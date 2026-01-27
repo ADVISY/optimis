@@ -1049,6 +1049,444 @@ const rawBlogPosts: BlogPost[] = [
     readTime: 3,
     image: comparerAssurancesImg,
   },
+  // ==================== BATCH 3: 20 NEW ARTICLES ====================
+  {
+    id: "3614",
+    slug: "subside-assurance-maladie-suisse-aide-financiere",
+    title: "Le subside dans le canton de Neuchatel ? Comment ça marche ?",
+    excerpt: "Les subsides d'assurance maladie sont des aides financières fournies par l'État pour soutenir les foyers à revenus modestes à couvrir les coûts de leur assurance maladie obligatoire.",
+    content: `<p>Les subsides d'assurance maladie sont des aides financières fournies par l'État pour soutenir les foyers à revenus modestes à couvrir les coûts de leur assurance maladie obligatoire.</p>
+
+<p>Dans le canton de Neuchâtel, ces subsides sont administrés par l'Office Cantonal de l'Assurance-Maladie et des Bourses d'Etudes (OCAB), autrefois connu sous le nom d'Office Cantonal de l'Assurance Maladie (OCAM).</p>
+
+<h3>Fonctionnement des Subsides</h3>
+<p>En fonction de votre situation familiale et de vos revenus, l'OCAB déterminera votre éligibilité et le montant du subside. Ces subsides sont automatiquement calculés et attribués sur la base de votre déclaration fiscale. Si vous êtes éligible, un courrier vous informera de votre droit au subside. Les subsides sont ensuite versés directement à votre caisse maladie, qui les déduira de vos primes à payer.</p>
+
+<h3>Informations Importantes</h3>
+<ul>
+<li><strong>Assurance Maladie de Base</strong> : Les subsides ne couvrent que l'assurance maladie de base obligatoire en Suisse et non les assurances complémentaires.</li>
+<li><strong>Changement d'Assurance</strong> : Vous ne perdez pas votre subside en changeant d'assurance maladie. Vous pouvez opter pour une meilleure formule tout en conservant vos subventions. Utilisez notre comparateur gratuit en ligne pour trouver l'assurance maladie qui vous correspond, au meilleur prix.</li>
+</ul>
+
+<h3>Demande de Subside d'Assurance Maladie à Neuchâtel</h3>
+<p>Si votre situation familiale et vos revenus vous rendent éligible à un subside, vous recevrez automatiquement un courrier indiquant votre droit et le montant du subside.</p>
+
+<p><strong>Attention</strong> : Ce courrier comprend un coupon-réponse à remplir et renvoyer à l'OCAB dans les 30 jours, sans quoi votre subside ne sera pas activé.</p>
+
+<p>Si vous pensez être éligible mais n'avez pas reçu de courrier, contactez le Guichet Social Régional de votre commune de domicile pour déposer une demande.</p>
+
+<h3>Conditions de Demande</h3>
+<p>Pour faire une demande de subside, vous devez remplir les conditions suivantes :</p>
+<ul>
+<li>Être assuré par une assurance maladie de base en Suisse</li>
+<li>Ne pas avoir reçu de notification de droit au subside par le canton de Neuchâtel</li>
+<li>Être âgé de 18 ans ou plus (les demandes pour les moins de 18 ans doivent être faites par un parent ou un représentant légal)</li>
+</ul>
+
+<h3>Contacter l'OCAB</h3>
+<ul>
+<li><strong>Email</strong> : <a href="mailto:ocab@ne.ch">ocab@ne.ch</a></li>
+<li><strong>Téléphone</strong> : 032 889 66 30 (lundi au vendredi : 9h00 - 12h00 et 13h00 - 16h00)</li>
+<li><strong>Courrier</strong> : Espace de l'Europe 2, Case postale 716, 2002 Neuchâtel</li>
+</ul>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-sante-comparatif/">Pour payer moins cher votre assurance maladie</a>, comparez les différentes offres et trouvez le contrat qui vous correspond au meilleur prix.</p>
+
+<p><strong>Optimis</strong> peut vous assister gratuitement dans toutes ces démarches administratives pour vous aider à obtenir le subside d'assurance maladie auquel vous avez droit.</p>`,
+    category: "Aide assurance maladie",
+    categorySlug: "aide-assurance-maladie",
+    date: "2024-07-10",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "3619",
+    slug: "le-subside-dassurance-maladie-dans-le-valais-comment-ca-fonctionne",
+    title: "Le subside d'assurance maladie dans le Valais ? Comment ça fonctionne ?",
+    excerpt: "Dans le canton du Valais, les subsides d'assurance maladie sont administrés par la Caisse de compensation du canton du Valais (CCCVs).",
+    content: `<p>Les subsides d'assurance maladie sont des aides financières fournies par l'État pour aider les individus et les familles à faibles revenus à payer leur assurance maladie obligatoire.</p>
+
+<p>Dans le canton du Valais, les subsides d'assurance maladie sont administrés par la Caisse de compensation du canton du Valais (CCCVs). Environ 20 % des résidents du canton du Valais bénéficient de cette aide.</p>
+
+<h3>Critères d'Éligibilité et Calcul des Subsides</h3>
+<p>Votre droit au subside et son montant dépendent de votre situation familiale et de vos revenus. Les subsides d'assurance maladie dans le canton du Valais sont automatiquement calculés et attribués en fonction de votre déclaration fiscale.</p>
+
+<h3>Bon à Savoir</h3>
+<p>Les subsides ne couvrent que l'assurance maladie de base obligatoire en Suisse : ils ne s'appliquent pas aux assurances complémentaires. Si vous changez d'assurance maladie, vous ne perdez pas votre subside.</p>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-sante-comparatif/">Optimis, notre comparateur gratuit en ligne</a>, vous aidera à trouver l'assurance maladie qui vous correspond au meilleur prix.</p>
+
+<h3>Calcul du Subside de l'Assurance Maladie dans le Valais</h3>
+<p>Le subside de l'assurance maladie du canton du Valais pour 2024 se base sur la déclaration fiscale de 2022.</p>
+
+<p><strong>Revenu déterminant</strong> = Revenu net avant déductions personnelles, auquel s'ajoutent :</p>
+<ul>
+<li>5% de la fortune revalorisée nette</li>
+<li>Les revenus de la fortune immobilière négatifs</li>
+<li>Les cotisations à des formes reconnues de prévoyance liée</li>
+<li>Les pertes commerciales non absorbées d'une activité indépendante</li>
+</ul>
+
+<h3>Taux de Subvention selon le Profil de l'Assuré</h3>
+<table><thead><tr><th>Profil de l'assuré</th><th>Pourcentage pris en charge par le canton</th></tr></thead><tbody><tr><td>Adultes</td><td>Entre 10 % et 70 %</td></tr><tr><td>Enfants</td><td>80 %</td></tr><tr><td>Bénéficiaires des aides complémentaires AVS/AI ou des aides sociales</td><td>100 %</td></tr></tbody></table>
+
+<h3>Contact pour le Service de Subside du Valais</h3>
+<ul>
+<li><strong>Par courrier</strong> : Caisse de Compensation du canton du Valais, Avenue Pratifori 22, 1950 Sion</li>
+<li><strong>Par téléphone</strong> : 027 324 91 15</li>
+</ul>
+
+<p><strong>Optimis</strong> peut vous assister gratuitement dans toutes ces démarches administratives pour vous aider à obtenir le subside d'assurance maladie auquel vous avez droit et comparer les offres d'assurance pour trouver celle qui vous convient le mieux.</p>`,
+    category: "Aide assurance maladie",
+    categorySlug: "aide-assurance-maladie",
+    date: "2024-07-10",
+    readTime: 6,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "3622",
+    slug: "le-subside-dassurance-maladie-a-fribourg-mode-demploi",
+    title: "Le subside d'assurance maladie à Fribourg ? Mode d'emploi.",
+    excerpt: "Le subside d'assurance maladie de Fribourg est une aide financière accordée par le canton pour aider les résidents à payer leurs primes d'assurance maladie.",
+    content: `<p>En Suisse, l'assurance maladie de base obligatoire et ses primes peuvent être trop élevées pour certains foyers. Le subside d'assurance maladie de Fribourg fait référence à une aide financière accordée par le canton pour permettre aux résidents de payer leurs primes d'assurance maladie obligatoire.</p>
+
+<p>À Fribourg, les subsides d'assurance maladie sont directement gérés par la Caisse cantonale de compensation AVS, et les subventions sont versées à la caisse maladie, qui déduit le montant de votre prime d'assurance obligatoire.</p>
+
+<p><strong>BON À SAVOIR</strong> : En cas de changement d'assureur maladie, vous ne perdez pas votre subside : la caisse maladie annonce elle-même le changement d'assureur, et vous n'avez aucune démarche à faire. <a href="https://le-comparateur-optimis.ch/assurance-sante-comparatif/">Optimis peut vous aider gratuitement à trouver l'assurance maladie qui vous correspond, au meilleur prix.</a></p>
+
+<h3>Comment m'enregistrer auprès du subside ?</h3>
+<p>Pour obtenir un subside d'assurance maladie à Fribourg, vous devez compléter et adresser un formulaire de demande à la Caisse de Compensation AVS.</p>
+<ul>
+<li>Par voie électronique sur le site de l'AVS.</li>
+<li>Par courrier en téléchargeant le formulaire "Demande de réduction des primes" disponible sur le site de l'AVS.</li>
+</ul>
+
+<h3>Pour qui est adressé le subside d'assurance maladie à Fribourg ?</h3>
+<p>N'ont pas droit à une réduction des primes les personnes ou les familles dont le revenu net excède 150 000 CHF ou la fortune imposable excède 250 000 CHF.</p>
+
+<table><thead><tr><th>Situation Familiale</th><th>Revenu Annuel</th></tr></thead><tbody><tr><td>Sans enfant à charge</td><td>37 000 CHF</td></tr><tr><td>1 enfant à charge</td><td>57 400 CHF</td></tr><tr><td>2 enfants à charge</td><td>71 400 CHF</td></tr><tr><td>3 enfants à charge</td><td>85 400 CHF</td></tr></tbody></table>
+
+<h3>Comment rentrer en relation avec l'office des subsides fribourgeois ?</h3>
+<ul>
+<li><strong>Téléphone</strong> : 058 277 70 55</li>
+<li><strong>Email</strong> : info.fribourg@css.ch</li>
+<li><strong>Bureau</strong> : Rue Saint-Pierre 8, 1700 Fribourg</li>
+</ul>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-sante-comparatif/">Optimis est disponible pour vous aider avec vos démarches de subside et pour comparer les assurances afin de trouver les meilleures options pour votre situation.</a></p>`,
+    category: "Aide assurance maladie",
+    categorySlug: "aide-assurance-maladie",
+    date: "2024-07-10",
+    readTime: 6,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "3635",
+    slug: "assurance-maladie-lamal-permis-b-arrive-en-suisse-resident-suisse-lca-complementaire-prenatale-maternite",
+    title: "Les dépenses de santé mutuelle en suisse.",
+    excerpt: "Les dépenses de santé en Suisse sont un sujet crucial en raison des coûts élevés associés au système de santé.",
+    content: `<h3>Introduction</h3>
+<p>Les dépenses de santé en Suisse sont un sujet crucial en raison des coûts élevés associés au système de santé. Comprendre ces coûts et savoir comment les gérer efficacement est essentiel pour tous les résidents suisses.</p>
+
+<h3>Contexte Général</h3>
+<h4>Système de Santé Suisse</h4>
+<p>Le système de santé suisse repose sur une assurance maladie obligatoire appelée LAMal (Loi sur l'assurance-maladie). Chaque résident en Suisse doit obligatoirement souscrire à une assurance de base, qui couvre les soins essentiels.</p>
+
+<p>Le système est décentralisé et chaque canton peut avoir des variations dans les primes et les prestations couvertes.</p>
+
+<h4>Comparaison Internationale</h4>
+<p>La Suisse est l'un des pays où les dépenses de santé sont les plus élevées. Environ 12% du PIB suisse est consacré à la santé.</p>
+
+<h3>Dépenses de Santé Mensuelles Moyennes</h3>
+<h4>Assurance Maladie</h4>
+<ul>
+<li><strong>Primes de l'assurance de base</strong> : Varient entre 300 et 500 CHF par mois.</li>
+<li><strong>Assurances complémentaires</strong> : Ces primes peuvent aller de 50 à 200 CHF par mois.</li>
+</ul>
+
+<h4>Frais Médicaux</h4>
+<ul>
+<li><strong>Consultations chez le médecin</strong> : Une visite chez le médecin généraliste coûte généralement entre 100 et 200 CHF.</li>
+<li><strong>Médicaments</strong> : Les dépenses mensuelles pour les médicaments se situent souvent entre 50 et 150 CHF.</li>
+</ul>
+
+<h4>Dépenses Dentaires</h4>
+<p><a href="https://le-comparateur-optimis.ch">Les soins dentaires ne sont pas couverts par l'assurance maladie de base</a>. Par conséquent, ces coûts doivent être payés de sa poche ou par une assurance dentaire complémentaire.</p>
+
+<h3>Conseils pour Réduire les Dépenses de Santé</h3>
+<ol>
+<li><strong>Comparez les assurances</strong> : Utilisez Optimis pour trouver les meilleures offres.</li>
+<li><strong>Adoptez un mode de vie sain</strong> : Réduisez les risques de maladies chroniques.</li>
+<li><strong>Utilisez les génériques</strong> : Les médicaments génériques coûtent moins cher.</li>
+<li><strong>Profitez des subventions cantonales</strong> : Si vous êtes éligible, demandez une réduction de prime.</li>
+</ol>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-07-11",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "3638",
+    slug: "comparer-assurances-suisse-optimis",
+    title: "Comparer vos Assurances en Suisse",
+    excerpt: "Comparer vos Assurances en Suisse. Le Guide Ultime pour Optimiser Vos Finances avec Optimis.",
+    content: `<h2>Le Guide Ultime pour Optimiser Vos Finances avec Optimis</h2>
+
+<blockquote><cite>Bienvenue sur le site d'Optimis, un comparateur qui vous aide à comparer vos assurances en Suisse. Optimis est votre compagnon de confiance pour comparer les assurances en Suisse.</cite></blockquote>
+
+<h3>Pourquoi Comparer Vos Assurances ?</h3>
+<p>Comparer les assurances est une étape cruciale pour optimiser vos dépenses. En utilisant un comparateur d'assurances comme Optimis, vous pouvez :</p>
+<ul>
+<li><strong>Économiser de l'argent</strong> : En comparant les différentes offres, vous pouvez trouver les assurances les plus abordables.</li>
+<li><strong>Gagner du temps</strong> : Optimis vous offre un aperçu clair et rapide des meilleures offres disponibles.</li>
+<li><strong>Faire des choix éclairés</strong> : Avec des informations détaillées et comparatives, vous êtes mieux équipé pour choisir.</li>
+</ul>
+
+<h3>Les Types d'Assurances que Vous Pouvez Comparer sur Optimis</h3>
+<ol>
+<li><strong>Assurance Maladie</strong> : Trouvez les meilleures primes et couvertures pour vous et votre famille.</li>
+<li><strong>Aide Cantonale Subsides</strong> : Découvrez les subventions cantonales auxquelles vous avez droit.</li>
+<li><strong>Assurance Auto</strong> : Comparez les offres pour protéger votre véhicule.</li>
+<li><strong>Assurance Habitation</strong> : Assurez votre domicile contre les imprévus.</li>
+<li><strong>Assurance Vie</strong> : Protégez vos proches et planifiez leur avenir.</li>
+<li><strong>Protection Juridique</strong> : Assurez-vous contre les frais juridiques imprévus.</li>
+</ol>
+
+<h3>Comment Optimis se Démarque ?</h3>
+<ul>
+<li><strong>Des Professionnels à Votre Écoute</strong> : Nos experts sont disponibles pour vous conseiller.</li>
+<li><strong>Mise à Jour Continue des Offres</strong> : Nous mettons constamment à jour notre base de données.</li>
+<li><strong>Un Alpaga Sympathique</strong> : Notre mascotte, l'alpaga suisse, est là pour rendre votre expérience plus chaleureuse.</li>
+</ul>
+
+<h3>Comment Utiliser Optimis pour Comparer Vos Assurances ?</h3>
+<ol>
+<li><strong>Accédez à notre site Optimis</strong></li>
+<li><strong>Sélectionnez le type d'assurance</strong> que vous souhaitez comparer.</li>
+<li><strong>Remplissez les informations nécessaires</strong> : âge, code postal, etc.</li>
+<li><strong>Explorez les offres</strong> : Comparez les différentes primes et couvertures proposées.</li>
+<li><strong>Choisissez l'offre qui vous convient</strong>.</li>
+</ol>
+
+<p>Visitez <a href="https://le-comparateur-optimis.ch">Optimis</a> et commencez votre comparaison dès maintenant.</p>
+
+<p><strong>Optimis, l'alpaga suisse qui veille sur vos assurances.</strong></p>`,
+    category: "OPTIMIS",
+    categorySlug: "optimis",
+    date: "2024-07-11",
+    readTime: 3,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "3657",
+    slug: "assurance-habitation-suisse",
+    title: "L'assurance Habitation en Suisse",
+    excerpt: "Découvrez l'importance de l'assurance habitation en Suisse et comment choisir la meilleure offre !",
+    content: `<h2>L'Importance de l'Assurance Habitation en Suisse et Comment Choisir la Meilleure Offre</h2>
+
+<h4>Introduction</h4>
+<p>Protéger votre domicile est essentiel. L'assurance habitation en Suisse offre une couverture contre les imprévus tels que les incendies, les vols, et les dégâts des eaux.</p>
+
+<h4>Pourquoi Avez-Vous Besoin d'une Assurance Habitation ?</h4>
+<p>L'assurance habitation offre une protection financière contre les dommages ou la perte de votre domicile et de vos biens. Voici quelques raisons pour lesquelles elle est indispensable :</p>
+<ul>
+<li><strong>Protection Contre les Catastrophes</strong> : Les événements naturels comme les inondations, les tempêtes et les tremblements de terre peuvent causer des dégâts importants.</li>
+<li><strong>Sécurité Financière</strong> : En cas de sinistre, l'assurance habitation couvre les coûts de réparation ou de reconstruction.</li>
+<li><strong>Responsabilité Civile</strong> : Elle vous protège contre les réclamations de tiers en cas de dommages accidentels.</li>
+</ul>
+
+<h4>Comment Choisir la Meilleure Assurance Habitation ?</h4>
+<ul>
+<li><strong>Comparer les Offres</strong> : Utilisez Optimis pour comparer les différentes polices d'assurance habitation.</li>
+<li><strong>Évaluer Vos Besoins</strong> : Déterminez la valeur de votre maison et de vos biens personnels.</li>
+<li><strong>Lire les Conditions Générales</strong> : Assurez-vous de bien comprendre les exclusions et les limites.</li>
+<li><strong>Vérifier les Options de Franchise</strong> : Choisir une franchise plus élevée peut réduire vos primes.</li>
+</ul>
+
+<h4>Utiliser Optimis pour Trouver la Meilleure Offre</h4>
+<p>Optimis est votre outil de référence pour comparer les offres d'assurance habitation en Suisse.</p>
+<ul>
+<li><strong>Accès Rapide aux Offres</strong> : En quelques clics, obtenez une vue d'ensemble des différentes polices disponibles.</li>
+<li><strong>Analyse Personnalisée</strong> : Notre algorithme prend en compte vos besoins spécifiques.</li>
+<li><strong>Simplicité et Efficacité</strong> : Évitez les tracas administratifs.</li>
+</ul>
+
+<h4>Conclusion</h4>
+<p>Choisir la bonne assurance habitation est crucial pour protéger votre maison et vos biens. Avec <a href="https://le-comparateur-optimis.ch">Optimis</a>, vous pouvez comparer facilement les différentes offres et trouver la couverture qui répond le mieux à vos besoins.</p>`,
+    category: "Assurance habitation",
+    categorySlug: "assurance-habitation",
+    date: "2024-07-11",
+    readTime: 3,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "3665",
+    slug: "participation-couts-assurance-maladie-suisse",
+    title: "Participation aux coûts de l'assurance maladie : quels frais restent à votre charge ?",
+    excerpt: "La gestion des coûts de l'assurance maladie en Suisse est essentielle pour optimiser votre budget santé.",
+    content: `<p>La participation aux coûts de l'assurance maladie en Suisse est une part des frais de santé que l'assuré doit payer de sa poche avant que l'assurance maladie ne commence à couvrir les coûts.</p>
+
+<p>En tant qu'assuré, il est crucial de comprendre la participation aux coûts pour mieux anticiper vos dépenses. <a href="https://le-comparateur-optimis.ch/assurance-sante/">Optimis est là pour vous accompagner et comparer les meilleures options d'assurances adaptées à vos besoins.</a></p>
+
+<h4>Les composantes de la participation aux coûts de l'assurance maladie</h4>
+
+<p><strong>1. La franchise</strong><br/>La franchise est un montant fixe que l'assuré doit payer de sa poche avant que l'assurance maladie n'intervienne. Les franchises peuvent varier de 300 à 2'500 CHF pour les adultes et de 0 à 600 CHF pour les enfants mineurs.</p>
+
+<p><strong>2. La quote-part</strong><br/>Une fois la franchise atteinte, l'assuré doit encore payer une quote-part, qui représente 10% des frais de traitement. Cette quote-part est plafonnée à 700 CHF par an pour les adultes et 350 CHF pour les enfants.</p>
+
+<p><strong>3. La contribution aux frais d'hospitalisation</strong><br/>En cas d'hospitalisation, chaque jour passé à l'hôpital entraîne une contribution de 15 CHF. Les enfants de moins de 18 ans et les jeunes adultes en formation de moins de 25 ans sont exemptés.</p>
+
+<h3>Quel montant de franchise choisir ?</h3>
+<p><strong>Évaluer votre situation personnelle</strong><br/>Le choix de la franchise dépend de plusieurs facteurs :</p>
+<ul>
+<li><strong>Âge et état de santé</strong> : Les jeunes adultes en bonne santé peuvent opter pour une franchise plus élevée.</li>
+<li><strong>Capacité financière</strong> : Il est important d'évaluer votre capacité à couvrir des coûts élevés en cas de besoin médical urgent.</li>
+</ul>
+
+<h3>Conclusion</h3>
+<p>Comprendre la participation aux coûts de l'assurance maladie en Suisse est essentiel pour gérer vos finances de santé. <a href="https://le-comparateur-optimis.ch/assurance-sante/">Avec Optimis, vous pouvez comparer et choisir les meilleures assurances adaptées à vos besoins spécifiques.</a></p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-07-11",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "3673",
+    slug: "quelle-complementaire-sante-pour-la-medecine-alternative-choisir",
+    title: "Quelle complémentaire santé pour la médecine alternative choisir ?",
+    excerpt: "En Suisse, et depuis quelques années maintenant, l'intérêt pour les médecines douces ne cesse de croître parmi une population cherchant des alternatives pour améliorer sa santé globale.",
+    content: `<p>En Suisse, et depuis quelques années maintenant, l'intérêt pour les médecines douces ne cesse de croître parmi une population cherchant des alternatives pour améliorer sa santé globale. Ainsi, de nombreuses compagnies d'assurance proposent désormais des <a href="https://le-comparateur-optimis.ch/assurance-sante/">complémentaires santé qui remboursent les consultations et les traitements issus de ces pratiques alternatives.</a></p>
+
+<p>L'assurance maladie de base ne prend que peu ou pas en charge ces traitements. Il est donc nécessaire de souscrire une complémentaire santé spécifique à cet effet.</p>
+
+<h2>Médecine alternative : Qu'est-ce que c'est ?</h2>
+<p>Contrairement aux méthodes conventionnelles, la médecine alternative adopte une approche holistique visant à travailler en harmonie avec les capacités de guérison naturelles du corps.</p>
+
+<h2>Spécialités de médecine alternative les plus répandues en Suisse</h2>
+<p>Il existe 4 formes principales de médecines douces :</p>
+<ul>
+<li><strong>Médecine ayurvédique (MAV)</strong> : originaire de l'Inde et du Sri Lanka.</li>
+<li><strong>Homéopathie</strong> : soigne en administrant des doses très diluées de substances.</li>
+<li><strong>Médecine traditionnelle chinoise (MTC)</strong> : utilise l'acupuncture, la diététique, les plantes médicinales.</li>
+<li><strong>Naturopathie traditionnelle européenne (NTE)</strong> : système holistique utilisant la phytothérapie, la nutrition, l'hydrothérapie.</li>
+</ul>
+
+<h2>Couverture de l'assurance complémentaire médecine alternative</h2>
+<p>Au niveau de l'assurance maladie obligatoire LAMal, des traitements comme l'acupuncture, l'homéopathie, la médecine anthroposophique, la pharmacothérapie de la médecine traditionnelle chinoise et la phytothérapie ne sont pas couverts de la même manière que la médecine conventionnelle.</p>
+
+<h2>Coût de l'assurance complémentaire médecine alternative en 2024</h2>
+<p>Le prix d'une complémentaire médecine alternative en Suisse dépend de facteurs tels que l'âge de l'assuré, les prestations couvertes, la franchise et le niveau de couverture choisi. En moyenne, les primes mensuelles varient entre 20 et 150 CHF.</p>
+
+<p>Il est recommandé de comparer les offres des différentes compagnies d'assurance en ligne pour trouver la formule qui correspond le mieux à vos besoins et à votre budget.</p>
+
+<p>Comparez les meilleures complémentaires santé en Suisse avec Optimis et trouvez celle qui vous convient !</p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-07-11",
+    readTime: 7,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "3709",
+    slug: "quelle-assurance-vie-de-capital-souscrire-suisse",
+    title: "Quelle assurance vie de capital souscrire en Suisse ?",
+    excerpt: "En Suisse, que vous souhaitiez assurer financièrement vos proches en cas de décès, épargner pour vos projets futurs ou profiter d'avantages fiscaux, il est judicieux de souscrire une assurance vie de capital.",
+    content: `<p>En Suisse, que vous souhaitiez assurer financièrement vos proches en cas de décès, épargner pour vos projets futurs ou profiter d'avantages fiscaux, <a href="https://le-comparateur-optimis.ch">il est judicieux de souscrire une assurance vie de capital.</a></p>
+
+<h3>Assurance vie de capital : Les points à retenir</h3>
+<ul>
+<li>L'assurance vie de capital en Suisse combine une couverture décès et une épargne.</li>
+<li>Vous pouvez choisir parmi différentes options d'investissement (fonds, obligations...).</li>
+<li>En cas de décès, le capital garanti est versé aux bénéficiaires désignés.</li>
+<li>L'assurance-vie offre des avantages fiscaux, variables selon le pilier choisi (3a ou 3b).</li>
+</ul>
+
+<h3>Qu'est-ce qu'une assurance vie de capital ?</h3>
+<p>L'assurance vie de capital en Suisse est une solution de prévoyance qui combine une couverture en cas de décès et un produit d'investissement.</p>
+
+<h3>Fonctionnement d'une assurance vie avec constitution de capital</h3>
+<ol>
+<li><strong>Souscription</strong> : Vous choisissez la durée du contrat, le montant des primes et les options d'investissement.</li>
+<li><strong>Versements de primes</strong> : Vous effectuez des paiements réguliers ou un paiement unique.</li>
+<li><strong>Accumulation du capital</strong> : Les primes sont investies par l'assureur.</li>
+<li><strong>Capital garanti</strong> : En cas de décès, le capital garanti est versé aux bénéficiaires.</li>
+<li><strong>Disponibilité du capital</strong> : Vous pouvez retirer tout ou partie du capital avant la fin du contrat.</li>
+</ol>
+
+<h3>Pourquoi souscrire une assurance vie de capital ?</h3>
+<ul>
+<li><strong>Protection financière pour vos proches</strong></li>
+<li><strong>Transmission du patrimoine</strong></li>
+<li><strong>Constitution d'un capital à long terme</strong></li>
+<li><strong>Avantages fiscaux</strong></li>
+<li><strong>Flexibilité des options d'investissement</strong></li>
+</ul>
+
+<h3>Imposition de l'assurance vie de capital</h3>
+<table><thead><tr><th>Imposition</th><th>Pilier 3a</th><th>Pilier 3b</th></tr></thead><tbody><tr><td>Déductions fiscales</td><td>Les versements sont déductibles jusqu'à CHF 7'056 pour les salariés</td><td>Moins d'avantages</td></tr><tr><td>Impôt sur la fortune</td><td>Non imposable</td><td>Imposable</td></tr><tr><td>Impôt sur le retrait du capital</td><td>Imposé entre 5% et 10%</td><td>Non imposé</td></tr></tbody></table>
+
+<h3>Comparer les assurances vie de capital</h3>
+<p>Pour trouver l'assurance vie de capital qui vous convient le mieux, utilisez <a href="https://le-comparateur-optimis.ch">Optimis,</a> votre conseiller et comparateur d'assurance.</p>`,
+    category: "Assurance vie",
+    categorySlug: "assurance-vie",
+    date: "2024-07-12",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "3714",
+    slug: "les-differentes-quotes-parts-assurance-maladie-suisse",
+    title: "Les différentes quotes-parts d'assurance maladie en Suisse",
+    excerpt: "La quote-part est une participation obligatoire aux frais de traitement supportée par l'assurance maladie une fois que la franchise est épuisée.",
+    content: `<p>En Suisse, chaque résident a l'obligation de souscrire à une assurance maladie. En conséquence, il doit également participer aux frais de traitement, représentés par la franchise et la quote-part.</p>
+
+<h3>Qu'est-ce que la quote-part ?</h3>
+<p>La quote-part est une participation obligatoire aux frais de traitement supportée par l'assurance maladie une fois que la franchise est épuisée. Elle s'applique aussi bien à l'assurance de base qu'à l'assurance complémentaire.</p>
+
+<p><strong>BON À SAVOIR</strong></p>
+<ul>
+<li>La quote-part est une participation aux coûts de LAMal.</li>
+<li>Elle doit être payée une fois la franchise d'assurance épuisée.</li>
+<li>Elle est égale à 10 % des frais de traitement.</li>
+<li>Son plafond est de 700 CHF par année civile.</li>
+<li>Pour les enfants, la quote-part est de 350 CHF maximum par année civile.</li>
+<li>Pas de quote-part pour les femmes enceintes.</li>
+</ul>
+
+<h3>Définition de la quote-part d'assurance maladie</h3>
+<p>La quote-part est la part des frais de traitement à la charge de l'assuré, une fois la franchise épuisée.</p>
+
+<p>L'assurance maladie est donc composée de trois éléments interconnectés :</p>
+<ul>
+<li>La quote-part d'assurance maladie</li>
+<li>La franchise d'assurance maladie</li>
+<li>La prime d'assurance maladie</li>
+</ul>
+
+<h3>Différentes quotes-parts de l'assurance maladie</h3>
+<p><strong>Femme enceinte</strong> : Aucune participation aux coûts n'est due pour les prestations légales de maternité à partir de la 13ème semaine de grossesse jusqu'à 8 semaines après l'accouchement.</p>
+
+<p><strong>Enfants</strong> : L'assurance de base prévoit une quote-part de 350 CHF maximum par enfant par année civile.</p>
+
+<table><thead><tr><th>Nombre d'enfants</th><th>Franchise (CHF)</th><th>Quote-part (CHF)</th><th>Plafond (CHF)</th></tr></thead><tbody><tr><td>1</td><td>0</td><td>350</td><td>350</td></tr><tr><td>2</td><td>0</td><td>350</td><td>700</td></tr><tr><td>3 et plus</td><td>0</td><td>350</td><td>1'000</td></tr></tbody></table>
+
+<p><strong>Médicaments</strong> : Deux quotes-parts différentes s'appliquent :</p>
+<ul>
+<li>10 % pour les médicaments génériques.</li>
+<li>20 % pour les médicaments originaux avec générique disponible.</li>
+</ul>
+
+<p><strong>Hospitalisation</strong> : Les patients doivent payer une contribution de 15 CHF par jour d'hospitalisation.</p>
+
+<p>Optimis est là pour vous accompagner et vous conseiller sur vos questions concernant l'assurance maladie. N'hésitez pas et comparez dès maintenant votre assurance avec <a href="https://le-comparateur-optimis.ch/">Optimis.</a></p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-07-12",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
 ];
 
 // Enforce “image à la une” strictly: if we have a locally downloaded featured image
@@ -1069,6 +1507,8 @@ export const categories = [
   { slug: "assurance-vie", name: "Assurance vie" },
   { slug: "3eme-pilier", name: "3ème pilier" },
   { slug: "hypotheque", name: "Hypothèque" },
+  { slug: "optimis", name: "OPTIMIS" },
+  { slug: "resiliation", name: "Résiliation" },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
