@@ -1487,6 +1487,1033 @@ const rawBlogPosts: BlogPost[] = [
     readTime: 5,
     image: comparerAssurancesImg,
   },
+  // ==================== BATCH 4 - 31 nouveaux articles ====================
+  {
+    id: "3719",
+    slug: "cout-intervention-ambulance-suisse",
+    title: "Les transports médicaux. Quand et comment l'assurance intervient-elle ?",
+    excerpt: "Le transport médical, en particulier l'intervention d'une ambulance, peut représenter un coût important.",
+    content: `<p>Le transport médical, en particulier l'intervention d'une ambulance, peut représenter un coût important. En Suisse, ces coûts varient en fonction de plusieurs facteurs, notamment la nature de l'intervention (accident ou maladie) et le canton dans lequel elle se déroule. Comprendre qui prend en charge ces frais et dans quelles conditions est essentiel pour éviter des surprises financières désagréables.</p>
+
+<h3>Combien coûte l'intervention d'une ambulance ?</h3>
+<p>Le coût d'intervention d'une ambulance se situe généralement entre 700 et 2100 francs. Toutefois, ce montant varie selon les cantons : par exemple, l'intervention pour un infarctus est plus coûteuse dans le canton de Saint-Gall que dans celui d'Argovie.</p>
+
+<h3>Qui paie les frais d'ambulance ?</h3>
+<p>Pour déterminer qui paie les frais d'ambulance, il est essentiel de connaître la cause de l'intervention : s'agit-il d'un accident ou d'une maladie ?</p>
+
+<table><thead><tr><th>Accident</th><th>Maladie</th></tr></thead><tbody><tr><td>Assurance de base</td><td>Ne paie pas</td></tr><tr><td>Assurance accidents selon la LAA (employeur)</td><td>En Suisse : Totalité. À l'étranger : 29 640 francs max.</td></tr><tr><td>Assurance accidents par l'assurance de base</td><td>50 % des frais de transport, max. 500 francs par an</td></tr><tr><td>Assurance complémentaire avec couverture</td><td>Prise en charge selon l'assureur et le montant d'assurance</td></tr></tbody></table>
+
+<h3>Prise en charge des coûts par l'assurance accidents</h3>
+<p>Si vous bénéficiez de l'assurance accidents de votre employeur ou d'une assurance privée, l'assurance accidents selon la LAA entre en jeu en cas d'accident. L'intervention de l'ambulance est alors prise en charge par cette assurance.</p>
+
+<h3>Prise en charge des coûts par l'assurance de base</h3>
+<p>En cas d'intervention pour cause de maladie, ou si vous êtes couvert contre les accidents uniquement par l'assurance de base, c'est l'assurance maladie obligatoire qui intervient. Elle prend en charge 50 % des coûts après déduction de la franchise et de la quote-part, avec un plafond de 500 francs par an pour les transports médicaux nécessaires.</p>
+
+<h3>Sauvetage en situation de danger de mort</h3>
+<p>Pour les cas de sauvetage en situation de danger de mort, l'assurance de base couvre jusqu'à 5000 francs par an. À l'étranger, l'assurance de base ne prend pas en charge les frais de sauvetage.</p>
+
+<h3>Quand ai-je besoin d'une assurance complémentaire ?</h3>
+<p>Les assurances complémentaires prennent en charge les frais de transport et de sauvetage non couverts par l'assurance de base ou l'assurance accidents. Pour trouver la meilleure offre, <a href="https://le-comparateur-optimis.ch/assurance-sante/">utilisez le comparateur Optimis.</a></p>
+
+<h3>Dans quels cas l'assurance ne couvre-t-elle pas les frais d'ambulance ?</h3>
+<p>Les caisses maladie ou les assurances accidents ne participent qu'aux frais médicalement nécessaires. Généralement, l'assurance ne couvre pas les frais si le patient peut être transporté en véhicule privé ou en transports en commun.</p>`,
+    category: "Assurance retraite",
+    categorySlug: "assurance-retraite",
+    date: "2024-07-12",
+    readTime: 3,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4236",
+    slug: "tout-savoir-sur-la-resiliation-de-votre-assurance-assura",
+    title: "Lettre résiliation Assura : Résilier facilement votre assurance",
+    excerpt: "Résilier votre assurance de base avec Assura est simple ! Voici les étapes à suivre.",
+    content: `<p>Résilier une assurance peut sembler compliqué, surtout lorsqu'il s'agit d'un acteur aussi important qu'Assura. Que vous cherchiez à résilier votre assurance de base (LAMal) ou une assurance complémentaire, il est important de connaître les bonnes démarches, dates et conditions.</p>
+
+<h2>Comment résilier votre assurance de base (LAMal) chez Assura ?</h2>
+
+<h3>Quelle est la date limite pour résilier l'assurance de base ?</h3>
+<p>Pour résilier votre assurance de base LAMal chez Assura, vous devez respecter deux dates clés. La première est le <strong>30 novembre</strong>. Si vous souhaitez résilier votre contrat pour le 1er janvier de l'année suivante, Assura doit recevoir votre lettre avant cette date.</p>
+<p>Si vous avez une franchise standard de CHF 300, vous avez également une deuxième option : résilier pour le 1er juillet. Pour cela, vous devez envoyer votre demande de résiliation avant le <strong>31 mars</strong>.</p>
+
+<h3>Quelles conditions devez-vous remplir pour résilier votre LAMal ?</h3>
+<ul>
+<li>Avoir la franchise standard (CHF 300).</li>
+<li>Envoyer votre résiliation en respectant les délais mentionnés.</li>
+<li>Avoir souscrit à une nouvelle assurance avant l'expiration de la précédente.</li>
+</ul>
+
+<h3>Où envoyer votre lettre de résiliation LAMal Assura ?</h3>
+<p><strong>Assura</strong><br>Case postale 61<br>1009 Pully</p>
+<p>Il est fortement recommandé d'opter pour un envoi en recommandé afin de conserver une preuve de votre demande.</p>
+
+<h2>Comment résilier une assurance complémentaire chez Assura ?</h2>
+<p>Assura propose une vaste gamme d'assurances complémentaires :</p>
+<ul>
+<li><strong>Complémenta Extra</strong> : soins dentaires, lunettes, médicaments.</li>
+<li><strong>Hospita</strong> : couverture en cas d'hospitalisation.</li>
+<li><strong>Mondia</strong> : couverture à l'étranger.</li>
+</ul>
+
+<h3>Quand pouvez-vous résilier une assurance complémentaire chez Assura ?</h3>
+<p>La plupart des contrats sont souscrits pour une durée de 3 à 5 ans, et ne peuvent être résiliés qu'à la fin de cette période. Vous devez envoyer votre lettre au plus tard le <strong>30 juin</strong> pour une résiliation effective au 1er janvier suivant.</p>
+
+<p>Si le montant de votre prime augmente, vous pouvez résilier à la fin de l'année en cours avec un préavis d'un mois.</p>`,
+    category: "Résiliation",
+    categorySlug: "resiliation",
+    date: "2024-07-23",
+    readTime: 5,
+    image: resiliationImg,
+  },
+  {
+    id: "4246",
+    slug: "tout-savoir-sur-la-resiliation-de-votre-assurance-helsana",
+    title: "Lettre de résiliation Helsana : Guide pour résilier votre assurance",
+    excerpt: "Résilier une assurance peut parfois être une tâche délicate, mais Helsana offre des options claires.",
+    content: `<p>Résilier une assurance peut parfois être une tâche délicate, mais Helsana offre des options claires pour mettre fin à votre contrat d'assurance maladie de base ou complémentaire.</p>
+
+<h2>Comment résilier mon assurance de base Helsana ?</h2>
+
+<h3>Quelles sont les étapes pour résilier l'assurance de base (LAMal) ?</h3>
+<ol>
+<li><strong>Comparer les offres d'assurance maladie</strong> avant d'envoyer votre résiliation.</li>
+<li><strong>Rédiger une lettre de résiliation complète</strong> incluant votre nom, adresse, numéro de police et demande explicite de résiliation.</li>
+<li><strong>Choisir la bonne date de résiliation</strong> : au 31 décembre ou au 30 juin (selon votre franchise).</li>
+<li><strong>Envoyer la lettre à la bonne adresse</strong> : Helsana Assurances SA, IDPH Résiliations F-CH, Case postale 8081 Zurich</li>
+</ol>
+
+<h3>Quand envoyer ma lettre de résiliation pour Helsana ?</h3>
+<ul>
+<li><strong>Résiliation pour le 1er janvier</strong> : Helsana doit recevoir votre lettre avant le <strong>30 novembre</strong>.</li>
+<li><strong>Résiliation pour le 1er juillet</strong> : avec franchise CHF 300, la lettre doit être reçue avant le <strong>31 mars</strong>.</li>
+</ul>
+
+<h3>Que doit contenir la lettre de résiliation ?</h3>
+<ul>
+<li>Vos nom et adresse complets</li>
+<li>Votre numéro de police</li>
+<li>La date souhaitée de résiliation</li>
+<li>Votre signature manuscrite</li>
+</ul>
+
+<h2>Comment résilier mon assurance complémentaire Helsana ?</h2>
+<p>Pour la résiliation des assurances complémentaires, le préavis est de <strong>trois mois</strong>. Votre lettre doit être reçue par Helsana avant le <strong>30 septembre</strong> pour une résiliation au 1er janvier.</p>
+
+<p>En cas d'augmentation de prime, vous pouvez résilier dans les 30 jours suivant la notification.</p>`,
+    category: "Résiliation",
+    categorySlug: "resiliation",
+    date: "2024-07-23",
+    readTime: 5,
+    image: resiliationImg,
+  },
+  {
+    id: "4250",
+    slug: "tout-savoir-sur-la-resiliation-de-votre-assurance-css",
+    title: "Résiliation CSS : Comment et quand résilier votre assurance ?",
+    excerpt: "Résilier votre assurance de base avec CSS est simple ! Voici les étapes à suivre.",
+    content: `<p>Lorsque vous souhaitez résilier votre assurance-maladie ou une assurance complémentaire chez CSS, il est important de respecter certaines règles et délais.</p>
+
+<h2>Quand et comment résilier son assurance-maladie CSS ?</h2>
+
+<h3>Quel est le délai pour résilier son assurance-maladie CSS ?</h3>
+<p>La lettre de résiliation doit parvenir à CSS avant le <strong>30 novembre</strong> pour une résiliation au 1er janvier.</p>
+<ul>
+<li>Un délai de préavis d'un mois</li>
+<li>L'envoi de la résiliation par courrier recommandé</li>
+<li>En cas d'augmentation des primes, résiliation possible pour le 31 mars</li>
+</ul>
+
+<h3>Où envoyer la lettre de résiliation ?</h3>
+<p><strong>CSS Holding AG, Tribschenstrasse 21, 6002 Lucerne, Suisse</strong></p>
+
+<h2>Délais spécifiques pour l'assurance complémentaire CSS</h2>
+<p>La résiliation des assurances complémentaires doit être effectuée avec un préavis de <strong>trois mois</strong> avant la fin de l'année, soit avant le <strong>30 septembre</strong>.</p>
+
+<h3>Quelles données doivent être incluses dans la lettre ?</h3>
+<ul>
+<li>Votre nom complet et adresse</li>
+<li>Votre numéro de contrat d'assurance</li>
+<li>La date de résiliation souhaitée</li>
+<li>Votre signature</li>
+</ul>
+
+<table><thead><tr><th>Type d'Assurance</th><th>Date Limite</th><th>Délai de Préavis</th></tr></thead><tbody><tr><td>Assurance de base (LAMal)</td><td>30 novembre</td><td>1 mois</td></tr><tr><td>Assurance complémentaire</td><td>30 septembre</td><td>3 mois</td></tr><tr><td>Résiliation pour augmentation</td><td>31 décembre</td><td>Aucune</td></tr></tbody></table>`,
+    category: "Résiliation",
+    categorySlug: "resiliation",
+    date: "2024-07-23",
+    readTime: 5,
+    image: resiliationImg,
+  },
+  {
+    id: "4253",
+    slug: "tout-savoir-sur-la-resiliation-de-votre-assurance-visana",
+    title: "Résiliation Visana : Comment et quand résilier votre assurance ?",
+    excerpt: "Résilier votre assurance de base avec Visana est simple ! Voici les étapes à suivre.",
+    content: `<p>Lorsqu'il s'agit de résilier une assurance maladie ou complémentaire, il est important de respecter certaines conditions pour que la demande soit prise en compte.</p>
+
+<h2>Comment résilier une assurance de base Visana (LAMal) ?</h2>
+
+<h3>Quels sont les délais de résiliation ?</h3>
+<ul>
+<li><strong>Résiliation pour le 1er janvier</strong> : lettre reçue avant le <strong>30 novembre</strong></li>
+<li><strong>Résiliation pour le 1er juillet</strong> : avec franchise CHF 300, lettre reçue avant le <strong>31 mars</strong></li>
+</ul>
+
+<h3>Que doit contenir votre lettre de résiliation ?</h3>
+<ul>
+<li>Votre nom complet et adresse</li>
+<li>Votre numéro d'assurance</li>
+<li>Objet de la lettre : résiliation de contrat</li>
+<li>Date de résiliation souhaitée</li>
+<li>Signature</li>
+</ul>
+
+<h2>Comment résilier une assurance complémentaire Visana ?</h2>
+<p>Les contrats peuvent durer 1, 3, ou 5 ans avec renouvellements automatiques. La demande de résiliation doit être envoyée au moins trois mois avant la fin de l'année civile, soit avant le <strong>30 septembre</strong>.</p>
+
+<h3>Adresse pour l'envoi</h3>
+<p><strong>Visana Services SA</strong><br>Weltpoststrasse 19<br>3000 Bern 16, Suisse</p>
+<p>Téléphone : <strong>0848 848 899</strong></p>`,
+    category: "Résiliation",
+    categorySlug: "resiliation",
+    date: "2024-07-23",
+    readTime: 5,
+    image: resiliationImg,
+  },
+  {
+    id: "4258",
+    slug: "tout-savoir-sur-la-resiliation-de-votre-assurance-swica",
+    title: "Résiliation Swica : rompre votre contrat d'assurance maladie et complémentaire",
+    excerpt: "La résiliation d'une assurance maladie ou complémentaire chez Swica peut sembler complexe en raison des règles et délais à respecter.",
+    content: `<p>La résiliation d'une assurance maladie ou complémentaire chez Swica peut sembler complexe en raison des règles et délais à respecter. Ce guide vous accompagne pas à pas.</p>
+
+<h2>La démarche pour résilier l'assurance de base SWICA (LAMal)</h2>
+
+<h3>Quelles sont les dates de résiliation ?</h3>
+<ul>
+<li><strong>Résiliation pour le 1er janvier</strong> : préavis d'un mois, lettre reçue avant le <strong>30 novembre</strong></li>
+<li><strong>Résiliation pour le 1er juillet</strong> : avec franchise standard, préavis de trois mois, lettre reçue avant le <strong>31 mars</strong></li>
+</ul>
+
+<h3>Comment rédiger une lettre de résiliation conforme ?</h3>
+<ul>
+<li>Nom, prénom, adresse</li>
+<li>Numéro de police</li>
+<li>Date de résiliation souhaitée</li>
+</ul>
+
+<h2>Comment résilier une assurance complémentaire Swica ?</h2>
+<p>Le délai de résiliation est de <strong>trois mois</strong> avant la fin de l'année civile. La lettre doit parvenir à Swica avant le <strong>30 septembre</strong>.</p>
+
+<h3>Adresse pour l'envoi</h3>
+<p><strong>SWICA Assurance-maladie SA</strong><br>Résiliations<br>Case postale<br>8400 Winterthour</p>`,
+    category: "Résiliation",
+    categorySlug: "resiliation",
+    date: "2024-07-23",
+    readTime: 5,
+    image: resiliationImg,
+  },
+  {
+    id: "4261",
+    slug: "tout-savoir-sur-la-resiliation-de-votre-assurance-concordia",
+    title: "Résiliation Concordia : Guide pour résilier votre assurance",
+    excerpt: "La résiliation de votre assurance Concordia peut être une étape délicate si vous n'êtes pas informé des procédures.",
+    content: `<p>La résiliation de votre assurance Concordia peut être une étape délicate si vous n'êtes pas informé des procédures et des délais spécifiques.</p>
+
+<h2>Comment résilier l'assurance de base Concordia ?</h2>
+<p>Pour résilier au 1er janvier, votre lettre doit être reçue par Concordia avant le <strong>30 novembre</strong>.</p>
+<p>Pour résilier au 1er juillet (franchise CHF 300), la lettre doit être reçue avant le <strong>31 mars</strong>.</p>
+
+<h2>Comment résilier une assurance complémentaire Concordia ?</h2>
+<p>Le délai de résiliation est de <strong>trois mois</strong>. La lettre doit parvenir avant le <strong>30 septembre</strong> pour une résiliation au 1er janvier.</p>
+
+<h3>Adresse pour l'envoi</h3>
+<p><strong>Concordia</strong><br>Bundesplatz 15<br>6002 Lucerne</p>`,
+    category: "Résiliation",
+    categorySlug: "resiliation",
+    date: "2024-07-23",
+    readTime: 5,
+    image: resiliationImg,
+  },
+  {
+    id: "4264",
+    slug: "tout-savoir-sur-la-resiliation-de-votre-assurance-sanitas",
+    title: "Résiliation Sanitas : Guide complet pour bien résilier votre contrat",
+    excerpt: "Lorsqu'il s'agit de résilier une assurance Sanitas, il est essentiel de respecter certaines étapes et délais.",
+    content: `<p>Lorsqu'il s'agit de résilier une assurance Sanitas, il est essentiel de respecter certaines étapes et délais.</p>
+
+<h2>Comment résilier l'assurance de base Sanitas ?</h2>
+<ul>
+<li><strong>Résiliation au 1er janvier</strong> : lettre reçue avant le <strong>30 novembre</strong></li>
+<li><strong>Résiliation au 1er juillet</strong> : franchise CHF 300, lettre reçue avant le <strong>31 mars</strong></li>
+</ul>
+
+<h2>Comment résilier une assurance complémentaire Sanitas ?</h2>
+<p>Préavis de <strong>trois mois</strong>, lettre à envoyer avant le <strong>30 septembre</strong>.</p>
+
+<h3>Adresse pour l'envoi</h3>
+<p><strong>Sanitas Assurance-maladie</strong><br>Jägergasse 3<br>8004 Zurich</p>`,
+    category: "Résiliation",
+    categorySlug: "resiliation",
+    date: "2024-07-23",
+    readTime: 5,
+    image: resiliationImg,
+  },
+  {
+    id: "4267",
+    slug: "tout-savoir-sur-la-resiliation-de-votre-assurance-kpt",
+    title: "Résiliation KPT : Comment résilier son assurance efficacement ?",
+    excerpt: "Résilier une assurance auprès de KPT peut sembler complexe, mais avec les bonnes informations, le processus devient simple.",
+    content: `<p>Résilier une assurance auprès de KPT peut sembler complexe, mais avec les bonnes informations, le processus devient simple et clair.</p>
+
+<h2>Comment résilier l'assurance de base KPT ?</h2>
+<ul>
+<li><strong>Résiliation au 1er janvier</strong> : lettre reçue avant le <strong>30 novembre</strong></li>
+<li><strong>Résiliation au 1er juillet</strong> : franchise CHF 300, lettre reçue avant le <strong>31 mars</strong></li>
+</ul>
+
+<h2>Comment résilier une assurance complémentaire KPT ?</h2>
+<p>Préavis de <strong>trois mois</strong>, lettre à envoyer avant le <strong>30 septembre</strong>.</p>
+
+<h3>Adresse pour l'envoi</h3>
+<p><strong>KPT Caisse-maladie SA</strong><br>Tellstrasse 18<br>3014 Bern</p>`,
+    category: "Résiliation",
+    categorySlug: "resiliation",
+    date: "2024-07-23",
+    readTime: 5,
+    image: resiliationImg,
+  },
+  {
+    id: "4270",
+    slug: "tout-savoir-sur-la-resiliation-de-votre-assurance-groupe-mutuel",
+    title: "Résiliation Groupe Mutuel : Guide pour gérer vos assurances",
+    excerpt: "La résiliation d'une assurance est une étape importante dans la gestion de vos finances personnelles.",
+    content: `<p>La résiliation d'une assurance est une étape importante dans la gestion de vos finances personnelles, notamment lorsqu'il s'agit de l'assurance-maladie.</p>
+
+<h2>Comment résilier l'assurance de base Groupe Mutuel ?</h2>
+<ul>
+<li><strong>Résiliation au 1er janvier</strong> : lettre reçue avant le <strong>30 novembre</strong></li>
+<li><strong>Résiliation au 1er juillet</strong> : franchise CHF 300, lettre reçue avant le <strong>31 mars</strong></li>
+</ul>
+
+<h2>Comment résilier une assurance complémentaire Groupe Mutuel ?</h2>
+<p>Préavis de <strong>trois mois</strong>, lettre à envoyer avant le <strong>30 septembre</strong>.</p>
+
+<h3>Adresse pour l'envoi</h3>
+<p><strong>Groupe Mutuel</strong><br>Rue des Cèdres 5<br>1919 Martigny</p>`,
+    category: "Résiliation",
+    categorySlug: "resiliation",
+    date: "2024-07-23",
+    readTime: 5,
+    image: resiliationImg,
+  },
+  {
+    id: "4382",
+    slug: "la-retraite-en-suisse",
+    title: "La retraite en Suisse : Un voyage en constante transformation !",
+    excerpt: "Bienvenue dans le monde fascinant de la retraite en Suisse ! Dans cet article, nous allons explorer les changements constants autour de l'âge de la retraite.",
+    content: `<h2>La retraite en Suisse</h2>
+<p>Bienvenue dans le monde fascinant de la <a href="https://www.ch.ch/fr/retraite/calculer-le-montant-de-sa-retraite/">retraite</a> en Suisse ! Dans cet article, nous allons explorer les changements constants autour de l'âge de la retraite et découvrir comment bien se préparer pour cette nouvelle étape de vie.</p>
+
+<h3>L'âge de la retraite en Suisse</h3>
+<p>L'âge légal de la retraite en Suisse est actuellement de 65 ans pour les hommes et 64 ans pour les femmes. Cependant, des réformes sont en cours pour harmoniser ces âges.</p>
+
+<h3>Les trois piliers de la prévoyance</h3>
+<ul>
+<li><strong>1er pilier (AVS)</strong> : La prévoyance étatique obligatoire</li>
+<li><strong>2ème pilier (LPP)</strong> : La prévoyance professionnelle</li>
+<li><strong>3ème pilier</strong> : La prévoyance privée facultative</li>
+</ul>
+
+<h3>Préparer sa retraite</h3>
+<p>Il est essentiel de commencer à épargner tôt et de diversifier ses investissements pour assurer une retraite confortable.</p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-08-05",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4390",
+    slug: "comprendre-gerer-depenses-sante-suisse",
+    title: "Les Dépenses de Santé en Suisse : Les Comprendre et Les Gérer",
+    excerpt: "Comprendre et gérer les dépenses de santé en Suisse peut parfois ressembler à une aventure en haute mer.",
+    content: `<p>Comprendre et gérer les dépenses de santé en Suisse peut parfois ressembler à une aventure en haute mer, avec des vagues de factures inattendues et des récifs de primes d'assurance.</p>
+
+<h3>Les composantes des coûts de santé</h3>
+<ul>
+<li><strong>Primes d'assurance</strong> : Montant mensuel payé à votre caisse maladie</li>
+<li><strong>Franchise</strong> : Montant annuel à votre charge avant remboursement (CHF 300 à CHF 2'500)</li>
+<li><strong>Quote-part</strong> : 10% des frais après la franchise (max. CHF 700/an)</li>
+</ul>
+
+<h3>Stratégies pour réduire vos dépenses</h3>
+<ol>
+<li>Comparer les assurances chaque année</li>
+<li>Choisir un modèle alternatif (médecin de famille, HMO, Telmed)</li>
+<li>Adapter votre franchise à votre situation de santé</li>
+<li>Utiliser les génériques plutôt que les médicaments originaux</li>
+</ol>
+
+<p><a href="https://le-comparateur-optimis.ch/">Utilisez Optimis</a> pour comparer les offres et optimiser votre budget santé.</p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-08-06",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4419",
+    slug: "lassurance-maladie-internationale-en-suisse-ce-que-vous-devez-savoir",
+    title: "L'assurance maladie internationale en Suisse : Ce que vous devez savoir",
+    excerpt: "L'assurance maladie est un sujet crucial, en particulier pour les expatriés et les voyageurs fréquents.",
+    content: `<p>L'assurance maladie est un sujet crucial, en particulier pour les expatriés, les voyageurs fréquents et les Suisses vivant à l'étranger. Dans un pays comme la Suisse, où les coûts des soins de santé sont parmi les plus élevés au monde, il est essentiel de bien comprendre vos options.</p>
+
+<h2>Qui a besoin d'une assurance maladie internationale ?</h2>
+<ul>
+<li>Les expatriés suisses vivant à l'étranger</li>
+<li>Les travailleurs internationaux en Suisse</li>
+<li>Les voyageurs fréquents</li>
+<li>Les étudiants à l'étranger</li>
+</ul>
+
+<h2>Les options disponibles</h2>
+<h3>Assurance voyage complémentaire</h3>
+<p>Pour les courts séjours, une assurance voyage peut suffire à couvrir les soins d'urgence à l'étranger.</p>
+
+<h3>Assurance maladie internationale</h3>
+<p>Pour les séjours prolongés ou l'expatriation, une assurance internationale offre une couverture complète dans le monde entier.</p>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-maladie-landing/">Optimis</a> se positionne comme un soutien pour vous aider à trouver la meilleure couverture.</p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-08-14",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4436",
+    slug: "subside-assurance-maladie",
+    title: "Subside d'assurance-maladie en Suisse : Tout ce qu'il faut savoir",
+    excerpt: "Les subsides d'assurance-maladie en Suisse sont une aide financière précieuse pour alléger les coûts des primes.",
+    content: `<p>Les <strong>subsides d'assurance-maladie</strong> en Suisse sont une aide financière précieuse pour alléger les coûts des primes. En 2024, ces aides sont plus importantes que jamais pour de nombreuses familles et personnes.</p>
+
+<h2>Qu'est-ce qu'un subside d'assurance-maladie et qui peut en bénéficier ?</h2>
+<p>Un subside est une aide financière versée par le canton pour réduire le montant des primes d'assurance maladie obligatoire (LAMal).</p>
+
+<h3>Critères d'éligibilité généraux</h3>
+<ul>
+<li>Être résident du canton concerné</li>
+<li>Avoir un revenu et une fortune inférieurs aux seuils fixés par le canton</li>
+<li>Être affilié à une caisse d'assurance maladie reconnue</li>
+</ul>
+
+<h2>Comment faire sa demande ?</h2>
+<ol>
+<li>Vérifier votre éligibilité selon les barèmes de votre canton</li>
+<li>Rassembler les documents nécessaires (déclaration fiscale, attestations)</li>
+<li>Remplir le formulaire de demande du canton</li>
+<li>Envoyer la demande dans les délais impartis</li>
+</ol>
+
+<p>Pour plus d'informations sur les subsides par canton, consultez <a href="https://le-comparateur-optimis.ch/subside-dassurance-maladie-comment-ca-marche-et-comment-faire-sa-demande/">notre guide complet</a>.</p>`,
+    category: "Aide assurance maladie",
+    categorySlug: "aide-assurance-maladie",
+    date: "2024-09-09",
+    readTime: 4,
+    image: subsideMaladieImg,
+  },
+  {
+    id: "4439",
+    slug: "lamal",
+    title: "LAMal : Tout savoir sur l'assurance-maladie obligatoire en Suisse",
+    excerpt: "La LAMal est la loi fédérale suisse qui régit l'assurance-maladie obligatoire.",
+    content: `<p>La LAMal est la loi fédérale suisse qui régit l'assurance-maladie obligatoire. Elle garantit à chaque résident l'accès à des soins de santé de qualité.</p>
+
+<h2>Qu'est-ce que la LAMal ?</h2>
+<p>La <strong>Loi fédérale sur l'assurance-maladie (LAMal)</strong> définit le cadre de l'assurance de base obligatoire en Suisse. Entrée en vigueur en 1996, elle assure une couverture médicale universelle.</p>
+
+<h2>Qui doit s'assurer ?</h2>
+<ul>
+<li>Toute personne domiciliée en Suisse</li>
+<li>Les personnes travaillant en Suisse</li>
+<li>Les frontaliers (avec possibilité d'exemption)</li>
+</ul>
+
+<h2>Que couvre la LAMal ?</h2>
+<ul>
+<li>Consultations médicales</li>
+<li>Hospitalisations en division commune</li>
+<li>Médicaments remboursables</li>
+<li>Maternité</li>
+<li>Soins à domicile</li>
+</ul>
+
+<h2>Les prestations non couvertes</h2>
+<ul>
+<li>Chambre privée à l'hôpital</li>
+<li>Médecines alternatives (sauf certaines)</li>
+<li>Soins dentaires (sauf exceptions)</li>
+</ul>
+
+<p><a href="https://le-comparateur-optimis.ch/">Comparez les offres</a> pour trouver la meilleure assurance LAMal.</p>`,
+    category: "Aide assurance maladie",
+    categorySlug: "aide-assurance-maladie",
+    date: "2024-09-09",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4441",
+    slug: "comparateur-assurance-maladie-suisse",
+    title: "Comparatif Assurance Maladie Suisse : Comment Trouver les Meilleures Primes",
+    excerpt: "En Suisse, l'assurance maladie est obligatoire, mais choisir la meilleure option peut s'avérer complexe.",
+    content: `<p>En Suisse, l'assurance maladie est obligatoire, mais choisir la meilleure option peut s'avérer complexe. Grâce à notre comparateur d'assurances, découvrez les meilleures offres.</p>
+
+<h2>Pourquoi utiliser un comparateur d'assurance maladie en Suisse en 2024 ?</h2>
+<ul>
+<li>Gagner du temps en comparant plusieurs offres simultanément</li>
+<li>Trouver les primes les plus avantageuses</li>
+<li>Comparer les prestations et services</li>
+<li>Identifier les économies potentielles</li>
+</ul>
+
+<h2>Comment fonctionne le comparateur Optimis ?</h2>
+<ol>
+<li>Entrez vos informations personnelles (âge, canton, franchise)</li>
+<li>Recevez une liste de primes comparées</li>
+<li>Analysez les différences de prestations</li>
+<li>Choisissez l'offre qui vous convient</li>
+</ol>
+
+<h2>Facteurs influençant les primes</h2>
+<ul>
+<li><strong>Canton de résidence</strong> : les primes varient fortement selon les cantons</li>
+<li><strong>Franchise choisie</strong> : une franchise plus élevée = prime plus basse</li>
+<li><strong>Modèle d'assurance</strong> : HMO, médecin de famille, standard</li>
+<li><strong>Âge</strong> : enfants, jeunes adultes, adultes</li>
+</ul>
+
+<p><a href="https://le-comparateur-optimis.ch/">Comparez maintenant</a> et économisez sur vos primes !</p>`,
+    category: "Aide assurance maladie",
+    categorySlug: "aide-assurance-maladie",
+    date: "2024-09-09",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4443",
+    slug: "prime-lamal",
+    title: "Primes LAMal et réductions : tout ce que vous devez savoir",
+    excerpt: "La prime LAMal est une charge importante pour les ménages suisses.",
+    content: `<p><a href="https://le-comparateur-optimis.ch/assurance-menage-suisse/">La prime LAMal est une charge importante pour les ménages suisses</a>. Cet article vous aide à comprendre les primes 2024 et à savoir comment bénéficier d'une réduction.</p>
+
+<h2>Qu'est-ce que la prime LAMal ?</h2>
+<p>La <strong>prime LAMal</strong> correspond au montant mensuel que vous payez pour votre assurance maladie obligatoire. Elle varie selon votre canton, votre âge et le modèle d'assurance choisi.</p>
+
+<h2>Comment réduire sa prime LAMal ?</h2>
+
+<h3>1. Augmenter sa franchise</h3>
+<p>En choisissant une franchise plus élevée (jusqu'à CHF 2'500), vous pouvez réduire significativement votre prime mensuelle.</p>
+
+<h3>2. Choisir un modèle alternatif</h3>
+<ul>
+<li><strong>Médecin de famille</strong> : économie de 10-15%</li>
+<li><strong>HMO</strong> : économie de 15-25%</li>
+<li><strong>Telmed</strong> : économie de 10-20%</li>
+</ul>
+
+<h3>3. Demander un subside</h3>
+<p>Si vos revenus sont modestes, vous pouvez bénéficier d'une aide cantonale pour réduire vos primes.</p>
+
+<p><a href="https://le-comparateur-optimis.ch/">Comparez les primes</a> et trouvez la meilleure offre !</p>`,
+    category: "Aide assurance maladie",
+    categorySlug: "aide-assurance-maladie",
+    date: "2024-09-09",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4445",
+    slug: "demande-de-subside-2024",
+    title: "Demande de subside 2024 : tout ce qu'il faut savoir pour votre demande",
+    excerpt: "La demande de subside 2024 est essentielle pour alléger vos frais d'assurance-maladie.",
+    content: `<p>La <strong>demande de subside 2024</strong> est essentielle pour alléger vos frais d'assurance-maladie. Ce guide complet vous accompagnera à chaque étape.</p>
+
+<h2>Qu'est-ce qu'un subside d'assurance-maladie et qui peut en bénéficier ?</h2>
+<p>Le <strong><a href="https://le-comparateur-optimis.ch/subside-dassurance-maladie-comment-ca-marche-et-comment-faire-sa-demande/">subside d'assurance maladie</a></strong> est une aide financière accordée aux personnes et familles à revenus modestes pour les aider à payer leurs primes.</p>
+
+<h2>Comment faire sa demande ?</h2>
+<ol>
+<li><strong>Vérifier votre éligibilité</strong> selon les barèmes de votre canton</li>
+<li><strong>Rassembler les documents</strong> : déclaration fiscale, attestation de domicile</li>
+<li><strong>Remplir le formulaire</strong> de demande de subside</li>
+<li><strong>Envoyer la demande</strong> à l'autorité cantonale compétente</li>
+</ol>
+
+<h2>Délais à respecter</h2>
+<p>Les délais varient selon les cantons. En général, la demande doit être effectuée en début d'année ou dans les mois suivant un changement de situation.</p>
+
+<h2>Documents nécessaires</h2>
+<ul>
+<li>Dernière déclaration d'impôts</li>
+<li>Attestation de résidence</li>
+<li>Attestation d'assurance maladie</li>
+<li>Justificatifs de revenus</li>
+</ul>`,
+    category: "Aide assurance maladie",
+    categorySlug: "aide-assurance-maladie",
+    date: "2024-09-09",
+    readTime: 4,
+    image: subsideMaladieImg,
+  },
+  {
+    id: "4447",
+    slug: "assurance-auto-suisse",
+    title: "Comparatif des assurances auto en Suisse : trouvez la meilleure option",
+    excerpt: "L'assurance automobile est un élément essentiel pour tous les conducteurs en Suisse.",
+    content: `<p>L'assurance automobile est un élément essentiel pour tous les conducteurs en Suisse. Que vous soyez à la recherche de la couverture la plus économique ou la plus complète, cet article vous guide.</p>
+
+<h2>Qu'est-ce qu'une assurance auto en Suisse et pourquoi est-elle importante ?</h2>
+<p>L'assurance responsabilité civile (RC) est obligatoire pour tout véhicule immatriculé en Suisse. Elle couvre les dommages causés à des tiers.</p>
+
+<h2>Les différents types d'assurance auto</h2>
+
+<h3>Responsabilité civile (RC) - Obligatoire</h3>
+<p>Couvre les dommages que vous causez à autrui avec votre véhicule.</p>
+
+<h3>Casco partielle</h3>
+<ul>
+<li>Vol et tentative de vol</li>
+<li>Incendie et forces de la nature</li>
+<li>Bris de glaces</li>
+<li>Collision avec des animaux</li>
+</ul>
+
+<h3>Casco complète</h3>
+<p>Inclut la casco partielle plus la couverture des dommages à votre propre véhicule, même en cas d'accident responsable.</p>
+
+<h2>Comment choisir son assurance auto ?</h2>
+<ol>
+<li>Évaluer la valeur de votre véhicule</li>
+<li>Comparer les primes et franchises</li>
+<li>Vérifier les prestations incluses</li>
+<li>Lire les avis clients</li>
+</ol>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-voiture/">Comparez les assurances auto</a> sur Optimis !</p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-09-09",
+    readTime: 4,
+    image: assuranceCascoImg,
+  },
+  {
+    id: "4449",
+    slug: "assurance-vie-suisse",
+    title: "Comparatif des assurances vie en Suisse : Comment choisir la meilleure option ?",
+    excerpt: "L'assurance vie en Suisse offre à la fois protection et opportunités d'épargne.",
+    content: `<p>L'assurance vie en Suisse offre à la fois protection et opportunités d'épargne. Que ce soit pour assurer l'avenir de vos proches ou pour bénéficier d'avantages fiscaux, il est essentiel de comprendre ses spécificités.</p>
+
+<h2>Qu'est-ce qu'une assurance vie en Suisse ?</h2>
+<p>L'assurance vie est un contrat entre vous et un assureur. Vous payez des primes, et l'assureur verse un capital ou une rente à vos bénéficiaires en cas de décès, ou à vous-même à échéance.</p>
+
+<h2>Les types d'assurance vie</h2>
+
+<h3>Assurance vie risque pur</h3>
+<p>Protège vos proches en cas de décès pendant la durée du contrat.</p>
+
+<h3>Assurance vie mixte (capitalisation)</h3>
+<p>Combine protection et épargne : vous constituez un capital tout en protégeant vos proches.</p>
+
+<h3>Pilier 3a lié</h3>
+<p>Assurance vie avec avantages fiscaux dans le cadre du 3ème pilier.</p>
+
+<h2>Avantages fiscaux</h2>
+<ul>
+<li>Déduction des primes du revenu imposable (3a)</li>
+<li>Capital exonéré d'impôt sur la fortune (sous conditions)</li>
+<li>Imposition réduite du capital à l'échéance</li>
+</ul>`,
+    category: "Aide assurance maladie",
+    categorySlug: "aide-assurance-maladie",
+    date: "2024-09-09",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4451",
+    slug: "assurance-accident-suisse",
+    title: "Assurance Accident en Suisse : Guide Complet",
+    excerpt: "En Suisse, l'assurance accident est essentielle pour protéger les individus contre les risques d'accidents.",
+    content: `<p><strong>En Suisse, l'assurance accident est essentielle pour protéger les individus contre les risques d'accidents dans la vie quotidienne et au travail.</strong></p>
+
+<h2>Assurance accident en Suisse : Qui est couvert ?</h2>
+
+<h3>Salariés</h3>
+<p>Les employés travaillant plus de 8 heures par semaine sont obligatoirement assurés par leur employeur contre les accidents professionnels ET non-professionnels.</p>
+
+<h3>Indépendants et personnes sans emploi</h3>
+<p>Doivent s'assurer eux-mêmes contre les accidents via leur assurance maladie (couverture accidents LAMal).</p>
+
+<h2>Que couvre l'assurance accident ?</h2>
+<ul>
+<li>Frais médicaux et hospitaliers</li>
+<li>Indemnités journalières en cas d'incapacité de travail</li>
+<li>Rente d'invalidité</li>
+<li>Indemnité pour atteinte à l'intégrité</li>
+<li>Rente de survivants</li>
+</ul>
+
+<h2>LAA vs couverture accidents LAMal</h2>
+<table><thead><tr><th>Aspect</th><th>LAA (employeur)</th><th>LAMal</th></tr></thead><tbody><tr><td>Frais médicaux</td><td>100%</td><td>Selon franchise</td></tr><tr><td>Indemnités journalières</td><td>80% du salaire</td><td>Non inclus</td></tr><tr><td>Monde entier</td><td>Limité</td><td>Limité</td></tr></tbody></table>`,
+    category: "Protection juridique",
+    categorySlug: "protection-juridique",
+    date: "2024-09-09",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4453",
+    slug: "assurance-menage-suisse",
+    title: "Tout savoir sur l'assurance ménage en Suisse",
+    excerpt: "L'assurance ménage en Suisse est essentielle pour protéger votre domicile contre divers risques.",
+    content: `<p>L'assurance ménage en Suisse est essentielle pour protéger votre domicile contre divers risques. Dans cet article, nous explorons les différentes facettes de cette couverture.</p>
+
+<h2>Qu'est-ce que l'assurance ménage en Suisse ?</h2>
+<p>L'assurance ménage (ou assurance inventaire du ménage) protège vos biens mobiliers contre les dommages causés par le feu, l'eau, le vol, et d'autres événements.</p>
+
+<h2>Que couvre l'assurance ménage ?</h2>
+<ul>
+<li><strong>Incendie et dommages naturels</strong></li>
+<li><strong>Dégâts des eaux</strong></li>
+<li><strong>Vol et cambriolage</strong></li>
+<li><strong>Bris de glaces</strong></li>
+<li><strong>Vandalisme</strong></li>
+</ul>
+
+<h2>Comment calculer la valeur de votre ménage ?</h2>
+<p>Règle générale : compter environ CHF 1'000 par m² de surface habitable. Pour un appartement de 80 m², la valeur assurée serait d'environ CHF 80'000.</p>
+
+<h2>L'assurance RC ménage</h2>
+<p>La <strong>responsabilité civile privée</strong> couvre les dommages que vous causez à des tiers dans votre vie quotidienne. Elle est généralement combinée avec l'assurance ménage.</p>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-menage/">Comparez les offres d'assurance ménage</a> sur Optimis !</p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-09-09",
+    readTime: 4,
+    image: assuranceMenageImg,
+  },
+  {
+    id: "4455",
+    slug: "assurance-chien-suisse",
+    title: "Assurance Chien en Suisse : Guide Complet pour Choisir la Meilleure Couverture",
+    excerpt: "Assurer votre chien en Suisse est essentiel pour garantir sa santé et votre tranquillité d'esprit.",
+    content: `<p>Assurer votre chien en Suisse est essentiel pour garantir sa santé et votre tranquillité d'esprit. Découvrez dans ce guide complet les critères de choix et les couvertures disponibles.</p>
+
+<h2>Assurance Chien en Suisse : Pourquoi est-ce Important ?</h2>
+<p><a href="https://le-comparateur-optimis.ch/">Les frais vétérinaires</a> peuvent rapidement devenir très élevés en cas de maladie ou d'accident. Une bonne assurance peut vous protéger contre ces coûts imprévus.</p>
+
+<h2>Types d'assurance pour chien</h2>
+
+<h3>Assurance maladie pour chien</h3>
+<p>Couvre les frais vétérinaires en cas de maladie ou d'accident de votre animal.</p>
+
+<h3>Assurance RC pour détenteur de chien</h3>
+<p>Obligatoire dans certains cantons, elle couvre les dommages causés par votre chien à des tiers.</p>
+
+<h2>Que couvre une assurance chien ?</h2>
+<ul>
+<li>Consultations vétérinaires</li>
+<li>Opérations chirurgicales</li>
+<li>Médicaments</li>
+<li>Hospitalisation</li>
+<li>Physiothérapie</li>
+</ul>
+
+<h2>Comment choisir ?</h2>
+<ol>
+<li>Comparer les franchises et primes</li>
+<li>Vérifier les exclusions (maladies héréditaires, âge)</li>
+<li>Regarder les plafonds de remboursement</li>
+<li>Considérer l'âge de votre animal</li>
+</ol>`,
+    category: "Aide assurance maladie",
+    categorySlug: "aide-assurance-maladie",
+    date: "2024-09-09",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4661",
+    slug: "taux-hypothecaire-suisse",
+    title: "Évolution des taux hypothécaires en Suisse en 2024 et 2025 : analyse et prévisions",
+    excerpt: "Les taux hypothécaires en Suisse jouent un rôle central dans le financement immobilier.",
+    content: `<p>Les <strong><a href="https://le-comparateur-optimis.ch/taux-hypothecaire-suisse">taux hypothécaires en Suisse</a></strong> jouent un rôle central dans le financement immobilier, influençant les décisions des acheteurs et des propriétaires.</p>
+
+<h2>Évolution des taux en 2024</h2>
+<p>Les taux hypothécaires ont connu des fluctuations importantes suite aux décisions de la Banque nationale suisse (BNS). Après plusieurs hausses en 2023, une stabilisation s'est amorcée.</p>
+
+<h2>Types de taux hypothécaires</h2>
+
+<h3>Taux fixe</h3>
+<p>Le taux reste constant pendant toute la durée du contrat (2 à 15 ans). Idéal pour ceux qui veulent une sécurité budgétaire.</p>
+
+<h3>Taux variable (SARON)</h3>
+<p>Le taux fluctue selon le marché. Potentiellement moins cher mais plus risqué.</p>
+
+<h2>Prévisions pour 2025</h2>
+<ul>
+<li>Stabilisation attendue des taux</li>
+<li>Possibilité de légère baisse si l'inflation diminue</li>
+<li>Les taux fixes à long terme pourraient devenir plus attractifs</li>
+</ul>
+
+<h2>Conseils pour choisir</h2>
+<ol>
+<li>Évaluer votre tolérance au risque</li>
+<li>Considérer la durée de détention prévue</li>
+<li>Comparer les offres de plusieurs banques</li>
+<li>Négocier les conditions</li>
+</ol>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-10-21",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4663",
+    slug: "taux-hypothecaire-raiffeisen",
+    title: "Taux hypothécaire Raiffeisen : Taux actuels et options de financement",
+    excerpt: "Les taux hypothécaires proposés par Raiffeisen sont une référence pour ceux qui cherchent à financer un bien immobilier en Suisse.",
+    content: `<p>Les taux hypothécaires proposés par Raiffeisen sont une référence pour ceux qui cherchent à financer un bien immobilier en Suisse.</p>
+
+<h2>Quels sont les taux hypothécaires Raiffeisen actuels ?</h2>
+<p>Raiffeisen propose différentes options de financement avec des taux compétitifs. Les taux varient selon la durée et le type d'hypothèque choisis.</p>
+
+<h2>Types d'hypothèques Raiffeisen</h2>
+
+<h3>Hypothèque à taux fixe</h3>
+<p>Durées disponibles de 2 à 15 ans. Taux garanti pendant toute la durée.</p>
+
+<h3>Hypothèque SARON</h3>
+<p>Taux variable basé sur le SARON (Swiss Average Rate Overnight). Ajusté trimestriellement.</p>
+
+<h3>Hypothèque variable</h3>
+<p>Flexibilité maximale avec possibilité de remboursement à tout moment.</p>
+
+<h2>Avantages Raiffeisen</h2>
+<ul>
+<li>Réseau de banques coopératives locales</li>
+<li>Conseil personnalisé</li>
+<li>Conditions avantageuses pour les membres</li>
+<li>Solutions digitales modernes</li>
+</ul>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-10-21",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4665",
+    slug: "taux-hypothecaire-bcv",
+    title: "Taux hypothécaire BCV : Les informations à connaître",
+    excerpt: "L'obtention d'un prêt hypothécaire est une étape clé dans le financement d'un bien immobilier.",
+    content: `<p>L'obtention d'un prêt hypothécaire est une étape clé dans le financement d'un bien immobilier. Cet article explore les taux pratiqués par la Banque Cantonale Vaudoise (BCV).</p>
+
+<h2>Quels sont les taux hypothécaires BCV actuels ?</h2>
+<p>La BCV offre une gamme complète de solutions hypothécaires adaptées à différents profils d'emprunteurs.</p>
+
+<h2>Options de financement BCV</h2>
+
+<h3>Hypothèque à taux fixe</h3>
+<p>Sécurité et prévisibilité avec des durées de 1 à 15 ans.</p>
+
+<h3>Hypothèque SARON</h3>
+<p>Taux indexé sur le SARON, idéal pour les profils flexibles.</p>
+
+<h3>Hypothèque Flex</h3>
+<p>Combinaison de plusieurs tranches avec des durées différentes.</p>
+
+<h2>Conditions générales</h2>
+<ul>
+<li>Apport personnel minimum : 20% (dont 10% de fonds propres "durs")</li>
+<li>Ratio d'endettement : maximum 33% des revenus bruts</li>
+<li>Amortissement : remboursement à 65% de la valeur du bien en 15 ans</li>
+</ul>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-10-21",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4667",
+    slug: "taux-hypothecaire-migros",
+    title: "Taux d'intérêt hypothécaires Migros : tout savoir",
+    excerpt: "Les taux hypothécaires de la Banque Migros en Suisse suscitent un intérêt croissant.",
+    content: `<p>Les <strong>taux hypothécaires de la Banque Migros</strong> <a href="https://le-comparateur-optimis.ch/taux-hypothecaire-suisse/">en Suisse</a> suscitent un intérêt croissant. Ils offrent une diversité d'options adaptées aux différents profils d'emprunteurs.</p>
+
+<h2>Taux hypothécaires Migros Bank</h2>
+<p>Migros Bank est réputée pour ses taux compétitifs et son approche transparente.</p>
+
+<h2>Types d'hypothèques proposées</h2>
+
+<h3>Hypothèque fixe</h3>
+<p>Durées de 1 à 15 ans avec taux garanti.</p>
+
+<h3>Hypothèque SARON</h3>
+<p>Basée sur le taux de référence suisse, ajustée périodiquement.</p>
+
+<h2>Avantages Migros Bank</h2>
+<ul>
+<li>Pas de frais de dossier</li>
+<li>Conseils gratuits</li>
+<li>Gestion en ligne complète</li>
+<li>Taux attractifs pour les clients Cumulus</li>
+</ul>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-10-21",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4669",
+    slug: "taux-hypothecaire-postfinance",
+    title: "Taux d'intérêt hypothécaires Postfinance",
+    excerpt: "Postfinance offre une solution simple et transparente pour les particuliers à la recherche de prêts hypothécaires.",
+    content: `<p>Postfinance offre une solution simple et transparente pour les particuliers à la recherche de prêts hypothécaires. Grâce à des durées courtes et des taux d'intérêt compétitifs, elle se distingue comme une banque accessible.</p>
+
+<h3>Postfinance propose une hypothèque à taux fixe</h3>
+<p>Durées disponibles de 2 à 10 ans. Remboursement anticipé possible moyennant indemnité.</p>
+
+<h2>Caractéristiques principales</h2>
+<ul>
+<li>Processus 100% en ligne</li>
+<li>Décision rapide</li>
+<li>Taux compétitifs</li>
+<li>Pas de conseiller attitré</li>
+</ul>
+
+<h2>Conditions</h2>
+<ul>
+<li>Apport minimum de 20%</li>
+<li>Bien immobilier en Suisse</li>
+<li>Revenus suffisants</li>
+</ul>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-10-21",
+    readTime: 3,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4671",
+    slug: "taux-hypothecaire-swiss-life",
+    title: "Taux hypothécaire Swiss Life : tout ce que vous devez savoir",
+    excerpt: "Naviguer dans le monde des prêts hypothécaires peut sembler complexe. Cet article vous guide à travers les taux Swiss Life.",
+    content: `<p>Naviguer dans le monde des prêts hypothécaires peut sembler complexe. Cet article vous guide à travers les taux hypothécaires proposés par Swiss Life.</p>
+
+<h2>Quel est le taux hypothécaire en ce moment ?</h2>
+<p>Swiss Life propose des taux attractifs pour les hypothèques fixes et SARON. Les conditions varient selon le profil de l'emprunteur.</p>
+
+<h2>Offres Swiss Life</h2>
+
+<h3>Hypothèque fixe</h3>
+<p>Durées de 1 à 15 ans avec taux garanti.</p>
+
+<h3>Hypothèque liée au 3ème pilier</h3>
+<p>Combinaison d'un financement hypothécaire avec une solution de prévoyance (pilier 3a ou 3b).</p>
+
+<h2>Avantages de Swiss Life</h2>
+<ul>
+<li>Expertise en prévoyance</li>
+<li>Solutions combinées assurance-hypothèque</li>
+<li>Conseil personnalisé</li>
+<li>Flexibilité des produits</li>
+</ul>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-10-21",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4673",
+    slug: "taux-hypothecaire-axa",
+    title: "Axa taux hypothécaire : tout ce qu'il faut savoir",
+    excerpt: "Lorsque vous envisagez de souscrire un prêt hypothécaire, il est essentiel de comparer les différentes offres du marché.",
+    content: `<p>Lorsque vous envisagez de souscrire un prêt hypothécaire, il est essentiel de comparer les différentes offres du marché. Axa se positionne parmi les leaders avec des taux compétitifs.</p>
+
+<h2>Taux hypothécaires Axa</h2>
+<p>Axa propose des solutions de financement immobilier combinées à des produits d'assurance et de prévoyance.</p>
+
+<h2>Types d'hypothèques Axa</h2>
+
+<h3>Hypothèque à taux fixe</h3>
+<p>Sécurité budgétaire avec des durées allant jusqu'à 15 ans.</p>
+
+<h3>Hypothèque liée à une assurance vie</h3>
+<p>Remboursement indirect via un pilier 3a, avec avantages fiscaux.</p>
+
+<h2>Avantages Axa</h2>
+<ul>
+<li>Solutions globales (hypothèque + prévoyance)</li>
+<li>Réseau d'agences en Suisse</li>
+<li>Conseils personnalisés</li>
+<li>Optimisation fiscale</li>
+</ul>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-10-21",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4675",
+    slug: "hypotheque-credit-suisse",
+    title: "Crédit Suisse Hypothèque : Taux et Options Disponibles",
+    excerpt: "L'hypothèque est un élément clé du financement immobilier, et Crédit Suisse propose une gamme d'options.",
+    content: `<p>L'hypothèque est un élément clé du financement immobilier, et Crédit Suisse propose une gamme d'options pour répondre à différents besoins.</p>
+
+<h2>Options hypothécaires Crédit Suisse</h2>
+
+<h3>Hypothèque à taux fixe</h3>
+<p>Durées de 1 à 15 ans. Taux garanti pendant toute la durée du contrat.</p>
+
+<h3>Hypothèque SARON</h3>
+<p>Taux variable basé sur le SARON, ajusté périodiquement.</p>
+
+<h3>Hypothèque Flex</h3>
+<p>Combine plusieurs tranches avec des durées et types différents.</p>
+
+<h2>Avantages</h2>
+<ul>
+<li>Large gamme de produits</li>
+<li>Conseil expert</li>
+<li>Solutions sur mesure</li>
+<li>Outils digitaux performants</li>
+</ul>
+
+<h2>Comment souscrire</h2>
+<ol>
+<li>Demande en ligne ou en agence</li>
+<li>Analyse de dossier</li>
+<li>Proposition de financement</li>
+<li>Signature du contrat</li>
+</ol>
+
+<p><strong>Note</strong> : Suite au rachat par UBS, certaines conditions peuvent évoluer.</p>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-10-21",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
 ];
 
 // Enforce “image à la une” strictly: if we have a locally downloaded featured image
@@ -1509,6 +2536,7 @@ export const categories = [
   { slug: "hypotheque", name: "Hypothèque" },
   { slug: "optimis", name: "OPTIMIS" },
   { slug: "resiliation", name: "Résiliation" },
+  { slug: "assurance-retraite", name: "Assurance retraite" },
 ];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
