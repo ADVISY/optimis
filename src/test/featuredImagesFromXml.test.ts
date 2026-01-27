@@ -11,6 +11,17 @@ type DownloadItem = {
   targetPath: string;
 };
 
+type PostFromXml = {
+  id: string;
+  slug: string;
+  title: string;
+  thumbnailId: string | null;
+  category: string;
+  categorySlug: string;
+  date: string;
+  contentPreview: string;
+};
+
 function getFirstDirectChildByLocalName(parent: Element, localName: string): Element | null {
   for (const child of Array.from(parent.children)) {
     if (child.localName === localName) return child;
@@ -46,8 +57,20 @@ function extensionFromUrl(url: string): string {
   return (match?.[1] || "jpg").toLowerCase();
 }
 
+function cleanTitle(title: string): string {
+  return title
+    .replace(/&#039;/g, "'")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/<!\[CDATA\[/g, "")
+    .replace(/\]\]>/g, "")
+    .trim();
+}
+
 describe("featured images from WordPress XML", () => {
-  it("exports a download list for current slugs (without changing app runtime)", () => {
+  it("exports a download list for current slugs AND lists posts not yet imported", () => {
     const xmlPath = path.resolve(process.cwd(), "src/data/wordpress-export.xml");
     const xml = readFileSync(xmlPath, "utf8");
 
@@ -56,6 +79,7 @@ describe("featured images from WordPress XML", () => {
 
     const attachmentUrlById = new Map<string, string>();
     const postThumbnailBySlug = new Map<string, string>();
+    const allPublishedPosts: PostFromXml[] = [];
 
     for (const item of items) {
       const postType = textOfDirectChild(item, "post_type");
@@ -74,9 +98,44 @@ describe("featured images from WordPress XML", () => {
 
       const thumbnailId = getMetaValue(item, "_thumbnail_id");
       if (thumbnailId) postThumbnailBySlug.set(slug, thumbnailId);
+
+      // Get category
+      const categoryEl = item.querySelector("category[domain='category']");
+      const category = categoryEl?.textContent?.replace(/<!\[CDATA\[|\]\]>/g, "").trim() || "Non classé";
+      const categorySlug = categoryEl?.getAttribute("nicename") || "non-classe";
+
+      // Get date
+      const pubDate = textOfDirectChild(item, "post_date");
+      const date = pubDate ? pubDate.split(" ")[0] : new Date().toISOString().split("T")[0];
+
+      // Get title
+      const title = cleanTitle(item.querySelector("title")?.textContent || "");
+
+      // Get content preview (first 200 chars)
+      const contentEl = Array.from(item.children).find(c => c.localName === "encoded");
+      const content = contentEl?.textContent || "";
+      const contentPreview = content.slice(0, 500);
+
+      allPublishedPosts.push({
+        id: postId,
+        slug,
+        title,
+        thumbnailId,
+        category,
+        categorySlug,
+        date,
+        contentPreview,
+      });
     }
 
-    const slugs = Array.from(new Set(blogPosts.map((p) => p.slug)));
+    // Current slugs in blogPosts
+    const existingSlugs = new Set(blogPosts.map((p) => p.slug));
+    
+    // Posts NOT yet imported
+    const postsToImport = allPublishedPosts.filter(p => !existingSlugs.has(p.slug));
+
+    // Downloads for current posts
+    const slugs = Array.from(existingSlugs);
     const downloads: DownloadItem[] = [];
     const missingSlugs: string[] = [];
     const missingAttachments: Array<{ slug: string; thumbnailId: string }> = [];
@@ -103,6 +162,18 @@ describe("featured images from WordPress XML", () => {
       });
     }
 
+    // Prepare download list for posts to import (next 10)
+    const next10ToImport = postsToImport.slice(0, 10).map(p => {
+      const imageUrl = p.thumbnailId ? attachmentUrlById.get(p.thumbnailId) : null;
+      return {
+        ...p,
+        imageUrl,
+        targetPath: imageUrl 
+          ? `src/assets/blog/featured/${p.slug}.${extensionFromUrl(imageUrl)}`
+          : null,
+      };
+    });
+
     const outDir = path.resolve(process.cwd(), "src/data");
     mkdirSync(outDir, { recursive: true });
 
@@ -111,10 +182,14 @@ describe("featured images from WordPress XML", () => {
       JSON.stringify(
         {
           generatedAt: new Date().toISOString(),
+          existingCount: existingSlugs.size,
+          totalInXml: allPublishedPosts.length,
+          remainingToImport: postsToImport.length,
           slugs,
           downloads,
           missingSlugs,
           missingAttachments,
+          next10ToImport,
         },
         null,
         2
@@ -124,5 +199,6 @@ describe("featured images from WordPress XML", () => {
 
     // The test should not fail the suite; it only produces an artifact.
     expect(Array.isArray(downloads)).toBe(true);
+    expect(postsToImport.length).toBeGreaterThanOrEqual(0);
   });
 });
