@@ -1,15 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { 
   Menu, 
-  ChevronDown, 
   Phone, 
   HeartPulse, 
   Car, 
   Scale, 
   Home, 
   Plus,
-  Banknote,
   Smartphone,
   CreditCard,
   FileX
@@ -28,6 +26,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import LocalizedLink from "@/components/LocalizedLink";
 import logo from "@/assets/logo.svg";
 import llamaMascot from "@/assets/llama-mascot.png";
 
@@ -35,50 +35,50 @@ import llamaMascot from "@/assets/llama-mascot.png";
 const assurancesCategories = [
   { 
     id: "sante",
-    label: "Assurance Santé", 
+    labelKey: "nav.healthInsurance", 
     icon: HeartPulse,
     href: "/assurance-sante",
     subLinks: [
-      { label: "Quel modèle d'assurance maladie choisir ?", href: "/blog/quel-modele-dassurance-maladie-choisir" },
-      { label: "Assurance dentaire complémentaire", href: "/blog/assurance-dentaire-complementaire-en-suisse-reponses-aux-questions-essentielles" },
-      { label: "Changement d'assurance maladie 2024", href: "/blog/changement-dassurance-maladie-delais-et-demarches-en-2024" },
-      { label: "Subside d'assurance maladie", href: "/blog/subside-dassurance-maladie-comment-ca-marche-et-comment-faire-sa-demande" },
+      { labelKey: "Quel modèle d'assurance maladie choisir ?", href: "/blog/quel-modele-dassurance-maladie-choisir" },
+      { labelKey: "Assurance dentaire complémentaire", href: "/blog/assurance-dentaire-complementaire-en-suisse-reponses-aux-questions-essentielles" },
+      { labelKey: "Changement d'assurance maladie 2024", href: "/blog/changement-dassurance-maladie-delais-et-demarches-en-2024" },
+      { labelKey: "Subside d'assurance maladie", href: "/blog/subside-dassurance-maladie-comment-ca-marche-et-comment-faire-sa-demande" },
     ]
   },
   { 
     id: "vehicule",
-    label: "Assurance Véhicule", 
+    labelKey: "nav.carInsurance", 
     icon: Car,
     href: "/assurance-voiture",
     subLinks: [
-      { label: "Comparer les assurances auto", href: "/assurance-voiture" },
+      { labelKey: "Comparer les assurances auto", href: "/assurance-voiture" },
     ]
   },
   { 
     id: "juridique",
-    label: "Protection Juridique", 
+    labelKey: "nav.legalProtection", 
     icon: Scale,
     href: "/protection-juridique",
     subLinks: [
-      { label: "Protection juridique en Suisse", href: "/blog/le-meilleur-de-la-protection-juridique-en-suisse" },
+      { labelKey: "Protection juridique en Suisse", href: "/blog/le-meilleur-de-la-protection-juridique-en-suisse" },
     ]
   },
   { 
     id: "menage",
-    label: "Assurance Ménage", 
+    labelKey: "nav.homeInsurance", 
     icon: Home,
     href: "/assurance-menage",
     subLinks: [
-      { label: "L'assurance ménage : les 7 choses à savoir", href: "/blog/lassurance-menage-en-suisse-les-7-choses-a-savoir" },
+      { labelKey: "L'assurance ménage : les 7 choses à savoir", href: "/blog/lassurance-menage-en-suisse-les-7-choses-a-savoir" },
     ]
   },
   { 
     id: "autres",
-    label: "Autres Assurances", 
+    labelKey: "nav.otherInsurances", 
     icon: Plus,
     href: "/blog",
     subLinks: [
-      { label: "Voir tous les articles", href: "/blog" },
+      { labelKey: "common.seeAllArticles", href: "/blog" },
     ]
   },
 ];
@@ -87,14 +87,14 @@ const assurancesCategories = [
 const financesCategories = [
   { 
     id: "vie",
-    label: "Assurance Vie", 
+    labelKey: "nav.lifeInsurance", 
     icon: HeartPulse,
     href: "/finances",
     subLinks: [
-      { label: "En 2 minutes", href: "/finances" },
-      { label: "Préparez votre retraite", href: "/finances" },
-      { label: "+ de 2700 CHF d'impôts", href: "/finances" },
-      { label: "Jusqu'à 7056 CHF d'impôts", href: "/finances" },
+      { labelKey: "En 2 minutes", href: "/finances" },
+      { labelKey: "Préparez votre retraite", href: "/finances" },
+      { labelKey: "+ de 2700 CHF d'impôts", href: "/finances" },
+      { labelKey: "Jusqu'à 7056 CHF d'impôts", href: "/finances" },
     ]
   },
 ];
@@ -103,45 +103,46 @@ const financesCategories = [
 const servicesCategories = [
   { 
     id: "mobile",
-    label: "Forfait Mobile", 
+    labelKey: "nav.mobilePackage", 
     icon: Smartphone,
     href: "/services",
     subLinks: [
-      { label: "En 2 minutes", href: "/services" },
-      { label: "Abonnements de téléphone mobile", href: "/services" },
-      { label: "+ de 200 CHF d'économies", href: "/services" },
-      { label: "100% illimité dans le monde", href: "/services" },
+      { labelKey: "En 2 minutes", href: "/services" },
+      { labelKey: "Abonnements de téléphone mobile", href: "/services" },
+      { labelKey: "+ de 200 CHF d'économies", href: "/services" },
+      { labelKey: "100% illimité dans le monde", href: "/services" },
     ]
   },
   { 
     id: "subside",
-    label: "Subside Assurance", 
+    labelKey: "nav.subsidyInsurance", 
     icon: CreditCard,
     href: "/services",
     subLinks: [
-      { label: "Demander un subside", href: "/blog/subside-dassurance-maladie-comment-ca-marche-et-comment-faire-sa-demande" },
+      { labelKey: "Demander un subside", href: "/blog/subside-dassurance-maladie-comment-ca-marche-et-comment-faire-sa-demande" },
     ]
   },
   { 
     id: "resiliation",
-    label: "Résiliation", 
+    labelKey: "nav.termination", 
     icon: FileX,
     href: "/services",
     subLinks: [
-      { label: "Résilier votre assurance", href: "/blog/tout-savoir-sur-la-resiliation-de-votre-assurance-assura" },
+      { labelKey: "Résilier votre assurance", href: "/blog/tout-savoir-sur-la-resiliation-de-votre-assurance-assura" },
     ]
   },
 ];
 
 interface MegaMenuCategoryProps {
   categories: typeof assurancesCategories;
-  ctaText: string;
+  ctaTextKey: string;
   ctaHref: string;
 }
 
-const MegaMenuContent = ({ categories, ctaText, ctaHref }: MegaMenuCategoryProps) => {
+const MegaMenuContent = ({ categories, ctaTextKey, ctaHref }: MegaMenuCategoryProps) => {
   const [activeCategory, setActiveCategory] = useState(categories[0]?.id || "");
   const activeItem = categories.find(c => c.id === activeCategory);
+  const { t } = useTranslation();
 
   return (
     <div className="flex w-[900px] bg-background rounded-xl shadow-2xl border">
@@ -160,7 +161,7 @@ const MegaMenuContent = ({ categories, ctaText, ctaHref }: MegaMenuCategoryProps
             >
               <Icon className={`h-6 w-6 ${isActive ? "text-primary" : "text-muted-foreground"}`} />
               <span className={`font-medium text-base ${isActive ? "text-primary" : "text-foreground"}`}>
-                {category.label}
+                {t(category.labelKey, category.labelKey)}
               </span>
             </button>
           );
@@ -172,17 +173,17 @@ const MegaMenuContent = ({ categories, ctaText, ctaHref }: MegaMenuCategoryProps
         <div className="flex gap-8">
           {/* Links section */}
           <div className="flex-1">
-            <h3 className="text-primary font-semibold text-lg mb-6">En savoir plus</h3>
+            <h3 className="text-primary font-semibold text-lg mb-6">{t('common.readMore')}</h3>
             <ul className="space-y-4">
               {activeItem?.subLinks.map((link, index) => (
                 <li key={index}>
-                  <Link 
+                  <LocalizedLink 
                     to={link.href} 
                     className="text-base text-foreground/80 hover:text-primary transition-colors flex items-center gap-3"
                   >
                     <span className="w-2 h-2 bg-muted-foreground/40 rounded-full" />
-                    {link.label}
-                  </Link>
+                    {t(link.labelKey, link.labelKey)}
+                  </LocalizedLink>
                 </li>
               ))}
             </ul>
@@ -195,10 +196,10 @@ const MegaMenuContent = ({ categories, ctaText, ctaHref }: MegaMenuCategoryProps
               alt="Optimis Mascot" 
               className="w-40 h-auto mb-4"
             />
-            <p className="text-primary font-semibold text-base mb-2">Obtenir une estimation</p>
-            <p className="text-foreground font-bold text-base mb-4">Gratuite & sans engagement</p>
+            <p className="text-primary font-semibold text-base mb-2">{t('common.getQuote')}</p>
+            <p className="text-foreground font-bold text-base mb-4">{t('common.freeAndNoCommitment')}</p>
             <Button asChild className="w-full">
-              <Link to={ctaHref}>{ctaText}</Link>
+              <LocalizedLink to={ctaHref}>{t(ctaTextKey, ctaTextKey)}</LocalizedLink>
             </Button>
           </div>
         </div>
@@ -209,14 +210,15 @@ const MegaMenuContent = ({ categories, ctaText, ctaHref }: MegaMenuCategoryProps
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-20 items-center">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 mr-8">
+        <LocalizedLink to="/" className="flex items-center gap-2 mr-8">
           <img src={logo} alt="Optimis" className="h-12" />
-        </Link>
+        </LocalizedLink>
 
         {/* Desktop Navigation - aligned left */}
         <NavigationMenu className="hidden md:flex flex-1 justify-start">
@@ -224,12 +226,12 @@ const Header = () => {
             {/* Assurances Mega Menu */}
             <NavigationMenuItem>
               <NavigationMenuTrigger className="bg-transparent text-foreground/80 hover:text-primary hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-base font-medium">
-                Assurances
+                {t('nav.insurances')}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <MegaMenuContent 
                   categories={assurancesCategories}
-                  ctaText="Comparer les offres"
+                  ctaTextKey="common.compareOffers"
                   ctaHref="/assurance-sante"
                 />
               </NavigationMenuContent>
@@ -238,12 +240,12 @@ const Header = () => {
             {/* Finances Mega Menu */}
             <NavigationMenuItem>
               <NavigationMenuTrigger className="bg-transparent text-foreground/80 hover:text-primary hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-base font-medium">
-                Finances
+                {t('nav.finances')}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <MegaMenuContent 
                   categories={financesCategories}
-                  ctaText="Comparer les offres"
+                  ctaTextKey="common.compareOffers"
                   ctaHref="/finances"
                 />
               </NavigationMenuContent>
@@ -252,12 +254,12 @@ const Header = () => {
             {/* Services Mega Menu */}
             <NavigationMenuItem>
               <NavigationMenuTrigger className="bg-transparent text-foreground/80 hover:text-primary hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-base font-medium">
-                Services
+                {t('nav.services')}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <MegaMenuContent 
                   categories={servicesCategories}
-                  ctaText="Voir les offres"
+                  ctaTextKey="services.seeServices"
                   ctaHref="/services"
                 />
               </NavigationMenuContent>
@@ -265,18 +267,19 @@ const Header = () => {
 
             {/* Blog Link */}
             <NavigationMenuItem>
-              <Link
+              <LocalizedLink
                 to="/blog"
                 className="inline-flex h-10 items-center justify-center rounded-md px-4 py-2 text-base font-medium text-foreground/80 transition-colors hover:text-primary"
               >
-                Blog
-              </Link>
+                {t('nav.blog')}
+              </LocalizedLink>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* CTA Button - pushed to right */}
-        <div className="hidden md:flex ml-auto">
+        {/* CTA Button + Language Switcher - pushed to right */}
+        <div className="hidden md:flex items-center gap-2 ml-auto">
+          <LanguageSwitcher />
           <Button asChild className="gap-2">
             <a
               href="https://calendly.com"
@@ -284,14 +287,14 @@ const Header = () => {
               rel="noopener noreferrer"
             >
               <Phone className="h-4 w-4" />
-              Prendre Rendez-vous
+              {t('common.takeAppointment')}
             </a>
           </Button>
         </div>
 
         {/* Mobile Menu */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger asChild className="md:hidden">
+          <SheetTrigger asChild className="md:hidden ml-auto">
             <Button variant="ghost" size="icon">
               <Menu className="h-6 w-6" />
               <span className="sr-only">Ouvrir le menu</span>
@@ -300,92 +303,95 @@ const Header = () => {
           <SheetContent side="right" className="w-[300px] sm:w-[350px] overflow-y-auto">
             <SheetTitle className="sr-only">Menu de navigation</SheetTitle>
             <div className="flex flex-col gap-6 pt-6">
-              <Link
+              <LocalizedLink
                 to="/"
                 className="flex items-center gap-2"
                 onClick={() => setIsOpen(false)}
               >
                 <img src={logo} alt="Optimis" className="h-8" />
-              </Link>
+              </LocalizedLink>
 
               <nav className="flex flex-col gap-4">
                 {/* Assurances Section */}
                 <div className="space-y-2">
-                  <p className="text-sm font-semibold text-primary">Assurances</p>
+                  <p className="text-sm font-semibold text-primary">{t('nav.insurances')}</p>
                   {assurancesCategories.map((category) => {
                     const Icon = category.icon;
                     return (
-                      <Link
+                      <LocalizedLink
                         key={category.id}
                         to={category.href}
                         className="flex items-center gap-2 py-2 pl-4 text-sm text-foreground/80 transition-colors hover:text-primary"
                         onClick={() => setIsOpen(false)}
                       >
                         <Icon className="h-4 w-4" />
-                        {category.label}
-                      </Link>
+                        {t(category.labelKey, category.labelKey)}
+                      </LocalizedLink>
                     );
                   })}
                 </div>
 
                 {/* Finances Section */}
                 <div className="space-y-2">
-                  <p className="text-sm font-semibold text-primary">Finances</p>
+                  <p className="text-sm font-semibold text-primary">{t('nav.finances')}</p>
                   {financesCategories.map((category) => {
                     const Icon = category.icon;
                     return (
-                      <Link
+                      <LocalizedLink
                         key={category.id}
                         to={category.href}
                         className="flex items-center gap-2 py-2 pl-4 text-sm text-foreground/80 transition-colors hover:text-primary"
                         onClick={() => setIsOpen(false)}
                       >
                         <Icon className="h-4 w-4" />
-                        {category.label}
-                      </Link>
+                        {t(category.labelKey, category.labelKey)}
+                      </LocalizedLink>
                     );
                   })}
                 </div>
 
                 {/* Services Section */}
                 <div className="space-y-2">
-                  <p className="text-sm font-semibold text-primary">Services</p>
+                  <p className="text-sm font-semibold text-primary">{t('nav.services')}</p>
                   {servicesCategories.map((category) => {
                     const Icon = category.icon;
                     return (
-                      <Link
+                      <LocalizedLink
                         key={category.id}
                         to={category.href}
                         className="flex items-center gap-2 py-2 pl-4 text-sm text-foreground/80 transition-colors hover:text-primary"
                         onClick={() => setIsOpen(false)}
                       >
                         <Icon className="h-4 w-4" />
-                        {category.label}
-                      </Link>
+                        {t(category.labelKey, category.labelKey)}
+                      </LocalizedLink>
                     );
                   })}
                 </div>
 
                 {/* Blog Link */}
-                <Link
+                <LocalizedLink
                   to="/blog"
                   className="py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
                   onClick={() => setIsOpen(false)}
                 >
-                  Blog
-                </Link>
+                  {t('nav.blog')}
+                </LocalizedLink>
               </nav>
 
-              <Button asChild className="w-full gap-2">
-                <a
-                  href="https://calendly.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Phone className="h-4 w-4" />
-                  Prendre Rendez-vous
-                </a>
-              </Button>
+              <div className="flex flex-col gap-4">
+                <LanguageSwitcher />
+                <Button asChild className="w-full gap-2">
+                  <a
+                    href="https://calendly.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Phone className="h-4 w-4" />
+                    {t('common.takeAppointment')}
+                  </a>
+                </Button>
+              </div>
             </div>
           </SheetContent>
         </Sheet>
