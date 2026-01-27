@@ -105,46 +105,47 @@ const Blog = () => {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredPosts.map((post) => (
               <Link key={post.id} to={`/blog/${post.slug}`}>
-                <Card className="h-full overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                  {post.image && (
-                    <div className="aspect-video w-full overflow-hidden">
+                <Card className="group h-full overflow-hidden border-0 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                  {/* Image with floating category badge */}
+                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
+                    {post.image && (
                       <img
                         src={post.image}
                         alt={post.title}
-                        className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                         loading="lazy"
                       />
-                    </div>
-                  )}
-                  <CardContent className="flex h-full flex-col p-6">
-                    <div className="mb-3 flex items-center justify-between">
-                      <Badge variant="secondary" className="text-xs">
-                        {post.category}
-                      </Badge>
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <Clock className="h-3 w-3" />
-                        {post.readTime} min
-                      </div>
-                    </div>
-                    <h2 className="mb-2 line-clamp-2 text-lg font-semibold text-foreground">
-                      {post.title}
-                    </h2>
-                    <p className="mb-4 line-clamp-3 flex-1 text-sm text-muted-foreground">
-                      {post.excerpt}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <time className="text-xs text-muted-foreground">
+                    )}
+                    {/* Floating category badge */}
+                    <Badge 
+                      className="absolute right-3 top-3 rounded-full bg-emerald-100 px-4 py-1 text-xs font-medium text-emerald-800 shadow-sm"
+                    >
+                      {post.category}
+                    </Badge>
+                  </div>
+                  
+                  <CardContent className="flex flex-col px-2 py-4">
+                    {/* Date */}
+                    <div className="mb-2 flex items-center gap-2 text-sm text-muted-foreground">
+                      <time>
                         {new Date(post.date).toLocaleDateString("fr-CH", {
                           day: "numeric",
                           month: "long",
                           year: "numeric",
                         })}
                       </time>
-                      <span className="flex items-center gap-1 text-sm font-medium text-primary">
-                        Lire plus
-                        <ArrowRight className="h-4 w-4" />
-                      </span>
+                      <span className="h-1 w-1 rounded-full bg-muted-foreground"></span>
                     </div>
+                    
+                    {/* Title */}
+                    <h2 className="mb-3 line-clamp-3 text-base font-bold uppercase leading-tight text-foreground">
+                      {post.title}
+                    </h2>
+                    
+                    {/* Author */}
+                    <p className="text-sm text-muted-foreground">
+                      Optimis
+                    </p>
                   </CardContent>
                 </Card>
               </Link>
