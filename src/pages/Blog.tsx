@@ -105,7 +105,17 @@ const Blog = () => {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredPosts.map((post) => (
               <Link key={post.id} to={`/blog/${post.slug}`}>
-                <Card className="h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                <Card className="h-full overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                  {post.image && (
+                    <div className="aspect-video w-full overflow-hidden">
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
                   <CardContent className="flex h-full flex-col p-6">
                     <div className="mb-3 flex items-center justify-between">
                       <Badge variant="secondary" className="text-xs">
