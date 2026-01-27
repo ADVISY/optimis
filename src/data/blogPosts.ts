@@ -365,6 +365,71 @@ export const blogPosts: BlogPost[] = [
     image: assuranceMenageImg,
   },
   {
+    id: "3339",
+    slug: "lassurance-rc-menage-les-7-infos-que-vous-devez-connaitre",
+    title: "L'assurance RC ménage : les 7 infos que vous devez connaître",
+    excerpt: "La couverture RC ménage en Suisse peut être un gain de temps et parfois d'argent si vous souhaitez à la fois protéger vos biens contre des sinistres et vous couvrir en cas de dommages causés à des tiers.",
+    content: `<blockquote><cite>La couverture RC ménage en Suisse peut être un gain de temps et parfois d'argent si vous souhaitez à la fois protéger vos biens contre des sinistres et vous couvrir en cas de dommages causés à des tiers.</cite></blockquote>
+
+<h2>1/ Qu'est-ce que l'assurance RC ménage ?</h2>
+<p>L'assurance RC ménage combine deux types de couvertures en une seule police :</p>
+<ul>
+<li><strong>L'assurance responsabilité civile (RC) privée</strong> : Couvre les dommages que vous pourriez causer à des tiers.</li>
+<li><strong>L'assurance ménage</strong> : Protège vos biens personnels contre les sinistres (incendie, vol, dégâts des eaux, etc.).</li>
+</ul>
+
+<h2>2/ Que couvre l'assurance RC ménage ?</h2>
+<p>La partie <strong>responsabilité civile</strong> couvre :</p>
+<ul>
+<li>Les dommages corporels causés à des tiers</li>
+<li>Les dommages matériels causés à des tiers</li>
+<li>Les dommages causés par vos enfants ou animaux domestiques</li>
+</ul>
+
+<p>La partie <strong>assurance ménage</strong> couvre :</p>
+<ul>
+<li>Incendies, explosions, foudre</li>
+<li>Vols et cambriolages</li>
+<li>Dégâts des eaux</li>
+<li>Catastrophes naturelles (tempêtes, inondations, grêle)</li>
+<li>Bris de glace</li>
+</ul>
+
+<h2>3/ L'assurance RC ménage est-elle obligatoire ?</h2>
+<p>En Suisse, l'assurance RC privée n'est pas légalement obligatoire, mais de nombreux propriétaires l'exigent de leurs locataires.</p>
+
+<p>L'assurance ménage peut être obligatoire dans certains cantons. Par exemple, dans le <strong>canton de Vaud</strong> et le <strong>canton de Nidwald</strong>, une couverture contre les incendies et catastrophes naturelles est requise.</p>
+
+<h2>4/ Combien coûte l'assurance RC ménage ?</h2>
+<p>Les primes varient généralement entre <strong>150 et 400 CHF par an</strong> selon :</p>
+<ul>
+<li>La valeur de vos biens</li>
+<li>La taille de votre logement</li>
+<li>Le niveau de couverture choisi</li>
+<li>Votre lieu de résidence</li>
+</ul>
+
+<h2>5/ Comment choisir la bonne assurance RC ménage ?</h2>
+<p>Pour bien choisir, comparez :</p>
+<ol>
+<li>Les montants de couverture proposés</li>
+<li>Les franchises applicables</li>
+<li>Les exclusions de garantie</li>
+<li>Les options complémentaires disponibles</li>
+</ol>
+
+<h2>6/ Comment résilier son contrat ?</h2>
+<p>Pour résilier votre assurance RC ménage, respectez le délai de préavis indiqué dans votre contrat (généralement <strong>1 à 3 mois</strong> avant l'échéance) et envoyez une lettre recommandée à votre assureur.</p>
+
+<h2>7/ Pourquoi comparer avec Optimis ?</h2>
+<p><a href="https://le-comparateur-optimis.ch/">Optimis</a> vous permet de comparer gratuitement les offres d'assurance RC ménage des principaux assureurs suisses pour trouver la meilleure couverture au meilleur prix.</p>`,
+    category: "Assurance habitation",
+    categorySlug: "assurance-habitation",
+    date: "2024-06-18",
+    readTime: 5,
+    image: rcMenageImg,
+  },
+  {
     id: "3359",
     slug: "lassurance-maladie-pour-bebe",
     title: "L'assurance maladie pour bébé",
