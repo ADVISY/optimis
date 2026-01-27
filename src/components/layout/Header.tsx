@@ -39,10 +39,10 @@ const assurancesCategories = [
     icon: HeartPulse,
     href: "/assurance-sante",
     subLinks: [
-      { label: "Choisir entre LAMal et CMU en tant que frontalier ?", href: "/blog/lamal-ou-cmu-comment-choisir" },
-      { label: "Évaluer les options d'assurance complémentaire", href: "/assurance-sante" },
-      { label: "Comprendre l'assurance maladie de base :", href: "/blog/lamal" },
-      { label: "Planification de l'assurance maladie pour 2024", href: "/blog/les-primes-lamal-en-hausse-de-6-pourquoi" },
+      { label: "Quel modèle d'assurance maladie choisir ?", href: "/blog/quel-modele-dassurance-maladie-choisir" },
+      { label: "Assurance dentaire complémentaire", href: "/blog/assurance-dentaire-complementaire-en-suisse-reponses-aux-questions-essentielles" },
+      { label: "Changement d'assurance maladie 2024", href: "/blog/changement-dassurance-maladie-delais-et-demarches-en-2024" },
+      { label: "Subside d'assurance maladie", href: "/blog/subside-dassurance-maladie-comment-ca-marche-et-comment-faire-sa-demande" },
     ]
   },
   { 
@@ -52,8 +52,6 @@ const assurancesCategories = [
     href: "/assurance-voiture",
     subLinks: [
       { label: "Comparer les assurances auto", href: "/assurance-voiture" },
-      { label: "Assurance casco complète", href: "/blog/assurance-casco-complete-suisse" },
-      { label: "Assurance responsabilité civile", href: "/blog/assurance-responsabilite-civile-voiture" },
     ]
   },
   { 
@@ -71,18 +69,16 @@ const assurancesCategories = [
     icon: Home,
     href: "/assurance-menage",
     subLinks: [
-      { label: "Assurance RC et ménage", href: "/blog/lassurance-menage-en-suisse-les-7-choses-a-savoir" },
+      { label: "L'assurance ménage : les 7 choses à savoir", href: "/blog/lassurance-menage-en-suisse-les-7-choses-a-savoir" },
     ]
   },
   { 
     id: "autres",
     label: "Autres Assurances", 
     icon: Plus,
-    href: "/assurances",
+    href: "/blog",
     subLinks: [
-      { label: "Assurance voyage", href: "/assurances" },
-      { label: "Assurance animaux", href: "/blog/assurance-chien-suisse" },
-      { label: "Assurance accident", href: "/blog/assurance-accident-suisse" },
+      { label: "Voir tous les articles", href: "/blog" },
     ]
   },
 ];
