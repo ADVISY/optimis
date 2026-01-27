@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { 
   Menu, 
@@ -23,6 +23,7 @@ import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
+  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
@@ -139,13 +140,14 @@ interface MegaMenuCategoryProps {
   ctaHref: string;
 }
 
-const MegaMenuContent = ({ categories, ctaTextKey, ctaHref }: MegaMenuCategoryProps) => {
-  const [activeCategory, setActiveCategory] = useState(categories[0]?.id || "");
-  const activeItem = categories.find(c => c.id === activeCategory);
-  const { t } = useTranslation();
+const MegaMenuContent = forwardRef<HTMLDivElement, MegaMenuCategoryProps>(
+  ({ categories, ctaTextKey, ctaHref }, ref) => {
+    const [activeCategory, setActiveCategory] = useState(categories[0]?.id || "");
+    const activeItem = categories.find((c) => c.id === activeCategory);
+    const { t } = useTranslation();
 
-  return (
-    <div className="flex w-[900px] bg-background rounded-xl shadow-2xl border">
+    return (
+      <div ref={ref} className="flex w-[900px] rounded-xl border bg-background shadow-2xl">
       {/* Left sidebar with categories */}
       <div className="w-[280px] bg-muted/30 rounded-l-xl py-4">
         {categories.map((category) => {
@@ -158,6 +160,7 @@ const MegaMenuContent = ({ categories, ctaTextKey, ctaHref }: MegaMenuCategoryPr
                 isActive ? "bg-primary/10 border-l-4 border-primary" : "border-l-4 border-transparent"
               }`}
               onMouseEnter={() => setActiveCategory(category.id)}
+              onFocus={() => setActiveCategory(category.id)}
             >
               <Icon className={`h-6 w-6 ${isActive ? "text-primary" : "text-muted-foreground"}`} />
               <span className={`font-medium text-base ${isActive ? "text-primary" : "text-foreground"}`}>
@@ -177,13 +180,15 @@ const MegaMenuContent = ({ categories, ctaTextKey, ctaHref }: MegaMenuCategoryPr
             <ul className="space-y-4">
               {activeItem?.subLinks.map((link, index) => (
                 <li key={index}>
-                  <LocalizedLink 
-                    to={link.href} 
-                    className="text-base text-foreground/80 hover:text-primary transition-colors flex items-center gap-3"
-                  >
-                    <span className="w-2 h-2 bg-muted-foreground/40 rounded-full" />
-                    {t(link.labelKey, link.labelKey)}
-                  </LocalizedLink>
+                  <NavigationMenuLink asChild>
+                    <LocalizedLink
+                      to={link.href}
+                      className="flex items-center gap-3 text-base text-foreground/80 transition-colors hover:text-primary"
+                    >
+                      <span className="w-2 h-2 bg-muted-foreground/40 rounded-full" />
+                      {t(link.labelKey, link.labelKey)}
+                    </LocalizedLink>
+                  </NavigationMenuLink>
                 </li>
               ))}
             </ul>
@@ -204,9 +209,12 @@ const MegaMenuContent = ({ categories, ctaTextKey, ctaHref }: MegaMenuCategoryPr
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+      </div>
+    );
+  },
+);
+
+MegaMenuContent.displayName = "MegaMenuContent";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -221,14 +229,14 @@ const Header = () => {
         </LocalizedLink>
 
         {/* Desktop Navigation - aligned left */}
-        <NavigationMenu className="hidden md:flex flex-1 justify-start">
+        <NavigationMenu className="hidden md:flex flex-1 justify-start max-w-full w-full z-50">
           <NavigationMenuList className="gap-1">
             {/* Assurances Mega Menu */}
             <NavigationMenuItem>
               <NavigationMenuTrigger className="bg-transparent text-foreground/80 hover:text-primary hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-base font-medium">
                 {t('nav.insurances')}
               </NavigationMenuTrigger>
-              <NavigationMenuContent>
+              <NavigationMenuContent className="p-0">
                 <MegaMenuContent 
                   categories={assurancesCategories}
                   ctaTextKey="common.compareOffers"
@@ -242,7 +250,7 @@ const Header = () => {
               <NavigationMenuTrigger className="bg-transparent text-foreground/80 hover:text-primary hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-base font-medium">
                 {t('nav.finances')}
               </NavigationMenuTrigger>
-              <NavigationMenuContent>
+              <NavigationMenuContent className="p-0">
                 <MegaMenuContent 
                   categories={financesCategories}
                   ctaTextKey="common.compareOffers"
@@ -256,7 +264,7 @@ const Header = () => {
               <NavigationMenuTrigger className="bg-transparent text-foreground/80 hover:text-primary hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-base font-medium">
                 {t('nav.services')}
               </NavigationMenuTrigger>
-              <NavigationMenuContent>
+              <NavigationMenuContent className="p-0">
                 <MegaMenuContent 
                   categories={servicesCategories}
                   ctaTextKey="services.seeServices"
