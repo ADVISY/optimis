@@ -1,96 +1,98 @@
-import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import LocalizedLink from "@/components/LocalizedLink";
 import logo from "@/assets/logo.svg";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className="border-t bg-secondary/30">
       <div className="container py-12">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Company Info */}
           <div className="space-y-4">
-            <Link to="/" className="inline-block">
+            <LocalizedLink to="/" className="inline-block">
               <img src={logo} alt="Optimis" className="h-10" />
-            </Link>
+            </LocalizedLink>
             <p className="text-sm text-muted-foreground">
-              Le comparateur d'assurances suisse qui vous aide à trouver les
-              meilleures offres pour votre budget.
+              {t('footer.aboutDescription')}
             </p>
           </div>
 
           {/* Assurances */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-foreground">Assurances</h3>
+            <h3 className="font-semibold text-foreground">{t('nav.insurances')}</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link
+                <LocalizedLink
                   to="/assurance-voiture"
                   className="text-muted-foreground transition-colors hover:text-primary"
                 >
-                  Assurance Voiture
-                </Link>
+                  {t('nav.carInsurance')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link
+                <LocalizedLink
                   to="/assurance-sante"
                   className="text-muted-foreground transition-colors hover:text-primary"
                 >
-                  Assurance Santé
-                </Link>
+                  {t('nav.healthInsurance')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link
+                <LocalizedLink
                   to="/protection-juridique"
                   className="text-muted-foreground transition-colors hover:text-primary"
                 >
-                  Protection Juridique
-                </Link>
+                  {t('nav.legalProtection')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link
+                <LocalizedLink
                   to="/assurance-menage"
                   className="text-muted-foreground transition-colors hover:text-primary"
                 >
-                  Assurance Ménage
-                </Link>
+                  {t('nav.homeInsurance')}
+                </LocalizedLink>
               </li>
             </ul>
           </div>
 
           {/* Legal */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-foreground">Légal</h3>
+            <h3 className="font-semibold text-foreground">{t('footer.legal')}</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link
+                <LocalizedLink
                   to="/politique-confidentialite"
                   className="text-muted-foreground transition-colors hover:text-primary"
                 >
-                  Politique de confidentialité
-                </Link>
+                  {t('footer.privacyPolicy')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link
+                <LocalizedLink
                   to="/mentions-legales"
                   className="text-muted-foreground transition-colors hover:text-primary"
                 >
-                  Mentions légales
-                </Link>
+                  {t('footer.legalNotice')}
+                </LocalizedLink>
               </li>
               <li>
-                <Link
+                <LocalizedLink
                   to="/cgu"
                   className="text-muted-foreground transition-colors hover:text-primary"
                 >
-                  Conditions générales
-                </Link>
+                  {t('footer.termsOfService')}
+                </LocalizedLink>
               </li>
             </ul>
           </div>
 
           {/* Contact */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-foreground">Contact</h3>
+            <h3 className="font-semibold text-foreground">{t('common.contact')}</h3>
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Phone className="h-4 w-4 text-primary" />
@@ -118,7 +120,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
           <p>
-            © {new Date().getFullYear()} Optimis. Tous droits réservés.
+            © {new Date().getFullYear()} Optimis. {t('footer.allRightsReserved')}
           </p>
         </div>
       </div>
