@@ -8,7 +8,7 @@ import { Clock, ArrowRight } from "lucide-react";
 import { blogPosts, categories, getBlogPostsByCategory } from "@/data/blogPosts";
 
 const Blog = () => {
-  const [activeCategory, setActiveCategory] = useState("Tous");
+  const [activeCategory, setActiveCategory] = useState("all");
   const filteredPosts = getBlogPostsByCategory(activeCategory);
 
   return (
@@ -32,13 +32,13 @@ const Blog = () => {
           <div className="flex flex-wrap justify-center gap-2">
             {categories.map((category) => (
               <Button
-                key={category}
-                variant={activeCategory === category ? "default" : "outline"}
+                key={category.slug}
+                variant={activeCategory === category.slug ? "default" : "outline"}
                 size="sm"
-                onClick={() => setActiveCategory(category)}
+                onClick={() => setActiveCategory(category.slug)}
                 className="rounded-full"
               >
-                {category}
+                {category.name}
               </Button>
             ))}
           </div>
