@@ -227,7 +227,7 @@ const Header = () => {
           <NavigationMenuList className="gap-1">
             {/* Assurances Mega Menu */}
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="bg-transparent text-foreground/80 hover:text-primary hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent">
+              <NavigationMenuTrigger className="bg-transparent text-foreground/80 hover:text-primary hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-base font-medium">
                 Assurances
               </NavigationMenuTrigger>
               <NavigationMenuContent>
@@ -241,7 +241,7 @@ const Header = () => {
 
             {/* Finances Mega Menu */}
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="bg-transparent text-foreground/80 hover:text-primary hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent">
+              <NavigationMenuTrigger className="bg-transparent text-foreground/80 hover:text-primary hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-base font-medium">
                 Finances
               </NavigationMenuTrigger>
               <NavigationMenuContent>
@@ -255,7 +255,7 @@ const Header = () => {
 
             {/* Services Mega Menu */}
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="bg-transparent text-foreground/80 hover:text-primary hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent">
+              <NavigationMenuTrigger className="bg-transparent text-foreground/80 hover:text-primary hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent text-base font-medium">
                 Services
               </NavigationMenuTrigger>
               <NavigationMenuContent>
@@ -271,7 +271,7 @@ const Header = () => {
             <NavigationMenuItem>
               <Link
                 to="/blog"
-                className="inline-flex h-10 items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
+                className="inline-flex h-10 items-center justify-center rounded-md px-4 py-2 text-base font-medium text-foreground/80 transition-colors hover:text-primary"
               >
                 Blog
               </Link>
