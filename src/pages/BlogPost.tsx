@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { getBlogPostBySlug, blogPosts } from "@/data/blogPosts";
+import { parseWordPressContent } from "@/utils/parseWordPressContent";
 import NotFound from "./NotFound";
 
 const BlogPost = () => {
@@ -18,6 +19,12 @@ const BlogPost = () => {
   const relatedPosts = blogPosts
     .filter((p) => p.category === post.category && p.id !== post.id)
     .slice(0, 3);
+
+  // Parse HTML content if it contains HTML tags, otherwise use simple parser
+  const isHtmlContent = post.content.includes('<') && post.content.includes('>');
+  const renderedContent = isHtmlContent 
+    ? parseWordPressContent(post.content)
+    : parseWordPressContent(post.content);
 
   return (
     <Layout>
@@ -55,66 +62,27 @@ const BlogPost = () => {
         </div>
       </section>
 
+      {/* Featured Image */}
+      {post.image && (
+        <section className="py-6 md:py-8">
+          <div className="container">
+            <div className="mx-auto max-w-4xl">
+              <img
+                src={post.image}
+                alt={post.title}
+                className="w-full rounded-xl shadow-lg"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Content */}
-      <article className="py-12 md:py-16">
+      <article className="py-8 md:py-12">
         <div className="container">
           <div className="prose prose-lg mx-auto max-w-3xl">
-            {post.content.split("\n").map((paragraph, index) => {
-              if (paragraph.startsWith("## ")) {
-                return (
-                  <h2 key={index} className="mb-4 mt-8 text-2xl font-bold text-foreground">
-                    {paragraph.replace("## ", "")}
-                  </h2>
-                );
-              }
-              if (paragraph.startsWith("### ")) {
-                return (
-                  <h3 key={index} className="mb-3 mt-6 text-xl font-semibold text-foreground">
-                    {paragraph.replace("### ", "")}
-                  </h3>
-                );
-              }
-              if (paragraph.startsWith("> ")) {
-                return (
-                  <blockquote
-                    key={index}
-                    className="my-4 border-l-4 border-primary bg-secondary/30 py-2 pl-4 italic text-muted-foreground"
-                  >
-                    {paragraph.replace("> ", "")}
-                  </blockquote>
-                );
-              }
-              if (paragraph.startsWith("- ")) {
-                return (
-                  <li key={index} className="ml-6 list-disc text-foreground">
-                    {paragraph.replace("- ", "")}
-                  </li>
-                );
-              }
-              if (paragraph.match(/^\d+\. /)) {
-                return (
-                  <li key={index} className="ml-6 list-decimal text-foreground">
-                    {paragraph.replace(/^\d+\. /, "")}
-                  </li>
-                );
-              }
-              if (paragraph.trim() === "") {
-                return null;
-              }
-              return (
-                <p key={index} className="mb-4 text-foreground/90">
-                  {paragraph.split("**").map((part, i) =>
-                    i % 2 === 1 ? (
-                      <strong key={i} className="font-semibold">
-                        {part}
-                      </strong>
-                    ) : (
-                      part
-                    )
-                  )}
-                </p>
-              );
-            })}
+            {renderedContent}
           </div>
         </div>
       </article>
