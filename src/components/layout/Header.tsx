@@ -216,14 +216,14 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-20 items-center justify-between">
+      <div className="container flex h-20 items-center">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2 mr-8">
           <img src={logo} alt="Optimis" className="h-12" />
         </Link>
 
-        {/* Desktop Navigation */}
-        <NavigationMenu className="hidden md:flex">
+        {/* Desktop Navigation - aligned left */}
+        <NavigationMenu className="hidden md:flex flex-1 justify-start">
           <NavigationMenuList className="gap-1">
             {/* Assurances Mega Menu */}
             <NavigationMenuItem>
@@ -279,8 +279,8 @@ const Header = () => {
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* CTA Button */}
-        <div className="hidden md:flex">
+        {/* CTA Button - pushed to right */}
+        <div className="hidden md:flex ml-auto">
           <Button asChild className="gap-2">
             <a
               href="https://calendly.com"
