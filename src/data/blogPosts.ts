@@ -2,6 +2,17 @@
 // Contains blog posts from le-comparateur-optimis.ch
 // Content is in HTML format from WordPress Gutenberg blocks
 
+// Import local featured images
+import subsideMaladieImg from "@/assets/blog/subside-assurance-maladie.jpg";
+import modeleAssuranceImg from "@/assets/blog/modele-assurance-maladie.jpg";
+import changementDelaisImg from "@/assets/blog/changement-assurance-delais.jpg";
+import assuranceDentaireImg from "@/assets/blog/assurance-dentaire.jpg";
+import reduirePrimesImg from "@/assets/blog/reduire-primes.jpg";
+import assuranceMenageImg from "@/assets/blog/assurance-menage.jpg";
+import protectionJuridiqueImg from "@/assets/blog/protection-juridique.jpg";
+import resiliationImg from "@/assets/blog/resiliation-assurance.jpg";
+import comparerAssurancesImg from "@/assets/blog/comparer-assurances.jpg";
+
 export interface BlogPost {
   id: string;
   slug: string;
@@ -16,7 +27,7 @@ export interface BlogPost {
   metaDescription?: string;
 }
 
-// Base URL for WordPress images
+// Base URL for WordPress images (for content images only)
 const WP_IMAGE_BASE = "https://le-comparateur-optimis.ch/wp-content/uploads";
 
 export const blogPosts: BlogPost[] = [
@@ -74,7 +85,7 @@ export const blogPosts: BlogPost[] = [
     categorySlug: "assurance-sante",
     date: "2024-06-12",
     readTime: 5,
-    image: `${WP_IMAGE_BASE}/2024/06/Vous-ne-savezpas-si-votre-assurance-copie-2-1024x576.jpg`,
+    image: subsideMaladieImg,
   },
   {
     id: "2917",
@@ -99,7 +110,7 @@ export const blogPosts: BlogPost[] = [
     categorySlug: "assurance-sante",
     date: "2024-06-12",
     readTime: 3,
-    image: `${WP_IMAGE_BASE}/2024/06/Choisir-son-modele-d-assurance-maladie-tableau-2-1024x576.jpg`,
+    image: modeleAssuranceImg,
   },
   {
     id: "2932",
@@ -166,7 +177,7 @@ export const blogPosts: BlogPost[] = [
     categorySlug: "protection-juridique",
     date: "2024-06-12",
     readTime: 5,
-    image: `${WP_IMAGE_BASE}/2024/06/Quel-est-le-prix-de-lassurance-protection-juridique-en-2024--1024x576.jpg`,
+    image: protectionJuridiqueImg,
   },
   {
     id: "2957",
@@ -226,7 +237,7 @@ export const blogPosts: BlogPost[] = [
     categorySlug: "assurance-sante",
     date: "2024-06-12",
     readTime: 4,
-    image: `${WP_IMAGE_BASE}/2024/06/La-date-limite-de-changement-est-depassee-que-faire-1024x576.jpg`,
+    image: changementDelaisImg,
   },
   {
     id: "2963",
@@ -265,7 +276,7 @@ export const blogPosts: BlogPost[] = [
     categorySlug: "assurance-sante",
     date: "2024-06-12",
     readTime: 3,
-    image: `${WP_IMAGE_BASE}/2024/06/quel-est-le-prix-dune-assurance-dentaire-1024x576.jpg`,
+    image: assuranceDentaireImg,
   },
   {
     id: "3344",
@@ -336,7 +347,7 @@ export const blogPosts: BlogPost[] = [
     categorySlug: "assurance-habitation",
     date: "2024-06-20",
     readTime: 5,
-    image: `${WP_IMAGE_BASE}/2024/06/menage-1024x576.jpg`,
+    image: assuranceMenageImg,
   },
   {
     id: "3359",
@@ -371,7 +382,7 @@ export const blogPosts: BlogPost[] = [
     categorySlug: "assurance-sante",
     date: "2024-06-21",
     readTime: 4,
-    image: `${WP_IMAGE_BASE}/2024/06/assurance-bebe-suisse-1024x576.jpg`,
+    image: comparerAssurancesImg,
   },
   {
     id: "3644",
@@ -425,7 +436,7 @@ export const blogPosts: BlogPost[] = [
     categorySlug: "assurance-sante",
     date: "2024-07-11",
     readTime: 3,
-    image: `${WP_IMAGE_BASE}/2024/07/comparer-assurances-suisse-optimis-1-1024x576.jpg`,
+    image: comparerAssurancesImg,
   },
   {
     id: "3652",
@@ -455,7 +466,7 @@ export const blogPosts: BlogPost[] = [
     categorySlug: "assurance-sante",
     date: "2024-07-11",
     readTime: 3,
-    image: `${WP_IMAGE_BASE}/2024/07/comment-reduire-primes-assurance-maladie-suisse-1024x576.jpg`,
+    image: reduirePrimesImg,
   },
   {
     id: "4721",
@@ -521,7 +532,7 @@ export const blogPosts: BlogPost[] = [
     categorySlug: "assurance-voiture",
     date: "2024-10-23",
     readTime: 5,
-    image: `${WP_IMAGE_BASE}/2024/10/assurance-casco-complete-1024x576.jpg`,
+    image: comparerAssurancesImg,
   },
   {
     id: "4552",
@@ -593,7 +604,7 @@ export const blogPosts: BlogPost[] = [
     categorySlug: "aide-assurance-maladie",
     date: "2024-09-26",
     readTime: 6,
-    image: `${WP_IMAGE_BASE}/2024/09/subside-valais-1024x576.jpg`,
+    image: subsideMaladieImg,
   },
 ];
 
