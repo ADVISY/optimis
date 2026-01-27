@@ -1,16 +1,19 @@
 import { Banknote, Shield, Clock, CheckCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import llamaMascot from "@/assets/llama-mascot.png";
 
-const features = [
-  { icon: Shield, title: "3ème Pilier", description: "Préparez votre retraite" },
-  { icon: Clock, title: "Économies d'impôts", description: "Jusqu'à 7056 CHF/an" },
-  { icon: CheckCircle, title: "Conseil gratuit", description: "Sans engagement" },
-];
-
 const Finances = () => {
+  const { t } = useTranslation();
+
+  const features = [
+    { icon: Shield, titleKey: "finances.thirdPillar", descKey: "finances.thirdPillarDesc" },
+    { icon: Clock, titleKey: "finances.taxSavings", descKey: "finances.taxSavingsDesc" },
+    { icon: CheckCircle, titleKey: "finances.freeAdvice", descKey: "finances.freeAdviceDesc" },
+  ];
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -19,17 +22,15 @@ const Finances = () => {
           <div className="grid items-center gap-8 md:grid-cols-2">
             <div className="space-y-6">
               <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">
-                Assurance Vie &{" "}
-                <span className="text-gradient-optimis">3ème Pilier</span>
+                {t('finances.title')}
               </h1>
               <p className="text-lg text-muted-foreground">
-                Préparez votre avenir et économisez sur vos impôts avec nos 
-                solutions de prévoyance adaptées.
+                {t('finances.heroSubtitle')}
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button size="lg" className="gap-2">
                   <Banknote className="h-5 w-5" />
-                  Comparer les offres
+                  {t('finances.compareButton')}
                 </Button>
               </div>
             </div>
@@ -49,14 +50,14 @@ const Finances = () => {
         <div className="container">
           <div className="grid gap-6 md:grid-cols-3">
             {features.map((feature) => (
-              <Card key={feature.title}>
+              <Card key={feature.titleKey}>
                 <CardContent className="flex items-start gap-4 p-6">
                   <div className="rounded-full bg-primary/10 p-3">
                     <feature.icon className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground">{feature.title}</h3>
-                    <p className="text-sm text-muted-foreground">{feature.description}</p>
+                    <h3 className="font-semibold text-foreground">{t(feature.titleKey)}</h3>
+                    <p className="text-sm text-muted-foreground">{t(feature.descKey)}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -70,17 +71,17 @@ const Finances = () => {
         <div className="container">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="mb-4 text-3xl font-bold text-foreground">
-              Simulez vos économies d'impôts
+              {t('finances.simulateTaxSavings')}
             </h2>
             <p className="mb-8 text-muted-foreground">
-              Découvrez combien vous pouvez économiser avec le 3ème pilier.
+              {t('finances.simulateDescription')}
             </p>
             <Card>
               <CardContent className="p-8">
                 <p className="text-muted-foreground">
                   Formulaire de simulation à venir...
                 </p>
-                <Button className="mt-6">Calculer mes économies</Button>
+                <Button className="mt-6">{t('finances.calculateSavings')}</Button>
               </CardContent>
             </Card>
           </div>
