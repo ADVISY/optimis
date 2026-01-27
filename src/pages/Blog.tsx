@@ -4,12 +4,66 @@ import Layout from "@/components/layout/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Clock, ArrowRight } from "lucide-react";
-import { blogPosts, categories, getBlogPostsByCategory } from "@/data/blogPosts";
+import { Clock, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { categories, getPaginatedPostsByCategory } from "@/data/blogPosts";
+
+const POSTS_PER_PAGE = 9;
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState("all");
-  const filteredPosts = getBlogPostsByCategory(activeCategory);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { posts: filteredPosts, totalPages } = getPaginatedPostsByCategory(
+    activeCategory,
+    currentPage,
+    POSTS_PER_PAGE
+  );
+
+  const handleCategoryChange = (categorySlug: string) => {
+    setActiveCategory(categorySlug);
+    setCurrentPage(1); // Reset to page 1 when changing category
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Generate page numbers to display
+  const getPageNumbers = () => {
+    const pages: (number | string)[] = [];
+    const maxVisiblePages = 5;
+
+    if (totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      if (currentPage <= 3) {
+        for (let i = 1; i <= 4; i++) {
+          pages.push(i);
+        }
+        pages.push("...");
+        pages.push(totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        pages.push(1);
+        pages.push("...");
+        for (let i = totalPages - 3; i <= totalPages; i++) {
+          pages.push(i);
+        }
+      } else {
+        pages.push(1);
+        pages.push("...");
+        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+          pages.push(i);
+        }
+        pages.push("...");
+        pages.push(totalPages);
+      }
+    }
+
+    return pages;
+  };
 
   return (
     <Layout>
@@ -35,7 +89,7 @@ const Blog = () => {
                 key={category.slug}
                 variant={activeCategory === category.slug ? "default" : "outline"}
                 size="sm"
-                onClick={() => setActiveCategory(category.slug)}
+                onClick={() => handleCategoryChange(category.slug)}
                 className="rounded-full"
               >
                 {category.name}
@@ -92,6 +146,56 @@ const Blog = () => {
               <p className="text-muted-foreground">
                 Aucun article dans cette catégorie pour le moment.
               </p>
+            </div>
+          )}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="mt-12 flex items-center justify-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="gap-1"
+              >
+                <ChevronLeft className="h-4 w-4" />
+                Précédent
+              </Button>
+
+              <div className="flex items-center gap-1">
+                {getPageNumbers().map((page, index) =>
+                  page === "..." ? (
+                    <span
+                      key={`ellipsis-${index}`}
+                      className="flex h-9 w-9 items-center justify-center text-muted-foreground"
+                    >
+                      ...
+                    </span>
+                  ) : (
+                    <Button
+                      key={page}
+                      variant={currentPage === page ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => handlePageChange(page as number)}
+                      className="h-9 w-9 p-0"
+                    >
+                      {page}
+                    </Button>
+                  )
+                )}
+              </div>
+
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="gap-1"
+              >
+                Suivant
+                <ChevronRight className="h-4 w-4" />
+              </Button>
             </div>
           )}
         </div>
