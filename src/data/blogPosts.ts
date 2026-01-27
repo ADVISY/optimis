@@ -621,6 +621,434 @@ const rawBlogPosts: BlogPost[] = [
     readTime: 6,
     image: subsideMaladieImg,
   },
+  // ==================== NOUVEAUX ARTICLES IMPORTÉS ====================
+  {
+    id: "3002",
+    slug: "comment-avoir-une-assurance-maladie-moins-chere-le-top-10",
+    title: "Comment avoir une assurance maladie moins chère ? Le top 10 !",
+    excerpt: "Les primes d'assurance maladie peuvent peser lourd sur le budget. Voici les conseils de Comparis pour économiser sur l'assurance maladie.",
+    content: `<blockquote><cite>Les primes d'assurance maladie peuvent peser lourd sur le budget. Voici les conseils de Comparis pour économiser sur l'assurance maladie.</cite></blockquote>
+
+<h2>Réduire le coût de l'assurance maladie en choisissant le bon modèle d'assurance</h2>
+<p>Les modèles d'assurance alternatifs comme le médecin de famille ou HMO permettent de réduire les primes jusqu'à 25%.</p>
+
+<p>En 2024, près de 0,7 million de personnes assurées pourraient économiser au moins 40 % sur leur prime d'assurance maladie. Le <strong>potentiel d'économies maximal</strong> pourrait s'élever jusqu'à <strong>3000 francs</strong>.</p>
+
+<p>Pour payer moins de primes, vous pouvez :</p>
+<ul>
+<li><strong>changer</strong> pour l'une des cinq caisses maladie les moins chères de votre région de primes</li>
+<li><strong>augmenter votre franchise</strong></li>
+<li><strong>changer de modèle</strong> (sans forcément changer de caisse)</li>
+</ul>
+
+<h2>Changer d'assurance de base</h2>
+<p>Vous avez la possibilité de souscrire votre assurance de base et votre assurance complémentaire auprès de différentes caisses maladie. Les prestations de l'assurance de base sont légalement définies et identiques, peu importe la caisse. Ainsi, il peut être avantageux de changer de caisse maladie pour opter pour un prestataire moins cher.</p>
+
+<figure><img src="${WP_IMAGE_BASE}/2024/06/Vous-avez-probablement-des-questions-avant-de-vous-lancer-dans-un-changement-dassurance-1-1-1024x576.jpg" alt="Changer d'assurance de base" /></figure>
+
+<h2>Réduire le coût de l'assurance maladie en augmentant sa franchise</h2>
+<p>Plus la franchise est élevée, plus la prime est basse. Un adulte choisissant la franchise maximale de 2500 francs peut économiser jusqu'à 1540 francs par an. Pour un enfant de moins de 18 ans optant pour la franchise maximale de 600 francs, les économies peuvent atteindre jusqu'à 420 francs par an.</p>
+
+<p>Cependant, avec une franchise élevée, en cas de traitement médical, vous devez contribuer davantage aux coûts. Il est important d'évaluer si, en cas de maladie grave, vous seriez en mesure de supporter ces coûts plus élevés.</p>
+
+<h2>Souscrire une assurance maladie sans couverture accidents</h2>
+<p>Si vous travaillez au moins huit heures par semaine pour un seul employeur, vous êtes automatiquement assuré contre les accidents selon la LAA. Vous pouvez donc choisir d'exclure la couverture accidents de votre assurance maladie, ce qui peut vous permettre d'économiser jusqu'à 10 % sur vos primes.</p>
+
+<h2>Réduire les coûts de l'assurance complémentaire</h2>
+<p>Si vous avez souscrit une assurance complémentaire pour l'hospitalisation, les produits Flex peuvent être une option intéressante. De nombreux assureurs proposent des réductions pour les assurances complémentaires souscrites par des entreprises, des associations ou des clubs.</p>
+
+<h2>Profitez des réductions pour les familles</h2>
+<p>Dans l'assurance de base, plusieurs prestataires offrent des réductions à partir du deuxième enfant assuré. Pour diverses assurances complémentaires, les rabais familiaux s'appliquent dès le premier enfant.</p>
+
+<h2>Demander une Réduction Individuelle des Primes (RIP)</h2>
+<p>Les personnes à faible revenu peuvent bénéficier, dans certains cas, de réductions de primes. Leur revenu imposable annuel ne doit pas dépasser un plafond déterminé. Si vous êtes éligible, le canton verse directement la contribution à votre caisse maladie.</p>
+
+<h2>Opter pour le paiement des primes annuellement</h2>
+<p>Certaines caisses maladie proposent des réductions si vous choisissez de régler vos primes annuellement ou semestriellement plutôt que mensuellement.</p>
+
+<p><strong><a href="https://le-comparateur-optimis.ch">Comparez vos assurances sur Optimis pour trouver la meilleure offre !</a></strong></p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-06-13",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "3041",
+    slug: "les-primes-lamal-en-hausse-de-6-pourquoi",
+    title: "Les primes LAMal en hausse de 6%. Pourquoi ?",
+    excerpt: "Les primes d'assurance maladie ont déjà enregistré des augmentations significatives en 2023 et 2024. Les analystes prévoient que cette tendance se poursuivra en 2025...",
+    content: `<p>Pour 2025, Optimis table sur un nouveau renchérissement de l'assurance de base.</p>
+
+<h2>Statistique : troisième hausse significative des contributions</h2>
+<p>Les primes d'assurance maladie ont déjà enregistré des augmentations significatives en 2023 et 2024. Les analystes en assurance maladie d'Optimis prévoient que cette tendance se poursuivra en 2025, avec une augmentation moyenne estimée à 6 % pour les primes d'assurance de base.</p>
+
+<p>Malgré la hausse des primes en 2024, de nombreuses compagnies d'assurance maladie pourraient se retrouver avec des réserves limitées d'ici la fin de l'année. Par conséquent, certaines caisses maladie pourraient être contraintes d'augmenter leurs primes de plus de 9,8 % dans certains cantons et régions.</p>
+
+<h2>Primes d'assurance maladie : augmentation rapide des coûts</h2>
+<p>Cette évaluation s'appuie sur les prévisions récentes d'Optimis et du Centre de recherches conjoncturelles de l'EPFZ (KOF), qui prévoient une augmentation de 3,4 % des dépenses de santé globales en Suisse l'année prochaine.</p>
+
+<p>« La part des coûts affectant les primes d'assurance santé continue de croître à un rythme soutenu, car le catalogue des prestations de l'assurance de base s'élargit constamment », affirment les experts d'Optimis.</p>
+
+<figure><img src="${WP_IMAGE_BASE}/2024/06/Vous-avez-probablement-des-questions-avant-de-vous-lancer-dans-un-changement-dassurance-1-1-1024x576.jpg" alt="Hausse des primes" /></figure>
+
+<h2>Comment réduire les coûts de la santé</h2>
+<p>Pour diminuer les coûts de la santé à long terme, Optimis préconise notamment :</p>
+<ul>
+<li>Accorder davantage de liberté aux caisses maladie et aux prestataires de soins avec l'introduction de modèles d'assurance alternatifs.</li>
+<li>Autoriser les assureurs à ne couvrir par l'assurance de base que les traitements efficaces, appropriés et économiques.</li>
+<li>Tester un projet pilote de caisse unique dans un canton pour obtenir des données objectives sur son efficacité.</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch">Comparez vos assurances sur Optimis</a></strong></p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-06-14",
+    readTime: 3,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "3249",
+    slug: "comment-enregistrer-votre-vehicule-en-suisse",
+    title: "Comment enregistrer votre véhicule en Suisse ?",
+    excerpt: "Enregistrer votre voiture en Suisse est une étape essentielle pour tout propriétaire résidant dans le pays. Comprendre le processus d'immatriculation est crucial pour respecter la législation suisse.",
+    content: `<p><a href="https://www.ge.ch/organisation/office-cantonal-vehicules-ocv">Pour enregistrer votre véhicule en Suisse, adressez-vous au service des automobiles de votre canton.</a></p>
+
+<p>Enregistrer votre voiture en Suisse est une étape essentielle pour tout propriétaire résidant dans le pays. Que vous importiez un véhicule ou que vous achetiez une voiture neuve ou d'occasion sur place, comprendre le processus d'immatriculation est crucial pour respecter la législation suisse.</p>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-voiture/">Que ce soit pour l'immatriculation d'un véhicule neuf ou d'occasion, préparez les documents suivants :</a></p>
+
+<ol>
+<li><strong>Pièce d'identité</strong> : passeport suisse, carte d'identité ou permis de séjour.</li>
+<li><strong>Pour les entreprises</strong> : extrait du registre du commerce ou certificat d'activité indépendante.</li>
+<li><strong>Attestation de domicile</strong> : nécessaire pour une première immatriculation.</li>
+<li><strong>Attestation d'assurance</strong> : en Suisse, l'assurance responsabilité civile est obligatoire pour tous les véhicules à moteur.</li>
+<li><strong>Rapport d'expertise (formulaire 13.20A)</strong> : requis uniquement pour les véhicules neufs.</li>
+<li><strong>Permis de circulation</strong> : uniquement pour les véhicules d'occasion.</li>
+</ol>
+
+<h3>Immatriculation sans contrôle technique (CT)</h3>
+<ul>
+<li><strong>Véhicules neufs</strong> : Aucun rapport d'expertise du contrôle technique n'est requis.</li>
+<li><strong>Véhicules d'occasion</strong> : Aucun contrôle technique n'est requis pendant les dix premières années suivant la première mise en circulation.</li>
+</ul>
+
+<p>Si le véhicule a plus de dix ans, un contrôle technique est obligatoire. Le rapport de contrôle technique est valable un an.</p>
+
+<h3>Immatriculation avec permis de circulation</h3>
+<p>Il n'est pas nécessaire de présenter un permis de circulation pour enregistrer une voiture neuve. Pour un véhicule d'occasion, il est conseillé de remettre l'original de l'ancien permis de circulation au service des automobiles.</p>
+
+<h3>Immatriculation sans permis de conduire</h3>
+<p>Pour acheter une voiture, vous n'avez pas besoin d'être titulaire d'un permis de conduire. Même sans permis, votre nom peut figurer sur le permis de circulation en tant que détenteur du véhicule.</p>
+
+<h2>Comment comparer votre assurance voiture avec Optimis ?</h2>
+<p><a href="https://le-comparateur-optimis.ch/assurance-voiture/">Découvrez dès maintenant notre site comparateur pour pouvoir comparer les différentes assurances voitures pour votre véhicule.</a></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-06-17",
+    readTime: 3,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "3253",
+    slug: "lassurance-automobile-suisse-en-bref",
+    title: "L'assurance automobile suisse en bref",
+    excerpt: "En Suisse, la mobilité est une composante essentielle de notre quotidien. Avec près de 6 millions de véhicules circulant sur nos routes, la nécessité d'une assurance automobile devient évidente.",
+    content: `<h4>Introduction</h4>
+<p>En Suisse, la mobilité est une composante essentielle de notre quotidien. Avec près de 6 millions de véhicules circulant sur nos routes, la nécessité d'une assurance automobile devient évidente.</p>
+
+<p>Que vous soyez propriétaire d'une voiture, d'une moto ou même d'un scooter, la souscription à une assurance automobile est non seulement une obligation légale, mais surtout une précaution indispensable pour protéger vos intérêts financiers.</p>
+
+<h4>Les Couvertures de Base de l'Assurance Voiture</h4>
+<p>Lorsque vous souscrivez une assurance automobile en Suisse, vous avez le choix entre plusieurs types de couvertures :</p>
+
+<ul>
+<li><strong>La responsabilité civile</strong> est la couverture minimale obligatoire pour tous les véhicules à moteur en Suisse. Elle couvre les dommages matériels et corporels que vous pourriez causer à des tiers en cas d'accident.</li>
+<li><strong>La casco partielle</strong> offre une protection supplémentaire en cas de vol, événements naturels, bris de glace, incendie, collisions avec des animaux et vandalisme.</li>
+<li><strong>La casco complète</strong> est la couverture la plus étendue, incluant toutes les garanties de la casco partielle plus la protection contre les dommages à votre propre véhicule.</li>
+</ul>
+
+<h4>Les Couvertures Complémentaires</h4>
+<ul>
+<li><strong>Assurance Passagers</strong> : Couvre les blessures subies par les conducteurs et les passagers en cas d'accident.</li>
+<li><strong>Dommages de Parking</strong> : Protège votre véhicule contre les dommages causés par des tiers inconnus lorsque stationné.</li>
+<li><strong>Mobilité/Assistance</strong> : Offre une assistance en cas de panne sur la route.</li>
+<li><strong>Protection du Bonus</strong> : Permet d'éviter une augmentation de la prime en cas de sinistre.</li>
+</ul>
+
+<h4>La Franchise en Assurance Automobile</h4>
+<p>La franchise représente la partie des frais que le titulaire de la police doit payer en cas de sinistre avant que l'assureur ne commence à verser des indemnités. Une franchise plus élevée entraîne une prime d'assurance plus basse.</p>
+
+<h3>Bonus-Malus en Assurance Automobile</h3>
+<p>Le système de bonus-malus est un mécanisme utilisé pour évaluer le risque associé à chaque conducteur. Les conducteurs sans accidents sont récompensés par une réduction de prime, tandis que ceux qui ont des accidents voient leur prime augmenter.</p>
+
+<p>Nous conseillons de conduire prudemment et de comparer régulièrement les offres d'assurance via <a href="https://le-comparateur-optimis.ch/assurance-voiture/">Optimis</a> pour obtenir le meilleur rapport qualité-prix.</p>
+
+<h2><a href="https://le-comparateur-optimis.ch/assurance-voiture/">Cliquez ici pour comparer et trouver votre assurance voiture !</a></h2>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-06-17",
+    readTime: 6,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "3340",
+    slug: "assurance-rc-menage-quest-ce-que-cest",
+    title: "Assurance RC ménage : qu'est-ce que c'est ?",
+    excerpt: "La couverture RC ménage en Suisse peut être un gain de temps et parfois d'argent si vous souhaitez à la fois protéger vos biens contre des sinistres et vous couvrir en cas de dommages causés à des tiers.",
+    content: `<p>Pour mieux comprendre ce qu'est une assurance RC ménage, il est crucial de saisir d'abord les caractéristiques d'une assurance responsabilité civile privée, puis celles d'une assurance ménage.</p>
+
+<p>L'assurance RC est une police de responsabilité civile (RC) privée qui vous couvre en cas de dommages causés à des tiers ou à leurs biens. Elle vous protège contre les conséquences financières découlant d'un dommage causé à autrui, qu'il soit corporel ou matériel.</p>
+
+<p>Par exemple, votre responsabilité civile est engagée si votre chien mord quelqu'un dans la rue, ou si votre enfant casse le vélo de votre voisin par accident.</p>
+
+<p>L'assurance ménage, quant à elle, est une police couvrant l'inventaire de votre domicile. Elle protège tout ce qui se trouve dans votre logement : vos meubles ainsi que vos effets personnels en cas de sinistre tel qu'un incendie, un vol ou une inondation.</p>
+
+<p>La combinaison des deux assurances constitue une <strong>assurance RC ménage</strong>, offrant une protection à la fois pour vos biens et contre les dommages que vous pourriez causer aux biens d'autrui.</p>
+
+<h3>Que couvre une RC ménage ?</h3>
+<p>L'assurance RC ménage en Suisse protège généralement vos biens dans les situations suivantes :</p>
+<ul>
+<li>Les incendies ainsi que les impacts de la foudre et les explosions.</li>
+<li>Les vols : cambriolage, effraction, et parfois vol à l'extérieur.</li>
+<li>Les catastrophes naturelles : inondations, tempêtes, avalanches, glissements de terrain.</li>
+<li>Les dégâts des eaux provenant de conduites d'eau ou d'appareils.</li>
+<li>Les bris de glace des vitrages, meubles en verre, installations sanitaires.</li>
+</ul>
+
+<h3>RC ménage, obligatoire en Suisse ?</h3>
+<p>L'assurance responsabilité civile privée en Suisse peut être imposée dans certaines situations. Les propriétaires de logements exigent souvent que leurs locataires fournissent une attestation d'assurance RC.</p>
+
+<p>L'assurance ménage est obligatoire dans certains cantons (Vaud et Nidwald), où vous devez être couvert contre les incendies et les catastrophes naturelles auprès de la Compagnie cantonale d'assurance incendie.</p>
+
+<p>L'assurance RC ménage n'est pas obligatoire en Suisse : vous pouvez choisir de souscrire uniquement une assurance RC, une assurance ménage, ou les deux ensemble.</p>`,
+    category: "Assurance habitation",
+    categorySlug: "assurance-habitation",
+    date: "2024-06-18",
+    readTime: 5,
+    image: assuranceMenageImg,
+  },
+  {
+    id: "3463",
+    slug: "pilier-3a-quand-et-comment-commencer-a-epargner",
+    title: "Pilier 3a : Quand et Comment Commencer à Épargner ?",
+    excerpt: "Commencer à épargner pour la retraite, c'est comme planter un arbre : plus tôt vous le faites, mieux c'est ! Le pilier 3a en Suisse est votre allié pour une prévoyance vieillesse optimale.",
+    content: `<blockquote><cite>Commencer à épargner pour la retraite, c'est comme planter un arbre : plus tôt vous le faites, mieux c'est ! Le pilier 3a en Suisse est votre allié pour une prévoyance vieillesse optimale. Voici tout ce que vous devez savoir pour vous lancer et optimiser vos économies.</cite></blockquote>
+
+<h4>1. Quand Commencer à Cotiser au Pilier 3a ?</h4>
+<p>Dès que vous commencez à travailler et à cotiser à l'AVS (généralement après 18 ans), vous pouvez verser dans le pilier 3a. Plus vous commencez tôt, plus vous profitez des intérêts composés. Un franc épargné dès le début de votre carrière aura un impact significatif sur votre épargne future.</p>
+
+<h4>2. L'Importance de Commencer Tôt</h4>
+<p>Imaginez commencer à épargner 150 CHF par mois à 25 ans : à 65 ans, vous pourriez accumuler environ 138 909 CHF grâce à une rémunération moyenne de 3 %. En comparaison, en commençant à 35 ans avec 200 CHF par mois, vous n'aurez que 116 547 CHF à 65 ans. L'effet des intérêts composés est puissant !</p>
+
+<h4>3. Maximiser les Rendements avec les Fonds de Prévoyance</h4>
+<p>Les comptes 3a classiques offrent des intérêts entre 0 % et 0,4 %. Pour de meilleurs rendements, envisagez d'investir dans un fonds de prévoyance. Ces fonds, souvent diversifiés en actions (jusqu'à 80 %), offrent des rendements potentiellement plus élevés mais avec des risques accrus.</p>
+
+<h4>4. Conditions de Retrait du Pilier 3a</h4>
+<p>Le pilier 3a est lié, ce qui signifie que vous pouvez retirer votre capital cinq ans avant l'âge de la retraite, ou dans des cas spécifiques comme l'achat d'un logement, le rachat de cotisations du deuxième pilier, ou si vous devenez indépendant.</p>
+
+<h1><a href="https://le-comparateur-optimis.ch">5. Réduire vos Impôts</a></h1>
+<p>En cotisant au pilier 3a, vous bénéficiez d'avantages fiscaux. Les montants versés sont déductibles de votre revenu imposable, ce qui réduit votre charge fiscale annuelle. <a href="https://le-comparateur-optimis.ch">Astuce : placez les économies d'impôts pour les faire fructifier encore plus !</a></p>
+
+<h4>6. Plafonds de Cotisation</h4>
+<p>Pour 2023, les versements au pilier 3a sont plafonnés à 7056 CHF par an pour les salariés. Pour les indépendants sans caisse de pension, le plafond est de 20 % du revenu net, avec un maximum de 35 280 CHF.</p>
+
+<h4>7. Combler les Lacunes de Prévoyance</h4>
+<p>Le pilier 3a est crucial pour compenser la baisse des prestations du deuxième pilier due à des facteurs comme l'augmentation de l'espérance de vie et les taux d'intérêt bas.</p>
+
+<h3>Conclusion</h3>
+<p><a href="https://le-comparateur-optimis.ch">Commencez à épargner dès que possible avec le pilier 3a pour maximiser vos intérêts composés et profiter d'avantages fiscaux.</a> Pensez à diversifier vos placements pour optimiser vos rendements et préparez-vous une retraite sereine et confortable. Le futur commence aujourd'hui !</p>`,
+    category: "Assurance vie",
+    categorySlug: "assurance-vie",
+    date: "2024-06-24",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "3481",
+    slug: "que-couvre-lamal-pour-lunettes-lentilles",
+    title: "Que couvre la LAMal pour les lunettes et lentilles ?",
+    excerpt: "Vous avez des soucis de vue ? Ou peut-être que vos enfants en ont ? Pas de panique, Optimis vous explique ce dont vous devez savoir!",
+    content: `<blockquote><cite>Vous avez des soucis de vue ? Ou peut-être que vos enfants en ont ? Pas de panique, Optimis vous explique ce dont vous devez savoir!<br/><br/>Vous le savez sûrement : la LAMal est l'assurance de base obligatoire en Suisse. Peu importe la caisse maladie que vous choisissez, les prestations restent les mêmes.</cite></blockquote>
+
+<h3>Lunettes pour Enfants et Adolescents</h3>
+<p><strong>Critères :</strong></p>
+<ul>
+<li>Jusqu'à 18 ans</li>
+<li>Prescription médicale indiquant la pathologie</li>
+</ul>
+<p><strong>Couverture :</strong></p>
+<ul>
+<li>Jusqu'à 180 CHF par an (la monture reste à votre charge)</li>
+</ul>
+
+<h4>Cas Spéciaux pour les Lunettes et Lentilles</h4>
+<p><strong>Critères :</strong></p>
+<ul>
+<li>Modifications de la vue dues à une maladie (comme la cataracte, le diabète, etc.)</li>
+<li>Nécessité après une opération (comme le glaucome, le décollement de la rétine)</li>
+<li>Tous âges</li>
+<li>Prescription médicale indiquant la pathologie</li>
+</ul>
+<p><strong>Couverture :</strong></p>
+<ul>
+<li>Jusqu'à 180 CHF par œil et par an (la monture reste à votre charge)</li>
+</ul>
+
+<h4>Lentilles de Contact : Cas Particulier 1</h4>
+<p><strong>Critères :</strong></p>
+<ul>
+<li>Amélioration de 2/10 par rapport aux lunettes</li>
+<li>Myopie supérieure à -8</li>
+<li>Hypermétropie supérieure à +6</li>
+<li>Anisométropie de 3 dioptries, avec troubles</li>
+</ul>
+<p><strong>Couverture :</strong></p>
+<ul>
+<li>Jusqu'à 270 CHF par œil tous les 2 ans (les produits d'entretien restent à votre charge)</li>
+</ul>
+
+<h3>Frais supplémentaires à prévoir</h3>
+<p>Même si la LAMal couvre certains frais, vous devrez toujours participer aux coûts avec une quote-part de 10% et une franchise.</p>
+
+<h3>Astuces et Conseils pour Optimiser vos Dépenses Optiques</h3>
+<ol>
+<li><strong>Comparer les Offres</strong> : <a href="https://le-comparateur-optimis.ch/assurance-sante/">Comparez les différentes offres disponibles sur le marché pour trouver celle qui répond le mieux à vos besoins.</a></li>
+<li><strong>Souscrire une Assurance Complémentaire</strong> : <a href="https://le-comparateur-optimis.ch/assurance-sante/">Pensez à souscrire une assurance complémentaire qui peut couvrir des prestations non prises en charge par la LAMal.</a></li>
+<li><strong>Profiter des Offres de Bienvenue</strong> : Certaines caisses maladie offrent des réductions pour les nouvelles souscriptions.</li>
+<li><strong>Surveiller les Promotions</strong> : Les opticiens proposent régulièrement des promotions sur les montures et les verres.</li>
+<li><strong>Prendre soin de ses Lunettes et Lentilles</strong> : Prolongez leur durée de vie en en prenant bien soin.</li>
+</ol>
+
+<h3>Conclusion</h3>
+<p>En résumé, la LAMal peut vous aider à couvrir certains frais d'optique, mais il est essentiel de bien comprendre les critères et les limites pour ne pas avoir de mauvaises surprises. <a href="https://le-comparateur-optimis.ch/blog/">Découvrez également d'autres articles de blog ici.</a></p>
+
+<p>Alors, prêt à voir clair sur vos assurances optiques avec Optimis ? 😊</p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-06-27",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "3548",
+    slug: "maternite-prenatale-enfant-naissance-assurance-complementaire",
+    title: "La césarienne ? Quels sont les prises en charges ?",
+    excerpt: "La césarienne est l'intervention chirurgicale la plus courante dans le monde, et la Suisse se distingue parmi les pays pratiquant le plus cette opération.",
+    content: `<p>Quand une césarienne est-elle indispensable ? La césarienne est réservée à des cas spécifiques où l'accouchement naturel est impossible ou risqué pour la mère, le bébé, ou les deux. Ces situations peuvent être détectées durant la grossesse ou surgir lors du travail.</p>
+
+<p><strong>Césarienne planifiée ou en urgence : quelles distinctions ?</strong> La décision de pratiquer une césarienne peut être anticipée, en surveillance durant la grossesse, appelée césarienne programmée. Par exemple, si le bébé se présente par le siège ou si la mère a des complications médicales préexistantes comme le diabète gestationnel ou l'hypertension. En revanche, une césarienne peut être décidée en urgence, le jour de l'accouchement.</p>
+
+<p><strong>Comment se déroule une césarienne ?</strong> La césarienne est réalisée sous anesthésie générale ou péridurale. Après l'administration de l'anesthésie, le chirurgien effectue une incision dans l'abdomen et l'utérus pour extraire le bébé. Une fois l'enfant né, le cordon ombilical est coupé et le placenta est retiré.</p>
+
+<p><strong>Un suivi post-partum plus important après une césarienne ?</strong> Après une césarienne, un suivi post-partum plus rigoureux est souvent nécessaire par rapport à un accouchement naturel. Outre la surveillance de la guérison de l'incision chirurgicale, il est crucial de surveiller les signes d'infection et de complications.</p>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-sante/">Tous les frais de césarienne sont-ils couverts par l'assurance de base ?</a> L'assurance de base offre des prestations supplémentaires pour couvrir la grossesse et le post-partum, appelées prestations maternité. À partir de la 13e semaine de grossesse, tous les soins sont exempts de participation aux coûts.</p>
+
+<h3>Détails des prestations maternité couvertes par l'assurance de base</h3>
+<p>Que la césarienne soit programmée ou d'urgence, elle sera couverte par l'assurance de base en division commune dans l'hôpital du canton de résidence. L'assurance-maladie obligatoire offre aussi une participation financière de 150 francs pour des cours de préparation à l'accouchement.</p>
+
+<h3>L'assurance hospitalisation privée pour une césarienne</h3>
+<p>L'assurance hospitalisation privée permet d'accoucher dans des conditions idéales :</p>
+<ul>
+<li>Choix de l'hôpital et de la clinique</li>
+<li>Choix du gynécologue</li>
+<li>Accouchement en chambre individuelle</li>
+</ul>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-sante/">En savoir plus sur l'assurance hospitalisation privée</a></p>
+
+<h3>L'assurance médecine douce pour le post-partum</h3>
+<p>Pour bénéficier des traitements désirés pour récupérer d'une césarienne, l'assurance de base est insuffisante. Parmi ces activités : yoga prénatal, kinésithérapie, naturopathie, sophrologie ou acupuncture.</p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-07-02",
+    readTime: 4,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "3602",
+    slug: "lassurance-maladie-et-le-fitness-quels-avantages",
+    title: "L'assurance maladie et le fitness, quels avantages ?",
+    excerpt: "Le fitness est devenu un élément incontournable de la vie quotidienne pour beaucoup en Suisse.",
+    content: `<h3>Les profits du fitness</h3>
+<p>De nombreuses recherches scientifiques ont démontré que l'exercice physique apporte de multiples bienfaits pour la santé. Il contribue à maintenir une bonne condition physique en renforçant les muscles, en améliorant la mobilité articulaire et en aidant à maintenir un poids corporel sain. Le fitness joue également un rôle crucial dans la prévention de nombreuses maladies chroniques, telles que le diabète de type 2, les maladies cardiovasculaires, et certains types de cancer.</p>
+
+<p>Sur le plan mental, l'activité physique a un effet positif sur le bien-être émotionnel et psychologique. Elle stimule la production d'endorphines, les hormones du bien-être, et aide à réduire le stress et l'anxiété, tout en améliorant la qualité du sommeil.</p>
+
+<h3>Les différentes dépenses liées au fitness</h3>
+<p>Les frais d'adhésion à une salle de fitness en Suisse varient en fonction de plusieurs facteurs. En moyenne, un abonnement mensuel coûte entre 50 CHF et 120 CHF.</p>
+
+<p>Il existe également des options plus économiques, comme les cours de fitness en ligne ou les applications mobiles de fitness, dont le coût mensuel varie généralement entre 10 CHF et 30 CHF.</p>
+
+<h3>Les avantages liés au fitness avec l'assurance maladie</h3>
+<p>En Suisse, certaines assurances complémentaires proposent des remboursements pour les frais liés au fitness dans le cadre de leurs programmes de prévention de la santé.</p>
+
+<p>Le montant du remboursement varie selon l'assureur et le plan spécifique. En général, vous pouvez obtenir un remboursement annuel allant de <strong>200 CHF à 1200 CHF</strong> pour les frais de fitness.</p>
+
+<p>Il est important de noter que certaines compagnies d'assurance exigent que le centre de fitness soit reconnu par <strong>Qualitop</strong>, le label de qualité pour le sport et l'activité physique en Suisse.</p>
+
+<h3>Conclusion</h3>
+<p>Le fitness offre de nombreux avantages pour la santé et le bien-être. Grâce aux assurances complémentaires, il est possible de bénéficier de remboursements pour les frais de fitness, rendant cette activité plus abordable. Il est donc recommandé de comparer les assurances complémentaires pour vérifier si elles couvrent les frais de fitness.</p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-07-08",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "3610",
+    slug: "comment-faire-ma-demande-de-subside-aupres-du-canton-de-vaud",
+    title: "Comment faire ma demande de subside auprès du canton de Vaud ?",
+    excerpt: "Le subside est directement versé par le canton à votre caisse d'assurance maladie, qui déduira ensuite le montant de la subvention de vos primes mensuelles.",
+    content: `<p>Le subside d'assurance maladie dans le canton de Vaud, administré par l'Office Vaudois de l'Assurance Maladie (OVAM), a pour but de réduire le fardeau financier des primes d'assurance maladie pour les résidents vaudois. L'objectif principal est de diminuer cette charge à 10 % du revenu des ménages, améliorant ainsi leur pouvoir d'achat. Le subside est directement versé par le canton à votre caisse d'assurance maladie.</p>
+
+<p>Pour déterminer vos droits à ce subside et soumettre une demande à l'OVAM, plusieurs options s'offrent à vous :</p>
+<ul>
+<li><strong>Effectuer la demande en ligne</strong> : Vous pouvez soumettre votre demande de subside directement via le portail en ligne dédié.</li>
+<li><strong>Assistance gratuite</strong> : Si vous avez besoin d'aide pour remplir votre demande, vous pouvez bénéficier d'un soutien gratuit de la part des agences d'assurances sociales régionales. <strong>Optimis</strong> est également à votre disposition pour vous aider à effectuer ces démarches administratives totalement gratuitement.</li>
+</ul>
+
+<h4>Documents Nécessaires pour la Demande</h4>
+<p>Pour compléter le formulaire de demande, préparez les documents suivants :</p>
+<ul>
+<li><strong>Police d'assurance maladie</strong> : Ce document indique les détails de votre couverture actuelle.</li>
+<li><strong>Justificatifs de revenu</strong> : Vous devez fournir les preuves de vos revenus actuels, comme les bulletins de salaire ou les déclarations fiscales.</li>
+</ul>
+
+<h4>Calcul du Subside d'Assurance Maladie</h4>
+<p>Le montant du subside est calculé en fonction d'un pourcentage des primes de référence, variant entre 4 % et 60 %. Ces primes diffèrent selon les régions et les groupes d'âge :</p>
+
+<h5>Primes de Référence pour les Bénéficiaires Ordinaires</h5>
+<ul>
+<li><strong>Région 1 (la plus peuplée)</strong> :
+  <ul>
+  <li>Jeune adulte (19-25 ans) : Entre 252 CHF et 326 CHF</li>
+  <li>Adulte de plus de 26 ans : Entre 373 CHF et 449 CHF</li>
+  <li>Enfant (jusqu'à 18 ans) : 129 CHF</li>
+  </ul>
+</li>
+<li><strong>Région 2</strong> :
+  <ul>
+  <li>Jeune adulte (19-25 ans) : Entre 233 CHF et 307 CHF</li>
+  <li>Adulte de plus de 26 ans : Entre 340 CHF et 417 CHF</li>
+  <li>Enfant (jusqu'à 18 ans) : 120 CHF</li>
+  </ul>
+</li>
+</ul>
+
+<p>Ces primes de référence servent de base pour calculer le subside auquel vous avez droit.</p>
+
+<h4>Conclusion</h4>
+<p>Le subside d'assurance maladie dans le canton de Vaud est une aide précieuse pour les résidents cherchant à réduire leurs dépenses. En versant directement les subsides aux caisses d'assurance maladie, l'OVAM simplifie le processus et assure une réduction immédiate des primes.</p>
+
+<p>Pour optimiser votre demande de subside, n'hésitez pas à solliciter l'assistance gratuite des agences d'assurances sociales régionales ou à contacter <strong>Optimis</strong>, qui peut vous aider à effectuer ces démarches administratives sans frais.</p>`,
+    category: "Aide assurance maladie",
+    categorySlug: "aide-assurance-maladie",
+    date: "2024-07-10",
+    readTime: 3,
+    image: comparerAssurancesImg,
+  },
 ];
 
 // Enforce “image à la une” strictly: if we have a locally downloaded featured image
