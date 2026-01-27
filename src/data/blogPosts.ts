@@ -16,6 +16,17 @@ import assuranceMaladieBebe from "@/assets/blog/assurance-maladie-bebe.jpg";
 import hospitalisationSuisseImg from "@/assets/blog/hospitalisation-suisse.jpg";
 import rcMenageImg from "@/assets/blog/rc-menage.webp";
 import assuranceCascoImg from "@/assets/blog/assurance-casco.png";
+// New car insurance images
+import axaAssuranceVoitureImg from "@/assets/blog/axa-assurance-voiture.png";
+import baloiseAssuranceVoitureImg from "@/assets/blog/baloise-assurance-voiture.png";
+import zurichAssuranceVoitureImg from "@/assets/blog/zurich-assurance-voiture.png";
+import vaudoiseAssuranceVoitureImg from "@/assets/blog/vaudoise-assurance-voiture.png";
+import helvetiaAssuranceVoitureImg from "@/assets/blog/helvetia-assurance-voiture.png";
+import mobiliereAssuranceVoitureImg from "@/assets/blog/mobiliere-assurance-voiture.png";
+import tcsAssuranceVoitureImg from "@/assets/blog/tcs-assurance-voiture.png";
+import generaliAssuranceVoitureImg from "@/assets/blog/generali-assurance-voiture.png";
+import allianzAssuranceVoitureImg from "@/assets/blog/allianz-assurance-voiture.png";
+import assuranceDepannageVoitureImg from "@/assets/blog/assurance-depannage-voiture.png";
 
 export interface BlogPost {
   id: string;
