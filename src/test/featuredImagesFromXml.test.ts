@@ -163,7 +163,7 @@ describe("featured images from WordPress XML", () => {
     }
 
     // Prepare download list for posts to import (next 10)
-    const next10ToImport = postsToImport.slice(0, 10).map(p => {
+    const next50ToImport = postsToImport.slice(0, 50).map(p => {
       const imageUrl = p.thumbnailId ? attachmentUrlById.get(p.thumbnailId) : null;
       return {
         ...p,
@@ -189,7 +189,7 @@ describe("featured images from WordPress XML", () => {
           downloads,
           missingSlugs,
           missingAttachments,
-          next10ToImport,
+          next50ToImport,
         },
         null,
         2
