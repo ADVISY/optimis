@@ -3197,59 +3197,190 @@ const rawBlogPosts: BlogPost[] = [
     id: "4733",
     slug: "assurance-auto-bonus-malus-calcul",
     title: "Assurance auto bonus-malus : Comment fonctionne le calcul ?",
-    excerpt: "Comprendre le système de bonus-malus pour optimiser vos primes.",
-    content: `<p>Le système de bonus-malus adapte les primes en fonction de la conduite de chaque assuré.</p>
+    excerpt: "Découvrez comment calculer et optimiser votre bonus-malus pour réduire vos primes d'assurance auto en Suisse et économiser facilement.",
+    content: `<p>L'assurance auto avec système de bonus-malus est un levier pour adapter les primes en fonction de la conduite de chaque assuré. Ce système permet aux bons conducteurs de bénéficier de réductions tandis que les sinistrés voient leur prime augmenter. Découvrez ici comment se calcule le bonus-malus et les moyens de l'optimiser.</p>
 
-<h2>Qu'est-ce que le bonus-malus ?</h2>
+<h2>Qu'est-ce que le système de bonus-malus en assurance auto ?</h2>
+
+<p>Le système de bonus-malus est un mécanisme qui ajuste les primes d'assurance en fonction du nombre d'années sans accident responsable ou, au contraire, du nombre de sinistres déclarés. Il a pour objectif d'inciter les assurés à adopter une conduite plus responsable en réduisant les primes pour ceux qui évitent les sinistres et en augmentant les coûts pour les conducteurs impliqués dans des accidents.</p>
+
+<h3>Comment fonctionne le bonus-malus ?</h3>
+
+<p>Le calcul du bonus-malus repose sur un coefficient de réduction-majoration (CRM) appliqué à la prime de base. À la souscription, le coefficient initial est de 1. Ce coefficient évolue chaque année, en fonction de l'historique de sinistres responsables de l'assuré :</p>
+
 <ul>
-<li><strong>Bonus</strong> : Réduction de prime pour les conducteurs sans sinistre</li>
-<li><strong>Malus</strong> : Majoration pour les conducteurs avec sinistres responsables</li>
+<li><strong>Bonus :</strong> Pour chaque année sans sinistre, le coefficient est réduit de 5 %, permettant à l'assuré de diminuer sa prime.</li>
+<li><strong>Malus :</strong> En cas d'accident responsable, le coefficient augmente, souvent de 25 %, ce qui impacte le coût de l'assurance.</li>
 </ul>
 
-<h2>Comment est calculé le bonus ?</h2>
-<p>Chaque année sans sinistre augmente votre bonus jusqu'à -70% maximum.</p>
+<h2>Comment l'assureur calcule-t-il la prime d'assurance auto ?</h2>
 
-<h2>Conseils pour optimiser son bonus</h2>
-<ul>
-<li>Conduire prudemment</li>
-<li>Souscrire une protection du bonus</li>
-<li>Changer d'assureur pour transférer son bonus</li>
-</ul>
+<p>Le calcul de la prime d'assurance auto prend en compte plusieurs éléments : les caractéristiques du véhicule, le profil du conducteur et les garanties choisies.</p>
 
-<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez les assurances avec les meilleurs bonus.</a></strong></p>`,
+<h3>L'étude du véhicule</h3>
+
+<p>Les caractéristiques du véhicule influencent la prime de base, puisque les assureurs évaluent le risque financier que représente un sinistre en fonction de la valeur et de la puissance du véhicule.</p>
+
+<figure><table><thead><tr><th>Facteurs influents</th><th>Impact sur la prime</th></tr></thead><tbody><tr><td><strong>Valeur vénale</strong></td><td>Véhicules de haute valeur = prime plus élevée</td></tr><tr><td><strong>Puissance du moteur</strong></td><td>Véhicules puissants = risque accru</td></tr><tr><td><strong>Stationnement</strong></td><td>Garage sécurisé = prime réduite</td></tr><tr><td><strong>Distance annuelle parcourue</strong></td><td>Usage intensif = prime plus élevée</td></tr></tbody></table></figure>
+
+<h3>Le profil de l'assuré et son historique de conduite</h3>
+
+<p>L'âge, l'expérience de conduite et le nombre de sinistres antérieurs sont des indicateurs utilisés par les assureurs pour calculer la prime. Les jeunes conducteurs sont souvent confrontés à une surprime due à leur manque d'expérience et à leur profil considéré comme « à risque. »</p>
+
+<h3>Options de couverture (responsabilité civile, casco)</h3>
+
+<p>Les assureurs suisses offrent plusieurs options de couverture, allant de la responsabilité civile (obligatoire) à des garanties étendues comme la casco partielle ou collision, qui protègent contre les dommages matériels en cas de collision. Plus la couverture est complète, plus la prime sera élevée.</p>
+
+<h2>Comment évolue le bonus-malus au fil des années ?</h2>
+
+<p>L'évolution du bonus-malus dépend du nombre d'années sans sinistre et des accidents responsables. Les conducteurs qui n'ont pas de sinistres bénéficient d'un bonus qui réduit leur prime chaque année.</p>
+
+<h3>Grille d'évolution du bonus-malus pour un conducteur sans sinistre</h3>
+
+<p>La grille de bonus-malus permet de voir l'évolution des primes sur plusieurs années de bonne conduite.</p>
+
+<figure><table><thead><tr><th>Année sans sinistre</th><th>Coefficient CRM</th><th>Pourcentage de la prime de base</th></tr></thead><tbody><tr><td>1re année</td><td>0,95</td><td>95 %</td></tr><tr><td>3e année</td><td>0,85</td><td>85 %</td></tr><tr><td>5e année</td><td>0,76</td><td>76 %</td></tr><tr><td>10e année</td><td>0,57</td><td>57 %</td></tr><tr><td>13e année</td><td>0,50</td><td>50 %</td></tr></tbody></table></figure>
+
+<h3>Pénalités en cas de sinistre responsable</h3>
+
+<p>Chaque accident responsable entraîne une augmentation de 25 % du coefficient, avec un impact direct sur la prime annuelle. Les assureurs suisses utilisent cette approche pour encourager les assurés à conduire prudemment.</p>
+
+<h3>Le système de réduction progressive de la prime avec les années sans accident</h3>
+
+<p>À chaque année sans accident, le bonus augmente progressivement jusqu'à atteindre un seuil maximal. Ce bonus accumulé permet de réduire de moitié la prime initiale pour les conducteurs les plus prudents.</p>
+
+<h2>Calculer et optimiser son degré de bonus</h2>
+
+<p>Connaître et optimiser son bonus-malus est essentiel pour réduire les coûts d'assurance.</p>
+
+<h3>Méthodes pour connaître son bonus-malus actuel</h3>
+
+<p>Les assurés peuvent obtenir leur coefficient bonus-malus en consultant leur relevé d'information d'assurance, un document fourni chaque année lors de l'échéance. Les assureurs indiquent généralement ce coefficient pour aider leurs clients à évaluer l'impact de leur historique sur la prime.</p>
+
+<h3>Stratégies pour réduire son malus et améliorer son bonus</h3>
+
+<p>Pour réduire son malus, un assuré doit maintenir une conduite prudente et éviter les sinistres responsables. L'option de <strong>protection du bonus</strong>, proposée par de nombreux assureurs, permet aussi de conserver son coefficient en cas d'accident, évitant ainsi l'augmentation de la prime.</p>
+
+<h2>L'impact d'un changement d'assurance sur le bonus-malus</h2>
+
+<p>Changer d'assureur n'efface pas le bonus-malus accumulé, mais l'impact tarifaire peut varier selon les compagnies.</p>
+
+<h3>Le transfert du bonus-malus entre compagnies d'assurance</h3>
+
+<p>En Suisse, le transfert du bonus-malus est pris en compte lors de la souscription à une nouvelle assurance. Les assurés peuvent conserver leur coefficient, mais le barème peut différer entre les assureurs, impactant la prime.</p>
+
+<h3>Situations où le bonus/malus peut être recalculé</h3>
+
+<p>Certaines situations spécifiques, comme un changement de véhicule ou une modification des garanties, peuvent entraîner un ajustement de la prime, bien que le bonus-malus reste inchangé.</p>
+
+<h2>Options de protection du bonus : Pourquoi et comment l'intégrer ?</h2>
+
+<p>La <strong>protection du bonus</strong> permet d'éviter une augmentation de la prime en cas de sinistre responsable.</p>
+
+<h3>Les avantages de la protection du bonus</h3>
+
+<p>Cette option, moyennant un supplément, garantit que le coefficient de bonus n'augmentera pas après un accident, maintenant la prime stable malgré un sinistre.</p>
+
+<h3>Quand éviter de déclarer un sinistre pour préserver son bonus</h3>
+
+<p>Dans certains cas, il peut être judicieux de payer les dommages mineurs de sa poche pour éviter une augmentation de la prime. Les conducteurs prudents bénéficient ainsi d'une prime réduite sur le long terme.</p>
+
+<h2>FAQ sur le bonus-malus en assurance auto</h2>
+
+<h3>Comment connaître son bonus-malus ?</h3>
+
+<p>Chaque année, l'assuré peut demander son relevé d'information pour connaître son coefficient. Celui-ci est également indiqué lors de l'envoi des avis d'échéance.</p>
+
+<h3>Qu'est-ce que le coefficient 0,50 ?</h3>
+
+<p>Ce coefficient représente le niveau maximum de réduction, soit 50 % de la prime de base, que les conducteurs peuvent atteindre après plusieurs années sans sinistre responsable.</p>
+
+<h3>Comment se remettre d'un malus important ?</h3>
+
+<p>Les assurés peuvent réduire leur malus avec le temps en adoptant une conduite prudente. Après deux ans sans accident, le coefficient peut revenir à son niveau initial.</p>`,
     category: "Assurance voiture",
     categorySlug: "assurance-voiture",
     date: "2024-10-28",
     readTime: 5,
-    image: comparerAssurancesImg,
+    image: "",
+    metaDescription: "Découvrez comment calculer et optimiser votre bonus-malus pour réduire vos primes d'assurance auto en Suisse et économiser facilement.",
   },
   {
     id: "4735",
     slug: "assurance-voiture-parking",
     title: "Comment assurer votre voiture contre les dommages de parking ?",
-    excerpt: "Protégez votre véhicule contre les dommages de stationnement.",
-    content: `<p>Les dommages de parking incluent éraflures, bosses, et vandalisme.</p>
+    excerpt: "Découvrez les options d'assurance pour protéger votre voiture contre les dommages en stationnement et choisissez la couverture adaptée à vos besoins.",
+    content: `<p>Laisser sa voiture stationnée peut parfois être risqué, car des dommages imprévus surviennent fréquemment. Face aux éraflures, bosses, ou autres impacts subis en parking, une assurance dommages de parcage est essentielle pour éviter des frais imprévus. Cet article explore en détail comment protéger votre véhicule efficacement en stationnement.</p>
 
-<h2>Quelle assurance pour les dommages de parking ?</h2>
+<h2>Dommages de stationnement : Définition et explications</h2>
+
+<p>Les <strong>dommages de stationnement</strong> désignent tous les impacts subis par un véhicule garé, généralement causés par des tiers non identifiables. Par exemple, une porte de voiture qui heurte votre véhicule, ou des dégradations subies sans que l'auteur ne soit identifié, entrent dans cette catégorie. Ces dommages sont souvent frustrants, car sans auteur identifiable, les frais restent souvent à la charge du propriétaire si aucune protection spécifique n'est souscrite.</p>
+
+<figure><table><thead><tr><th>Type de dommage</th><th>Description</th></tr></thead><tbody><tr><td>Bosse de carrosserie</td><td>Impact d'une autre voiture</td></tr><tr><td>Éraflures</td><td>Friction d'un objet ou véhicule</td></tr><tr><td>Vitres brisées</td><td>Vandalisme ou chute d'objets</td></tr><tr><td>Antennes ou rétroviseurs endommagés</td><td>Coup de portière ou vandalisme</td></tr></tbody></table></figure>
+
+<p>Les assurances dommages de parcage interviennent dans ces cas-là, à condition d'avoir souscrit une couverture complémentaire à votre assurance de base.</p>
+
+<h2>Qui est responsable en cas de dommage de parcage ?</h2>
+
+<p>Lorsque votre voiture subit un dommage en stationnement, la responsabilité dépend de la possibilité d'identifier l'auteur de l'incident. Voici les principaux cas de figure :</p>
+
 <ul>
-<li><strong>Casco partielle</strong> : Vandalisme, vol, bris de glace</li>
-<li><strong>Casco complète</strong> : Tous les dommages y compris stationnement</li>
+<li><strong>Auteur inconnu</strong> : Si l'auteur n'est pas identifiable, votre assurance dommages de parcage prend en charge les frais de réparation, à condition d'avoir souscrit cette couverture.</li>
+<li><strong>Auteur connu</strong> : Si l'auteur du dommage est connu et a laissé ses coordonnées, son assurance responsabilité civile couvre les frais.</li>
 </ul>
 
-<h2>Que faire en cas de dommage ?</h2>
+<p>Les dommages de parcage sont donc couverts par une assurance spécifique et complémentaire. En revanche, les incidents causés par vous-même sont considérés comme des <strong>collisions</strong> et nécessitent une assurance casco complète pour être pris en charge.</p>
+
+<h2>Quelles couvertures d'assurance pour les dommages de parcage ?</h2>
+
+<p>Plusieurs options d'assurance sont disponibles pour protéger un véhicule stationné. Les garanties dommages de parcage fonctionnent en complément de la casco partielle ou de la casco complète, selon le niveau de couverture choisi. Voici une comparaison :</p>
+
+<figure><table><thead><tr><th>Type d'assurance</th><th>Ce qu'elle couvre</th><th>Idéal pour...</th></tr></thead><tbody><tr><td>Casco complète</td><td>Dommages en stationnement, vandalisme, collision</td><td>Véhicules neufs ou de valeur</td></tr><tr><td>Casco partielle</td><td>Vandalisme partiel (antennes, rétroviseurs, etc.)</td><td>Véhicules avec usage régulier</td></tr><tr><td>Assurance dommages de parcage</td><td>Deux sinistres en parking par an, sans perte de bonus</td><td>Véhicules stationnés en zone risquée</td></tr></tbody></table></figure>
+
+<p>En cas de dommages fréquents ou pour un véhicule neuf, la souscription à une assurance casco complète et à une garantie spécifique pour le stationnement est recommandée. Pour les véhicules plus anciens, une casco partielle peut suffire.</p>
+
+<h2>Démarches en cas de dommages de stationnement sur votre propre véhicule</h2>
+
+<p>Face à un dommage de parcage, il est essentiel de suivre certaines étapes pour bien gérer la situation et garantir la prise en charge des réparations :</p>
+
 <ol>
-<li>Photographier les dégâts</li>
-<li>Chercher des témoins ou caméras</li>
-<li>Déposer une déclaration à la police</li>
-<li>Déclarer le sinistre à votre assurance</li>
+<li><strong>Photographiez</strong> le dommage sous plusieurs angles pour documenter l'incident.</li>
+<li><strong>Notez l'emplacement et les circonstances</strong> du stationnement : heure, date, et parking.</li>
+<li><strong>Déclarez le sinistre</strong> à votre assureur, en ligne ou par téléphone, en joignant les preuves.</li>
+<li><strong>Consultez un garage partenaire</strong> si votre assureur recommande un centre de réparation spécifique.</li>
 </ol>
 
-<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez les assurances casco sur Optimis.</a></strong></p>`,
+<p>En suivant ces étapes, vous augmentez vos chances d'obtenir une couverture rapide et sans complication.</p>
+
+<h2>Comment choisir la place de parking pour minimiser les risques ?</h2>
+
+<p>Certaines précautions réduisent les risques de dommages en stationnement :</p>
+
+<ul>
+<li><strong>Privilégiez les parkings surveillés ou privés</strong> pour une sécurité accrue.</li>
+<li><strong>Évitez de stationner près de zones à forte circulation</strong> ou à proximité d'arbres, où les chutes de branches sont fréquentes.</li>
+<li><strong>Recherchez des emplacements bien éclairés</strong> pour dissuader d'éventuels actes de vandalisme.</li>
+<li><strong>Vérifiez les conditions de drainage</strong> dans les parkings souterrains pour éviter les risques d'inondation.</li>
+</ul>
+
+<p>En adoptant ces pratiques, vous minimisez le risque de dommages et préservez la valeur de votre véhicule.</p>
+
+<h2>Est-il nécessaire de souscrire une casco complète pour les dommages de parcage ?</h2>
+
+<p>L'assurance casco complète offre la couverture la plus étendue pour protéger un véhicule contre les dommages de parcage, ainsi que contre les incidents causés par le conducteur lui-même. Cependant, elle n'est pas toujours nécessaire pour tous les véhicules. Voici les situations où une casco complète est fortement recommandée :</p>
+
+<ul>
+<li><strong>Véhicules neufs ou de haute valeur</strong> : Une casco complète protège des coûts élevés en cas de dommages.</li>
+<li><strong>Stationnement fréquent dans des zones risquées</strong> : Pour les véhicules garés en centre-ville ou en zone dense, une casco complète et une couverture dommages de parcage offrent une tranquillité d'esprit optimale.</li>
+</ul>
+
+<p>En revanche, pour un véhicule plus ancien ou de faible valeur, une assurance casco partielle avec une option dommages de parcage peut être suffisante et économiquement plus viable.</p>`,
     category: "Assurance voiture",
     categorySlug: "assurance-voiture",
     date: "2024-10-28",
-    readTime: 5,
-    image: comparerAssurancesImg,
+    readTime: 4,
+    image: "",
+    metaDescription: "Découvrez les options d'assurance pour protéger votre voiture contre les dommages en stationnement et choisissez la couverture adaptée à vos besoins.",
   },
   {
     id: "4737",
