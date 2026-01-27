@@ -148,22 +148,22 @@ const MegaMenuContent = ({ categories, ctaText, ctaHref }: MegaMenuCategoryProps
   const activeItem = categories.find(c => c.id === activeCategory);
 
   return (
-    <div className="flex w-[750px] bg-background rounded-xl shadow-xl border">
+    <div className="flex w-[900px] bg-background rounded-xl shadow-2xl border">
       {/* Left sidebar with categories */}
-      <div className="w-[250px] bg-muted/30 rounded-l-xl py-2">
+      <div className="w-[280px] bg-muted/30 rounded-l-xl py-4">
         {categories.map((category) => {
           const Icon = category.icon;
           const isActive = activeCategory === category.id;
           return (
             <button
               key={category.id}
-              className={`flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-primary/10 ${
+              className={`flex w-full items-center gap-4 px-6 py-4 text-left transition-colors hover:bg-primary/10 ${
                 isActive ? "bg-primary/10 border-l-4 border-primary" : "border-l-4 border-transparent"
               }`}
               onMouseEnter={() => setActiveCategory(category.id)}
             >
-              <Icon className={`h-5 w-5 ${isActive ? "text-primary" : "text-muted-foreground"}`} />
-              <span className={`font-medium ${isActive ? "text-primary" : "text-foreground"}`}>
+              <Icon className={`h-6 w-6 ${isActive ? "text-primary" : "text-muted-foreground"}`} />
+              <span className={`font-medium text-base ${isActive ? "text-primary" : "text-foreground"}`}>
                 {category.label}
               </span>
             </button>
@@ -172,19 +172,19 @@ const MegaMenuContent = ({ categories, ctaText, ctaHref }: MegaMenuCategoryProps
       </div>
 
       {/* Right content area */}
-      <div className="flex-1 p-6">
-        <div className="flex gap-6">
+      <div className="flex-1 p-8">
+        <div className="flex gap-8">
           {/* Links section */}
           <div className="flex-1">
-            <h3 className="text-primary font-semibold mb-4">En savoir plus</h3>
-            <ul className="space-y-3">
+            <h3 className="text-primary font-semibold text-lg mb-6">En savoir plus</h3>
+            <ul className="space-y-4">
               {activeItem?.subLinks.map((link, index) => (
                 <li key={index}>
                   <Link 
                     to={link.href} 
-                    className="text-sm text-foreground/80 hover:text-primary transition-colors flex items-center gap-2"
+                    className="text-base text-foreground/80 hover:text-primary transition-colors flex items-center gap-3"
                   >
-                    <span className="w-1.5 h-1.5 bg-muted-foreground/40 rounded-full" />
+                    <span className="w-2 h-2 bg-muted-foreground/40 rounded-full" />
                     {link.label}
                   </Link>
                 </li>
@@ -193,15 +193,15 @@ const MegaMenuContent = ({ categories, ctaText, ctaHref }: MegaMenuCategoryProps
           </div>
 
           {/* Mascot + CTA section */}
-          <div className="w-[200px] flex flex-col items-center text-center">
+          <div className="w-[220px] flex flex-col items-center text-center">
             <img 
               src={llamaMascot} 
               alt="Optimis Mascot" 
-              className="w-32 h-auto mb-2"
+              className="w-40 h-auto mb-4"
             />
-            <p className="text-primary font-medium text-sm mb-1">Obtenir une estimation</p>
-            <p className="text-foreground font-semibold text-sm mb-3">Gratuite & sans engagement</p>
-            <Button asChild size="sm" className="w-full">
+            <p className="text-primary font-semibold text-base mb-2">Obtenir une estimation</p>
+            <p className="text-foreground font-bold text-base mb-4">Gratuite & sans engagement</p>
+            <Button asChild className="w-full">
               <Link to={ctaHref}>{ctaText}</Link>
             </Button>
           </div>
@@ -216,10 +216,10 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container flex h-20 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Optimis" className="h-10" />
+          <img src={logo} alt="Optimis" className="h-12" />
         </Link>
 
         {/* Desktop Navigation */}
