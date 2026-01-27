@@ -2514,8 +2514,845 @@ const rawBlogPosts: BlogPost[] = [
     readTime: 4,
     image: comparerAssurancesImg,
   },
-];
+  // ==================== BATCH 4: Assurance Voiture & Hypothèque (26 articles) ====================
+  {
+    id: "4677",
+    slug: "amortissement-direct-indirect",
+    title: "Amortissement direct et indirect : quelles différences et comment choisir ?",
+    excerpt: "Comprendre les différences entre amortissement direct et indirect pour optimiser vos coûts hypothécaires et avantages fiscaux.",
+    content: `<p>L'amortissement d'une hypothèque est une étape essentielle dans le financement immobilier. Comprendre les différences entre amortissement direct et indirect permet d'optimiser ses coûts et avantages fiscaux. Découvrez comment choisir la solution la plus adaptée à votre situation financière et personnelle.</p>
 
+<h2>Comprendre les bases de l'amortissement : direct et indirect</h2>
+
+<h3>Amortissement direct</h3>
+<p>Avec l'amortissement direct, vous remboursez périodiquement une partie du capital emprunté. Cela réduit progressivement votre dette hypothécaire et, par conséquent, les intérêts que vous payez.</p>
+<ul>
+<li>Réduction progressive de la dette</li>
+<li>Diminution des intérêts au fil du temps</li>
+<li>Diminution des déductions fiscales</li>
+</ul>
+
+<h3>Amortissement indirect</h3>
+<p>L'amortissement indirect consiste à verser des cotisations dans un <a href="https://le-comparateur-optimis.ch/pilier-3a-quand-et-comment-commencer-a-epargner/">pilier 3a</a> (prévoyance liée). L'avoir accumulé servira à rembourser l'hypothèque à terme.</p>
+<ul>
+<li>Dette hypothécaire inchangée pendant la durée</li>
+<li>Déductions fiscales maintenues</li>
+<li>Constitution d'un capital de prévoyance</li>
+</ul>
+
+<h2>Avantages et inconvénients</h2>
+
+<h3>Amortissement direct</h3>
+<p><strong>Avantages :</strong></p>
+<ul>
+<li>Réduction progressive des intérêts</li>
+<li>Diminution du risque d'endettement</li>
+</ul>
+<p><strong>Inconvénients :</strong></p>
+<ul>
+<li>Perte progressive des déductions fiscales</li>
+<li>Moins de flexibilité</li>
+</ul>
+
+<h3>Amortissement indirect</h3>
+<p><strong>Avantages :</strong></p>
+<ul>
+<li>Déductions fiscales optimisées</li>
+<li>Constitution d'un capital prévoyance</li>
+</ul>
+<p><strong>Inconvénients :</strong></p>
+<ul>
+<li>La dette reste constante</li>
+<li>Risque lié aux placements (si 3a en fonds)</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez les offres hypothécaires sur notre site pour trouver la meilleure solution.</a></strong></p>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-10-21",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4679",
+    slug: "assurance-voiture-vaudoise",
+    title: "Vaudoise assurance voiture : une protection complète et adaptée à vos besoins",
+    excerpt: "Découvrez les garanties innovantes et services personnalisés de la Vaudoise pour votre assurance automobile.",
+    content: `<p>Les assurances automobiles sont indispensables pour protéger votre véhicule et couvrir les éventuels incidents liés à la circulation. <strong>Vaudoise assurance voiture</strong> se distingue par des garanties innovantes, des services personnalisés et un engagement coopératif envers ses clients.</p>
+
+<h2>Pourquoi choisir la Vaudoise pour votre assurance auto ?</h2>
+<p>La Vaudoise est une compagnie d'assurance suisse avec plus de 125 ans d'expérience.</p>
+
+<h3>Les formules d'assurance</h3>
+<ul>
+<li><strong>Responsabilité civile</strong> : Obligatoire, elle couvre les dommages causés à des tiers</li>
+<li><strong>Casco partielle</strong> : Protection contre le vol, bris de glace, événements naturels</li>
+<li><strong><a href="https://le-comparateur-optimis.ch/assurance-casco-complete/">Casco complète</a></strong> : Couverture maximale incluant les dommages propres</li>
+</ul>
+
+<h2>Avantages de la Vaudoise</h2>
+<ul>
+<li>Bonus jusqu'à 70% pour les bons conducteurs</li>
+<li>Assistance 24h/24 en Suisse et en Europe</li>
+<li>Protection du bonus en cas de sinistre</li>
+<li>Options véhicules électriques et hybrides</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez votre assurance auto avec Optimis pour trouver la meilleure offre.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-22",
+    readTime: 5,
+    image: vaudoiseAssuranceVoitureImg,
+  },
+  {
+    id: "4681",
+    slug: "zurich-assurance-voiture",
+    title: "Zurich Assurance Voiture : Guide & Comparatif",
+    excerpt: "Découvrez les différentes options d'assurance voiture Zurich, adaptées à vos besoins spécifiques.",
+    content: `<p>Choisir la bonne assurance voiture est une décision cruciale pour tout conducteur. Zurich propose des solutions adaptées à vos besoins spécifiques.</p>
+
+<h2>Les formules Zurich</h2>
+
+<h3>Responsabilité civile</h3>
+<p>Couverture obligatoire pour les dommages causés à des tiers.</p>
+
+<h3>Casco partielle Plus</h3>
+<ul>
+<li>Vol et tentative de vol</li>
+<li>Incendie et événements naturels</li>
+<li>Bris de glace</li>
+<li>Dommages causés par les animaux</li>
+</ul>
+
+<h3>Casco complète</h3>
+<p>Protection maximale incluant tous les dommages propres.</p>
+
+<h2>Avantages Zurich</h2>
+<ul>
+<li>Réseau de garages partenaires étendu</li>
+<li>Gestion des sinistres simplifiée</li>
+<li>Application mobile pour les déclarations</li>
+<li>Remises pour véhicules écologiques</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Utilisez notre comparateur pour trouver la meilleure assurance auto.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-22",
+    readTime: 5,
+    image: zurichAssuranceVoitureImg,
+  },
+  {
+    id: "4683",
+    slug: "axa-assurance-voiture",
+    title: "AXA Assurance Voiture : Guide comparatif & avis",
+    excerpt: "Explorez les différentes offres d'AXA pour assurer votre véhicule en Suisse.",
+    content: `<p>AXA, acteur majeur dans le domaine de l'assurance, propose une gamme complète de solutions adaptées à tous types de véhicules.</p>
+
+<h2>Les formules AXA</h2>
+
+<h3>Responsabilité civile</h3>
+<p>Couverture obligatoire avec une somme d'assurance jusqu'à 100 millions CHF.</p>
+
+<h3>Casco partielle</h3>
+<ul>
+<li>Vol et vandalisme</li>
+<li>Bris de glace</li>
+<li>Grêle et événements naturels</li>
+<li>Collision avec des animaux</li>
+</ul>
+
+<h3>Casco complète</h3>
+<p>La protection la plus étendue, couvrant également les dommages causés par vous-même.</p>
+
+<h2>Avantages AXA</h2>
+<ul>
+<li>Système de bonus-malus avantageux</li>
+<li>Assistance routière 24/7</li>
+<li>Véhicule de remplacement</li>
+<li>Protection du permis de conduire</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez les offres AXA avec d'autres assureurs sur Optimis.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-22",
+    readTime: 5,
+    image: axaAssuranceVoitureImg,
+  },
+  {
+    id: "4686",
+    slug: "baloise-assurance-voiture",
+    title: "Baloise Assurance Voiture : prix, offres et avis en 2024",
+    excerpt: "L'assurance voiture Baloise propose une gamme complète de couvertures adaptées.",
+    content: `<p>L'assurance voiture Baloise propose une gamme complète de couvertures adaptées aux besoins de chaque conducteur.</p>
+
+<h2>Quelles couvertures propose Baloise ?</h2>
+
+<h3>Responsabilité civile</h3>
+<p>Obligatoire en Suisse, elle couvre les dommages corporels et matériels causés à des tiers.</p>
+
+<h3>Casco partielle</h3>
+<ul>
+<li>Vol et tentative de vol</li>
+<li>Événements naturels (grêle, tempête)</li>
+<li>Bris de glace</li>
+<li>Collision avec des animaux</li>
+</ul>
+
+<h3>Casco complète</h3>
+<p>Inclut tous les risques de la casco partielle plus les dommages propres au véhicule.</p>
+
+<h2>Points forts de Baloise</h2>
+<ul>
+<li>Bonus pouvant atteindre 70%</li>
+<li>Protection du bonus incluse</li>
+<li>Assistance en Europe</li>
+<li>Gestion digitale des sinistres</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Faites une simulation sur notre comparateur d'assurances.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-22",
+    readTime: 5,
+    image: baloiseAssuranceVoitureImg,
+  },
+  {
+    id: "4689",
+    slug: "permis-de-conduire-suisse",
+    title: "Comment obtenir son permis de conduire en Suisse ?",
+    excerpt: "Guide complet pour obtenir votre permis de conduire suisse.",
+    content: `<p>Le permis de conduire suisse est une étape essentielle pour gagner en autonomie.</p>
+
+<h2>Préparer sa demande de permis de conduire</h2>
+
+<h3>Conditions d'âge</h3>
+<ul>
+<li><strong>Permis voiture (cat. B)</strong> : dès 18 ans</li>
+<li><strong>Permis moto (cat. A1)</strong> : dès 16 ans</li>
+</ul>
+
+<h3>Documents requis</h3>
+<ol>
+<li>Formulaire de demande complété</li>
+<li>Photo d'identité récente</li>
+<li>Pièce d'identité</li>
+<li>Certificat de premiers secours</li>
+<li>Test de vue d'un opticien</li>
+</ol>
+
+<h2>Les étapes du permis</h2>
+<ol>
+<li><strong>Permis d'élève conducteur</strong> : Après l'examen théorique</li>
+<li><strong>Formation pratique</strong> : Cours et leçons</li>
+<li><strong>Examen pratique</strong> : Évaluation de conduite</li>
+<li><strong>Permis à l'essai</strong> : Permis provisoire de 3 ans</li>
+</ol>
+
+<p><strong>N'oubliez pas de souscrire une <a href="https://le-comparateur-optimis.ch/assurance-auto-suisse/">assurance auto</a> avant de conduire !</strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-22",
+    readTime: 6,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4691",
+    slug: "helvetia-assurance-voiture",
+    title: "Helvetia assurance voiture : tarifs, offres et avantages 2024",
+    excerpt: "L'assurance automobile Helvetia propose des couvertures complètes.",
+    content: `<p>L'assurance automobile Helvetia est l'une des plus anciennes sur le marché suisse.</p>
+
+<h2>Avantages et inconvénients</h2>
+
+<h3>Avantages</h3>
+<ul>
+<li>Large réseau d'agences en Suisse</li>
+<li>Conseils personnalisés</li>
+<li>Bonus fidélité attractif</li>
+<li>Solutions pour véhicules électriques</li>
+</ul>
+
+<h3>Inconvénients</h3>
+<ul>
+<li>Tarifs parfois plus élevés que les assureurs en ligne</li>
+</ul>
+
+<h2>Les formules proposées</h2>
+<ul>
+<li><strong>Responsabilité civile</strong> : Couverture de base obligatoire</li>
+<li><strong>Casco partielle</strong> : Vol, bris de glace, événements naturels</li>
+<li><strong>Casco complète</strong> : Protection maximale</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez Helvetia avec d'autres assureurs sur notre plateforme.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-22",
+    readTime: 5,
+    image: helvetiaAssuranceVoitureImg,
+  },
+  {
+    id: "4693",
+    slug: "plaque-immatriculation-suisse",
+    title: "Comment obtenir sa plaque d'immatriculation suisse ?",
+    excerpt: "Guide complet des démarches pour immatriculer un véhicule en Suisse.",
+    content: `<p>Obtenir une plaque d'immatriculation en Suisse est une démarche essentielle pour tout propriétaire de véhicule.</p>
+
+<h2>Types de plaques en Suisse</h2>
+<ul>
+<li><strong>Plaques blanches</strong> : Véhicules de tourisme</li>
+<li><strong>Plaques vertes</strong> : Véhicules agricoles</li>
+<li><strong>Plaques bleues</strong> : Plaques provisoires</li>
+</ul>
+
+<h2>Documents requis</h2>
+<ol>
+<li>Formulaire 13.20A complété</li>
+<li>Pièce d'identité ou permis de séjour</li>
+<li>Permis de conduire valable</li>
+<li>Attestation d'<a href="https://le-comparateur-optimis.ch/lassurance-automobile-suisse-en-bref/">assurance RC</a></li>
+<li>Rapport d'expertise du véhicule</li>
+</ol>
+
+<h2>Coûts à prévoir</h2>
+<ul>
+<li>Expertise : 50-100 CHF</li>
+<li>Plaques : 40-80 CHF</li>
+<li>Taxe annuelle : selon canton et puissance</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">N'oubliez pas de comparer votre assurance auto.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-22",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4695",
+    slug: "generali-assurance-voiture",
+    title: "Generali assurance voiture : découvrez si cette offre est faite pour vous",
+    excerpt: "Analyse complète des offres Generali pour votre assurance auto.",
+    content: `<p>Avec Generali, l'un des acteurs majeurs du marché, vous avez accès à des solutions adaptées à différents profils.</p>
+
+<h2>Aperçu des offres Generali</h2>
+
+<h3>Responsabilité civile</h3>
+<p>Couverture obligatoire pour les dommages causés à des tiers.</p>
+
+<h3>Casco partielle</h3>
+<ul>
+<li>Vol et vandalisme</li>
+<li>Incendie et explosions</li>
+<li>Bris de glace</li>
+<li>Forces de la nature</li>
+</ul>
+
+<h3>Casco complète</h3>
+<p>Protection maximale incluant les dommages propres.</p>
+
+<h2>Avantages Generali</h2>
+<ul>
+<li>Présence internationale</li>
+<li>Assistance 24/7</li>
+<li>Gestion simplifiée des sinistres</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez Generali avec d'autres assureurs suisses.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-22",
+    readTime: 5,
+    image: generaliAssuranceVoitureImg,
+  },
+  {
+    id: "4697",
+    slug: "assurance-voiture-pas-chere-suisse",
+    title: "5 Meilleures Assurances Voiture Pas Chères - Comparatif Suisse 2024",
+    excerpt: "Guide pour trouver une assurance voiture économique en Suisse.",
+    content: `<p>Trouver une assurance voiture pas chère en Suisse peut sembler difficile. Ce guide vous aide à naviguer parmi les options.</p>
+
+<h2>Top 5 des assurances économiques</h2>
+<ol>
+<li><strong>Smile Direct</strong> : 100% en ligne, tarifs compétitifs</li>
+<li><strong>Dextra</strong> : Formules personnalisables</li>
+<li><strong>Baloise</strong> : Bon rapport qualité-prix</li>
+<li><strong>TCS</strong> : Avantages membres</li>
+<li><strong>Helvetia</strong> : Tarifs bons conducteurs</li>
+</ol>
+
+<h2>Comment réduire ses primes ?</h2>
+<ul>
+<li>Augmenter la franchise</li>
+<li>Choisir la casco partielle</li>
+<li>Regrouper ses assurances</li>
+<li>Limiter le kilométrage</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Utilisez notre comparateur pour trouver l'assurance la moins chère.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-22",
+    readTime: 6,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4699",
+    slug: "assurance-voiture-sans-permis",
+    title: "Assurance Voiture Sans Permis : Guide complet Suisse 2024",
+    excerpt: "Tout savoir sur l'assurance des voitures sans permis en Suisse.",
+    content: `<p>Assurer une voiture sans permis (VSP) nécessite une couverture spécifique.</p>
+
+<h2>Qu'est-ce qu'une voiture sans permis ?</h2>
+<p>Un quadricycle léger limité à 45 km/h, conduisible dès 16 ans avec un permis AM.</p>
+
+<h2>Quelle assurance pour une VSP ?</h2>
+<ul>
+<li><strong>Responsabilité civile</strong> : Obligatoire</li>
+<li><strong>Casco partielle</strong> : Vol, incendie, bris de glace</li>
+<li><strong>Casco complète</strong> : Recommandée pour les véhicules neufs</li>
+</ul>
+
+<h2>Coût moyen</h2>
+<p>Entre 300 et 800 CHF par an selon la couverture.</p>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez les offres pour votre voiture sans permis.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-22",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4701",
+    slug: "allianz-assurance-voiture",
+    title: "Allianz assurance voiture : tout ce que vous devez savoir",
+    excerpt: "Découvrez les offres d'assurance auto Allianz personnalisables.",
+    content: `<p>Allianz est un acteur majeur offrant des solutions variées pour protéger votre véhicule.</p>
+
+<h2>Les formules Allianz</h2>
+<ul>
+<li><strong>Responsabilité civile</strong> : Couverture de base obligatoire</li>
+<li><strong>Casco partielle</strong> : Vol, incendie, bris de glace, événements naturels</li>
+<li><strong>Casco complète</strong> : Protection maximale</li>
+</ul>
+
+<h2>Avantages Allianz</h2>
+<ul>
+<li>Groupe international solide</li>
+<li>Assistance routière incluse</li>
+<li>Bonus sans sinistre avantageux</li>
+<li>Application mobile</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Faites une simulation gratuite sur notre comparateur.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-22",
+    readTime: 5,
+    image: allianzAssuranceVoitureImg,
+  },
+  {
+    id: "4705",
+    slug: "assurance-responsabilite-civile-voiture",
+    title: "Comment fonctionne l'assurance responsabilité civile automobile ?",
+    excerpt: "Tout comprendre sur l'assurance RC auto obligatoire en Suisse.",
+    content: `<p>L'assurance responsabilité civile pour voiture est obligatoire en Suisse.</p>
+
+<h2>Qu'est-ce que l'assurance RC auto ?</h2>
+<p>Elle couvre les dommages que vous causez à des tiers :</p>
+<ul>
+<li>Dommages corporels aux personnes</li>
+<li>Dommages matériels aux véhicules et biens</li>
+<li>Frais médicaux des victimes</li>
+</ul>
+
+<h2>Ce qui n'est pas couvert</h2>
+<ul>
+<li>Les dommages à votre propre véhicule</li>
+<li>Vos propres blessures</li>
+</ul>
+
+<h2>Montants de couverture</h2>
+<p>Minimum légal : 5 millions CHF. Recommandé : 100 millions CHF.</p>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez les offres RC sur notre plateforme.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-22",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4707",
+    slug: "tcs-assurance-voiture",
+    title: "TCS assurance voiture : Est-elle la meilleure option pour vous en 2024 ?",
+    excerpt: "Analyse des formules d'assurance voiture TCS du Touring Club Suisse.",
+    content: `<p>L'assurance voiture TCS, proposée par le Touring Club Suisse, attire de plus en plus d'adhérents.</p>
+
+<h2>Qui est le TCS ?</h2>
+<p>La plus grande association de mobilité en Suisse avec plus de 1,5 million de membres.</p>
+
+<h2>Les formules TCS</h2>
+<ul>
+<li><strong>Responsabilité civile</strong> : Couverture obligatoire</li>
+<li><strong>Casco partielle</strong> : Vol, bris de glace, événements naturels</li>
+<li><strong>Casco complète</strong> : Protection maximale</li>
+</ul>
+
+<h2>Avantages pour les membres TCS</h2>
+<ul>
+<li>Tarifs préférentiels</li>
+<li>Assistance routière incluse</li>
+<li>Protection du bonus</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez TCS avec d'autres assureurs sur Optimis.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-22",
+    readTime: 5,
+    image: tcsAssuranceVoitureImg,
+  },
+  {
+    id: "4710",
+    slug: "comparateur-assurance-voiture-jeune-conducteur",
+    title: "Le tarif de l'assurance auto pour jeune conducteur",
+    excerpt: "Guide pour comprendre et réduire les tarifs d'assurance auto pour les jeunes conducteurs.",
+    content: `<p>Les jeunes conducteurs paient des surprimes en raison de leur manque d'expérience.</p>
+
+<h2>Pourquoi les jeunes conducteurs paient plus ?</h2>
+<p>Les statistiques montrent un risque d'accident plus élevé chez les moins de 25 ans.</p>
+
+<h2>Comment réduire sa prime ?</h2>
+<ol>
+<li>Choisir un véhicule modeste</li>
+<li>Augmenter la franchise</li>
+<li>Ajouter un conducteur expérimenté</li>
+<li>Opter pour une assurance au kilomètre</li>
+<li>Comparer les offres</li>
+</ol>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Utilisez notre comparateur pour trouver la meilleure offre jeune conducteur.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-22",
+    readTime: 6,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4712",
+    slug: "mobiliere-assurance-voiture",
+    title: "Mobilière Assurance Voiture : Comparatif complet et avis",
+    excerpt: "Découvrez l'offre d'assurance voiture de La Mobilière.",
+    content: `<p>La Mobilière se positionne comme un acteur clé du marché en Suisse.</p>
+
+<h2>Quels produits propose La Mobilière ?</h2>
+<ul>
+<li><strong>Responsabilité civile</strong> : 100 millions CHF</li>
+<li><strong>Casco partielle</strong> : Vol, bris de glace, événements naturels</li>
+<li><strong>Casco complète</strong> : Protection maximale</li>
+</ul>
+
+<h2>Avantages de La Mobilière</h2>
+<ul>
+<li>Structure coopérative</li>
+<li>Réseau d'agences dense</li>
+<li>Service de sinistre rapide</li>
+<li>Bonus jusqu'à 70%</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez La Mobilière avec d'autres assureurs.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-22",
+    readTime: 5,
+    image: mobiliereAssuranceVoitureImg,
+  },
+  {
+    id: "4714",
+    slug: "assurance-depannage-voiture",
+    title: "Assurance dépannage voiture : tout ce que vous devez savoir",
+    excerpt: "Guide complet sur l'assurance dépannage et assistance routière.",
+    content: `<p>L'assurance dépannage pour voiture est une garantie précieuse en cas de panne.</p>
+
+<h2>Que couvre l'assurance dépannage ?</h2>
+<ul>
+<li><strong>Assistance sur place</strong> : Dépannage, démarrage batterie, changement de roue</li>
+<li><strong>Remorquage</strong> : Transport vers le garage le plus proche</li>
+<li><strong>Véhicule de remplacement</strong> : Mise à disposition pendant les réparations</li>
+<li><strong>Rapatriement</strong> : Transport du véhicule et des passagers</li>
+</ul>
+
+<h2>Options populaires</h2>
+<ul>
+<li><strong>TCS</strong> : Assistance complète pour les membres</li>
+<li><strong>Assurance auto avec assistance</strong> : Souvent incluse dans la casco</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez les options d'assistance sur notre site.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-22",
+    readTime: 5,
+    image: assuranceDepannageVoitureImg,
+  },
+  {
+    id: "4716",
+    slug: "assurance-voiture-resiliation",
+    title: "Comment résilier son assurance voiture ?",
+    excerpt: "Guide des démarches pour résilier votre assurance auto en Suisse.",
+    content: `<p>Résilier une assurance voiture peut sembler complexe, mais il existe des démarches simples.</p>
+
+<h2>Pourquoi résilier ?</h2>
+<ul>
+<li>Trouver une offre moins chère</li>
+<li>Vente ou changement de véhicule</li>
+<li>Augmentation injustifiée des primes</li>
+</ul>
+
+<h2>Quand résilier ?</h2>
+<ul>
+<li><strong>Résiliation ordinaire</strong> : Fin d'année avec 3 mois de préavis</li>
+<li><strong>Résiliation extraordinaire</strong> : Vente, augmentation de prime, sinistre</li>
+</ul>
+
+<h2>Comment procéder ?</h2>
+<ol>
+<li>Vérifier les délais de préavis</li>
+<li>Envoyer une lettre recommandée</li>
+<li>Conserver une copie de l'envoi</li>
+<li>Attendre la confirmation</li>
+</ol>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez les nouvelles offres avant de résilier.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-22",
+    readTime: 5,
+    image: resiliationImg,
+  },
+  {
+    id: "4718",
+    slug: "assurance-utilitaire-pas-chere",
+    title: "Assurance Utilitaire : ce qu'il faut savoir pour être couvert",
+    excerpt: "Guide pour trouver une assurance utilitaire économique.",
+    content: `<p>L'assurance pour les véhicules utilitaires est indispensable pour les professionnels.</p>
+
+<h2>Types de couvertures</h2>
+<ul>
+<li><strong>Responsabilité civile</strong> : Obligatoire</li>
+<li><strong>Casco partielle</strong> : Vol, incendie, bris de glace</li>
+<li><strong>Casco complète</strong> : Protection maximale</li>
+<li><strong>Assurance des marchandises</strong> : Couverture des biens transportés</li>
+</ul>
+
+<h2>Comment réduire les coûts ?</h2>
+<ul>
+<li>Comparer plusieurs offres</li>
+<li>Augmenter la franchise</li>
+<li>Regrouper vos véhicules professionnels</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez les assurances utilitaires sur notre site.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-23",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4723",
+    slug: "assurance-voiture-smile",
+    title: "Assurance voiture Smile : Comment économiser sur votre assurance auto",
+    excerpt: "Découvrez Smile, l'assurance auto 100% en ligne avec des tarifs compétitifs.",
+    content: `<p>Smile est la marque en ligne d'Helvetia, proposant des assurances auto 100% digitales.</p>
+
+<h2>Les formules Smile</h2>
+<ul>
+<li><strong>Responsabilité civile</strong> : Couverture obligatoire</li>
+<li><strong>Casco partielle</strong> : Vol, bris de glace, événements naturels</li>
+<li><strong>Casco complète</strong> : Protection maximale</li>
+</ul>
+
+<h2>Avantages de Smile</h2>
+<ul>
+<li>Tarifs jusqu'à 20% moins chers</li>
+<li>Souscription 100% en ligne</li>
+<li>Gestion digitale simple</li>
+<li>Qualité Helvetia</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez Smile avec d'autres assureurs sur Optimis.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-23",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4733",
+    slug: "assurance-auto-bonus-malus-calcul",
+    title: "Assurance auto bonus-malus : Comment fonctionne le calcul ?",
+    excerpt: "Comprendre le système de bonus-malus pour optimiser vos primes.",
+    content: `<p>Le système de bonus-malus adapte les primes en fonction de la conduite de chaque assuré.</p>
+
+<h2>Qu'est-ce que le bonus-malus ?</h2>
+<ul>
+<li><strong>Bonus</strong> : Réduction de prime pour les conducteurs sans sinistre</li>
+<li><strong>Malus</strong> : Majoration pour les conducteurs avec sinistres responsables</li>
+</ul>
+
+<h2>Comment est calculé le bonus ?</h2>
+<p>Chaque année sans sinistre augmente votre bonus jusqu'à -70% maximum.</p>
+
+<h2>Conseils pour optimiser son bonus</h2>
+<ul>
+<li>Conduire prudemment</li>
+<li>Souscrire une protection du bonus</li>
+<li>Changer d'assureur pour transférer son bonus</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez les assurances avec les meilleurs bonus.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-28",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4735",
+    slug: "assurance-voiture-parking",
+    title: "Comment assurer votre voiture contre les dommages de parking ?",
+    excerpt: "Protégez votre véhicule contre les dommages de stationnement.",
+    content: `<p>Les dommages de parking incluent éraflures, bosses, et vandalisme.</p>
+
+<h2>Quelle assurance pour les dommages de parking ?</h2>
+<ul>
+<li><strong>Casco partielle</strong> : Vandalisme, vol, bris de glace</li>
+<li><strong>Casco complète</strong> : Tous les dommages y compris stationnement</li>
+</ul>
+
+<h2>Que faire en cas de dommage ?</h2>
+<ol>
+<li>Photographier les dégâts</li>
+<li>Chercher des témoins ou caméras</li>
+<li>Déposer une déclaration à la police</li>
+<li>Déclarer le sinistre à votre assurance</li>
+</ol>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez les assurances casco sur Optimis.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-28",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4737",
+    slug: "assurance-camping-car",
+    title: "Assurance camping-car : guide des garanties et offres",
+    excerpt: "Tout savoir pour bien assurer votre camping-car.",
+    content: `<p>L'assurance camping-car est essentielle pour voyager sereinement.</p>
+
+<h2>Types de garanties</h2>
+<ul>
+<li><strong>Responsabilité civile</strong> : Obligatoire</li>
+<li><strong>Casco partielle</strong> : Vol, incendie, bris de glace</li>
+<li><strong>Casco complète</strong> : Protection maximale</li>
+</ul>
+
+<h2>Garanties spécifiques camping-car</h2>
+<ul>
+<li><strong>Contenu du véhicule</strong> : Mobilier, électroménager</li>
+<li><strong>Auvent et accessoires</strong> : Store, antenne</li>
+<li><strong>Assistance voyage</strong> : Rapatriement, hébergement</li>
+</ul>
+
+<h2>Prix moyens</h2>
+<p>Entre 500 et 1500 CHF par an.</p>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez les assurances camping-car sur notre site.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-29",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4739",
+    slug: "assurance-voiture-kilometre",
+    title: "Assurance auto adaptée au kilométrage parcouru : rouler moins cher",
+    excerpt: "Découvrez l'assurance au kilomètre, idéale pour les conducteurs occasionnels.",
+    content: `<p>L'assurance "Pay as you drive" ajuste votre prime selon votre kilométrage.</p>
+
+<h2>Pour qui est-elle adaptée ?</h2>
+<ul>
+<li>Conducteurs occasionnels (moins de 10'000 km/an)</li>
+<li>Second véhicule peu utilisé</li>
+<li>Retraités roulant peu</li>
+</ul>
+
+<h2>Comment ça fonctionne ?</h2>
+<ol>
+<li>Un boîtier ou une application enregistre vos km</li>
+<li>Vous payez une prime de base réduite</li>
+<li>Un montant par kilomètre s'ajoute</li>
+</ol>
+
+<h2>Avantages</h2>
+<ul>
+<li>Économies pour les petits rouleurs</li>
+<li>Prime adaptée à l'usage réel</li>
+</ul>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez les offres au kilomètre sur Optimis.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-29",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+  {
+    id: "4742",
+    slug: "assurance-auto-documents-a-fournir",
+    title: "Souscrire à une assurance auto : les documents requis",
+    excerpt: "Liste complète des documents nécessaires pour souscrire une assurance automobile.",
+    content: `<p>Souscrire une assurance auto nécessite de fournir des documents spécifiques.</p>
+
+<h2>Documents personnels</h2>
+<ul>
+<li>Pièce d'identité (carte d'identité ou passeport)</li>
+<li>Permis de conduire en cours de validité</li>
+<li>Permis de séjour (pour les étrangers)</li>
+</ul>
+
+<h2>Documents du véhicule</h2>
+<ul>
+<li>Permis de circulation (carte grise)</li>
+<li>Rapport d'expertise (véhicules importés)</li>
+<li>Facture d'achat (véhicules neufs)</li>
+</ul>
+
+<h2>Conseils pratiques</h2>
+<ol>
+<li>Préparez tous les documents avant la demande</li>
+<li>Gardez des copies numériques</li>
+<li>Soyez honnête sur votre historique</li>
+<li>Comparez plusieurs offres</li>
+</ol>
+
+<p><strong><a href="https://le-comparateur-optimis.ch/">Comparez les assurances auto sur notre plateforme.</a></strong></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-29",
+    readTime: 5,
+    image: comparerAssurancesImg,
+  },
+];
 // Enforce “image à la une” strictly: if we have a locally downloaded featured image
 // (from WordPress XML _thumbnail_id), it overrides any older placeholder / content image.
 export const blogPosts: BlogPost[] = rawBlogPosts
