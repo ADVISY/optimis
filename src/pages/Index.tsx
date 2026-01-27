@@ -1,73 +1,76 @@
 import { Car, Heart, Scale, Home } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import llamaMascot from "@/assets/llama-mascot.png";
-
-const insuranceCards = [
-  {
-    icon: Car,
-    title: "Assurance Voiture",
-    description: "Comparez les meilleures offres auto",
-    href: "/assurance-voiture",
-    color: "text-blue-600",
-  },
-  {
-    icon: Heart,
-    title: "Assurance Santé",
-    description: "Trouvez la couverture idéale",
-    href: "/assurance-sante",
-    color: "text-red-500",
-  },
-  {
-    icon: Scale,
-    title: "Protection Juridique",
-    description: "Protégez vos droits",
-    href: "/protection-juridique",
-    color: "text-purple-600",
-  },
-  {
-    icon: Home,
-    title: "Assurance Ménage",
-    description: "Sécurisez votre foyer",
-    href: "/assurance-menage",
-    color: "text-orange-500",
-  },
-];
-
-const steps = [
-  { number: "1", title: "Choisissez", description: "Sélectionnez votre type d'assurance" },
-  { number: "2", title: "Remplissez", description: "Complétez le formulaire en 2 minutes" },
-  { number: "3", title: "Comparez", description: "Recevez les meilleures offres" },
-  { number: "4", title: "Économisez", description: "Jusqu'à 40% d'économies" },
-];
-
-const stats = [
-  { value: "10,000+", label: "Utilisateurs satisfaits" },
-  { value: "95%", label: "Taux de recommandation" },
-  { value: "20+", label: "Partenaires assureurs" },
-];
-
-const testimonials = [
-  {
-    name: "Laurent Weber",
-    location: "Genève",
-    text: "Grâce à Optimis, j'ai économisé plus de 800 CHF sur mon assurance auto. Service rapide et professionnel !",
-  },
-  {
-    name: "Claire Muller",
-    location: "Lausanne",
-    text: "Excellente expérience ! Le comparateur est simple d'utilisation et j'ai trouvé une assurance santé parfaite pour ma famille.",
-  },
-  {
-    name: "Marc Dubois",
-    location: "Zurich",
-    text: "Je recommande vivement Optimis. L'équipe m'a accompagné tout au long du processus de changement d'assurance.",
-  },
-];
+import LocalizedLink from "@/components/LocalizedLink";
 
 const Index = () => {
+  const { t } = useTranslation();
+
+  const insuranceCards = [
+    {
+      icon: Car,
+      titleKey: "nav.carInsurance",
+      descriptionKey: "home.carInsuranceDesc",
+      href: "/assurance-voiture",
+      color: "text-blue-600",
+    },
+    {
+      icon: Heart,
+      titleKey: "nav.healthInsurance",
+      descriptionKey: "home.healthInsuranceDesc",
+      href: "/assurance-sante",
+      color: "text-red-500",
+    },
+    {
+      icon: Scale,
+      titleKey: "nav.legalProtection",
+      descriptionKey: "home.legalProtectionDesc",
+      href: "/protection-juridique",
+      color: "text-purple-600",
+    },
+    {
+      icon: Home,
+      titleKey: "nav.homeInsurance",
+      descriptionKey: "home.homeInsuranceDesc",
+      href: "/assurance-menage",
+      color: "text-orange-500",
+    },
+  ];
+
+  const steps = [
+    { number: "1", titleKey: "home.step1Title", descriptionKey: "home.step1Desc" },
+    { number: "2", titleKey: "home.step2Title", descriptionKey: "home.step2Desc" },
+    { number: "3", titleKey: "home.step3Title", descriptionKey: "home.step3Desc" },
+    { number: "4", titleKey: "home.step4Title", descriptionKey: "home.step4Desc" },
+  ];
+
+  const stats = [
+    { value: "10,000+", labelKey: "stats.satisfiedUsers" },
+    { value: "95%", labelKey: "stats.recommendationRate" },
+    { value: "20+", labelKey: "stats.insurerPartners" },
+  ];
+
+  const testimonials = [
+    {
+      name: "Laurent Weber",
+      location: "Genève",
+      textKey: "testimonials.testimonial1",
+    },
+    {
+      name: "Claire Muller",
+      location: "Lausanne",
+      textKey: "testimonials.testimonial2",
+    },
+    {
+      name: "Marc Dubois",
+      location: "Zurich",
+      textKey: "testimonials.testimonial3",
+    },
+  ];
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -76,19 +79,18 @@ const Index = () => {
           <div className="grid items-center gap-8 md:grid-cols-2">
             <div className="space-y-6 animate-fade-in">
               <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl lg:text-6xl">
-                Comparez les assurances et trouvez les{" "}
-                <span className="text-gradient-optimis">meilleures offres</span>
+                {t('home.heroTitle')}{" "}
+                <span className="text-gradient-optimis">{t('home.heroHighlight')}</span>
               </h1>
               <p className="text-lg text-muted-foreground md:text-xl">
-                Le comparateur suisse qui vous aide à économiser sur vos
-                assurances en quelques clics.
+                {t('home.heroSubtitle')}
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button size="lg" className="text-base">
-                  Comparer maintenant
+                  {t('common.compareNow')}
                 </Button>
                 <Button size="lg" variant="outline" className="text-base">
-                  En savoir plus
+                  {t('common.readMore')}
                 </Button>
               </div>
             </div>
@@ -108,29 +110,29 @@ const Index = () => {
         <div className="container">
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
-              Quelle assurance cherchez-vous ?
+              {t('home.whichInsurance')}
             </h2>
             <p className="text-muted-foreground">
-              Sélectionnez un type d'assurance pour commencer votre comparaison
+              {t('home.selectInsurance')}
             </p>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {insuranceCards.map((card) => (
-              <Link key={card.href} to={card.href}>
+              <LocalizedLink key={card.href} to={card.href}>
                 <Card className="h-full transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
                   <CardContent className="flex flex-col items-center p-6 text-center">
                     <div className={`mb-4 rounded-full bg-secondary p-4 ${card.color}`}>
                       <card.icon className="h-8 w-8" />
                     </div>
                     <h3 className="mb-2 text-lg font-semibold text-foreground">
-                      {card.title}
+                      {t(card.titleKey)}
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      {card.description}
+                      {t(card.descriptionKey)}
                     </p>
                   </CardContent>
                 </Card>
-              </Link>
+              </LocalizedLink>
             ))}
           </div>
         </div>
@@ -141,10 +143,10 @@ const Index = () => {
         <div className="container">
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
-              Comment ça marche ?
+              {t('home.howItWorks')}
             </h2>
             <p className="text-muted-foreground">
-              Obtenez les meilleures offres en 4 étapes simples
+              {t('home.bestOffersIn4Steps')}
             </p>
           </div>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -160,10 +162,10 @@ const Index = () => {
                   {step.number}
                 </div>
                 <h3 className="mb-2 text-lg font-semibold text-foreground">
-                  {step.title}
+                  {t(step.titleKey)}
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  {step.description}
+                  {t(step.descriptionKey)}
                 </p>
               </div>
             ))}
@@ -176,11 +178,11 @@ const Index = () => {
         <div className="container">
           <div className="grid gap-8 text-center sm:grid-cols-3">
             {stats.map((stat) => (
-              <div key={stat.label} className="space-y-2">
+              <div key={stat.labelKey} className="space-y-2">
                 <p className="text-4xl font-bold text-primary md:text-5xl">
                   {stat.value}
                 </p>
-                <p className="text-muted-foreground">{stat.label}</p>
+                <p className="text-muted-foreground">{t(stat.labelKey)}</p>
               </div>
             ))}
           </div>
@@ -192,10 +194,10 @@ const Index = () => {
         <div className="container">
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
-              Ce que disent nos clients
+              {t('home.whatClientsSay')}
             </h2>
             <p className="text-muted-foreground">
-              Des milliers de Suisses nous font confiance
+              {t('home.thousandsTrust')}
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
@@ -203,7 +205,7 @@ const Index = () => {
               <Card key={testimonial.name} className="h-full">
                 <CardContent className="p-6">
                   <p className="mb-4 text-muted-foreground">
-                    "{testimonial.text}"
+                    "{t(testimonial.textKey)}"
                   </p>
                   <div>
                     <p className="font-semibold text-foreground">
@@ -224,13 +226,13 @@ const Index = () => {
       <section className="gradient-optimis py-16 md:py-20">
         <div className="container text-center">
           <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
-            Prêt à économiser sur vos assurances ?
+            {t('home.readyToSave')}
           </h2>
           <p className="mb-8 text-muted-foreground">
-            Rejoignez plus de 10,000 utilisateurs satisfaits
+            {t('home.joinUsers')}
           </p>
           <Button size="lg" className="text-base">
-            Commencer ma comparaison gratuite
+            {t('home.startFreeComparison')}
           </Button>
         </div>
       </section>

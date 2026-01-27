@@ -14,7 +14,8 @@
     "readingTime": "Temps de lecture",
     "min": "min",
     "continue": "Continuer",
-    "seeAllArticles": "Voir tous les articles"
+    "seeAllArticles": "Voir tous les articles",
+    "compareNow": "Comparer maintenant"
   },
   "nav": {
     "insurances": "Assurances",
@@ -37,7 +38,36 @@
     "join": "Rejoignez",
     "users": "utilisateurs",
     "noCommitment": "Sans engagement",
-    "free": "Et 100% gratuit"
+    "free": "Et 100% gratuit",
+    "satisfiedUsers": "Utilisateurs satisfaits",
+    "recommendationRate": "Taux de recommandation",
+    "insurerPartners": "Partenaires assureurs"
+  },
+  "home": {
+    "heroTitle": "Comparez les assurances et trouvez les",
+    "heroHighlight": "meilleures offres",
+    "heroSubtitle": "Le comparateur suisse qui vous aide à économiser sur vos assurances en quelques clics.",
+    "whichInsurance": "Quelle assurance cherchez-vous ?",
+    "selectInsurance": "Sélectionnez un type d'assurance pour commencer votre comparaison",
+    "carInsuranceDesc": "Comparez les meilleures offres auto",
+    "healthInsuranceDesc": "Trouvez la couverture idéale",
+    "legalProtectionDesc": "Protégez vos droits",
+    "homeInsuranceDesc": "Sécurisez votre foyer",
+    "howItWorks": "Comment ça marche ?",
+    "bestOffersIn4Steps": "Obtenez les meilleures offres en 4 étapes simples",
+    "step1Title": "Choisissez",
+    "step1Desc": "Sélectionnez votre type d'assurance",
+    "step2Title": "Remplissez",
+    "step2Desc": "Complétez le formulaire en 2 minutes",
+    "step3Title": "Comparez",
+    "step3Desc": "Recevez les meilleures offres",
+    "step4Title": "Économisez",
+    "step4Desc": "Jusqu'à 40% d'économies",
+    "whatClientsSay": "Ce que disent nos clients",
+    "thousandsTrust": "Des milliers de Suisses nous font confiance",
+    "readyToSave": "Prêt à économiser sur vos assurances ?",
+    "joinUsers": "Rejoignez plus de 10,000 utilisateurs satisfaits",
+    "startFreeComparison": "Commencer ma comparaison gratuite"
   },
   "healthInsurance": {
     "title": "Assurance Santé",
@@ -193,5 +223,10 @@
     "termsOfService": "Conditions d'utilisation",
     "legalNotice": "Mentions légales",
     "allRightsReserved": "Tous droits réservés."
+  },
+  "testimonials": {
+    "testimonial1": "Grâce à Optimis, j'ai économisé plus de 800 CHF sur mon assurance auto. Service rapide et professionnel !",
+    "testimonial2": "Excellente expérience ! Le comparateur est simple d'utilisation et j'ai trouvé une assurance santé parfaite pour ma famille.",
+    "testimonial3": "Je recommande vivement Optimis. L'équipe m'a accompagné tout au long du processus de changement d'assurance."
   }
 }

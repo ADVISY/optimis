@@ -14,7 +14,8 @@
     "readingTime": "Lesezeit",
     "min": "Min",
     "continue": "Weiter",
-    "seeAllArticles": "Alle Artikel ansehen"
+    "seeAllArticles": "Alle Artikel ansehen",
+    "compareNow": "Jetzt vergleichen"
   },
   "nav": {
     "insurances": "Versicherungen",
@@ -37,7 +38,36 @@
     "join": "Schliessen Sie sich an",
     "users": "Nutzer",
     "noCommitment": "Unverbindlich",
-    "free": "Und 100% kostenlos"
+    "free": "Und 100% kostenlos",
+    "satisfiedUsers": "Zufriedene Nutzer",
+    "recommendationRate": "Empfehlungsrate",
+    "insurerPartners": "Versicherungspartner"
+  },
+  "home": {
+    "heroTitle": "Vergleichen Sie Versicherungen und finden Sie die",
+    "heroHighlight": "besten Angebote",
+    "heroSubtitle": "Der Schweizer Vergleicher, der Ihnen hilft, bei Ihren Versicherungen mit wenigen Klicks zu sparen.",
+    "whichInsurance": "Welche Versicherung suchen Sie?",
+    "selectInsurance": "Wählen Sie eine Versicherungsart, um Ihren Vergleich zu starten",
+    "carInsuranceDesc": "Vergleichen Sie die besten Autoangebote",
+    "healthInsuranceDesc": "Finden Sie die ideale Deckung",
+    "legalProtectionDesc": "Schützen Sie Ihre Rechte",
+    "homeInsuranceDesc": "Sichern Sie Ihr Zuhause",
+    "howItWorks": "Wie funktioniert es?",
+    "bestOffersIn4Steps": "Erhalten Sie die besten Angebote in 4 einfachen Schritten",
+    "step1Title": "Wählen",
+    "step1Desc": "Wählen Sie Ihre Versicherungsart",
+    "step2Title": "Ausfüllen",
+    "step2Desc": "Füllen Sie das Formular in 2 Minuten aus",
+    "step3Title": "Vergleichen",
+    "step3Desc": "Erhalten Sie die besten Angebote",
+    "step4Title": "Sparen",
+    "step4Desc": "Bis zu 40% Ersparnis",
+    "whatClientsSay": "Was unsere Kunden sagen",
+    "thousandsTrust": "Tausende Schweizer vertrauen uns",
+    "readyToSave": "Bereit, bei Ihren Versicherungen zu sparen?",
+    "joinUsers": "Schliessen Sie sich über 10.000 zufriedenen Nutzern an",
+    "startFreeComparison": "Meinen kostenlosen Vergleich starten"
   },
   "healthInsurance": {
     "title": "Krankenversicherung",
@@ -193,5 +223,10 @@
     "termsOfService": "Nutzungsbedingungen",
     "legalNotice": "Impressum",
     "allRightsReserved": "Alle Rechte vorbehalten."
+  },
+  "testimonials": {
+    "testimonial1": "Dank Optimis habe ich über 800 CHF bei meiner Autoversicherung gespart. Schneller und professioneller Service!",
+    "testimonial2": "Ausgezeichnete Erfahrung! Der Vergleicher ist einfach zu bedienen und ich habe die perfekte Krankenversicherung für meine Familie gefunden.",
+    "testimonial3": "Ich empfehle Optimis wärmstens. Das Team hat mich während des gesamten Versicherungswechsels begleitet."
   }
 }

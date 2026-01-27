@@ -14,7 +14,8 @@
     "readingTime": "Tempo di lettura",
     "min": "min",
     "continue": "Continua",
-    "seeAllArticles": "Vedi tutti gli articoli"
+    "seeAllArticles": "Vedi tutti gli articoli",
+    "compareNow": "Confronta ora"
   },
   "nav": {
     "insurances": "Assicurazioni",
@@ -37,7 +38,36 @@
     "join": "Unisciti a",
     "users": "utenti",
     "noCommitment": "Senza impegno",
-    "free": "E 100% gratuito"
+    "free": "E 100% gratuito",
+    "satisfiedUsers": "Utenti soddisfatti",
+    "recommendationRate": "Tasso di raccomandazione",
+    "insurerPartners": "Partner assicurativi"
+  },
+  "home": {
+    "heroTitle": "Confronta le assicurazioni e trova le",
+    "heroHighlight": "migliori offerte",
+    "heroSubtitle": "Il comparatore svizzero che ti aiuta a risparmiare sulle tue assicurazioni con pochi clic.",
+    "whichInsurance": "Quale assicurazione stai cercando?",
+    "selectInsurance": "Seleziona un tipo di assicurazione per iniziare il tuo confronto",
+    "carInsuranceDesc": "Confronta le migliori offerte auto",
+    "healthInsuranceDesc": "Trova la copertura ideale",
+    "legalProtectionDesc": "Proteggi i tuoi diritti",
+    "homeInsuranceDesc": "Metti in sicurezza la tua casa",
+    "howItWorks": "Come funziona?",
+    "bestOffersIn4Steps": "Ottieni le migliori offerte in 4 semplici passaggi",
+    "step1Title": "Scegli",
+    "step1Desc": "Seleziona il tuo tipo di assicurazione",
+    "step2Title": "Compila",
+    "step2Desc": "Compila il modulo in 2 minuti",
+    "step3Title": "Confronta",
+    "step3Desc": "Ricevi le migliori offerte",
+    "step4Title": "Risparmia",
+    "step4Desc": "Fino al 40% di risparmio",
+    "whatClientsSay": "Cosa dicono i nostri clienti",
+    "thousandsTrust": "Migliaia di svizzeri si fidano di noi",
+    "readyToSave": "Pronto a risparmiare sulle tue assicurazioni?",
+    "joinUsers": "Unisciti a oltre 10.000 utenti soddisfatti",
+    "startFreeComparison": "Inizia il mio confronto gratuito"
   },
   "healthInsurance": {
     "title": "Assicurazione Malattia",
@@ -193,5 +223,10 @@
     "termsOfService": "Termini di servizio",
     "legalNotice": "Note legali",
     "allRightsReserved": "Tutti i diritti riservati."
+  },
+  "testimonials": {
+    "testimonial1": "Grazie a Optimis, ho risparmiato oltre 800 CHF sulla mia assicurazione auto. Servizio rapido e professionale!",
+    "testimonial2": "Esperienza eccellente! Il comparatore è facile da usare e ho trovato l'assicurazione malattia perfetta per la mia famiglia.",
+    "testimonial3": "Consiglio vivamente Optimis. Il team mi ha accompagnato durante tutto il processo di cambio assicurazione."
   }
 }
