@@ -2,16 +2,20 @@
 // Contains blog posts from le-comparateur-optimis.ch
 // Content is in HTML format from WordPress Gutenberg blocks
 
-// Import local featured images
+// Import local featured images - each article has its unique image from WordPress
 import subsideMaladieImg from "@/assets/blog/subside-assurance-maladie.jpg";
 import modeleAssuranceImg from "@/assets/blog/modele-assurance-maladie.jpg";
 import changementDelaisImg from "@/assets/blog/changement-assurance-delais.jpg";
 import assuranceDentaireImg from "@/assets/blog/assurance-dentaire.jpg";
 import reduirePrimesImg from "@/assets/blog/reduire-primes.jpg";
 import assuranceMenageImg from "@/assets/blog/assurance-menage.jpg";
-import protectionJuridiqueImg from "@/assets/blog/protection-juridique.jpg";
+import protectionJuridiqueImg from "@/assets/blog/protection-juridique.png";
 import resiliationImg from "@/assets/blog/resiliation-assurance.jpg";
 import comparerAssurancesImg from "@/assets/blog/comparer-assurances.jpg";
+import assuranceMaladieBebe from "@/assets/blog/assurance-maladie-bebe.jpg";
+import hospitalisationSuisseImg from "@/assets/blog/hospitalisation-suisse.jpg";
+import rcMenageImg from "@/assets/blog/rc-menage.webp";
+import assuranceCascoImg from "@/assets/blog/assurance-casco.png";
 
 export interface BlogPost {
   id: string;
@@ -382,7 +386,7 @@ export const blogPosts: BlogPost[] = [
     categorySlug: "assurance-sante",
     date: "2024-06-21",
     readTime: 4,
-    image: comparerAssurancesImg,
+    image: assuranceMaladieBebe,
   },
   {
     id: "3644",
@@ -436,7 +440,7 @@ export const blogPosts: BlogPost[] = [
     categorySlug: "assurance-sante",
     date: "2024-07-11",
     readTime: 3,
-    image: comparerAssurancesImg,
+    image: hospitalisationSuisseImg,
   },
   {
     id: "3652",
@@ -532,7 +536,7 @@ export const blogPosts: BlogPost[] = [
     categorySlug: "assurance-voiture",
     date: "2024-10-23",
     readTime: 5,
-    image: comparerAssurancesImg,
+    image: assuranceCascoImg,
   },
   {
     id: "4552",
