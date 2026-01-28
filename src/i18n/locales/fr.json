@@ -44,9 +44,9 @@
     "insurerPartners": "Partenaires assureurs"
   },
   "home": {
-    "heroTitle": "Trouvez les",
-    "heroHighlight": "meilleures assurances",
-    "heroSubtitle": "Comparaison gratuite en 2 minutes",
+    "heroTitle": "Comparez les assurances",
+    "heroHighlight": "et trouvez les meilleures offres",
+    "heroSubtitle": "Le comparateur suisse gratuit.",
     "whichInsurance": "Quelle assurance cherchez-vous ?",
     "selectInsurance": "Sélectionnez un type d'assurance pour commencer votre comparaison",
     "carInsuranceDesc": "Comparez les meilleures offres auto",
