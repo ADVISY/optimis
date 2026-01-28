@@ -44,6 +44,9 @@
     "insurerPartners": "Partenaires assureurs"
   },
   "home": {
+    "heroLine1": "Comparez les assurances",
+    "heroLine2": "et trouvez les",
+    "heroLine3": "meilleures offres",
     "heroTitle": "Comparez les assurances",
     "heroHighlight": "et trouvez les meilleures offres",
     "heroSubtitle": "Le comparateur suisse gratuit.",
