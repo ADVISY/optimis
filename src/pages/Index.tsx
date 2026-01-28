@@ -78,11 +78,11 @@ const Index = () => {
         <div className="container">
           <div className="grid items-center gap-8 md:grid-cols-2">
             <div className="space-y-6 animate-fade-in">
-              <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl lg:text-6xl">
+              <h1 className="text-4xl font-bold leading-tight text-foreground uppercase md:text-5xl lg:text-6xl">
                 {t('home.heroTitle')}{" "}
                 <span className="text-gradient-optimis">{t('home.heroHighlight')}</span>
               </h1>
-              <p className="text-lg text-muted-foreground md:text-xl">
+              <p className="text-lg font-bold uppercase text-muted-foreground md:text-xl">
                 {t('home.heroSubtitle')}
               </p>
               <div className="flex flex-wrap gap-4">
@@ -109,10 +109,10 @@ const Index = () => {
       <section className="py-16 md:py-20">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
+            <h2 className="mb-4 text-3xl font-bold uppercase text-foreground md:text-4xl">
               {t('home.whichInsurance')}
             </h2>
-            <p className="text-muted-foreground">
+            <p className="font-bold uppercase text-muted-foreground">
               {t('home.selectInsurance')}
             </p>
           </div>
@@ -124,10 +124,10 @@ const Index = () => {
                     <div className={`mb-4 rounded-full bg-secondary p-4 ${card.color}`}>
                       <card.icon className="h-8 w-8" />
                     </div>
-                    <h3 className="mb-2 text-lg font-semibold text-foreground">
+                    <h3 className="mb-2 text-lg font-bold uppercase text-foreground">
                       {t(card.titleKey)}
                     </h3>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm font-bold uppercase text-muted-foreground">
                       {t(card.descriptionKey)}
                     </p>
                   </CardContent>
@@ -142,10 +142,10 @@ const Index = () => {
       <section className="bg-secondary/30 py-16 md:py-20">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
+            <h2 className="mb-4 text-3xl font-bold uppercase text-foreground md:text-4xl">
               {t('home.howItWorks')}
             </h2>
-            <p className="text-muted-foreground">
+            <p className="font-bold uppercase text-muted-foreground">
               {t('home.bestOffersIn4Steps')}
             </p>
           </div>
@@ -161,10 +161,10 @@ const Index = () => {
                 <div className="relative z-10 mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-2xl font-bold text-primary-foreground">
                   {step.number}
                 </div>
-                <h3 className="mb-2 text-lg font-semibold text-foreground">
+                <h3 className="mb-2 text-lg font-bold uppercase text-foreground">
                   {t(step.titleKey)}
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm font-bold uppercase text-muted-foreground">
                   {t(step.descriptionKey)}
                 </p>
               </div>
@@ -179,10 +179,10 @@ const Index = () => {
           <div className="grid gap-8 text-center sm:grid-cols-3">
             {stats.map((stat) => (
               <div key={stat.labelKey} className="space-y-2">
-                <p className="text-4xl font-bold text-primary md:text-5xl">
+                <p className="text-4xl font-bold uppercase text-primary md:text-5xl">
                   {stat.value}
                 </p>
-                <p className="text-muted-foreground">{t(stat.labelKey)}</p>
+                <p className="font-bold uppercase text-muted-foreground">{t(stat.labelKey)}</p>
               </div>
             ))}
           </div>
@@ -193,10 +193,10 @@ const Index = () => {
       <section className="bg-secondary/30 py-16 md:py-20">
         <div className="container">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
+            <h2 className="mb-4 text-3xl font-bold uppercase text-foreground md:text-4xl">
               {t('home.whatClientsSay')}
             </h2>
-            <p className="text-muted-foreground">
+            <p className="font-bold uppercase text-muted-foreground">
               {t('home.thousandsTrust')}
             </p>
           </div>
@@ -204,14 +204,14 @@ const Index = () => {
             {testimonials.map((testimonial) => (
               <Card key={testimonial.name} className="h-full">
                 <CardContent className="p-6">
-                  <p className="mb-4 text-muted-foreground">
+                  <p className="mb-4 font-bold uppercase text-muted-foreground">
                     "{t(testimonial.textKey)}"
                   </p>
                   <div>
-                    <p className="font-semibold text-foreground">
+                    <p className="font-bold uppercase text-foreground">
                       {testimonial.name}
                     </p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm font-bold uppercase text-muted-foreground">
                       {testimonial.location}
                     </p>
                   </div>
@@ -225,10 +225,10 @@ const Index = () => {
       {/* CTA Section */}
       <section className="gradient-optimis py-16 md:py-20">
         <div className="container text-center">
-          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
+          <h2 className="mb-4 text-3xl font-bold uppercase text-foreground md:text-4xl">
             {t('home.readyToSave')}
           </h2>
-          <p className="mb-8 text-muted-foreground">
+          <p className="mb-8 font-bold uppercase text-muted-foreground">
             {t('home.joinUsers')}
           </p>
           <Button size="lg" className="text-base">
