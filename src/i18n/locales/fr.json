@@ -228,5 +228,50 @@
     "testimonial1": "Grâce à Optimis, j'ai économisé plus de 800 CHF sur mon assurance auto. Service rapide et professionnel !",
     "testimonial2": "Excellente expérience ! Le comparateur est simple d'utilisation et j'ai trouvé une assurance santé parfaite pour ma famille.",
     "testimonial3": "Je recommande vivement Optimis. L'équipe m'a accompagné tout au long du processus de changement d'assurance."
+  },
+  "legal": {
+    "privacyPolicy": {
+      "title": "Politique de confidentialité",
+      "introTitle": "Introduction",
+      "introContent": "Optimis s'engage à protéger votre vie privée. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations personnelles lorsque vous utilisez notre site web et nos services.",
+      "dataCollectionTitle": "Données collectées",
+      "dataCollectionContent": "Nous collectons les informations que vous nous fournissez directement, telles que votre nom, adresse e-mail, numéro de téléphone et informations relatives à vos besoins en assurance. Nous collectons également automatiquement certaines informations techniques comme votre adresse IP et les données de navigation.",
+      "dataUsageTitle": "Utilisation des données",
+      "dataUsageContent": "Vos données sont utilisées pour vous fournir nos services de comparaison d'assurances, vous contacter concernant vos demandes, améliorer nos services et vous envoyer des informations pertinentes avec votre consentement.",
+      "cookiesTitle": "Cookies",
+      "cookiesContent": "Notre site utilise des cookies pour améliorer votre expérience de navigation, analyser l'utilisation du site et personnaliser le contenu. Vous pouvez gérer vos préférences de cookies dans les paramètres de votre navigateur.",
+      "rightsTitle": "Vos droits",
+      "rightsContent": "Conformément à la loi suisse sur la protection des données, vous avez le droit d'accéder à vos données personnelles, de les rectifier, de les supprimer et de vous opposer à leur traitement. Vous pouvez exercer ces droits en nous contactant.",
+      "contactTitle": "Contact",
+      "contactContent": "Pour toute question concernant notre politique de confidentialité ou vos données personnelles, veuillez nous contacter à contact@optimis.ch."
+    },
+    "legalNotice": {
+      "title": "Mentions légales",
+      "companyTitle": "Informations sur l'entreprise",
+      "companyContent": "Optimis est une société basée à Genève, Suisse, spécialisée dans la comparaison d'assurances. Notre mission est d'aider les résidents suisses à trouver les meilleures offres d'assurance adaptées à leurs besoins.",
+      "publisherTitle": "Éditeur du site",
+      "publisherContent": "Le site optimis.ch est édité par Optimis Sàrl. Siège social : Genève, Suisse. Contact : contact@optimis.ch",
+      "hostingTitle": "Hébergement",
+      "hostingContent": "Le site est hébergé par des services cloud sécurisés conformes aux normes européennes de protection des données.",
+      "intellectualPropertyTitle": "Propriété intellectuelle",
+      "intellectualPropertyContent": "L'ensemble du contenu du site (textes, images, logos, marques) est protégé par le droit d'auteur et appartient à Optimis ou à ses partenaires. Toute reproduction sans autorisation est interdite.",
+      "liabilityTitle": "Limitation de responsabilité",
+      "liabilityContent": "Optimis s'efforce de fournir des informations exactes et à jour. Cependant, nous ne pouvons garantir l'exactitude absolue des informations et déclinons toute responsabilité en cas d'erreur ou d'omission."
+    },
+    "termsOfService": {
+      "title": "Conditions générales d'utilisation",
+      "acceptanceTitle": "Acceptation des conditions",
+      "acceptanceContent": "En utilisant le site optimis.ch, vous acceptez les présentes conditions générales d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser notre site.",
+      "servicesTitle": "Description des services",
+      "servicesContent": "Optimis propose un service gratuit de comparaison d'assurances en Suisse. Nous mettons en relation les utilisateurs avec des compagnies d'assurance partenaires. Notre service est informatif et ne constitue pas un conseil en assurance personnalisé.",
+      "obligationsTitle": "Obligations de l'utilisateur",
+      "obligationsContent": "L'utilisateur s'engage à fournir des informations exactes et à jour. Il s'engage également à utiliser le site de manière légale et à ne pas porter atteinte aux droits de tiers.",
+      "liabilityTitle": "Responsabilité",
+      "liabilityContent": "Optimis agit en tant qu'intermédiaire et ne peut être tenu responsable des contrats conclus entre les utilisateurs et les compagnies d'assurance. Les décisions d'assurance sont de la responsabilité exclusive de l'utilisateur.",
+      "modificationsTitle": "Modifications",
+      "modificationsContent": "Optimis se réserve le droit de modifier les présentes conditions à tout moment. Les modifications entrent en vigueur dès leur publication sur le site.",
+      "jurisdictionTitle": "Droit applicable",
+      "jurisdictionContent": "Les présentes conditions sont régies par le droit suisse. Tout litige sera soumis à la compétence exclusive des tribunaux de Genève, Suisse."
+    }
   }
 }

@@ -14,6 +14,9 @@ import ProtectionJuridique from "./pages/ProtectionJuridique";
 import AssuranceMenage from "./pages/AssuranceMenage";
 import Finances from "./pages/Finances";
 import Services from "./pages/Services";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import LegalNotice from "./pages/LegalNotice";
+import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
 import { languages } from "./i18n";
 
@@ -47,6 +50,9 @@ const LanguageRoutes = () => {
         <Route path="/services" element={<Services />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/politique-confidentialite" element={<PrivacyPolicy />} />
+        <Route path="/mentions-legales" element={<LegalNotice />} />
+        <Route path="/cgu" element={<TermsOfService />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </LanguageWrapper>
