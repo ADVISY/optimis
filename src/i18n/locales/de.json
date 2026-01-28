@@ -44,6 +44,9 @@
     "insurerPartners": "Versicherungspartner"
   },
   "home": {
+    "heroLine1": "Versicherungen vergleichen",
+    "heroLine2": "und die besten",
+    "heroLine3": "Angebote finden",
     "heroTitle": "Versicherungen vergleichen",
     "heroHighlight": "und die besten Angebote finden",
     "heroSubtitle": "Der kostenlose Schweizer Vergleicher.",
