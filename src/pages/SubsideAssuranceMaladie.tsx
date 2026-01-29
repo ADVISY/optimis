@@ -32,9 +32,12 @@ const Subside = () => {
               <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">
                 {t('subsidy.title')}
               </h1>
-              <h2 className="text-xl text-muted-foreground">
-                {t('subsidy.heroSubtitle')}
-              </h2>
+              <ul className="text-lg text-muted-foreground space-y-2">
+                <li>• {t('subsidy.feature1')}</li>
+                <li>• {t('subsidy.feature2')}</li>
+                <li>• {t('subsidy.feature3')}</li>
+                <li>• {t('subsidy.feature4')}</li>
+              </ul>
               <div className="flex flex-wrap gap-4">
                 <Button size="lg" className="gap-2">
                   <CreditCard className="h-5 w-5" />

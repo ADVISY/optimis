@@ -39,9 +39,12 @@ const Resiliation = () => {
               <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">
                 {t('termination.title')}
               </h1>
-              <h2 className="text-xl text-muted-foreground">
-                {t('termination.heroSubtitle')}
-              </h2>
+              <ul className="text-lg text-muted-foreground space-y-2">
+                <li>• {t('termination.feature1')}</li>
+                <li>• {t('termination.feature2')}</li>
+                <li>• {t('termination.feature3')}</li>
+                <li>• {t('termination.feature4')}</li>
+              </ul>
               <div className="flex flex-wrap gap-4">
                 <Button size="lg" className="gap-2">
                   <FileX className="h-5 w-5" />
