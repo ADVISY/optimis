@@ -90,12 +90,12 @@ const financesCategories = [
     id: "vie",
     labelKey: "nav.lifeInsurance", 
     icon: HeartPulse,
-    href: "/finances",
+    href: "/assurance-vie",
     subLinks: [
-      { labelKey: "En 2 minutes", href: "/finances" },
-      { labelKey: "Préparez votre retraite", href: "/finances" },
-      { labelKey: "+ de 2700 CHF d'impôts", href: "/finances" },
-      { labelKey: "Jusqu'à 7056 CHF d'impôts", href: "/finances" },
+      { labelKey: "En 2 minutes", href: "/assurance-vie" },
+      { labelKey: "Préparez votre retraite", href: "/assurance-vie" },
+      { labelKey: "+ de 2700 CHF d'impôts", href: "/assurance-vie" },
+      { labelKey: "Jusqu'à 7056 CHF d'impôts", href: "/assurance-vie" },
     ]
   },
 ];
@@ -106,30 +106,30 @@ const servicesCategories = [
     id: "mobile",
     labelKey: "nav.mobilePackage", 
     icon: Smartphone,
-    href: "/services",
+    href: "/forfait-mobile",
     subLinks: [
-      { labelKey: "En 2 minutes", href: "/services" },
-      { labelKey: "Abonnements de téléphone mobile", href: "/services" },
-      { labelKey: "+ de 200 CHF d'économies", href: "/services" },
-      { labelKey: "100% illimité dans le monde", href: "/services" },
+      { labelKey: "En 2 minutes", href: "/forfait-mobile" },
+      { labelKey: "Abonnements de téléphone mobile", href: "/forfait-mobile" },
+      { labelKey: "+ de 200 CHF d'économies", href: "/forfait-mobile" },
+      { labelKey: "100% illimité dans le monde", href: "/forfait-mobile" },
     ]
   },
   { 
     id: "subside",
     labelKey: "nav.subsidyInsurance", 
     icon: CreditCard,
-    href: "/services",
+    href: "/subside-assurance-maladie",
     subLinks: [
-      { labelKey: "Demander un subside", href: "/blog/subside-dassurance-maladie-comment-ca-marche-et-comment-faire-sa-demande" },
+      { labelKey: "Demander un subside", href: "/subside-assurance-maladie" },
     ]
   },
   { 
     id: "resiliation",
     labelKey: "nav.termination", 
     icon: FileX,
-    href: "/services",
+    href: "/resiliation",
     subLinks: [
-      { labelKey: "Résilier votre assurance", href: "/blog/tout-savoir-sur-la-resiliation-de-votre-assurance-assura" },
+      { labelKey: "Résilier votre assurance", href: "/resiliation" },
     ]
   },
 ];
@@ -254,7 +254,7 @@ const Header = () => {
                 <MegaMenuContent 
                   categories={financesCategories}
                   ctaTextKey="common.compareOffers"
-                  ctaHref="/finances"
+                  ctaHref="/hypotheque"
                 />
               </NavigationMenuContent>
             </NavigationMenuItem>

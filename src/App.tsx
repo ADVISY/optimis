@@ -13,10 +13,10 @@ import AssuranceSante from "./pages/AssuranceSante";
 import ProtectionJuridique from "./pages/ProtectionJuridique";
 import AssuranceMenage from "./pages/AssuranceMenage";
 import AssuranceVie from "./pages/AssuranceVie";
-import Finances from "./pages/Finances";
+import Hypotheque from "./pages/Hypotheque";
 import Services from "./pages/Services";
 import ForfaitMobile from "./pages/ForfaitMobile";
-import Subside from "./pages/Subside";
+import SubsideAssuranceMaladie from "./pages/SubsideAssuranceMaladie";
 import Resiliation from "./pages/Resiliation";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import LegalNotice from "./pages/LegalNotice";
@@ -51,11 +51,11 @@ const LanguageRoutes = () => {
         <Route path="/protection-juridique" element={<ProtectionJuridique />} />
         <Route path="/assurance-menage" element={<AssuranceMenage />} />
         <Route path="/assurance-vie" element={<AssuranceVie />} />
-        <Route path="/finances" element={<Finances />} />
+        <Route path="/hypotheque" element={<Hypotheque />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/services/forfait-mobile" element={<ForfaitMobile />} />
-        <Route path="/services/subside" element={<Subside />} />
-        <Route path="/services/resiliation" element={<Resiliation />} />
+        <Route path="/forfait-mobile" element={<ForfaitMobile />} />
+        <Route path="/subside-assurance-maladie" element={<SubsideAssuranceMaladie />} />
+        <Route path="/resiliation" element={<Resiliation />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/politique-confidentialite" element={<PrivacyPolicy />} />
@@ -86,8 +86,12 @@ const App = () => (
           <Route path="/protection-juridique" element={<Navigate to="/fr/protection-juridique" replace />} />
           <Route path="/assurance-menage" element={<Navigate to="/fr/assurance-menage" replace />} />
           <Route path="/assurance-vie" element={<Navigate to="/fr/assurance-vie" replace />} />
-          <Route path="/finances" element={<Navigate to="/fr/finances" replace />} />
+          <Route path="/hypotheque" element={<Navigate to="/fr/hypotheque" replace />} />
+          <Route path="/finances" element={<Navigate to="/fr/hypotheque" replace />} />
           <Route path="/services" element={<Navigate to="/fr/services" replace />} />
+          <Route path="/subside-assurance-maladie" element={<Navigate to="/fr/subside-assurance-maladie" replace />} />
+          <Route path="/forfait-mobile" element={<Navigate to="/fr/forfait-mobile" replace />} />
+          <Route path="/resiliation" element={<Navigate to="/fr/resiliation" replace />} />
           <Route path="/blog" element={<Navigate to="/fr/blog" replace />} />
           <Route path="/blog/:slug" element={<Navigate to="/fr/blog/:slug" replace />} />
           

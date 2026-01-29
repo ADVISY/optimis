@@ -30,8 +30,7 @@ const ForfaitMobile = () => {
           <div className="grid items-center gap-8 md:grid-cols-2">
             <div className="space-y-6">
               <p className="text-sm font-medium text-muted-foreground">
-                <LocalizedLink to="/" className="hover:text-primary">{t('common.home')}</LocalizedLink> / 
-                <LocalizedLink to="/services" className="hover:text-primary"> {t('services.title')}</LocalizedLink> / {t('mobile.title')}
+                <LocalizedLink to="/" className="hover:text-primary">{t('common.home')}</LocalizedLink> / {t('mobile.title')}
               </p>
               <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">
                 {t('mobile.title')}
