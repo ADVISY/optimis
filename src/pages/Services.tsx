@@ -21,21 +21,21 @@ const Services = () => {
       icon: Smartphone,
       titleKey: "services.mobilePackage",
       descKey: "services.mobilePackageDesc",
-      href: "/services/forfait-mobile",
+      href: "/forfait-mobile",
       content: "services.mobileContent",
     },
     {
       icon: CreditCard,
       titleKey: "services.subsidy",
       descKey: "services.subsidyDesc",
-      href: "/services/subside",
+      href: "/subside-assurance-maladie",
       content: "services.subsidyContent",
     },
     {
       icon: FileX,
       titleKey: "services.termination",
       descKey: "services.terminationDesc",
-      href: "/services/resiliation",
+      href: "/resiliation",
       content: "services.terminationContent",
     },
   ];
@@ -140,7 +140,7 @@ const Services = () => {
                   <li>• {t('services.mobileFeature3')}</li>
                 </ul>
                 <Button asChild>
-                  <LocalizedLink to="/services/forfait-mobile">
+                  <LocalizedLink to="/forfait-mobile">
                     {t('services.compareMobile')}
                   </LocalizedLink>
                 </Button>
@@ -179,7 +179,7 @@ const Services = () => {
                   <li>• {t('services.subsidyFeature3')}</li>
                 </ul>
                 <Button asChild>
-                  <LocalizedLink to="/services/subside">
+                  <LocalizedLink to="/subside-assurance-maladie">
                     {t('services.requestSubsidy')}
                   </LocalizedLink>
                 </Button>
@@ -204,7 +204,7 @@ const Services = () => {
                   <li>• {t('services.terminationFeature3')}</li>
                 </ul>
                 <Button asChild>
-                  <LocalizedLink to="/services/resiliation">
+                  <LocalizedLink to="/resiliation">
                     {t('services.startTermination')}
                   </LocalizedLink>
                 </Button>

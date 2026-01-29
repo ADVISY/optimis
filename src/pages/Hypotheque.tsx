@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import llamaMascot from "@/assets/llama-mascot.png";
 
-const Finances = () => {
+const Hypotheque = () => {
   const { t } = useTranslation();
 
   const features = [
@@ -91,4 +91,4 @@ const Finances = () => {
   );
 };
 
-export default Finances;
+export default Hypotheque;
