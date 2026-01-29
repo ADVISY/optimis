@@ -1,4 +1,4 @@
-import { Scale, Shield, Clock, CheckCircle, Car, Heart, Home, Banknote } from "lucide-react";
+import { Heart, Shield, Clock, CheckCircle, Car, Scale, Home, Banknote } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -10,10 +10,10 @@ const partners = [
   { name: "Generali", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/general-1.svg" },
   { name: "Allianz", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/allianz-logo.svg" },
   { name: "AXA", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/0001_0003782804_2-640.jpg" },
-  { name: "DAS", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/das-logo.svg" },
+  { name: "Swiss Life", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/Swiss_Life_AG_logo.svg" },
 ];
 
-const ProtectionJuridique = () => {
+const AssuranceVie = () => {
   const { t } = useTranslation();
 
   const quickLinks = [
@@ -24,9 +24,9 @@ const ProtectionJuridique = () => {
   ];
 
   const features = [
-    { icon: Shield, titleKey: "legalProtection.legalDefense", descKey: "legalProtection.legalDefenseDesc" },
-    { icon: Clock, titleKey: "legalProtection.quickComparison", descKey: "legalProtection.quickComparisonDesc" },
-    { icon: CheckCircle, titleKey: "legalProtection.noCommitment", descKey: "legalProtection.noCommitmentDesc" },
+    { icon: Shield, titleKey: "lifeInsurance.capitalProtection", descKey: "lifeInsurance.capitalProtectionDesc" },
+    { icon: Clock, titleKey: "lifeInsurance.taxAdvantages", descKey: "lifeInsurance.taxAdvantagesDesc" },
+    { icon: CheckCircle, titleKey: "lifeInsurance.familyProtection", descKey: "lifeInsurance.familyProtectionDesc" },
   ];
 
   const stats = [
@@ -36,11 +36,12 @@ const ProtectionJuridique = () => {
   ];
 
   const tableOfContents = [
-    "legalProtection.whatIsLegalProtection",
-    "legalProtection.coverageTypes",
-    "legalProtection.whyNeedIt",
-    "legalProtection.howToChoose",
-    "legalProtection.costs",
+    "lifeInsurance.whatIsLifeInsurance",
+    "lifeInsurance.typesOfLifeInsurance",
+    "lifeInsurance.thirdPillarExplained",
+    "lifeInsurance.whoNeedsIt",
+    "lifeInsurance.howToChoose",
+    "lifeInsurance.taxBenefits",
   ];
 
   return (
@@ -51,25 +52,25 @@ const ProtectionJuridique = () => {
           <div className="grid items-center gap-8 md:grid-cols-2">
             <div className="space-y-6">
               <p className="text-sm font-medium text-muted-foreground">
-                <LocalizedLink to="/" className="hover:text-primary">{t('common.home')}</LocalizedLink> / {t('legalProtection.title')}
+                <LocalizedLink to="/" className="hover:text-primary">{t('common.home')}</LocalizedLink> / {t('lifeInsurance.title')}
               </p>
               <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">
-                {t('legalProtection.title')}
+                {t('lifeInsurance.title')}
               </h1>
               <h2 className="text-xl text-muted-foreground">
-                {t('legalProtection.heroSubtitle')}
+                {t('lifeInsurance.heroSubtitle')}
               </h2>
               <div className="flex flex-wrap gap-4">
                 <Button size="lg" className="gap-2">
-                  <Scale className="h-5 w-5" />
-                  {t('legalProtection.compareButton')}
+                  <Banknote className="h-5 w-5" />
+                  {t('lifeInsurance.compareButton')}
                 </Button>
               </div>
             </div>
             <div className="flex justify-center md:justify-end">
               <img
-                src={llamaMascot}
-                alt="Mascotte Optimis"
+                src="https://le-comparateur-optimis.ch/wp-content/uploads/2024/05/happy-man-doing-winning-gesture-1.png"
+                alt="Assurance vie"
                 className="h-64 w-auto md:h-80"
               />
             </div>
@@ -99,7 +100,7 @@ const ProtectionJuridique = () => {
       <section className="py-12 bg-primary/5">
         <div className="container">
           <h3 className="text-center text-lg font-semibold text-foreground mb-8">
-            {t('legalProtection.protectYourRights')}
+            {t('lifeInsurance.protectYourFuture')}
           </h3>
           <div className="grid gap-6 md:grid-cols-3">
             {stats.map((stat) => (
@@ -148,7 +149,7 @@ const ProtectionJuridique = () => {
                     <Clock className="h-5 w-5 text-primary" />
                     <span className="text-sm text-muted-foreground">{t('common.readingTime')}</span>
                   </div>
-                  <p className="text-2xl font-bold text-primary mb-6">4 {t('common.min')}</p>
+                  <p className="text-2xl font-bold text-primary mb-6">5 {t('common.min')}</p>
                   <nav className="space-y-2">
                     {tableOfContents.map((item, index) => (
                       <a
@@ -167,42 +168,59 @@ const ProtectionJuridique = () => {
             {/* Main Content */}
             <div className="lg:col-span-2 prose prose-lg max-w-none">
               <section id="section-0" className="mb-12">
-                <h3 className="text-2xl font-bold text-foreground">{t('legalProtection.whatIsLegalProtection')}</h3>
-                <p className="text-muted-foreground">{t('legalProtection.whatIsLegalProtectionContent')}</p>
+                <h3 className="text-2xl font-bold text-foreground">{t('lifeInsurance.whatIsLifeInsurance')}</h3>
+                <p className="text-muted-foreground">{t('lifeInsurance.whatIsLifeInsuranceContent')}</p>
               </section>
 
               <section id="section-1" className="mb-12">
-                <h3 className="text-2xl font-bold text-foreground">{t('legalProtection.coverageTypes')}</h3>
-                <p className="text-muted-foreground">{t('legalProtection.coverageTypesContent')}</p>
+                <h3 className="text-2xl font-bold text-foreground">{t('lifeInsurance.typesOfLifeInsurance')}</h3>
+                <p className="text-muted-foreground">{t('lifeInsurance.typesContent')}</p>
                 <div className="bg-muted/50 p-6 rounded-lg my-6">
                   <ul className="space-y-2 text-muted-foreground">
-                    <li>• {t('legalProtection.coverage1')}</li>
-                    <li>• {t('legalProtection.coverage2')}</li>
-                    <li>• {t('legalProtection.coverage3')}</li>
-                    <li>• {t('legalProtection.coverage4')}</li>
-                    <li>• {t('legalProtection.coverage5')}</li>
+                    <li>• {t('lifeInsurance.type1')}</li>
+                    <li>• {t('lifeInsurance.type2')}</li>
+                    <li>• {t('lifeInsurance.type3')}</li>
                   </ul>
                 </div>
               </section>
 
               <section id="section-2" className="mb-12">
-                <h3 className="text-2xl font-bold text-foreground">{t('legalProtection.whyNeedIt')}</h3>
-                <p className="text-muted-foreground">{t('legalProtection.whyNeedItContent')}</p>
+                <h3 className="text-2xl font-bold text-foreground">{t('lifeInsurance.thirdPillarExplained')}</h3>
+                <p className="text-muted-foreground">{t('lifeInsurance.thirdPillarContent')}</p>
+                <div className="bg-primary/5 p-6 rounded-lg my-6">
+                  <h4 className="font-semibold text-foreground mb-4">{t('lifeInsurance.pillar3aVs3b')}</h4>
+                  <ul className="space-y-2 text-muted-foreground">
+                    <li>• {t('lifeInsurance.pillar3aDesc')}</li>
+                    <li>• {t('lifeInsurance.pillar3bDesc')}</li>
+                  </ul>
+                </div>
               </section>
 
               <section id="section-3" className="mb-12">
-                <h3 className="text-2xl font-bold text-foreground">{t('legalProtection.howToChoose')}</h3>
-                <p className="text-muted-foreground">{t('legalProtection.howToChooseContent')}</p>
+                <h3 className="text-2xl font-bold text-foreground">{t('lifeInsurance.whoNeedsIt')}</h3>
+                <p className="text-muted-foreground">{t('lifeInsurance.whoNeedsItContent')}</p>
                 <ul className="space-y-2 text-muted-foreground my-4">
-                  <li>• {t('legalProtection.criteria1')}</li>
-                  <li>• {t('legalProtection.criteria2')}</li>
-                  <li>• {t('legalProtection.criteria3')}</li>
+                  <li>• {t('lifeInsurance.needCase1')}</li>
+                  <li>• {t('lifeInsurance.needCase2')}</li>
+                  <li>• {t('lifeInsurance.needCase3')}</li>
+                  <li>• {t('lifeInsurance.needCase4')}</li>
                 </ul>
               </section>
 
               <section id="section-4" className="mb-12">
-                <h3 className="text-2xl font-bold text-foreground">{t('legalProtection.costs')}</h3>
-                <p className="text-muted-foreground">{t('legalProtection.costsContent')}</p>
+                <h3 className="text-2xl font-bold text-foreground">{t('lifeInsurance.howToChoose')}</h3>
+                <p className="text-muted-foreground">{t('lifeInsurance.howToChooseContent')}</p>
+              </section>
+
+              <section id="section-5" className="mb-12">
+                <h3 className="text-2xl font-bold text-foreground">{t('lifeInsurance.taxBenefits')}</h3>
+                <p className="text-muted-foreground">{t('lifeInsurance.taxBenefitsContent')}</p>
+                <Card className="my-6">
+                  <CardContent className="p-6">
+                    <p className="text-lg font-semibold text-primary">{t('lifeInsurance.maxDeduction')}</p>
+                    <p className="text-muted-foreground mt-2">{t('lifeInsurance.maxDeductionDesc')}</p>
+                  </CardContent>
+                </Card>
               </section>
             </div>
           </div>
@@ -236,14 +254,14 @@ const ProtectionJuridique = () => {
             <CardContent className="p-8 md:p-12 text-center">
               <img src={llamaMascot} alt="Mascotte Optimis" className="h-24 mx-auto mb-6" />
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                {t('legalProtection.getFreeQuote')}
+                {t('lifeInsurance.readyToCompare')}
               </h2>
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-                {t('legalProtection.compareDescription')}
+                {t('lifeInsurance.getEstimate')}
               </p>
               <Button size="lg" className="gap-2">
-                <Scale className="h-5 w-5" />
-                {t('legalProtection.requestQuote')}
+                <Banknote className="h-5 w-5" />
+                {t('lifeInsurance.compareNow')}
               </Button>
             </CardContent>
           </Card>
@@ -253,4 +271,4 @@ const ProtectionJuridique = () => {
   );
 };
 
-export default ProtectionJuridique;
+export default AssuranceVie;
