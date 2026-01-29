@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import LocalizedLink from "@/components/LocalizedLink";
 import llamaMascot from "@/assets/llama-mascot.png";
 
 const Hypotheque = () => {
@@ -21,6 +22,9 @@ const Hypotheque = () => {
         <div className="container">
           <div className="grid items-center gap-8 md:grid-cols-2">
             <div className="space-y-6">
+              <p className="text-sm font-medium text-muted-foreground">
+                <LocalizedLink to="/" className="hover:text-primary">{t('common.home')}</LocalizedLink> / {t('finances.title')}
+              </p>
               <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">
                 {t('finances.title')}
               </h1>
@@ -85,6 +89,27 @@ const Hypotheque = () => {
               </CardContent>
             </Card>
           </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16">
+        <div className="container">
+          <Card className="bg-primary/5 border-primary/20">
+            <CardContent className="p-8 md:p-12 text-center">
+              <img src={llamaMascot} alt="Mascotte Optimis" className="h-24 mx-auto mb-6" />
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+                {t('lifeInsurance.readyToCompare')}
+              </h2>
+              <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
+                {t('lifeInsurance.getEstimate')}
+              </p>
+              <Button size="lg" className="gap-2">
+                <Banknote className="h-5 w-5" />
+                {t('finances.compareButton')}
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </section>
     </Layout>
