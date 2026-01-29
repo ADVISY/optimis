@@ -12,8 +12,12 @@ import AssuranceVoiture from "./pages/AssuranceVoiture";
 import AssuranceSante from "./pages/AssuranceSante";
 import ProtectionJuridique from "./pages/ProtectionJuridique";
 import AssuranceMenage from "./pages/AssuranceMenage";
+import AssuranceVie from "./pages/AssuranceVie";
 import Finances from "./pages/Finances";
 import Services from "./pages/Services";
+import ForfaitMobile from "./pages/ForfaitMobile";
+import Subside from "./pages/Subside";
+import Resiliation from "./pages/Resiliation";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import LegalNotice from "./pages/LegalNotice";
 import TermsOfService from "./pages/TermsOfService";
@@ -46,8 +50,12 @@ const LanguageRoutes = () => {
         <Route path="/assurance-sante" element={<AssuranceSante />} />
         <Route path="/protection-juridique" element={<ProtectionJuridique />} />
         <Route path="/assurance-menage" element={<AssuranceMenage />} />
+        <Route path="/assurance-vie" element={<AssuranceVie />} />
         <Route path="/finances" element={<Finances />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/services/forfait-mobile" element={<ForfaitMobile />} />
+        <Route path="/services/subside" element={<Subside />} />
+        <Route path="/services/resiliation" element={<Resiliation />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/politique-confidentialite" element={<PrivacyPolicy />} />
@@ -77,6 +85,7 @@ const App = () => (
           <Route path="/assurance-sante" element={<Navigate to="/fr/assurance-sante" replace />} />
           <Route path="/protection-juridique" element={<Navigate to="/fr/protection-juridique" replace />} />
           <Route path="/assurance-menage" element={<Navigate to="/fr/assurance-menage" replace />} />
+          <Route path="/assurance-vie" element={<Navigate to="/fr/assurance-vie" replace />} />
           <Route path="/finances" element={<Navigate to="/fr/finances" replace />} />
           <Route path="/services" element={<Navigate to="/fr/services" replace />} />
           <Route path="/blog" element={<Navigate to="/fr/blog" replace />} />
