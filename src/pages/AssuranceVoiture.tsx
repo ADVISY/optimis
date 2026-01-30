@@ -1,4 +1,4 @@
-import { Car, Heart, Scale, Home, Star, Quote } from "lucide-react";
+import { Car, Heart, Scale, Home, Clock } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,63 +6,12 @@ import llamaMascot from "@/assets/llama-mascot.png";
 import { useTranslation } from "react-i18next";
 import LocalizedLink from "@/components/LocalizedLink";
 
-const insuranceOffers = [
-  {
-    name: "AXA",
-    logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/0001_0003782804_2-640.jpg",
-    price: "800 CHF",
-  },
-  {
-    name: "La Mobilière",
-    logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/images.png",
-    price: "800 CHF",
-  },
-  {
-    name: "Allianz",
-    logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/05/allianz-logo.svg",
-    price: "800 CHF",
-  },
-  {
-    name: "Zurich",
-    logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/thumb_3715_page_big.png",
-    price: "800 CHF",
-  },
-  {
-    name: "Generali",
-    logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/general-1.svg",
-    price: "800 CHF",
-  },
-];
-
-const testimonials = [
-  {
-    name: "Laurent Weber",
-    image: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/telechargement-1.jpeg",
-    textKey: "testimonial1",
-  },
-  {
-    name: "Claire Muller",
-    image: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/telechargement-4.jpeg",
-    textKey: "testimonial2",
-  },
-  {
-    name: "Philippe Dupont",
-    image: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/telechargement-3.jpeg",
-    textKey: "testimonial3",
-  },
-  {
-    name: "Sophie Girard",
-    image: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/telechargement-2.jpeg",
-    textKey: "testimonial4",
-  },
-];
-
 const partners = [
-  { name: "Generali", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/general-1.svg" },
-  { name: "Helsana", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/helsana-logo.svg" },
-  { name: "Groupe Mutuel", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/logo-groupe-mutuel.svg" },
-  { name: "SWICA", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/SWICA_Logo_Mobile.svg" },
+  { name: "AXA", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/0001_0003782804_2-640.jpg" },
+  { name: "La Mobilière", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/images.png" },
   { name: "Allianz", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/allianz-logo.svg" },
+  { name: "Zurich", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/thumb_3715_page_big.png" },
+  { name: "Generali", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/general-1.svg" },
 ];
 
 const AssuranceVoiture = () => {
@@ -75,21 +24,19 @@ const AssuranceVoiture = () => {
     { labelKey: "nav.homeInsurance", href: "/assurance-menage", icon: Home },
   ];
 
-  const formSteps = [
-    { key: "carInsurance.yourCar" },
-    { key: "carInsurance.carUsage" },
-    { key: "carInsurance.yourInfo" },
-    { key: "carInsurance.yourCoverage" },
-    { key: "carInsurance.yourContact" },
+  const stats = [
+    { labelKey: "stats.recommended", value: "95%", descriptionKey: "stats.byUsers" },
+    { labelKey: "stats.join", value: "+10,000", descriptionKey: "stats.users" },
+    { labelKey: "stats.noCommitment", value: "100%", descriptionKey: "stats.free" },
   ];
 
-  // Static testimonial texts (could be added to translation files if needed)
-  const testimonialTexts: Record<string, string> = {
-    testimonial1: "Utiliser Optimis a été une excellente décision. J'ai trouvé une assurance habitation avec des conditions bien meilleures que mon précédent contrat, et à un prix inférieur. Leur site est très convivial et m'a permis de prendre une décision éclairée en toute confiance. Merci à l'équipe d'Optimis pour leur aide précieuse.",
-    testimonial2: "Optimis a transformé ma manière de comparer les assurances. En quelques clics, j'ai pu comparer différentes offres et choisir celle qui convenait le mieux à mes besoins. Leur service client est également très réactif et m'a aidée à clarifier certaines questions. Une expérience sans stress et très satisfaisante !",
-    testimonial3: "Je suis vraiment impressionné par les services d'Optimis. Ils ont simplifié la recherche d'assurance, me permettant de trouver rapidement la meilleure offre pour ma famille. Grâce à leur plateforme intuitive, j'ai économisé du temps et de l'argent. Je recommande vivement Optimis à tous ceux qui cherchent à optimiser leur couverture d'assurance.",
-    testimonial4: "Je ne savais pas par où commencer pour trouver une nouvelle assurance auto, mais Optimis m'a grandement facilité la tâche. Les comparaisons sont claires et détaillées, et j'ai rapidement trouvé une offre qui correspondait parfaitement à mes besoins et à mon budget. Je suis très satisfaite du service et je le recommande sans hésitation.",
-  };
+  const tableOfContents = [
+    "carInsurance.introduction",
+    "carInsurance.basicCoverage",
+    "carInsurance.complementaryCoverage",
+    "carInsurance.franchise",
+    "carInsurance.bonusMalus",
+  ];
 
   return (
     <Layout>
@@ -104,18 +51,21 @@ const AssuranceVoiture = () => {
               <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">
                 {t('carInsurance.title')}
               </h1>
-              <p className="text-xl text-muted-foreground">
+              <h2 className="text-xl text-muted-foreground">
                 {t('carInsurance.heroSubtitle')}
-              </p>
-              <p className="text-lg text-muted-foreground">
-                {t('carInsurance.findPerfectPlan')}
-              </p>
+              </h2>
+              <div className="flex flex-wrap gap-4">
+                <Button size="lg" className="gap-2">
+                  <Car className="h-5 w-5" />
+                  {t('healthInsurance.compareButton')}
+                </Button>
+              </div>
             </div>
             <div className="flex justify-center md:justify-end">
               <img
-                src="https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/0001_0003782804_2-640.jpg"
-                alt="Assurance voiture"
-                className="h-48 w-auto md:h-64 rounded-xl shadow-lg object-cover"
+                src="https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/automobile-3734396.jpg"
+                alt="Assurance automobile"
+                className="h-64 w-auto md:h-80 rounded-xl shadow-lg object-cover"
               />
             </div>
           </div>
@@ -140,30 +90,19 @@ const AssuranceVoiture = () => {
         </div>
       </section>
 
-      {/* Insurance Offers */}
-      <section className="py-16">
+      {/* Stats Section */}
+      <section className="py-12 bg-primary/5">
         <div className="container">
-          <div className="text-center mb-10">
-            <p className="text-muted-foreground mb-2">{t('carInsurance.offersForYou')}</p>
-            <p className="text-sm text-muted-foreground">{t('carInsurance.clickOffer')}</p>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-            {insuranceOffers.map((offer) => (
-              <Card key={offer.name} className="hover:shadow-lg transition-shadow cursor-pointer hover:border-primary">
-                <CardContent className="p-6 text-center">
-                  <div className="h-16 flex items-center justify-center mb-4">
-                    <img
-                      src={offer.logo}
-                      alt={offer.name}
-                      className="max-h-full max-w-full object-contain"
-                    />
-                  </div>
-                  <h3 className="font-semibold text-foreground mb-2">{offer.name}</h3>
-                  <p className="text-xs text-muted-foreground mb-1">{t('carInsurance.estimatedBudget')}</p>
-                  <p className="text-primary font-semibold">{offer.price}</p>
-                  <Button className="w-full mt-4" variant="outline">
-                    {t('carInsurance.interestedInOffer')}
-                  </Button>
+          <h3 className="text-center text-lg font-semibold text-foreground mb-8">
+            {t('carInsurance.coverageBenefit')}
+          </h3>
+          <div className="grid gap-6 md:grid-cols-3">
+            {stats.map((stat) => (
+              <Card key={stat.labelKey} className="text-center">
+                <CardContent className="p-6">
+                  <p className="text-sm font-medium text-muted-foreground">{t(stat.labelKey)}</p>
+                  <p className="text-3xl font-bold text-primary">{stat.value}</p>
+                  <p className="text-sm text-muted-foreground">{t(stat.descriptionKey)}</p>
                 </CardContent>
               </Card>
             ))}
@@ -171,46 +110,143 @@ const AssuranceVoiture = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-16 bg-muted/30">
+      {/* Video Section */}
+      <section className="py-12">
         <div className="container">
-          <div className="text-center mb-10">
-            <p className="text-sm font-semibold text-primary mb-2">{t('carInsurance.clientReviews')}</p>
-            <h2 className="text-3xl font-bold text-foreground">{t('carInsurance.testimonials')}</h2>
-            <p className="text-muted-foreground mt-2">{t('carInsurance.whatClientsSay')}</p>
+          <div className="max-w-3xl mx-auto">
+            <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/4pYQxql9Ghw"
+                title="PRÉSENTATION DE OPTIMIS"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
           </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="h-full">
+        </div>
+      </section>
+
+      {/* Table of Contents & Content */}
+      <section className="py-16">
+        <div className="container">
+          <div className="grid gap-12 lg:grid-cols-3">
+            {/* Sidebar - Table of Contents */}
+            <div className="lg:col-span-1">
+              <Card className="sticky top-24">
                 <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <img
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      className="w-12 h-12 rounded-full object-cover"
-                    />
-                    <div>
-                      <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
-                      <div className="flex text-yellow-500">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="h-3 w-3 fill-current" />
-                        ))}
-                      </div>
-                    </div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <Clock className="h-5 w-5 text-primary" />
+                    <span className="text-sm text-muted-foreground">{t('common.readingTime')}</span>
                   </div>
-                  <Quote className="h-6 w-6 text-primary/30 mb-2" />
-                  <p className="text-sm text-muted-foreground line-clamp-6">
-                    {testimonialTexts[testimonial.textKey]}
-                  </p>
+                  <p className="text-2xl font-bold text-primary mb-6">8 {t('common.min')}</p>
+                  <nav className="space-y-2">
+                    {tableOfContents.map((item, index) => (
+                      <a
+                        key={index}
+                        href={`#section-${index}`}
+                        className="block text-sm text-foreground/80 hover:text-primary transition-colors py-1 border-l-2 border-transparent hover:border-primary pl-3"
+                      >
+                        {t(item)}
+                      </a>
+                    ))}
+                  </nav>
                 </CardContent>
               </Card>
-            ))}
+            </div>
+
+            {/* Main Content */}
+            <div className="lg:col-span-2 prose prose-lg max-w-none">
+              <section id="section-0" className="mb-12">
+                <h3 className="text-2xl font-bold text-foreground">{t('carInsurance.introduction')}</h3>
+                <p className="text-muted-foreground">
+                  {t('carInsurance.introContent1')}
+                </p>
+                <p className="text-muted-foreground">
+                  {t('carInsurance.introContent2')}
+                </p>
+                <p className="text-muted-foreground">
+                  {t('carInsurance.introContent3')}
+                </p>
+              </section>
+
+              <section id="section-1" className="mb-12">
+                <h3 className="text-2xl font-bold text-foreground">{t('carInsurance.basicCoverage')}</h3>
+                <p className="text-muted-foreground">
+                  {t('carInsurance.basicCoverageIntro')}
+                </p>
+                <div className="bg-muted/50 p-6 rounded-lg my-6">
+                  <ul className="space-y-4 text-muted-foreground">
+                    <li><strong>{t('carInsurance.civilLiability')}</strong> {t('carInsurance.civilLiabilityDesc')}</li>
+                    <li><strong>{t('carInsurance.partialCasco')}</strong> {t('carInsurance.partialCascoDesc')}</li>
+                    <li><strong>{t('carInsurance.fullCasco')}</strong> {t('carInsurance.fullCascoDesc')}</li>
+                  </ul>
+                </div>
+                <p className="text-muted-foreground">
+                  {t('carInsurance.basicCoverageConclusion')}
+                </p>
+              </section>
+
+              <section id="section-2" className="mb-12">
+                <h3 className="text-2xl font-bold text-foreground">{t('carInsurance.complementaryCoverage')}</h3>
+                <p className="text-muted-foreground">
+                  {t('carInsurance.complementaryIntro')}
+                </p>
+                <ul className="space-y-3 text-muted-foreground my-4">
+                  <li><strong>{t('carInsurance.passengerInsurance')}</strong> {t('carInsurance.passengerInsuranceDesc')}</li>
+                  <li><strong>{t('carInsurance.parkingDamage')}</strong> {t('carInsurance.parkingDamageDesc')}</li>
+                  <li><strong>{t('carInsurance.extendedGlass')}</strong> {t('carInsurance.extendedGlassDesc')}</li>
+                  <li><strong>{t('carInsurance.mobilityAssistance')}</strong> {t('carInsurance.mobilityAssistanceDesc')}</li>
+                  <li><strong>{t('carInsurance.lossOfUse')}</strong> {t('carInsurance.lossOfUseDesc')}</li>
+                  <li><strong>{t('carInsurance.grossNegligence')}</strong> {t('carInsurance.grossNegligenceDesc')}</li>
+                  <li><strong>{t('carInsurance.increasedValue')}</strong> {t('carInsurance.increasedValueDesc')}</li>
+                  <li><strong>{t('carInsurance.bonusProtection')}</strong> {t('carInsurance.bonusProtectionDesc')}</li>
+                </ul>
+              </section>
+
+              <section id="section-3" className="mb-12">
+                <h3 className="text-2xl font-bold text-foreground">{t('carInsurance.franchise')}</h3>
+                <p className="text-muted-foreground">
+                  {t('carInsurance.franchiseContent1')}
+                </p>
+                <p className="text-muted-foreground">
+                  {t('carInsurance.franchiseContent2')}
+                </p>
+                <p className="text-muted-foreground">
+                  {t('carInsurance.franchiseContent3')}
+                </p>
+              </section>
+
+              <section id="section-4" className="mb-12">
+                <h3 className="text-2xl font-bold text-foreground">{t('carInsurance.bonusMalus')}</h3>
+                <p className="text-muted-foreground">
+                  {t('carInsurance.bonusMalusContent1')}
+                </p>
+                <p className="text-muted-foreground">
+                  {t('carInsurance.bonusMalusContent2')}
+                </p>
+                <p className="text-muted-foreground">
+                  {t('carInsurance.bonusMalusContent3')}
+                </p>
+                <p className="text-muted-foreground">
+                  {t('carInsurance.bonusMalusContent4')}
+                </p>
+              </section>
+
+              <img 
+                src="https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/Vous-ne-savezpas-si-votre-assurance-copie-2-1024x576.jpg" 
+                alt="Assurance automobile Suisse"
+                className="rounded-lg my-6 w-full"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* Partners Section */}
-      <section className="py-16">
+      <section className="py-16 bg-muted/30">
         <div className="container">
           <div className="text-center mb-10">
             <h3 className="text-sm font-semibold text-primary mb-2">{t('common.partners')}</h3>
@@ -228,66 +264,6 @@ const AssuranceVoiture = () => {
               />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Form Section */}
-      <section className="py-16 bg-primary/5">
-        <div className="container">
-          <Card className="max-w-4xl mx-auto">
-            <CardContent className="p-8">
-              {/* Form Steps */}
-              <div className="flex flex-wrap justify-center gap-2 mb-8">
-                {formSteps.map((step, index) => (
-                  <div
-                    key={step.key}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium ${
-                      index === 0
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted text-muted-foreground"
-                    }`}
-                  >
-                    <span className="w-6 h-6 rounded-full bg-background/20 flex items-center justify-center text-xs">
-                      {index + 1}
-                    </span>
-                    {t(step.key)}
-                  </div>
-                ))}
-              </div>
-
-              <div className="text-center">
-                <h2 className="text-2xl font-bold text-foreground mb-4">{t('carInsurance.yourCar')}</h2>
-                <p className="text-muted-foreground mb-8">{t('carInsurance.whichCarToInsure')}</p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                  <Button variant="outline" className="px-8 py-6">
-                    {t('carInsurance.currentCar')}
-                  </Button>
-                  <Button variant="outline" className="px-8 py-6">
-                    {t('carInsurance.carToBuy')}
-                  </Button>
-                </div>
-
-                <p className="text-muted-foreground mb-6">{t('carInsurance.carBrand')}</p>
-                
-                <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-4 mb-8">
-                  {["ABARTH", "AIWAYS", "ALFA ROMEO", "ALPINE", "ASTON MARTIN", "AUDI", "BENTLEY", "BMW"].map((brand) => (
-                    <div
-                      key={brand}
-                      className="p-3 border rounded-lg hover:border-primary cursor-pointer transition-colors"
-                    >
-                      <p className="text-xs text-center text-muted-foreground">{brand}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <Button size="lg" className="gap-2">
-                  <Car className="h-5 w-5" />
-                  {t('common.continue')}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </section>
 
