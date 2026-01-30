@@ -137,14 +137,16 @@ const servicesCategories = [
 interface MegaMenuCategoryProps {
   categories: typeof assurancesCategories;
   ctaTextKey: string;
-  ctaHref: string;
 }
 
 const MegaMenuContent = forwardRef<HTMLDivElement, MegaMenuCategoryProps>(
-  ({ categories, ctaTextKey, ctaHref }, ref) => {
+  ({ categories, ctaTextKey }, ref) => {
     const [activeCategory, setActiveCategory] = useState(categories[0]?.id || "");
     const activeItem = categories.find((c) => c.id === activeCategory);
     const { t } = useTranslation();
+
+    // CTA dynamique : redirige vers la page de la catégorie active
+    const dynamicCtaHref = activeItem?.href || categories[0]?.href || "/";
 
     return (
       <div ref={ref} className="flex w-[900px] rounded-xl border bg-background shadow-2xl">
@@ -203,9 +205,11 @@ const MegaMenuContent = forwardRef<HTMLDivElement, MegaMenuCategoryProps>(
             />
             <p className="text-primary font-semibold text-base mb-2">{t('common.getQuote')}</p>
             <p className="text-foreground font-bold text-base mb-4">{t('common.freeAndNoCommitment')}</p>
-            <Button asChild className="w-full">
-              <LocalizedLink to={ctaHref}>{t(ctaTextKey, ctaTextKey)}</LocalizedLink>
-            </Button>
+            <NavigationMenuLink asChild>
+              <LocalizedLink to={dynamicCtaHref} className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full">
+                {t(ctaTextKey, ctaTextKey)}
+              </LocalizedLink>
+            </NavigationMenuLink>
           </div>
         </div>
       </div>
@@ -240,7 +244,6 @@ const Header = () => {
                 <MegaMenuContent 
                   categories={assurancesCategories}
                   ctaTextKey="common.compareOffers"
-                  ctaHref="/assurance-sante"
                 />
               </NavigationMenuContent>
             </NavigationMenuItem>
@@ -254,7 +257,6 @@ const Header = () => {
                 <MegaMenuContent 
                   categories={financesCategories}
                   ctaTextKey="common.compareOffers"
-                  ctaHref="/hypotheque"
                 />
               </NavigationMenuContent>
             </NavigationMenuItem>
@@ -268,7 +270,6 @@ const Header = () => {
                 <MegaMenuContent 
                   categories={servicesCategories}
                   ctaTextKey="services.seeServices"
-                  ctaHref="/services"
                 />
               </NavigationMenuContent>
             </NavigationMenuItem>
