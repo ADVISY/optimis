@@ -1,4 +1,4 @@
-import { Home, Shield, Clock, CheckCircle, Car, Heart, Scale } from "lucide-react";
+import { Home, Shield, Clock, CheckCircle, Car, Heart, Scale, Play } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -37,11 +37,13 @@ const AssuranceMenage = () => {
   ];
 
   const tableOfContents = [
-    "homeInsurance.whatIsHomeInsurance",
+    "homeInsurance.whatIsRcMenage",
     "homeInsurance.whatIsCovered",
-    "homeInsurance.rcExplained",
-    "homeInsurance.howToChoose",
-    "homeInsurance.costs",
+    "homeInsurance.isItMandatory",
+    "homeInsurance.combinedInsurance",
+    "homeInsurance.howMuchDoesItCost",
+    "homeInsurance.howToTerminate",
+    "homeInsurance.optimisHelps",
   ];
 
   return (
@@ -137,6 +139,27 @@ const AssuranceMenage = () => {
         </div>
       </section>
 
+      {/* Video Section */}
+      <section className="py-12 bg-muted/30">
+        <div className="container">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold text-foreground mb-2">{t('homeInsurance.watchVideo')}</h3>
+              <p className="text-muted-foreground">{t('homeInsurance.videoDescription')}</p>
+            </div>
+            <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg">
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/Q_HiE7yxfBE"
+                title="Assurance Ménage Optimis"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Content Section */}
       <section className="py-16">
         <div className="container">
@@ -149,7 +172,7 @@ const AssuranceMenage = () => {
                     <Clock className="h-5 w-5 text-primary" />
                     <span className="text-sm text-muted-foreground">{t('common.readingTime')}</span>
                   </div>
-                  <p className="text-2xl font-bold text-primary mb-6">4 {t('common.min')}</p>
+                  <p className="text-2xl font-bold text-primary mb-6">5 {t('common.min')}</p>
                   <nav className="space-y-2">
                     {tableOfContents.map((item, index) => (
                       <a
@@ -168,41 +191,77 @@ const AssuranceMenage = () => {
             {/* Main Content */}
             <div className="lg:col-span-2 prose prose-lg max-w-none">
               <section id="section-0" className="mb-12">
-                <h3 className="text-2xl font-bold text-foreground">{t('homeInsurance.whatIsHomeInsurance')}</h3>
-                <p className="text-muted-foreground">{t('homeInsurance.whatIsHomeInsuranceContent')}</p>
+                <h3 className="text-2xl font-bold text-foreground">{t('homeInsurance.whatIsRcMenage')}</h3>
+                <p className="text-muted-foreground">{t('homeInsurance.whatIsRcMenageContent')}</p>
+                <div className="bg-muted/50 p-6 rounded-lg my-6">
+                  <p className="text-muted-foreground mb-4"><strong>{t('homeInsurance.rcPrivateTitle')}</strong> {t('homeInsurance.rcPrivateDesc')}</p>
+                  <p className="text-muted-foreground"><strong>{t('homeInsurance.menageTitle')}</strong> {t('homeInsurance.menageDesc')}</p>
+                </div>
+                <p className="text-muted-foreground">{t('homeInsurance.combinedExplanation')}</p>
               </section>
 
               <section id="section-1" className="mb-12">
                 <h3 className="text-2xl font-bold text-foreground">{t('homeInsurance.whatIsCovered')}</h3>
-                <p className="text-muted-foreground">{t('homeInsurance.whatIsCoveredContent')}</p>
+                <p className="text-muted-foreground">{t('homeInsurance.whatIsCoveredIntro')}</p>
                 <div className="bg-muted/50 p-6 rounded-lg my-6">
                   <ul className="space-y-2 text-muted-foreground">
-                    <li>• {t('homeInsurance.covered1')}</li>
-                    <li>• {t('homeInsurance.covered2')}</li>
-                    <li>• {t('homeInsurance.covered3')}</li>
-                    <li>• {t('homeInsurance.covered4')}</li>
+                    <li>• <strong>{t('homeInsurance.coverFire')}</strong> {t('homeInsurance.coverFireDesc')}</li>
+                    <li>• <strong>{t('homeInsurance.coverTheft')}</strong> {t('homeInsurance.coverTheftDesc')}</li>
+                    <li>• <strong>{t('homeInsurance.coverNatural')}</strong> {t('homeInsurance.coverNaturalDesc')}</li>
+                    <li>• <strong>{t('homeInsurance.coverWater')}</strong> {t('homeInsurance.coverWaterDesc')}</li>
+                    <li>• <strong>{t('homeInsurance.coverGlass')}</strong> {t('homeInsurance.coverGlassDesc')}</li>
                   </ul>
                 </div>
+                <p className="text-muted-foreground">{t('homeInsurance.rcCoversSummary')}</p>
               </section>
 
               <section id="section-2" className="mb-12">
-                <h3 className="text-2xl font-bold text-foreground">{t('homeInsurance.rcExplained')}</h3>
-                <p className="text-muted-foreground">{t('homeInsurance.rcExplainedContent')}</p>
+                <h3 className="text-2xl font-bold text-foreground">{t('homeInsurance.isItMandatory')}</h3>
+                <p className="text-muted-foreground">{t('homeInsurance.mandatoryContent1')}</p>
+                <p className="text-muted-foreground mt-4">{t('homeInsurance.mandatoryContent2')}</p>
+                <div className="bg-primary/5 p-6 rounded-lg my-6">
+                  <p className="text-muted-foreground">{t('homeInsurance.mandatoryCantons')}</p>
+                </div>
               </section>
 
               <section id="section-3" className="mb-12">
-                <h3 className="text-2xl font-bold text-foreground">{t('homeInsurance.howToChoose')}</h3>
-                <p className="text-muted-foreground">{t('homeInsurance.howToChooseContent')}</p>
-                <ul className="space-y-2 text-muted-foreground my-4">
-                  <li>• {t('homeInsurance.criteria1')}</li>
-                  <li>• {t('homeInsurance.criteria2')}</li>
-                  <li>• {t('homeInsurance.criteria3')}</li>
-                </ul>
+                <h3 className="text-2xl font-bold text-foreground">{t('homeInsurance.combinedInsurance')}</h3>
+                <p className="text-muted-foreground">{t('homeInsurance.combinedIntro')}</p>
+                <div className="bg-muted/50 p-6 rounded-lg my-6">
+                  <ol className="space-y-2 text-muted-foreground list-decimal list-inside">
+                    <li><strong>{t('homeInsurance.benefit1')}</strong> {t('homeInsurance.benefit1Desc')}</li>
+                    <li><strong>{t('homeInsurance.benefit2')}</strong> {t('homeInsurance.benefit2Desc')}</li>
+                    <li><strong>{t('homeInsurance.benefit3')}</strong> {t('homeInsurance.benefit3Desc')}</li>
+                    <li><strong>{t('homeInsurance.benefit4')}</strong> {t('homeInsurance.benefit4Desc')}</li>
+                    <li><strong>{t('homeInsurance.benefit5')}</strong> {t('homeInsurance.benefit5Desc')}</li>
+                    <li><strong>{t('homeInsurance.benefit6')}</strong> {t('homeInsurance.benefit6Desc')}</li>
+                  </ol>
+                </div>
               </section>
 
               <section id="section-4" className="mb-12">
-                <h3 className="text-2xl font-bold text-foreground">{t('homeInsurance.costs')}</h3>
-                <p className="text-muted-foreground">{t('homeInsurance.costsContent')}</p>
+                <h3 className="text-2xl font-bold text-foreground">{t('homeInsurance.howMuchDoesItCost')}</h3>
+                <p className="text-muted-foreground">{t('homeInsurance.costContent')}</p>
+              </section>
+
+              <section id="section-5" className="mb-12">
+                <h3 className="text-2xl font-bold text-foreground">{t('homeInsurance.howToTerminate')}</h3>
+                <p className="text-muted-foreground">{t('homeInsurance.terminateContent')}</p>
+                <div className="bg-muted/50 p-6 rounded-lg my-6">
+                  <ul className="space-y-2 text-muted-foreground">
+                    <li>• {t('homeInsurance.terminateInfo1')}</li>
+                    <li>• {t('homeInsurance.terminateInfo2')}</li>
+                    <li>• {t('homeInsurance.terminateInfo3')}</li>
+                    <li>• {t('homeInsurance.terminateInfo4')}</li>
+                    <li>• {t('homeInsurance.terminateInfo5')}</li>
+                  </ul>
+                </div>
+                <p className="text-muted-foreground">{t('homeInsurance.terminateDeadline')}</p>
+              </section>
+
+              <section id="section-6" className="mb-12">
+                <h3 className="text-2xl font-bold text-foreground">{t('homeInsurance.optimisHelps')}</h3>
+                <p className="text-muted-foreground">{t('homeInsurance.optimisHelpsContent')}</p>
               </section>
             </div>
           </div>
