@@ -40,10 +40,10 @@ const assurancesCategories = [
     icon: HeartPulse,
     href: "/assurance-sante",
     subLinks: [
-      { labelKey: "Quel modèle d'assurance maladie choisir ?", href: "/blog/quel-modele-dassurance-maladie-choisir" },
-      { labelKey: "Assurance dentaire complémentaire", href: "/blog/assurance-dentaire-complementaire-en-suisse-reponses-aux-questions-essentielles" },
-      { labelKey: "Changement d'assurance maladie 2024", href: "/blog/changement-dassurance-maladie-delais-et-demarches-en-2024" },
-      { labelKey: "Subside d'assurance maladie", href: "/blog/subside-dassurance-maladie-comment-ca-marche-et-comment-faire-sa-demande" },
+      { labelKey: "megaMenu.healthModel", href: "/blog/quel-modele-dassurance-maladie-choisir" },
+      { labelKey: "megaMenu.dentalInsurance", href: "/blog/assurance-dentaire-complementaire-en-suisse-reponses-aux-questions-essentielles" },
+      { labelKey: "megaMenu.healthChange2024", href: "/blog/changement-dassurance-maladie-delais-et-demarches-en-2024" },
+      { labelKey: "megaMenu.healthSubsidy", href: "/blog/subside-dassurance-maladie-comment-ca-marche-et-comment-faire-sa-demande" },
     ]
   },
   { 
@@ -52,7 +52,7 @@ const assurancesCategories = [
     icon: Car,
     href: "/assurance-voiture",
     subLinks: [
-      { labelKey: "Comparer les assurances auto", href: "/assurance-voiture" },
+      { labelKey: "megaMenu.compareAutoInsurance", href: "/assurance-voiture" },
     ]
   },
   { 
@@ -61,7 +61,7 @@ const assurancesCategories = [
     icon: Scale,
     href: "/protection-juridique",
     subLinks: [
-      { labelKey: "Protection juridique en Suisse", href: "/blog/le-meilleur-de-la-protection-juridique-en-suisse" },
+      { labelKey: "megaMenu.legalProtectionSwitzerland", href: "/blog/le-meilleur-de-la-protection-juridique-en-suisse" },
     ]
   },
   { 
@@ -70,7 +70,7 @@ const assurancesCategories = [
     icon: Home,
     href: "/assurance-menage",
     subLinks: [
-      { labelKey: "L'assurance ménage : les 7 choses à savoir", href: "/blog/lassurance-menage-en-suisse-les-7-choses-a-savoir" },
+      { labelKey: "megaMenu.homeInsurance7Things", href: "/blog/lassurance-menage-en-suisse-les-7-choses-a-savoir" },
     ]
   },
   { 
@@ -92,10 +92,10 @@ const financesCategories = [
     icon: HeartPulse,
     href: "/assurance-vie",
     subLinks: [
-      { labelKey: "En 2 minutes", href: "/assurance-vie" },
-      { labelKey: "Préparez votre retraite", href: "/assurance-vie" },
-      { labelKey: "+ de 2700 CHF d'impôts", href: "/assurance-vie" },
-      { labelKey: "Jusqu'à 7056 CHF d'impôts", href: "/assurance-vie" },
+      { labelKey: "megaMenu.in2Minutes", href: "/assurance-vie" },
+      { labelKey: "megaMenu.prepareRetirement", href: "/assurance-vie" },
+      { labelKey: "megaMenu.save2700Taxes", href: "/assurance-vie" },
+      { labelKey: "megaMenu.save7056Taxes", href: "/assurance-vie" },
     ]
   },
 ];
@@ -108,10 +108,10 @@ const servicesCategories = [
     icon: Smartphone,
     href: "/forfait-mobile",
     subLinks: [
-      { labelKey: "En 2 minutes", href: "/forfait-mobile" },
-      { labelKey: "Abonnements de téléphone mobile", href: "/forfait-mobile" },
-      { labelKey: "+ de 200 CHF d'économies", href: "/forfait-mobile" },
-      { labelKey: "100% illimité dans le monde", href: "/forfait-mobile" },
+      { labelKey: "megaMenu.in2Minutes", href: "/forfait-mobile" },
+      { labelKey: "megaMenu.mobileSubscriptions", href: "/forfait-mobile" },
+      { labelKey: "megaMenu.save200", href: "/forfait-mobile" },
+      { labelKey: "megaMenu.unlimitedWorld", href: "/forfait-mobile" },
     ]
   },
   { 
@@ -120,7 +120,7 @@ const servicesCategories = [
     icon: CreditCard,
     href: "/subside-assurance-maladie",
     subLinks: [
-      { labelKey: "Demander un subside", href: "/subside-assurance-maladie" },
+      { labelKey: "megaMenu.requestSubsidy", href: "/subside-assurance-maladie" },
     ]
   },
   { 
@@ -129,7 +129,7 @@ const servicesCategories = [
     icon: FileX,
     href: "/resiliation",
     subLinks: [
-      { labelKey: "Résilier votre assurance", href: "/resiliation" },
+      { labelKey: "megaMenu.terminateInsurance", href: "/resiliation" },
     ]
   },
 ];
