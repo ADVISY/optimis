@@ -948,5 +948,57 @@
       "requestEmail": "Ricevi via email",
       "talkToAdvisor": "Parla con un consulente"
     }
+  },
+  "comparators": {
+    "trust": {
+      "free": "100% gratuito",
+      "noCommitment": "Senza impegno",
+      "dataProtected": "Dati protetti"
+    },
+    "health": {
+      "badge": "Comparatore Assicurazione Malattia",
+      "title": "Confronta le offerte di assicurazione malattia",
+      "subtitle": "Trova la migliore copertura al miglior prezzo in pochi minuti"
+    },
+    "car": {
+      "badge": "Comparatore Assicurazione Auto",
+      "title": "Confronta le assicurazioni auto",
+      "subtitle": "RC, casco parziale o completa: trova l'offerta ideale"
+    },
+    "household": {
+      "badge": "Comparatore Assicurazione Casa",
+      "title": "Confronta le assicurazioni casa e RC",
+      "subtitle": "Proteggi la tua casa al miglior prezzo"
+    },
+    "legalProtection": {
+      "badge": "Comparatore Protezione Giuridica",
+      "title": "Confronta le protezioni giuridiche",
+      "subtitle": "Difendi i tuoi diritti con la migliore copertura"
+    },
+    "subsidy": {
+      "badge": "Verifica Sussidio",
+      "title": "Verifica la tua idoneità ai sussidi",
+      "subtitle": "Scopri se hai diritto a un aiuto per i tuoi premi"
+    },
+    "termination": {
+      "badge": "Disdetta Assicurazione",
+      "title": "Disdici la tua assicurazione facilmente",
+      "subtitle": "Genera la tua lettera di disdetta in pochi clic"
+    },
+    "pillar3": {
+      "badge": "Comparatore 3° Pilastro",
+      "title": "Confronta le soluzioni 3° pilastro",
+      "subtitle": "Ottimizza i tuoi risparmi e riduci le tue tasse"
+    },
+    "mortgage": {
+      "badge": "Comparatore Ipoteca",
+      "title": "Confronta le offerte ipotecarie",
+      "subtitle": "Trova i migliori tassi per il tuo progetto immobiliare"
+    },
+    "professional": {
+      "badge": "Assicurazioni Professionali",
+      "title": "Confronta le assicurazioni per indipendenti",
+      "subtitle": "RC professionale, perdita di guadagno, LPP: proteggi la tua attività"
+    }
   }
 }

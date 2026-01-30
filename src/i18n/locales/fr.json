@@ -980,5 +980,57 @@
       "requestEmail": "Recevoir par email",
       "talkToAdvisor": "Parler à un conseiller"
     }
+  },
+  "comparators": {
+    "trust": {
+      "free": "100% gratuit",
+      "noCommitment": "Sans engagement",
+      "dataProtected": "Données protégées"
+    },
+    "health": {
+      "badge": "Comparateur Assurance Maladie",
+      "title": "Comparez les offres d'assurance maladie",
+      "subtitle": "Trouvez la meilleure couverture au meilleur prix en quelques minutes"
+    },
+    "car": {
+      "badge": "Comparateur Assurance Auto",
+      "title": "Comparez les assurances voiture",
+      "subtitle": "RC, casco partielle ou complète : trouvez l'offre idéale"
+    },
+    "household": {
+      "badge": "Comparateur Assurance Ménage",
+      "title": "Comparez les assurances ménage et RC",
+      "subtitle": "Protégez votre foyer au meilleur prix"
+    },
+    "legalProtection": {
+      "badge": "Comparateur Protection Juridique",
+      "title": "Comparez les protections juridiques",
+      "subtitle": "Défendez vos droits avec la meilleure couverture"
+    },
+    "subsidy": {
+      "badge": "Vérification Subside",
+      "title": "Vérifiez votre éligibilité aux subsides",
+      "subtitle": "Découvrez si vous avez droit à une aide pour vos primes"
+    },
+    "termination": {
+      "badge": "Résiliation d'Assurance",
+      "title": "Résiliez votre assurance facilement",
+      "subtitle": "Générez votre lettre de résiliation en quelques clics"
+    },
+    "pillar3": {
+      "badge": "Comparateur 3ème Pilier",
+      "title": "Comparez les solutions 3ème pilier",
+      "subtitle": "Optimisez votre épargne et réduisez vos impôts"
+    },
+    "mortgage": {
+      "badge": "Comparateur Hypothèque",
+      "title": "Comparez les offres hypothécaires",
+      "subtitle": "Trouvez les meilleurs taux pour votre projet immobilier"
+    },
+    "professional": {
+      "badge": "Assurances Professionnelles",
+      "title": "Comparez les assurances pour indépendants",
+      "subtitle": "RC pro, perte de gain, LPP : protégez votre activité"
+    }
   }
 }

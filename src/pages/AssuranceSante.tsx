@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Heart, Car, Scale, Home, Clock } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -6,7 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import llamaMascot from "@/assets/llama-mascot.png";
 import { useTranslation } from "react-i18next";
 import LocalizedLink from "@/components/LocalizedLink";
-import { HealthInsuranceForm } from "@/components/forms";
+import { useNavigate } from "react-router-dom";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 
 const partners = [
   { name: "Generali", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/general-1.svg" },
@@ -18,6 +18,8 @@ const partners = [
 
 const AssuranceSante = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { localizedPath } = useLocalizedPath();
 
   const quickLinks = [
     { labelKey: "nav.carInsurance", href: "/assurance-voiture", icon: Car },
@@ -43,7 +45,9 @@ const AssuranceSante = () => {
     "healthInsurance.lamalOrCmu",
   ];
 
-  const [showForm, setShowForm] = useState(false);
+  const handleCompareClick = () => {
+    navigate(localizedPath("/comparateur/sante"));
+  };
 
   return (
     <Layout>
@@ -62,7 +66,7 @@ const AssuranceSante = () => {
                 {t('healthInsurance.heroSubtitle')}
               </h2>
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="gap-2" onClick={() => setShowForm(true)}>
+                <Button size="lg" className="gap-2" onClick={handleCompareClick}>
                   <Heart className="h-5 w-5" />
                   {t('healthInsurance.compareButton')}
                 </Button>
@@ -78,15 +82,6 @@ const AssuranceSante = () => {
           </div>
         </div>
       </section>
-
-      {/* Form Section */}
-      {showForm && (
-        <section className="py-16 bg-muted/30" id="form">
-          <div className="container">
-            <HealthInsuranceForm />
-          </div>
-        </section>
-      )}
 
       {/* Quick Links */}
       <section className="py-8 bg-background border-b">
@@ -368,10 +363,7 @@ const AssuranceSante = () => {
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
                 {t('healthInsurance.getEstimate')}
               </p>
-              <Button size="lg" className="gap-2" onClick={() => {
-                setShowForm(true);
-                document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' });
-              }}>
+              <Button size="lg" className="gap-2" onClick={handleCompareClick}>
                 <Heart className="h-5 w-5" />
                 {t('healthInsurance.compareNow')}
               </Button>

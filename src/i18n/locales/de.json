@@ -948,5 +948,57 @@
       "requestEmail": "Per E-Mail erhalten",
       "talkToAdvisor": "Mit Berater sprechen"
     }
+  },
+  "comparators": {
+    "trust": {
+      "free": "100% kostenlos",
+      "noCommitment": "Ohne Verpflichtung",
+      "dataProtected": "Daten geschützt"
+    },
+    "health": {
+      "badge": "Krankenversicherungsvergleich",
+      "title": "Krankenversicherungsangebote vergleichen",
+      "subtitle": "Finden Sie die beste Deckung zum besten Preis in wenigen Minuten"
+    },
+    "car": {
+      "badge": "Autoversicherungsvergleich",
+      "title": "Autoversicherungen vergleichen",
+      "subtitle": "Haftpflicht, Teil- oder Vollkasko: Finden Sie das ideale Angebot"
+    },
+    "household": {
+      "badge": "Hausratversicherungsvergleich",
+      "title": "Hausrat- und Haftpflichtversicherungen vergleichen",
+      "subtitle": "Schützen Sie Ihr Zuhause zum besten Preis"
+    },
+    "legalProtection": {
+      "badge": "Rechtsschutzvergleich",
+      "title": "Rechtsschutzversicherungen vergleichen",
+      "subtitle": "Verteidigen Sie Ihre Rechte mit der besten Deckung"
+    },
+    "subsidy": {
+      "badge": "Prämienverbilligung",
+      "title": "Prüfen Sie Ihre Berechtigung für Prämienverbilligung",
+      "subtitle": "Erfahren Sie, ob Sie Anspruch auf Unterstützung haben"
+    },
+    "termination": {
+      "badge": "Versicherungskündigung",
+      "title": "Kündigen Sie Ihre Versicherung einfach",
+      "subtitle": "Erstellen Sie Ihr Kündigungsschreiben in wenigen Klicks"
+    },
+    "pillar3": {
+      "badge": "Säule 3a Vergleich",
+      "title": "Säule 3a Lösungen vergleichen",
+      "subtitle": "Optimieren Sie Ihre Ersparnisse und reduzieren Sie Ihre Steuern"
+    },
+    "mortgage": {
+      "badge": "Hypothekenvergleich",
+      "title": "Hypothekenangebote vergleichen",
+      "subtitle": "Finden Sie die besten Zinsen für Ihr Immobilienprojekt"
+    },
+    "professional": {
+      "badge": "Berufsversicherungen",
+      "title": "Versicherungen für Selbständige vergleichen",
+      "subtitle": "Berufshaftpflicht, Erwerbsausfall, BVG: Schützen Sie Ihre Tätigkeit"
+    }
   }
 }
