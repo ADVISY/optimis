@@ -636,5 +636,317 @@
       "jurisdictionTitle": "Giurisdizione",
       "jurisdictionContent": "Le presenti condizioni sono regolate dal diritto svizzero. Qualsiasi controversia sarà sottoposta ai tribunali competenti di Ginevra, Svizzera."
     }
+  },
+  "forms": {
+    "common": {
+      "step": "Passo",
+      "of": "di",
+      "next": "Avanti",
+      "previous": "Indietro",
+      "submit": "Confronta ora",
+      "required": "Campo obbligatorio",
+      "selectOption": "Seleziona un'opzione"
+    },
+    "contact": {
+      "firstName": "Nome",
+      "lastName": "Cognome",
+      "email": "Email",
+      "phone": "Telefono",
+      "birthDate": "Data di nascita"
+    },
+    "healthInsurance": {
+      "title": "Confronto assicurazione malattia",
+      "description": "Ottieni le migliori offerte con pochi clic",
+      "canton": "Cantone",
+      "selectCanton": "Seleziona il tuo cantone",
+      "postalCode": "Codice postale",
+      "personsToInsure": "Numero di persone da assicurare",
+      "adults": "Adulti",
+      "children": "Bambini",
+      "model": "Modello assicurativo",
+      "selectModel": "Seleziona un modello",
+      "models": {
+        "standard": "Standard",
+        "hmo": "HMO",
+        "familyDoctor": "Medico di famiglia",
+        "telemedicine": "Telemedicina"
+      },
+      "franchise": "Franchigia",
+      "accidentCoverage": "Copertura infortuni",
+      "accidentYes": "Sì, includere infortuni",
+      "accidentNo": "No, escludere infortuni",
+      "complementary": "Assicurazioni complementari",
+      "complementaryOptions": {
+        "dental": "Cure dentali",
+        "hospitalization": "Ospedalizzazione",
+        "glasses": "Occhiali e lenti",
+        "alternativeMedicine": "Medicine alternative",
+        "worldwide": "Copertura mondiale",
+        "fitness": "Fitness e benessere"
+      },
+      "availability": "Disponibilità per essere contattato"
+    },
+    "carInsurance": {
+      "title": "Confronto assicurazione auto",
+      "description": "Trova la migliore protezione per il tuo veicolo",
+      "vehicleInfo": "Informazioni veicolo",
+      "licensePlate": "Targa",
+      "or": "o",
+      "vehicleBrand": "Marca",
+      "vehicleModel": "Modello",
+      "vehicleYear": "Anno",
+      "selectBrand": "Seleziona marca",
+      "selectModel": "Seleziona modello",
+      "selectYear": "Seleziona anno",
+      "usage": "Utilizzo del veicolo",
+      "usagePrivate": "Privato",
+      "usageProfessional": "Professionale",
+      "annualMileage": "Chilometraggio annuo",
+      "mileageOptions": {
+        "less5000": "Meno di 5'000 km",
+        "5000to10000": "5'000 - 10'000 km",
+        "10000to15000": "10'000 - 15'000 km",
+        "15000to20000": "15'000 - 20'000 km",
+        "more20000": "Più di 20'000 km"
+      },
+      "driverInfo": "Informazioni conducente",
+      "licenseYear": "Anno di conseguimento patente",
+      "claimsLast5Years": "Sinistri (ultimi 5 anni)",
+      "claimsOptions": {
+        "none": "Nessuno",
+        "one": "1 sinistro",
+        "two": "2 sinistri",
+        "threeOrMore": "3 o più"
+      },
+      "coverageType": "Tipo di copertura",
+      "coverageOptions": {
+        "rc": "Responsabilità civile (RC)",
+        "partialCasco": "Casco parziale",
+        "fullCasco": "Casco completa"
+      },
+      "additionalOptions": "Opzioni aggiuntive",
+      "options": {
+        "glassBreakage": "Rottura vetri",
+        "assistance": "Assistenza stradale",
+        "replacementVehicle": "Veicolo sostitutivo"
+      }
+    },
+    "pillar3": {
+      "title": "Confronto 3° pilastro",
+      "description": "Prepara la tua pensione e risparmia sulle tasse",
+      "objective": "Obiettivo principale",
+      "objectives": {
+        "taxSavings": "Risparmio fiscale",
+        "retirement": "Preparazione pensione",
+        "protection": "Protezione famiglia",
+        "mix": "Obiettivi misti"
+      },
+      "professionalStatus": "Stato professionale",
+      "statuses": {
+        "employee": "Dipendente",
+        "selfEmployed": "Indipendente",
+        "unemployed": "Disoccupato",
+        "student": "Studente"
+      },
+      "incomeRange": "Fascia di reddito annuo",
+      "incomeRanges": {
+        "less50k": "Meno di 50'000 CHF",
+        "50to80k": "50'000 - 80'000 CHF",
+        "80to120k": "80'000 - 120'000 CHF",
+        "more120k": "Più di 120'000 CHF"
+      },
+      "savingsAmount": "Importo di risparmio desiderato all'anno",
+      "horizon": "Orizzonte di investimento",
+      "horizons": {
+        "short": "Breve termine (< 5 anni)",
+        "medium": "Medio termine (5-15 anni)",
+        "long": "Lungo termine (> 15 anni)"
+      },
+      "riskProfile": "Profilo di rischio",
+      "riskProfiles": {
+        "conservative": "Conservativo",
+        "balanced": "Bilanciato",
+        "dynamic": "Dinamico"
+      }
+    },
+    "professionalInsurance": {
+      "title": "Assicurazioni per indipendenti",
+      "description": "Proteggi la tua attività professionale",
+      "selectTypes": "Seleziona le assicurazioni desiderate",
+      "types": {
+        "rcProfessional": "RC Professionale",
+        "lossOfEarnings": "Perdita di guadagno",
+        "laa": "LAINF (Infortuni)",
+        "lpp": "LPP (Previdenza)",
+        "legalProtection": "Protezione giuridica",
+        "multiRisk": "Multirischio aziendale"
+      },
+      "activityType": "Tipo di attività",
+      "activityPlaceholder": "Es: Consulente, Artigiano, Medico...",
+      "legalForm": "Forma giuridica",
+      "selectLegalForm": "Seleziona la forma giuridica",
+      "legalForms": {
+        "selfEmployed": "Ditta individuale",
+        "sarl": "Sagl",
+        "sa": "SA",
+        "snc": "Snc"
+      },
+      "employeesCount": "Numero di dipendenti",
+      "selectEmployees": "Seleziona il numero",
+      "soloEntrepreneur": "Imprenditore individuale",
+      "message": "Messaggio o precisazioni",
+      "messagePlaceholder": "Descrivi le tue esigenze specifiche..."
+    },
+    "mortgage": {
+      "title": "Confronto ipoteche",
+      "description": "Trova il miglior tasso per il tuo progetto immobiliare",
+      "projectType": "Tipo di progetto",
+      "projectTypes": {
+        "acquisition": "Acquisto",
+        "renewal": "Rinnovo",
+        "refinancing": "Rifinanziamento"
+      },
+      "propertyType": "Tipo di immobile",
+      "propertyTypes": {
+        "apartment": "Appartamento",
+        "house": "Casa",
+        "building": "Edificio",
+        "other": "Altro"
+      },
+      "propertyValue": "Valore dell'immobile (CHF)",
+      "commune": "Comune",
+      "borrowersCount": "Numero di mutuatari",
+      "professionalSituation": "Situazione professionale",
+      "ownFunds": "Fondi propri (CHF)",
+      "ownFundsRanges": {
+        "less100k": "Meno di 100'000 CHF",
+        "100to200k": "100'000 - 200'000 CHF",
+        "200to500k": "200'000 - 500'000 CHF",
+        "more500k": "Più di 500'000 CHF"
+      }
+    },
+    "household": {
+      "title": "Confronto assicurazione casa",
+      "description": "Proteggi la tua casa e i tuoi beni",
+      "housingType": "Tipo di alloggio",
+      "housingTypes": {
+        "apartment": "Appartamento",
+        "house": "Casa",
+        "studio": "Monolocale"
+      },
+      "ownershipStatus": "Stato",
+      "statuses": {
+        "tenant": "Affittuario",
+        "owner": "Proprietario"
+      },
+      "livingSpace": "Superficie abitabile (m²)",
+      "numberOfRooms": "Numero di stanze",
+      "insuredValue": "Valore da assicurare (CHF)",
+      "insuredValueHelp": "Stima del valore dei tuoi beni mobili",
+      "includeCivilLiability": "Includere responsabilità civile privata",
+      "additionalCoverage": "Coperture aggiuntive",
+      "coverageOptions": {
+        "theft": "Furto con scasso",
+        "water": "Danni da acqua",
+        "glass": "Rottura vetri",
+        "electronics": "Apparecchi elettronici",
+        "bicycle": "Bicicletta",
+        "valuables": "Oggetti di valore"
+      }
+    },
+    "subsidy": {
+      "title": "Richiesta sussidio",
+      "description": "Verifica la tua idoneità agli aiuti cantonali",
+      "adultsCount": "Numero di adulti",
+      "childrenCount": "Numero di bambini",
+      "incomeRange": "Reddito annuo del nucleo familiare",
+      "selectIncome": "Seleziona la tua fascia di reddito",
+      "specialSituation": "Situazione particolare",
+      "situations": {
+        "none": "Nessuna situazione particolare",
+        "avs": "Beneficiario AVS",
+        "ai": "Beneficiario AI",
+        "student": "Studente",
+        "unemployed": "Disoccupato"
+      },
+      "eligible": "Probabilmente sei idoneo!",
+      "maybeEligible": "Potresti essere idoneo",
+      "eligibleDescription": "In base alle tue informazioni, soddisfi i criteri per beneficiare di un sussidio.",
+      "maybeEligibleDescription": "La tua situazione richiede un'analisi più approfondita per determinare la tua idoneità.",
+      "estimatedAmount": "Importo stimato",
+      "perMonth": "mese",
+      "estimateNote": "Questa stima è indicativa e può variare a seconda del cantone.",
+      "startApplication": "Inizia la richiesta",
+      "downloadGuide": "Scarica la guida",
+      "contactNote": "Un consulente ti contatterà per finalizzare la tua richiesta."
+    },
+    "termination": {
+      "title": "Disdetta assicurazione",
+      "description": "Disdici il tuo contratto in modo semplice e veloce",
+      "contractType": "Tipo di contratto da disdire",
+      "contractTypes": {
+        "health": "Assicurazione malattia",
+        "car": "Assicurazione auto",
+        "household": "Assicurazione casa",
+        "life": "Assicurazione vita",
+        "legalProtection": "Protezione giuridica",
+        "other": "Altro"
+      },
+      "currentInsurer": "Assicuratore attuale",
+      "selectInsurer": "Seleziona il tuo assicuratore",
+      "policyNumber": "Numero di polizza (opzionale)",
+      "policyNumberHelp": "Lo trovi sul tuo contratto o sulle fatture",
+      "terminationDate": "Data di disdetta desiderata",
+      "reason": "Motivo della disdetta",
+      "reasons": {
+        "price": "Trovare un prezzo migliore",
+        "coverage": "Copertura insufficiente",
+        "service": "Servizio clienti insoddisfacente",
+        "moving": "Trasloco",
+        "other": "Altro motivo"
+      },
+      "generateLetter": "Genera la lettera di disdetta",
+      "letterGenerated": "Lettera generata con successo!",
+      "downloadLetter": "Scarica la lettera (PDF)"
+    },
+    "legalProtection": {
+      "title": "Confronto protezione giuridica",
+      "description": "Proteggi i tuoi diritti con la copertura giusta",
+      "coverageAreas": "Aree di copertura desiderate",
+      "areas": {
+        "traffic": "Circolazione stradale",
+        "contract": "Contratti e consumo",
+        "work": "Diritto del lavoro",
+        "housing": "Alloggio e affitto",
+        "family": "Diritto di famiglia",
+        "tax": "Diritto fiscale"
+      },
+      "hasExistingCoverage": "Hai già una protezione giuridica?",
+      "existingOptions": {
+        "no": "No, nessuna",
+        "partial": "Sì, ma incompleta",
+        "unsure": "Non lo so"
+      }
+    },
+    "loading": {
+      "analyzing": "Analisi del tuo profilo...",
+      "comparing": "Confronto delle offerte...",
+      "preparing": "Preparazione dei risultati..."
+    },
+    "results": {
+      "title": "Le tue offerte personalizzate",
+      "subtitle": "Basate sul tuo profilo",
+      "bestPrice": "Miglior prezzo",
+      "recommended": "Consigliato",
+      "bestValue": "Miglior rapporto qualità/prezzo",
+      "perMonth": "/mese",
+      "perYear": "/anno",
+      "coverage": "Copertura",
+      "franchise": "Franchigia",
+      "selectOffer": "Scegli questa offerta",
+      "requestCallback": "Richiedi richiamata",
+      "requestEmail": "Ricevi via email",
+      "talkToAdvisor": "Parla con un consulente"
+    }
   }
 }

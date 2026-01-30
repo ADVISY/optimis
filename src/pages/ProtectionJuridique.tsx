@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Scale, Shield, Clock, CheckCircle, Car, Heart, Home } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
@@ -5,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import LocalizedLink from "@/components/LocalizedLink";
 import llamaMascot from "@/assets/llama-mascot.png";
+import { LegalProtectionForm } from "@/components/forms";
 
 const partners = [
   { name: "Generali", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/general-1.svg" },
@@ -45,6 +47,8 @@ const ProtectionJuridique = () => {
     "legalProtection.top10Tips",
   ];
 
+  const [showForm, setShowForm] = useState(false);
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -62,7 +66,7 @@ const ProtectionJuridique = () => {
                 {t('legalProtection.heroSubtitle')}
               </h2>
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="gap-2">
+                <Button size="lg" className="gap-2" onClick={() => setShowForm(true)}>
                   <Scale className="h-5 w-5" />
                   {t('legalProtection.compareButton')}
                 </Button>
@@ -78,6 +82,15 @@ const ProtectionJuridique = () => {
           </div>
         </div>
       </section>
+
+      {/* Form Section */}
+      {showForm && (
+        <section className="py-16 bg-muted/30" id="form">
+          <div className="container">
+            <LegalProtectionForm />
+          </div>
+        </section>
+      )}
 
       {/* Quick Links */}
       <section className="py-8 bg-background border-b">
@@ -315,7 +328,10 @@ const ProtectionJuridique = () => {
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
                 {t('legalProtection.compareDescription')}
               </p>
-              <Button size="lg" className="gap-2">
+              <Button size="lg" className="gap-2" onClick={() => {
+                setShowForm(true);
+                document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' });
+              }}>
                 <Scale className="h-5 w-5" />
                 {t('legalProtection.requestQuote')}
               </Button>

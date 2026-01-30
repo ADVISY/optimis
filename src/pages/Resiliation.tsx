@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import LocalizedLink from "@/components/LocalizedLink";
 import llamaMascot from "@/assets/llama-mascot.png";
+import { TerminationForm } from "@/components/forms";
 
 const insurers = [
   { name: "Assura", slug: "assura" },
@@ -21,6 +22,7 @@ const insurers = [
 const Resiliation = () => {
   const { t } = useTranslation();
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [showForm, setShowForm] = useState(false);
 
   const tableOfContents = [
     { id: "deadlines", labelKey: "terminationDetailed.deadlinesTitle" },
@@ -58,7 +60,7 @@ const Resiliation = () => {
                 <li>• {t('termination.feature4')}</li>
               </ul>
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="gap-2">
+                <Button size="lg" className="gap-2" onClick={() => setShowForm(true)}>
                   <FileX className="h-5 w-5" />
                   {t('termination.startButton')}
                 </Button>
@@ -74,6 +76,15 @@ const Resiliation = () => {
           </div>
         </div>
       </section>
+
+      {/* Form Section */}
+      {showForm && (
+        <section className="py-16 bg-muted/30" id="form">
+          <div className="container">
+            <TerminationForm />
+          </div>
+        </section>
+      )}
 
       {/* Alert */}
       <section className="py-8">
@@ -242,10 +253,12 @@ const Resiliation = () => {
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
                 {t('termination.helpDescription')}
               </p>
-              <Button size="lg" asChild>
-                <a href="https://calendly.com" target="_blank" rel="noopener noreferrer">
-                  {t('common.takeAppointment')}
-                </a>
+              <Button size="lg" className="gap-2" onClick={() => {
+                setShowForm(true);
+                document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' });
+              }}>
+                <FileX className="h-5 w-5" />
+                {t('termination.startButton')}
               </Button>
             </CardContent>
           </Card>

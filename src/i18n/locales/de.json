@@ -636,5 +636,317 @@
       "jurisdictionTitle": "Gerichtsstand",
       "jurisdictionContent": "Diese Bedingungen unterliegen Schweizer Recht. Alle Streitigkeiten werden den zuständigen Gerichten in Genf, Schweiz, unterbreitet."
     }
+  },
+  "forms": {
+    "common": {
+      "step": "Schritt",
+      "of": "von",
+      "next": "Weiter",
+      "previous": "Zurück",
+      "submit": "Jetzt vergleichen",
+      "required": "Pflichtfeld",
+      "selectOption": "Option auswählen"
+    },
+    "contact": {
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "birthDate": "Geburtsdatum"
+    },
+    "healthInsurance": {
+      "title": "Krankenversicherungs-Vergleich",
+      "description": "Erhalten Sie die besten Angebote mit wenigen Klicks",
+      "canton": "Kanton",
+      "selectCanton": "Wählen Sie Ihren Kanton",
+      "postalCode": "Postleitzahl",
+      "personsToInsure": "Anzahl zu versichernder Personen",
+      "adults": "Erwachsene",
+      "children": "Kinder",
+      "model": "Versicherungsmodell",
+      "selectModel": "Modell auswählen",
+      "models": {
+        "standard": "Standard",
+        "hmo": "HMO",
+        "familyDoctor": "Hausarzt",
+        "telemedicine": "Telemedizin"
+      },
+      "franchise": "Franchise",
+      "accidentCoverage": "Unfalldeckung",
+      "accidentYes": "Ja, Unfall einschliessen",
+      "accidentNo": "Nein, Unfall ausschliessen",
+      "complementary": "Zusatzversicherungen",
+      "complementaryOptions": {
+        "dental": "Zahnpflege",
+        "hospitalization": "Hospitalisation",
+        "glasses": "Brillen & Kontaktlinsen",
+        "alternativeMedicine": "Alternativmedizin",
+        "worldwide": "Weltweite Deckung",
+        "fitness": "Fitness & Wellness"
+      },
+      "availability": "Erreichbarkeit für Kontaktaufnahme"
+    },
+    "carInsurance": {
+      "title": "Autoversicherungs-Vergleich",
+      "description": "Finden Sie den besten Schutz für Ihr Fahrzeug",
+      "vehicleInfo": "Fahrzeuginformationen",
+      "licensePlate": "Kennzeichen",
+      "or": "oder",
+      "vehicleBrand": "Marke",
+      "vehicleModel": "Modell",
+      "vehicleYear": "Jahr",
+      "selectBrand": "Marke auswählen",
+      "selectModel": "Modell auswählen",
+      "selectYear": "Jahr auswählen",
+      "usage": "Fahrzeugnutzung",
+      "usagePrivate": "Privat",
+      "usageProfessional": "Geschäftlich",
+      "annualMileage": "Jährliche Kilometerleistung",
+      "mileageOptions": {
+        "less5000": "Weniger als 5'000 km",
+        "5000to10000": "5'000 - 10'000 km",
+        "10000to15000": "10'000 - 15'000 km",
+        "15000to20000": "15'000 - 20'000 km",
+        "more20000": "Mehr als 20'000 km"
+      },
+      "driverInfo": "Fahrerinformationen",
+      "licenseYear": "Jahr des Führerscheinerwerbs",
+      "claimsLast5Years": "Schäden (letzte 5 Jahre)",
+      "claimsOptions": {
+        "none": "Keine",
+        "one": "1 Schaden",
+        "two": "2 Schäden",
+        "threeOrMore": "3 oder mehr"
+      },
+      "coverageType": "Deckungsart",
+      "coverageOptions": {
+        "rc": "Haftpflicht",
+        "partialCasco": "Teilkasko",
+        "fullCasco": "Vollkasko"
+      },
+      "additionalOptions": "Zusätzliche Optionen",
+      "options": {
+        "glassBreakage": "Glasbruch",
+        "assistance": "Pannenhilfe",
+        "replacementVehicle": "Ersatzfahrzeug"
+      }
+    },
+    "pillar3": {
+      "title": "3. Säule Vergleich",
+      "description": "Bereiten Sie Ihre Rente vor und sparen Sie Steuern",
+      "objective": "Hauptziel",
+      "objectives": {
+        "taxSavings": "Steuerersparnis",
+        "retirement": "Altersvorsorge",
+        "protection": "Familienschutz",
+        "mix": "Gemischte Ziele"
+      },
+      "professionalStatus": "Beruflicher Status",
+      "statuses": {
+        "employee": "Angestellt",
+        "selfEmployed": "Selbstständig",
+        "unemployed": "Arbeitslos",
+        "student": "Student"
+      },
+      "incomeRange": "Jährliche Einkommensspanne",
+      "incomeRanges": {
+        "less50k": "Weniger als 50'000 CHF",
+        "50to80k": "50'000 - 80'000 CHF",
+        "80to120k": "80'000 - 120'000 CHF",
+        "more120k": "Mehr als 120'000 CHF"
+      },
+      "savingsAmount": "Gewünschter Sparbetrag pro Jahr",
+      "horizon": "Anlagehorizont",
+      "horizons": {
+        "short": "Kurzfristig (< 5 Jahre)",
+        "medium": "Mittelfristig (5-15 Jahre)",
+        "long": "Langfristig (> 15 Jahre)"
+      },
+      "riskProfile": "Risikoprofil",
+      "riskProfiles": {
+        "conservative": "Konservativ",
+        "balanced": "Ausgewogen",
+        "dynamic": "Dynamisch"
+      }
+    },
+    "professionalInsurance": {
+      "title": "Versicherungen für Selbstständige",
+      "description": "Schützen Sie Ihre berufliche Tätigkeit",
+      "selectTypes": "Wählen Sie die gewünschten Versicherungen",
+      "types": {
+        "rcProfessional": "Berufshaftpflicht",
+        "lossOfEarnings": "Erwerbsausfall",
+        "laa": "UVG (Unfall)",
+        "lpp": "BVG (Vorsorge)",
+        "legalProtection": "Rechtsschutz",
+        "multiRisk": "Betriebsversicherung"
+      },
+      "activityType": "Art der Tätigkeit",
+      "activityPlaceholder": "z.B. Berater, Handwerker, Arzt...",
+      "legalForm": "Rechtsform",
+      "selectLegalForm": "Rechtsform auswählen",
+      "legalForms": {
+        "selfEmployed": "Einzelunternehmen",
+        "sarl": "GmbH",
+        "sa": "AG",
+        "snc": "Kollektivgesellschaft"
+      },
+      "employeesCount": "Anzahl Mitarbeiter",
+      "selectEmployees": "Anzahl auswählen",
+      "soloEntrepreneur": "Einzelunternehmer",
+      "message": "Nachricht oder Anmerkungen",
+      "messagePlaceholder": "Beschreiben Sie Ihre spezifischen Bedürfnisse..."
+    },
+    "mortgage": {
+      "title": "Hypotheken-Vergleich",
+      "description": "Finden Sie den besten Zinssatz für Ihr Immobilienprojekt",
+      "projectType": "Projektart",
+      "projectTypes": {
+        "acquisition": "Erwerb",
+        "renewal": "Verlängerung",
+        "refinancing": "Refinanzierung"
+      },
+      "propertyType": "Art der Immobilie",
+      "propertyTypes": {
+        "apartment": "Wohnung",
+        "house": "Haus",
+        "building": "Gebäude",
+        "other": "Andere"
+      },
+      "propertyValue": "Immobilienwert (CHF)",
+      "commune": "Gemeinde",
+      "borrowersCount": "Anzahl Kreditnehmer",
+      "professionalSituation": "Berufliche Situation",
+      "ownFunds": "Eigenmittel (CHF)",
+      "ownFundsRanges": {
+        "less100k": "Weniger als 100'000 CHF",
+        "100to200k": "100'000 - 200'000 CHF",
+        "200to500k": "200'000 - 500'000 CHF",
+        "more500k": "Mehr als 500'000 CHF"
+      }
+    },
+    "household": {
+      "title": "Hausratversicherungs-Vergleich",
+      "description": "Schützen Sie Ihr Zuhause und Ihre Besitztümer",
+      "housingType": "Wohnungsart",
+      "housingTypes": {
+        "apartment": "Wohnung",
+        "house": "Haus",
+        "studio": "Studio"
+      },
+      "ownershipStatus": "Status",
+      "statuses": {
+        "tenant": "Mieter",
+        "owner": "Eigentümer"
+      },
+      "livingSpace": "Wohnfläche (m²)",
+      "numberOfRooms": "Anzahl Zimmer",
+      "insuredValue": "Versicherungswert (CHF)",
+      "insuredValueHelp": "Geschätzter Wert Ihrer beweglichen Güter",
+      "includeCivilLiability": "Private Haftpflicht einschliessen",
+      "additionalCoverage": "Zusätzliche Deckungen",
+      "coverageOptions": {
+        "theft": "Einbruchdiebstahl",
+        "water": "Wasserschäden",
+        "glass": "Glasbruch",
+        "electronics": "Elektronische Geräte",
+        "bicycle": "Fahrrad",
+        "valuables": "Wertsachen"
+      }
+    },
+    "subsidy": {
+      "title": "Prämienverbilligung beantragen",
+      "description": "Prüfen Sie Ihre Berechtigung für kantonale Unterstützung",
+      "adultsCount": "Anzahl Erwachsene",
+      "childrenCount": "Anzahl Kinder",
+      "incomeRange": "Jährliches Haushaltseinkommen",
+      "selectIncome": "Wählen Sie Ihre Einkommensspanne",
+      "specialSituation": "Besondere Situation",
+      "situations": {
+        "none": "Keine besondere Situation",
+        "avs": "AHV-Bezüger",
+        "ai": "IV-Bezüger",
+        "student": "Student",
+        "unemployed": "Arbeitslos"
+      },
+      "eligible": "Sie sind wahrscheinlich berechtigt!",
+      "maybeEligible": "Sie könnten berechtigt sein",
+      "eligibleDescription": "Gemäss Ihren Angaben erfüllen Sie die Kriterien für eine Prämienverbilligung.",
+      "maybeEligibleDescription": "Ihre Situation erfordert eine genauere Analyse zur Feststellung Ihrer Berechtigung.",
+      "estimatedAmount": "Geschätzter Betrag",
+      "perMonth": "Monat",
+      "estimateNote": "Diese Schätzung ist indikativ und kann je nach Kanton variieren.",
+      "startApplication": "Antrag starten",
+      "downloadGuide": "Leitfaden herunterladen",
+      "contactNote": "Ein Berater wird Sie kontaktieren, um Ihren Antrag abzuschliessen."
+    },
+    "termination": {
+      "title": "Versicherung kündigen",
+      "description": "Kündigen Sie Ihren Vertrag einfach und schnell",
+      "contractType": "Art des zu kündigenden Vertrags",
+      "contractTypes": {
+        "health": "Krankenversicherung",
+        "car": "Autoversicherung",
+        "household": "Hausratversicherung",
+        "life": "Lebensversicherung",
+        "legalProtection": "Rechtsschutz",
+        "other": "Andere"
+      },
+      "currentInsurer": "Aktueller Versicherer",
+      "selectInsurer": "Wählen Sie Ihren Versicherer",
+      "policyNumber": "Policennummer (optional)",
+      "policyNumberHelp": "Sie finden diese auf Ihrem Vertrag oder Ihren Rechnungen",
+      "terminationDate": "Gewünschtes Kündigungsdatum",
+      "reason": "Kündigungsgrund",
+      "reasons": {
+        "price": "Günstigeres Angebot finden",
+        "coverage": "Unzureichende Deckung",
+        "service": "Unzufriedenheit mit Kundenservice",
+        "moving": "Umzug",
+        "other": "Anderer Grund"
+      },
+      "generateLetter": "Kündigungsschreiben erstellen",
+      "letterGenerated": "Schreiben erfolgreich erstellt!",
+      "downloadLetter": "Schreiben herunterladen (PDF)"
+    },
+    "legalProtection": {
+      "title": "Rechtsschutz-Vergleich",
+      "description": "Schützen Sie Ihre Rechte mit der richtigen Deckung",
+      "coverageAreas": "Gewünschte Deckungsbereiche",
+      "areas": {
+        "traffic": "Strassenverkehr",
+        "contract": "Verträge & Konsum",
+        "work": "Arbeitsrecht",
+        "housing": "Wohnung & Miete",
+        "family": "Familienrecht",
+        "tax": "Steuerrecht"
+      },
+      "hasExistingCoverage": "Haben Sie bereits einen Rechtsschutz?",
+      "existingOptions": {
+        "no": "Nein, keinen",
+        "partial": "Ja, aber unvollständig",
+        "unsure": "Ich weiss nicht"
+      }
+    },
+    "loading": {
+      "analyzing": "Analyse Ihres Profils...",
+      "comparing": "Vergleich der Angebote...",
+      "preparing": "Vorbereitung der Ergebnisse..."
+    },
+    "results": {
+      "title": "Ihre personalisierten Angebote",
+      "subtitle": "Basierend auf Ihrem Profil",
+      "bestPrice": "Bester Preis",
+      "recommended": "Empfohlen",
+      "bestValue": "Bestes Preis-Leistungs-Verhältnis",
+      "perMonth": "/Monat",
+      "perYear": "/Jahr",
+      "coverage": "Deckung",
+      "franchise": "Franchise",
+      "selectOffer": "Dieses Angebot wählen",
+      "requestCallback": "Rückruf anfordern",
+      "requestEmail": "Per E-Mail erhalten",
+      "talkToAdvisor": "Mit Berater sprechen"
+    }
   }
 }
