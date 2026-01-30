@@ -18,6 +18,24 @@
     "compareNow": "Comparer maintenant",
     "tableOfContents": "Sommaire"
   },
+  "megaMenu": {
+    "healthModel": "Quel modèle d'assurance maladie choisir ?",
+    "dentalInsurance": "Assurance dentaire complémentaire",
+    "healthChange2024": "Changement d'assurance maladie 2024",
+    "healthSubsidy": "Subside d'assurance maladie",
+    "compareAutoInsurance": "Comparer les assurances auto",
+    "legalProtectionSwitzerland": "Protection juridique en Suisse",
+    "homeInsurance7Things": "L'assurance ménage : les 7 choses à savoir",
+    "in2Minutes": "En 2 minutes",
+    "prepareRetirement": "Préparez votre retraite",
+    "save2700Taxes": "+ de 2700 CHF d'impôts",
+    "save7056Taxes": "Jusqu'à 7056 CHF d'impôts",
+    "mobileSubscriptions": "Abonnements de téléphone mobile",
+    "save200": "+ de 200 CHF d'économies",
+    "unlimitedWorld": "100% illimité dans le monde",
+    "requestSubsidy": "Demander un subside",
+    "terminateInsurance": "Résilier votre assurance"
+  },
   "nav": {
     "insurances": "Assurances",
     "finances": "Finances",

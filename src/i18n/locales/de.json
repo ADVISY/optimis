@@ -18,6 +18,24 @@
     "compareNow": "Jetzt vergleichen",
     "tableOfContents": "Inhaltsverzeichnis"
   },
+  "megaMenu": {
+    "healthModel": "Welches Krankenversicherungsmodell wählen?",
+    "dentalInsurance": "Zahnzusatzversicherung",
+    "healthChange2024": "Krankenversicherungswechsel 2024",
+    "healthSubsidy": "Prämienverbilligung",
+    "compareAutoInsurance": "Autoversicherungen vergleichen",
+    "legalProtectionSwitzerland": "Rechtsschutz in der Schweiz",
+    "homeInsurance7Things": "Hausratversicherung: 7 Dinge zu wissen",
+    "in2Minutes": "In 2 Minuten",
+    "prepareRetirement": "Bereiten Sie Ihre Rente vor",
+    "save2700Taxes": "Über 2700 CHF Steuern sparen",
+    "save7056Taxes": "Bis zu 7056 CHF Steuern sparen",
+    "mobileSubscriptions": "Mobilfunkabonnements",
+    "save200": "Über 200 CHF Ersparnis",
+    "unlimitedWorld": "100% weltweit unbegrenzt",
+    "requestSubsidy": "Prämienverbilligung beantragen",
+    "terminateInsurance": "Versicherung kündigen"
+  },
   "nav": {
     "insurances": "Versicherungen",
     "finances": "Finanzen",
