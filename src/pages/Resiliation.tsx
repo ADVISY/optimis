@@ -1,5 +1,6 @@
-import { FileX, Check, Clock, AlertTriangle } from "lucide-react";
+import { FileX, Check, AlertTriangle } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -19,12 +20,23 @@ const insurers = [
 
 const Resiliation = () => {
   const { t } = useTranslation();
+  const [activeSection, setActiveSection] = useState<string | null>(null);
 
-  const features = [
-    { icon: Clock, titleKey: "termination.deadlines", descKey: "termination.deadlinesDesc" },
-    { icon: FileX, titleKey: "termination.freeTemplates", descKey: "termination.freeTemplatesDesc" },
-    { icon: Check, titleKey: "termination.assistance", descKey: "termination.assistanceDesc" },
+  const tableOfContents = [
+    { id: "deadlines", labelKey: "terminationDetailed.deadlinesTitle" },
+    { id: "how-to", labelKey: "terminationDetailed.howToTitle" },
+    { id: "by-insurer", labelKey: "terminationDetailed.byInsurerTitle" },
+    { id: "templates", labelKey: "terminationDetailed.templatesTitle" },
+    { id: "faq", labelKey: "terminationDetailed.faqTitle" },
   ];
+
+  const scrollToSection = (id: string) => {
+    setActiveSection(id);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   return (
     <Layout>
@@ -63,27 +75,6 @@ const Resiliation = () => {
         </div>
       </section>
 
-      {/* Features */}
-      <section className="py-16">
-        <div className="container">
-          <div className="grid gap-6 md:grid-cols-3">
-            {features.map((feature) => (
-              <Card key={feature.titleKey}>
-                <CardContent className="flex items-start gap-4 p-6">
-                  <div className="rounded-full bg-primary/10 p-3">
-                    <feature.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground">{t(feature.titleKey)}</h3>
-                    <p className="text-sm text-muted-foreground">{t(feature.descKey)}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Alert */}
       <section className="py-8">
         <div className="container">
@@ -99,50 +90,142 @@ const Resiliation = () => {
         </div>
       </section>
 
-      {/* Content */}
-      <section className="py-16 bg-muted/30">
+      {/* Video Section */}
+      <section className="py-12 bg-muted/30">
         <div className="container">
-          <div className="max-w-3xl mx-auto">
-            <h3 className="text-2xl font-bold text-foreground mb-6">{t('termination.howToTerminate')}</h3>
-            <p className="text-muted-foreground mb-6">{t('termination.howToTerminateContent')}</p>
-            
-            <h4 className="text-xl font-semibold text-foreground mb-4">{t('termination.steps')}</h4>
-            <ol className="space-y-4 text-muted-foreground mb-8">
-              <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold">1</span>
-                {t('termination.step1')}
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold">2</span>
-                {t('termination.step2')}
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold">3</span>
-                {t('termination.step3')}
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold">4</span>
-                {t('termination.step4')}
-              </li>
-            </ol>
+          <div className="max-w-4xl mx-auto">
+            <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/9KQfrp1_lqg"
+                title="Optimis - Résiliation Assurance"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Insurers */}
+      {/* Content with Table of Contents */}
       <section className="py-16">
         <div className="container">
-          <h3 className="text-2xl font-bold text-center text-foreground mb-8">{t('termination.byInsurer')}</h3>
-          <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
-            {insurers.map((insurer) => (
-              <LocalizedLink key={insurer.slug} to={`/blog/tout-savoir-sur-la-resiliation-de-votre-assurance-${insurer.slug}`}>
-                <Card className="hover:border-primary transition-colors cursor-pointer h-full">
-                  <CardContent className="p-4 text-center flex items-center justify-center h-full">
-                    <p className="font-medium text-foreground">{insurer.name}</p>
+          <div className="grid gap-12 lg:grid-cols-[300px_1fr]">
+            {/* Table of Contents */}
+            <aside className="hidden lg:block">
+              <div className="sticky top-24 space-y-2">
+                <h3 className="font-semibold text-foreground mb-4">{t('common.tableOfContents')}</h3>
+                {tableOfContents.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`block w-full text-left px-4 py-2 rounded-lg transition-colors ${
+                      activeSection === item.id
+                        ? "bg-primary/10 text-primary font-medium"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    }`}
+                  >
+                    {t(item.labelKey, item.labelKey.split('.').pop())}
+                  </button>
+                ))}
+              </div>
+            </aside>
+
+            {/* Main Content */}
+            <div className="space-y-12">
+              <div id="deadlines" className="scroll-mt-24">
+                <h2 className="text-3xl font-bold text-foreground mb-6">{t('terminationDetailed.deadlinesTitle')}</h2>
+                <p className="text-muted-foreground mb-4">{t('terminationDetailed.deadlinesContent')}</p>
+                <Card className="bg-primary/5 border-primary/20">
+                  <CardContent className="p-6">
+                    <h4 className="font-semibold text-foreground mb-4">{t('terminationDetailed.keyDates')}</h4>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li>• {t('terminationDetailed.date1')}</li>
+                      <li>• {t('terminationDetailed.date2')}</li>
+                      <li>• {t('terminationDetailed.date3')}</li>
+                    </ul>
                   </CardContent>
                 </Card>
-              </LocalizedLink>
-            ))}
+              </div>
+
+              <div id="how-to" className="scroll-mt-24">
+                <h2 className="text-3xl font-bold text-foreground mb-6">{t('terminationDetailed.howToTitle')}</h2>
+                <p className="text-muted-foreground mb-4">{t('termination.howToTerminateContent')}</p>
+                <ol className="space-y-4">
+                  <li className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold">1</span>
+                    <span className="text-muted-foreground">{t('termination.step1')}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold">2</span>
+                    <span className="text-muted-foreground">{t('termination.step2')}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold">3</span>
+                    <span className="text-muted-foreground">{t('termination.step3')}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold">4</span>
+                    <span className="text-muted-foreground">{t('termination.step4')}</span>
+                  </li>
+                </ol>
+              </div>
+
+              <div id="by-insurer" className="scroll-mt-24">
+                <h2 className="text-3xl font-bold text-foreground mb-6">{t('terminationDetailed.byInsurerTitle')}</h2>
+                <p className="text-muted-foreground mb-6">{t('terminationDetailed.byInsurerContent')}</p>
+                <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
+                  {insurers.map((insurer) => (
+                    <LocalizedLink key={insurer.slug} to={`/blog/tout-savoir-sur-la-resiliation-de-votre-assurance-${insurer.slug}`}>
+                      <Card className="hover:border-primary transition-colors cursor-pointer h-full">
+                        <CardContent className="p-4 text-center flex items-center justify-center h-full">
+                          <p className="font-medium text-foreground">{insurer.name}</p>
+                        </CardContent>
+                      </Card>
+                    </LocalizedLink>
+                  ))}
+                </div>
+              </div>
+
+              <div id="templates" className="scroll-mt-24">
+                <h2 className="text-3xl font-bold text-foreground mb-6">{t('terminationDetailed.templatesTitle')}</h2>
+                <p className="text-muted-foreground mb-4">{t('terminationDetailed.templatesContent')}</p>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-2">
+                    <Check className="h-5 w-5 text-primary mt-0.5" />
+                    <span className="text-muted-foreground">{t('terminationDetailed.template1')}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="h-5 w-5 text-primary mt-0.5" />
+                    <span className="text-muted-foreground">{t('terminationDetailed.template2')}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="h-5 w-5 text-primary mt-0.5" />
+                    <span className="text-muted-foreground">{t('terminationDetailed.template3')}</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div id="faq" className="scroll-mt-24">
+                <h2 className="text-3xl font-bold text-foreground mb-6">{t('terminationDetailed.faqTitle')}</h2>
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2">{t('terminationDetailed.faq1Question')}</h4>
+                    <p className="text-muted-foreground">{t('terminationDetailed.faq1Answer')}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2">{t('terminationDetailed.faq2Question')}</h4>
+                    <p className="text-muted-foreground">{t('terminationDetailed.faq2Answer')}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2">{t('terminationDetailed.faq3Question')}</h4>
+                    <p className="text-muted-foreground">{t('terminationDetailed.faq3Answer')}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
