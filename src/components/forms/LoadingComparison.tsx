@@ -10,9 +10,9 @@ const LoadingComparison = ({ step = "analyzing" }: LoadingComparisonProps) => {
   const { t } = useTranslation();
 
   const steps = [
-    { key: "analyzing", icon: Search, label: t("comparison.loading.analyzing") },
-    { key: "comparing", icon: Shield, label: t("comparison.loading.comparing") },
-    { key: "preparing", icon: CheckCircle, label: t("comparison.loading.preparing") },
+    { key: "analyzing", icon: Search, label: t("forms.loading.analyzing") },
+    { key: "comparing", icon: Shield, label: t("forms.loading.comparing") },
+    { key: "preparing", icon: CheckCircle, label: t("forms.loading.preparing") },
   ];
 
   const currentIndex = steps.findIndex((s) => s.key === step);
@@ -28,7 +28,7 @@ const LoadingComparison = ({ step = "analyzing" }: LoadingComparisonProps) => {
 
       <div className="space-y-4 text-center">
         <h2 className="text-2xl font-bold text-foreground">
-          {t("comparison.loading.title")}
+          {t("forms.loading.title")}
         </h2>
         
         <div className="space-y-3">
@@ -65,7 +65,7 @@ const LoadingComparison = ({ step = "analyzing" }: LoadingComparisonProps) => {
       </div>
 
       <p className="text-sm text-muted-foreground max-w-md text-center">
-        {t("comparison.loading.message")}
+        {t("forms.loading.message")}
       </p>
     </div>
   );
