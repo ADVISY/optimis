@@ -1,23 +1,42 @@
-import { CreditCard, Check, Clock, FileText } from "lucide-react";
+import { CreditCard, Check, ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import LocalizedLink from "@/components/LocalizedLink";
 import llamaMascot from "@/assets/llama-mascot.png";
 
+const cantons = [
+  { name: "Vaud", slug: "vaud" },
+  { name: "Genève", slug: "geneve" },
+  { name: "Fribourg", slug: "fribourg" },
+  { name: "Valais", slug: "valais" },
+  { name: "Neuchâtel", slug: "neuchatel" },
+  { name: "Jura", slug: "jura" },
+  { name: "Berne", slug: "berne" },
+  { name: "Zurich", slug: "zurich" },
+];
+
 const Subside = () => {
   const { t } = useTranslation();
+  const [activeSection, setActiveSection] = useState<string | null>(null);
 
-  const features = [
-    { icon: CreditCard, titleKey: "subsidy.financialHelp", descKey: "subsidy.financialHelpDesc" },
-    { icon: Clock, titleKey: "subsidy.quickProcess", descKey: "subsidy.quickProcessDesc" },
-    { icon: FileText, titleKey: "subsidy.freeAssistance", descKey: "subsidy.freeAssistanceDesc" },
+  const tableOfContents = [
+    { id: "what-is", labelKey: "subsidyDetailed.whatIsSubsidy" },
+    { id: "eligibility", labelKey: "subsidyDetailed.eligibilityTitle" },
+    { id: "how-to-apply", labelKey: "subsidyDetailed.howToApply" },
+    { id: "by-canton", labelKey: "subsidyDetailed.byCantonTitle" },
+    { id: "amounts", labelKey: "subsidyDetailed.amountsTitle" },
   ];
 
-  const cantons = [
-    "Vaud", "Genève", "Fribourg", "Valais", "Neuchâtel", "Jura", "Berne", "Zurich"
-  ];
+  const scrollToSection = (id: string) => {
+    setActiveSection(id);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   return (
     <Layout>
@@ -56,68 +75,138 @@ const Subside = () => {
         </div>
       </section>
 
-      {/* Features */}
-      <section className="py-16">
+      {/* Video Section */}
+      <section className="py-12 bg-muted/30">
         <div className="container">
-          <div className="grid gap-6 md:grid-cols-3">
-            {features.map((feature) => (
-              <Card key={feature.titleKey}>
-                <CardContent className="flex items-start gap-4 p-6">
-                  <div className="rounded-full bg-primary/10 p-3">
-                    <feature.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground">{t(feature.titleKey)}</h3>
-                    <p className="text-sm text-muted-foreground">{t(feature.descKey)}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="max-w-4xl mx-auto">
+            <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/9KQfrp1_lqg"
+                title="Optimis - Subside Assurance Maladie"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Content */}
-      <section className="py-16 bg-muted/30">
-        <div className="container">
-          <div className="max-w-3xl mx-auto">
-            <h3 className="text-2xl font-bold text-foreground mb-6">{t('subsidy.whatIsSubsidy')}</h3>
-            <p className="text-muted-foreground mb-6">{t('subsidy.whatIsSubsidyContent')}</p>
-            
-            <h4 className="text-xl font-semibold text-foreground mb-4">{t('subsidy.eligibility')}</h4>
-            <ul className="space-y-3 text-muted-foreground mb-8">
-              <li className="flex items-start gap-2">
-                <Check className="h-5 w-5 text-primary mt-0.5" />
-                {t('subsidy.eligibility1')}
-              </li>
-              <li className="flex items-start gap-2">
-                <Check className="h-5 w-5 text-primary mt-0.5" />
-                {t('subsidy.eligibility2')}
-              </li>
-              <li className="flex items-start gap-2">
-                <Check className="h-5 w-5 text-primary mt-0.5" />
-                {t('subsidy.eligibility3')}
-              </li>
-            </ul>
-
-            <h4 className="text-xl font-semibold text-foreground mb-4">{t('subsidy.howToApply')}</h4>
-            <p className="text-muted-foreground mb-6">{t('subsidy.howToApplyContent')}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Cantons */}
+      {/* Content with Table of Contents */}
       <section className="py-16">
         <div className="container">
-          <h3 className="text-2xl font-bold text-center text-foreground mb-8">{t('subsidy.byCantonTitle')}</h3>
-          <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
-            {cantons.map((canton) => (
-              <Card key={canton} className="hover:border-primary transition-colors cursor-pointer">
-                <CardContent className="p-4 text-center">
-                  <p className="font-medium text-foreground">{canton}</p>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid gap-12 lg:grid-cols-[300px_1fr]">
+            {/* Table of Contents */}
+            <aside className="hidden lg:block">
+              <div className="sticky top-24 space-y-2">
+                <h3 className="font-semibold text-foreground mb-4">{t('common.tableOfContents')}</h3>
+                {tableOfContents.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`block w-full text-left px-4 py-2 rounded-lg transition-colors ${
+                      activeSection === item.id
+                        ? "bg-primary/10 text-primary font-medium"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    }`}
+                  >
+                    {t(item.labelKey, item.labelKey.split('.').pop())}
+                  </button>
+                ))}
+              </div>
+            </aside>
+
+            {/* Main Content */}
+            <div className="space-y-12">
+              <div id="what-is" className="scroll-mt-24">
+                <h2 className="text-3xl font-bold text-foreground mb-6">{t('subsidyDetailed.whatIsSubsidy')}</h2>
+                <p className="text-muted-foreground mb-4">{t('subsidyDetailed.whatIsSubsidyContent')}</p>
+                <Card className="bg-primary/5 border-primary/20">
+                  <CardContent className="p-6">
+                    <p className="text-lg font-semibold text-primary">{t('subsidyDetailed.savingsHighlight')}</p>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div id="eligibility" className="scroll-mt-24">
+                <h2 className="text-3xl font-bold text-foreground mb-6">{t('subsidyDetailed.eligibilityTitle')}</h2>
+                <p className="text-muted-foreground mb-4">{t('subsidyDetailed.eligibilityContent')}</p>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-2">
+                    <Check className="h-5 w-5 text-primary mt-0.5" />
+                    <span className="text-muted-foreground">{t('subsidy.eligibility1')}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="h-5 w-5 text-primary mt-0.5" />
+                    <span className="text-muted-foreground">{t('subsidy.eligibility2')}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="h-5 w-5 text-primary mt-0.5" />
+                    <span className="text-muted-foreground">{t('subsidy.eligibility3')}</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div id="how-to-apply" className="scroll-mt-24">
+                <h2 className="text-3xl font-bold text-foreground mb-6">{t('subsidyDetailed.howToApply')}</h2>
+                <p className="text-muted-foreground mb-4">{t('subsidyDetailed.howToApplyContent')}</p>
+                <ol className="space-y-4">
+                  <li className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold">1</span>
+                    <span className="text-muted-foreground">{t('subsidyDetailed.step1')}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold">2</span>
+                    <span className="text-muted-foreground">{t('subsidyDetailed.step2')}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold">3</span>
+                    <span className="text-muted-foreground">{t('subsidyDetailed.step3')}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold">4</span>
+                    <span className="text-muted-foreground">{t('subsidyDetailed.step4')}</span>
+                  </li>
+                </ol>
+              </div>
+
+              <div id="by-canton" className="scroll-mt-24">
+                <h2 className="text-3xl font-bold text-foreground mb-6">{t('subsidyDetailed.byCantonTitle')}</h2>
+                <p className="text-muted-foreground mb-6">{t('subsidyDetailed.byCantonContent')}</p>
+                <div className="grid gap-4 grid-cols-2 md:grid-cols-4">
+                  {cantons.map((canton) => (
+                    <LocalizedLink key={canton.slug} to={`/blog/le-subside-dassurance-maladie-a-${canton.slug}-mode-demploi`}>
+                      <Card className="hover:border-primary transition-colors cursor-pointer h-full">
+                        <CardContent className="p-4 text-center flex items-center justify-center h-full">
+                          <p className="font-medium text-foreground">{canton.name}</p>
+                        </CardContent>
+                      </Card>
+                    </LocalizedLink>
+                  ))}
+                </div>
+              </div>
+
+              <div id="amounts" className="scroll-mt-24">
+                <h2 className="text-3xl font-bold text-foreground mb-6">{t('subsidyDetailed.amountsTitle')}</h2>
+                <p className="text-muted-foreground mb-4">{t('subsidyDetailed.amountsContent')}</p>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-2">
+                    <ArrowRight className="h-5 w-5 text-primary mt-0.5" />
+                    <span className="text-muted-foreground">{t('subsidyDetailed.amountPoint1')}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <ArrowRight className="h-5 w-5 text-primary mt-0.5" />
+                    <span className="text-muted-foreground">{t('subsidyDetailed.amountPoint2')}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <ArrowRight className="h-5 w-5 text-primary mt-0.5" />
+                    <span className="text-muted-foreground">{t('subsidyDetailed.amountPoint3')}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </section>
