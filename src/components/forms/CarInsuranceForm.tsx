@@ -1,0 +1,472 @@
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import FormContainer from "@/components/forms/FormContainer";
+import FormStep from "@/components/forms/FormStep";
+import FormNavigation from "@/components/forms/FormNavigation";
+import FormFieldWrapper from "@/components/forms/FormField";
+import ComparisonResults from "@/components/forms/ComparisonResults";
+import LoadingComparison from "@/components/forms/LoadingComparison";
+import { useMultiStepForm } from "@/hooks/useMultiStepForm";
+import { useLeadSubmission } from "@/hooks/useLeadSubmission";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Slider } from "@/components/ui/slider";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { swissCantons, getCantonName } from "@/data/swissCantons";
+import { mockCarInsuranceOffers, InsuranceOffer } from "@/data/mockInsuranceData";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { CalendarIcon } from "lucide-react";
+import { format } from "date-fns";
+import { fr, de, it } from "date-fns/locale";
+import { cn } from "@/lib/utils";
+
+interface CarInsuranceFormData {
+  // Vehicle info
+  vehiclePlate: string;
+  vehicleBrand: string;
+  vehicleModel: string;
+  vehicleYear: string;
+  // Usage
+  usage: string;
+  annualKm: number;
+  // Driver info
+  driverBirthDate: Date | null;
+  licenseYear: string;
+  accidentsLast5Years: number;
+  // Coverage
+  coverageType: string;
+  // Options
+  options: {
+    glassBreakage: boolean;
+    assistance: boolean;
+    replacementVehicle: boolean;
+  };
+  // Contact
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  canton: string;
+}
+
+const TOTAL_STEPS = 5;
+
+const CarInsuranceForm = () => {
+  const { t, i18n } = useTranslation();
+  const [showResults, setShowResults] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
+
+  const getDateLocale = () => {
+    switch (i18n.language) {
+      case "de": return de;
+      case "it": return it;
+      default: return fr;
+    }
+  };
+
+  const initialData: CarInsuranceFormData = {
+    vehiclePlate: "",
+    vehicleBrand: "",
+    vehicleModel: "",
+    vehicleYear: "",
+    usage: "private",
+    annualKm: 10000,
+    driverBirthDate: null,
+    licenseYear: "",
+    accidentsLast5Years: 0,
+    coverageType: "rc-partial",
+    options: {
+      glassBreakage: false,
+      assistance: false,
+      replacementVehicle: false,
+    },
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    canton: "",
+  };
+
+  const { submitLead, isSubmitting } = useLeadSubmission({
+    formType: "car-insurance",
+  });
+
+  const {
+    currentStep,
+    formData,
+    isLastStep,
+    updateFormData,
+    nextStep,
+    previousStep,
+  } = useMultiStepForm({
+    initialData,
+    totalSteps: TOTAL_STEPS,
+    onSubmit: async (data) => {
+      await submitLead(data as unknown as Record<string, unknown>);
+    },
+  });
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    setLoadingStep("analyzing");
+    setTimeout(() => setLoadingStep("comparing"), 1000);
+    setTimeout(() => setLoadingStep("preparing"), 2000);
+    await submitLead(formData as unknown as Record<string, unknown>);
+    setTimeout(() => {
+      setIsLoading(false);
+      setShowResults(true);
+    }, 3000);
+  };
+
+  const handleNext = () => {
+    if (isLastStep) {
+      handleSubmit();
+    } else {
+      nextStep();
+    }
+  };
+
+  const handleSelectOffer = (offer: InsuranceOffer) => {
+    console.log("Selected offer:", offer);
+  };
+
+  const handleContactRequest = (offer: InsuranceOffer, type: "call" | "email") => {
+    console.log("Contact request:", offer, type);
+  };
+
+  if (isLoading) {
+    return (
+      <div className="max-w-2xl mx-auto">
+        <LoadingComparison step={loadingStep} />
+      </div>
+    );
+  }
+
+  if (showResults) {
+    return (
+      <div className="max-w-4xl mx-auto">
+        <ComparisonResults
+          offers={mockCarInsuranceOffers}
+          onSelectOffer={handleSelectOffer}
+          onContactRequest={handleContactRequest}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <FormContainer
+      title={t("forms.carInsurance.title")}
+      description={t("forms.carInsurance.description")}
+      currentStep={currentStep}
+      totalSteps={TOTAL_STEPS}
+    >
+      {/* Step 1: Vehicle */}
+      <FormStep isActive={currentStep === 1}>
+        <div className="space-y-4">
+          <FormFieldWrapper label={t("forms.carInsurance.vehiclePlate")} htmlFor="vehiclePlate">
+            <Input
+              id="vehiclePlate"
+              value={formData.vehiclePlate}
+              onChange={(e) => updateFormData({ vehiclePlate: e.target.value.toUpperCase() })}
+              placeholder="VD 123456"
+            />
+          </FormFieldWrapper>
+
+          <p className="text-sm text-muted-foreground text-center">{t("forms.carInsurance.orManual")}</p>
+
+          <div className="grid grid-cols-2 gap-4">
+            <FormFieldWrapper label={t("forms.carInsurance.brand")} htmlFor="vehicleBrand">
+              <Input
+                id="vehicleBrand"
+                value={formData.vehicleBrand}
+                onChange={(e) => updateFormData({ vehicleBrand: e.target.value })}
+                placeholder="Toyota, VW, BMW..."
+              />
+            </FormFieldWrapper>
+
+            <FormFieldWrapper label={t("forms.carInsurance.model")} htmlFor="vehicleModel">
+              <Input
+                id="vehicleModel"
+                value={formData.vehicleModel}
+                onChange={(e) => updateFormData({ vehicleModel: e.target.value })}
+                placeholder="Yaris, Golf, X3..."
+              />
+            </FormFieldWrapper>
+          </div>
+
+          <FormFieldWrapper label={t("forms.carInsurance.year")} htmlFor="vehicleYear">
+            <Select
+              value={formData.vehicleYear}
+              onValueChange={(value) => updateFormData({ vehicleYear: value })}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder={t("forms.carInsurance.selectYear")} />
+              </SelectTrigger>
+              <SelectContent>
+                {Array.from({ length: 30 }, (_, i) => new Date().getFullYear() - i).map((year) => (
+                  <SelectItem key={year} value={year.toString()}>
+                    {year}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </FormFieldWrapper>
+        </div>
+      </FormStep>
+
+      {/* Step 2: Usage */}
+      <FormStep isActive={currentStep === 2}>
+        <div className="space-y-6">
+          <FormFieldWrapper label={t("forms.carInsurance.usage")} required>
+            <RadioGroup
+              value={formData.usage}
+              onValueChange={(value) => updateFormData({ usage: value })}
+              className="grid gap-3"
+            >
+              <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+                <RadioGroupItem value="private" id="private" />
+                <Label htmlFor="private" className="cursor-pointer flex-1">
+                  {t("forms.carInsurance.usagePrivate")}
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+                <RadioGroupItem value="professional" id="professional" />
+                <Label htmlFor="professional" className="cursor-pointer flex-1">
+                  {t("forms.carInsurance.usageProfessional")}
+                </Label>
+              </div>
+            </RadioGroup>
+          </FormFieldWrapper>
+
+          <FormFieldWrapper
+            label={`${t("forms.carInsurance.annualKm")}: ${formData.annualKm.toLocaleString()} km`}
+          >
+            <Slider
+              value={[formData.annualKm]}
+              onValueChange={(value) => updateFormData({ annualKm: value[0] })}
+              min={5000}
+              max={50000}
+              step={1000}
+              className="py-4"
+            />
+            <div className="flex justify-between text-xs text-muted-foreground">
+              <span>5'000 km</span>
+              <span>50'000 km</span>
+            </div>
+          </FormFieldWrapper>
+        </div>
+      </FormStep>
+
+      {/* Step 3: Driver */}
+      <FormStep isActive={currentStep === 3}>
+        <div className="space-y-4">
+          <FormFieldWrapper label={t("forms.carInsurance.driverBirthDate")} required>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className={cn(
+                    "w-full justify-start text-left font-normal",
+                    !formData.driverBirthDate && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {formData.driverBirthDate
+                    ? format(formData.driverBirthDate, "PPP", { locale: getDateLocale() })
+                    : t("forms.healthInsurance.selectDate")}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={formData.driverBirthDate || undefined}
+                  onSelect={(date) => updateFormData({ driverBirthDate: date || null })}
+                  disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
+                  initialFocus
+                  className="pointer-events-auto"
+                />
+              </PopoverContent>
+            </Popover>
+          </FormFieldWrapper>
+
+          <FormFieldWrapper label={t("forms.carInsurance.licenseYear")} htmlFor="licenseYear" required>
+            <Select
+              value={formData.licenseYear}
+              onValueChange={(value) => updateFormData({ licenseYear: value })}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder={t("forms.carInsurance.selectLicenseYear")} />
+              </SelectTrigger>
+              <SelectContent>
+                {Array.from({ length: 60 }, (_, i) => new Date().getFullYear() - i).map((year) => (
+                  <SelectItem key={year} value={year.toString()}>
+                    {year}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </FormFieldWrapper>
+
+          <FormFieldWrapper
+            label={`${t("forms.carInsurance.accidents")}: ${formData.accidentsLast5Years}`}
+          >
+            <Slider
+              value={[formData.accidentsLast5Years]}
+              onValueChange={(value) => updateFormData({ accidentsLast5Years: value[0] })}
+              min={0}
+              max={5}
+              step={1}
+              className="py-4"
+            />
+            <div className="flex justify-between text-xs text-muted-foreground">
+              <span>0</span>
+              <span>5+</span>
+            </div>
+          </FormFieldWrapper>
+        </div>
+      </FormStep>
+
+      {/* Step 4: Coverage & Options */}
+      <FormStep isActive={currentStep === 4}>
+        <div className="space-y-6">
+          <FormFieldWrapper label={t("forms.carInsurance.coverage")} required>
+            <RadioGroup
+              value={formData.coverageType}
+              onValueChange={(value) => updateFormData({ coverageType: value })}
+              className="grid gap-3"
+            >
+              <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+                <RadioGroupItem value="rc" id="rc" />
+                <Label htmlFor="rc" className="cursor-pointer flex-1">
+                  <span className="font-medium">{t("forms.carInsurance.coverageRC")}</span>
+                  <p className="text-sm text-muted-foreground">{t("forms.carInsurance.coverageRCDesc")}</p>
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+                <RadioGroupItem value="rc-partial" id="rc-partial" />
+                <Label htmlFor="rc-partial" className="cursor-pointer flex-1">
+                  <span className="font-medium">{t("forms.carInsurance.coveragePartial")}</span>
+                  <p className="text-sm text-muted-foreground">{t("forms.carInsurance.coveragePartialDesc")}</p>
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+                <RadioGroupItem value="rc-full" id="rc-full" />
+                <Label htmlFor="rc-full" className="cursor-pointer flex-1">
+                  <span className="font-medium">{t("forms.carInsurance.coverageFull")}</span>
+                  <p className="text-sm text-muted-foreground">{t("forms.carInsurance.coverageFullDesc")}</p>
+                </Label>
+              </div>
+            </RadioGroup>
+          </FormFieldWrapper>
+
+          <div className="space-y-3">
+            <p className="font-medium">{t("forms.carInsurance.additionalOptions")}</p>
+            {[
+              { key: "glassBreakage", label: t("forms.carInsurance.options.glassBreakage") },
+              { key: "assistance", label: t("forms.carInsurance.options.assistance") },
+              { key: "replacementVehicle", label: t("forms.carInsurance.options.replacementVehicle") },
+            ].map((option) => (
+              <div key={option.key} className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-muted/50">
+                <Checkbox
+                  id={option.key}
+                  checked={formData.options[option.key as keyof typeof formData.options]}
+                  onCheckedChange={(checked) =>
+                    updateFormData({
+                      options: { ...formData.options, [option.key]: checked as boolean },
+                    })
+                  }
+                />
+                <Label htmlFor={option.key} className="cursor-pointer flex-1">
+                  {option.label}
+                </Label>
+              </div>
+            ))}
+          </div>
+        </div>
+      </FormStep>
+
+      {/* Step 5: Contact */}
+      <FormStep isActive={currentStep === 5}>
+        <div className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
+            <FormFieldWrapper label={t("forms.contact.firstName")} htmlFor="firstName" required>
+              <Input
+                id="firstName"
+                value={formData.firstName}
+                onChange={(e) => updateFormData({ firstName: e.target.value })}
+              />
+            </FormFieldWrapper>
+            <FormFieldWrapper label={t("forms.contact.lastName")} htmlFor="lastName" required>
+              <Input
+                id="lastName"
+                value={formData.lastName}
+                onChange={(e) => updateFormData({ lastName: e.target.value })}
+              />
+            </FormFieldWrapper>
+          </div>
+
+          <FormFieldWrapper label={t("forms.contact.email")} htmlFor="email" required>
+            <Input
+              id="email"
+              type="email"
+              value={formData.email}
+              onChange={(e) => updateFormData({ email: e.target.value })}
+            />
+          </FormFieldWrapper>
+
+          <FormFieldWrapper label={t("forms.contact.phone")} htmlFor="phone" required>
+            <Input
+              id="phone"
+              type="tel"
+              value={formData.phone}
+              onChange={(e) => updateFormData({ phone: e.target.value })}
+              placeholder="+41 79 123 45 67"
+            />
+          </FormFieldWrapper>
+
+          <FormFieldWrapper label={t("forms.healthInsurance.canton")} htmlFor="canton">
+            <Select
+              value={formData.canton}
+              onValueChange={(value) => updateFormData({ canton: value })}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
+              </SelectTrigger>
+              <SelectContent>
+                {swissCantons.map((canton) => (
+                  <SelectItem key={canton.code} value={canton.code}>
+                    {getCantonName(canton.code, i18n.language)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </FormFieldWrapper>
+        </div>
+      </FormStep>
+
+      <FormNavigation
+        currentStep={currentStep}
+        totalSteps={TOTAL_STEPS}
+        onPrevious={previousStep}
+        onNext={handleNext}
+        isSubmitting={isSubmitting}
+        isLastStep={isLastStep}
+        canProceed={true}
+      />
+    </FormContainer>
+  );
+};
+
+export default CarInsuranceForm;
