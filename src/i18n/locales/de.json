@@ -638,6 +638,13 @@
     }
   },
   "forms": {
+    "free": "100% kostenlos",
+    "secure": "Sichere Daten",
+    "noCommitment": "Ohne Verpflichtung",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "compare": "Vergleichen",
+    "processing": "Verarbeitung...",
     "common": {
       "step": "Schritt",
       "of": "von",
@@ -929,9 +936,11 @@
       }
     },
     "loading": {
+      "title": "Suche nach den besten Angeboten",
       "analyzing": "Analyse Ihres Profils...",
       "comparing": "Vergleich der Angebote...",
-      "preparing": "Vorbereitung der Ergebnisse..."
+      "preparing": "Vorbereitung der Ergebnisse...",
+      "message": "Wir analysieren Ihr Profil, um Ihnen die passendsten Angebote zu unterbreiten."
     },
     "results": {
       "title": "Ihre personalisierten Angebote",

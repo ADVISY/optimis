@@ -670,6 +670,13 @@
     }
   },
   "forms": {
+    "free": "100% gratuit",
+    "secure": "Données sécurisées",
+    "noCommitment": "Sans engagement",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "compare": "Comparer",
+    "processing": "Traitement...",
     "common": {
       "step": "Étape",
       "of": "sur",
@@ -961,9 +968,11 @@
       }
     },
     "loading": {
+      "title": "Recherche des meilleures offres",
       "analyzing": "Analyse de votre profil...",
       "comparing": "Comparaison des offres...",
-      "preparing": "Préparation des résultats..."
+      "preparing": "Préparation des résultats...",
+      "message": "Nous analysons votre profil pour vous proposer les offres les plus adaptées."
     },
     "results": {
       "title": "Vos offres personnalisées",

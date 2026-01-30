@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import ScrollToTop from "@/components/ScrollToTop";
 import { useTranslation } from "react-i18next";
 import Index from "./pages/Index";
 import Blog from "./pages/Blog";
@@ -96,6 +97,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           {/* Root redirect to French */}
           <Route path="/" element={<Navigate to="/fr" replace />} />
