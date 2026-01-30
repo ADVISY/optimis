@@ -1,4 +1,4 @@
-import { Scale, Shield, Clock, CheckCircle, Car, Heart, Home, Banknote } from "lucide-react";
+import { Scale, Shield, Clock, CheckCircle, Car, Heart, Home } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -37,10 +37,12 @@ const ProtectionJuridique = () => {
 
   const tableOfContents = [
     "legalProtection.whatIsLegalProtection",
-    "legalProtection.coverageTypes",
+    "legalProtection.typesOfProtection",
+    "legalProtection.guarantees",
+    "legalProtection.prices",
     "legalProtection.whyNeedIt",
-    "legalProtection.howToChoose",
-    "legalProtection.costs",
+    "legalProtection.terminationContract",
+    "legalProtection.top10Tips",
   ];
 
   return (
@@ -136,6 +138,27 @@ const ProtectionJuridique = () => {
         </div>
       </section>
 
+      {/* Video Section */}
+      <section className="py-12 bg-muted/30">
+        <div className="container">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold text-foreground mb-2">{t('legalProtection.watchVideo')}</h3>
+              <p className="text-muted-foreground">{t('legalProtection.videoDescription')}</p>
+            </div>
+            <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg">
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/Q_HiE7yxfBE"
+                title="Protection Juridique Optimis"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Content Section */}
       <section className="py-16">
         <div className="container">
@@ -148,7 +171,7 @@ const ProtectionJuridique = () => {
                     <Clock className="h-5 w-5 text-primary" />
                     <span className="text-sm text-muted-foreground">{t('common.readingTime')}</span>
                   </div>
-                  <p className="text-2xl font-bold text-primary mb-6">4 {t('common.min')}</p>
+                  <p className="text-2xl font-bold text-primary mb-6">5 {t('common.min')}</p>
                   <nav className="space-y-2">
                     {tableOfContents.map((item, index) => (
                       <a
@@ -169,40 +192,91 @@ const ProtectionJuridique = () => {
               <section id="section-0" className="mb-12">
                 <h3 className="text-2xl font-bold text-foreground">{t('legalProtection.whatIsLegalProtection')}</h3>
                 <p className="text-muted-foreground">{t('legalProtection.whatIsLegalProtectionContent')}</p>
+                <p className="text-muted-foreground mt-4">{t('legalProtection.whatIsLegalProtectionContent2')}</p>
+                <p className="text-muted-foreground mt-4">{t('legalProtection.whatIsLegalProtectionContent3')}</p>
               </section>
 
               <section id="section-1" className="mb-12">
-                <h3 className="text-2xl font-bold text-foreground">{t('legalProtection.coverageTypes')}</h3>
-                <p className="text-muted-foreground">{t('legalProtection.coverageTypesContent')}</p>
+                <h3 className="text-2xl font-bold text-foreground">{t('legalProtection.typesOfProtection')}</h3>
+                <p className="text-muted-foreground">{t('legalProtection.typesContent')}</p>
                 <div className="bg-muted/50 p-6 rounded-lg my-6">
-                  <ul className="space-y-2 text-muted-foreground">
-                    <li>• {t('legalProtection.coverage1')}</li>
-                    <li>• {t('legalProtection.coverage2')}</li>
-                    <li>• {t('legalProtection.coverage3')}</li>
-                    <li>• {t('legalProtection.coverage4')}</li>
-                    <li>• {t('legalProtection.coverage5')}</li>
+                  <ul className="space-y-4 text-muted-foreground">
+                    <li>• <strong>{t('legalProtection.typeCirculation')}</strong> {t('legalProtection.typeCirculationDesc')}</li>
+                    <li>• <strong>{t('legalProtection.typeEnterprise')}</strong> {t('legalProtection.typeEnterpriseDesc')}</li>
+                    <li>• <strong>{t('legalProtection.typePrivate')}</strong> {t('legalProtection.typePrivateDesc')}</li>
                   </ul>
+                </div>
+                <div className="bg-primary/5 p-6 rounded-lg my-6">
+                  <p className="text-muted-foreground italic">{t('legalProtection.typesNote')}</p>
                 </div>
               </section>
 
               <section id="section-2" className="mb-12">
-                <h3 className="text-2xl font-bold text-foreground">{t('legalProtection.whyNeedIt')}</h3>
-                <p className="text-muted-foreground">{t('legalProtection.whyNeedItContent')}</p>
+                <h3 className="text-2xl font-bold text-foreground">{t('legalProtection.guarantees')}</h3>
+                <div className="grid md:grid-cols-2 gap-6 my-6">
+                  <div className="bg-green-50 dark:bg-green-950/20 p-6 rounded-lg">
+                    <h4 className="font-semibold text-foreground mb-4">{t('legalProtection.covered')}</h4>
+                    <ul className="space-y-2 text-muted-foreground text-sm">
+                      <li>✓ {t('legalProtection.coveredItem1')}</li>
+                      <li>✓ {t('legalProtection.coveredItem2')}</li>
+                      <li>✓ {t('legalProtection.coveredItem3')}</li>
+                      <li>✓ {t('legalProtection.coveredItem4')}</li>
+                      <li>✓ {t('legalProtection.coveredItem5')}</li>
+                      <li>✓ {t('legalProtection.coveredItem6')}</li>
+                      <li>✓ {t('legalProtection.coveredItem7')}</li>
+                    </ul>
+                  </div>
+                  <div className="bg-red-50 dark:bg-red-950/20 p-6 rounded-lg">
+                    <h4 className="font-semibold text-foreground mb-4">{t('legalProtection.notCovered')}</h4>
+                    <ul className="space-y-2 text-muted-foreground text-sm">
+                      <li>✗ {t('legalProtection.notCoveredItem1')}</li>
+                      <li>✗ {t('legalProtection.notCoveredItem2')}</li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="bg-primary/5 p-6 rounded-lg my-6">
+                  <p className="text-muted-foreground italic">{t('legalProtection.guaranteesNote')}</p>
+                </div>
               </section>
 
               <section id="section-3" className="mb-12">
-                <h3 className="text-2xl font-bold text-foreground">{t('legalProtection.howToChoose')}</h3>
-                <p className="text-muted-foreground">{t('legalProtection.howToChooseContent')}</p>
-                <ul className="space-y-2 text-muted-foreground my-4">
-                  <li>• {t('legalProtection.criteria1')}</li>
-                  <li>• {t('legalProtection.criteria2')}</li>
-                  <li>• {t('legalProtection.criteria3')}</li>
-                </ul>
+                <h3 className="text-2xl font-bold text-foreground">{t('legalProtection.prices')}</h3>
+                <p className="text-muted-foreground">{t('legalProtection.pricesContent')}</p>
               </section>
 
               <section id="section-4" className="mb-12">
-                <h3 className="text-2xl font-bold text-foreground">{t('legalProtection.costs')}</h3>
-                <p className="text-muted-foreground">{t('legalProtection.costsContent')}</p>
+                <h3 className="text-2xl font-bold text-foreground">{t('legalProtection.whyNeedIt')}</h3>
+                <ul className="space-y-4 text-muted-foreground my-4">
+                  <li>• {t('legalProtection.whyReason1')}</li>
+                  <li>• {t('legalProtection.whyReason2')}</li>
+                </ul>
+                <div className="bg-primary/5 p-6 rounded-lg my-6">
+                  <p className="text-muted-foreground italic">{t('legalProtection.waitingPeriodNote')}</p>
+                </div>
+              </section>
+
+              <section id="section-5" className="mb-12">
+                <h3 className="text-2xl font-bold text-foreground">{t('legalProtection.terminationContract')}</h3>
+                <p className="text-muted-foreground">{t('legalProtection.terminationContent')}</p>
+                <p className="text-muted-foreground mt-4">{t('legalProtection.terminationContent2')}</p>
+              </section>
+
+              <section id="section-6" className="mb-12">
+                <h3 className="text-2xl font-bold text-foreground">{t('legalProtection.top10Tips')}</h3>
+                <div className="bg-muted/50 p-6 rounded-lg my-6">
+                  <ol className="space-y-3 text-muted-foreground list-decimal list-inside">
+                    <li>{t('legalProtection.tip1')}</li>
+                    <li>{t('legalProtection.tip2')}</li>
+                    <li>{t('legalProtection.tip3')}</li>
+                    <li>{t('legalProtection.tip4')}</li>
+                    <li>{t('legalProtection.tip5')}</li>
+                    <li>{t('legalProtection.tip6')}</li>
+                    <li>{t('legalProtection.tip7')}</li>
+                    <li>{t('legalProtection.tip8')}</li>
+                    <li>{t('legalProtection.tip9')}</li>
+                    <li>{t('legalProtection.tip10')}</li>
+                  </ol>
+                </div>
               </section>
             </div>
           </div>

@@ -140,6 +140,27 @@ const AssuranceVie = () => {
         </div>
       </section>
 
+      {/* Video Section */}
+      <section className="py-12 bg-muted/30">
+        <div className="container">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold text-foreground mb-2">{t('lifeInsurance.watchVideo')}</h3>
+              <p className="text-muted-foreground">{t('lifeInsurance.videoDescription')}</p>
+            </div>
+            <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg">
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/Q_HiE7yxfBE"
+                title="Assurance Vie Optimis"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Content Section */}
       <section className="py-16">
         <div className="container">
