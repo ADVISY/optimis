@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Home, Shield, Clock, CheckCircle, Car, Heart, Scale, Play } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
@@ -5,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import LocalizedLink from "@/components/LocalizedLink";
 import llamaMascot from "@/assets/llama-mascot.png";
+import { HouseholdInsuranceForm } from "@/components/forms";
 
 const partners = [
   { name: "La Mobilière", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/images.png" },
@@ -46,6 +48,8 @@ const AssuranceMenage = () => {
     "homeInsurance.optimisHelps",
   ];
 
+  const [showForm, setShowForm] = useState(false);
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -63,7 +67,7 @@ const AssuranceMenage = () => {
                 {t('homeInsurance.heroSubtitle')}
               </h2>
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="gap-2">
+                <Button size="lg" className="gap-2" onClick={() => setShowForm(true)}>
                   <Home className="h-5 w-5" />
                   {t('homeInsurance.compareButton')}
                 </Button>
@@ -79,6 +83,15 @@ const AssuranceMenage = () => {
           </div>
         </div>
       </section>
+
+      {/* Form Section */}
+      {showForm && (
+        <section className="py-16 bg-muted/30" id="form">
+          <div className="container">
+            <HouseholdInsuranceForm />
+          </div>
+        </section>
+      )}
 
       {/* Quick Links */}
       <section className="py-8 bg-background border-b">
@@ -300,7 +313,10 @@ const AssuranceMenage = () => {
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
                 {t('homeInsurance.compareDescription')}
               </p>
-              <Button size="lg" className="gap-2">
+              <Button size="lg" className="gap-2" onClick={() => {
+                setShowForm(true);
+                document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' });
+              }}>
                 <Home className="h-5 w-5" />
                 {t('homeInsurance.requestQuote')}
               </Button>
