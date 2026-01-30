@@ -24,6 +24,17 @@ import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
 import { languages } from "./i18n";
 
+// Comparator pages
+import ComparateurSante from "./pages/comparateurs/ComparateurSante";
+import ComparateurVoiture from "./pages/comparateurs/ComparateurVoiture";
+import ComparateurMenage from "./pages/comparateurs/ComparateurMenage";
+import ComparateurProtectionJuridique from "./pages/comparateurs/ComparateurProtectionJuridique";
+import ComparateurSubside from "./pages/comparateurs/ComparateurSubside";
+import ComparateurResiliation from "./pages/comparateurs/ComparateurResiliation";
+import ComparateurPilier3 from "./pages/comparateurs/ComparateurPilier3";
+import ComparateurHypotheque from "./pages/comparateurs/ComparateurHypotheque";
+import ComparateurProfessionnel from "./pages/comparateurs/ComparateurProfessionnel";
+
 const queryClient = new QueryClient();
 
 // Wrapper component to handle language from URL
@@ -61,6 +72,18 @@ const LanguageRoutes = () => {
         <Route path="/politique-confidentialite" element={<PrivacyPolicy />} />
         <Route path="/mentions-legales" element={<LegalNotice />} />
         <Route path="/cgu" element={<TermsOfService />} />
+        
+        {/* Comparator routes */}
+        <Route path="/comparateur/sante" element={<ComparateurSante />} />
+        <Route path="/comparateur/voiture" element={<ComparateurVoiture />} />
+        <Route path="/comparateur/menage" element={<ComparateurMenage />} />
+        <Route path="/comparateur/protection-juridique" element={<ComparateurProtectionJuridique />} />
+        <Route path="/comparateur/subside" element={<ComparateurSubside />} />
+        <Route path="/comparateur/resiliation" element={<ComparateurResiliation />} />
+        <Route path="/comparateur/pilier-3a" element={<ComparateurPilier3 />} />
+        <Route path="/comparateur/hypotheque" element={<ComparateurHypotheque />} />
+        <Route path="/comparateur/professionnel" element={<ComparateurProfessionnel />} />
+        
         <Route path="*" element={<NotFound />} />
       </Routes>
     </LanguageWrapper>

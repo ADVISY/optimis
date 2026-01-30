@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Car, Heart, Scale, Home, Clock } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -6,7 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import llamaMascot from "@/assets/llama-mascot.png";
 import { useTranslation } from "react-i18next";
 import LocalizedLink from "@/components/LocalizedLink";
-import { CarInsuranceForm } from "@/components/forms";
+import { useNavigate } from "react-router-dom";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 
 const partners = [
   { name: "AXA", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/0001_0003782804_2-640.jpg" },
@@ -18,6 +18,8 @@ const partners = [
 
 const AssuranceVoiture = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { localizedPath } = useLocalizedPath();
 
   const quickLinks = [
     { labelKey: "nav.carInsurance", href: "/assurance-voiture", icon: Car },
@@ -40,7 +42,9 @@ const AssuranceVoiture = () => {
     "carInsurance.bonusMalus",
   ];
 
-  const [showForm, setShowForm] = useState(false);
+  const handleCompareClick = () => {
+    navigate(localizedPath("/comparateur/voiture"));
+  };
 
   return (
     <Layout>
@@ -59,7 +63,7 @@ const AssuranceVoiture = () => {
                 {t('carInsurance.heroSubtitle')}
               </h2>
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="gap-2" onClick={() => setShowForm(true)}>
+                <Button size="lg" className="gap-2" onClick={handleCompareClick}>
                   <Car className="h-5 w-5" />
                   {t('healthInsurance.compareButton')}
                 </Button>
@@ -75,15 +79,6 @@ const AssuranceVoiture = () => {
           </div>
         </div>
       </section>
-
-      {/* Form Section */}
-      {showForm && (
-        <section className="py-16 bg-muted/30" id="form">
-          <div className="container">
-            <CarInsuranceForm />
-          </div>
-        </section>
-      )}
 
       {/* Quick Links */}
       <section className="py-8 bg-background border-b">
@@ -292,10 +287,7 @@ const AssuranceVoiture = () => {
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
                 {t('carInsurance.getEstimate')}
               </p>
-              <Button size="lg" className="gap-2" onClick={() => {
-                setShowForm(true);
-                document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' });
-              }}>
+              <Button size="lg" className="gap-2" onClick={handleCompareClick}>
                 <Car className="h-5 w-5" />
                 {t('healthInsurance.compareNow')}
               </Button>
