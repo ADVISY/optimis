@@ -696,6 +696,12 @@
     "carInsurance": {
       "title": "Confronto assicurazione auto",
       "description": "Trova la migliore protezione per il tuo veicolo",
+      "vehiclePlate": "Targa",
+      "orManual": "o inserisci manualmente",
+      "brand": "Marca",
+      "model": "Modello",
+      "year": "Anno",
+      "selectYear": "Seleziona anno",
       "vehicleInfo": "Informazioni veicolo",
       "licensePlate": "Targa",
       "or": "o",
@@ -704,10 +710,10 @@
       "vehicleYear": "Anno",
       "selectBrand": "Seleziona marca",
       "selectModel": "Seleziona modello",
-      "selectYear": "Seleziona anno",
       "usage": "Utilizzo del veicolo",
       "usagePrivate": "Privato",
       "usageProfessional": "Professionale",
+      "annualKm": "Chilometraggio annuo",
       "annualMileage": "Chilometraggio annuo",
       "mileageOptions": {
         "less5000": "Meno di 5'000 km",
@@ -716,8 +722,11 @@
         "15000to20000": "15'000 - 20'000 km",
         "more20000": "Più di 20'000 km"
       },
+      "driverBirthDate": "Data di nascita del conducente",
       "driverInfo": "Informazioni conducente",
       "licenseYear": "Anno di conseguimento patente",
+      "selectLicenseYear": "Seleziona anno",
+      "accidents": "Sinistri (ultimi 5 anni)",
       "claimsLast5Years": "Sinistri (ultimi 5 anni)",
       "claimsOptions": {
         "none": "Nessuno",
@@ -725,6 +734,13 @@
         "two": "2 sinistri",
         "threeOrMore": "3 o più"
       },
+      "coverage": "Tipo di copertura",
+      "coverageRC": "Responsabilità civile (RC)",
+      "coverageRCDesc": "Copertura minima obbligatoria",
+      "coveragePartial": "Casco parziale",
+      "coveragePartialDesc": "RC + furto, incendio, rottura vetri, eventi naturali",
+      "coverageFull": "Casco completa",
+      "coverageFullDesc": "Casco parziale + danni propri",
       "coverageType": "Tipo di copertura",
       "coverageOptions": {
         "rc": "Responsabilità civile (RC)",
@@ -743,12 +759,21 @@
       "description": "Prepara la tua pensione e risparmia sulle tasse",
       "objective": "Obiettivo principale",
       "objectives": {
+        "tax": "Risparmio fiscale",
         "taxSavings": "Risparmio fiscale",
         "retirement": "Preparazione pensione",
         "protection": "Protezione famiglia",
         "mix": "Obiettivi misti"
       },
+      "age": "La tua età",
       "professionalStatus": "Stato professionale",
+      "selectStatus": "Seleziona stato",
+      "status": {
+        "employee": "Dipendente",
+        "selfEmployed": "Indipendente",
+        "executive": "Dirigente",
+        "student": "Studente"
+      },
       "statuses": {
         "employee": "Dipendente",
         "selfEmployed": "Indipendente",
@@ -756,13 +781,20 @@
         "student": "Studente"
       },
       "incomeRange": "Fascia di reddito annuo",
+      "selectIncome": "Seleziona reddito",
       "incomeRanges": {
         "less50k": "Meno di 50'000 CHF",
         "50to80k": "50'000 - 80'000 CHF",
         "80to120k": "80'000 - 120'000 CHF",
         "more120k": "Più di 120'000 CHF"
       },
-      "savingsAmount": "Importo di risparmio desiderato all'anno",
+      "savingsAmount": "Importo di risparmio desiderato",
+      "selectAmount": "Seleziona importo",
+      "perMonth": "mese",
+      "maxAmount": "7056 CHF/anno",
+      "investmentHorizon": "Orizzonte di investimento",
+      "selectHorizon": "Seleziona orizzonte",
+      "years": "anni",
       "horizon": "Orizzonte di investimento",
       "horizons": {
         "short": "Breve termine (< 5 anni)",
@@ -770,6 +802,12 @@
         "long": "Lungo termine (> 15 anni)"
       },
       "riskProfile": "Profilo di rischio",
+      "risks": {
+        "conservative": "Conservativo",
+        "moderate": "Moderato",
+        "dynamic": "Dinamico",
+        "aggressive": "Aggressivo"
+      },
       "riskProfiles": {
         "conservative": "Conservativo",
         "balanced": "Bilanciato",
@@ -919,15 +957,32 @@
     "legalProtection": {
       "title": "Confronto protezione giuridica",
       "description": "Proteggi i tuoi diritti con la copertura giusta",
+      "coverageType": "Tipo di copertura",
+      "types": {
+        "complete": "Protezione completa",
+        "completeDesc": "Copertura in tutti i settori: circolazione, lavoro, alloggio, consumo",
+        "traffic": "Protezione circolazione",
+        "trafficDesc": "Copertura specifica per controversie stradali",
+        "custom": "Protezione personalizzata",
+        "customDesc": "Scegli i settori secondo le tue esigenze"
+      },
+      "selectAreas": "Seleziona le aree di copertura",
       "coverageAreas": "Aree di copertura desiderate",
       "areas": {
         "traffic": "Circolazione stradale",
-        "contract": "Contratti e consumo",
+        "private": "Vita privata",
         "work": "Diritto del lavoro",
+        "property": "Proprietà",
+        "tenant": "Inquilino",
+        "contract": "Contratti e consumo",
         "housing": "Alloggio e affitto",
         "family": "Diritto di famiglia",
         "tax": "Diritto fiscale"
       },
+      "householdSize": "Dimensione del nucleo familiare",
+      "single": "Persona singola",
+      "couple": "Coppia",
+      "family": "Famiglia",
       "hasExistingCoverage": "Hai già una protezione giuridica?",
       "existingOptions": {
         "no": "No, nessuna",

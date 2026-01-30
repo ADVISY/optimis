@@ -696,6 +696,12 @@
     "carInsurance": {
       "title": "Autoversicherungs-Vergleich",
       "description": "Finden Sie den besten Schutz für Ihr Fahrzeug",
+      "vehiclePlate": "Kennzeichen",
+      "orManual": "oder manuell eingeben",
+      "brand": "Marke",
+      "model": "Modell",
+      "year": "Jahr",
+      "selectYear": "Jahr auswählen",
       "vehicleInfo": "Fahrzeuginformationen",
       "licensePlate": "Kennzeichen",
       "or": "oder",
@@ -704,10 +710,10 @@
       "vehicleYear": "Jahr",
       "selectBrand": "Marke auswählen",
       "selectModel": "Modell auswählen",
-      "selectYear": "Jahr auswählen",
       "usage": "Fahrzeugnutzung",
       "usagePrivate": "Privat",
       "usageProfessional": "Geschäftlich",
+      "annualKm": "Jährliche Kilometerleistung",
       "annualMileage": "Jährliche Kilometerleistung",
       "mileageOptions": {
         "less5000": "Weniger als 5'000 km",
@@ -716,8 +722,11 @@
         "15000to20000": "15'000 - 20'000 km",
         "more20000": "Mehr als 20'000 km"
       },
+      "driverBirthDate": "Geburtsdatum des Fahrers",
       "driverInfo": "Fahrerinformationen",
       "licenseYear": "Jahr des Führerscheinerwerbs",
+      "selectLicenseYear": "Jahr auswählen",
+      "accidents": "Schäden (letzte 5 Jahre)",
       "claimsLast5Years": "Schäden (letzte 5 Jahre)",
       "claimsOptions": {
         "none": "Keine",
@@ -725,6 +734,13 @@
         "two": "2 Schäden",
         "threeOrMore": "3 oder mehr"
       },
+      "coverage": "Deckungsart",
+      "coverageRC": "Haftpflicht",
+      "coverageRCDesc": "Obligatorische Mindestdeckung",
+      "coveragePartial": "Teilkasko",
+      "coveragePartialDesc": "Haftpflicht + Diebstahl, Brand, Glasbruch, Naturereignisse",
+      "coverageFull": "Vollkasko",
+      "coverageFullDesc": "Teilkasko + Eigenschäden",
       "coverageType": "Deckungsart",
       "coverageOptions": {
         "rc": "Haftpflicht",
@@ -743,12 +759,21 @@
       "description": "Bereiten Sie Ihre Rente vor und sparen Sie Steuern",
       "objective": "Hauptziel",
       "objectives": {
+        "tax": "Steuerersparnis",
         "taxSavings": "Steuerersparnis",
         "retirement": "Altersvorsorge",
         "protection": "Familienschutz",
         "mix": "Gemischte Ziele"
       },
+      "age": "Ihr Alter",
       "professionalStatus": "Beruflicher Status",
+      "selectStatus": "Status auswählen",
+      "status": {
+        "employee": "Angestellt",
+        "selfEmployed": "Selbstständig",
+        "executive": "Führungskraft",
+        "student": "Student"
+      },
       "statuses": {
         "employee": "Angestellt",
         "selfEmployed": "Selbstständig",
@@ -756,13 +781,20 @@
         "student": "Student"
       },
       "incomeRange": "Jährliche Einkommensspanne",
+      "selectIncome": "Einkommen auswählen",
       "incomeRanges": {
         "less50k": "Weniger als 50'000 CHF",
         "50to80k": "50'000 - 80'000 CHF",
         "80to120k": "80'000 - 120'000 CHF",
         "more120k": "Mehr als 120'000 CHF"
       },
-      "savingsAmount": "Gewünschter Sparbetrag pro Jahr",
+      "savingsAmount": "Gewünschter Sparbetrag",
+      "selectAmount": "Betrag auswählen",
+      "perMonth": "Monat",
+      "maxAmount": "7056 CHF/Jahr",
+      "investmentHorizon": "Anlagehorizont",
+      "selectHorizon": "Horizont auswählen",
+      "years": "Jahre",
       "horizon": "Anlagehorizont",
       "horizons": {
         "short": "Kurzfristig (< 5 Jahre)",
@@ -770,6 +802,12 @@
         "long": "Langfristig (> 15 Jahre)"
       },
       "riskProfile": "Risikoprofil",
+      "risks": {
+        "conservative": "Konservativ",
+        "moderate": "Moderat",
+        "dynamic": "Dynamisch",
+        "aggressive": "Aggressiv"
+      },
       "riskProfiles": {
         "conservative": "Konservativ",
         "balanced": "Ausgewogen",
@@ -919,15 +957,32 @@
     "legalProtection": {
       "title": "Rechtsschutz-Vergleich",
       "description": "Schützen Sie Ihre Rechte mit der richtigen Deckung",
+      "coverageType": "Art der Deckung",
+      "types": {
+        "complete": "Vollständiger Schutz",
+        "completeDesc": "Deckung in allen Bereichen: Verkehr, Arbeit, Wohnung, Konsum",
+        "traffic": "Verkehrsschutz",
+        "trafficDesc": "Spezifische Deckung für Strassenverkehrsstreitigkeiten",
+        "custom": "Individueller Schutz",
+        "customDesc": "Wählen Sie die Bereiche nach Ihren Bedürfnissen"
+      },
+      "selectAreas": "Wählen Sie die Deckungsbereiche",
       "coverageAreas": "Gewünschte Deckungsbereiche",
       "areas": {
         "traffic": "Strassenverkehr",
-        "contract": "Verträge & Konsum",
+        "private": "Privatleben",
         "work": "Arbeitsrecht",
+        "property": "Eigentum",
+        "tenant": "Mieter",
+        "contract": "Verträge & Konsum",
         "housing": "Wohnung & Miete",
         "family": "Familienrecht",
         "tax": "Steuerrecht"
       },
+      "householdSize": "Haushaltsgrösse",
+      "single": "Einzelperson",
+      "couple": "Paar",
+      "family": "Familie",
       "hasExistingCoverage": "Haben Sie bereits einen Rechtsschutz?",
       "existingOptions": {
         "no": "Nein, keinen",

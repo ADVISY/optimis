@@ -699,6 +699,7 @@
       "canton": "Canton",
       "selectCanton": "Sélectionnez votre canton",
       "postalCode": "Code postal",
+      "selectDate": "Sélectionnez une date",
       "personsToInsure": "Nombre de personnes à assurer",
       "adults": "Adultes",
       "children": "Enfants",
@@ -728,6 +729,12 @@
     "carInsurance": {
       "title": "Comparateur d'assurance voiture",
       "description": "Trouvez la meilleure protection pour votre véhicule",
+      "vehiclePlate": "Plaque d'immatriculation",
+      "orManual": "ou saisissez manuellement",
+      "brand": "Marque",
+      "model": "Modèle",
+      "year": "Année",
+      "selectYear": "Sélectionnez l'année",
       "vehicleInfo": "Informations véhicule",
       "licensePlate": "Plaque d'immatriculation",
       "or": "ou",
@@ -736,10 +743,10 @@
       "vehicleYear": "Année",
       "selectBrand": "Sélectionnez une marque",
       "selectModel": "Sélectionnez un modèle",
-      "selectYear": "Sélectionnez l'année",
       "usage": "Utilisation du véhicule",
       "usagePrivate": "Privée",
       "usageProfessional": "Professionnelle",
+      "annualKm": "Kilométrage annuel",
       "annualMileage": "Kilométrage annuel",
       "mileageOptions": {
         "less5000": "Moins de 5'000 km",
@@ -748,8 +755,11 @@
         "15000to20000": "15'000 - 20'000 km",
         "more20000": "Plus de 20'000 km"
       },
+      "driverBirthDate": "Date de naissance du conducteur",
       "driverInfo": "Informations conducteur",
       "licenseYear": "Année d'obtention du permis",
+      "selectLicenseYear": "Sélectionnez l'année",
+      "accidents": "Sinistres (5 dernières années)",
       "claimsLast5Years": "Sinistres (5 dernières années)",
       "claimsOptions": {
         "none": "Aucun",
@@ -757,6 +767,13 @@
         "two": "2 sinistres",
         "threeOrMore": "3 ou plus"
       },
+      "coverage": "Type de couverture",
+      "coverageRC": "Responsabilité civile (RC)",
+      "coverageRCDesc": "Couverture obligatoire minimale",
+      "coveragePartial": "Casco partielle",
+      "coveragePartialDesc": "RC + vol, incendie, bris de glace, événements naturels",
+      "coverageFull": "Casco complète",
+      "coverageFullDesc": "Casco partielle + dommages propres",
       "coverageType": "Type de couverture",
       "coverageOptions": {
         "rc": "Responsabilité civile (RC)",
@@ -775,12 +792,21 @@
       "description": "Préparez votre retraite et économisez sur vos impôts",
       "objective": "Objectif principal",
       "objectives": {
+        "tax": "Économies d'impôts",
         "taxSavings": "Économies d'impôts",
         "retirement": "Préparation retraite",
         "protection": "Protection famille",
         "mix": "Objectifs mixtes"
       },
+      "age": "Votre âge",
       "professionalStatus": "Statut professionnel",
+      "selectStatus": "Sélectionnez votre statut",
+      "status": {
+        "employee": "Salarié",
+        "selfEmployed": "Indépendant",
+        "executive": "Cadre dirigeant",
+        "student": "Étudiant"
+      },
       "statuses": {
         "employee": "Salarié",
         "selfEmployed": "Indépendant",
@@ -788,13 +814,20 @@
         "student": "Étudiant"
       },
       "incomeRange": "Tranche de revenu annuel",
+      "selectIncome": "Sélectionnez votre revenu",
       "incomeRanges": {
         "less50k": "Moins de 50'000 CHF",
         "50to80k": "50'000 - 80'000 CHF",
         "80to120k": "80'000 - 120'000 CHF",
         "more120k": "Plus de 120'000 CHF"
       },
-      "savingsAmount": "Montant d'épargne souhaité par an",
+      "savingsAmount": "Montant d'épargne souhaité",
+      "selectAmount": "Sélectionnez un montant",
+      "perMonth": "mois",
+      "maxAmount": "7056 CHF/an",
+      "investmentHorizon": "Horizon de placement",
+      "selectHorizon": "Sélectionnez un horizon",
+      "years": "ans",
       "horizon": "Horizon de placement",
       "horizons": {
         "short": "Court terme (< 5 ans)",
@@ -802,6 +835,12 @@
         "long": "Long terme (> 15 ans)"
       },
       "riskProfile": "Profil de risque",
+      "risks": {
+        "conservative": "Conservateur",
+        "moderate": "Modéré",
+        "dynamic": "Dynamique",
+        "aggressive": "Agressif"
+      },
       "riskProfiles": {
         "conservative": "Conservateur",
         "balanced": "Équilibré",
@@ -840,12 +879,18 @@
       "title": "Comparateur hypothécaire",
       "description": "Trouvez le meilleur taux pour votre projet immobilier",
       "projectType": "Type de projet",
+      "projects": {
+        "acquisition": "Acquisition",
+        "renewal": "Renouvellement",
+        "refinancing": "Refinancement"
+      },
       "projectTypes": {
         "acquisition": "Acquisition",
         "renewal": "Renouvellement",
         "refinancing": "Refinancement"
       },
       "propertyType": "Type de bien",
+      "selectPropertyType": "Sélectionnez le type de bien",
       "propertyTypes": {
         "apartment": "Appartement",
         "house": "Maison",
@@ -854,8 +899,18 @@
       },
       "propertyValue": "Valeur du bien (CHF)",
       "commune": "Commune",
+      "numberOfBorrowers": "Nombre d'emprunteurs",
+      "person": "personne",
+      "persons": "personnes",
       "borrowersCount": "Nombre d'emprunteurs",
+      "professionalStatus": "Situation professionnelle",
       "professionalSituation": "Situation professionnelle",
+      "incomeRange": "Revenu annuel",
+      "ownFundsRange": "Fonds propres",
+      "selectOwnFunds": "Sélectionnez vos fonds propres",
+      "status": {
+        "retired": "Retraité"
+      },
       "ownFunds": "Fonds propres (CHF)",
       "ownFundsRanges": {
         "less100k": "Moins de 100'000 CHF",
@@ -863,6 +918,19 @@
         "200to500k": "200'000 - 500'000 CHF",
         "more500k": "Plus de 500'000 CHF"
       }
+    },
+    "householdInsurance": {
+      "title": "Comparateur assurance ménage",
+      "description": "Protégez votre foyer et vos biens",
+      "propertyType": "Type de logement",
+      "ownershipStatus": "Statut de propriété",
+      "tenant": "Locataire",
+      "owner": "Propriétaire",
+      "livingSpace": "Surface habitable (m²)",
+      "numberOfRooms": "Nombre de pièces",
+      "selectRooms": "Sélectionnez le nombre de pièces",
+      "propertyValue": "Valeur des biens à assurer",
+      "selectValue": "Sélectionnez une tranche de valeur"
     },
     "household": {
       "title": "Comparateur assurance ménage",
@@ -951,15 +1019,32 @@
     "legalProtection": {
       "title": "Comparateur protection juridique",
       "description": "Protégez vos droits avec la bonne couverture",
+      "coverageType": "Type de couverture",
+      "types": {
+        "complete": "Protection complète",
+        "completeDesc": "Couverture tous domaines : circulation, travail, logement, consommation",
+        "traffic": "Protection circulation",
+        "trafficDesc": "Couverture spécifique pour les litiges liés à la route",
+        "custom": "Protection personnalisée",
+        "customDesc": "Choisissez les domaines selon vos besoins"
+      },
+      "selectAreas": "Sélectionnez les domaines de couverture",
       "coverageAreas": "Domaines de couverture souhaités",
       "areas": {
         "traffic": "Circulation routière",
-        "contract": "Contrats & consommation",
+        "private": "Vie privée",
         "work": "Droit du travail",
+        "property": "Propriété",
+        "tenant": "Locataire",
+        "contract": "Contrats & consommation",
         "housing": "Logement & bail",
         "family": "Droit de la famille",
         "tax": "Droit fiscal"
       },
+      "householdSize": "Taille du ménage",
+      "single": "Personne seule",
+      "couple": "Couple",
+      "family": "Famille",
       "hasExistingCoverage": "Avez-vous déjà une protection juridique ?",
       "existingOptions": {
         "no": "Non, aucune",
