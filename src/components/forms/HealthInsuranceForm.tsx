@@ -302,7 +302,7 @@ const HealthInsuranceForm = () => {
         <div className="space-y-6">
           <div className="space-y-4">
             {formData.persons.map((person, index) => (
-              <Card key={person.id} className="bg-white/10 border-white/20 backdrop-blur-sm">
+              <Card key={person.id} className="bg-white/20 border-white/30 backdrop-blur-sm">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-4">
                     <span className="font-medium text-white">
@@ -346,7 +346,7 @@ const HealthInsuranceForm = () => {
               type="button"
               variant="outline"
               onClick={() => addPerson("adult")}
-              className="flex-1 gap-2 bg-white/10 text-white border-white/30 hover:bg-white/20 backdrop-blur-sm"
+              className="flex-1 gap-2 bg-white/20 text-white border-white/40 hover:bg-white/30 backdrop-blur-sm"
             >
               <Plus className="h-4 w-4" />
               {t("forms.healthInsurance.addAdult")}
@@ -355,7 +355,7 @@ const HealthInsuranceForm = () => {
               type="button"
               variant="outline"
               onClick={() => addPerson("child")}
-              className="flex-1 gap-2 bg-white/10 text-white border-white/30 hover:bg-white/20 backdrop-blur-sm"
+              className="flex-1 gap-2 bg-white/20 text-white border-white/40 hover:bg-white/30 backdrop-blur-sm"
             >
               <Plus className="h-4 w-4" />
               {t("forms.healthInsurance.addChild")}
@@ -368,7 +368,7 @@ const HealthInsuranceForm = () => {
       <FormStep isActive={currentStep === 3}>
         <div className="space-y-6">
           {/* LAMal Model Card */}
-          <Card className="bg-white/10 border-white/20 backdrop-blur-sm">
+          <Card className="bg-white/20 border-white/30 backdrop-blur-sm">
             <CardContent className="p-5">
               <Label className="text-sm font-semibold text-white mb-4 block">
                 {t("forms.healthInsurance.lamalModel")}
@@ -385,7 +385,7 @@ const HealthInsuranceForm = () => {
                   { value: "hmo", label: t("forms.healthInsurance.models.hmo") },
                   { value: "telemed", label: t("forms.healthInsurance.models.telemed") },
                 ].map((model) => (
-                  <div key={model.value} className="flex items-center space-x-2 p-3 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+                  <div key={model.value} className="flex items-center space-x-2 p-3 rounded-lg bg-white/20 hover:bg-white/30 transition-colors">
                     <RadioGroupItem value={model.value} id={model.value} />
                     <Label htmlFor={model.value} className="cursor-pointer text-white">
                       {model.label}
@@ -397,7 +397,7 @@ const HealthInsuranceForm = () => {
           </Card>
 
           {/* Franchise Card */}
-          <Card className="bg-white/10 border-white/20 backdrop-blur-sm">
+          <Card className="bg-white/20 border-white/30 backdrop-blur-sm">
             <CardContent className="p-5">
               <Label className="text-sm font-semibold text-white mb-2 block">
                 {t("forms.healthInsurance.franchise")}
@@ -425,7 +425,7 @@ const HealthInsuranceForm = () => {
           </Card>
 
           {/* Accident Coverage Card */}
-          <Card className="bg-white/10 border-white/20 backdrop-blur-sm">
+          <Card className="bg-white/20 border-white/30 backdrop-blur-sm">
             <CardContent className="p-5">
               <div className="flex items-center space-x-3">
                 <Checkbox
@@ -463,10 +463,10 @@ const HealthInsuranceForm = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* BASIC */}
             <Card 
-              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-white/10 backdrop-blur-sm ${
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-white/20 backdrop-blur-sm ${
                 formData.complementaryTier === "basic" 
-                  ? "ring-2 ring-white border-white/50" 
-                  : "border-white/20 hover:border-white/40"
+                  ? "ring-2 ring-white border-white/60" 
+                  : "border-white/30 hover:border-white/50"
               }`}
               onClick={() => updateFormData({ 
                 complementaryTier: formData.complementaryTier === "basic" ? null : "basic",
@@ -476,7 +476,7 @@ const HealthInsuranceForm = () => {
               })}
             >
               <CardContent className="p-4 text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20 mb-3">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/30 mb-3">
                   <span className="text-white text-xl font-bold">B</span>
                 </div>
                 <h4 className="font-bold text-lg text-white">BASIC</h4>
@@ -494,10 +494,10 @@ const HealthInsuranceForm = () => {
 
             {/* PREMIUM */}
             <Card 
-              className={`cursor-pointer transition-all duration-200 hover:shadow-md relative bg-white/10 backdrop-blur-sm ${
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md relative bg-white/20 backdrop-blur-sm ${
                 formData.complementaryTier === "premium" 
                   ? "ring-2 ring-violet-400 border-violet-400" 
-                  : "border-white/20 hover:border-violet-400"
+                  : "border-white/30 hover:border-violet-400"
               }`}
               onClick={() => updateFormData({ 
                 complementaryTier: formData.complementaryTier === "premium" ? null : "premium",
@@ -530,10 +530,10 @@ const HealthInsuranceForm = () => {
 
             {/* DIAMOND */}
             <Card 
-              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-white/10 backdrop-blur-sm ${
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-white/20 backdrop-blur-sm ${
                 formData.complementaryTier === "diamond" 
                   ? "ring-2 ring-amber-400 border-amber-400" 
-                  : "border-white/20 hover:border-amber-400"
+                  : "border-white/30 hover:border-amber-400"
               }`}
               onClick={() => updateFormData({ 
                 complementaryTier: formData.complementaryTier === "diamond" ? null : "diamond",
@@ -569,7 +569,7 @@ const HealthInsuranceForm = () => {
                 complementaryTier: null,
                 complementary: { dental: false, hospitalization: false, glasses: false, alternativeMedicine: false, worldwide: false }
               })}
-              className="text-white/70 hover:text-white hover:bg-white/10"
+              className="text-white/80 hover:text-white hover:bg-white/20"
             >
               {t("forms.healthInsurance.skipComplementary", "Continuer sans complémentaire")}
             </Button>
@@ -577,7 +577,7 @@ const HealthInsuranceForm = () => {
 
           {/* Selected tier details */}
           {formData.complementaryTier && (
-            <Card className="bg-white/10 border-white/20 backdrop-blur-sm">
+            <Card className="bg-white/20 border-white/30 backdrop-blur-sm">
               <CardContent className="p-4">
                 <h5 className="font-semibold mb-3 text-sm text-white">
                   {t("forms.healthInsurance.includedInPackage", "Inclus dans votre package")} {formData.complementaryTier.toUpperCase()}:
@@ -694,7 +694,7 @@ const HealthInsuranceForm = () => {
             />
           </FormFieldWrapper>
 
-          <div className="bg-white/10 border border-white/20 rounded-xl p-4 text-center backdrop-blur-sm">
+          <div className="bg-white/20 border border-white/30 rounded-xl p-4 text-center backdrop-blur-sm">
             <p className="text-sm text-white/80">
               🔒 {t("forms.contact.privacyNote", "Vos données sont protégées et ne seront jamais partagées.")}
             </p>
