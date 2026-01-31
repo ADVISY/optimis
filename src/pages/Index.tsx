@@ -74,61 +74,51 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="gradient-optimis pt-16 pb-32 md:pt-24 md:pb-40 lg:pt-32 lg:pb-48 overflow-hidden relative">
-        <div className="container">
-          <div className="grid items-center gap-8 md:grid-cols-2">
-            <div className="space-y-6 animate-fade-in z-10 relative">
+      <section className="gradient-optimis pt-12 md:pt-16 lg:pt-20 pb-24 md:pb-28 lg:pb-32 overflow-hidden relative">
+        <div className="container relative">
+          <div className="grid items-start gap-8 md:grid-cols-2 min-h-[400px] md:min-h-[500px] lg:min-h-[550px]">
+            <div className="space-y-6 animate-fade-in z-10 relative pt-4 md:pt-8">
               {/* 5 Gold Stars */}
               <div className="flex gap-1">
                 {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-accent text-2xl">★</span>
+                  <span key={i} className="text-accent text-xl md:text-2xl">★</span>
                 ))}
               </div>
-              <h1 className="font-heading text-4xl font-black leading-tight text-foreground uppercase md:text-5xl lg:text-6xl xl:text-7xl">
+              <h1 className="font-heading text-3xl font-black leading-[1.1] text-foreground uppercase md:text-4xl lg:text-5xl xl:text-6xl">
                 <span className="block">{t('home.heroLine1')}</span>
                 <span className="block">{t('home.heroLine2')}</span>
-                <span className="block text-gradient-optimis">{t('home.heroLine3')}</span>
+                <span className="block">{t('home.heroLine3')}</span>
               </h1>
-              <p className="text-lg text-muted-foreground md:text-xl max-w-lg">
+              <p className="text-base text-muted-foreground md:text-lg max-w-md">
                 {t('home.heroSubtitle')}
               </p>
-              <div className="flex flex-wrap gap-4 pt-2">
-                <Button asChild size="lg" className="text-base px-8 py-6 rounded-xl">
-                  <LocalizedLink to="/assurance-sante">
-                    {t('common.compareNow')}
-                  </LocalizedLink>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="text-base px-8 py-6 rounded-xl border-2">
-                  <LocalizedLink to="/blog">
-                    {t('common.readMore')}
-                  </LocalizedLink>
-                </Button>
-              </div>
             </div>
-            <div className="flex justify-center md:justify-end relative">
+            
+            {/* Mascot - positioned to be cut by selection bar */}
+            <div className="absolute right-0 bottom-0 translate-y-16 md:translate-y-20 lg:translate-y-24 flex justify-end md:relative md:translate-y-0">
               <img
                 src={mascotPointing}
                 alt="Mascotte Optimis"
-                className="h-[350px] w-auto animate-fade-in md:h-[500px] lg:h-[600px] xl:h-[700px] drop-shadow-2xl"
+                className="h-[280px] w-auto animate-fade-in md:h-[400px] lg:h-[500px] xl:h-[580px] object-contain object-bottom md:absolute md:right-0 md:bottom-0 md:translate-y-20 lg:translate-y-24"
               />
             </div>
           </div>
         </div>
         
-        {/* Quick Selection Bar - Overlapping */}
-        <div className="container absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20">
+        {/* Quick Selection Bar - Overlapping mascot */}
+        <div className="container relative z-20 mt-4 md:mt-0">
           <div className="bg-background rounded-2xl shadow-xl p-4 md:p-6 border">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
               {insuranceCards.map((card) => (
                 <LocalizedLink
                   key={card.href}
                   to={card.href}
-                  className="flex items-center gap-3 p-3 md:p-4 rounded-xl transition-all hover:bg-secondary group"
+                  className="flex items-center gap-2 md:gap-3 p-3 md:p-4 rounded-xl transition-all hover:bg-secondary group"
                 >
                   <div className={`${card.color} transition-transform group-hover:scale-110`}>
-                    <card.icon className="h-6 w-6 md:h-7 md:w-7" />
+                    <card.icon className="h-5 w-5 md:h-6 md:w-6" />
                   </div>
-                  <span className="font-medium text-sm md:text-base text-foreground">
+                  <span className="font-medium text-xs md:text-sm lg:text-base text-foreground">
                     {t(card.titleKey)}
                   </span>
                 </LocalizedLink>
@@ -137,9 +127,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-      
-      {/* Spacer for the overlapping bar */}
-      <div className="h-16 md:h-20"></div>
 
       {/* Insurance Selector */}
       <section className="py-16 md:py-20">
