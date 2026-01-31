@@ -102,6 +102,20 @@
     font-family: 'Ruda', system-ui, -apple-system, sans-serif;
     font-size: 1.125rem; /* 18px base */
     line-height: 1.7;
+    /* Ensure the app starts at the very top (prevents template flex-centering) */
+    display: block !important;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  #root {
+    width: 100%;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   h1, h2, h3, h4, h5, h6 {
