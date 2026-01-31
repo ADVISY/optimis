@@ -45,7 +45,7 @@ const Resiliation = () => {
   };
 
   const handleCompareClick = () => {
-    navigate(localizedPath("/comparateur/resiliation"));
+    navigate(localizedPath("/resiliation-assurance"));
   };
 
   return (

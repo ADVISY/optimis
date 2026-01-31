@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -6,6 +6,7 @@ import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { getBlogPostBySlug, blogPosts } from "@/data/blogPosts";
 import { parseWordPressContent } from "@/utils/parseWordPressContent";
 import NotFound from "./NotFound";
+import LocalizedLink from "@/components/LocalizedLink";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -29,14 +30,14 @@ const BlogPost = () => {
   return (
     <Layout>
       {/* Header with title */}
-      <section className="bg-emerald-50 py-8 md:py-12">
+      <section className="bg-secondary/20 py-8 md:py-12">
         <div className="container">
-          <Link to="/blog">
+          <LocalizedLink to="/blog">
             <Button variant="ghost" size="sm" className="mb-4 gap-2 text-muted-foreground hover:text-foreground">
               <ArrowLeft className="h-4 w-4" />
               Retour au blog
             </Button>
-          </Link>
+          </LocalizedLink>
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="mb-4 text-2xl font-bold uppercase tracking-tight text-foreground md:text-3xl lg:text-4xl">
               {post.title}
@@ -47,7 +48,7 @@ const BlogPost = () => {
 
       {/* Featured Image - Full width within container */}
       {post.image && (
-        <section className="bg-emerald-50 pb-8">
+        <section className="bg-secondary/20 pb-8">
           <div className="container">
             <div className="mx-auto max-w-4xl overflow-hidden rounded-xl">
               <img
@@ -82,7 +83,7 @@ const BlogPost = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button size="lg" asChild>
-              <Link to="/">Comparer maintenant</Link>
+              <LocalizedLink to="/">Comparer maintenant</LocalizedLink>
             </Button>
             <Button size="lg" variant="outline" asChild>
               <a
@@ -106,7 +107,7 @@ const BlogPost = () => {
             </h2>
             <div className="grid gap-6 md:grid-cols-3">
               {relatedPosts.map((relatedPost) => (
-                <Link key={relatedPost.id} to={`/blog/${relatedPost.slug}`}>
+                <LocalizedLink key={relatedPost.id} to={`/blog/${relatedPost.slug}`}>
                   <div className="rounded-lg border p-4 transition-all hover:border-primary hover:shadow-md">
                     <Badge variant="secondary" className="mb-2 text-xs">
                       {relatedPost.category}
@@ -118,7 +119,7 @@ const BlogPost = () => {
                       {relatedPost.excerpt}
                     </p>
                   </div>
-                </Link>
+                </LocalizedLink>
               ))}
             </div>
           </div>

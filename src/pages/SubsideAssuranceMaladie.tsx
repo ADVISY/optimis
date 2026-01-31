@@ -45,7 +45,7 @@ const Subside = () => {
   };
 
   const handleCompareClick = () => {
-    navigate(localizedPath("/comparateur/subside"));
+    navigate(localizedPath("/subside-assurance-maladie-demande"));
   };
 
   return (

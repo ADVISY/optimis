@@ -33,7 +33,7 @@ const Hypotheque = () => {
   };
 
   const handleCompareClick = () => {
-    navigate(localizedPath("/comparateur/hypotheque"));
+    navigate(localizedPath("/hypotheque-offres"));
   };
 
   return (

@@ -25,7 +25,7 @@ import TermsOfService from "./pages/TermsOfService";
 import NotFound from "./pages/NotFound";
 import { languages } from "./i18n";
 
-// Comparator pages
+// Comparator/Landing pages (using original WordPress URLs for SEO)
 import ComparateurSante from "./pages/comparateurs/ComparateurSante";
 import ComparateurVoiture from "./pages/comparateurs/ComparateurVoiture";
 import ComparateurMenage from "./pages/comparateurs/ComparateurMenage";
@@ -52,6 +52,12 @@ const LanguageWrapper = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
+// Redirect component that uses language from URL
+const LegacyRedirect = ({ to }: { to: string }) => {
+  const { lang } = useParams<{ lang: string }>();
+  return <Navigate to={`/${lang || 'fr'}${to}`} replace />;
+};
+
 // Routes component with language prefix
 const LanguageRoutes = () => {
   return (
@@ -74,16 +80,27 @@ const LanguageRoutes = () => {
         <Route path="/mentions-legales" element={<LegalNotice />} />
         <Route path="/cgu" element={<TermsOfService />} />
         
-        {/* Comparator routes */}
-        <Route path="/comparateur/sante" element={<ComparateurSante />} />
-        <Route path="/comparateur/voiture" element={<ComparateurVoiture />} />
-        <Route path="/comparateur/menage" element={<ComparateurMenage />} />
-        <Route path="/comparateur/protection-juridique" element={<ComparateurProtectionJuridique />} />
-        <Route path="/comparateur/subside" element={<ComparateurSubside />} />
-        <Route path="/comparateur/resiliation" element={<ComparateurResiliation />} />
-        <Route path="/comparateur/pilier-3a" element={<ComparateurPilier3 />} />
-        <Route path="/comparateur/hypotheque" element={<ComparateurHypotheque />} />
-        <Route path="/comparateur/professionnel" element={<ComparateurProfessionnel />} />
+        {/* Landing/Comparator routes - using original WordPress URLs for SEO */}
+        <Route path="/assurance-maladie-landing" element={<ComparateurSante />} />
+        <Route path="/assurance-voiture-landing" element={<ComparateurVoiture />} />
+        <Route path="/assurance-menage-landing" element={<ComparateurMenage />} />
+        <Route path="/protection-juridique-landing" element={<ComparateurProtectionJuridique />} />
+        <Route path="/subside-assurance-maladie-demande" element={<ComparateurSubside />} />
+        <Route path="/resiliation-assurance" element={<ComparateurResiliation />} />
+        <Route path="/3eme-pilier-offres" element={<ComparateurPilier3 />} />
+        <Route path="/hypotheque-offres" element={<ComparateurHypotheque />} />
+        <Route path="/assurance-entreprise-offres" element={<ComparateurProfessionnel />} />
+        
+        {/* Legacy comparateur routes - redirect to new WordPress URLs */}
+        <Route path="/comparateur/sante" element={<LegacyRedirect to="/assurance-maladie-landing" />} />
+        <Route path="/comparateur/voiture" element={<LegacyRedirect to="/assurance-voiture-landing" />} />
+        <Route path="/comparateur/menage" element={<LegacyRedirect to="/assurance-menage-landing" />} />
+        <Route path="/comparateur/protection-juridique" element={<LegacyRedirect to="/protection-juridique-landing" />} />
+        <Route path="/comparateur/subside" element={<LegacyRedirect to="/subside-assurance-maladie-demande" />} />
+        <Route path="/comparateur/resiliation" element={<LegacyRedirect to="/resiliation-assurance" />} />
+        <Route path="/comparateur/pilier-3a" element={<LegacyRedirect to="/3eme-pilier-offres" />} />
+        <Route path="/comparateur/hypotheque" element={<LegacyRedirect to="/hypotheque-offres" />} />
+        <Route path="/comparateur/professionnel" element={<LegacyRedirect to="/assurance-entreprise-offres" />} />
         
         <Route path="*" element={<NotFound />} />
       </Routes>

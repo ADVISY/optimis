@@ -37,7 +37,7 @@ const AssuranceVie = () => {
   ];
 
   const handleCompareClick = () => {
-    navigate(localizedPath("/comparateur/pilier3"));
+    navigate(localizedPath("/3eme-pilier-offres"));
   };
 
   return (
