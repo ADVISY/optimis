@@ -74,10 +74,10 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section - Premium & Engaging */}
-      <section className="gradient-optimis pt-16 md:pt-20 lg:pt-24 pb-24 md:pb-28 overflow-visible relative !py-0 pt-16 md:pt-20 lg:pt-24 pb-24 md:pb-28">
+      <section className="gradient-optimis pt-6 md:pt-8 lg:pt-10 pb-8 md:pb-10 overflow-visible relative">
         <div className="container relative">
-          <div className="grid items-start gap-8 lg:grid-cols-2 min-h-[480px] lg:min-h-[520px]">
-            <div className="space-y-8 animate-fade-in z-10 relative pt-8 md:pt-12 lg:pt-16">
+          <div className="grid items-start gap-4 lg:grid-cols-2 min-h-[380px] lg:min-h-[420px]">
+            <div className="space-y-4 md:space-y-5 animate-fade-in z-10 relative pt-4 md:pt-6 lg:pt-8">
               {/* 5 Gold Stars */}
               <div className="flex gap-1.5 animate-fade-in-delay">
                 {[...Array(5)].map((_, i) => (
@@ -92,7 +92,7 @@ const Index = () => {
               <p className="text-lg text-muted-foreground md:text-xl max-w-lg leading-relaxed">
                 {t('home.heroSubtitle')}
               </p>
-              <div className="flex flex-wrap gap-4 pt-2">
+              <div className="flex flex-wrap gap-4">
                 <Button asChild size="xl" className="animate-fade-in-delay-2">
                   <LocalizedLink to="/assurance-sante">
                     {t('common.compareNow')}
@@ -106,19 +106,19 @@ const Index = () => {
               </div>
             </div>
             
-            {/* Mascot - large, spanning the hero, anchored on selection bar */}
-            <div className="hidden lg:flex justify-end items-end absolute right-0 xl:right-4 2xl:right-12 bottom-0 translate-y-10 z-30">
+            {/* Mascot - large, behind the selection bar */}
+            <div className="hidden lg:flex justify-end items-end absolute right-0 xl:right-4 2xl:right-12 bottom-0 translate-y-20 z-10">
               <img
                 src={mascotPointing}
                 alt="Mascotte Optimis"
-                className="h-[520px] xl:h-[600px] 2xl:h-[680px] w-auto drop-shadow-2xl animate-fade-in"
+                className="h-[560px] xl:h-[640px] 2xl:h-[720px] w-auto drop-shadow-2xl animate-fade-in"
               />
             </div>
           </div>
         </div>
         
-        {/* Quick Selection Bar - Premium */}
-        <div className="container relative z-20 mt-10 lg:mt-8">
+        {/* Quick Selection Bar - Premium - above mascot */}
+        <div className="container relative z-20 mt-4 lg:mt-2">
           <div className="bg-background rounded-2xl shadow-premium p-5 md:p-8 border">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {insuranceCards.map((card) => (
