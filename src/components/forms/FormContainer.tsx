@@ -40,7 +40,7 @@ const FormContainer = ({
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="w-full max-w-3xl mx-auto shadow-2xl border-0 rounded-3xl overflow-hidden min-h-[520px] ring-2 ring-emerald-400/30 animate-fade-in text-white relative"
+      className="w-full max-w-3xl mx-auto shadow-2xl border-4 border-emerald-800 rounded-3xl overflow-hidden min-h-[520px] ring-2 ring-emerald-400/30 animate-fade-in text-white relative"
       style={{
         background: `radial-gradient(circle at ${gradientPos.x}% ${gradientPos.y}%, rgba(72, 140, 100, 0.95) 0%, rgba(52, 115, 80, 0.95) 40%, rgba(45, 100, 70, 1) 100%)`,
         transition: 'background 0.15s ease-out'
