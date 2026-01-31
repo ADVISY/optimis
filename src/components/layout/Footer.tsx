@@ -8,7 +8,7 @@ const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="border-t bg-secondary/30">
+    <footer className="border-t bg-optimis-green-pastel">
       {/* CTA Banner */}
       <div className="container py-12 md:py-16">
         <div className="bg-primary rounded-2xl p-8 md:p-12 text-center text-primary-foreground">
