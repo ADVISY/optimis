@@ -1,1 +1,4 @@
 project_id = "phshmvklhwpihayanhpf"
+
+[functions.get-health-premiums]
+verify_jwt = false
