@@ -4,7 +4,7 @@ import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
-import ComparisonResults from "@/components/forms/ComparisonResults";
+import HealthComparisonResults from "@/components/forms/HealthComparisonResults";
 import LoadingComparison from "@/components/forms/LoadingComparison";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
@@ -198,14 +198,6 @@ const HealthInsuranceForm = () => {
     });
   };
 
-  const handleSelectOffer = (offer: InsuranceOffer) => {
-    console.log("Selected offer:", offer);
-  };
-
-  const handleContactRequest = (offer: InsuranceOffer, type: "call" | "email") => {
-    console.log("Contact request:", offer, type);
-  };
-
   if (isLoading) {
     return (
       <div className="max-w-2xl mx-auto">
@@ -235,10 +227,20 @@ const HealthInsuranceForm = () => {
             </Button>
           </div>
         )}
-        <ComparisonResults
+        <HealthComparisonResults
           offers={realOffers}
-          onSelectOffer={handleSelectOffer}
-          onContactRequest={handleContactRequest}
+          formData={{
+            canton: formData.canton,
+            postalCode: formData.postalCode,
+            lamalModel: formData.lamalModel,
+            franchise: formData.franchise,
+            accidentCoverage: formData.accidentCoverage,
+            complementary: formData.complementary,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+          }}
         />
       </div>
     );
