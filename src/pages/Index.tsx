@@ -2,9 +2,13 @@ import { Car, Heart, Scale, Home } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import mascotPointing from "@/assets/mascotte-optimis-hd.png";
 import LocalizedLink from "@/components/LocalizedLink";
+import StatsBar from "@/components/home/StatsBar";
+import InsuranceCardsCarousel from "@/components/home/InsuranceCardsCarousel";
+import TestimonialsCarousel from "@/components/home/TestimonialsCarousel";
+import BlogPreview from "@/components/home/BlogPreview";
+import InsuranceDetails from "@/components/home/InsuranceDetails";
 
 const Index = () => {
   const { t } = useTranslation();
@@ -13,28 +17,24 @@ const Index = () => {
     {
       icon: Car,
       titleKey: "nav.carInsurance",
-      descriptionKey: "home.carInsuranceDesc",
       href: "/assurance-voiture",
       color: "text-blue-600",
     },
     {
       icon: Heart,
       titleKey: "nav.healthInsurance",
-      descriptionKey: "home.healthInsuranceDesc",
       href: "/assurance-sante",
       color: "text-red-500",
     },
     {
       icon: Scale,
       titleKey: "nav.legalProtection",
-      descriptionKey: "home.legalProtectionDesc",
       href: "/protection-juridique",
       color: "text-purple-600",
     },
     {
       icon: Home,
       titleKey: "nav.homeInsurance",
-      descriptionKey: "home.homeInsuranceDesc",
       href: "/assurance-menage",
       color: "text-orange-500",
     },
@@ -45,30 +45,6 @@ const Index = () => {
     { number: "2", titleKey: "home.step2Title", descriptionKey: "home.step2Desc" },
     { number: "3", titleKey: "home.step3Title", descriptionKey: "home.step3Desc" },
     { number: "4", titleKey: "home.step4Title", descriptionKey: "home.step4Desc" },
-  ];
-
-  const stats = [
-    { value: "10,000+", labelKey: "stats.satisfiedUsers" },
-    { value: "95%", labelKey: "stats.recommendationRate" },
-    { value: "20+", labelKey: "stats.insurerPartners" },
-  ];
-
-  const testimonials = [
-    {
-      name: "Laurent Weber",
-      location: "Genève",
-      textKey: "testimonials.testimonial1",
-    },
-    {
-      name: "Claire Muller",
-      location: "Lausanne",
-      textKey: "testimonials.testimonial2",
-    },
-    {
-      name: "Marc Dubois",
-      location: "Zurich",
-      textKey: "testimonials.testimonial3",
-    },
   ];
 
   return (
@@ -140,66 +116,36 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Insurance Selector - Enhanced */}
-      <section className="py-20 md:py-28 lg:py-32">
-        <div className="container">
-          <div className="mb-16 text-center max-w-2xl mx-auto">
-            <h2 className="text-headline mb-6 text-foreground">
-              {t('home.whichInsurance')}
-            </h2>
-            <p className="text-body-lg text-muted-foreground">
-              {t('home.selectInsurance')}
-            </p>
-          </div>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {insuranceCards.map((card, index) => (
-              <LocalizedLink key={card.href} to={card.href} className="group">
-                <Card className="h-full hover-lift" style={{ animationDelay: `${index * 100}ms` }}>
-                  <CardContent className="flex flex-col items-center p-8 text-center">
-                    <div className={`mb-6 rounded-2xl bg-secondary p-5 ${card.color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}>
-                      <card.icon className="h-10 w-10" />
-                    </div>
-                    <h3 className="mb-3 text-xl font-bold text-foreground">
-                      {t(card.titleKey)}
-                    </h3>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                      {t(card.descriptionKey)}
-                    </p>
-                  </CardContent>
-                </Card>
-              </LocalizedLink>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Stats Bar - just below hero */}
+      <StatsBar />
 
-      {/* How it Works - Premium */}
-      <section className="bg-secondary/30 py-20 md:py-28 lg:py-32">
+      {/* How it Works Section */}
+      <section className="py-16 md:py-20 bg-background">
         <div className="container">
-          <div className="mb-16 text-center max-w-2xl mx-auto">
-            <h2 className="text-headline mb-6 text-foreground">
+          <div className="mb-10 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
               {t('home.howItWorks')}
             </h2>
-            <p className="text-body-lg text-muted-foreground">
+            <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
               {t('home.bestOffersIn4Steps')}
             </p>
           </div>
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((step, index) => (
               <div
                 key={step.number}
                 className="relative flex flex-col items-center text-center group"
               >
                 {index < steps.length - 1 && (
-                  <div className="absolute left-1/2 top-12 hidden h-1 w-full bg-border/50 lg:block rounded-full" />
+                  <div className="absolute left-1/2 top-10 hidden h-0.5 w-full bg-border lg:block" />
                 )}
-                <div className="relative z-10 mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-primary text-4xl font-black text-primary-foreground shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl">
+                <div className="relative z-10 mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-primary text-3xl font-black text-primary-foreground shadow-lg transition-all duration-300 group-hover:scale-110">
                   {step.number}
                 </div>
-                <h3 className="mb-3 text-xl font-bold text-foreground">
+                <h3 className="mb-2 text-xl font-bold text-foreground">
                   {t(step.titleKey)}
                 </h3>
-                <p className="text-base text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground">
                   {t(step.descriptionKey)}
                 </p>
               </div>
@@ -208,67 +154,25 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stats Section - Impactful */}
-      <section className="py-20 md:py-28 lg:py-32">
-        <div className="container">
-          <div className="grid gap-12 text-center sm:grid-cols-3">
-            {stats.map((stat) => (
-              <div key={stat.labelKey} className="space-y-4 group">
-                <p className="text-5xl md:text-6xl lg:text-7xl font-black text-primary transition-transform duration-300 group-hover:scale-105">
-                  {stat.value}
-                </p>
-                <p className="text-lg text-muted-foreground font-medium">{t(stat.labelKey)}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Insurance Cards Carousel */}
+      <InsuranceCardsCarousel />
 
-      {/* Testimonials - Premium Cards */}
-      <section className="bg-secondary/30 py-20 md:py-28 lg:py-32">
-        <div className="container">
-          <div className="mb-16 text-center max-w-2xl mx-auto">
-            <h2 className="text-headline mb-6 text-foreground">
-              {t('home.whatClientsSay')}
-            </h2>
-            <p className="text-body-lg text-muted-foreground">
-              {t('home.thousandsTrust')}
-            </p>
-          </div>
-          <div className="grid gap-8 md:grid-cols-3">
-            {testimonials.map((testimonial) => (
-              <Card key={testimonial.name} className="h-full hover-lift">
-                <CardContent className="p-8">
-                  <div className="flex gap-1 mb-6">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-accent text-xl">★</span>
-                    ))}
-                  </div>
-                  <p className="mb-6 text-lg text-foreground/80 leading-relaxed italic">
-                    "{t(testimonial.textKey)}"
-                  </p>
-                  <div className="pt-4 border-t border-border">
-                    <p className="font-bold text-lg text-foreground">
-                      {testimonial.name}
-                    </p>
-                    <p className="text-base text-muted-foreground">
-                      {testimonial.location}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Client Testimonials */}
+      <TestimonialsCarousel />
 
-      {/* CTA Section - Compelling */}
-      <section className="gradient-optimis py-20 md:py-28 lg:py-32">
+      {/* Insurance Details */}
+      <InsuranceDetails />
+
+      {/* Blog Preview */}
+      <BlogPreview />
+
+      {/* CTA Section */}
+      <section className="gradient-optimis py-16 md:py-20">
         <div className="container text-center max-w-3xl mx-auto">
-          <h2 className="text-headline mb-6 text-foreground">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             {t('home.readyToSave')}
           </h2>
-          <p className="mb-10 text-body-lg text-muted-foreground">
+          <p className="mb-8 text-muted-foreground text-lg">
             {t('home.joinUsers')}
           </p>
           <Button asChild size="xl">
