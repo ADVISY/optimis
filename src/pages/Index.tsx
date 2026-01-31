@@ -99,7 +99,7 @@ const Index = () => {
               <img
                 src={mascotPointing}
                 alt="Mascotte Optimis"
-                className="h-[380px] lg:h-[480px] xl:h-[550px] w-auto drop-shadow-2xl"
+                className="h-[340px] lg:h-[420px] xl:h-[480px] w-auto drop-shadow-2xl"
               />
             </div>
           </div>
