@@ -74,10 +74,10 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="gradient-optimis py-16 md:py-24 lg:py-32 overflow-hidden">
+      <section className="gradient-optimis pt-16 pb-32 md:pt-24 md:pb-40 lg:pt-32 lg:pb-48 overflow-hidden relative">
         <div className="container">
           <div className="grid items-center gap-8 md:grid-cols-2">
-            <div className="space-y-6 animate-fade-in">
+            <div className="space-y-6 animate-fade-in z-10 relative">
               {/* 5 Gold Stars */}
               <div className="flex gap-1">
                 {[...Array(5)].map((_, i) => (
@@ -109,15 +109,15 @@ const Index = () => {
               <img
                 src={mascotPointing}
                 alt="Mascotte Optimis"
-                className="h-80 w-auto animate-fade-in md:h-[420px] lg:h-[500px] xl:h-[550px] drop-shadow-2xl"
+                className="h-[350px] w-auto animate-fade-in md:h-[500px] lg:h-[600px] xl:h-[700px] drop-shadow-2xl"
               />
             </div>
           </div>
         </div>
         
-        {/* Quick Selection Bar */}
-        <div className="container mt-8 md:mt-12">
-          <div className="bg-background rounded-2xl shadow-xl p-4 md:p-6">
+        {/* Quick Selection Bar - Overlapping */}
+        <div className="container absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20">
+          <div className="bg-background rounded-2xl shadow-xl p-4 md:p-6 border">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {insuranceCards.map((card) => (
                 <LocalizedLink
@@ -137,6 +137,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+      
+      {/* Spacer for the overlapping bar */}
+      <div className="h-16 md:h-20"></div>
 
       {/* Insurance Selector */}
       <section className="py-16 md:py-20">
