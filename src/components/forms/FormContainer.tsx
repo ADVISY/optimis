@@ -22,27 +22,27 @@ const FormContainer = ({
   const { t } = useTranslation();
 
   return (
-    <Card className="w-full max-w-3xl mx-auto shadow-2xl border-0 bg-gradient-to-br from-emerald-100 via-emerald-50 to-teal-100 dark:from-emerald-900/40 dark:via-emerald-800/30 dark:to-teal-900/40 rounded-3xl overflow-hidden min-h-[520px] ring-2 ring-primary/40 animate-fade-in">
-      <CardHeader className="space-y-6 pb-8 px-8 pt-10 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/5">
-        {/* Trust badges */}
-        <div className="flex flex-wrap items-center gap-4 text-base">
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <div className="p-1.5 rounded-lg bg-primary/10">
-              <Shield className="h-4 w-4 text-primary" />
+    <Card className="w-full max-w-3xl mx-auto shadow-2xl border-0 bg-white dark:bg-card rounded-3xl overflow-hidden min-h-[520px] ring-2 ring-primary/30 animate-fade-in">
+      <CardHeader className="space-y-6 pb-8 px-8 pt-10">
+        {/* Trust badges with LED glow effect */}
+        <div className="flex flex-wrap items-center justify-center gap-4 text-base">
+          <div className="flex items-center gap-2 text-primary font-semibold px-4 py-2 rounded-full bg-primary/10 shadow-[0_0_15px_rgba(45,90,61,0.4)] animate-pulse">
+            <div className="p-1.5 rounded-lg bg-primary/20 shadow-[0_0_10px_rgba(45,90,61,0.6)]">
+              <Shield className="h-4 w-4 text-primary drop-shadow-[0_0_6px_rgba(45,90,61,0.8)]" />
             </div>
-            <span className="font-medium">{t("forms.free")}</span>
+            <span className="drop-shadow-[0_0_8px_rgba(45,90,61,0.5)]">{t("forms.free")}</span>
           </div>
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <div className="p-1.5 rounded-lg bg-primary/10">
-              <Lock className="h-4 w-4 text-primary" />
+          <div className="flex items-center gap-2 text-primary font-semibold px-4 py-2 rounded-full bg-primary/10 shadow-[0_0_15px_rgba(45,90,61,0.4)] animate-pulse" style={{ animationDelay: '0.2s' }}>
+            <div className="p-1.5 rounded-lg bg-primary/20 shadow-[0_0_10px_rgba(45,90,61,0.6)]">
+              <Lock className="h-4 w-4 text-primary drop-shadow-[0_0_6px_rgba(45,90,61,0.8)]" />
             </div>
-            <span className="font-medium">{t("forms.secure")}</span>
+            <span className="drop-shadow-[0_0_8px_rgba(45,90,61,0.5)]">{t("forms.secure")}</span>
           </div>
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <div className="p-1.5 rounded-lg bg-primary/10">
-              <CheckCircle className="h-4 w-4 text-primary" />
+          <div className="flex items-center gap-2 text-primary font-semibold px-4 py-2 rounded-full bg-primary/10 shadow-[0_0_15px_rgba(45,90,61,0.4)] animate-pulse" style={{ animationDelay: '0.4s' }}>
+            <div className="p-1.5 rounded-lg bg-primary/20 shadow-[0_0_10px_rgba(45,90,61,0.6)]">
+              <CheckCircle className="h-4 w-4 text-primary drop-shadow-[0_0_6px_rgba(45,90,61,0.8)]" />
             </div>
-            <span className="font-medium">{t("forms.noCommitment")}</span>
+            <span className="drop-shadow-[0_0_8px_rgba(45,90,61,0.5)]">{t("forms.noCommitment")}</span>
           </div>
         </div>
         
