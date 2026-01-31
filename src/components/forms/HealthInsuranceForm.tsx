@@ -302,7 +302,7 @@ const HealthInsuranceForm = () => {
         <div className="space-y-6">
           <div className="space-y-4">
             {formData.persons.map((person, index) => (
-              <Card key={person.id} className="bg-white border-gray-200">
+              <Card key={person.id} className="bg-optimis-green-light border-optimis-green-pastel">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-4">
                     <span className="font-medium text-gray-900">
@@ -346,7 +346,7 @@ const HealthInsuranceForm = () => {
               type="button"
               variant="outline"
               onClick={() => addPerson("adult")}
-              className="flex-1 gap-2 bg-white text-gray-900 border-gray-300 hover:bg-gray-50"
+              className="flex-1 gap-2 bg-optimis-green-light text-gray-900 border-optimis-green-pastel hover:bg-optimis-green-pastel"
             >
               <Plus className="h-4 w-4" />
               {t("forms.healthInsurance.addAdult")}
@@ -355,7 +355,7 @@ const HealthInsuranceForm = () => {
               type="button"
               variant="outline"
               onClick={() => addPerson("child")}
-              className="flex-1 gap-2 bg-white text-gray-900 border-gray-300 hover:bg-gray-50"
+              className="flex-1 gap-2 bg-optimis-green-light text-gray-900 border-optimis-green-pastel hover:bg-optimis-green-pastel"
             >
               <Plus className="h-4 w-4" />
               {t("forms.healthInsurance.addChild")}
@@ -368,7 +368,7 @@ const HealthInsuranceForm = () => {
       <FormStep isActive={currentStep === 3}>
         <div className="space-y-6">
           {/* LAMal Model Card */}
-          <Card className="bg-white border-gray-200">
+          <Card className="bg-optimis-green-light border-optimis-green-pastel">
             <CardContent className="p-5">
               <Label className="text-sm font-semibold text-gray-900 mb-4 block">
                 {t("forms.healthInsurance.lamalModel")}
@@ -397,7 +397,7 @@ const HealthInsuranceForm = () => {
           </Card>
 
           {/* Franchise Card */}
-          <Card className="bg-white border-gray-200">
+          <Card className="bg-optimis-green-light border-optimis-green-pastel">
             <CardContent className="p-5">
               <Label className="text-sm font-semibold text-gray-900 mb-2 block">
                 {t("forms.healthInsurance.franchise")}
@@ -425,7 +425,7 @@ const HealthInsuranceForm = () => {
           </Card>
 
           {/* Accident Coverage Card */}
-          <Card className="bg-white border-gray-200">
+          <Card className="bg-optimis-green-light border-optimis-green-pastel">
             <CardContent className="p-5">
               <div className="flex items-center space-x-3">
                 <Checkbox
@@ -463,7 +463,7 @@ const HealthInsuranceForm = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* BASIC */}
             <Card 
-              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-white ${
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-optimis-green-light ${
                 formData.complementaryTier === "basic" 
                   ? "ring-2 ring-slate-500 border-slate-500" 
                   : "border-gray-200 hover:border-slate-400"
@@ -494,7 +494,7 @@ const HealthInsuranceForm = () => {
 
             {/* PREMIUM */}
             <Card 
-              className={`cursor-pointer transition-all duration-200 hover:shadow-md relative bg-white ${
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md relative bg-optimis-green-light ${
                 formData.complementaryTier === "premium" 
                   ? "ring-2 ring-violet-500 border-violet-500" 
                   : "border-gray-200 hover:border-violet-400"
@@ -530,7 +530,7 @@ const HealthInsuranceForm = () => {
 
             {/* DIAMOND */}
             <Card 
-              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-white ${
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-optimis-green-light ${
                 formData.complementaryTier === "diamond" 
                   ? "ring-2 ring-amber-500 border-amber-500" 
                   : "border-gray-200 hover:border-amber-400"
