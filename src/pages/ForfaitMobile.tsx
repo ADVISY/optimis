@@ -4,8 +4,9 @@ import { useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import LocalizedLink from "@/components/LocalizedLink";
 import llamaMascot from "@/assets/llama-mascot.png";
+import CategoryHero from "@/components/home/CategoryHero";
+import StatsBar from "@/components/home/StatsBar";
 
 const providers = [
   { name: "Swisscom", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/swisscom-logo.svg" },
@@ -34,42 +35,23 @@ const ForfaitMobile = () => {
     }
   };
 
+  const handleCompareClick = () => {
+    // No comparator page for mobile yet - could show a toast or redirect
+  };
+
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="gradient-optimis py-16 md:py-24">
-        <div className="container">
-          <div className="grid items-center gap-8 md:grid-cols-2">
-            <div className="space-y-6">
-              <p className="text-sm font-medium text-muted-foreground">
-                <LocalizedLink to="/" className="hover:text-primary">{t('common.home')}</LocalizedLink> / {t('mobile.title')}
-              </p>
-              <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">
-                {t('mobile.title')}
-              </h1>
-              <ul className="text-lg text-muted-foreground space-y-2">
-                <li>• {t('mobile.feature1')}</li>
-                <li>• {t('mobile.feature2')}</li>
-                <li>• {t('mobile.feature3')}</li>
-                <li>• {t('mobile.feature4')}</li>
-              </ul>
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="gap-2">
-                  <Smartphone className="h-5 w-5" />
-                  {t('mobile.compareButton')}
-                </Button>
-              </div>
-            </div>
-            <div className="flex justify-center md:justify-end">
-              <img
-                src={llamaMascot}
-                alt="Mascotte Optimis"
-                className="h-64 w-auto md:h-80"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <CategoryHero
+        pageTitle={t("mobile.title")}
+        subtitle={t("mobile.feature1")}
+        buttonLabel={t("mobile.compareButton")}
+        buttonIcon={Smartphone}
+        onButtonClick={handleCompareClick}
+      />
+
+      {/* Stats Bar */}
+      <StatsBar />
 
       {/* Video Section */}
       <section className="py-12 bg-muted/30">
@@ -218,7 +200,7 @@ const ForfaitMobile = () => {
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
                 {t('mobile.getEstimate')}
               </p>
-              <Button size="lg" className="gap-2">
+              <Button size="lg" className="gap-2" onClick={handleCompareClick}>
                 <Smartphone className="h-5 w-5" />
                 {t('mobile.compareNow')}
               </Button>

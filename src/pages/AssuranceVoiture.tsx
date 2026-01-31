@@ -1,12 +1,13 @@
-import { Car, Heart, Scale, Home, Clock } from "lucide-react";
+import { Car, Clock } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import llamaMascot from "@/assets/llama-mascot.png";
 import { useTranslation } from "react-i18next";
-import LocalizedLink from "@/components/LocalizedLink";
 import { useNavigate } from "react-router-dom";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
+import CategoryHero from "@/components/home/CategoryHero";
+import StatsBar from "@/components/home/StatsBar";
 
 const partners = [
   { name: "AXA", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/0001_0003782804_2-640.jpg" },
@@ -20,19 +21,6 @@ const AssuranceVoiture = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { localizedPath } = useLocalizedPath();
-
-  const quickLinks = [
-    { labelKey: "nav.carInsurance", href: "/assurance-voiture", icon: Car },
-    { labelKey: "nav.healthInsurance", href: "/assurance-sante", icon: Heart },
-    { labelKey: "nav.legalProtection", href: "/protection-juridique", icon: Scale },
-    { labelKey: "nav.homeInsurance", href: "/assurance-menage", icon: Home },
-  ];
-
-  const stats = [
-    { labelKey: "stats.recommended", value: "95%", descriptionKey: "stats.byUsers" },
-    { labelKey: "stats.join", value: "+10,000", descriptionKey: "stats.users" },
-    { labelKey: "stats.noCommitment", value: "100%", descriptionKey: "stats.free" },
-  ];
 
   const tableOfContents = [
     "carInsurance.introduction",
@@ -49,74 +37,16 @@ const AssuranceVoiture = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="gradient-optimis py-16 md:py-24">
-        <div className="container">
-          <div className="grid items-center gap-8 md:grid-cols-2">
-            <div className="space-y-6">
-              <p className="text-sm font-medium text-muted-foreground">
-                <LocalizedLink to="/" className="hover:text-primary">{t('common.home')}</LocalizedLink> / {t('carInsurance.title')}
-              </p>
-              <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">
-                {t('carInsurance.title')}
-              </h1>
-              <h2 className="text-xl text-muted-foreground">
-                {t('carInsurance.heroSubtitle')}
-              </h2>
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="gap-2" onClick={handleCompareClick}>
-                  <Car className="h-5 w-5" />
-                  {t('healthInsurance.compareButton')}
-                </Button>
-              </div>
-            </div>
-            <div className="flex justify-center md:justify-end">
-              <img
-                src="https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/automobile-3734396.jpg"
-                alt="Assurance automobile"
-                className="h-64 w-auto md:h-80 rounded-xl shadow-lg object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <CategoryHero
+        pageTitle={t("carInsurance.title")}
+        subtitle={t("carInsurance.heroSubtitle")}
+        buttonLabel={t("healthInsurance.compareButton")}
+        buttonIcon={Car}
+        onButtonClick={handleCompareClick}
+      />
 
-      {/* Quick Links */}
-      <section className="py-8 bg-background border-b">
-        <div className="container">
-          <div className="flex flex-wrap justify-center gap-4">
-            {quickLinks.map((link) => (
-              <LocalizedLink
-                key={link.href}
-                to={link.href}
-                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-muted hover:bg-primary/10 transition-colors font-medium"
-              >
-                <link.icon className="h-5 w-5 text-primary" />
-                {t(link.labelKey)}
-              </LocalizedLink>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-12 bg-primary/5">
-        <div className="container">
-          <h3 className="text-center text-lg font-semibold text-foreground mb-8">
-            {t('carInsurance.coverageBenefit')}
-          </h3>
-          <div className="grid gap-6 md:grid-cols-3">
-            {stats.map((stat) => (
-              <Card key={stat.labelKey} className="text-center">
-                <CardContent className="p-6">
-                  <p className="text-sm font-medium text-muted-foreground">{t(stat.labelKey)}</p>
-                  <p className="text-3xl font-bold text-primary">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground">{t(stat.descriptionKey)}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Stats Bar */}
+      <StatsBar />
 
       {/* Video Section */}
       <section className="py-12">

@@ -1,12 +1,13 @@
-import { Scale, Shield, Clock, CheckCircle, Car, Heart, Home } from "lucide-react";
+import { Scale, Shield, Clock, CheckCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import LocalizedLink from "@/components/LocalizedLink";
 import llamaMascot from "@/assets/llama-mascot.png";
 import { useNavigate } from "react-router-dom";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
+import CategoryHero from "@/components/home/CategoryHero";
+import StatsBar from "@/components/home/StatsBar";
 
 const partners = [
   { name: "Generali", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/general-1.svg" },
@@ -20,23 +21,10 @@ const ProtectionJuridique = () => {
   const navigate = useNavigate();
   const { localizedPath } = useLocalizedPath();
 
-  const quickLinks = [
-    { labelKey: "nav.carInsurance", href: "/assurance-voiture", icon: Car },
-    { labelKey: "nav.healthInsurance", href: "/assurance-sante", icon: Heart },
-    { labelKey: "nav.legalProtection", href: "/protection-juridique", icon: Scale },
-    { labelKey: "nav.homeInsurance", href: "/assurance-menage", icon: Home },
-  ];
-
   const features = [
     { icon: Shield, titleKey: "legalProtection.legalDefense", descKey: "legalProtection.legalDefenseDesc" },
     { icon: Clock, titleKey: "legalProtection.quickComparison", descKey: "legalProtection.quickComparisonDesc" },
     { icon: CheckCircle, titleKey: "legalProtection.noCommitment", descKey: "legalProtection.noCommitmentDesc" },
-  ];
-
-  const stats = [
-    { labelKey: "stats.recommended", value: "95%", descriptionKey: "stats.byUsers" },
-    { labelKey: "stats.join", value: "+10,000", descriptionKey: "stats.users" },
-    { labelKey: "stats.noCommitment", value: "100%", descriptionKey: "stats.free" },
   ];
 
   const tableOfContents = [
@@ -56,75 +44,16 @@ const ProtectionJuridique = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="gradient-optimis py-16 md:py-24">
-        <div className="container">
-          <div className="grid items-center gap-8 md:grid-cols-2">
-            <div className="space-y-6">
-              <p className="text-sm font-medium text-muted-foreground">
-                <LocalizedLink to="/" className="hover:text-primary">{t('common.home')}</LocalizedLink> / {t('legalProtection.title')}
-              </p>
-              <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">
-                {t('legalProtection.title')}
-              </h1>
-              <h2 className="text-xl text-muted-foreground">
-                {t('legalProtection.heroSubtitle')}
-              </h2>
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="gap-2" onClick={handleCompareClick}>
-                  <Scale className="h-5 w-5" />
-                  {t('legalProtection.compareButton')}
-                </Button>
-              </div>
-            </div>
-            <div className="flex justify-center md:justify-end">
-              <img
-                src={llamaMascot}
-                alt="Mascotte Optimis"
-                className="h-64 w-auto md:h-80"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <CategoryHero
+        pageTitle={t("legalProtection.title")}
+        subtitle={t("legalProtection.heroSubtitle")}
+        buttonLabel={t("legalProtection.compareButton")}
+        buttonIcon={Scale}
+        onButtonClick={handleCompareClick}
+      />
 
-
-      {/* Quick Links */}
-      <section className="py-8 bg-background border-b">
-        <div className="container">
-          <div className="flex flex-wrap justify-center gap-4">
-            {quickLinks.map((link) => (
-              <LocalizedLink
-                key={link.href}
-                to={link.href}
-                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-muted hover:bg-primary/10 transition-colors font-medium"
-              >
-                <link.icon className="h-5 w-5 text-primary" />
-                {t(link.labelKey)}
-              </LocalizedLink>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-12 bg-primary/5">
-        <div className="container">
-          <h3 className="text-center text-lg font-semibold text-foreground mb-8">
-            {t('legalProtection.protectYourRights')}
-          </h3>
-          <div className="grid gap-6 md:grid-cols-3">
-            {stats.map((stat) => (
-              <Card key={stat.labelKey} className="text-center">
-                <CardContent className="p-6">
-                  <p className="text-sm font-medium text-muted-foreground">{t(stat.labelKey)}</p>
-                  <p className="text-3xl font-bold text-primary">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground">{t(stat.descriptionKey)}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Stats Bar */}
+      <StatsBar />
 
       {/* Features */}
       <section className="py-16">
@@ -223,7 +152,7 @@ const ProtectionJuridique = () => {
               <section id="section-2" className="mb-12">
                 <h3 className="text-2xl font-bold text-foreground">{t('legalProtection.guarantees')}</h3>
                 <div className="grid md:grid-cols-2 gap-6 my-6">
-                  <div className="bg-green-50 dark:bg-green-950/20 p-6 rounded-lg">
+                  <div className="bg-primary/5 p-6 rounded-lg">
                     <h4 className="font-semibold text-foreground mb-4">{t('legalProtection.covered')}</h4>
                     <ul className="space-y-2 text-muted-foreground text-sm">
                       <li>✓ {t('legalProtection.coveredItem1')}</li>
@@ -235,7 +164,7 @@ const ProtectionJuridique = () => {
                       <li>✓ {t('legalProtection.coveredItem7')}</li>
                     </ul>
                   </div>
-                  <div className="bg-red-50 dark:bg-red-950/20 p-6 rounded-lg">
+                  <div className="bg-muted/50 p-6 rounded-lg">
                     <h4 className="font-semibold text-foreground mb-4">{t('legalProtection.notCovered')}</h4>
                     <ul className="space-y-2 text-muted-foreground text-sm">
                       <li>✗ {t('legalProtection.notCoveredItem1')}</li>

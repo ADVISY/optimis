@@ -8,6 +8,8 @@ import LocalizedLink from "@/components/LocalizedLink";
 import llamaMascot from "@/assets/llama-mascot.png";
 import { useNavigate } from "react-router-dom";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
+import CategoryHero from "@/components/home/CategoryHero";
+import StatsBar from "@/components/home/StatsBar";
 
 const cantons = [
   { name: "Vaud", slug: "vaud" },
@@ -49,39 +51,16 @@ const Subside = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="gradient-optimis py-16 md:py-24">
-        <div className="container">
-          <div className="grid items-center gap-8 md:grid-cols-2">
-            <div className="space-y-6">
-              <p className="text-sm font-medium text-muted-foreground">
-                <LocalizedLink to="/" className="hover:text-primary">{t('common.home')}</LocalizedLink> / {t('subsidy.title')}
-              </p>
-              <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">
-                {t('subsidy.title')}
-              </h1>
-              <ul className="text-lg text-muted-foreground space-y-2">
-                <li>• {t('subsidy.feature1')}</li>
-                <li>• {t('subsidy.feature2')}</li>
-                <li>• {t('subsidy.feature3')}</li>
-                <li>• {t('subsidy.feature4')}</li>
-              </ul>
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="gap-2" onClick={handleCompareClick}>
-                  <CreditCard className="h-5 w-5" />
-                  {t('subsidy.requestButton')}
-                </Button>
-              </div>
-            </div>
-            <div className="flex justify-center md:justify-end">
-              <img
-                src="https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/coins-5946827.jpg"
-                alt="Subside"
-                className="h-64 w-auto md:h-80 rounded-xl shadow-lg object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <CategoryHero
+        pageTitle={t("subsidy.title")}
+        subtitle={t("subsidy.feature1")}
+        buttonLabel={t("subsidy.requestButton")}
+        buttonIcon={CreditCard}
+        onButtonClick={handleCompareClick}
+      />
+
+      {/* Stats Bar */}
+      <StatsBar />
 
       {/* Video Section */}
       <section className="py-12 bg-muted/30">

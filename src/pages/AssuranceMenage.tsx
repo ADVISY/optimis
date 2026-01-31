@@ -1,12 +1,13 @@
-import { Home, Shield, Clock, CheckCircle, Car, Heart, Scale, Play } from "lucide-react";
+import { Home, Shield, Clock, CheckCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import LocalizedLink from "@/components/LocalizedLink";
 import llamaMascot from "@/assets/llama-mascot.png";
 import { useNavigate } from "react-router-dom";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
+import CategoryHero from "@/components/home/CategoryHero";
+import StatsBar from "@/components/home/StatsBar";
 
 const partners = [
   { name: "La Mobilière", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/images.png" },
@@ -21,23 +22,10 @@ const AssuranceMenage = () => {
   const navigate = useNavigate();
   const { localizedPath } = useLocalizedPath();
 
-  const quickLinks = [
-    { labelKey: "nav.carInsurance", href: "/assurance-voiture", icon: Car },
-    { labelKey: "nav.healthInsurance", href: "/assurance-sante", icon: Heart },
-    { labelKey: "nav.legalProtection", href: "/protection-juridique", icon: Scale },
-    { labelKey: "nav.homeInsurance", href: "/assurance-menage", icon: Home },
-  ];
-
   const features = [
     { icon: Shield, titleKey: "homeInsurance.rcAndHome", descKey: "homeInsurance.rcAndHomeDesc" },
     { icon: Clock, titleKey: "homeInsurance.quickComparison", descKey: "homeInsurance.quickComparisonDesc" },
     { icon: CheckCircle, titleKey: "homeInsurance.guaranteedSavings", descKey: "homeInsurance.guaranteedSavingsDesc" },
-  ];
-
-  const stats = [
-    { labelKey: "stats.recommended", value: "95%", descriptionKey: "stats.byUsers" },
-    { labelKey: "stats.join", value: "+10,000", descriptionKey: "stats.users" },
-    { labelKey: "stats.noCommitment", value: "100%", descriptionKey: "stats.free" },
   ];
 
   const tableOfContents = [
@@ -57,75 +45,16 @@ const AssuranceMenage = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="gradient-optimis py-16 md:py-24">
-        <div className="container">
-          <div className="grid items-center gap-8 md:grid-cols-2">
-            <div className="space-y-6">
-              <p className="text-sm font-medium text-muted-foreground">
-                <LocalizedLink to="/" className="hover:text-primary">{t('common.home')}</LocalizedLink> / {t('homeInsurance.title')}
-              </p>
-              <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">
-                {t('homeInsurance.title')}
-              </h1>
-              <h2 className="text-xl text-muted-foreground">
-                {t('homeInsurance.heroSubtitle')}
-              </h2>
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="gap-2" onClick={handleCompareClick}>
-                  <Home className="h-5 w-5" />
-                  {t('homeInsurance.compareButton')}
-                </Button>
-              </div>
-            </div>
-            <div className="flex justify-center md:justify-end">
-              <img
-                src={llamaMascot}
-                alt="Mascotte Optimis"
-                className="h-64 w-auto md:h-80"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <CategoryHero
+        pageTitle={t("homeInsurance.title")}
+        subtitle={t("homeInsurance.heroSubtitle")}
+        buttonLabel={t("homeInsurance.compareButton")}
+        buttonIcon={Home}
+        onButtonClick={handleCompareClick}
+      />
 
-
-      {/* Quick Links */}
-      <section className="py-8 bg-background border-b">
-        <div className="container">
-          <div className="flex flex-wrap justify-center gap-4">
-            {quickLinks.map((link) => (
-              <LocalizedLink
-                key={link.href}
-                to={link.href}
-                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-muted hover:bg-primary/10 transition-colors font-medium"
-              >
-                <link.icon className="h-5 w-5 text-primary" />
-                {t(link.labelKey)}
-              </LocalizedLink>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-12 bg-primary/5">
-        <div className="container">
-          <h3 className="text-center text-lg font-semibold text-foreground mb-8">
-            {t('homeInsurance.protectYourHome')}
-          </h3>
-          <div className="grid gap-6 md:grid-cols-3">
-            {stats.map((stat) => (
-              <Card key={stat.labelKey} className="text-center">
-                <CardContent className="p-6">
-                  <p className="text-sm font-medium text-muted-foreground">{t(stat.labelKey)}</p>
-                  <p className="text-3xl font-bold text-primary">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground">{t(stat.descriptionKey)}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Stats Bar */}
+      <StatsBar />
 
       {/* Features */}
       <section className="py-16">

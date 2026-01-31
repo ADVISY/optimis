@@ -4,12 +4,17 @@ import { useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import LocalizedLink from "@/components/LocalizedLink";
 import llamaMascot from "@/assets/llama-mascot.png";
+import { useNavigate } from "react-router-dom";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
+import CategoryHero from "@/components/home/CategoryHero";
+import StatsBar from "@/components/home/StatsBar";
 
 const Hypotheque = () => {
   const { t } = useTranslation();
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const { localizedPath } = useLocalizedPath();
 
   const tableOfContents = [
     { id: "what-is", labelKey: "mortgage.whatIsMortgage" },
@@ -27,42 +32,23 @@ const Hypotheque = () => {
     }
   };
 
+  const handleCompareClick = () => {
+    navigate(localizedPath("/comparateur/hypotheque"));
+  };
+
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="gradient-optimis py-16 md:py-24">
-        <div className="container">
-          <div className="grid items-center gap-8 md:grid-cols-2">
-            <div className="space-y-6">
-              <p className="text-sm font-medium text-muted-foreground">
-                <LocalizedLink to="/" className="hover:text-primary">{t('common.home')}</LocalizedLink> / {t('mortgage.title')}
-              </p>
-              <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">
-                {t('mortgage.title')}
-              </h1>
-              <ul className="text-lg text-muted-foreground space-y-2">
-                <li>• {t('mortgage.feature1')}</li>
-                <li>• {t('mortgage.feature2')}</li>
-                <li>• {t('mortgage.feature3')}</li>
-                <li>• {t('mortgage.feature4')}</li>
-              </ul>
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="gap-2">
-                  <Banknote className="h-5 w-5" />
-                  {t('mortgage.compareButton')}
-                </Button>
-              </div>
-            </div>
-            <div className="flex justify-center md:justify-end">
-              <img
-                src={llamaMascot}
-                alt="Mascotte Optimis"
-                className="h-64 w-auto md:h-80"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <CategoryHero
+        pageTitle={t("mortgage.title")}
+        subtitle={t("mortgage.feature1")}
+        buttonLabel={t("mortgage.compareButton")}
+        buttonIcon={Banknote}
+        onButtonClick={handleCompareClick}
+      />
+
+      {/* Stats Bar */}
+      <StatsBar />
 
       {/* Video Section */}
       <section className="py-12 bg-muted/30">
@@ -226,7 +212,7 @@ const Hypotheque = () => {
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
                 {t('mortgage.getEstimate')}
               </p>
-              <Button size="lg" className="gap-2">
+              <Button size="lg" className="gap-2" onClick={handleCompareClick}>
                 <Banknote className="h-5 w-5" />
                 {t('mortgage.compareNow')}
               </Button>
