@@ -41,6 +41,7 @@ interface HealthInsuranceFormData {
   lamalModel: string;
   franchise: number;
   accidentCoverage: boolean;
+  complementaryTier: "basic" | "premium" | "diamond" | null;
   complementary: {
     dental: boolean;
     hospitalization: boolean;
@@ -74,6 +75,7 @@ const HealthInsuranceForm = () => {
     lamalModel: "standard",
     franchise: 2500,
     accidentCoverage: true,
+    complementaryTier: null,
     complementary: {
       dental: false,
       hospitalization: false,
@@ -235,6 +237,7 @@ const HealthInsuranceForm = () => {
             lamalModel: formData.lamalModel,
             franchise: formData.franchise,
             accidentCoverage: formData.accidentCoverage,
+            complementaryTier: formData.complementaryTier,
             complementary: formData.complementary,
             firstName: formData.firstName,
             lastName: formData.lastName,
@@ -422,38 +425,166 @@ const HealthInsuranceForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 4: Complementary Insurance */}
+      {/* Step 4: Complementary Insurance - Tier Selection */}
       <FormStep isActive={currentStep === 4}>
-        <div className="space-y-4">
-          <p className="text-sm text-muted-foreground mb-4">
-            {t("forms.healthInsurance.complementaryDescription")}
-          </p>
+        <div className="space-y-6">
+          <div className="text-center mb-6">
+            <h3 className="text-lg font-semibold mb-2">
+              {t("forms.healthInsurance.complementaryTitle", "Assurances complémentaires")}
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              {t("forms.healthInsurance.complementaryDescription")}
+            </p>
+          </div>
 
-          {[
-            { key: "dental", label: t("forms.healthInsurance.complementary.dental") },
-            { key: "hospitalization", label: t("forms.healthInsurance.complementary.hospitalization") },
-            { key: "glasses", label: t("forms.healthInsurance.complementary.glasses") },
-            { key: "alternativeMedicine", label: t("forms.healthInsurance.complementary.alternativeMedicine") },
-            { key: "worldwide", label: t("forms.healthInsurance.complementary.worldwide") },
-          ].map((option) => (
-            <div key={option.key} className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-muted/50 transition-colors">
-              <Checkbox
-                id={option.key}
-                checked={formData.complementary[option.key as keyof typeof formData.complementary]}
-                onCheckedChange={(checked) =>
-                  updateFormData({
-                    complementary: {
-                      ...formData.complementary,
-                      [option.key]: checked as boolean,
-                    },
-                  })
-                }
-              />
-              <Label htmlFor={option.key} className="cursor-pointer flex-1">
-                {option.label}
-              </Label>
-            </div>
-          ))}
+          {/* Tier Selection Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* BASIC */}
+            <Card 
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md ${
+                formData.complementaryTier === "basic" 
+                  ? "ring-2 ring-slate-500 border-slate-500" 
+                  : "hover:border-slate-400"
+              }`}
+              onClick={() => updateFormData({ 
+                complementaryTier: formData.complementaryTier === "basic" ? null : "basic",
+                complementary: formData.complementaryTier === "basic" 
+                  ? { dental: false, hospitalization: false, glasses: false, alternativeMedicine: false, worldwide: false }
+                  : { dental: true, hospitalization: true, glasses: true, alternativeMedicine: true, worldwide: true }
+              })}
+            >
+              <CardContent className="p-4 text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-slate-100 mb-3">
+                  <span className="text-slate-600 text-xl font-bold">B</span>
+                </div>
+                <h4 className="font-bold text-lg text-slate-700">BASIC</h4>
+                <p className="text-xs text-muted-foreground mb-3">
+                  {t("forms.healthInsurance.tiers.basicDesc", "Couverture essentielle")}
+                </p>
+                <div className="text-2xl font-bold text-slate-600">
+                  ~CHF 39<span className="text-sm font-normal">/mois</span>
+                </div>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {t("forms.healthInsurance.tiers.allOptions", "Toutes options incluses")}
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* PREMIUM */}
+            <Card 
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md relative ${
+                formData.complementaryTier === "premium" 
+                  ? "ring-2 ring-violet-500 border-violet-500" 
+                  : "hover:border-violet-400"
+              }`}
+              onClick={() => updateFormData({ 
+                complementaryTier: formData.complementaryTier === "premium" ? null : "premium",
+                complementary: formData.complementaryTier === "premium" 
+                  ? { dental: false, hospitalization: false, glasses: false, alternativeMedicine: false, worldwide: false }
+                  : { dental: true, hospitalization: true, glasses: true, alternativeMedicine: true, worldwide: true }
+              })}
+            >
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <span className="bg-violet-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                  {t("forms.healthInsurance.tiers.popular", "Populaire")}
+                </span>
+              </div>
+              <CardContent className="p-4 text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-violet-100 mb-3">
+                  <span className="text-violet-600 text-xl font-bold">P</span>
+                </div>
+                <h4 className="font-bold text-lg text-violet-700">PREMIUM</h4>
+                <p className="text-xs text-muted-foreground mb-3">
+                  {t("forms.healthInsurance.tiers.premiumDesc", "Rapport qualité-prix optimal")}
+                </p>
+                <div className="text-2xl font-bold text-violet-600">
+                  ~CHF 91<span className="text-sm font-normal">/mois</span>
+                </div>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {t("forms.healthInsurance.tiers.allOptions", "Toutes options incluses")}
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* DIAMOND */}
+            <Card 
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md ${
+                formData.complementaryTier === "diamond" 
+                  ? "ring-2 ring-amber-500 border-amber-500" 
+                  : "hover:border-amber-400"
+              }`}
+              onClick={() => updateFormData({ 
+                complementaryTier: formData.complementaryTier === "diamond" ? null : "diamond",
+                complementary: formData.complementaryTier === "diamond" 
+                  ? { dental: false, hospitalization: false, glasses: false, alternativeMedicine: false, worldwide: false }
+                  : { dental: true, hospitalization: true, glasses: true, alternativeMedicine: true, worldwide: true }
+              })}
+            >
+              <CardContent className="p-4 text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-100 mb-3">
+                  <span className="text-amber-600 text-xl font-bold">D</span>
+                </div>
+                <h4 className="font-bold text-lg text-amber-700">DIAMOND</h4>
+                <p className="text-xs text-muted-foreground mb-3">
+                  {t("forms.healthInsurance.tiers.diamondDesc", "Couverture maximale")}
+                </p>
+                <div className="text-2xl font-bold text-amber-600">
+                  ~CHF 175<span className="text-sm font-normal">/mois</span>
+                </div>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {t("forms.healthInsurance.tiers.allOptions", "Toutes options incluses")}
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Skip option */}
+          <div className="text-center pt-4">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => updateFormData({ 
+                complementaryTier: null,
+                complementary: { dental: false, hospitalization: false, glasses: false, alternativeMedicine: false, worldwide: false }
+              })}
+              className="text-muted-foreground"
+            >
+              {t("forms.healthInsurance.skipComplementary", "Continuer sans complémentaire")}
+            </Button>
+          </div>
+
+          {/* Selected tier details */}
+          {formData.complementaryTier && (
+            <Card className="bg-muted/30 border-dashed">
+              <CardContent className="p-4">
+                <h5 className="font-semibold mb-3 text-sm">
+                  {t("forms.healthInsurance.includedInPackage", "Inclus dans votre package")} {formData.complementaryTier.toUpperCase()}:
+                </h5>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+                  <div className="flex items-center gap-2">
+                    <span className="text-primary">✓</span>
+                    {t("forms.healthInsurance.complementary.dental")}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-primary">✓</span>
+                    {t("forms.healthInsurance.complementary.hospitalization")}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-primary">✓</span>
+                    {t("forms.healthInsurance.complementary.glasses")}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-primary">✓</span>
+                    {t("forms.healthInsurance.complementary.alternativeMedicine")}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-primary">✓</span>
+                    {t("forms.healthInsurance.complementary.worldwide")}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </FormStep>
 

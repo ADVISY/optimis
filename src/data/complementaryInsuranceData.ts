@@ -1,14 +1,24 @@
 // Realistic data for complementary insurance (LCA) pricing in Switzerland
 // Based on market research 2024-2025: packages range from ~CHF 30-180/month
-// depending on coverage level (commune, semi-privée, privée) and reimbursement rates
+// Three tiers: BASIC, PREMIUM, DIAMOND
+
+export type ComplementaryTier = "basic" | "premium" | "diamond";
+
+export interface TieredPricing {
+  basic: number;
+  premium: number;
+  diamond: number;
+}
 
 export interface ComplementaryPricing {
   type: keyof ComplementaryOptions;
   name: string;
-  minPrice: number;
-  maxPrice: number;
-  averagePrice: number;
-  description: string;
+  prices: TieredPricing;
+  descriptions: {
+    basic: string;
+    premium: string;
+    diamond: string;
+  };
 }
 
 export interface ComplementaryOptions {
@@ -19,71 +29,111 @@ export interface ComplementaryOptions {
   worldwide: boolean;
 }
 
-// Realistic monthly prices for complementary insurance by type (CHF)
+// Tier descriptions
+export const tierInfo: Record<ComplementaryTier, { name: string; color: string; description: string }> = {
+  basic: {
+    name: "BASIC",
+    color: "#64748b", // slate
+    description: "Couverture essentielle à prix économique",
+  },
+  premium: {
+    name: "PREMIUM",
+    color: "#8b5cf6", // violet
+    description: "Excellent rapport qualité-prix",
+  },
+  diamond: {
+    name: "DIAMOND",
+    color: "#f59e0b", // amber
+    description: "Couverture maximale et privilèges",
+  },
+};
+
+// Realistic monthly prices for complementary insurance by type and tier (CHF)
 // Sources: Comparis, Helsana COMPLETA, CSS PLUS, Groupe Mutuel Premium, SWICA Optima
 export const complementaryPricing: Record<keyof ComplementaryOptions, ComplementaryPricing> = {
   dental: {
     type: "dental",
     name: "Soins dentaires",
-    minPrice: 8,      // Basic coverage 50%
-    maxPrice: 25,     // Premium coverage 75%
-    averagePrice: 15, // Standard 50-75% up to CHF 2000/year
-    description: "Couverture des soins dentaires (contrôles, détartrages, petites caries). Orthodontie enfants souvent en option.",
+    prices: {
+      basic: 8,      // 50% jusqu'à CHF 1000/an
+      premium: 15,   // 75% jusqu'à CHF 2000/an
+      diamond: 25,   // 90% jusqu'à CHF 5000/an + orthodontie
+    },
+    descriptions: {
+      basic: "50% remboursé, max CHF 1'000/an",
+      premium: "75% remboursé, max CHF 2'000/an",
+      diamond: "90% remboursé, max CHF 5'000/an + orthodontie",
+    },
   },
   hospitalization: {
     type: "hospitalization",
     name: "Hospitalisation",
-    minPrice: 15,     // Division commune flex
-    maxPrice: 95,     // Division privée tout hôpital Suisse
-    averagePrice: 45, // Semi-privée standard
-    description: "Chambre semi-privée ou privée, libre choix du médecin. Prix varie selon division et âge.",
+    prices: {
+      basic: 15,     // Division commune flex
+      premium: 45,   // Semi-privée tout hôpital
+      diamond: 95,   // Privée tout hôpital Suisse
+    },
+    descriptions: {
+      basic: "Division commune, libre choix hôpital",
+      premium: "Semi-privée, médecin-chef adjoint",
+      diamond: "Privée, libre choix du médecin",
+    },
   },
   glasses: {
     type: "glasses",
     name: "Lunettes & lentilles",
-    minPrice: 3,      // CHF 150/an
-    maxPrice: 12,     // CHF 300/an + lentilles
-    averagePrice: 6,  // CHF 200/an standard
-    description: "Participation aux frais de lunettes et lentilles de contact (CHF 150-300/an typiquement).",
+    prices: {
+      basic: 3,      // CHF 150/an
+      premium: 6,    // CHF 250/an + lentilles
+      diamond: 12,   // CHF 400/an + chirurgie laser partiel
+    },
+    descriptions: {
+      basic: "CHF 150/an pour lunettes",
+      premium: "CHF 250/an lunettes + lentilles",
+      diamond: "CHF 400/an + participation laser",
+    },
   },
   alternativeMedicine: {
     type: "alternativeMedicine",
     name: "Médecines alternatives",
-    minPrice: 5,      // CHF 500/an 50%
-    maxPrice: 18,     // CHF 3000/an 75%
-    averagePrice: 10, // CHF 1500/an 75% standard
-    description: "Ostéopathie, acupuncture, homéopathie, naturopathie, massage thérapeutique.",
+    prices: {
+      basic: 5,      // 50% jusqu'à CHF 500/an
+      premium: 10,   // 75% jusqu'à CHF 1500/an
+      diamond: 18,   // 90% jusqu'à CHF 3000/an
+    },
+    descriptions: {
+      basic: "50% remboursé, max CHF 500/an",
+      premium: "75% remboursé, max CHF 1'500/an",
+      diamond: "90% remboursé, max CHF 3'000/an",
+    },
   },
   worldwide: {
     type: "worldwide",
     name: "Couverture monde & fitness",
-    minPrice: 8,      // Fitness seulement ~CHF 300/an
-    maxPrice: 25,     // Couverture monde + fitness + prévention
-    averagePrice: 12, // Fitness + couverture vacances
-    description: "Abonnement fitness (CHF 300-600/an), soins à l'étranger, rapatriement, prévention santé.",
+    prices: {
+      basic: 8,      // Fitness CHF 300/an seulement
+      premium: 15,   // Fitness CHF 500/an + urgences monde
+      diamond: 25,   // Fitness CHF 800/an + couverture monde complète + prévention
+    },
+    descriptions: {
+      basic: "Fitness CHF 300/an",
+      premium: "Fitness CHF 500/an + urgences monde",
+      diamond: "Fitness CHF 800/an + couverture monde + prévention",
+    },
   },
 };
 
-// Calculate complementary insurance price for selected options
+// Calculate complementary insurance price for selected options and tier
 export const calculateComplementaryPrice = (
   selectedOptions: ComplementaryOptions,
-  variant: "min" | "average" | "max" = "average"
+  tier: ComplementaryTier = "premium"
 ): number => {
   let total = 0;
   
   (Object.keys(selectedOptions) as Array<keyof ComplementaryOptions>).forEach((key) => {
     if (selectedOptions[key]) {
       const pricing = complementaryPricing[key];
-      switch (variant) {
-        case "min":
-          total += pricing.minPrice;
-          break;
-        case "max":
-          total += pricing.maxPrice;
-          break;
-        default:
-          total += pricing.averagePrice;
-      }
+      total += pricing.prices[tier];
     }
   });
   
@@ -92,11 +142,16 @@ export const calculateComplementaryPrice = (
 
 // Get list of selected complementary options with details
 export const getSelectedComplementaryDetails = (
-  selectedOptions: ComplementaryOptions
-): ComplementaryPricing[] => {
+  selectedOptions: ComplementaryOptions,
+  tier: ComplementaryTier = "premium"
+): Array<ComplementaryPricing & { selectedTier: ComplementaryTier; selectedPrice: number }> => {
   return (Object.keys(selectedOptions) as Array<keyof ComplementaryOptions>)
     .filter((key) => selectedOptions[key])
-    .map((key) => complementaryPricing[key]);
+    .map((key) => ({
+      ...complementaryPricing[key],
+      selectedTier: tier,
+      selectedPrice: complementaryPricing[key].prices[tier],
+    }));
 };
 
 // Translations for complementary insurance types
@@ -133,4 +188,50 @@ export const getComplementaryLabel = (
   };
 
   return labels[type]?.[language] || labels[type]?.fr || type;
+};
+
+// Get tier label translated
+export const getTierLabel = (tier: ComplementaryTier, language: string): string => {
+  const labels: Record<ComplementaryTier, Record<string, string>> = {
+    basic: {
+      fr: "BASIC",
+      de: "BASIC",
+      it: "BASIC",
+    },
+    premium: {
+      fr: "PREMIUM",
+      de: "PREMIUM",
+      it: "PREMIUM",
+    },
+    diamond: {
+      fr: "DIAMOND",
+      de: "DIAMOND",
+      it: "DIAMOND",
+    },
+  };
+
+  return labels[tier]?.[language] || labels[tier]?.fr || tier.toUpperCase();
+};
+
+// Get tier description translated
+export const getTierDescription = (tier: ComplementaryTier, language: string): string => {
+  const descriptions: Record<ComplementaryTier, Record<string, string>> = {
+    basic: {
+      fr: "Couverture essentielle à prix économique",
+      de: "Grundlegende Deckung zu günstigen Preisen",
+      it: "Copertura essenziale a prezzo economico",
+    },
+    premium: {
+      fr: "Excellent rapport qualité-prix",
+      de: "Ausgezeichnetes Preis-Leistungs-Verhältnis",
+      it: "Ottimo rapporto qualità-prezzo",
+    },
+    diamond: {
+      fr: "Couverture maximale et privilèges",
+      de: "Maximale Deckung und Privilegien",
+      it: "Copertura massima e privilegi",
+    },
+  };
+
+  return descriptions[tier]?.[language] || descriptions[tier]?.fr || "";
 };
