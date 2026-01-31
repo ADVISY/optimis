@@ -237,7 +237,7 @@ const Header = () => {
   const { t } = useTranslation();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/80 shadow-soft">
+    <header className="sticky top-0 z-50 w-full border-b border-primary/20 bg-optimis-green-light backdrop-blur-md shadow-soft">
       <div className="w-full px-4 md:px-6 lg:px-8 xl:px-12 flex h-24 items-center">
         {/* Logo - pushed to left edge */}
         <LocalizedLink to="/" className="flex items-center gap-2 mr-6 lg:mr-10 transition-transform hover:scale-105">
