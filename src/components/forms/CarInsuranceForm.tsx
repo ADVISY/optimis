@@ -6,6 +6,7 @@ import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
 import ComparisonResults from "@/components/forms/ComparisonResults";
 import LoadingComparison from "@/components/forms/LoadingComparison";
+import VehicleSelector from "@/components/forms/VehicleSelector";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { Input } from "@/components/ui/input";
@@ -22,12 +23,8 @@ import {
 } from "@/components/ui/select";
 import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { mockCarInsuranceOffers, InsuranceOffer } from "@/data/mockInsuranceData";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
-import { CalendarIcon, Lock, User, Phone } from "lucide-react";
-import { format } from "date-fns";
-import { fr, de, it } from "date-fns/locale";
+import DateInput from "@/components/ui/date-input";
+import { Lock, User, Phone, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface CarInsuranceFormData {
@@ -66,14 +63,7 @@ const CarInsuranceForm = () => {
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
-
-  const getDateLocale = () => {
-    switch (i18n.language) {
-      case "de": return de;
-      case "it": return it;
-      default: return fr;
-    }
-  };
+  const [plateSearching, setPlateSearching] = useState(false);
 
   const initialData: CarInsuranceFormData = {
     vehiclePlate: "",
@@ -174,58 +164,46 @@ const CarInsuranceForm = () => {
     >
       {/* Step 1: Vehicle */}
       <FormStep isActive={currentStep === 1}>
-        <div className="space-y-4">
-          <FormFieldWrapper label={t("forms.carInsurance.vehiclePlate")} htmlFor="vehiclePlate">
-            <Input
-              id="vehiclePlate"
-              value={formData.vehiclePlate}
-              onChange={(e) => updateFormData({ vehiclePlate: e.target.value.toUpperCase() })}
-              placeholder="VD 123456"
-              className="h-14 text-lg"
-            />
-          </FormFieldWrapper>
-
-          <p className="text-sm text-muted-foreground text-center">{t("forms.carInsurance.orManual")}</p>
-
-          <div className="grid grid-cols-2 gap-4">
-            <FormFieldWrapper label={t("forms.carInsurance.brand")} htmlFor="vehicleBrand">
-              <Input
-                id="vehicleBrand"
-                value={formData.vehicleBrand}
-                onChange={(e) => updateFormData({ vehicleBrand: e.target.value })}
-                placeholder="Toyota, VW, BMW..."
-                className="h-14 text-lg"
-              />
-            </FormFieldWrapper>
-
-            <FormFieldWrapper label={t("forms.carInsurance.model")} htmlFor="vehicleModel">
-              <Input
-                id="vehicleModel"
-                value={formData.vehicleModel}
-                onChange={(e) => updateFormData({ vehicleModel: e.target.value })}
-                placeholder="Yaris, Golf, X3..."
-                className="h-14 text-lg"
-              />
+        <div className="space-y-6">
+          {/* License Plate Search */}
+          <div className="bg-muted/50 p-4 rounded-lg">
+            <FormFieldWrapper label={t("forms.carInsurance.vehiclePlate")} htmlFor="vehiclePlate">
+              <div className="relative">
+                <Input
+                  id="vehiclePlate"
+                  value={formData.vehiclePlate}
+                  onChange={(e) => updateFormData({ vehiclePlate: e.target.value.toUpperCase() })}
+                  placeholder="VD 123456"
+                  className="h-14 text-lg pr-12 font-mono tracking-wider"
+                />
+                <Search className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+              </div>
+              <p className="text-xs text-muted-foreground mt-1">
+                Entrez votre plaque pour identifier automatiquement votre véhicule
+              </p>
             </FormFieldWrapper>
           </div>
 
-          <FormFieldWrapper label={t("forms.carInsurance.year")} htmlFor="vehicleYear">
-            <Select
-              value={formData.vehicleYear}
-              onValueChange={(value) => updateFormData({ vehicleYear: value })}
-            >
-              <SelectTrigger className="h-14 text-lg">
-                <SelectValue placeholder={t("forms.carInsurance.selectYear")} />
-              </SelectTrigger>
-              <SelectContent>
-                {Array.from({ length: 30 }, (_, i) => new Date().getFullYear() - i).map((year) => (
-                  <SelectItem key={year} value={year.toString()}>
-                    {year}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </FormFieldWrapper>
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">
+                {t("forms.carInsurance.orManual")}
+              </span>
+            </div>
+          </div>
+
+          {/* Manual Vehicle Selection */}
+          <VehicleSelector
+            brand={formData.vehicleBrand}
+            model={formData.vehicleModel}
+            year={formData.vehicleYear}
+            onBrandChange={(brand) => updateFormData({ vehicleBrand: brand })}
+            onModelChange={(model) => updateFormData({ vehicleModel: model })}
+            onYearChange={(year) => updateFormData({ vehicleYear: year })}
+          />
         </div>
       </FormStep>
 
@@ -276,32 +254,16 @@ const CarInsuranceForm = () => {
       <FormStep isActive={currentStep === 3}>
         <div className="space-y-4">
           <FormFieldWrapper label={t("forms.carInsurance.driverBirthDate")} required>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    "w-full h-14 justify-start text-left font-normal text-lg",
-                    !formData.driverBirthDate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {formData.driverBirthDate
-                    ? format(formData.driverBirthDate, "PPP", { locale: getDateLocale() })
-                    : t("forms.healthInsurance.selectDate")}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={formData.driverBirthDate || undefined}
-                  onSelect={(date) => updateFormData({ driverBirthDate: date || null })}
-                  disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
-                  initialFocus
-                  className="pointer-events-auto"
-                />
-              </PopoverContent>
-            </Popover>
+            <DateInput
+              value={formData.driverBirthDate}
+              onChange={(date) => updateFormData({ driverBirthDate: date })}
+              placeholder="JJ/MM/AAAA"
+              className="h-14 text-lg"
+              maxYear={new Date().getFullYear() - 18}
+            />
+            <p className="text-xs text-muted-foreground mt-1">
+              Le conducteur principal doit avoir au moins 18 ans
+            </p>
           </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.carInsurance.licenseYear")} htmlFor="licenseYear" required>
