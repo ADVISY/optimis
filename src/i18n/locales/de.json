@@ -738,7 +738,8 @@
         "worldwide": "Weltweite Deckung",
         "fitness": "Fitness & Wellness"
       },
-      "availability": "Erreichbarkeit für Kontaktaufnahme"
+      "availability": "Erreichbarkeit für Kontaktaufnahme",
+      "errorLoadingPremiums": "Fehler beim Laden der Prämien. Bitte versuchen Sie es erneut."
     },
     "carInsurance": {
       "title": "Autoversicherungs-Vergleich",
