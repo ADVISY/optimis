@@ -42,15 +42,15 @@ const FormContainer = ({
       onMouseLeave={handleMouseLeave}
       className="w-full max-w-3xl mx-auto shadow-2xl border-0 rounded-3xl overflow-hidden min-h-[520px] ring-2 ring-emerald-400/30 animate-fade-in text-white relative"
       style={{
-        background: `radial-gradient(circle at ${gradientPos.x}% ${gradientPos.y}%, rgba(52, 120, 80, 0.9) 0%, rgba(30, 70, 50, 0.95) 35%, rgba(20, 50, 35, 1) 100%)`,
+        background: `radial-gradient(circle at ${gradientPos.x}% ${gradientPos.y}%, rgba(72, 140, 100, 0.95) 0%, rgba(52, 115, 80, 0.95) 40%, rgba(45, 100, 70, 1) 100%)`,
         transition: 'background 0.15s ease-out'
       }}
     >
       {/* Subtle animated glow overlay */}
       <div 
-        className="absolute inset-0 pointer-events-none opacity-30"
+        className="absolute inset-0 pointer-events-none opacity-40"
         style={{
-          background: `radial-gradient(circle at ${gradientPos.x}% ${gradientPos.y}%, rgba(100, 200, 150, 0.4) 0%, transparent 50%)`,
+          background: `radial-gradient(circle at ${gradientPos.x}% ${gradientPos.y}%, rgba(130, 200, 160, 0.5) 0%, transparent 45%)`,
           transition: 'background 0.15s ease-out'
         }}
       />
