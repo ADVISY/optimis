@@ -344,7 +344,7 @@ const HealthInsuranceForm = () => {
               type="button"
               variant="outline"
               onClick={() => addPerson("adult")}
-              className="flex-1 gap-2"
+              className="flex-1 gap-2 bg-white text-gray-900 border-gray-300 hover:bg-gray-50"
             >
               <Plus className="h-4 w-4" />
               {t("forms.healthInsurance.addAdult")}
@@ -353,7 +353,7 @@ const HealthInsuranceForm = () => {
               type="button"
               variant="outline"
               onClick={() => addPerson("child")}
-              className="flex-1 gap-2"
+              className="flex-1 gap-2 bg-white text-gray-900 border-gray-300 hover:bg-gray-50"
             >
               <Plus className="h-4 w-4" />
               {t("forms.healthInsurance.addChild")}
