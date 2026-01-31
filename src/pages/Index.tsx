@@ -107,7 +107,7 @@ const Index = () => {
             </div>
             
             {/* Mascot - large, spanning the hero, anchored on selection bar */}
-            <div className="hidden lg:flex justify-end items-end absolute right-0 xl:right-4 2xl:right-12 bottom-0 translate-y-16 z-30">
+            <div className="hidden lg:flex justify-end items-end absolute right-0 xl:right-4 2xl:right-12 bottom-0 translate-y-6 z-30">
               <img
                 src={mascotPointing}
                 alt="Mascotte Optimis"
