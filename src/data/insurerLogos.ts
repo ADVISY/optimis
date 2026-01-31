@@ -11,6 +11,18 @@ import tcsLogo from "@/assets/blog/tcs-assurance-voiture.png";
 import vaudoiseLogo from "@/assets/blog/vaudoise-assurance-voiture.png";
 import zurichLogo from "@/assets/blog/zurich-assurance-voiture.png";
 
+// Health insurer logos (SVG)
+import cssLogo from "@/assets/insurers/css-logo.svg";
+import helsanaLogo from "@/assets/insurers/helsana-logo.svg";
+import swicaLogo from "@/assets/insurers/swica-logo.svg";
+import sanitasLogo from "@/assets/insurers/sanitas-logo.svg";
+import groupeMutuelLogo from "@/assets/insurers/groupe-mutuel-logo.svg";
+import concordiaLogo from "@/assets/insurers/concordia-logo.svg";
+import visanaLogo from "@/assets/insurers/visana-logo.svg";
+import kptLogo from "@/assets/insurers/kpt-logo.svg";
+import atupriLogo from "@/assets/insurers/atupri-logo.svg";
+import assuraLogo from "@/assets/insurers/assura-logo.svg";
+
 export interface InsurerInfo {
   name: string;
   logo: string;
@@ -19,56 +31,56 @@ export interface InsurerInfo {
 
 // Map insurer names to their logos and brand colors
 export const insurerLogos: Record<string, InsurerInfo> = {
-  // Health insurers (LAMal)
+  // Health insurers (LAMal) with logos
   "Assura": {
     name: "Assura",
-    logo: "", // No specific logo available
-    color: "#1a5f7a",
+    logo: assuraLogo,
+    color: "#0066B3",
   },
   "CSS": {
     name: "CSS",
-    logo: "",
-    color: "#e30613",
+    logo: cssLogo,
+    color: "#E30613",
   },
   "Helsana": {
     name: "Helsana",
-    logo: "",
-    color: "#003366",
+    logo: helsanaLogo,
+    color: "#A21942",
   },
   "SWICA": {
     name: "SWICA",
-    logo: "",
-    color: "#009ee3",
+    logo: swicaLogo,
+    color: "#00A19A",
   },
   "Groupe Mutuel": {
     name: "Groupe Mutuel",
-    logo: "",
-    color: "#0066b3",
+    logo: groupeMutuelLogo,
+    color: "#1A365D",
   },
   "Sanitas": {
     name: "Sanitas",
-    logo: "",
-    color: "#e4002b",
+    logo: sanitasLogo,
+    color: "#6B8E23",
   },
   "Concordia": {
     name: "Concordia",
-    logo: "",
-    color: "#00457c",
+    logo: concordiaLogo,
+    color: "#E31937",
   },
   "Visana": {
     name: "Visana",
-    logo: "",
-    color: "#00a0e1",
+    logo: visanaLogo,
+    color: "#00529B",
   },
   "KPT": {
     name: "KPT",
-    logo: "",
-    color: "#004d87",
+    logo: kptLogo,
+    color: "#00A5E0",
   },
   "Atupri": {
     name: "Atupri",
-    logo: "",
-    color: "#e30613",
+    logo: atupriLogo,
+    color: "#E30613",
   },
   "ÖKK": {
     name: "ÖKK",
