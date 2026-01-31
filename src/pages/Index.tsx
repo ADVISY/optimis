@@ -73,64 +73,52 @@ const Index = () => {
 
   return (
     <Layout>
-      {/* Hero Section - Premium & Engaging */}
-      <section className="gradient-optimis pt-16 md:pt-20 lg:pt-24 pb-24 md:pb-28 overflow-visible relative !py-0 pt-16 md:pt-20 lg:pt-24 pb-24 md:pb-28">
+      {/* Hero Section */}
+      <section className="gradient-optimis pt-12 md:pt-16 lg:pt-20 pb-20 md:pb-24 overflow-visible relative">
         <div className="container relative">
-          <div className="grid items-start gap-8 lg:grid-cols-2 min-h-[480px] lg:min-h-[520px]">
-            <div className="space-y-8 animate-fade-in z-10 relative pt-8 md:pt-12 lg:pt-16">
+          <div className="grid items-start gap-8 md:grid-cols-2">
+            <div className="space-y-6 animate-fade-in z-10 relative pt-4 md:pt-8">
               {/* 5 Gold Stars */}
-              <div className="flex gap-1.5 animate-fade-in-delay">
+              <div className="flex gap-1">
                 {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-accent text-2xl md:text-3xl drop-shadow-sm">★</span>
+                  <span key={i} className="text-accent text-xl md:text-2xl">★</span>
                 ))}
               </div>
-              <h1 className="font-heading text-4xl font-black leading-[1.05] text-foreground uppercase md:text-5xl lg:text-6xl xl:text-7xl tracking-tight">
+              <h1 className="font-heading text-3xl font-black leading-[1.1] text-foreground uppercase md:text-4xl lg:text-5xl xl:text-6xl">
                 <span className="block">{t('home.heroLine1')}</span>
                 <span className="block">{t('home.heroLine2')}</span>
-                <span className="block text-gradient-optimis">{t('home.heroLine3')}</span>
+                <span className="block">{t('home.heroLine3')}</span>
               </h1>
-              <p className="text-lg text-muted-foreground md:text-xl max-w-lg leading-relaxed">
+              <p className="text-base text-muted-foreground md:text-lg max-w-md">
                 {t('home.heroSubtitle')}
               </p>
-              <div className="flex flex-wrap gap-4 pt-2">
-                <Button asChild size="xl" className="animate-fade-in-delay-2">
-                  <LocalizedLink to="/assurance-sante">
-                    {t('common.compareNow')}
-                  </LocalizedLink>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="animate-fade-in-delay-2">
-                  <LocalizedLink to="/blog">
-                    {t('common.readMore')}
-                  </LocalizedLink>
-                </Button>
-              </div>
             </div>
             
             {/* Mascot - positioned on top of selection bar */}
-            <div className="hidden lg:flex justify-end items-end absolute right-4 xl:right-8 bottom-0 translate-y-12 z-30">
+            <div className="hidden md:flex justify-end items-end absolute right-4 lg:right-8 bottom-0 translate-y-8 z-30">
               <img
                 src={mascotPointing}
                 alt="Mascotte Optimis"
-                className="h-[380px] xl:h-[460px] w-auto drop-shadow-2xl animate-fade-in"
+                className="h-[340px] lg:h-[420px] xl:h-[480px] w-auto drop-shadow-2xl"
               />
             </div>
           </div>
         </div>
         
-        {/* Quick Selection Bar - Premium */}
-        <div className="container relative z-20 mt-10 lg:mt-8">
-          <div className="bg-background rounded-2xl shadow-premium p-5 md:p-8 border">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        {/* Quick Selection Bar */}
+        <div className="container relative z-20 mt-8">
+          <div className="bg-background rounded-2xl shadow-xl p-4 md:p-6 border">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
               {insuranceCards.map((card) => (
                 <LocalizedLink
                   key={card.href}
                   to={card.href}
-                  className="flex items-center gap-3 md:gap-4 p-4 md:p-5 rounded-xl transition-all duration-300 hover:bg-secondary hover:-translate-y-1 hover:shadow-card group"
+                  className="flex items-center gap-2 md:gap-3 p-3 md:p-4 rounded-xl transition-all hover:bg-secondary group"
                 >
-                  <div className={`${card.color} transition-transform duration-300 group-hover:scale-110`}>
-                    <card.icon className="h-6 w-6 md:h-7 md:w-7" />
+                  <div className={`${card.color} transition-transform group-hover:scale-110`}>
+                    <card.icon className="h-5 w-5 md:h-6 md:w-6" />
                   </div>
-                  <span className="font-semibold text-sm md:text-base lg:text-lg text-foreground">
+                  <span className="font-medium text-xs md:text-sm lg:text-base text-foreground">
                     {t(card.titleKey)}
                   </span>
                 </LocalizedLink>
@@ -140,29 +128,29 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Insurance Selector - Enhanced */}
-      <section className="py-20 md:py-28 lg:py-32">
+      {/* Insurance Selector */}
+      <section className="py-16 md:py-20">
         <div className="container">
-          <div className="mb-16 text-center max-w-2xl mx-auto">
-            <h2 className="text-headline mb-6 text-foreground">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
               {t('home.whichInsurance')}
             </h2>
-            <p className="text-body-lg text-muted-foreground">
+            <p className="text-muted-foreground">
               {t('home.selectInsurance')}
             </p>
           </div>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {insuranceCards.map((card, index) => (
-              <LocalizedLink key={card.href} to={card.href} className="group">
-                <Card className="h-full hover-lift" style={{ animationDelay: `${index * 100}ms` }}>
-                  <CardContent className="flex flex-col items-center p-8 text-center">
-                    <div className={`mb-6 rounded-2xl bg-secondary p-5 ${card.color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}>
-                      <card.icon className="h-10 w-10" />
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {insuranceCards.map((card) => (
+              <LocalizedLink key={card.href} to={card.href}>
+                <Card className="h-full transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                  <CardContent className="flex flex-col items-center p-6 text-center">
+                    <div className={`mb-4 rounded-full bg-secondary p-4 ${card.color}`}>
+                      <card.icon className="h-8 w-8" />
                     </div>
-                    <h3 className="mb-3 text-xl font-bold text-foreground">
+                    <h3 className="mb-2 text-lg font-semibold text-foreground">
                       {t(card.titleKey)}
                     </h3>
-                    <p className="text-base text-muted-foreground leading-relaxed">
+                    <p className="text-sm text-muted-foreground">
                       {t(card.descriptionKey)}
                     </p>
                   </CardContent>
@@ -173,33 +161,33 @@ const Index = () => {
         </div>
       </section>
 
-      {/* How it Works - Premium */}
-      <section className="bg-secondary/30 py-20 md:py-28 lg:py-32">
+      {/* How it Works */}
+      <section className="bg-secondary/30 py-16 md:py-20">
         <div className="container">
-          <div className="mb-16 text-center max-w-2xl mx-auto">
-            <h2 className="text-headline mb-6 text-foreground">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
               {t('home.howItWorks')}
             </h2>
-            <p className="text-body-lg text-muted-foreground">
+            <p className="text-muted-foreground">
               {t('home.bestOffersIn4Steps')}
             </p>
           </div>
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((step, index) => (
               <div
                 key={step.number}
-                className="relative flex flex-col items-center text-center group"
+                className="relative flex flex-col items-center text-center"
               >
                 {index < steps.length - 1 && (
-                  <div className="absolute left-1/2 top-12 hidden h-1 w-full bg-border/50 lg:block rounded-full" />
+                  <div className="absolute left-1/2 top-8 hidden h-0.5 w-full bg-border lg:block" />
                 )}
-                <div className="relative z-10 mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-primary text-4xl font-black text-primary-foreground shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl">
+                <div className="relative z-10 mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-2xl font-bold text-primary-foreground">
                   {step.number}
                 </div>
-                <h3 className="mb-3 text-xl font-bold text-foreground">
+                <h3 className="mb-2 text-lg font-semibold text-foreground">
                   {t(step.titleKey)}
                 </h3>
-                <p className="text-base text-muted-foreground leading-relaxed">
+                <p className="text-sm text-muted-foreground">
                   {t(step.descriptionKey)}
                 </p>
               </div>
@@ -208,50 +196,45 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stats Section - Impactful */}
-      <section className="py-20 md:py-28 lg:py-32">
+      {/* Stats Section */}
+      <section className="py-16 md:py-20">
         <div className="container">
-          <div className="grid gap-12 text-center sm:grid-cols-3">
+          <div className="grid gap-8 text-center sm:grid-cols-3">
             {stats.map((stat) => (
-              <div key={stat.labelKey} className="space-y-4 group">
-                <p className="text-5xl md:text-6xl lg:text-7xl font-black text-primary transition-transform duration-300 group-hover:scale-105">
+              <div key={stat.labelKey} className="space-y-2">
+                <p className="text-4xl font-bold text-primary md:text-5xl">
                   {stat.value}
                 </p>
-                <p className="text-lg text-muted-foreground font-medium">{t(stat.labelKey)}</p>
+                <p className="text-muted-foreground">{t(stat.labelKey)}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials - Premium Cards */}
-      <section className="bg-secondary/30 py-20 md:py-28 lg:py-32">
+      {/* Testimonials */}
+      <section className="bg-secondary/30 py-16 md:py-20">
         <div className="container">
-          <div className="mb-16 text-center max-w-2xl mx-auto">
-            <h2 className="text-headline mb-6 text-foreground">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
               {t('home.whatClientsSay')}
             </h2>
-            <p className="text-body-lg text-muted-foreground">
+            <p className="text-muted-foreground">
               {t('home.thousandsTrust')}
             </p>
           </div>
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3">
             {testimonials.map((testimonial) => (
-              <Card key={testimonial.name} className="h-full hover-lift">
-                <CardContent className="p-8">
-                  <div className="flex gap-1 mb-6">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-accent text-xl">★</span>
-                    ))}
-                  </div>
-                  <p className="mb-6 text-lg text-foreground/80 leading-relaxed italic">
+              <Card key={testimonial.name} className="h-full">
+                <CardContent className="p-6">
+                  <p className="mb-4 text-muted-foreground">
                     "{t(testimonial.textKey)}"
                   </p>
-                  <div className="pt-4 border-t border-border">
-                    <p className="font-bold text-lg text-foreground">
+                  <div>
+                    <p className="font-semibold text-foreground">
                       {testimonial.name}
                     </p>
-                    <p className="text-base text-muted-foreground">
+                    <p className="text-sm text-muted-foreground">
                       {testimonial.location}
                     </p>
                   </div>
@@ -262,16 +245,16 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section - Compelling */}
-      <section className="gradient-optimis py-20 md:py-28 lg:py-32">
-        <div className="container text-center max-w-3xl mx-auto">
-          <h2 className="text-headline mb-6 text-foreground">
+      {/* CTA Section */}
+      <section className="gradient-optimis py-16 md:py-20">
+        <div className="container text-center">
+          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
             {t('home.readyToSave')}
           </h2>
-          <p className="mb-10 text-body-lg text-muted-foreground">
+          <p className="mb-8 text-muted-foreground">
             {t('home.joinUsers')}
           </p>
-          <Button asChild size="xl">
+          <Button asChild size="lg" className="text-base">
             <LocalizedLink to="/assurance-sante">
               {t('home.startFreeComparison')}
             </LocalizedLink>

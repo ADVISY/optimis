@@ -1,6 +1,5 @@
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-import { useTranslation } from "react-i18next";
 
 interface FormProgressProps {
   currentStep: number;
@@ -9,25 +8,15 @@ interface FormProgressProps {
 }
 
 const FormProgress = ({ currentStep, totalSteps, className }: FormProgressProps) => {
-  const { t } = useTranslation();
   const progress = (currentStep / totalSteps) * 100;
 
   return (
-    <div className={cn("w-full space-y-3", className)}>
-      <div className="flex justify-between items-center text-base">
-        <span className="font-semibold text-foreground">
-          {t("forms.stepOf", { current: currentStep, total: totalSteps, defaultValue: `Étape ${currentStep} sur ${totalSteps}` })}
-        </span>
-        <span className="text-lg font-bold text-primary">{Math.round(progress)}%</span>
+    <div className={cn("w-full space-y-2", className)}>
+      <div className="flex justify-between text-sm text-muted-foreground">
+        <span>Étape {currentStep} sur {totalSteps}</span>
+        <span>{Math.round(progress)}%</span>
       </div>
-      <div className="relative">
-        <Progress value={progress} className="h-3 rounded-full" />
-        {/* Animated glow effect */}
-        <div 
-          className="absolute top-0 left-0 h-3 rounded-full bg-gradient-to-r from-primary to-accent opacity-50 blur-sm transition-all duration-500"
-          style={{ width: `${progress}%` }}
-        />
-      </div>
+      <Progress value={progress} className="h-2" />
     </div>
   );
 };
