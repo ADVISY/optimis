@@ -303,7 +303,7 @@ const Header = () => {
           <LanguageSwitcher />
           <Button asChild size="lg" className="gap-2.5">
             <a
-              href="https://calendly.com/optimis-ch/consultation"
+              href="https://calendly.com/lesiteoptimis/30min"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -404,7 +404,7 @@ const Header = () => {
                 <LanguageSwitcher />
                 <Button asChild size="lg" className="w-full gap-2.5">
                   <a
-                    href="https://calendly.com/optimis-ch/consultation"
+                    href="https://calendly.com/lesiteoptimis/30min"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
