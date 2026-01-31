@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import llamaMascot from "@/assets/llama-mascot.png";
+import mascotPointing from "@/assets/mascot-pointing.png";
 import LocalizedLink from "@/components/LocalizedLink";
 
 const Index = () => {
@@ -107,7 +107,7 @@ const Index = () => {
             </div>
             <div className="flex justify-center md:justify-end relative">
               <img
-                src={llamaMascot}
+                src={mascotPointing}
                 alt="Mascotte Optimis"
                 className="h-80 w-auto animate-fade-in md:h-[420px] lg:h-[500px] xl:h-[550px] drop-shadow-2xl"
               />
