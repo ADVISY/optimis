@@ -25,7 +25,7 @@ import { mockCarInsuranceOffers, InsuranceOffer } from "@/data/mockInsuranceData
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Lock, User, Phone } from "lucide-react";
 import { format } from "date-fns";
 import { fr, de, it } from "date-fns/locale";
 import { cn } from "@/lib/utils";
@@ -59,7 +59,7 @@ interface CarInsuranceFormData {
   canton: string;
 }
 
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 6;
 
 const CarInsuranceForm = () => {
   const { t, i18n } = useTranslation();
@@ -181,6 +181,7 @@ const CarInsuranceForm = () => {
               value={formData.vehiclePlate}
               onChange={(e) => updateFormData({ vehiclePlate: e.target.value.toUpperCase() })}
               placeholder="VD 123456"
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
@@ -193,6 +194,7 @@ const CarInsuranceForm = () => {
                 value={formData.vehicleBrand}
                 onChange={(e) => updateFormData({ vehicleBrand: e.target.value })}
                 placeholder="Toyota, VW, BMW..."
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
 
@@ -202,6 +204,7 @@ const CarInsuranceForm = () => {
                 value={formData.vehicleModel}
                 onChange={(e) => updateFormData({ vehicleModel: e.target.value })}
                 placeholder="Yaris, Golf, X3..."
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
           </div>
@@ -211,7 +214,7 @@ const CarInsuranceForm = () => {
               value={formData.vehicleYear}
               onValueChange={(value) => updateFormData({ vehicleYear: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.carInsurance.selectYear")} />
               </SelectTrigger>
               <SelectContent>
@@ -235,15 +238,15 @@ const CarInsuranceForm = () => {
               onValueChange={(value) => updateFormData({ usage: value })}
               className="grid gap-3"
             >
-              <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
                 <RadioGroupItem value="private" id="private" />
-                <Label htmlFor="private" className="cursor-pointer flex-1">
+                <Label htmlFor="private" className="cursor-pointer flex-1 text-lg">
                   {t("forms.carInsurance.usagePrivate")}
                 </Label>
               </div>
-              <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
                 <RadioGroupItem value="professional" id="professional" />
-                <Label htmlFor="professional" className="cursor-pointer flex-1">
+                <Label htmlFor="professional" className="cursor-pointer flex-1 text-lg">
                   {t("forms.carInsurance.usageProfessional")}
                 </Label>
               </div>
@@ -278,7 +281,7 @@ const CarInsuranceForm = () => {
                 <Button
                   variant="outline"
                   className={cn(
-                    "w-full justify-start text-left font-normal",
+                    "w-full h-14 justify-start text-left font-normal text-lg",
                     !formData.driverBirthDate && "text-muted-foreground"
                   )}
                 >
@@ -306,7 +309,7 @@ const CarInsuranceForm = () => {
               value={formData.licenseYear}
               onValueChange={(value) => updateFormData({ licenseYear: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.carInsurance.selectLicenseYear")} />
               </SelectTrigger>
               <SelectContent>
@@ -347,24 +350,24 @@ const CarInsuranceForm = () => {
               onValueChange={(value) => updateFormData({ coverageType: value })}
               className="grid gap-3"
             >
-              <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
                 <RadioGroupItem value="rc" id="rc" />
                 <Label htmlFor="rc" className="cursor-pointer flex-1">
-                  <span className="font-medium">{t("forms.carInsurance.coverageRC")}</span>
+                  <span className="font-medium text-lg">{t("forms.carInsurance.coverageRC")}</span>
                   <p className="text-sm text-muted-foreground">{t("forms.carInsurance.coverageRCDesc")}</p>
                 </Label>
               </div>
-              <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
                 <RadioGroupItem value="rc-partial" id="rc-partial" />
                 <Label htmlFor="rc-partial" className="cursor-pointer flex-1">
-                  <span className="font-medium">{t("forms.carInsurance.coveragePartial")}</span>
+                  <span className="font-medium text-lg">{t("forms.carInsurance.coveragePartial")}</span>
                   <p className="text-sm text-muted-foreground">{t("forms.carInsurance.coveragePartialDesc")}</p>
                 </Label>
               </div>
-              <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
                 <RadioGroupItem value="rc-full" id="rc-full" />
                 <Label htmlFor="rc-full" className="cursor-pointer flex-1">
-                  <span className="font-medium">{t("forms.carInsurance.coverageFull")}</span>
+                  <span className="font-medium text-lg">{t("forms.carInsurance.coverageFull")}</span>
                   <p className="text-sm text-muted-foreground">{t("forms.carInsurance.coverageFullDesc")}</p>
                 </Label>
               </div>
@@ -372,13 +375,13 @@ const CarInsuranceForm = () => {
           </FormFieldWrapper>
 
           <div className="space-y-3">
-            <p className="font-medium">{t("forms.carInsurance.additionalOptions")}</p>
+            <p className="font-medium text-lg">{t("forms.carInsurance.additionalOptions")}</p>
             {[
               { key: "glassBreakage", label: t("forms.carInsurance.options.glassBreakage") },
               { key: "assistance", label: t("forms.carInsurance.options.assistance") },
               { key: "replacementVehicle", label: t("forms.carInsurance.options.replacementVehicle") },
             ].map((option) => (
-              <div key={option.key} className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-muted/50">
+              <div key={option.key} className="flex items-center space-x-3 p-4 border rounded-lg hover:bg-muted/50">
                 <Checkbox
                   id={option.key}
                   checked={formData.options[option.key as keyof typeof formData.options]}
@@ -388,7 +391,7 @@ const CarInsuranceForm = () => {
                     })
                   }
                 />
-                <Label htmlFor={option.key} className="cursor-pointer flex-1">
+                <Label htmlFor={option.key} className="cursor-pointer flex-1 text-lg">
                   {option.label}
                 </Label>
               </div>
@@ -397,15 +400,24 @@ const CarInsuranceForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 5: Contact */}
+      {/* Step 5: Identity */}
       <FormStep isActive={currentStep === 5}>
-        <div className="space-y-4">
+        <div className="space-y-6">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+              <User className="h-8 w-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold">{t("forms.contact.almostDone")}</h3>
+            <p className="text-muted-foreground">{t("forms.contact.nameStepDescription")}</p>
+          </div>
+
           <div className="grid grid-cols-2 gap-4">
             <FormFieldWrapper label={t("forms.contact.firstName")} htmlFor="firstName" required>
               <Input
                 id="firstName"
                 value={formData.firstName}
                 onChange={(e) => updateFormData({ firstName: e.target.value })}
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
             <FormFieldWrapper label={t("forms.contact.lastName")} htmlFor="lastName" required>
@@ -413,35 +425,17 @@ const CarInsuranceForm = () => {
                 id="lastName"
                 value={formData.lastName}
                 onChange={(e) => updateFormData({ lastName: e.target.value })}
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
           </div>
-
-          <FormFieldWrapper label={t("forms.contact.email")} htmlFor="email" required>
-            <Input
-              id="email"
-              type="email"
-              value={formData.email}
-              onChange={(e) => updateFormData({ email: e.target.value })}
-            />
-          </FormFieldWrapper>
-
-          <FormFieldWrapper label={t("forms.contact.phone")} htmlFor="phone" required>
-            <Input
-              id="phone"
-              type="tel"
-              value={formData.phone}
-              onChange={(e) => updateFormData({ phone: e.target.value })}
-              placeholder="+41 79 123 45 67"
-            />
-          </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.healthInsurance.canton")} htmlFor="canton">
             <Select
               value={formData.canton}
               onValueChange={(value) => updateFormData({ canton: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
               </SelectTrigger>
               <SelectContent>
@@ -453,6 +447,45 @@ const CarInsuranceForm = () => {
               </SelectContent>
             </Select>
           </FormFieldWrapper>
+        </div>
+      </FormStep>
+
+      {/* Step 6: Contact */}
+      <FormStep isActive={currentStep === 6}>
+        <div className="space-y-6">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+              <Phone className="h-8 w-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold">{t("forms.contact.contactStepTitle")}</h3>
+            <p className="text-muted-foreground">{t("forms.contact.contactStepDescription")}</p>
+          </div>
+
+          <FormFieldWrapper label={t("forms.contact.email")} htmlFor="email" required>
+            <Input
+              id="email"
+              type="email"
+              value={formData.email}
+              onChange={(e) => updateFormData({ email: e.target.value })}
+              className="h-14 text-lg"
+            />
+          </FormFieldWrapper>
+
+          <FormFieldWrapper label={t("forms.contact.phone")} htmlFor="phone" required>
+            <Input
+              id="phone"
+              type="tel"
+              value={formData.phone}
+              onChange={(e) => updateFormData({ phone: e.target.value })}
+              placeholder="+41 79 123 45 67"
+              className="h-14 text-lg"
+            />
+          </FormFieldWrapper>
+
+          <div className="flex items-center gap-2 p-4 bg-muted/50 rounded-lg">
+            <Lock className="h-5 w-5 text-muted-foreground flex-shrink-0" />
+            <p className="text-sm text-muted-foreground">{t("forms.contact.privacyNote")}</p>
+          </div>
         </div>
       </FormStep>
 

@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/select";
 import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { mockLegalProtectionOffers, InsuranceOffer } from "@/data/mockInsuranceData";
+import { Lock, User, Phone } from "lucide-react";
 
 interface LegalProtectionFormData {
   coverageType: string;
@@ -39,7 +40,7 @@ interface LegalProtectionFormData {
   phone: string;
 }
 
-const TOTAL_STEPS = 3;
+const TOTAL_STEPS = 4;
 
 const LegalProtectionForm = () => {
   const { t, i18n } = useTranslation();
@@ -152,10 +153,10 @@ const LegalProtectionForm = () => {
                 { value: "traffic", label: t("forms.legalProtection.types.traffic"), desc: t("forms.legalProtection.types.trafficDesc") },
                 { value: "custom", label: t("forms.legalProtection.types.custom"), desc: t("forms.legalProtection.types.customDesc") },
               ].map((type) => (
-                <div key={type.value} className="flex items-start space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+                <div key={type.value} className="flex items-start space-x-2 p-4 border rounded-lg hover:bg-muted/50">
                   <RadioGroupItem value={type.value} id={type.value} className="mt-1" />
                   <Label htmlFor={type.value} className="cursor-pointer flex-1">
-                    <span className="font-medium">{type.label}</span>
+                    <span className="font-medium text-lg">{type.label}</span>
                     <p className="text-sm text-muted-foreground">{type.desc}</p>
                   </Label>
                 </div>
@@ -207,9 +208,9 @@ const LegalProtectionForm = () => {
                 { value: "2", label: t("forms.legalProtection.couple") },
                 { value: "family", label: t("forms.legalProtection.family") },
               ].map((size) => (
-                <div key={size.value} className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+                <div key={size.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
                   <RadioGroupItem value={size.value} id={`size-${size.value}`} />
-                  <Label htmlFor={`size-${size.value}`} className="cursor-pointer">
+                  <Label htmlFor={`size-${size.value}`} className="cursor-pointer text-lg">
                     {size.label}
                   </Label>
                 </div>
@@ -222,7 +223,7 @@ const LegalProtectionForm = () => {
               value={formData.canton}
               onValueChange={(value) => updateFormData({ canton: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
               </SelectTrigger>
               <SelectContent>
@@ -237,15 +238,24 @@ const LegalProtectionForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 3: Contact */}
+      {/* Step 3: Identity */}
       <FormStep isActive={currentStep === 3}>
-        <div className="space-y-4">
+        <div className="space-y-6">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+              <User className="h-8 w-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold">{t("forms.contact.almostDone")}</h3>
+            <p className="text-muted-foreground">{t("forms.contact.nameStepDescription")}</p>
+          </div>
+
           <div className="grid grid-cols-2 gap-4">
             <FormFieldWrapper label={t("forms.contact.firstName")} htmlFor="firstName" required>
               <Input
                 id="firstName"
                 value={formData.firstName}
                 onChange={(e) => updateFormData({ firstName: e.target.value })}
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
             <FormFieldWrapper label={t("forms.contact.lastName")} htmlFor="lastName" required>
@@ -253,8 +263,22 @@ const LegalProtectionForm = () => {
                 id="lastName"
                 value={formData.lastName}
                 onChange={(e) => updateFormData({ lastName: e.target.value })}
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
+          </div>
+        </div>
+      </FormStep>
+
+      {/* Step 4: Contact */}
+      <FormStep isActive={currentStep === 4}>
+        <div className="space-y-6">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+              <Phone className="h-8 w-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold">{t("forms.contact.contactStepTitle")}</h3>
+            <p className="text-muted-foreground">{t("forms.contact.contactStepDescription")}</p>
           </div>
 
           <FormFieldWrapper label={t("forms.contact.email")} htmlFor="email" required>
@@ -263,6 +287,7 @@ const LegalProtectionForm = () => {
               type="email"
               value={formData.email}
               onChange={(e) => updateFormData({ email: e.target.value })}
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
@@ -273,8 +298,14 @@ const LegalProtectionForm = () => {
               value={formData.phone}
               onChange={(e) => updateFormData({ phone: e.target.value })}
               placeholder="+41 79 123 45 67"
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
+
+          <div className="flex items-center gap-2 p-4 bg-muted/50 rounded-lg">
+            <Lock className="h-5 w-5 text-muted-foreground flex-shrink-0" />
+            <p className="text-sm text-muted-foreground">{t("forms.contact.privacyNote")}</p>
+          </div>
         </div>
       </FormStep>
 

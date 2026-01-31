@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/select";
 import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { mockHouseholdInsuranceOffers, InsuranceOffer } from "@/data/mockInsuranceData";
+import { Lock, User, Phone } from "lucide-react";
 
 interface HouseholdInsuranceFormData {
   propertyType: string;
@@ -35,7 +36,7 @@ interface HouseholdInsuranceFormData {
   phone: string;
 }
 
-const TOTAL_STEPS = 3;
+const TOTAL_STEPS = 4;
 
 const HouseholdInsuranceForm = () => {
   const { t, i18n } = useTranslation();
@@ -144,9 +145,9 @@ const HouseholdInsuranceForm = () => {
                 { value: "apartment", label: t("forms.mortgage.propertyTypes.apartment") },
                 { value: "house", label: t("forms.mortgage.propertyTypes.house") },
               ].map((type) => (
-                <div key={type.value} className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+                <div key={type.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
                   <RadioGroupItem value={type.value} id={type.value} />
-                  <Label htmlFor={type.value} className="cursor-pointer flex-1">
+                  <Label htmlFor={type.value} className="cursor-pointer flex-1 text-lg">
                     {type.label}
                   </Label>
                 </div>
@@ -160,15 +161,15 @@ const HouseholdInsuranceForm = () => {
               onValueChange={(value) => updateFormData({ ownershipStatus: value })}
               className="grid grid-cols-2 gap-3"
             >
-              <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
                 <RadioGroupItem value="tenant" id="tenant" />
-                <Label htmlFor="tenant" className="cursor-pointer">
+                <Label htmlFor="tenant" className="cursor-pointer text-lg">
                   {t("forms.householdInsurance.tenant")}
                 </Label>
               </div>
-              <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
                 <RadioGroupItem value="owner" id="owner" />
-                <Label htmlFor="owner" className="cursor-pointer">
+                <Label htmlFor="owner" className="cursor-pointer text-lg">
                   {t("forms.householdInsurance.owner")}
                 </Label>
               </div>
@@ -183,6 +184,7 @@ const HouseholdInsuranceForm = () => {
                 value={formData.livingSpace}
                 onChange={(e) => updateFormData({ livingSpace: e.target.value })}
                 placeholder="80 m²"
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
 
@@ -191,7 +193,7 @@ const HouseholdInsuranceForm = () => {
                 value={formData.numberOfRooms}
                 onValueChange={(value) => updateFormData({ numberOfRooms: value })}
               >
-                <SelectTrigger>
+                <SelectTrigger className="h-14 text-lg">
                   <SelectValue placeholder={t("forms.householdInsurance.selectRooms")} />
                 </SelectTrigger>
                 <SelectContent>
@@ -213,7 +215,7 @@ const HouseholdInsuranceForm = () => {
               value={formData.canton}
               onValueChange={(value) => updateFormData({ canton: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
               </SelectTrigger>
               <SelectContent>
@@ -234,6 +236,7 @@ const HouseholdInsuranceForm = () => {
               value={formData.postalCode}
               onChange={(e) => updateFormData({ postalCode: e.target.value })}
               placeholder="1000"
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
@@ -242,7 +245,7 @@ const HouseholdInsuranceForm = () => {
               value={formData.propertyValue}
               onValueChange={(value) => updateFormData({ propertyValue: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.householdInsurance.selectValue")} />
               </SelectTrigger>
               <SelectContent>
@@ -257,15 +260,24 @@ const HouseholdInsuranceForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 3: Contact */}
+      {/* Step 3: Identity */}
       <FormStep isActive={currentStep === 3}>
-        <div className="space-y-4">
+        <div className="space-y-6">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+              <User className="h-8 w-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold">{t("forms.contact.almostDone")}</h3>
+            <p className="text-muted-foreground">{t("forms.contact.nameStepDescription")}</p>
+          </div>
+
           <div className="grid grid-cols-2 gap-4">
             <FormFieldWrapper label={t("forms.contact.firstName")} htmlFor="firstName" required>
               <Input
                 id="firstName"
                 value={formData.firstName}
                 onChange={(e) => updateFormData({ firstName: e.target.value })}
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
             <FormFieldWrapper label={t("forms.contact.lastName")} htmlFor="lastName" required>
@@ -273,8 +285,22 @@ const HouseholdInsuranceForm = () => {
                 id="lastName"
                 value={formData.lastName}
                 onChange={(e) => updateFormData({ lastName: e.target.value })}
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
+          </div>
+        </div>
+      </FormStep>
+
+      {/* Step 4: Contact */}
+      <FormStep isActive={currentStep === 4}>
+        <div className="space-y-6">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+              <Phone className="h-8 w-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold">{t("forms.contact.contactStepTitle")}</h3>
+            <p className="text-muted-foreground">{t("forms.contact.contactStepDescription")}</p>
           </div>
 
           <FormFieldWrapper label={t("forms.contact.email")} htmlFor="email" required>
@@ -283,6 +309,7 @@ const HouseholdInsuranceForm = () => {
               type="email"
               value={formData.email}
               onChange={(e) => updateFormData({ email: e.target.value })}
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
@@ -293,8 +320,14 @@ const HouseholdInsuranceForm = () => {
               value={formData.phone}
               onChange={(e) => updateFormData({ phone: e.target.value })}
               placeholder="+41 79 123 45 67"
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
+
+          <div className="flex items-center gap-2 p-4 bg-muted/50 rounded-lg">
+            <Lock className="h-5 w-5 text-muted-foreground flex-shrink-0" />
+            <p className="text-sm text-muted-foreground">{t("forms.contact.privacyNote")}</p>
+          </div>
         </div>
       </FormStep>
 
