@@ -440,7 +440,10 @@
     "terminationFeature1": "Kostenlose Briefvorlagen",
     "terminationFeature2": "Erinnerung an wichtige Fristen",
     "terminationFeature3": "Persönliche Begleitung",
-    "startTermination": "Kündigung starten"
+    "startTermination": "Kündigung starten",
+    "mortgage": "Hypothek",
+    "mortgageDesc": "Zinssätze vergleichen",
+    "mortgageContent": "Finden Sie den besten Hypothekenzins für Ihr Immobilienprojekt."
   },
   "mobile": {
     "title": "Mobilfunktarif",

@@ -475,7 +475,10 @@
     "terminationFeature1": "Modèles de lettres gratuits",
     "terminationFeature2": "Rappel des délais importants",
     "terminationFeature3": "Accompagnement personnalisé",
-    "startTermination": "Commencer ma résiliation"
+    "startTermination": "Commencer ma résiliation",
+    "mortgage": "Hypothèque",
+    "mortgageDesc": "Comparez les taux",
+    "mortgageContent": "Trouvez le meilleur taux hypothécaire pour votre projet immobilier."
   },
   "mobile": {
     "title": "Forfait Mobile",

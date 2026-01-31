@@ -440,7 +440,10 @@
     "terminationFeature1": "Modelli di lettere gratuiti",
     "terminationFeature2": "Promemoria delle scadenze importanti",
     "terminationFeature3": "Accompagnamento personalizzato",
-    "startTermination": "Inizia la mia disdetta"
+    "startTermination": "Inizia la mia disdetta",
+    "mortgage": "Ipoteca",
+    "mortgageDesc": "Confronta i tassi",
+    "mortgageContent": "Trova il miglior tasso ipotecario per il tuo progetto immobiliare."
   },
   "mobile": {
     "title": "Abbonamento Mobile",
