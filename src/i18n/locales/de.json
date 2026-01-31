@@ -637,6 +637,18 @@
       "jurisdictionContent": "Diese Bedingungen unterliegen Schweizer Recht. Alle Streitigkeiten werden den zuständigen Gerichten in Genf, Schweiz, unterbreitet."
     }
   },
+  "comparison": {
+    "resultsTitle": "Ihre personalisierten Angebote",
+    "resultsSubtitle": "Wir haben {{count}} Angebote gefunden, die zu Ihrem Profil passen",
+    "perMonth": "/Monat",
+    "perYear": "Pro Jahr",
+    "selectOffer": "Dieses Angebot wählen",
+    "callBack": "Rückruf anfordern",
+    "email": "Per E-Mail",
+    "needHelp": "Brauchen Sie Hilfe bei der Auswahl?",
+    "expertAdvice": "Unsere Berater helfen Ihnen kostenlos",
+    "talkToExpert": "Mit Berater sprechen"
+  },
   "forms": {
     "free": "100% kostenlos",
     "secure": "Sichere Daten",
@@ -645,6 +657,13 @@
     "next": "Weiter",
     "compare": "Vergleichen",
     "processing": "Verarbeitung...",
+    "loading": {
+      "title": "Suche nach den besten Angeboten...",
+      "analyzing": "Analyse Ihrer Bedürfnisse",
+      "comparing": "Vergleich der Angebote",
+      "preparing": "Vorbereitung der Ergebnisse",
+      "message": "Wir analysieren die besten Angebote auf dem Markt für Sie."
+    },
     "common": {
       "step": "Schritt",
       "of": "von",

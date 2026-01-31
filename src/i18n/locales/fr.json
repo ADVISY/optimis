@@ -669,6 +669,18 @@
       "jurisdictionContent": "Les présentes conditions sont régies par le droit suisse. Tout litige sera soumis aux tribunaux compétents de Genève, Suisse."
     }
   },
+  "comparison": {
+    "resultsTitle": "Vos offres personnalisées",
+    "resultsSubtitle": "Nous avons trouvé {{count}} offres adaptées à votre profil",
+    "perMonth": "/mois",
+    "perYear": "Par an",
+    "selectOffer": "Choisir cette offre",
+    "callBack": "Être rappelé",
+    "email": "Par email",
+    "needHelp": "Besoin d'aide pour choisir ?",
+    "expertAdvice": "Nos conseillers sont là pour vous aider gratuitement",
+    "talkToExpert": "Parler à un conseiller"
+  },
   "forms": {
     "free": "100% gratuit",
     "secure": "Données sécurisées",
@@ -677,6 +689,13 @@
     "next": "Suivant",
     "compare": "Comparer",
     "processing": "Traitement...",
+    "loading": {
+      "title": "Recherche des meilleures offres...",
+      "analyzing": "Analyse de vos besoins",
+      "comparing": "Comparaison des offres",
+      "preparing": "Préparation des résultats",
+      "message": "Nous analysons les meilleures offres du marché pour vous."
+    },
     "common": {
       "step": "Étape",
       "of": "sur",
