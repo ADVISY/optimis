@@ -707,7 +707,9 @@
     "subtotal": "Zwischensumme",
     "noComplementarySelected": "Keine Zusatzversicherung ausgewählt",
     "totalMonthly": "Monatliche Gesamtsumme",
-    "priceNote": "Die Preise der Zusatzversicherungen sind indikativ und können je nach gewähltem Versicherer variieren."
+    "priceNote": "Die Preise der Zusatzversicherungen sind indikativ und können je nach gewähltem Versicherer variieren.",
+    "noOffersFound": "Keine Angebote für Ihr Profil gefunden",
+    "recommendedForYou": "Empfohlen für Sie"
   },
   "contact": {
     "callbackTitle": "Rückruf anfordern",
@@ -739,6 +741,8 @@
     "successDescription": "Danke! Ein Berater meldet sich in Kürze bei Ihnen.",
     "errorTitle": "Fehler",
     "errorDescription": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    "seeMyOffers": "Meine Angebote anzeigen",
+    "stepOf": "von",
     "loading": {
       "title": "Suche nach den besten Angeboten...",
       "analyzing": "Analyse Ihrer Bedürfnisse",
@@ -824,7 +828,18 @@
         "fitness": "Fitness & Wellness"
       },
       "availability": "Erreichbarkeit für Kontaktaufnahme",
-      "errorLoadingPremiums": "Fehler beim Laden der Prämien. Bitte versuchen Sie es erneut."
+      "errorLoadingPremiums": "Fehler beim Laden der Prämien. Bitte versuchen Sie es erneut.",
+      "complementaryLabel": "Zusatzversicherungen",
+      "complementaryTitle": "Wählen Sie Ihre Zusatzversicherungen",
+      "includedInPackage": "Im Paket enthalten",
+      "skipComplementary": "Diesen Schritt überspringen",
+      "tiers": {
+        "allOptions": "Alle Optionen",
+        "basicDesc": "Grundlegende Deckung",
+        "diamondDesc": "Premium Komplettschutz",
+        "popular": "Beliebt",
+        "premiumDesc": "Erweiterte Deckung"
+      }
     },
     "carInsurance": {
       "title": "Autoversicherungs-Vergleich",
@@ -1237,7 +1252,10 @@
       "selectOffer": "Dieses Angebot wählen",
       "requestCallback": "Rückruf anfordern",
       "requestEmail": "Per E-Mail erhalten",
-      "talkToAdvisor": "Mit Berater sprechen"
+      "talkToAdvisor": "Mit Berater sprechen",
+      "byEmail": "Per E-Mail erhalten",
+      "callMe": "Rückruf anfordern",
+      "chooseOffer": "Dieses Angebot wählen"
     }
   },
   "comparators": {

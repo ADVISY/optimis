@@ -707,7 +707,9 @@
     "subtotal": "Subtotale",
     "noComplementarySelected": "Nessuna complementare selezionata",
     "totalMonthly": "Totale mensile",
-    "priceNote": "I prezzi delle complementari sono indicativi e possono variare a seconda dell'assicuratore scelto."
+    "priceNote": "I prezzi delle complementari sono indicativi e possono variare a seconda dell'assicuratore scelto.",
+    "noOffersFound": "Nessuna offerta trovata per il tuo profilo",
+    "recommendedForYou": "Consigliato per te"
   },
   "contact": {
     "callbackTitle": "Essere richiamato",
@@ -739,6 +741,8 @@
     "successDescription": "Grazie! Un consulente ti ricontatterà a breve.",
     "errorTitle": "Errore",
     "errorDescription": "Si è verificato un errore. Riprova.",
+    "seeMyOffers": "Vedi le mie offerte",
+    "stepOf": "di",
     "loading": {
       "title": "Ricerca delle migliori offerte...",
       "analyzing": "Analisi delle tue esigenze",
@@ -824,7 +828,18 @@
         "fitness": "Fitness e benessere"
       },
       "availability": "Disponibilità per essere contattato",
-      "errorLoadingPremiums": "Errore durante il caricamento dei premi. Riprova."
+      "errorLoadingPremiums": "Errore durante il caricamento dei premi. Riprova.",
+      "complementaryLabel": "Assicurazioni complementari",
+      "complementaryTitle": "Scegli le tue complementari",
+      "includedInPackage": "Incluso nel pacchetto",
+      "skipComplementary": "Salta questo passaggio",
+      "tiers": {
+        "allOptions": "Tutte le opzioni",
+        "basicDesc": "Copertura essenziale",
+        "diamondDesc": "Copertura premium completa",
+        "popular": "Popolare",
+        "premiumDesc": "Copertura estesa"
+      }
     },
     "carInsurance": {
       "title": "Confronto assicurazione auto",
@@ -1237,7 +1252,10 @@
       "selectOffer": "Scegli questa offerta",
       "requestCallback": "Richiedi richiamata",
       "requestEmail": "Ricevi via email",
-      "talkToAdvisor": "Parla con un consulente"
+      "talkToAdvisor": "Parla con un consulente",
+      "byEmail": "Ricevi via email",
+      "callMe": "Essere richiamato",
+      "chooseOffer": "Scegli questa offerta"
     }
   },
   "comparators": {
