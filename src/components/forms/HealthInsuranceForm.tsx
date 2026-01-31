@@ -23,13 +23,9 @@ import {
 } from "@/components/ui/select";
 import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { InsuranceOffer } from "@/data/mockInsuranceData";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { CalendarIcon, Plus, Trash2 } from "lucide-react";
-import { format } from "date-fns";
-import { fr, de, it } from "date-fns/locale";
-import { cn } from "@/lib/utils";
+import { Plus, Trash2 } from "lucide-react";
+import DateInput from "@/components/ui/date-input";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface Person {
@@ -70,16 +66,6 @@ const HealthInsuranceForm = () => {
   
   const { fetchPremiums, error: premiumsError } = useHealthPremiums();
 
-  const getDateLocale = () => {
-    switch (i18n.language) {
-      case "de":
-        return de;
-      case "it":
-        return it;
-      default:
-        return fr;
-    }
-  };
 
   const initialData: HealthInsuranceFormData = {
     canton: "",
@@ -130,7 +116,21 @@ const HealthInsuranceForm = () => {
     const firstPerson = formData.persons[0];
     const birthYear = firstPerson?.birthDate 
       ? firstPerson.birthDate.getFullYear() 
-      : 1990;
+      : 1990; // Fallback for testing
+
+    // Validate canton
+    if (!formData.canton) {
+      console.error("Canton is required");
+      setIsLoading(false);
+      return;
+    }
+
+    console.log("Fetching premiums with:", {
+      canton: formData.canton,
+      birthYear,
+      franchise: formData.franchise,
+      model: formData.lamalModel,
+    });
 
     setTimeout(() => setLoadingStep("comparing"), 1000);
 
@@ -144,6 +144,8 @@ const HealthInsuranceForm = () => {
       withAccident: formData.accidentCoverage,
       language: i18n.language,
     });
+
+    console.log("Received premiums:", premiums.length);
 
     setLoadingStep("preparing");
 
@@ -218,6 +220,19 @@ const HealthInsuranceForm = () => {
         {premiumsError && (
           <div className="mb-4 p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm">
             {t("forms.healthInsurance.errorLoadingPremiums")}
+          </div>
+        )}
+        {realOffers.length === 0 && !premiumsError && (
+          <div className="mb-4 p-4 bg-muted border border-border rounded-lg text-center">
+            <p className="text-muted-foreground mb-2">
+              {t("comparison.noOffersFound", "Aucune offre trouvée pour ces critères.")}
+            </p>
+            <Button 
+              variant="outline" 
+              onClick={() => setShowResults(false)}
+            >
+              {t("common.modifySearch", "Modifier ma recherche")}
+            </Button>
           </div>
         )}
         <ComparisonResults
@@ -306,38 +321,13 @@ const HealthInsuranceForm = () => {
                     label={t("forms.healthInsurance.birthDate")}
                     required
                   >
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className={cn(
-                            "w-full justify-start text-left font-normal",
-                            !person.birthDate && "text-muted-foreground"
-                          )}
-                        >
-                          <CalendarIcon className="mr-2 h-4 w-4" />
-                          {person.birthDate
-                            ? format(person.birthDate, "PPP", {
-                                locale: getDateLocale(),
-                              })
-                            : t("forms.healthInsurance.selectDate")}
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={person.birthDate || undefined}
-                          onSelect={(date) =>
-                            updatePersonBirthDate(person.id, date || null)
-                          }
-                          disabled={(date) =>
-                            date > new Date() || date < new Date("1900-01-01")
-                          }
-                          initialFocus
-                          className="pointer-events-auto"
-                        />
-                      </PopoverContent>
-                    </Popover>
+                    <DateInput
+                      value={person.birthDate}
+                      onChange={(date) => updatePersonBirthDate(person.id, date)}
+                      placeholder="JJ/MM/AAAA"
+                      maxYear={new Date().getFullYear()}
+                      minYear={1900}
+                    />
                   </FormFieldWrapper>
                 </CardContent>
               </Card>
