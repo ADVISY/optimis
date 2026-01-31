@@ -4,7 +4,7 @@ import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
-import ComparisonResults from "@/components/forms/ComparisonResults";
+import MortgageComparisonResults from "@/components/forms/MortgageComparisonResults";
 import LoadingComparison from "@/components/forms/LoadingComparison";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
@@ -19,7 +19,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { swissCantons, getCantonName } from "@/data/swissCantons";
-import { mockMortgageOffers, InsuranceOffer } from "@/data/mockInsuranceData";
+import { mortgageProducts } from "@/data/mortgageProducts";
+import { simulateMortgage, MortgageSimulationResult } from "@/utils/mortgageCalculations";
 import { Lock, User, Phone } from "lucide-react";
 
 interface MortgageFormData {
@@ -45,6 +46,7 @@ const MortgageForm = () => {
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
+  const [simulationResults, setSimulationResults] = useState<MortgageSimulationResult[]>([]);
 
   const initialData: MortgageFormData = {
     projectType: "",
@@ -84,7 +86,28 @@ const MortgageForm = () => {
   const handleSubmit = async () => {
     setIsLoading(true);
     setLoadingStep("analyzing");
+    
+    // Parse form data for calculations
+    const propertyValue = parseFloat(formData.propertyValue.replace(/[^0-9]/g, "")) || 800000;
+    const loanAmount = propertyValue * 0.8; // Default 80% LTV
+    const duration = 15; // Default duration
+    const annualIncome = parseFloat(formData.incomeRange.split("-")[0]) || 150000;
+    
     setTimeout(() => setLoadingStep("comparing"), 1000);
+    
+    // Run simulations for all products
+    const results = mortgageProducts.map(product => 
+      simulateMortgage(product, {
+        loanAmount,
+        propertyValue,
+        duration,
+        annualIncome,
+        mortgageType: product.mortgageType,
+      })
+    );
+    
+    setSimulationResults(results);
+    
     setTimeout(() => setLoadingStep("preparing"), 2000);
     await submitLead(formData as unknown as Record<string, unknown>);
     setTimeout(() => {
@@ -101,14 +124,6 @@ const MortgageForm = () => {
     }
   };
 
-  const handleSelectOffer = (offer: InsuranceOffer) => {
-    console.log("Selected offer:", offer);
-  };
-
-  const handleContactRequest = (offer: InsuranceOffer, type: "call" | "email") => {
-    console.log("Contact request:", offer, type);
-  };
-
   if (isLoading) {
     return (
       <div className="max-w-2xl mx-auto">
@@ -118,12 +133,18 @@ const MortgageForm = () => {
   }
 
   if (showResults) {
+    // Parse values for display
+    const propertyValue = parseFloat(formData.propertyValue.replace(/[^0-9]/g, "")) || 800000;
+    const loanAmount = propertyValue * 0.8;
+    const duration = 15;
+    
     return (
       <div className="max-w-4xl mx-auto">
-        <ComparisonResults
-          offers={mockMortgageOffers}
-          onSelectOffer={handleSelectOffer}
-          onContactRequest={handleContactRequest}
+        <MortgageComparisonResults
+          results={simulationResults}
+          loanAmount={loanAmount}
+          propertyValue={propertyValue}
+          duration={duration}
         />
       </div>
     );
