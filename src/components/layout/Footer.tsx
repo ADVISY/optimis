@@ -109,6 +109,14 @@ const Footer = () => {
                   {t('nav.lifeInsurance')}
                 </LocalizedLink>
               </li>
+              <li>
+                <LocalizedLink
+                  to="/hypotheque"
+                  className="text-base text-muted-foreground transition-all duration-200 hover:text-primary hover:translate-x-1 inline-block"
+                >
+                  {t('services.mortgage')}
+                </LocalizedLink>
+              </li>
             </ul>
           </div>
 
@@ -138,14 +146,6 @@ const Footer = () => {
                   className="text-base text-muted-foreground transition-all duration-200 hover:text-primary hover:translate-x-1 inline-block"
                 >
                   {t('nav.termination')}
-                </LocalizedLink>
-              </li>
-              <li>
-                <LocalizedLink
-                  to="/hypotheque"
-                  className="text-base text-muted-foreground transition-all duration-200 hover:text-primary hover:translate-x-1 inline-block"
-                >
-                  {t('services.mortgage')}
                 </LocalizedLink>
               </li>
             </ul>
