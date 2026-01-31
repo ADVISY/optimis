@@ -22,6 +22,20 @@ import visanaLogo from "@/assets/insurers/visana-logo.svg";
 import kptLogo from "@/assets/insurers/kpt-logo.svg";
 import atupriLogo from "@/assets/insurers/atupri-logo.svg";
 import assuraLogo from "@/assets/insurers/assura-logo.svg";
+import oekkLogo from "@/assets/insurers/oekk-logo.svg";
+import sympanyLogo from "@/assets/insurers/sympany-logo.svg";
+
+// Other insurers logos (SVG)
+import swissLifeLogo from "@/assets/insurers/swiss-life-logo.svg";
+import viacLogo from "@/assets/insurers/viac-logo.svg";
+import postfinanceLogo from "@/assets/insurers/postfinance-logo.svg";
+import ubsLogo from "@/assets/insurers/ubs-logo.svg";
+import raiffeisenLogo from "@/assets/insurers/raiffeisen-logo.svg";
+import bcvLogo from "@/assets/insurers/bcv-logo.svg";
+import smileLogo from "@/assets/insurers/smile-logo.svg";
+import dextraLogo from "@/assets/insurers/dextra-logo.svg";
+import aragLogo from "@/assets/insurers/arag-logo.svg";
+import capLogo from "@/assets/insurers/cap-logo.svg";
 
 export interface InsurerInfo {
   name: string;
@@ -84,12 +98,12 @@ export const insurerLogos: Record<string, InsurerInfo> = {
   },
   "ÖKK": {
     name: "ÖKK",
-    logo: "",
+    logo: oekkLogo,
     color: "#00a0e1",
   },
   "Sympany": {
     name: "Sympany",
-    logo: "",
+    logo: sympanyLogo,
     color: "#ffd100",
   },
   
@@ -145,25 +159,25 @@ export const insurerLogos: Record<string, InsurerInfo> = {
     color: "#003781",
   },
   
-  // Other insurers
+  // Other insurers with logos
   "Swiss Life": {
     name: "Swiss Life",
-    logo: "",
+    logo: swissLifeLogo,
     color: "#e30613",
   },
   "VIAC": {
     name: "VIAC",
-    logo: "",
+    logo: viacLogo,
     color: "#00c389",
   },
   "PostFinance": {
     name: "PostFinance",
-    logo: "",
+    logo: postfinanceLogo,
     color: "#ffcc00",
   },
   "UBS": {
     name: "UBS",
-    logo: "",
+    logo: ubsLogo,
     color: "#e60000",
   },
   "Credit Suisse": {
@@ -173,32 +187,32 @@ export const insurerLogos: Record<string, InsurerInfo> = {
   },
   "Raiffeisen": {
     name: "Raiffeisen",
-    logo: "",
+    logo: raiffeisenLogo,
     color: "#fdc300",
   },
   "BCV": {
     name: "BCV",
-    logo: "",
+    logo: bcvLogo,
     color: "#003e6a",
   },
   "Smile": {
     name: "Smile",
-    logo: "",
+    logo: smileLogo,
     color: "#ff6600",
   },
   "Dextra": {
     name: "Dextra",
-    logo: "",
+    logo: dextraLogo,
     color: "#00274d",
   },
   "ARAG": {
     name: "ARAG",
-    logo: "",
+    logo: aragLogo,
     color: "#0053a3",
   },
   "CAP": {
     name: "CAP",
-    logo: "",
+    logo: capLogo,
     color: "#003366",
   },
 };
