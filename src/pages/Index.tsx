@@ -74,36 +74,42 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="gradient-optimis py-16 md:py-24">
+      <section className="gradient-optimis py-16 md:py-24 lg:py-32 overflow-hidden">
         <div className="container">
           <div className="grid items-center gap-8 md:grid-cols-2">
             <div className="space-y-6 animate-fade-in">
-              <h1 className="font-heading text-4xl font-black leading-tight text-foreground uppercase md:text-5xl lg:text-6xl">
+              {/* 5 Gold Stars */}
+              <div className="flex gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-accent text-2xl">★</span>
+                ))}
+              </div>
+              <h1 className="font-heading text-4xl font-black leading-tight text-foreground uppercase md:text-5xl lg:text-6xl xl:text-7xl">
                 <span className="block">{t('home.heroLine1')}</span>
                 <span className="block">{t('home.heroLine2')}</span>
                 <span className="block text-gradient-optimis">{t('home.heroLine3')}</span>
               </h1>
-              <p className="font-heading text-lg font-black uppercase text-muted-foreground md:text-xl">
+              <p className="text-lg text-muted-foreground md:text-xl max-w-lg">
                 {t('home.heroSubtitle')}
               </p>
-              <div className="flex flex-wrap gap-4">
-                <Button asChild size="lg" className="text-base">
+              <div className="flex flex-wrap gap-4 pt-2">
+                <Button asChild size="lg" className="text-base px-8 py-6 rounded-xl">
                   <LocalizedLink to="/assurance-sante">
                     {t('common.compareNow')}
                   </LocalizedLink>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="text-base">
+                <Button asChild size="lg" variant="outline" className="text-base px-8 py-6 rounded-xl border-2">
                   <LocalizedLink to="/blog">
                     {t('common.readMore')}
                   </LocalizedLink>
                 </Button>
               </div>
             </div>
-            <div className="flex justify-center md:justify-end">
+            <div className="flex justify-center md:justify-end relative">
               <img
                 src={llamaMascot}
                 alt="Mascotte Optimis"
-                className="h-64 w-auto animate-fade-in md:h-80 lg:h-96"
+                className="h-80 w-auto animate-fade-in md:h-[420px] lg:h-[500px] xl:h-[550px] drop-shadow-2xl"
               />
             </div>
           </div>
