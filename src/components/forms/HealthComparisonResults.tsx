@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Star, Check, Phone, Mail, ArrowRight, Info, ChevronDown, ChevronUp } from "lucide-react";
+import { Star, Check, Phone, Mail, ArrowRight, Info, ChevronDown, ChevronUp, Award, ThumbsUp, Sparkles } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { InsuranceOffer, getBadgeLabel } from "@/data/mockInsuranceData";
 import { 
@@ -11,6 +11,7 @@ import {
   getSelectedComplementaryDetails,
   getComplementaryLabel 
 } from "@/data/complementaryInsuranceData";
+import { getInsurerInfo, getInsurerInitials } from "@/data/insurerLogos";
 import { motion, AnimatePresence } from "framer-motion";
 import ContactOfferModal from "./ContactOfferModal";
 import {
@@ -19,6 +20,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 
 interface HealthComparisonResultsProps {
   offers: InsuranceOffer[];
@@ -65,7 +67,7 @@ const HealthComparisonResults = ({
   const complementaryPrice = calculateComplementaryPrice(complementaryOptions);
   const selectedComplementaryDetails = getSelectedComplementaryDetails(complementaryOptions);
 
-  const getBadgeVariant = (badge: string) => {
+  const getBadgeVariant = (badge: string): "default" | "secondary" | "outline" | "destructive" => {
     switch (badge) {
       case "bestPrice":
         return "default";
@@ -77,6 +79,37 @@ const HealthComparisonResults = ({
         return "default";
     }
   };
+
+  const getBadgeIcon = (badge: string) => {
+    switch (badge) {
+      case "bestPrice":
+        return <Sparkles className="h-3 w-3" />;
+      case "recommended":
+        return <ThumbsUp className="h-3 w-3" />;
+      case "bestValue":
+        return <Award className="h-3 w-3" />;
+      default:
+        return null;
+    }
+  };
+
+  // Sort offers: recommended first, then by badge, then by price
+  const sortedOffers = [...offers].sort((a, b) => {
+    // Prioritize recommended
+    if (a.badge === "recommended" && b.badge !== "recommended") return -1;
+    if (b.badge === "recommended" && a.badge !== "recommended") return 1;
+    
+    // Then best price
+    if (a.badge === "bestPrice" && b.badge !== "bestPrice") return -1;
+    if (b.badge === "bestPrice" && a.badge !== "bestPrice") return 1;
+    
+    // Then best value
+    if (a.badge === "bestValue" && b.badge !== "bestValue") return -1;
+    if (b.badge === "bestValue" && a.badge !== "bestValue") return 1;
+    
+    // Finally by price
+    return a.monthlyPrice - b.monthlyPrice;
+  });
 
   const handleSelectOffer = (offer: InsuranceOffer) => {
     setModalState({ isOpen: true, offer, type: "offer" });
@@ -158,10 +191,12 @@ const HealthComparisonResults = ({
       </Card>
 
       <div className="space-y-4">
-        {offers.map((offer, index) => {
+        {sortedOffers.map((offer, index) => {
           const totalMonthly = offer.monthlyPrice + (hasComplementary ? complementaryPrice : 0);
           const totalYearly = totalMonthly * 12;
           const isExpanded = expandedOfferId === offer.id;
+          const insurerInfo = getInsurerInfo(offer.companyName);
+          const isHighlighted = offer.badge === "recommended" || index === 0;
 
           return (
             <motion.div
@@ -170,40 +205,85 @@ const HealthComparisonResults = ({
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="overflow-hidden border-2 hover:border-primary/50 transition-colors">
+              <Card 
+                className={cn(
+                  "overflow-hidden border-2 transition-all duration-300",
+                  isHighlighted 
+                    ? "border-primary shadow-lg ring-2 ring-primary/20" 
+                    : "hover:border-primary/50"
+                )}
+              >
+                {/* Highlighted ribbon for recommended */}
+                {offer.badge === "recommended" && (
+                  <div className="bg-primary text-primary-foreground text-center py-1.5 text-sm font-semibold flex items-center justify-center gap-2">
+                    <ThumbsUp className="h-4 w-4" />
+                    {t("comparison.recommendedForYou", "Recommandé pour votre profil")}
+                  </div>
+                )}
+
                 <CardContent className="p-0">
                   <div className="flex flex-col lg:flex-row">
-                    {/* Company Info */}
+                    {/* Company Info with Logo */}
                     <div className="p-6 flex-1 border-b lg:border-b-0 lg:border-r">
-                      <div className="flex items-start justify-between mb-3">
-                        <div>
-                          <h3 className="font-bold text-lg">{offer.companyName}</h3>
-                          <p className="text-sm text-muted-foreground">
+                      <div className="flex items-start gap-4 mb-4">
+                        {/* Logo or Initials */}
+                        <div 
+                          className="flex-shrink-0 w-16 h-16 rounded-xl flex items-center justify-center overflow-hidden border-2 border-muted"
+                          style={{ 
+                            backgroundColor: insurerInfo.logo ? 'white' : `${insurerInfo.color}15`
+                          }}
+                        >
+                          {insurerInfo.logo ? (
+                            <img 
+                              src={insurerInfo.logo} 
+                              alt={`Logo ${offer.companyName}`}
+                              className="w-full h-full object-contain p-1"
+                            />
+                          ) : (
+                            <span 
+                              className="text-xl font-bold"
+                              style={{ color: insurerInfo.color }}
+                            >
+                              {getInsurerInitials(offer.companyName)}
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Company Name & Coverage */}
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between flex-wrap gap-2">
+                            <h3 className="font-bold text-xl">{offer.companyName}</h3>
+                            {offer.badge && (
+                              <Badge 
+                                variant={getBadgeVariant(offer.badge)} 
+                                className="gap-1 text-xs font-semibold"
+                              >
+                                {getBadgeIcon(offer.badge)}
+                                {getBadgeLabel(offer.badge, i18n.language)}
+                              </Badge>
+                            )}
+                          </div>
+                          <p className="text-sm text-muted-foreground mt-1">
                             {offer.coverageType}
                           </p>
-                        </div>
-                        {offer.badge && (
-                          <Badge variant={getBadgeVariant(offer.badge)} className="ml-2">
-                            {getBadgeLabel(offer.badge, i18n.language)}
-                          </Badge>
-                        )}
-                      </div>
 
-                      {/* Rating */}
-                      <div className="flex items-center gap-1 mb-4">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`h-4 w-4 ${
-                              i < Math.floor(offer.rating)
-                                ? "text-amber-400 fill-amber-400"
-                                : "text-muted"
-                            }`}
-                          />
-                        ))}
-                        <span className="ml-1 text-sm text-muted-foreground">
-                          {offer.rating.toFixed(1)}
-                        </span>
+                          {/* Rating */}
+                          <div className="flex items-center gap-1 mt-2">
+                            {[...Array(5)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className={`h-4 w-4 ${
+                                  i < Math.floor(offer.rating)
+                                    ? "text-amber-400 fill-amber-400"
+                                    : "text-muted"
+                                }`}
+                              />
+                            ))}
+                            <span className="ml-1 text-sm font-medium">
+                              {offer.rating.toFixed(1)}
+                            </span>
+                          </div>
+                        </div>
                       </div>
 
                       {/* Features */}
