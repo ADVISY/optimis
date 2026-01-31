@@ -7,9 +7,11 @@ import { useTranslation } from "react-i18next";
 import { InsuranceOffer, getBadgeLabel } from "@/data/mockInsuranceData";
 import { 
   ComplementaryOptions, 
+  ComplementaryTier,
   calculateComplementaryPrice, 
   getSelectedComplementaryDetails,
-  getComplementaryLabel 
+  getComplementaryLabel,
+  getTierLabel
 } from "@/data/complementaryInsuranceData";
 import { getInsurerInfo, getInsurerInitials } from "@/data/insurerLogos";
 import { motion, AnimatePresence } from "framer-motion";
@@ -30,6 +32,7 @@ interface HealthComparisonResultsProps {
     lamalModel?: string;
     franchise?: number;
     accidentCoverage?: boolean;
+    complementaryTier?: ComplementaryTier | null;
     complementary?: ComplementaryOptions;
     firstName?: string;
     lastName?: string;
@@ -63,9 +66,10 @@ const HealthComparisonResults = ({
     worldwide: false,
   };
 
-  const hasComplementary = Object.values(complementaryOptions).some(Boolean);
-  const complementaryPrice = calculateComplementaryPrice(complementaryOptions);
-  const selectedComplementaryDetails = getSelectedComplementaryDetails(complementaryOptions);
+  const complementaryTier: ComplementaryTier = formData.complementaryTier || "premium";
+  const hasComplementary = Object.values(complementaryOptions).some(Boolean) && formData.complementaryTier;
+  const complementaryPrice = hasComplementary ? calculateComplementaryPrice(complementaryOptions, complementaryTier) : 0;
+  const selectedComplementaryDetails = hasComplementary ? getSelectedComplementaryDetails(complementaryOptions, complementaryTier) : [];
 
   const getBadgeVariant = (badge: string): "default" | "secondary" | "outline" | "destructive" => {
     switch (badge) {
@@ -162,24 +166,30 @@ const HealthComparisonResults = ({
             </div>
             <div>
               <span className="text-muted-foreground">{t("forms.healthInsurance.complementaryLabel", "Complémentaires")}:</span>
-              <p className="font-medium">{hasComplementary ? selectedComplementaryDetails.length : 0} {t("comparison.options", "option(s)")}</p>
+              <p className="font-medium">
+                {hasComplementary 
+                  ? getTierLabel(complementaryTier, i18n.language) 
+                  : t("common.no", "Non")}
+              </p>
             </div>
           </div>
           
           {hasComplementary && (
             <div className="mt-3 pt-3 border-t border-border">
-              <p className="text-xs text-muted-foreground mb-2">{t("comparison.selectedComplementary", "Complémentaires sélectionnées")}:</p>
+              <p className="text-xs text-muted-foreground mb-2">
+                {t("comparison.selectedComplementary", "Package")} {getTierLabel(complementaryTier, i18n.language)} :
+              </p>
               <div className="flex flex-wrap gap-2">
                 {selectedComplementaryDetails.map((comp) => (
                   <TooltipProvider key={comp.type}>
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <Badge variant="secondary" className="text-xs cursor-help">
-                          {getComplementaryLabel(comp.type, i18n.language)} (~CHF {comp.averagePrice}/mois)
+                          {getComplementaryLabel(comp.type, i18n.language)} (~CHF {comp.selectedPrice}/mois)
                         </Badge>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p className="max-w-xs">{comp.description}</p>
+                        <p className="max-w-xs">{comp.descriptions[complementaryTier]}</p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
@@ -423,13 +433,18 @@ const HealthComparisonResults = ({
                             <div className="space-y-2">
                               <h5 className="text-sm font-medium text-primary">
                                 {t("comparison.complementarySection", "Assurances complémentaires (LCA)")}
+                                {hasComplementary && (
+                                  <span className="ml-2 text-xs font-normal text-muted-foreground">
+                                    - Package {getTierLabel(complementaryTier, i18n.language)}
+                                  </span>
+                                )}
                               </h5>
                               {hasComplementary ? (
                                 <div className="text-sm space-y-1">
                                   {selectedComplementaryDetails.map((comp) => (
                                     <div key={comp.type} className="flex justify-between">
                                       <span>{getComplementaryLabel(comp.type, i18n.language)}</span>
-                                      <span className="font-medium">~CHF {comp.averagePrice.toFixed(2)}</span>
+                                      <span className="font-medium">~CHF {comp.selectedPrice.toFixed(2)}</span>
                                     </div>
                                   ))}
                                   <div className="border-t pt-1 mt-2 flex justify-between font-medium">
