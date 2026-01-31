@@ -84,7 +84,7 @@ const Index = () => {
                   <span key={i} className="text-accent text-2xl md:text-3xl drop-shadow-sm">★</span>
                 ))}
               </div>
-              <h1 className="font-heading text-4xl font-black leading-[1.05] text-foreground uppercase md:text-5xl lg:text-6xl xl:text-7xl tracking-tight">
+              <h1 className="font-heading text-3xl font-black leading-[1.05] text-foreground uppercase md:text-4xl lg:text-5xl xl:text-6xl tracking-tight">
                 <span className="block">{t('home.heroLine1')}</span>
                 <span className="block">{t('home.heroLine2')}</span>
                 <span className="block text-gradient-optimis">{t('home.heroLine3')}</span>
