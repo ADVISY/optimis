@@ -23,19 +23,19 @@ const FormFieldWrapper = ({
 }: FormFieldWrapperProps) => {
   return (
     <div className={cn("space-y-2", className)}>
-      <Label htmlFor={htmlFor} className="text-sm font-medium">
+      <Label htmlFor={htmlFor} className="text-sm font-medium text-white">
         {label}
-        {required && <span className="text-destructive ml-1">*</span>}
+        {required && <span className="text-red-300 ml-1">*</span>}
       </Label>
       
       {children}
       
       {helpText && !error && (
-        <p className="text-sm text-muted-foreground">{helpText}</p>
+        <p className="text-sm text-white/70">{helpText}</p>
       )}
       
       {error && (
-        <p className="text-sm text-destructive">{error}</p>
+        <p className="text-sm text-red-300">{error}</p>
       )}
     </div>
   );
