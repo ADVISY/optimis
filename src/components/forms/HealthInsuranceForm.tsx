@@ -302,10 +302,10 @@ const HealthInsuranceForm = () => {
         <div className="space-y-6">
           <div className="space-y-4">
             {formData.persons.map((person, index) => (
-              <Card key={person.id} className="bg-optimis-green-light border-optimis-green-pastel">
+              <Card key={person.id} className="bg-white/10 border-white/20 backdrop-blur-sm">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="font-medium text-gray-900">
+                    <span className="font-medium text-white">
                       {person.type === "adult"
                         ? t("forms.healthInsurance.adult")
                         : t("forms.healthInsurance.child")}{" "}
@@ -316,7 +316,7 @@ const HealthInsuranceForm = () => {
                         variant="ghost"
                         size="sm"
                         onClick={() => removePerson(person.id)}
-                        className="text-gray-600 hover:text-red-600 hover:bg-red-50"
+                        className="text-white/70 hover:text-red-300 hover:bg-red-500/20"
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
@@ -324,9 +324,9 @@ const HealthInsuranceForm = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label className="text-sm font-medium text-gray-700">
+                    <Label className="text-sm font-medium text-white/90">
                       {t("forms.healthInsurance.birthDate")}
-                      <span className="text-red-500 ml-1">*</span>
+                      <span className="text-red-300 ml-1">*</span>
                     </Label>
                     <DateInput
                       value={person.birthDate}
@@ -346,7 +346,7 @@ const HealthInsuranceForm = () => {
               type="button"
               variant="outline"
               onClick={() => addPerson("adult")}
-              className="flex-1 gap-2 bg-optimis-green-light text-gray-900 border-optimis-green-pastel hover:bg-optimis-green-pastel"
+              className="flex-1 gap-2 bg-white/10 text-white border-white/30 hover:bg-white/20 backdrop-blur-sm"
             >
               <Plus className="h-4 w-4" />
               {t("forms.healthInsurance.addAdult")}
@@ -355,7 +355,7 @@ const HealthInsuranceForm = () => {
               type="button"
               variant="outline"
               onClick={() => addPerson("child")}
-              className="flex-1 gap-2 bg-optimis-green-light text-gray-900 border-optimis-green-pastel hover:bg-optimis-green-pastel"
+              className="flex-1 gap-2 bg-white/10 text-white border-white/30 hover:bg-white/20 backdrop-blur-sm"
             >
               <Plus className="h-4 w-4" />
               {t("forms.healthInsurance.addChild")}
@@ -368,11 +368,11 @@ const HealthInsuranceForm = () => {
       <FormStep isActive={currentStep === 3}>
         <div className="space-y-6">
           {/* LAMal Model Card */}
-          <Card className="bg-optimis-green-light border-optimis-green-pastel">
+          <Card className="bg-white/10 border-white/20 backdrop-blur-sm">
             <CardContent className="p-5">
-              <Label className="text-sm font-semibold text-gray-900 mb-4 block">
+              <Label className="text-sm font-semibold text-white mb-4 block">
                 {t("forms.healthInsurance.lamalModel")}
-                <span className="text-red-500 ml-1">*</span>
+                <span className="text-red-300 ml-1">*</span>
               </Label>
               <RadioGroup
                 value={formData.lamalModel}
@@ -385,9 +385,9 @@ const HealthInsuranceForm = () => {
                   { value: "hmo", label: t("forms.healthInsurance.models.hmo") },
                   { value: "telemed", label: t("forms.healthInsurance.models.telemed") },
                 ].map((model) => (
-                  <div key={model.value} className="flex items-center space-x-2 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
+                  <div key={model.value} className="flex items-center space-x-2 p-3 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
                     <RadioGroupItem value={model.value} id={model.value} />
-                    <Label htmlFor={model.value} className="cursor-pointer text-gray-800">
+                    <Label htmlFor={model.value} className="cursor-pointer text-white">
                       {model.label}
                     </Label>
                   </div>
@@ -397,14 +397,14 @@ const HealthInsuranceForm = () => {
           </Card>
 
           {/* Franchise Card */}
-          <Card className="bg-optimis-green-light border-optimis-green-pastel">
+          <Card className="bg-white/10 border-white/20 backdrop-blur-sm">
             <CardContent className="p-5">
-              <Label className="text-sm font-semibold text-gray-900 mb-2 block">
+              <Label className="text-sm font-semibold text-white mb-2 block">
                 {t("forms.healthInsurance.franchise")}
               </Label>
               <div className="text-center mb-4">
                 <span className="text-3xl font-bold text-emerald-600">CHF {formData.franchise}</span>
-                <span className="text-gray-500 text-sm ml-2">/ an</span>
+                <span className="text-white/70 text-sm ml-2">/ an</span>
               </div>
               <Slider
                 value={[formData.franchise]}
@@ -414,18 +414,18 @@ const HealthInsuranceForm = () => {
                 step={200}
                 className="py-4"
               />
-              <div className="flex justify-between text-xs text-gray-500 mt-2">
+              <div className="flex justify-between text-xs text-white/70 mt-2">
                 <span>CHF 300</span>
                 <span>CHF 2500</span>
               </div>
-              <p className="text-xs text-gray-500 mt-3 text-center">
+              <p className="text-xs text-white/60 mt-3 text-center">
                 {t("forms.healthInsurance.franchiseHelp")}
               </p>
             </CardContent>
           </Card>
 
           {/* Accident Coverage Card */}
-          <Card className="bg-optimis-green-light border-optimis-green-pastel">
+          <Card className="bg-white/10 border-white/20 backdrop-blur-sm">
             <CardContent className="p-5">
               <div className="flex items-center space-x-3">
                 <Checkbox
@@ -435,11 +435,11 @@ const HealthInsuranceForm = () => {
                     updateFormData({ accidentCoverage: checked as boolean })
                   }
                 />
-                <Label htmlFor="accidentCoverage" className="cursor-pointer text-gray-800 font-medium">
+                <Label htmlFor="accidentCoverage" className="cursor-pointer text-white font-medium">
                   {t("forms.healthInsurance.includeAccident")}
                 </Label>
               </div>
-              <p className="text-xs text-gray-500 mt-2 ml-7">
+              <p className="text-xs text-white/60 mt-2 ml-7">
                 {t("forms.healthInsurance.accidentCoverageHelp", "Couvre les accidents si vous n'êtes pas assuré par votre employeur")}
               </p>
             </CardContent>
@@ -463,10 +463,10 @@ const HealthInsuranceForm = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* BASIC */}
             <Card 
-              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-optimis-green-light ${
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-white/10 backdrop-blur-sm ${
                 formData.complementaryTier === "basic" 
-                  ? "ring-2 ring-slate-500 border-slate-500" 
-                  : "border-gray-200 hover:border-slate-400"
+                  ? "ring-2 ring-white border-white/50" 
+                  : "border-white/20 hover:border-white/40"
               }`}
               onClick={() => updateFormData({ 
                 complementaryTier: formData.complementaryTier === "basic" ? null : "basic",
@@ -476,17 +476,17 @@ const HealthInsuranceForm = () => {
               })}
             >
               <CardContent className="p-4 text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-slate-100 mb-3">
-                  <span className="text-slate-600 text-xl font-bold">B</span>
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/20 mb-3">
+                  <span className="text-white text-xl font-bold">B</span>
                 </div>
-                <h4 className="font-bold text-lg text-slate-700">BASIC</h4>
-                <p className="text-xs text-gray-500 mb-3">
+                <h4 className="font-bold text-lg text-white">BASIC</h4>
+                <p className="text-xs text-white/70 mb-3">
                   {t("forms.healthInsurance.tiers.basicDesc", "Couverture essentielle")}
                 </p>
-                <div className="text-2xl font-bold text-slate-600">
-                  ~CHF 39<span className="text-sm font-normal">/mois</span>
+                <div className="text-2xl font-bold text-white">
+                  ~CHF 39<span className="text-sm font-normal text-white/70">/mois</span>
                 </div>
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-white/60 mt-1">
                   {t("forms.healthInsurance.tiers.allOptions", "Toutes options incluses")}
                 </p>
               </CardContent>
@@ -494,10 +494,10 @@ const HealthInsuranceForm = () => {
 
             {/* PREMIUM */}
             <Card 
-              className={`cursor-pointer transition-all duration-200 hover:shadow-md relative bg-optimis-green-light ${
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md relative bg-white/10 backdrop-blur-sm ${
                 formData.complementaryTier === "premium" 
-                  ? "ring-2 ring-violet-500 border-violet-500" 
-                  : "border-gray-200 hover:border-violet-400"
+                  ? "ring-2 ring-violet-400 border-violet-400" 
+                  : "border-white/20 hover:border-violet-400"
               }`}
               onClick={() => updateFormData({ 
                 complementaryTier: formData.complementaryTier === "premium" ? null : "premium",
@@ -512,17 +512,17 @@ const HealthInsuranceForm = () => {
                 </span>
               </div>
               <CardContent className="p-4 text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-violet-100 mb-3">
-                  <span className="text-violet-600 text-xl font-bold">P</span>
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-violet-500/30 mb-3">
+                  <span className="text-violet-300 text-xl font-bold">P</span>
                 </div>
-                <h4 className="font-bold text-lg text-violet-700">PREMIUM</h4>
-                <p className="text-xs text-gray-500 mb-3">
+                <h4 className="font-bold text-lg text-violet-300">PREMIUM</h4>
+                <p className="text-xs text-white/70 mb-3">
                   {t("forms.healthInsurance.tiers.premiumDesc", "Rapport qualité-prix optimal")}
                 </p>
-                <div className="text-2xl font-bold text-violet-600">
-                  ~CHF 91<span className="text-sm font-normal">/mois</span>
+                <div className="text-2xl font-bold text-violet-300">
+                  ~CHF 91<span className="text-sm font-normal text-white/70">/mois</span>
                 </div>
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-white/60 mt-1">
                   {t("forms.healthInsurance.tiers.allOptions", "Toutes options incluses")}
                 </p>
               </CardContent>
@@ -530,10 +530,10 @@ const HealthInsuranceForm = () => {
 
             {/* DIAMOND */}
             <Card 
-              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-optimis-green-light ${
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-white/10 backdrop-blur-sm ${
                 formData.complementaryTier === "diamond" 
-                  ? "ring-2 ring-amber-500 border-amber-500" 
-                  : "border-gray-200 hover:border-amber-400"
+                  ? "ring-2 ring-amber-400 border-amber-400" 
+                  : "border-white/20 hover:border-amber-400"
               }`}
               onClick={() => updateFormData({ 
                 complementaryTier: formData.complementaryTier === "diamond" ? null : "diamond",
@@ -543,17 +543,17 @@ const HealthInsuranceForm = () => {
               })}
             >
               <CardContent className="p-4 text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-100 mb-3">
-                  <span className="text-amber-600 text-xl font-bold">D</span>
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/30 mb-3">
+                  <span className="text-amber-300 text-xl font-bold">D</span>
                 </div>
-                <h4 className="font-bold text-lg text-amber-700">DIAMOND</h4>
-                <p className="text-xs text-gray-500 mb-3">
+                <h4 className="font-bold text-lg text-amber-300">DIAMOND</h4>
+                <p className="text-xs text-white/70 mb-3">
                   {t("forms.healthInsurance.tiers.diamondDesc", "Couverture maximale")}
                 </p>
-                <div className="text-2xl font-bold text-amber-600">
-                  ~CHF 175<span className="text-sm font-normal">/mois</span>
+                <div className="text-2xl font-bold text-amber-300">
+                  ~CHF 175<span className="text-sm font-normal text-white/70">/mois</span>
                 </div>
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-white/60 mt-1">
                   {t("forms.healthInsurance.tiers.allOptions", "Toutes options incluses")}
                 </p>
               </CardContent>
