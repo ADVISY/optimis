@@ -92,10 +92,10 @@ const financesCategories = [
     icon: HeartPulse,
     href: "/assurance-vie",
     subLinks: [
-      { labelKey: "megaMenu.in2Minutes", href: "/assurance-vie" },
-      { labelKey: "megaMenu.prepareRetirement", href: "/assurance-vie" },
-      { labelKey: "megaMenu.save2700Taxes", href: "/assurance-vie" },
-      { labelKey: "megaMenu.save7056Taxes", href: "/assurance-vie" },
+      { labelKey: "megaMenu.in2Minutes", href: "/comparateur/pilier3" },
+      { labelKey: "megaMenu.prepareRetirement", href: "/blog/la-retraite-en-suisse" },
+      { labelKey: "megaMenu.save2700Taxes", href: "/blog/pilier-3a-quand-et-comment-commencer-a-epargner" },
+      { labelKey: "megaMenu.save7056Taxes", href: "/comparateur/pilier3" },
     ]
   },
 ];
@@ -291,7 +291,7 @@ const Header = () => {
           <LanguageSwitcher />
           <Button asChild className="gap-2">
             <a
-              href="https://calendly.com"
+              href="https://calendly.com/optimis-ch/consultation"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -392,7 +392,7 @@ const Header = () => {
                 <LanguageSwitcher />
                 <Button asChild className="w-full gap-2">
                   <a
-                    href="https://calendly.com"
+                    href="https://calendly.com/optimis-ch/consultation"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

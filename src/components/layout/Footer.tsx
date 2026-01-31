@@ -59,6 +59,53 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Services */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-foreground">{t('nav.services')}</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <LocalizedLink
+                  to="/forfait-mobile"
+                  className="text-muted-foreground transition-colors hover:text-primary"
+                >
+                  {t('nav.mobilePackage')}
+                </LocalizedLink>
+              </li>
+              <li>
+                <LocalizedLink
+                  to="/subside-assurance-maladie"
+                  className="text-muted-foreground transition-colors hover:text-primary"
+                >
+                  {t('nav.subsidyInsurance')}
+                </LocalizedLink>
+              </li>
+              <li>
+                <LocalizedLink
+                  to="/resiliation"
+                  className="text-muted-foreground transition-colors hover:text-primary"
+                >
+                  {t('nav.termination')}
+                </LocalizedLink>
+              </li>
+              <li>
+                <LocalizedLink
+                  to="/hypotheque"
+                  className="text-muted-foreground transition-colors hover:text-primary"
+                >
+                  {t('services.mortgage')}
+                </LocalizedLink>
+              </li>
+              <li>
+                <LocalizedLink
+                  to="/assurance-vie"
+                  className="text-muted-foreground transition-colors hover:text-primary"
+                >
+                  {t('nav.lifeInsurance')}
+                </LocalizedLink>
+              </li>
+            </ul>
+          </div>
+
           {/* Legal */}
           <div className="space-y-4">
             <h3 className="font-semibold text-foreground">{t('footer.legal')}</h3>

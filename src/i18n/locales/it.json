@@ -738,7 +738,8 @@
         "worldwide": "Copertura mondiale",
         "fitness": "Fitness e benessere"
       },
-      "availability": "Disponibilità per essere contattato"
+      "availability": "Disponibilità per essere contattato",
+      "errorLoadingPremiums": "Errore durante il caricamento dei premi. Riprova."
     },
     "carInsurance": {
       "title": "Confronto assicurazione auto",

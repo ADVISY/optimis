@@ -770,7 +770,8 @@
         "worldwide": "Couverture monde",
         "fitness": "Fitness & bien-être"
       },
-      "availability": "Disponibilité pour être contacté"
+      "availability": "Disponibilité pour être contacté",
+      "errorLoadingPremiums": "Erreur lors du chargement des primes. Veuillez réessayer."
     },
     "carInsurance": {
       "title": "Comparateur d'assurance voiture",

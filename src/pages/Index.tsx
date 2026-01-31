@@ -87,11 +87,15 @@ const Index = () => {
                 {t('home.heroSubtitle')}
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="text-base">
-                  {t('common.compareNow')}
+                <Button asChild size="lg" className="text-base">
+                  <LocalizedLink to="/assurance-sante">
+                    {t('common.compareNow')}
+                  </LocalizedLink>
                 </Button>
-                <Button size="lg" variant="outline" className="text-base">
-                  {t('common.readMore')}
+                <Button asChild size="lg" variant="outline" className="text-base">
+                  <LocalizedLink to="/blog">
+                    {t('common.readMore')}
+                  </LocalizedLink>
                 </Button>
               </div>
             </div>
@@ -232,8 +236,10 @@ const Index = () => {
           <p className="mb-8 text-muted-foreground">
             {t('home.joinUsers')}
           </p>
-          <Button size="lg" className="text-base">
-            {t('home.startFreeComparison')}
+          <Button asChild size="lg" className="text-base">
+            <LocalizedLink to="/assurance-sante">
+              {t('home.startFreeComparison')}
+            </LocalizedLink>
           </Button>
         </div>
       </section>
