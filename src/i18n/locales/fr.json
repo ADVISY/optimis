@@ -16,7 +16,8 @@
     "continue": "Continuer",
     "seeAllArticles": "Voir tous les articles",
     "compareNow": "Comparer maintenant",
-    "tableOfContents": "Sommaire"
+    "tableOfContents": "Sommaire",
+    "compare": "Comparez"
   },
   "megaMenu": {
     "healthModel": "Quel modèle d'assurance maladie choisir ?",
@@ -60,7 +61,22 @@
     "free": "Et 100% gratuit",
     "satisfiedUsers": "Utilisateurs satisfaits",
     "recommendationRate": "Taux de recommandation",
-    "insurerPartners": "Partenaires assureurs"
+    "insurerPartners": "Partenaires assureurs",
+    "usersLabel": "utilisateurs",
+    "usersSublabel": "nous font confiance",
+    "recommendLabel": "de nos clients",
+    "recommendSublabel": "nous recommandent",
+    "freeLabel": "Gratuit",
+    "freeSublabel": "et sans engagement"
+  },
+  "testimonials": {
+    "testimonial1": "Utiliser Optimis a été une excellente décision. J'ai trouvé une assurance habitation avec des conditions bien meilleures que mon précédent contrat.",
+    "testimonial2": "Optimis a transformé ma manière de comparer les assurances. En quelques clics, j'ai pu comparer différentes offres.",
+    "testimonial3": "Je suis vraiment impressionné par les services d'Optimis. Ils ont simplifié la recherche d'assurance.",
+    "laurent": "Utiliser Optimis a été une excellente décision. J'ai trouvé une assurance habitation avec des conditions bien meilleures que mon précédent contrat, et à un prix inférieur.",
+    "claire": "Optimis a transformé ma manière de comparer les assurances. En quelques clics, j'ai pu comparer différentes offres et choisir celle qui convenait le mieux à mes besoins.",
+    "philippe": "Je suis vraiment impressionné par les services d'Optimis. Ils ont simplifié la recherche d'assurance, me permettant de trouver rapidement la meilleure offre pour ma famille.",
+    "sophie": "Je ne savais pas par où commencer pour trouver une nouvelle assurance auto, mais Optimis m'a grandement facilité la tâche. Les comparaisons sont claires et détaillées."
   },
   "home": {
     "heroLine1": "Comparez les assurances",
@@ -68,7 +84,7 @@
     "heroLine3": "meilleures offres",
     "heroTitle": "Comparez les assurances",
     "heroHighlight": "et trouvez les meilleures offres",
-    "heroSubtitle": "Le comparateur suisse gratuit.",
+    "heroSubtitle": "Comparez des centaines d'assurances en quelques minutes seulement.",
     "whichInsurance": "Quelle assurance cherchez-vous ?",
     "selectInsurance": "Sélectionnez un type d'assurance pour commencer votre comparaison",
     "carInsuranceDesc": "Comparez les meilleures offres auto",
@@ -89,7 +105,30 @@
     "thousandsTrust": "Des milliers de Suisses nous font confiance",
     "readyToSave": "Prêt à économiser sur vos assurances ?",
     "joinUsers": "Rejoignez plus de 10,000 utilisateurs satisfaits",
-    "startFreeComparison": "Commencer ma comparaison gratuite"
+    "startFreeComparison": "Commencer ma comparaison gratuite",
+    "compareLabel": "Comparez",
+    "compareInsurancesTitle": "COMPAREZ LES ASSURANCES",
+    "compareInsurancesSubtitle": "Comparez et économisez sur vos prochaines assurances",
+    "legalProtectionCardDesc": "Trouvez les meilleures offres adaptées à vos besoins.",
+    "healthInsuranceCardDesc": "Trouvez les meilleures offres adaptées à vos besoins.",
+    "carInsuranceCardDesc": "Trouvez les meilleures offres adaptées à vos besoins.",
+    "homeInsuranceCardDesc": "Trouvez les meilleures offres adaptées à vos besoins.",
+    "clientReviewsLabel": "Avis Clients",
+    "clientReviewsTitle": "TÉMOIGNAGES CLIENTS",
+    "clientReviewsSubtitle": "Voici ce que nos clients disent de nous",
+    "blogLabel": "Blog",
+    "blogTitle": "NOS DERNIERS ARTICLES",
+    "blogSubtitle": "Conseils, guides et actualités sur les assurances en Suisse",
+    "viewAllArticles": "Voir tous les articles",
+    "findInsuranceTitle": "TROUVEZ VOTRE NOUVELLE ASSURANCE AVEC OPTIMIS",
+    "carInsuranceLabel": "Assurance voiture",
+    "carInsuranceDetailTitle": "Assurance voiture",
+    "carInsuranceDetailDesc": "Assurer votre véhicule est une obligation légale, quel que soit la marque ou le modèle de votre voiture. Notre comparateur explore un large éventail d'offres pour vous aider à trouver le contrat qui vous convient le mieux.",
+    "compareCarInsurance": "Comparez les assurances auto",
+    "healthInsuranceLabel": "Assurance santé",
+    "healthInsuranceDetailTitle": "Assurance santé",
+    "healthInsuranceDetailDesc": "Les coûts des soins de santé comptent parmi les dépenses les plus élevées. Trouvez la meilleure assurance maladie adaptée à vos besoins et à votre budget.",
+    "compareHealthInsurance": "Comparez les assurances santé"
   },
   "healthInsurance": {
     "title": "Assurance Santé",
