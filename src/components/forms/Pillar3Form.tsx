@@ -4,7 +4,7 @@ import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
-import ComparisonResults from "@/components/forms/ComparisonResults";
+import Pillar3ComparisonResults from "@/components/forms/Pillar3ComparisonResults";
 import LoadingComparison from "@/components/forms/LoadingComparison";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
@@ -18,7 +18,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { mockPillar3Offers, InsuranceOffer } from "@/data/mockInsuranceData";
+import { getMatchingProducts } from "@/data/pillar3aProducts";
+import { calculateAllProjections, Pillar3aProjection } from "@/utils/pillar3aCalculations";
 import { Lock, User, Phone } from "lucide-react";
 
 interface Pillar3FormData {
@@ -33,6 +34,7 @@ interface Pillar3FormData {
   lastName: string;
   email: string;
   phone: string;
+  canton: string;
 }
 
 const TOTAL_STEPS = 5;
@@ -42,6 +44,7 @@ const Pillar3Form = () => {
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
+  const [projections, setProjections] = useState<Pillar3aProjection[]>([]);
 
   const initialData: Pillar3FormData = {
     objective: "",
@@ -55,6 +58,7 @@ const Pillar3Form = () => {
     lastName: "",
     email: "",
     phone: "",
+    canton: "VD",
   };
 
   const { submitLead, isSubmitting } = useLeadSubmission({
@@ -79,10 +83,27 @@ const Pillar3Form = () => {
   const handleSubmit = async () => {
     setIsLoading(true);
     setLoadingStep("analyzing");
+    
+    // Calculate projections based on form data
+    const matchingProducts = getMatchingProducts(formData.riskProfile, formData.objective);
+    
     setTimeout(() => setLoadingStep("comparing"), 1000);
+    
+    const calculatedProjections = calculateAllProjections(matchingProducts, {
+      age: formData.age,
+      riskProfile: formData.riskProfile,
+      savingsAmount: formData.savingsAmount,
+      incomeRange: formData.incomeRange,
+      objective: formData.objective,
+      canton: formData.canton,
+    });
+    
     setTimeout(() => setLoadingStep("preparing"), 2000);
+    
     await submitLead(formData as unknown as Record<string, unknown>);
+    
     setTimeout(() => {
+      setProjections(calculatedProjections);
       setIsLoading(false);
       setShowResults(true);
     }, 3000);
@@ -96,12 +117,12 @@ const Pillar3Form = () => {
     }
   };
 
-  const handleSelectOffer = (offer: InsuranceOffer) => {
-    console.log("Selected offer:", offer);
+  const handleSelectOffer = (projection: Pillar3aProjection) => {
+    console.log("Selected offer:", projection);
   };
 
-  const handleContactRequest = (offer: InsuranceOffer, type: "call" | "email") => {
-    console.log("Contact request:", offer, type);
+  const handleContactRequest = (projection: Pillar3aProjection, type: "call" | "email") => {
+    console.log("Contact request:", projection.product.companyName, type);
   };
 
   if (isLoading) {
@@ -115,8 +136,8 @@ const Pillar3Form = () => {
   if (showResults) {
     return (
       <div className="max-w-4xl mx-auto">
-        <ComparisonResults
-          offers={mockPillar3Offers}
+        <Pillar3ComparisonResults
+          projections={projections}
           onSelectOffer={handleSelectOffer}
           onContactRequest={handleContactRequest}
         />
