@@ -117,15 +117,15 @@ const Index = () => {
           </div>
         </div>
         
-        {/* Quick Selection Bar - narrower width */}
+        {/* Quick Selection Bar - full width, compact height */}
         <div className="container relative z-20 mt-6">
-          <div className="max-w-4xl mx-auto bg-background rounded-2xl shadow-premium p-4 md:p-6 border">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+          <div className="bg-background rounded-2xl shadow-premium p-3 md:p-4 border">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3">
               {insuranceCards.map((card) => (
                 <LocalizedLink
                   key={card.href}
                   to={card.href}
-                  className="flex items-center gap-3 p-3 md:p-4 rounded-xl transition-all duration-300 hover:bg-secondary hover:-translate-y-1 hover:shadow-card group"
+                  className="flex items-center gap-2 md:gap-3 p-2 md:p-3 rounded-xl transition-all duration-300 hover:bg-secondary hover:-translate-y-1 hover:shadow-card group"
                 >
                   <div className={`${card.color} transition-transform duration-300 group-hover:scale-110`}>
                     <card.icon className="h-5 w-5 md:h-6 md:w-6" />
