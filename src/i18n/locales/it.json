@@ -657,6 +657,10 @@
     "next": "Avanti",
     "compare": "Confronta",
     "processing": "Elaborazione...",
+    "successTitle": "Richiesta inviata",
+    "successDescription": "Grazie! Un consulente ti ricontatterà a breve.",
+    "errorTitle": "Errore",
+    "errorDescription": "Si è verificato un errore. Riprova.",
     "loading": {
       "title": "Ricerca delle migliori offerte...",
       "analyzing": "Analisi delle tue esigenze",
@@ -678,7 +682,13 @@
       "lastName": "Cognome",
       "email": "Email",
       "phone": "Telefono",
-      "birthDate": "Data di nascita"
+      "birthDate": "Data di nascita",
+      "availability": "Disponibilità",
+      "selectAvailability": "Seleziona una fascia oraria",
+      "morning": "Mattina",
+      "afternoon": "Pomeriggio",
+      "evening": "Sera",
+      "anytime": "In qualsiasi momento"
     },
     "healthInsurance": {
       "title": "Confronto assicurazione malattia",
@@ -686,22 +696,40 @@
       "canton": "Cantone",
       "selectCanton": "Seleziona il tuo cantone",
       "postalCode": "Codice postale",
+      "selectDate": "Seleziona una data",
       "personsToInsure": "Numero di persone da assicurare",
       "adults": "Adulti",
       "children": "Bambini",
+      "adult": "Adulto",
+      "child": "Bambino",
+      "birthDate": "Data di nascita",
+      "addAdult": "Aggiungi un adulto",
+      "addChild": "Aggiungi un bambino",
+      "lamalModel": "Modello assicurativo",
       "model": "Modello assicurativo",
       "selectModel": "Seleziona un modello",
       "models": {
         "standard": "Standard",
         "hmo": "HMO",
         "familyDoctor": "Medico di famiglia",
-        "telemedicine": "Telemedicina"
+        "telemedicine": "Telemedicina",
+        "telemed": "Telemedicina"
       },
       "franchise": "Franchigia",
+      "franchiseHelp": "Più alta è la franchigia, più bassa è la tariffa.",
       "accidentCoverage": "Copertura infortuni",
+      "includeAccident": "Sì, includere infortuni",
       "accidentYes": "Sì, includere infortuni",
       "accidentNo": "No, escludere infortuni",
       "complementary": "Assicurazioni complementari",
+      "complementaryDescription": "Seleziona le coperture complementari che ti interessano.",
+      "complementary": {
+        "dental": "Cure dentali",
+        "hospitalization": "Ospedalizzazione",
+        "glasses": "Occhiali e lenti",
+        "alternativeMedicine": "Medicine alternative",
+        "worldwide": "Copertura mondiale"
+      },
       "complementaryOptions": {
         "dental": "Cure dentali",
         "hospitalization": "Ospedalizzazione",
@@ -865,12 +893,18 @@
       "title": "Confronto ipoteche",
       "description": "Trova il miglior tasso per il tuo progetto immobiliare",
       "projectType": "Tipo di progetto",
+      "projects": {
+        "acquisition": "Acquisto",
+        "renewal": "Rinnovo",
+        "refinancing": "Rifinanziamento"
+      },
       "projectTypes": {
         "acquisition": "Acquisto",
         "renewal": "Rinnovo",
         "refinancing": "Rifinanziamento"
       },
       "propertyType": "Tipo di immobile",
+      "selectPropertyType": "Seleziona il tipo di immobile",
       "propertyTypes": {
         "apartment": "Appartamento",
         "house": "Casa",
@@ -879,8 +913,18 @@
       },
       "propertyValue": "Valore dell'immobile (CHF)",
       "commune": "Comune",
+      "numberOfBorrowers": "Numero di mutuatari",
+      "person": "persona",
+      "persons": "persone",
       "borrowersCount": "Numero di mutuatari",
+      "professionalStatus": "Situazione professionale",
       "professionalSituation": "Situazione professionale",
+      "incomeRange": "Fascia di reddito",
+      "ownFundsRange": "Fondi propri",
+      "selectOwnFunds": "Seleziona i fondi propri",
+      "status": {
+        "retired": "Pensionato"
+      },
       "ownFunds": "Fondi propri (CHF)",
       "ownFundsRanges": {
         "less100k": "Meno di 100'000 CHF",
@@ -888,6 +932,19 @@
         "200to500k": "200'000 - 500'000 CHF",
         "more500k": "Più di 500'000 CHF"
       }
+    },
+    "householdInsurance": {
+      "title": "Confronto assicurazione casa",
+      "description": "Proteggi la tua casa e i tuoi beni",
+      "propertyType": "Tipo di alloggio",
+      "ownershipStatus": "Stato",
+      "tenant": "Affittuario",
+      "owner": "Proprietario",
+      "livingSpace": "Superficie abitabile (m²)",
+      "numberOfRooms": "Numero di stanze",
+      "selectRooms": "Seleziona il numero di stanze",
+      "propertyValue": "Valore dei beni da assicurare",
+      "selectValue": "Seleziona una fascia di valore"
     },
     "household": {
       "title": "Confronto assicurazione casa",
@@ -948,6 +1005,14 @@
       "title": "Disdetta assicurazione",
       "description": "Disdici il tuo contratto in modo semplice e veloce",
       "contractType": "Tipo di contratto da disdire",
+      "types": {
+        "health": "Assicurazione malattia",
+        "car": "Assicurazione auto",
+        "household": "Assicurazione casa",
+        "legal": "Protezione giuridica",
+        "life": "Assicurazione vita",
+        "other": "Altro"
+      },
       "contractTypes": {
         "health": "Assicurazione malattia",
         "car": "Assicurazione auto",
@@ -961,6 +1026,9 @@
       "policyNumber": "Numero di polizza (opzionale)",
       "policyNumberHelp": "Lo trovi sul tuo contratto o sulle fatture",
       "terminationDate": "Data di disdetta desiderata",
+      "selectDate": "Seleziona una data",
+      "address": "Indirizzo",
+      "city": "Città",
       "reason": "Motivo della disdetta",
       "reasons": {
         "price": "Trovare un prezzo migliore",
@@ -971,7 +1039,17 @@
       },
       "generateLetter": "Genera la lettera di disdetta",
       "letterGenerated": "Lettera generata con successo!",
-      "downloadLetter": "Scarica la lettera (PDF)"
+      "downloadLetter": "Scarica la lettera (PDF)",
+      "success": "Lettera pronta!",
+      "successDescription": "La tua lettera di disdetta è stata generata. Puoi scaricarla e inviarla al tuo assicuratore.",
+      "letterPreview": "Anteprima della lettera",
+      "letterSubject": "Oggetto: Disdetta del contratto",
+      "letterBody": "Con la presente, vi chiedo di disdire il mio contratto alla data indicata. Vi prego di confermare la disdetta per iscritto.",
+      "policyRef": "Riferimento polizza",
+      "effectiveDate": "Data di efficacia",
+      "downloadPDF": "Scarica PDF",
+      "compareNew": "Confronta nuove offerte",
+      "generateNote": "Dopo la conferma, genereremo automaticamente la tua lettera di disdetta."
     },
     "legalProtection": {
       "title": "Confronto protezione giuridica",

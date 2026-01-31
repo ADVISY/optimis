@@ -657,6 +657,10 @@
     "next": "Weiter",
     "compare": "Vergleichen",
     "processing": "Verarbeitung...",
+    "successTitle": "Anfrage gesendet",
+    "successDescription": "Danke! Ein Berater meldet sich in Kürze bei Ihnen.",
+    "errorTitle": "Fehler",
+    "errorDescription": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
     "loading": {
       "title": "Suche nach den besten Angeboten...",
       "analyzing": "Analyse Ihrer Bedürfnisse",
@@ -678,7 +682,13 @@
       "lastName": "Nachname",
       "email": "E-Mail",
       "phone": "Telefon",
-      "birthDate": "Geburtsdatum"
+      "birthDate": "Geburtsdatum",
+      "availability": "Erreichbarkeit",
+      "selectAvailability": "Zeitfenster wählen",
+      "morning": "Vormittag",
+      "afternoon": "Nachmittag",
+      "evening": "Abend",
+      "anytime": "Jederzeit"
     },
     "healthInsurance": {
       "title": "Krankenversicherungs-Vergleich",
@@ -686,22 +696,40 @@
       "canton": "Kanton",
       "selectCanton": "Wählen Sie Ihren Kanton",
       "postalCode": "Postleitzahl",
+      "selectDate": "Datum auswählen",
       "personsToInsure": "Anzahl zu versichernder Personen",
       "adults": "Erwachsene",
       "children": "Kinder",
+      "adult": "Erwachsener",
+      "child": "Kind",
+      "birthDate": "Geburtsdatum",
+      "addAdult": "Erwachsenen hinzufügen",
+      "addChild": "Kind hinzufügen",
+      "lamalModel": "Versicherungsmodell",
       "model": "Versicherungsmodell",
       "selectModel": "Modell auswählen",
       "models": {
         "standard": "Standard",
         "hmo": "HMO",
         "familyDoctor": "Hausarzt",
-        "telemedicine": "Telemedizin"
+        "telemedicine": "Telemedizin",
+        "telemed": "Telemedizin"
       },
       "franchise": "Franchise",
+      "franchiseHelp": "Je höher die Franchise, desto tiefer die Prämie.",
       "accidentCoverage": "Unfalldeckung",
+      "includeAccident": "Ja, Unfall einschliessen",
       "accidentYes": "Ja, Unfall einschliessen",
       "accidentNo": "Nein, Unfall ausschliessen",
       "complementary": "Zusatzversicherungen",
+      "complementaryDescription": "Wählen Sie die Zusatzleistungen, die Sie interessieren.",
+      "complementary": {
+        "dental": "Zahnpflege",
+        "hospitalization": "Hospitalisation",
+        "glasses": "Brillen & Kontaktlinsen",
+        "alternativeMedicine": "Alternativmedizin",
+        "worldwide": "Weltweite Deckung"
+      },
       "complementaryOptions": {
         "dental": "Zahnpflege",
         "hospitalization": "Hospitalisation",
@@ -865,12 +893,18 @@
       "title": "Hypotheken-Vergleich",
       "description": "Finden Sie den besten Zinssatz für Ihr Immobilienprojekt",
       "projectType": "Projektart",
+      "projects": {
+        "acquisition": "Erwerb",
+        "renewal": "Verlängerung",
+        "refinancing": "Refinanzierung"
+      },
       "projectTypes": {
         "acquisition": "Erwerb",
         "renewal": "Verlängerung",
         "refinancing": "Refinanzierung"
       },
       "propertyType": "Art der Immobilie",
+      "selectPropertyType": "Immobilienart auswählen",
       "propertyTypes": {
         "apartment": "Wohnung",
         "house": "Haus",
@@ -879,8 +913,18 @@
       },
       "propertyValue": "Immobilienwert (CHF)",
       "commune": "Gemeinde",
+      "numberOfBorrowers": "Anzahl Kreditnehmer",
+      "person": "Person",
+      "persons": "Personen",
       "borrowersCount": "Anzahl Kreditnehmer",
+      "professionalStatus": "Berufliche Situation",
       "professionalSituation": "Berufliche Situation",
+      "incomeRange": "Einkommensspanne",
+      "ownFundsRange": "Eigenmittel",
+      "selectOwnFunds": "Eigenmittel auswählen",
+      "status": {
+        "retired": "Rentner"
+      },
       "ownFunds": "Eigenmittel (CHF)",
       "ownFundsRanges": {
         "less100k": "Weniger als 100'000 CHF",
@@ -888,6 +932,19 @@
         "200to500k": "200'000 - 500'000 CHF",
         "more500k": "Mehr als 500'000 CHF"
       }
+    },
+    "householdInsurance": {
+      "title": "Hausratversicherungs-Vergleich",
+      "description": "Schützen Sie Ihr Zuhause und Ihre Besitztümer",
+      "propertyType": "Wohnungsart",
+      "ownershipStatus": "Status",
+      "tenant": "Mieter",
+      "owner": "Eigentümer",
+      "livingSpace": "Wohnfläche (m²)",
+      "numberOfRooms": "Anzahl Zimmer",
+      "selectRooms": "Zimmerzahl auswählen",
+      "propertyValue": "Wert der zu versichernden Güter",
+      "selectValue": "Wertspanne auswählen"
     },
     "household": {
       "title": "Hausratversicherungs-Vergleich",
@@ -948,6 +1005,14 @@
       "title": "Versicherung kündigen",
       "description": "Kündigen Sie Ihren Vertrag einfach und schnell",
       "contractType": "Art des zu kündigenden Vertrags",
+      "types": {
+        "health": "Krankenversicherung",
+        "car": "Autoversicherung",
+        "household": "Hausratversicherung",
+        "legal": "Rechtsschutz",
+        "life": "Lebensversicherung",
+        "other": "Andere"
+      },
       "contractTypes": {
         "health": "Krankenversicherung",
         "car": "Autoversicherung",
@@ -961,6 +1026,9 @@
       "policyNumber": "Policennummer (optional)",
       "policyNumberHelp": "Sie finden diese auf Ihrem Vertrag oder Ihren Rechnungen",
       "terminationDate": "Gewünschtes Kündigungsdatum",
+      "selectDate": "Datum auswählen",
+      "address": "Adresse",
+      "city": "Ort",
       "reason": "Kündigungsgrund",
       "reasons": {
         "price": "Günstigeres Angebot finden",
@@ -971,7 +1039,17 @@
       },
       "generateLetter": "Kündigungsschreiben erstellen",
       "letterGenerated": "Schreiben erfolgreich erstellt!",
-      "downloadLetter": "Schreiben herunterladen (PDF)"
+      "downloadLetter": "Schreiben herunterladen (PDF)",
+      "success": "Schreiben ist bereit!",
+      "successDescription": "Ihr Kündigungsschreiben wurde erstellt. Sie können es herunterladen und an Ihren Versicherer senden.",
+      "letterPreview": "Vorschau des Schreibens",
+      "letterSubject": "Betreff: Vertragskündigung",
+      "letterBody": "Hiermit bitte ich Sie, meinen Vertrag zum angegebenen Datum zu kündigen. Bitte bestätigen Sie mir die Kündigung schriftlich.",
+      "policyRef": "Policenreferenz",
+      "effectiveDate": "Wirksamkeitsdatum",
+      "downloadPDF": "Als PDF herunterladen",
+      "compareNew": "Neue Angebote vergleichen",
+      "generateNote": "Nach der Bestätigung erstellen wir Ihr Kündigungsschreiben automatisch."
     },
     "legalProtection": {
       "title": "Rechtsschutz-Vergleich",

@@ -689,6 +689,10 @@
     "next": "Suivant",
     "compare": "Comparer",
     "processing": "Traitement...",
+    "successTitle": "Demande envoyée",
+    "successDescription": "Merci ! Un conseiller vous recontactera rapidement.",
+    "errorTitle": "Erreur",
+    "errorDescription": "Une erreur est survenue. Veuillez réessayer.",
     "loading": {
       "title": "Recherche des meilleures offres...",
       "analyzing": "Analyse de vos besoins",
@@ -710,7 +714,13 @@
       "lastName": "Nom",
       "email": "Email",
       "phone": "Téléphone",
-      "birthDate": "Date de naissance"
+      "birthDate": "Date de naissance",
+      "availability": "Disponibilité",
+      "selectAvailability": "Sélectionnez un créneau",
+      "morning": "Matin",
+      "afternoon": "Après-midi",
+      "evening": "Soir",
+      "anytime": "N'importe quand"
     },
     "healthInsurance": {
       "title": "Comparateur d'assurance maladie",
@@ -722,19 +732,36 @@
       "personsToInsure": "Nombre de personnes à assurer",
       "adults": "Adultes",
       "children": "Enfants",
+      "adult": "Adulte",
+      "child": "Enfant",
+      "birthDate": "Date de naissance",
+      "addAdult": "Ajouter un adulte",
+      "addChild": "Ajouter un enfant",
+      "lamalModel": "Modèle d'assurance",
       "model": "Modèle d'assurance",
       "selectModel": "Sélectionnez un modèle",
       "models": {
         "standard": "Standard",
         "hmo": "HMO",
         "familyDoctor": "Médecin de famille",
-        "telemedicine": "Télémédecine"
+        "telemedicine": "Télémédecine",
+        "telemed": "Télémédecine"
       },
       "franchise": "Franchise",
+      "franchiseHelp": "Plus la franchise est élevée, plus la prime est basse.",
       "accidentCoverage": "Couverture accident",
+      "includeAccident": "Oui, inclure l'accident",
       "accidentYes": "Oui, inclure l'accident",
       "accidentNo": "Non, exclure l'accident",
       "complementary": "Assurances complémentaires",
+      "complementaryDescription": "Sélectionnez les options complémentaires qui vous intéressent.",
+      "complementary": {
+        "dental": "Soins dentaires",
+        "hospitalization": "Hospitalisation",
+        "glasses": "Lunettes & lentilles",
+        "alternativeMedicine": "Médecines alternatives",
+        "worldwide": "Couverture monde"
+      },
       "complementaryOptions": {
         "dental": "Soins dentaires",
         "hospitalization": "Hospitalisation",
@@ -1010,6 +1037,14 @@
       "title": "Résiliation d'assurance",
       "description": "Résiliez votre contrat simplement et rapidement",
       "contractType": "Type de contrat à résilier",
+      "types": {
+        "health": "Assurance maladie",
+        "car": "Assurance voiture",
+        "household": "Assurance ménage",
+        "legal": "Protection juridique",
+        "life": "Assurance vie",
+        "other": "Autre"
+      },
       "contractTypes": {
         "health": "Assurance maladie",
         "car": "Assurance voiture",
@@ -1023,6 +1058,9 @@
       "policyNumber": "Numéro de police (optionnel)",
       "policyNumberHelp": "Vous le trouverez sur votre contrat ou vos factures",
       "terminationDate": "Date de résiliation souhaitée",
+      "selectDate": "Choisir une date",
+      "address": "Adresse",
+      "city": "Ville",
       "reason": "Motif de résiliation",
       "reasons": {
         "price": "Trouver moins cher",
@@ -1033,7 +1071,17 @@
       },
       "generateLetter": "Générer ma lettre de résiliation",
       "letterGenerated": "Lettre générée avec succès !",
-      "downloadLetter": "Télécharger la lettre (PDF)"
+      "downloadLetter": "Télécharger la lettre (PDF)",
+      "success": "Lettre prête !",
+      "successDescription": "Votre lettre de résiliation est générée. Vous pouvez la télécharger et l'envoyer à votre assureur.",
+      "letterPreview": "Aperçu de la lettre",
+      "letterSubject": "Objet : Résiliation de contrat",
+      "letterBody": "Par la présente, je vous prie de résilier mon contrat à la date indiquée. Merci de me confirmer la résiliation par écrit.",
+      "policyRef": "Référence de police",
+      "effectiveDate": "Date d'effet",
+      "downloadPDF": "Télécharger en PDF",
+      "compareNew": "Comparer de nouvelles offres",
+      "generateNote": "Nous générerons automatiquement votre lettre de résiliation après validation."
     },
     "legalProtection": {
       "title": "Comparateur protection juridique",
