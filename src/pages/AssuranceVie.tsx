@@ -1,10 +1,13 @@
-import { Heart, Shield, Clock, CheckCircle, Car, Scale, Home, Banknote } from "lucide-react";
+import { Heart, Shield, Clock, CheckCircle, Banknote } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import LocalizedLink from "@/components/LocalizedLink";
 import llamaMascot from "@/assets/llama-mascot.png";
+import { useNavigate } from "react-router-dom";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
+import CategoryHero from "@/components/home/CategoryHero";
+import StatsBar from "@/components/home/StatsBar";
 
 const partners = [
   { name: "Generali", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/general-1.svg" },
@@ -15,24 +18,13 @@ const partners = [
 
 const AssuranceVie = () => {
   const { t } = useTranslation();
-
-  const quickLinks = [
-    { labelKey: "nav.carInsurance", href: "/assurance-voiture", icon: Car },
-    { labelKey: "nav.healthInsurance", href: "/assurance-sante", icon: Heart },
-    { labelKey: "nav.legalProtection", href: "/protection-juridique", icon: Scale },
-    { labelKey: "nav.homeInsurance", href: "/assurance-menage", icon: Home },
-  ];
+  const navigate = useNavigate();
+  const { localizedPath } = useLocalizedPath();
 
   const features = [
     { icon: Shield, titleKey: "lifeInsurance.capitalProtection", descKey: "lifeInsurance.capitalProtectionDesc" },
     { icon: Clock, titleKey: "lifeInsurance.taxAdvantages", descKey: "lifeInsurance.taxAdvantagesDesc" },
     { icon: CheckCircle, titleKey: "lifeInsurance.familyProtection", descKey: "lifeInsurance.familyProtectionDesc" },
-  ];
-
-  const stats = [
-    { labelKey: "stats.recommended", value: "95%", descriptionKey: "stats.byUsers" },
-    { labelKey: "stats.join", value: "+10,000", descriptionKey: "stats.users" },
-    { labelKey: "stats.noCommitment", value: "100%", descriptionKey: "stats.free" },
   ];
 
   const tableOfContents = [
@@ -44,80 +36,23 @@ const AssuranceVie = () => {
     "lifeInsurance.taxBenefits",
   ];
 
+  const handleCompareClick = () => {
+    navigate(localizedPath("/comparateur/pilier3"));
+  };
+
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="gradient-optimis py-16 md:py-24">
-        <div className="container">
-          <div className="grid items-center gap-8 md:grid-cols-2">
-            <div className="space-y-6">
-              <p className="text-sm font-medium text-muted-foreground">
-                <LocalizedLink to="/" className="hover:text-primary">{t('common.home')}</LocalizedLink> / {t('lifeInsurance.title')}
-              </p>
-              <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">
-                {t('lifeInsurance.title')}
-              </h1>
-              <ul className="text-lg text-muted-foreground space-y-2">
-                <li>• {t('lifeInsurance.feature1')}</li>
-                <li>• {t('lifeInsurance.feature2')}</li>
-                <li>• {t('lifeInsurance.feature3')}</li>
-                <li>• {t('lifeInsurance.feature4')}</li>
-              </ul>
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="gap-2">
-                  <Banknote className="h-5 w-5" />
-                  {t('lifeInsurance.compareButton')}
-                </Button>
-              </div>
-            </div>
-            <div className="flex justify-center md:justify-end">
-              <img
-                src="https://le-comparateur-optimis.ch/wp-content/uploads/2024/05/happy-man-doing-winning-gesture-1.png"
-                alt="Assurance vie"
-                className="h-64 w-auto md:h-80"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <CategoryHero
+        pageTitle={t("lifeInsurance.title")}
+        subtitle={t("lifeInsurance.heroSubtitle") || t("lifeInsurance.feature1")}
+        buttonLabel={t("lifeInsurance.compareButton")}
+        buttonIcon={Banknote}
+        onButtonClick={handleCompareClick}
+      />
 
-      {/* Quick Links */}
-      <section className="py-8 bg-background border-b">
-        <div className="container">
-          <div className="flex flex-wrap justify-center gap-4">
-            {quickLinks.map((link) => (
-              <LocalizedLink
-                key={link.href}
-                to={link.href}
-                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-muted hover:bg-primary/10 transition-colors font-medium"
-              >
-                <link.icon className="h-5 w-5 text-primary" />
-                {t(link.labelKey)}
-              </LocalizedLink>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-12 bg-primary/5">
-        <div className="container">
-          <h3 className="text-center text-lg font-semibold text-foreground mb-8">
-            {t('lifeInsurance.protectYourFuture')}
-          </h3>
-          <div className="grid gap-6 md:grid-cols-3">
-            {stats.map((stat) => (
-              <Card key={stat.labelKey} className="text-center">
-                <CardContent className="p-6">
-                  <p className="text-sm font-medium text-muted-foreground">{t(stat.labelKey)}</p>
-                  <p className="text-3xl font-bold text-primary">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground">{t(stat.descriptionKey)}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Stats Bar */}
+      <StatsBar />
 
       {/* Features */}
       <section className="py-16">
@@ -283,7 +218,7 @@ const AssuranceVie = () => {
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
                 {t('lifeInsurance.getEstimate')}
               </p>
-              <Button size="lg" className="gap-2">
+              <Button size="lg" className="gap-2" onClick={handleCompareClick}>
                 <Banknote className="h-5 w-5" />
                 {t('lifeInsurance.compareNow')}
               </Button>

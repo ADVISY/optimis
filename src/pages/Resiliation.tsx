@@ -8,6 +8,8 @@ import LocalizedLink from "@/components/LocalizedLink";
 import llamaMascot from "@/assets/llama-mascot.png";
 import { useNavigate } from "react-router-dom";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
+import CategoryHero from "@/components/home/CategoryHero";
+import StatsBar from "@/components/home/StatsBar";
 
 const insurers = [
   { name: "Assura", slug: "assura" },
@@ -49,47 +51,23 @@ const Resiliation = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="gradient-optimis py-16 md:py-24">
-        <div className="container">
-          <div className="grid items-center gap-8 md:grid-cols-2">
-            <div className="space-y-6">
-              <p className="text-sm font-medium text-muted-foreground">
-                <LocalizedLink to="/" className="hover:text-primary">{t('common.home')}</LocalizedLink> / {t('termination.title')}
-              </p>
-              <h1 className="text-4xl font-bold leading-tight text-foreground md:text-5xl">
-                {t('termination.title')}
-              </h1>
-              <ul className="text-lg text-muted-foreground space-y-2">
-                <li>• {t('termination.feature1')}</li>
-                <li>• {t('termination.feature2')}</li>
-                <li>• {t('termination.feature3')}</li>
-                <li>• {t('termination.feature4')}</li>
-              </ul>
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="gap-2" onClick={handleCompareClick}>
-                  <FileX className="h-5 w-5" />
-                  {t('termination.startButton')}
-                </Button>
-              </div>
-            </div>
-            <div className="flex justify-center md:justify-end">
-              <img
-                src={llamaMascot}
-                alt="Mascotte Optimis"
-                className="h-64 w-auto md:h-80"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <CategoryHero
+        pageTitle={t("termination.title")}
+        subtitle={t("termination.feature1")}
+        buttonLabel={t("termination.startButton")}
+        buttonIcon={FileX}
+        onButtonClick={handleCompareClick}
+      />
 
+      {/* Stats Bar */}
+      <StatsBar />
 
       {/* Alert */}
       <section className="py-8">
         <div className="container">
-          <Card className="border-yellow-500/50 bg-yellow-500/10">
+          <Card className="border-accent/50 bg-accent/10">
             <CardContent className="p-6 flex items-start gap-4">
-              <AlertTriangle className="h-6 w-6 text-yellow-600 flex-shrink-0 mt-1" />
+              <AlertTriangle className="h-6 w-6 text-accent flex-shrink-0 mt-1" />
               <div>
                 <h4 className="font-semibold text-foreground mb-2">{t('termination.importantDeadline')}</h4>
                 <p className="text-muted-foreground">{t('termination.deadlineInfo')}</p>
