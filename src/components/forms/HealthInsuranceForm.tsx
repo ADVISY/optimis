@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
@@ -8,6 +8,7 @@ import ComparisonResults from "@/components/forms/ComparisonResults";
 import LoadingComparison from "@/components/forms/LoadingComparison";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
+import { useHealthPremiums, premiumToInsuranceOffer } from "@/hooks/useHealthPremiums";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -21,7 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { swissCantons, getCantonName } from "@/data/swissCantons";
-import { mockHealthInsuranceOffers, InsuranceOffer } from "@/data/mockInsuranceData";
+import { InsuranceOffer } from "@/data/mockInsuranceData";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
@@ -65,6 +66,9 @@ const HealthInsuranceForm = () => {
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
+  const [realOffers, setRealOffers] = useState<InsuranceOffer[]>([]);
+  
+  const { fetchPremiums, error: premiumsError } = useHealthPremiums();
 
   const getDateLocale = () => {
     switch (i18n.language) {
@@ -122,15 +126,41 @@ const HealthInsuranceForm = () => {
     setIsLoading(true);
     setLoadingStep("analyzing");
 
-    setTimeout(() => setLoadingStep("comparing"), 1000);
-    setTimeout(() => setLoadingStep("preparing"), 2000);
+    // Calculate birth year from first person's birth date
+    const firstPerson = formData.persons[0];
+    const birthYear = firstPerson?.birthDate 
+      ? firstPerson.birthDate.getFullYear() 
+      : 1990;
 
+    setTimeout(() => setLoadingStep("comparing"), 1000);
+
+    // Fetch real premiums from OFSP API
+    const premiums = await fetchPremiums({
+      canton: formData.canton,
+      postalCode: formData.postalCode,
+      birthYear,
+      franchise: formData.franchise,
+      model: formData.lamalModel,
+      withAccident: formData.accidentCoverage,
+      language: i18n.language,
+    });
+
+    setLoadingStep("preparing");
+
+    // Convert premiums to InsuranceOffer format
+    const offers = premiums.map((premium, index) => 
+      premiumToInsuranceOffer(premium, index)
+    );
+    
+    setRealOffers(offers);
+
+    // Submit lead
     await submitLead(formData as unknown as Record<string, unknown>);
 
     setTimeout(() => {
       setIsLoading(false);
       setShowResults(true);
-    }, 3000);
+    }, 500);
   };
 
   const handleNext = () => {
@@ -185,8 +215,13 @@ const HealthInsuranceForm = () => {
   if (showResults) {
     return (
       <div className="max-w-4xl mx-auto">
+        {premiumsError && (
+          <div className="mb-4 p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm">
+            {t("forms.healthInsurance.errorLoadingPremiums")}
+          </div>
+        )}
         <ComparisonResults
-          offers={mockHealthInsuranceOffers}
+          offers={realOffers}
           onSelectOffer={handleSelectOffer}
           onContactRequest={handleContactRequest}
         />
