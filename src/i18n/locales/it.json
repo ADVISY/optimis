@@ -637,6 +637,18 @@
       "jurisdictionContent": "Le presenti condizioni sono regolate dal diritto svizzero. Qualsiasi controversia sarà sottoposta ai tribunali competenti di Ginevra, Svizzera."
     }
   },
+  "comparison": {
+    "resultsTitle": "Le tue offerte personalizzate",
+    "resultsSubtitle": "Abbiamo trovato {{count}} offerte adatte al tuo profilo",
+    "perMonth": "/mese",
+    "perYear": "All'anno",
+    "selectOffer": "Scegli questa offerta",
+    "callBack": "Essere richiamato",
+    "email": "Via email",
+    "needHelp": "Hai bisogno di aiuto per scegliere?",
+    "expertAdvice": "I nostri consulenti sono qui per aiutarti gratuitamente",
+    "talkToExpert": "Parla con un consulente"
+  },
   "forms": {
     "free": "100% gratuito",
     "secure": "Dati sicuri",
@@ -645,6 +657,13 @@
     "next": "Avanti",
     "compare": "Confronta",
     "processing": "Elaborazione...",
+    "loading": {
+      "title": "Ricerca delle migliori offerte...",
+      "analyzing": "Analisi delle tue esigenze",
+      "comparing": "Confronto delle offerte",
+      "preparing": "Preparazione dei risultati",
+      "message": "Stiamo analizzando le migliori offerte del mercato per te."
+    },
     "common": {
       "step": "Passo",
       "of": "di",
