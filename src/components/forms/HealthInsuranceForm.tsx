@@ -55,7 +55,7 @@ interface HealthInsuranceFormData {
   availability: string;
 }
 
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 6;
 
 const HealthInsuranceForm = () => {
   const { t, i18n } = useTranslation();
@@ -457,35 +457,60 @@ const HealthInsuranceForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 5: Contact Information */}
+      {/* Step 5: Name */}
       <FormStep isActive={currentStep === 5}>
-        <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <FormFieldWrapper
-              label={t("forms.contact.firstName")}
-              htmlFor="firstName"
-              required
-            >
-              <Input
-                id="firstName"
-                value={formData.firstName}
-                onChange={(e) => updateFormData({ firstName: e.target.value })}
-              />
-            </FormFieldWrapper>
-
-            <FormFieldWrapper
-              label={t("forms.contact.lastName")}
-              htmlFor="lastName"
-              required
-            >
-              <Input
-                id="lastName"
-                value={formData.lastName}
-                onChange={(e) => updateFormData({ lastName: e.target.value })}
-              />
-            </FormFieldWrapper>
+        <div className="space-y-6">
+          <div className="text-center mb-6">
+            <h3 className="text-lg font-semibold mb-2">
+              {t("forms.contact.almostDone", "Presque terminé !")}
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              {t("forms.contact.nameStepDescription", "Comment pouvons-nous vous appeler ?")}
+            </p>
           </div>
+          
+          <FormFieldWrapper
+            label={t("forms.contact.firstName")}
+            htmlFor="firstName"
+            required
+          >
+            <Input
+              id="firstName"
+              value={formData.firstName}
+              onChange={(e) => updateFormData({ firstName: e.target.value })}
+              placeholder={t("forms.contact.firstNamePlaceholder", "Votre prénom")}
+              className="h-14 text-lg"
+            />
+          </FormFieldWrapper>
 
+          <FormFieldWrapper
+            label={t("forms.contact.lastName")}
+            htmlFor="lastName"
+            required
+          >
+            <Input
+              id="lastName"
+              value={formData.lastName}
+              onChange={(e) => updateFormData({ lastName: e.target.value })}
+              placeholder={t("forms.contact.lastNamePlaceholder", "Votre nom")}
+              className="h-14 text-lg"
+            />
+          </FormFieldWrapper>
+        </div>
+      </FormStep>
+
+      {/* Step 6: Contact Details */}
+      <FormStep isActive={currentStep === 6}>
+        <div className="space-y-6">
+          <div className="text-center mb-6">
+            <h3 className="text-lg font-semibold mb-2">
+              {t("forms.contact.contactStepTitle", "Où pouvons-nous vous joindre ?")}
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              {t("forms.contact.contactStepDescription", "Un conseiller vous contactera pour vous présenter les meilleures offres.")}
+            </p>
+          </div>
+          
           <FormFieldWrapper
             label={t("forms.contact.email")}
             htmlFor="email"
@@ -496,6 +521,8 @@ const HealthInsuranceForm = () => {
               type="email"
               value={formData.email}
               onChange={(e) => updateFormData({ email: e.target.value })}
+              placeholder="votre@email.ch"
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
@@ -510,28 +537,15 @@ const HealthInsuranceForm = () => {
               value={formData.phone}
               onChange={(e) => updateFormData({ phone: e.target.value })}
               placeholder="+41 79 123 45 67"
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
-          <FormFieldWrapper
-            label={t("forms.contact.availability")}
-            htmlFor="availability"
-          >
-            <Select
-              value={formData.availability}
-              onValueChange={(value) => updateFormData({ availability: value })}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder={t("forms.contact.selectAvailability")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="morning">{t("forms.contact.morning")}</SelectItem>
-                <SelectItem value="afternoon">{t("forms.contact.afternoon")}</SelectItem>
-                <SelectItem value="evening">{t("forms.contact.evening")}</SelectItem>
-                <SelectItem value="anytime">{t("forms.contact.anytime")}</SelectItem>
-              </SelectContent>
-            </Select>
-          </FormFieldWrapper>
+          <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 text-center">
+            <p className="text-sm text-muted-foreground">
+              🔒 {t("forms.contact.privacyNote", "Vos données sont protégées et ne seront jamais partagées.")}
+            </p>
+          </div>
         </div>
       </FormStep>
 

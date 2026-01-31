@@ -799,7 +799,14 @@
       "morning": "Matin",
       "afternoon": "Après-midi",
       "evening": "Soir",
-      "anytime": "N'importe quand"
+      "anytime": "N'importe quand",
+      "almostDone": "Presque terminé !",
+      "nameStepDescription": "Comment pouvons-nous vous appeler ?",
+      "firstNamePlaceholder": "Votre prénom",
+      "lastNamePlaceholder": "Votre nom",
+      "contactStepTitle": "Où pouvons-nous vous joindre ?",
+      "contactStepDescription": "Un conseiller vous contactera pour vous présenter les meilleures offres.",
+      "privacyNote": "Vos données sont protégées et ne seront jamais partagées."
     },
     "healthInsurance": {
       "title": "Comparateur d'assurance maladie",

@@ -764,7 +764,14 @@
       "morning": "Vormittag",
       "afternoon": "Nachmittag",
       "evening": "Abend",
-      "anytime": "Jederzeit"
+      "anytime": "Jederzeit",
+      "almostDone": "Fast geschafft!",
+      "nameStepDescription": "Wie dürfen wir Sie nennen?",
+      "firstNamePlaceholder": "Ihr Vorname",
+      "lastNamePlaceholder": "Ihr Nachname",
+      "contactStepTitle": "Wie können wir Sie erreichen?",
+      "contactStepDescription": "Ein Berater wird Sie kontaktieren, um Ihnen die besten Angebote zu präsentieren.",
+      "privacyNote": "Ihre Daten sind geschützt und werden niemals weitergegeben."
     },
     "healthInsurance": {
       "title": "Krankenversicherungs-Vergleich",
