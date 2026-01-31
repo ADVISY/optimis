@@ -2,7 +2,7 @@ import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import LocalizedLink from "@/components/LocalizedLink";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/logo-white.svg";
 
 const Footer = () => {
   const { t } = useTranslation();
