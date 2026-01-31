@@ -134,11 +134,22 @@ const App = () => (
           <Route path="/subside-assurance-maladie" element={<Navigate to="/fr/subside-assurance-maladie" replace />} />
           <Route path="/forfait-mobile" element={<Navigate to="/fr/forfait-mobile" replace />} />
           <Route path="/resiliation" element={<Navigate to="/fr/resiliation" replace />} />
-          <Route path="/blog" element={<Navigate to="/fr/blog" replace />} />
-          <Route path="/blog/:slug" element={<Navigate to="/fr/blog/:slug" replace />} />
-          
-          {/* Catch-all */}
-          <Route path="*" element={<NotFound />} />
+        <Route path="/blog" element={<Navigate to="/fr/blog" replace />} />
+        <Route path="/blog/:slug" element={<Navigate to="/fr/blog/:slug" replace />} />
+        
+        {/* Legacy WordPress URLs without language prefix - SEO redirects */}
+        <Route path="/assurance-maladie-landing" element={<Navigate to="/fr/assurance-maladie-landing" replace />} />
+        <Route path="/assurance-voiture-landing" element={<Navigate to="/fr/assurance-voiture-landing" replace />} />
+        <Route path="/assurance-menage-landing" element={<Navigate to="/fr/assurance-menage-landing" replace />} />
+        <Route path="/protection-juridique-landing" element={<Navigate to="/fr/protection-juridique-landing" replace />} />
+        <Route path="/subside-assurance-maladie-demande" element={<Navigate to="/fr/subside-assurance-maladie-demande" replace />} />
+        <Route path="/resiliation-assurance" element={<Navigate to="/fr/resiliation-assurance" replace />} />
+        <Route path="/3eme-pilier-offres" element={<Navigate to="/fr/3eme-pilier-offres" replace />} />
+        <Route path="/hypotheque-offres" element={<Navigate to="/fr/hypotheque-offres" replace />} />
+        <Route path="/assurance-entreprise-offres" element={<Navigate to="/fr/assurance-entreprise-offres" replace />} />
+        
+        {/* Catch-all */}
+        <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
