@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState, useRef, useCallback } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Lock, CheckCircle } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -20,29 +20,61 @@ const FormContainer = ({
   children,
 }: FormContainerProps) => {
   const { t } = useTranslation();
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [gradientPos, setGradientPos] = useState({ x: 50, y: 50 });
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setGradientPos({ x, y });
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setGradientPos({ x: 50, y: 50 });
+  }, []);
 
   return (
-    <Card className="w-full max-w-3xl mx-auto shadow-2xl border-0 bg-[#1a3d2a] rounded-3xl overflow-hidden min-h-[520px] ring-2 ring-primary/30 animate-fade-in text-white">
-      <CardHeader className="space-y-6 pb-8 px-8 pt-10">
+    <Card 
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="w-full max-w-3xl mx-auto shadow-2xl border-0 rounded-3xl overflow-hidden min-h-[520px] ring-2 ring-emerald-400/30 animate-fade-in text-white relative"
+      style={{
+        background: `radial-gradient(circle at ${gradientPos.x}% ${gradientPos.y}%, rgba(52, 120, 80, 0.9) 0%, rgba(30, 70, 50, 0.95) 35%, rgba(20, 50, 35, 1) 100%)`,
+        transition: 'background 0.15s ease-out'
+      }}
+    >
+      {/* Subtle animated glow overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-30"
+        style={{
+          background: `radial-gradient(circle at ${gradientPos.x}% ${gradientPos.y}%, rgba(100, 200, 150, 0.4) 0%, transparent 50%)`,
+          transition: 'background 0.15s ease-out'
+        }}
+      />
+      
+      <CardHeader className="space-y-6 pb-8 px-8 pt-10 relative z-10">
         {/* Trust badges with LED glow effect */}
         <div className="flex flex-wrap items-center justify-center gap-4 text-base">
-          <div className="flex items-center gap-2 text-white font-semibold px-4 py-2 rounded-full bg-white/15 shadow-[0_0_20px_rgba(255,255,255,0.3)] animate-pulse backdrop-blur-sm">
-            <div className="p-1.5 rounded-lg bg-white/20 shadow-[0_0_12px_rgba(255,255,255,0.5)]">
-              <Shield className="h-4 w-4 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+          <div className="flex items-center gap-2 text-white font-semibold px-4 py-2 rounded-full bg-white/15 shadow-[0_0_20px_rgba(255,255,255,0.25)] animate-pulse backdrop-blur-sm border border-white/20">
+            <div className="p-1.5 rounded-lg bg-white/20 shadow-[0_0_12px_rgba(255,255,255,0.4)]">
+              <Shield className="h-4 w-4 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]" />
             </div>
-            <span className="drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]">{t("forms.free")}</span>
+            <span className="drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">{t("forms.free")}</span>
           </div>
-          <div className="flex items-center gap-2 text-white font-semibold px-4 py-2 rounded-full bg-white/15 shadow-[0_0_20px_rgba(255,255,255,0.3)] animate-pulse backdrop-blur-sm" style={{ animationDelay: '0.2s' }}>
-            <div className="p-1.5 rounded-lg bg-white/20 shadow-[0_0_12px_rgba(255,255,255,0.5)]">
-              <Lock className="h-4 w-4 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+          <div className="flex items-center gap-2 text-white font-semibold px-4 py-2 rounded-full bg-white/15 shadow-[0_0_20px_rgba(255,255,255,0.25)] animate-pulse backdrop-blur-sm border border-white/20" style={{ animationDelay: '0.2s' }}>
+            <div className="p-1.5 rounded-lg bg-white/20 shadow-[0_0_12px_rgba(255,255,255,0.4)]">
+              <Lock className="h-4 w-4 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]" />
             </div>
-            <span className="drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]">{t("forms.secure")}</span>
+            <span className="drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">{t("forms.secure")}</span>
           </div>
-          <div className="flex items-center gap-2 text-white font-semibold px-4 py-2 rounded-full bg-white/15 shadow-[0_0_20px_rgba(255,255,255,0.3)] animate-pulse backdrop-blur-sm" style={{ animationDelay: '0.4s' }}>
-            <div className="p-1.5 rounded-lg bg-white/20 shadow-[0_0_12px_rgba(255,255,255,0.5)]">
-              <CheckCircle className="h-4 w-4 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+          <div className="flex items-center gap-2 text-white font-semibold px-4 py-2 rounded-full bg-white/15 shadow-[0_0_20px_rgba(255,255,255,0.25)] animate-pulse backdrop-blur-sm border border-white/20" style={{ animationDelay: '0.4s' }}>
+            <div className="p-1.5 rounded-lg bg-white/20 shadow-[0_0_12px_rgba(255,255,255,0.4)]">
+              <CheckCircle className="h-4 w-4 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]" />
             </div>
-            <span className="drop-shadow-[0_0_10px_rgba(255,255,255,0.6)]">{t("forms.noCommitment")}</span>
+            <span className="drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">{t("forms.noCommitment")}</span>
           </div>
         </div>
         
@@ -56,7 +88,7 @@ const FormContainer = ({
         </div>
       </CardHeader>
       
-      <CardContent className="pt-0 px-8 pb-8 text-white">
+      <CardContent className="pt-0 px-8 pb-8 text-white relative z-10">
         {children}
       </CardContent>
     </Card>
