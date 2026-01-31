@@ -74,10 +74,10 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section - Premium & Engaging */}
-      <section className="gradient-optimis pt-6 md:pt-8 lg:pt-10 pb-8 md:pb-10 overflow-visible relative">
+      <section className="gradient-optimis pt-8 md:pt-10 lg:pt-12 pb-6 md:pb-8 overflow-visible relative">
         <div className="container relative">
-          <div className="grid items-start gap-4 lg:grid-cols-2 min-h-[380px] lg:min-h-[420px]">
-            <div className="space-y-4 md:space-y-5 animate-fade-in z-10 relative pt-4 md:pt-6 lg:pt-8">
+          <div className="grid items-start gap-4 lg:grid-cols-2 min-h-[360px] lg:min-h-[400px]">
+            <div className="space-y-5 animate-fade-in z-10 relative pt-4 md:pt-6">
               {/* 5 Gold Stars */}
               <div className="flex gap-1.5 animate-fade-in-delay">
                 {[...Array(5)].map((_, i) => (
@@ -92,7 +92,7 @@ const Index = () => {
               <p className="text-lg text-muted-foreground md:text-xl max-w-lg leading-relaxed">
                 {t('home.heroSubtitle')}
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 pt-1">
                 <Button asChild size="xl" className="animate-fade-in-delay-2">
                   <LocalizedLink to="/assurance-sante">
                     {t('common.compareNow')}
@@ -117,20 +117,20 @@ const Index = () => {
           </div>
         </div>
         
-        {/* Quick Selection Bar - Premium - above mascot */}
-        <div className="container relative z-20 mt-4 lg:mt-2">
-          <div className="bg-background rounded-2xl shadow-premium p-5 md:p-8 border">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        {/* Quick Selection Bar - narrower width */}
+        <div className="container relative z-20 mt-6">
+          <div className="max-w-4xl mx-auto bg-background rounded-2xl shadow-premium p-4 md:p-6 border">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
               {insuranceCards.map((card) => (
                 <LocalizedLink
                   key={card.href}
                   to={card.href}
-                  className="flex items-center gap-3 md:gap-4 p-4 md:p-5 rounded-xl transition-all duration-300 hover:bg-secondary hover:-translate-y-1 hover:shadow-card group"
+                  className="flex items-center gap-3 p-3 md:p-4 rounded-xl transition-all duration-300 hover:bg-secondary hover:-translate-y-1 hover:shadow-card group"
                 >
                   <div className={`${card.color} transition-transform duration-300 group-hover:scale-110`}>
-                    <card.icon className="h-6 w-6 md:h-7 md:w-7" />
+                    <card.icon className="h-5 w-5 md:h-6 md:w-6" />
                   </div>
-                  <span className="font-semibold text-sm md:text-base lg:text-lg text-foreground">
+                  <span className="font-semibold text-sm md:text-base text-foreground">
                     {t(card.titleKey)}
                   </span>
                 </LocalizedLink>
