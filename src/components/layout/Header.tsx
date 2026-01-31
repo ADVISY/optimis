@@ -10,7 +10,8 @@ import {
   Plus,
   Smartphone,
   CreditCard,
-  FileX
+  FileX,
+  Banknote
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -96,6 +97,17 @@ const financesCategories = [
       { labelKey: "megaMenu.prepareRetirement", href: "/blog/la-retraite-en-suisse" },
       { labelKey: "megaMenu.save2700Taxes", href: "/blog/pilier-3a-quand-et-comment-commencer-a-epargner" },
       { labelKey: "megaMenu.save7056Taxes", href: "/3eme-pilier-offres" },
+    ]
+  },
+  { 
+    id: "hypotheque",
+    labelKey: "nav.mortgage", 
+    icon: Banknote,
+    href: "/hypotheque",
+    subLinks: [
+      { labelKey: "megaMenu.compareMortgages", href: "/hypotheque-offres" },
+      { labelKey: "megaMenu.mortgageTypes", href: "/hypotheque" },
+      { labelKey: "megaMenu.currentRates", href: "/hypotheque" },
     ]
   },
 ];

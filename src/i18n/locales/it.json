@@ -43,7 +43,10 @@
     "save200": "Oltre 200 CHF di risparmio",
     "unlimitedWorld": "100% illimitato nel mondo",
     "requestSubsidy": "Richiedi un sussidio",
-    "terminateInsurance": "Disdici la tua assicurazione"
+    "terminateInsurance": "Disdici la tua assicurazione",
+    "compareMortgages": "Confronta i mutui",
+    "mortgageTypes": "Tipi di mutuo",
+    "currentRates": "Tassi attuali"
   },
   "nav": {
     "insurances": "Assicurazioni",
@@ -58,7 +61,8 @@
     "lifeInsurance": "Assicurazione Vita",
     "mobilePackage": "Abbonamento Mobile",
     "subsidyInsurance": "Sussidio Assicurazione",
-    "termination": "Disdetta"
+    "termination": "Disdetta",
+    "mortgage": "Ipoteca"
   },
   "stats": {
     "recommended": "Raccomandato",
