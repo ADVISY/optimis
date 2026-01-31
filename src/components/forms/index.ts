@@ -8,6 +8,8 @@ export { default as SubsidyForm } from './SubsidyForm';
 export { default as TerminationForm } from './TerminationForm';
 export { default as LegalProtectionForm } from './LegalProtectionForm';
 export { default as ComparisonResults } from './ComparisonResults';
+export { default as HealthComparisonResults } from './HealthComparisonResults';
+export { default as ContactOfferModal } from './ContactOfferModal';
 export { default as FormContainer } from './FormContainer';
 export { default as FormStep } from './FormStep';
 export { default as FormNavigation } from './FormNavigation';
