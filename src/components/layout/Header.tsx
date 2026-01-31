@@ -201,7 +201,7 @@ const MegaMenuContent = forwardRef<HTMLDivElement, MegaMenuCategoryProps>(
             <img 
               src={llamaMascot} 
               alt="Optimis Mascot" 
-              className="w-40 h-auto mb-4"
+              className="w-60 h-auto mb-4"
             />
             <p className="text-primary font-semibold text-base mb-2">{t('common.getQuote')}</p>
             <p className="text-foreground font-bold text-base mb-4">{t('common.freeAndNoCommitment')}</p>
