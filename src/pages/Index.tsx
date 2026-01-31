@@ -106,12 +106,12 @@ const Index = () => {
               </div>
             </div>
             
-            {/* Mascot - fully visible, behind the selection bar */}
-            <div className="hidden lg:flex justify-end items-end absolute right-0 xl:right-4 2xl:right-12 bottom-8 z-10">
+            {/* Mascot - large, behind the selection bar */}
+            <div className="hidden lg:flex justify-end items-end absolute right-4 xl:right-8 2xl:right-16 bottom-0 translate-y-16 z-10">
               <img
                 src={mascotPointing}
                 alt="Mascotte Optimis"
-                className="h-[480px] xl:h-[540px] 2xl:h-[600px] w-auto drop-shadow-2xl animate-fade-in"
+                className="h-[520px] xl:h-[600px] 2xl:h-[680px] w-auto drop-shadow-2xl animate-fade-in"
               />
             </div>
           </div>
