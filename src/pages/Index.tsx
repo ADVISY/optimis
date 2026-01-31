@@ -73,11 +73,11 @@ const Index = () => {
 
   return (
     <Layout>
-      {/* Hero Section - Premium & Engaging */}
-      <section className="gradient-optimis pt-8 md:pt-10 lg:pt-12 pb-6 md:pb-8 overflow-visible relative">
-        <div className="container relative">
-          <div className="grid items-start gap-4 lg:grid-cols-2 min-h-[360px] lg:min-h-[400px]">
-            <div className="space-y-5 animate-fade-in z-10 relative pt-4 md:pt-6">
+      {/* Hero Section - Full viewport height to show everything above the fold */}
+      <section className="gradient-optimis min-h-[calc(100vh-6rem)] flex flex-col justify-between overflow-visible relative pb-8">
+        <div className="container relative flex-1 flex items-center">
+          <div className="grid items-center gap-4 lg:grid-cols-2 w-full py-8 lg:py-12">
+            <div className="space-y-5 animate-fade-in z-10 relative">
               {/* 5 Gold Stars */}
               <div className="flex gap-1.5 animate-fade-in-delay">
                 {[...Array(5)].map((_, i) => (
@@ -106,12 +106,12 @@ const Index = () => {
               </div>
             </div>
             
-            {/* Mascot - large, behind the selection bar */}
-            <div className="hidden lg:flex justify-end items-end absolute right-0 xl:right-4 2xl:right-12 bottom-0 translate-y-20 z-10">
+            {/* Mascot - fully visible, behind the selection bar */}
+            <div className="hidden lg:flex justify-end items-end absolute right-0 xl:right-4 2xl:right-12 bottom-8 z-10">
               <img
                 src={mascotPointing}
                 alt="Mascotte Optimis"
-                className="h-[560px] xl:h-[640px] 2xl:h-[720px] w-auto drop-shadow-2xl animate-fade-in"
+                className="h-[480px] xl:h-[540px] 2xl:h-[600px] w-auto drop-shadow-2xl animate-fade-in"
               />
             </div>
           </div>
