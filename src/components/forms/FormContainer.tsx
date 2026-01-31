@@ -22,30 +22,41 @@ const FormContainer = ({
   const { t } = useTranslation();
 
   return (
-    <Card className="w-full max-w-2xl mx-auto shadow-xl border-0 bg-white/95 backdrop-blur">
-      <CardHeader className="space-y-4 pb-4">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Shield className="h-4 w-4 text-primary" />
-          <span>{t("forms.free")}</span>
-          <span className="text-muted-foreground/50">•</span>
-          <Lock className="h-4 w-4 text-primary" />
-          <span>{t("forms.secure")}</span>
-          <span className="text-muted-foreground/50">•</span>
-          <CheckCircle className="h-4 w-4 text-primary" />
-          <span>{t("forms.noCommitment")}</span>
+    <Card className="w-full max-w-2xl mx-auto shadow-premium border-0 bg-background/98 backdrop-blur-md rounded-3xl overflow-hidden">
+      <CardHeader className="space-y-6 pb-6 px-8 pt-8">
+        {/* Trust badges */}
+        <div className="flex flex-wrap items-center gap-4 text-base">
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <div className="p-1.5 rounded-lg bg-primary/10">
+              <Shield className="h-4 w-4 text-primary" />
+            </div>
+            <span className="font-medium">{t("forms.free")}</span>
+          </div>
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <div className="p-1.5 rounded-lg bg-primary/10">
+              <Lock className="h-4 w-4 text-primary" />
+            </div>
+            <span className="font-medium">{t("forms.secure")}</span>
+          </div>
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <div className="p-1.5 rounded-lg bg-primary/10">
+              <CheckCircle className="h-4 w-4 text-primary" />
+            </div>
+            <span className="font-medium">{t("forms.noCommitment")}</span>
+          </div>
         </div>
         
         <FormProgress currentStep={currentStep} totalSteps={totalSteps} />
         
-        <div>
-          <CardTitle className="text-2xl font-bold text-foreground">{title}</CardTitle>
+        <div className="space-y-3">
+          <CardTitle className="text-2xl md:text-3xl font-bold text-foreground leading-tight">{title}</CardTitle>
           {description && (
-            <CardDescription className="text-base mt-2">{description}</CardDescription>
+            <CardDescription className="text-lg text-muted-foreground leading-relaxed">{description}</CardDescription>
           )}
         </div>
       </CardHeader>
       
-      <CardContent className="pt-0">
+      <CardContent className="pt-0 px-8 pb-8">
         {children}
       </CardContent>
     </Card>
