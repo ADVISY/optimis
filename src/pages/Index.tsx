@@ -114,6 +114,28 @@ const Index = () => {
             </div>
           </div>
         </div>
+        
+        {/* Quick Selection Bar */}
+        <div className="container mt-8 md:mt-12">
+          <div className="bg-background rounded-2xl shadow-xl p-4 md:p-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {insuranceCards.map((card) => (
+                <LocalizedLink
+                  key={card.href}
+                  to={card.href}
+                  className="flex items-center gap-3 p-3 md:p-4 rounded-xl transition-all hover:bg-secondary group"
+                >
+                  <div className={`${card.color} transition-transform group-hover:scale-110`}>
+                    <card.icon className="h-6 w-6 md:h-7 md:w-7" />
+                  </div>
+                  <span className="font-medium text-sm md:text-base text-foreground">
+                    {t(card.titleKey)}
+                  </span>
+                </LocalizedLink>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Insurance Selector */}
