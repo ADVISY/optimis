@@ -74,9 +74,9 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="gradient-optimis pt-12 md:pt-16 lg:pt-20 pb-24 md:pb-28 lg:pb-32 overflow-hidden relative">
+      <section className="gradient-optimis pt-12 md:pt-16 lg:pt-20 pb-20 md:pb-24 overflow-visible relative">
         <div className="container relative">
-          <div className="grid items-start gap-8 md:grid-cols-2 min-h-[400px] md:min-h-[500px] lg:min-h-[550px]">
+          <div className="grid items-start gap-8 md:grid-cols-2">
             <div className="space-y-6 animate-fade-in z-10 relative pt-4 md:pt-8">
               {/* 5 Gold Stars */}
               <div className="flex gap-1">
@@ -94,19 +94,19 @@ const Index = () => {
               </p>
             </div>
             
-            {/* Mascot - positioned to be cut by selection bar */}
-            <div className="absolute right-0 bottom-0 translate-y-16 md:translate-y-20 lg:translate-y-24 flex justify-end md:relative md:translate-y-0">
+            {/* Mascot - positioned on top of selection bar */}
+            <div className="hidden md:flex justify-end items-end absolute right-4 lg:right-8 bottom-0 translate-y-8 z-30">
               <img
                 src={mascotPointing}
                 alt="Mascotte Optimis"
-                className="h-[280px] w-auto animate-fade-in md:h-[400px] lg:h-[500px] xl:h-[580px] object-contain object-bottom md:absolute md:right-0 md:bottom-0 md:translate-y-20 lg:translate-y-24"
+                className="h-[380px] lg:h-[480px] xl:h-[550px] w-auto drop-shadow-2xl"
               />
             </div>
           </div>
         </div>
         
-        {/* Quick Selection Bar - Overlapping mascot */}
-        <div className="container relative z-20 mt-4 md:mt-0">
+        {/* Quick Selection Bar */}
+        <div className="container relative z-20 mt-8">
           <div className="bg-background rounded-2xl shadow-xl p-4 md:p-6 border">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
               {insuranceCards.map((card) => (
