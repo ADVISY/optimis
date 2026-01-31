@@ -43,7 +43,10 @@
     "save200": "+ de 200 CHF d'économies",
     "unlimitedWorld": "100% illimité dans le monde",
     "requestSubsidy": "Demander un subside",
-    "terminateInsurance": "Résilier votre assurance"
+    "terminateInsurance": "Résilier votre assurance",
+    "compareMortgages": "Comparer les hypothèques",
+    "mortgageTypes": "Types d'hypothèques",
+    "currentRates": "Taux actuels"
   },
   "nav": {
     "insurances": "Assurances",
@@ -58,7 +61,8 @@
     "lifeInsurance": "Assurance Vie",
     "mobilePackage": "Forfait Mobile",
     "subsidyInsurance": "Subside Assurance",
-    "termination": "Résiliation"
+    "termination": "Résiliation",
+    "mortgage": "Hypothèque"
   },
   "stats": {
     "recommended": "Recommandé",

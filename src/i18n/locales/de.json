@@ -43,7 +43,10 @@
     "save200": "Über 200 CHF Ersparnis",
     "unlimitedWorld": "100% weltweit unbegrenzt",
     "requestSubsidy": "Prämienverbilligung beantragen",
-    "terminateInsurance": "Versicherung kündigen"
+    "terminateInsurance": "Versicherung kündigen",
+    "compareMortgages": "Hypotheken vergleichen",
+    "mortgageTypes": "Hypothekenarten",
+    "currentRates": "Aktuelle Zinssätze"
   },
   "nav": {
     "insurances": "Versicherungen",
@@ -58,7 +61,8 @@
     "lifeInsurance": "Lebensversicherung",
     "mobilePackage": "Mobilfunktarif",
     "subsidyInsurance": "Prämienverbilligung",
-    "termination": "Kündigung"
+    "termination": "Kündigung",
+    "mortgage": "Hypothek"
   },
   "stats": {
     "recommended": "Empfohlen",
