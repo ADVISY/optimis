@@ -22,8 +22,8 @@ const FormContainer = ({
   const { t } = useTranslation();
 
   return (
-    <Card className="w-full max-w-2xl mx-auto shadow-premium border-0 bg-background/98 backdrop-blur-md rounded-3xl overflow-hidden">
-      <CardHeader className="space-y-6 pb-6 px-8 pt-8">
+    <Card className="w-full max-w-3xl mx-auto shadow-premium border-0 bg-background/98 backdrop-blur-md rounded-3xl overflow-hidden min-h-[500px]">
+      <CardHeader className="space-y-6 pb-8 px-8 pt-10">
         {/* Trust badges */}
         <div className="flex flex-wrap items-center gap-4 text-base">
           <div className="flex items-center gap-2 text-muted-foreground">
