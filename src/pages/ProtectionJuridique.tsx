@@ -38,7 +38,7 @@ const ProtectionJuridique = () => {
   ];
 
   const handleCompareClick = () => {
-    navigate(localizedPath("/comparateur/protection-juridique"));
+    navigate(localizedPath("/protection-juridique-landing"));
   };
 
   return (

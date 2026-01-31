@@ -92,10 +92,10 @@ const financesCategories = [
     icon: HeartPulse,
     href: "/assurance-vie",
     subLinks: [
-      { labelKey: "megaMenu.in2Minutes", href: "/comparateur/pilier3" },
+      { labelKey: "megaMenu.in2Minutes", href: "/3eme-pilier-offres" },
       { labelKey: "megaMenu.prepareRetirement", href: "/blog/la-retraite-en-suisse" },
       { labelKey: "megaMenu.save2700Taxes", href: "/blog/pilier-3a-quand-et-comment-commencer-a-epargner" },
-      { labelKey: "megaMenu.save7056Taxes", href: "/comparateur/pilier3" },
+      { labelKey: "megaMenu.save7056Taxes", href: "/3eme-pilier-offres" },
     ]
   },
 ];

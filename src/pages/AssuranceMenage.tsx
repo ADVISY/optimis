@@ -39,7 +39,7 @@ const AssuranceMenage = () => {
   ];
 
   const handleCompareClick = () => {
-    navigate(localizedPath("/comparateur/menage"));
+    navigate(localizedPath("/assurance-menage-landing"));
   };
 
   return (
