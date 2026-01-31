@@ -8,7 +8,7 @@ const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="border-t bg-optimis-green-pastel">
+    <footer className="border-t bg-optimis-green-dark text-white">
       {/* CTA Banner */}
       <div className="container py-12 md:py-16">
         <div className="bg-primary rounded-2xl p-8 md:p-12 text-center text-primary-foreground">
@@ -35,30 +35,30 @@ const Footer = () => {
             <LocalizedLink to="/" className="inline-block transition-transform hover:scale-105">
               <img src={logo} alt="Optimis" className="h-14" />
             </LocalizedLink>
-            <p className="text-base text-muted-foreground leading-relaxed max-w-sm">
+            <p className="text-base text-white/80 leading-relaxed max-w-sm">
               {t('footer.aboutDescription')}
             </p>
             {/* Contact Info */}
             <ul className="space-y-4">
-              <li className="flex items-center gap-3 text-muted-foreground">
-                <div className="p-2 rounded-lg bg-primary/10">
-                  <Phone className="h-5 w-5 text-primary" />
+              <li className="flex items-center gap-3 text-white/80">
+                <div className="p-2 rounded-lg bg-white/10">
+                  <Phone className="h-5 w-5 text-white" />
                 </div>
-                <a href="tel:+41782122360" className="text-base hover:text-primary transition-colors">
+                <a href="tel:+41782122360" className="text-base hover:text-optimis-gold transition-colors">
                   +41 78 212 23 60
                 </a>
               </li>
-              <li className="flex items-center gap-3 text-muted-foreground">
-                <div className="p-2 rounded-lg bg-primary/10">
-                  <Mail className="h-5 w-5 text-primary" />
+              <li className="flex items-center gap-3 text-white/80">
+                <div className="p-2 rounded-lg bg-white/10">
+                  <Mail className="h-5 w-5 text-white" />
                 </div>
-                <a href="mailto:contact@optimis.ch" className="text-base hover:text-primary transition-colors">
+                <a href="mailto:contact@optimis.ch" className="text-base hover:text-optimis-gold transition-colors">
                   contact@optimis.ch
                 </a>
               </li>
-              <li className="flex items-center gap-3 text-muted-foreground">
-                <div className="p-2 rounded-lg bg-primary/10">
-                  <MapPin className="h-5 w-5 text-primary" />
+              <li className="flex items-center gap-3 text-white/80">
+                <div className="p-2 rounded-lg bg-white/10">
+                  <MapPin className="h-5 w-5 text-white" />
                 </div>
                 <span className="text-base">Genève, Suisse</span>
               </li>
@@ -67,12 +67,12 @@ const Footer = () => {
 
           {/* Assurances */}
           <div className="space-y-6">
-            <h3 className="font-bold text-lg text-foreground">{t('nav.insurances')}</h3>
+            <h3 className="font-bold text-lg text-white">{t('nav.insurances')}</h3>
             <ul className="space-y-4">
               <li>
                 <LocalizedLink
                   to="/assurance-voiture"
-                  className="text-base text-muted-foreground transition-all duration-200 hover:text-primary hover:translate-x-1 inline-block"
+                  className="text-base text-white/80 transition-all duration-200 hover:text-optimis-gold hover:translate-x-1 inline-block"
                 >
                   {t('nav.carInsurance')}
                 </LocalizedLink>
@@ -80,7 +80,7 @@ const Footer = () => {
               <li>
                 <LocalizedLink
                   to="/assurance-sante"
-                  className="text-base text-muted-foreground transition-all duration-200 hover:text-primary hover:translate-x-1 inline-block"
+                  className="text-base text-white/80 transition-all duration-200 hover:text-optimis-gold hover:translate-x-1 inline-block"
                 >
                   {t('nav.healthInsurance')}
                 </LocalizedLink>
@@ -88,7 +88,7 @@ const Footer = () => {
               <li>
                 <LocalizedLink
                   to="/protection-juridique"
-                  className="text-base text-muted-foreground transition-all duration-200 hover:text-primary hover:translate-x-1 inline-block"
+                  className="text-base text-white/80 transition-all duration-200 hover:text-optimis-gold hover:translate-x-1 inline-block"
                 >
                   {t('nav.legalProtection')}
                 </LocalizedLink>
@@ -96,7 +96,7 @@ const Footer = () => {
               <li>
                 <LocalizedLink
                   to="/assurance-menage"
-                  className="text-base text-muted-foreground transition-all duration-200 hover:text-primary hover:translate-x-1 inline-block"
+                  className="text-base text-white/80 transition-all duration-200 hover:text-optimis-gold hover:translate-x-1 inline-block"
                 >
                   {t('nav.homeInsurance')}
                 </LocalizedLink>
@@ -104,7 +104,7 @@ const Footer = () => {
               <li>
                 <LocalizedLink
                   to="/assurance-vie"
-                  className="text-base text-muted-foreground transition-all duration-200 hover:text-primary hover:translate-x-1 inline-block"
+                  className="text-base text-white/80 transition-all duration-200 hover:text-optimis-gold hover:translate-x-1 inline-block"
                 >
                   {t('nav.lifeInsurance')}
                 </LocalizedLink>
@@ -112,7 +112,7 @@ const Footer = () => {
               <li>
                 <LocalizedLink
                   to="/hypotheque"
-                  className="text-base text-muted-foreground transition-all duration-200 hover:text-primary hover:translate-x-1 inline-block"
+                  className="text-base text-white/80 transition-all duration-200 hover:text-optimis-gold hover:translate-x-1 inline-block"
                 >
                   {t('services.mortgage')}
                 </LocalizedLink>
@@ -122,12 +122,12 @@ const Footer = () => {
 
           {/* Services */}
           <div className="space-y-6">
-            <h3 className="font-bold text-lg text-foreground">{t('nav.services')}</h3>
+            <h3 className="font-bold text-lg text-white">{t('nav.services')}</h3>
             <ul className="space-y-4">
               <li>
                 <LocalizedLink
                   to="/forfait-mobile"
-                  className="text-base text-muted-foreground transition-all duration-200 hover:text-primary hover:translate-x-1 inline-block"
+                  className="text-base text-white/80 transition-all duration-200 hover:text-optimis-gold hover:translate-x-1 inline-block"
                 >
                   {t('nav.mobilePackage')}
                 </LocalizedLink>
@@ -135,7 +135,7 @@ const Footer = () => {
               <li>
                 <LocalizedLink
                   to="/subside-assurance-maladie"
-                  className="text-base text-muted-foreground transition-all duration-200 hover:text-primary hover:translate-x-1 inline-block"
+                  className="text-base text-white/80 transition-all duration-200 hover:text-optimis-gold hover:translate-x-1 inline-block"
                 >
                   {t('nav.subsidyInsurance')}
                 </LocalizedLink>
@@ -143,7 +143,7 @@ const Footer = () => {
               <li>
                 <LocalizedLink
                   to="/resiliation"
-                  className="text-base text-muted-foreground transition-all duration-200 hover:text-primary hover:translate-x-1 inline-block"
+                  className="text-base text-white/80 transition-all duration-200 hover:text-optimis-gold hover:translate-x-1 inline-block"
                 >
                   {t('nav.termination')}
                 </LocalizedLink>
@@ -153,12 +153,12 @@ const Footer = () => {
 
           {/* Legal */}
           <div className="space-y-6">
-            <h3 className="font-bold text-lg text-foreground">{t('footer.legal')}</h3>
+            <h3 className="font-bold text-lg text-white">{t('footer.legal')}</h3>
             <ul className="space-y-4">
               <li>
                 <LocalizedLink
                   to="/politique-confidentialite"
-                  className="text-base text-muted-foreground transition-all duration-200 hover:text-primary hover:translate-x-1 inline-block"
+                  className="text-base text-white/80 transition-all duration-200 hover:text-optimis-gold hover:translate-x-1 inline-block"
                 >
                   {t('footer.privacyPolicy')}
                 </LocalizedLink>
@@ -166,7 +166,7 @@ const Footer = () => {
               <li>
                 <LocalizedLink
                   to="/mentions-legales"
-                  className="text-base text-muted-foreground transition-all duration-200 hover:text-primary hover:translate-x-1 inline-block"
+                  className="text-base text-white/80 transition-all duration-200 hover:text-optimis-gold hover:translate-x-1 inline-block"
                 >
                   {t('footer.legalNotice')}
                 </LocalizedLink>
@@ -174,7 +174,7 @@ const Footer = () => {
               <li>
                 <LocalizedLink
                   to="/cgu"
-                  className="text-base text-muted-foreground transition-all duration-200 hover:text-primary hover:translate-x-1 inline-block"
+                  className="text-base text-white/80 transition-all duration-200 hover:text-optimis-gold hover:translate-x-1 inline-block"
                 >
                   {t('footer.termsOfService')}
                 </LocalizedLink>
@@ -182,7 +182,7 @@ const Footer = () => {
               <li>
                 <LocalizedLink
                   to="/blog"
-                  className="text-base text-muted-foreground transition-all duration-200 hover:text-primary hover:translate-x-1 inline-block"
+                  className="text-base text-white/80 transition-all duration-200 hover:text-optimis-gold hover:translate-x-1 inline-block"
                 >
                   {t('nav.blog')}
                 </LocalizedLink>
@@ -192,11 +192,11 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="mt-16 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-base text-muted-foreground">
+        <div className="mt-16 pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-base text-white/80">
             © {new Date().getFullYear()} Optimis. {t('footer.allRightsReserved')}
           </p>
-          <p className="text-sm text-muted-foreground/70">
+          <p className="text-sm text-white/60">
             🇨🇭 {t('footer.madeInSwitzerland', { defaultValue: 'Conçu avec ❤️ en Suisse' })}
           </p>
         </div>

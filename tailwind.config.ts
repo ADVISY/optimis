@@ -87,6 +87,7 @@ export default {
           green: "hsl(var(--optimis-green))",
           "green-light": "hsl(var(--optimis-green-light))",
           "green-pastel": "hsl(var(--optimis-green-pastel))",
+          "green-dark": "hsl(var(--optimis-green-dark))",
           gold: "hsl(var(--optimis-gold))",
         },
       },
