@@ -30,7 +30,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import LocalizedLink from "@/components/LocalizedLink";
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/logo-header.svg";
 import llamaMascot from "@/assets/llama-mascot.png";
 
 // Assurances menu data
