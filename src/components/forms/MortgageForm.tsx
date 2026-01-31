@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/select";
 import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { mockMortgageOffers, InsuranceOffer } from "@/data/mockInsuranceData";
+import { Lock, User, Phone } from "lucide-react";
 
 interface MortgageFormData {
   projectType: string;
@@ -37,7 +38,7 @@ interface MortgageFormData {
   phone: string;
 }
 
-const TOTAL_STEPS = 4;
+const TOTAL_STEPS = 5;
 
 const MortgageForm = () => {
   const { t, i18n } = useTranslation();
@@ -149,9 +150,9 @@ const MortgageForm = () => {
                 { value: "renewal", label: t("forms.mortgage.projects.renewal") },
                 { value: "refinancing", label: t("forms.mortgage.projects.refinancing") },
               ].map((proj) => (
-                <div key={proj.value} className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+                <div key={proj.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
                   <RadioGroupItem value={proj.value} id={proj.value} />
-                  <Label htmlFor={proj.value} className="cursor-pointer flex-1">
+                  <Label htmlFor={proj.value} className="cursor-pointer flex-1 text-lg">
                     {proj.label}
                   </Label>
                 </div>
@@ -164,7 +165,7 @@ const MortgageForm = () => {
               value={formData.propertyType}
               onValueChange={(value) => updateFormData({ propertyType: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.mortgage.selectPropertyType")} />
               </SelectTrigger>
               <SelectContent>
@@ -188,6 +189,7 @@ const MortgageForm = () => {
               value={formData.propertyValue}
               onChange={(e) => updateFormData({ propertyValue: e.target.value })}
               placeholder="CHF 800'000"
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
@@ -196,7 +198,7 @@ const MortgageForm = () => {
               value={formData.canton}
               onValueChange={(value) => updateFormData({ canton: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
               </SelectTrigger>
               <SelectContent>
@@ -215,6 +217,7 @@ const MortgageForm = () => {
               value={formData.commune}
               onChange={(e) => updateFormData({ commune: e.target.value })}
               placeholder="Lausanne, Genève..."
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
@@ -224,13 +227,13 @@ const MortgageForm = () => {
               onValueChange={(value) => updateFormData({ numberOfBorrowers: value })}
               className="flex gap-4"
             >
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
                 <RadioGroupItem value="1" id="borrowers-1" />
-                <Label htmlFor="borrowers-1" className="cursor-pointer">1 {t("forms.mortgage.person")}</Label>
+                <Label htmlFor="borrowers-1" className="cursor-pointer text-lg">1 {t("forms.mortgage.person")}</Label>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
                 <RadioGroupItem value="2" id="borrowers-2" />
-                <Label htmlFor="borrowers-2" className="cursor-pointer">2 {t("forms.mortgage.persons")}</Label>
+                <Label htmlFor="borrowers-2" className="cursor-pointer text-lg">2 {t("forms.mortgage.persons")}</Label>
               </div>
             </RadioGroup>
           </FormFieldWrapper>
@@ -245,7 +248,7 @@ const MortgageForm = () => {
               value={formData.professionalStatus}
               onValueChange={(value) => updateFormData({ professionalStatus: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectStatus")} />
               </SelectTrigger>
               <SelectContent>
@@ -262,7 +265,7 @@ const MortgageForm = () => {
               value={formData.incomeRange}
               onValueChange={(value) => updateFormData({ incomeRange: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectIncome")} />
               </SelectTrigger>
               <SelectContent>
@@ -280,7 +283,7 @@ const MortgageForm = () => {
               value={formData.ownFundsRange}
               onValueChange={(value) => updateFormData({ ownFundsRange: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.mortgage.selectOwnFunds")} />
               </SelectTrigger>
               <SelectContent>
@@ -294,15 +297,24 @@ const MortgageForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 4: Contact */}
+      {/* Step 4: Identity */}
       <FormStep isActive={currentStep === 4}>
-        <div className="space-y-4">
+        <div className="space-y-6">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+              <User className="h-8 w-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold">{t("forms.contact.almostDone")}</h3>
+            <p className="text-muted-foreground">{t("forms.contact.nameStepDescription")}</p>
+          </div>
+
           <div className="grid grid-cols-2 gap-4">
             <FormFieldWrapper label={t("forms.contact.firstName")} htmlFor="firstName" required>
               <Input
                 id="firstName"
                 value={formData.firstName}
                 onChange={(e) => updateFormData({ firstName: e.target.value })}
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
             <FormFieldWrapper label={t("forms.contact.lastName")} htmlFor="lastName" required>
@@ -310,8 +322,22 @@ const MortgageForm = () => {
                 id="lastName"
                 value={formData.lastName}
                 onChange={(e) => updateFormData({ lastName: e.target.value })}
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
+          </div>
+        </div>
+      </FormStep>
+
+      {/* Step 5: Contact */}
+      <FormStep isActive={currentStep === 5}>
+        <div className="space-y-6">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+              <Phone className="h-8 w-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold">{t("forms.contact.contactStepTitle")}</h3>
+            <p className="text-muted-foreground">{t("forms.contact.contactStepDescription")}</p>
           </div>
 
           <FormFieldWrapper label={t("forms.contact.email")} htmlFor="email" required>
@@ -320,6 +346,7 @@ const MortgageForm = () => {
               type="email"
               value={formData.email}
               onChange={(e) => updateFormData({ email: e.target.value })}
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
@@ -330,8 +357,14 @@ const MortgageForm = () => {
               value={formData.phone}
               onChange={(e) => updateFormData({ phone: e.target.value })}
               placeholder="+41 79 123 45 67"
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
+
+          <div className="flex items-center gap-2 p-4 bg-muted/50 rounded-lg">
+            <Lock className="h-5 w-5 text-muted-foreground flex-shrink-0" />
+            <p className="text-sm text-muted-foreground">{t("forms.contact.privacyNote")}</p>
+          </div>
         </div>
       </FormStep>
 

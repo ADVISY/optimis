@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/select";
 import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle, Download, FileText } from "lucide-react";
+import { CheckCircle, Download, FileText, Lock, User, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface SubsidyFormData {
@@ -35,7 +35,7 @@ interface SubsidyFormData {
   phone: string;
 }
 
-const TOTAL_STEPS = 3;
+const TOTAL_STEPS = 4;
 
 const SubsidyForm = () => {
   const { t, i18n } = useTranslation();
@@ -157,7 +157,7 @@ const SubsidyForm = () => {
               value={formData.canton}
               onValueChange={(value) => updateFormData({ canton: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
               </SelectTrigger>
               <SelectContent>
@@ -176,6 +176,7 @@ const SubsidyForm = () => {
               value={formData.commune}
               onChange={(e) => updateFormData({ commune: e.target.value })}
               placeholder="Lausanne, Genève..."
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
@@ -185,7 +186,7 @@ const SubsidyForm = () => {
                 value={formData.adultsCount}
                 onValueChange={(value) => updateFormData({ adultsCount: value })}
               >
-                <SelectTrigger>
+                <SelectTrigger className="h-14 text-lg">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -201,7 +202,7 @@ const SubsidyForm = () => {
                 value={formData.childrenCount}
                 onValueChange={(value) => updateFormData({ childrenCount: value })}
               >
-                <SelectTrigger>
+                <SelectTrigger className="h-14 text-lg">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -223,7 +224,7 @@ const SubsidyForm = () => {
               value={formData.incomeRange}
               onValueChange={(value) => updateFormData({ incomeRange: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.subsidy.selectIncome")} />
               </SelectTrigger>
               <SelectContent>
@@ -249,9 +250,9 @@ const SubsidyForm = () => {
                 { value: "student", label: t("forms.subsidy.situations.student") },
                 { value: "unemployed", label: t("forms.subsidy.situations.unemployed") },
               ].map((situation) => (
-                <div key={situation.value} className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+                <div key={situation.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
                   <RadioGroupItem value={situation.value} id={situation.value} />
-                  <Label htmlFor={situation.value} className="cursor-pointer flex-1">
+                  <Label htmlFor={situation.value} className="cursor-pointer flex-1 text-lg">
                     {situation.label}
                   </Label>
                 </div>
@@ -261,15 +262,24 @@ const SubsidyForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 3: Contact */}
+      {/* Step 3: Identity */}
       <FormStep isActive={currentStep === 3}>
-        <div className="space-y-4">
+        <div className="space-y-6">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+              <User className="h-8 w-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold">{t("forms.contact.almostDone")}</h3>
+            <p className="text-muted-foreground">{t("forms.contact.nameStepDescription")}</p>
+          </div>
+
           <div className="grid grid-cols-2 gap-4">
             <FormFieldWrapper label={t("forms.contact.firstName")} htmlFor="firstName" required>
               <Input
                 id="firstName"
                 value={formData.firstName}
                 onChange={(e) => updateFormData({ firstName: e.target.value })}
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
             <FormFieldWrapper label={t("forms.contact.lastName")} htmlFor="lastName" required>
@@ -277,8 +287,22 @@ const SubsidyForm = () => {
                 id="lastName"
                 value={formData.lastName}
                 onChange={(e) => updateFormData({ lastName: e.target.value })}
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
+          </div>
+        </div>
+      </FormStep>
+
+      {/* Step 4: Contact */}
+      <FormStep isActive={currentStep === 4}>
+        <div className="space-y-6">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+              <Phone className="h-8 w-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold">{t("forms.contact.contactStepTitle")}</h3>
+            <p className="text-muted-foreground">{t("forms.contact.contactStepDescription")}</p>
           </div>
 
           <FormFieldWrapper label={t("forms.contact.email")} htmlFor="email" required>
@@ -287,6 +311,7 @@ const SubsidyForm = () => {
               type="email"
               value={formData.email}
               onChange={(e) => updateFormData({ email: e.target.value })}
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
@@ -297,8 +322,14 @@ const SubsidyForm = () => {
               value={formData.phone}
               onChange={(e) => updateFormData({ phone: e.target.value })}
               placeholder="+41 79 123 45 67"
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
+
+          <div className="flex items-center gap-2 p-4 bg-muted/50 rounded-lg">
+            <Lock className="h-5 w-5 text-muted-foreground flex-shrink-0" />
+            <p className="text-sm text-muted-foreground">{t("forms.contact.privacyNote")}</p>
+          </div>
         </div>
       </FormStep>
 

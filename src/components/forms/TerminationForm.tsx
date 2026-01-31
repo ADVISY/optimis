@@ -12,7 +12,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { CalendarIcon, Download, CheckCircle, FileText } from "lucide-react";
+import { CalendarIcon, Download, CheckCircle, FileText, Lock, User, Phone } from "lucide-react";
 import { format } from "date-fns";
 import { fr, de, it } from "date-fns/locale";
 import { cn } from "@/lib/utils";
@@ -32,7 +32,7 @@ interface TerminationFormData {
   city: string;
 }
 
-const TOTAL_STEPS = 3;
+const TOTAL_STEPS = 4;
 
 const TerminationForm = () => {
   const { t, i18n } = useTranslation();
@@ -167,9 +167,9 @@ const TerminationForm = () => {
                 { value: "life", label: t("forms.termination.types.life") },
                 { value: "other", label: t("forms.termination.types.other") },
               ].map((type) => (
-                <div key={type.value} className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-muted/50">
+                <div key={type.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
                   <RadioGroupItem value={type.value} id={type.value} />
-                  <Label htmlFor={type.value} className="cursor-pointer flex-1">
+                  <Label htmlFor={type.value} className="cursor-pointer flex-1 text-lg">
                     {type.label}
                   </Label>
                 </div>
@@ -183,6 +183,7 @@ const TerminationForm = () => {
               value={formData.currentInsurer}
               onChange={(e) => updateFormData({ currentInsurer: e.target.value })}
               placeholder="CSS, Helsana, La Mobilière..."
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
@@ -192,6 +193,7 @@ const TerminationForm = () => {
               value={formData.policyNumber}
               onChange={(e) => updateFormData({ policyNumber: e.target.value })}
               placeholder="12345678"
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
@@ -201,7 +203,7 @@ const TerminationForm = () => {
                 <Button
                   variant="outline"
                   className={cn(
-                    "w-full justify-start text-left font-normal",
+                    "w-full h-14 justify-start text-left font-normal text-lg",
                     !formData.terminationDate && "text-muted-foreground"
                   )}
                 >
@@ -226,15 +228,24 @@ const TerminationForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 2: Personal Info */}
+      {/* Step 2: Identity & Address */}
       <FormStep isActive={currentStep === 2}>
-        <div className="space-y-4">
+        <div className="space-y-6">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+              <User className="h-8 w-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold">{t("forms.contact.almostDone")}</h3>
+            <p className="text-muted-foreground">{t("forms.contact.nameStepDescription")}</p>
+          </div>
+
           <div className="grid grid-cols-2 gap-4">
             <FormFieldWrapper label={t("forms.contact.firstName")} htmlFor="firstName" required>
               <Input
                 id="firstName"
                 value={formData.firstName}
                 onChange={(e) => updateFormData({ firstName: e.target.value })}
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
             <FormFieldWrapper label={t("forms.contact.lastName")} htmlFor="lastName" required>
@@ -242,6 +253,7 @@ const TerminationForm = () => {
                 id="lastName"
                 value={formData.lastName}
                 onChange={(e) => updateFormData({ lastName: e.target.value })}
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
           </div>
@@ -252,6 +264,7 @@ const TerminationForm = () => {
               value={formData.address}
               onChange={(e) => updateFormData({ address: e.target.value })}
               placeholder="Rue de Lausanne 10"
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
@@ -263,6 +276,7 @@ const TerminationForm = () => {
                 onChange={(e) => updateFormData({ postalCode: e.target.value })}
                 placeholder="1000"
                 maxLength={4}
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
             <div className="col-span-2">
@@ -272,6 +286,7 @@ const TerminationForm = () => {
                   value={formData.city}
                   onChange={(e) => updateFormData({ city: e.target.value })}
                   placeholder="Lausanne"
+                  className="h-14 text-lg"
                 />
               </FormFieldWrapper>
             </div>
@@ -281,13 +296,22 @@ const TerminationForm = () => {
 
       {/* Step 3: Contact */}
       <FormStep isActive={currentStep === 3}>
-        <div className="space-y-4">
+        <div className="space-y-6">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+              <Phone className="h-8 w-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold">{t("forms.contact.contactStepTitle")}</h3>
+            <p className="text-muted-foreground">{t("forms.contact.contactStepDescription")}</p>
+          </div>
+
           <FormFieldWrapper label={t("forms.contact.email")} htmlFor="email" required>
             <Input
               id="email"
               type="email"
               value={formData.email}
               onChange={(e) => updateFormData({ email: e.target.value })}
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
@@ -298,9 +322,20 @@ const TerminationForm = () => {
               value={formData.phone}
               onChange={(e) => updateFormData({ phone: e.target.value })}
               placeholder="+41 79 123 45 67"
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
+          <div className="flex items-center gap-2 p-4 bg-muted/50 rounded-lg">
+            <Lock className="h-5 w-5 text-muted-foreground flex-shrink-0" />
+            <p className="text-sm text-muted-foreground">{t("forms.contact.privacyNote")}</p>
+          </div>
+        </div>
+      </FormStep>
+
+      {/* Step 4: Confirmation */}
+      <FormStep isActive={currentStep === 4}>
+        <div className="space-y-4">
           <div className="bg-muted/50 p-4 rounded-lg">
             <p className="text-sm text-muted-foreground">
               {t("forms.termination.generateNote")}

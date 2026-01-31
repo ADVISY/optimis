@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/select";
 import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { mockLegalProtectionOffers, InsuranceOffer } from "@/data/mockInsuranceData";
+import { Lock, User, Phone } from "lucide-react";
 
 interface ProfessionalInsuranceFormData {
   insuranceTypes: {
@@ -42,7 +43,7 @@ interface ProfessionalInsuranceFormData {
   message: string;
 }
 
-const TOTAL_STEPS = 4;
+const TOTAL_STEPS = 5;
 
 const ProfessionalInsuranceForm = () => {
   const { t, i18n } = useTranslation();
@@ -158,7 +159,7 @@ const ProfessionalInsuranceForm = () => {
             { key: "legalProtection", label: t("forms.professionalInsurance.types.legalProtection") },
             { key: "multiRisk", label: t("forms.professionalInsurance.types.multiRisk") },
           ].map((type) => (
-            <div key={type.key} className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-muted/50">
+            <div key={type.key} className="flex items-center space-x-3 p-4 border rounded-lg hover:bg-muted/50">
               <Checkbox
                 id={type.key}
                 checked={formData.insuranceTypes[type.key as keyof typeof formData.insuranceTypes]}
@@ -168,7 +169,7 @@ const ProfessionalInsuranceForm = () => {
                   })
                 }
               />
-              <Label htmlFor={type.key} className="cursor-pointer flex-1">
+              <Label htmlFor={type.key} className="cursor-pointer flex-1 text-lg">
                 {type.label}
               </Label>
             </div>
@@ -185,6 +186,7 @@ const ProfessionalInsuranceForm = () => {
               value={formData.activityType}
               onChange={(e) => updateFormData({ activityType: e.target.value })}
               placeholder={t("forms.professionalInsurance.activityPlaceholder")}
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
@@ -193,7 +195,7 @@ const ProfessionalInsuranceForm = () => {
               value={formData.legalForm}
               onValueChange={(value) => updateFormData({ legalForm: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.professionalInsurance.selectLegalForm")} />
               </SelectTrigger>
               <SelectContent>
@@ -210,7 +212,7 @@ const ProfessionalInsuranceForm = () => {
               value={formData.employeesCount}
               onValueChange={(value) => updateFormData({ employeesCount: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.professionalInsurance.selectEmployees")} />
               </SelectTrigger>
               <SelectContent>
@@ -228,7 +230,7 @@ const ProfessionalInsuranceForm = () => {
               value={formData.canton}
               onValueChange={(value) => updateFormData({ canton: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
               </SelectTrigger>
               <SelectContent>
@@ -243,15 +245,24 @@ const ProfessionalInsuranceForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 3: Contact */}
+      {/* Step 3: Identity */}
       <FormStep isActive={currentStep === 3}>
-        <div className="space-y-4">
+        <div className="space-y-6">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+              <User className="h-8 w-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold">{t("forms.contact.almostDone")}</h3>
+            <p className="text-muted-foreground">{t("forms.contact.nameStepDescription")}</p>
+          </div>
+
           <div className="grid grid-cols-2 gap-4">
             <FormFieldWrapper label={t("forms.contact.firstName")} htmlFor="firstName" required>
               <Input
                 id="firstName"
                 value={formData.firstName}
                 onChange={(e) => updateFormData({ firstName: e.target.value })}
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
             <FormFieldWrapper label={t("forms.contact.lastName")} htmlFor="lastName" required>
@@ -259,8 +270,22 @@ const ProfessionalInsuranceForm = () => {
                 id="lastName"
                 value={formData.lastName}
                 onChange={(e) => updateFormData({ lastName: e.target.value })}
+                className="h-14 text-lg"
               />
             </FormFieldWrapper>
+          </div>
+        </div>
+      </FormStep>
+
+      {/* Step 4: Contact */}
+      <FormStep isActive={currentStep === 4}>
+        <div className="space-y-6">
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+              <Phone className="h-8 w-8 text-primary" />
+            </div>
+            <h3 className="text-xl font-semibold">{t("forms.contact.contactStepTitle")}</h3>
+            <p className="text-muted-foreground">{t("forms.contact.contactStepDescription")}</p>
           </div>
 
           <FormFieldWrapper label={t("forms.contact.email")} htmlFor="email" required>
@@ -269,6 +294,7 @@ const ProfessionalInsuranceForm = () => {
               type="email"
               value={formData.email}
               onChange={(e) => updateFormData({ email: e.target.value })}
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
 
@@ -279,13 +305,19 @@ const ProfessionalInsuranceForm = () => {
               value={formData.phone}
               onChange={(e) => updateFormData({ phone: e.target.value })}
               placeholder="+41 79 123 45 67"
+              className="h-14 text-lg"
             />
           </FormFieldWrapper>
+
+          <div className="flex items-center gap-2 p-4 bg-muted/50 rounded-lg">
+            <Lock className="h-5 w-5 text-muted-foreground flex-shrink-0" />
+            <p className="text-sm text-muted-foreground">{t("forms.contact.privacyNote")}</p>
+          </div>
         </div>
       </FormStep>
 
-      {/* Step 4: Message */}
-      <FormStep isActive={currentStep === 4}>
+      {/* Step 5: Message */}
+      <FormStep isActive={currentStep === 5}>
         <div className="space-y-4">
           <FormFieldWrapper label={t("forms.professionalInsurance.message")} htmlFor="message">
             <Textarea
@@ -294,6 +326,7 @@ const ProfessionalInsuranceForm = () => {
               onChange={(e) => updateFormData({ message: e.target.value })}
               placeholder={t("forms.professionalInsurance.messagePlaceholder")}
               rows={5}
+              className="text-lg"
             />
           </FormFieldWrapper>
         </div>
