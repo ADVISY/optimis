@@ -7407,6 +7407,888 @@ const rawBlogPosts: BlogPost[] = [
     image: "",
     metaDescription: "Guide pratique pour immatriculer votre véhicule en Suisse : documents et démarches.",
   },
+  // ==================== BATCH 8 - Assurance vie, ménage, AVS ====================
+  {
+    id: "5067",
+    slug: "contrat-d-assurance-vie",
+    title: "C'est quoi un contrat d'assurance vie ?",
+    excerpt: "Comprendre le contrat d'assurance vie : avantages fiscaux, clauses bénéficiaires, démarches de souscription et résiliation.",
+    content: `<h2>Comprendre le contrat d'assurance vie en Suisse</h2>
+
+<p>L'assurance vie est un outil essentiel pour protéger vos proches et préparer votre avenir financier. Découvrez les spécificités du contrat d'assurance vie en Suisse.</p>
+
+<h3>Qu'est-ce qu'un contrat d'assurance vie ?</h3>
+
+<p>Un contrat d'assurance vie est un accord entre un souscripteur et un assureur. L'assureur s'engage à verser un capital ou une rente à un bénéficiaire désigné, en cas de décès de l'assuré ou à une échéance donnée.</p>
+
+<h3>Les différents types de contrats</h3>
+
+<ul>
+<li><strong>Assurance vie en cas de décès</strong> : Le capital est versé aux bénéficiaires au décès de l'assuré</li>
+<li><strong>Assurance vie en cas de vie</strong> : Le capital est versé à l'assuré s'il est toujours en vie à l'échéance</li>
+<li><strong>Assurance vie mixte</strong> : Combine les deux garanties</li>
+</ul>
+
+<h3>Pilier 3a vs Pilier 3b</h3>
+
+<p>En Suisse, l'assurance vie peut être souscrite dans le cadre de la prévoyance :</p>
+
+<ul>
+<li><strong>Pilier 3a (prévoyance liée)</strong> : Avantages fiscaux importants, mais conditions strictes de retrait</li>
+<li><strong>Pilier 3b (prévoyance libre)</strong> : Plus de flexibilité, fiscalité variable selon les cantons</li>
+</ul>
+
+<h3>Les avantages fiscaux</h3>
+
+<p>Les avantages fiscaux varient selon le canton de résidence :</p>
+
+<ul>
+<li>Les conjoints survivants et enfants bénéficient souvent d'une exonération totale</li>
+<li>Pour les bénéficiaires plus éloignés, les droits de succession sont plus élevés</li>
+<li>Le Pilier 3a est généralement exonéré d'impôt sur les successions</li>
+</ul>
+
+<h3>La clause bénéficiaire</h3>
+
+<p>Le souscripteur peut désigner un ou plusieurs bénéficiaires par :</p>
+
+<ul>
+<li>Mention dans le contrat</li>
+<li>Testament</li>
+<li>Lettre adressée à l'assureur</li>
+</ul>
+
+<p>Cette désignation peut être modifiée à tout moment, sauf si le bénéficiaire accepte son statut.</p>
+
+<h3>Résiliation du contrat</h3>
+
+<p>Un délai légal de 30 jours permet de renoncer à un contrat sans frais. Pour résilier après ce délai, envoyez une lettre recommandée à l'assureur.</p>
+
+<p><a href="/fr/3eme-pilier-offres">Comparez les offres d'assurance vie sur Optimis</a></p>`,
+    category: "Assurance vie",
+    categorySlug: "assurance-vie",
+    date: "2024-11-28",
+    readTime: 5,
+    image: "",
+    metaDescription: "Comprendre le contrat d'assurance vie : avantages fiscaux, clauses bénéficiaires, démarches de souscription et résiliation.",
+  },
+  {
+    id: "5071",
+    slug: "meilleure-assurance-vie-en-ligne",
+    title: "Les meilleures assurances vie en ligne",
+    excerpt: "Les assurances vie en ligne séduisent grâce à leurs frais réduits, leur flexibilité et des performances souvent supérieures.",
+    content: `<h2>Pourquoi choisir une assurance vie en ligne ?</h2>
+
+<p>Les assurances vie en ligne offrent une alternative moderne et accessible aux contrats classiques.</p>
+
+<h3>Avantages des contrats en ligne</h3>
+
+<ul>
+<li><strong>Frais réduits</strong> : Moins de frais sur les versements et la gestion</li>
+<li><strong>Accessibilité</strong> : Souvent accessibles dès 100 CHF</li>
+<li><strong>Souplesse</strong> : Gestion autonome ou pilotée</li>
+<li><strong>Choix élargi</strong> : Large gamme de supports financiers (SCPI, OPCI, ETF)</li>
+</ul>
+
+<h3>Comparatif des meilleures offres</h3>
+
+<h4>BforBank (Spirica)</h4>
+<ul>
+<li>Dolcea Vie : +1,65 %</li>
+<li>Euro Allocation Long Terme 2 : +2,40 %</li>
+<li>Minimum 25 % en unités de compte</li>
+</ul>
+
+<h4>Boursorama Vie (Generali)</h4>
+<ul>
+<li>Fonds Euro Exclusif : +1,55 %</li>
+<li>Gestion pilotée dès 300 CHF</li>
+<li>Plus de 200 supports dont 39 ETF</li>
+</ul>
+
+<h4>Darjeeling (Swisslife)</h4>
+<ul>
+<li>Rendement jusqu'à +3 % avec bonus</li>
+<li>Plus de 1 000 supports disponibles</li>
+<li>56 ETF et 18 supports immobiliers</li>
+</ul>
+
+<h4>Fortuneo Vie (Suravenir)</h4>
+<ul>
+<li>Suravenir Rendement : +1,60 %</li>
+<li>Suravenir Opportunités : +2,40 %</li>
+<li>Conditions d'investissement en UC : 30-50 %</li>
+</ul>
+
+<h3>Comment choisir ?</h3>
+
+<p>Critères à prendre en compte :</p>
+
+<ul>
+<li>Les frais de gestion et d'entrée</li>
+<li>La diversité des supports</li>
+<li>Les options de gestion (libre ou pilotée)</li>
+<li>Le rendement du fonds euros</li>
+</ul>
+
+<p><a href="/fr/3eme-pilier-offres">Comparez les assurances vie sur Optimis</a></p>`,
+    category: "Assurance vie",
+    categorySlug: "assurance-vie",
+    date: "2024-11-28",
+    readTime: 6,
+    image: "",
+    metaDescription: "Découvrez les meilleures assurances vie en ligne : frais réduits, rendements compétitifs et gestion flexible.",
+  },
+  {
+    id: "5351",
+    slug: "assurance-menage-rc",
+    title: "Assurance RC ménage : tout savoir",
+    excerpt: "Découvrez comment l'assurance ménage RC protège vos biens et votre responsabilité civile en Suisse.",
+    content: `<h2>L'assurance ménage RC en Suisse</h2>
+
+<p>L'assurance ménage et responsabilité civile (RC) est essentielle pour protéger vos biens et vous couvrir en cas de dommages causés à des tiers.</p>
+
+<h3>Qu'est-ce que l'assurance ménage ?</h3>
+
+<p>L'assurance ménage couvre vos biens personnels contre les risques suivants :</p>
+
+<ul>
+<li><strong>Incendie</strong> : Dommages causés par le feu</li>
+<li><strong>Vol</strong> : Cambriolage et effraction</li>
+<li><strong>Dégâts d'eau</strong> : Fuites, inondations</li>
+<li><strong>Événements naturels</strong> : Grêle, tempête, neige</li>
+<li><strong>Bris de glace</strong> : Fenêtres, miroirs</li>
+</ul>
+
+<h3>La responsabilité civile (RC) ménage</h3>
+
+<p>La RC couvre les dommages que vous pourriez causer à autrui :</p>
+
+<ul>
+<li>À l'intérieur de votre domicile</li>
+<li>En dehors de votre domicile</li>
+<li>Dommages causés par vos enfants</li>
+<li>Dommages causés par vos animaux</li>
+</ul>
+
+<h3>L'inventaire du ménage</h3>
+
+<p>L'inventaire est une liste complète de tous vos biens. Il détermine le montant de la couverture nécessaire.</p>
+
+<h4>Que doit inclure l'inventaire ?</h4>
+
+<ul>
+<li>Meubles et électroménager</li>
+<li>Vêtements et objets personnels</li>
+<li>Appareils électroniques</li>
+<li>Objets de valeur (bijoux, œuvres d'art)</li>
+</ul>
+
+<h3>Comment souscrire ?</h3>
+
+<ol>
+<li><strong>Évaluation des besoins</strong> : Estimez la valeur de vos biens</li>
+<li><strong>Comparaison des offres</strong> : Comparez les garanties et les primes</li>
+<li><strong>Souscription</strong> : Signez le contrat et déclarez votre inventaire</li>
+</ol>
+
+<p><a href="/fr/assurance-menage-landing">Comparez les assurances ménage sur Optimis</a></p>`,
+    category: "Assurance ménage",
+    categorySlug: "assurance-menage",
+    date: "2025-02-23",
+    readTime: 8,
+    image: "",
+    metaDescription: "Découvrez comment l'assurance ménage RC protège vos biens et votre responsabilité. Comparez les meilleures offres en Suisse.",
+  },
+  {
+    id: "5354",
+    slug: "assurance-inventaire-menage",
+    title: "Assurance inventaire ménage : tout ce que vous devez savoir",
+    excerpt: "L'assurance inventaire ménage protège vos biens et garantit leur remplacement en cas de sinistre.",
+    content: `<h2>Pourquoi souscrire à une assurance inventaire ménage ?</h2>
+
+<p>L'assurance inventaire ménage permet de protéger vos biens personnels en cas de sinistre : vol, incendie ou autre événement.</p>
+
+<h3>Comment effectuer un inventaire ?</h3>
+
+<ol>
+<li><strong>Listez vos biens</strong> : Meubles, électroménager, vêtements, objets personnels</li>
+<li><strong>Estimez leur valeur à neuf</strong> : Coût de remplacement actuel</li>
+<li><strong>Classez par catégorie</strong> : Meubles, électronique, bijoux</li>
+<li><strong>Photographiez vos biens</strong> : Pour faciliter les démarches</li>
+<li><strong>Mettez à jour régulièrement</strong> : À chaque nouvel achat</li>
+</ol>
+
+<h3>Inventaire de base vs complémentaire</h3>
+
+<h4>Inventaire de base</h4>
+<ul>
+<li>Meubles (canapés, tables, chaises)</li>
+<li>Électroménager</li>
+<li>Vêtements et chaussures</li>
+<li>Vaisselle, linge de maison</li>
+</ul>
+
+<h4>Inventaire complémentaire</h4>
+<ul>
+<li>Appareils électroniques</li>
+<li>Objets de valeur (bijoux, œuvres d'art)</li>
+<li>Équipement sportif</li>
+<li>Collections</li>
+</ul>
+
+<h3>Ajuster la couverture</h3>
+
+<p>Réévaluez régulièrement la valeur de vos biens et ajustez votre couverture en conséquence. Mise à jour recommandée : au moins une fois par an.</p>
+
+<h3>Avantages du contrat combiné</h3>
+
+<p>L'assurance inventaire ménage combinée avec la RC offre :</p>
+
+<ul>
+<li>Économies sur les primes</li>
+<li>Couverture complète</li>
+<li>Gestion simplifiée</li>
+</ul>
+
+<p><a href="/fr/assurance-menage-landing">Comparez les assurances ménage sur Optimis</a></p>`,
+    category: "Assurance ménage",
+    categorySlug: "assurance-menage",
+    date: "2025-02-24",
+    readTime: 7,
+    image: "",
+    metaDescription: "Guide complet sur l'assurance inventaire ménage : comment évaluer vos biens et choisir la bonne couverture.",
+  },
+  {
+    id: "5499",
+    slug: "augmentation-avs-2025",
+    title: "Est-ce que l'AVS va augmenter en 2025 en Suisse ?",
+    excerpt: "En 2025, l'AVS augmente de 2,9 %. Découvrez les nouvelles rentes, cotisations et ajustements.",
+    content: `<h2>Augmentation AVS 2025 : ce qui change</h2>
+
+<p>Le Conseil fédéral a annoncé une augmentation des rentes AVS de 2,9 % à partir de janvier 2025.</p>
+
+<h3>Nouvelles rentes mensuelles 2025</h3>
+
+<figure><table><thead><tr><th>Type de rente</th><th>2024</th><th>2025</th><th>Différence</th></tr></thead><tbody><tr><td>Rente minimale</td><td>CHF 1'225</td><td>CHF 1'260</td><td>+ CHF 35</td></tr><tr><td>Rente maximale</td><td>CHF 2'450</td><td>CHF 2'520</td><td>+ CHF 70</td></tr><tr><td>Rente couple (max)</td><td>CHF 3'675</td><td>CHF 3'780</td><td>+ CHF 105</td></tr></tbody></table></figure>
+
+<h3>Changements pour les cotisations</h3>
+
+<figure><table><thead><tr><th>Type de cotisation</th><th>2024</th><th>2025</th><th>Différence</th></tr></thead><tbody><tr><td>Cotisation min. indépendants</td><td>CHF 514</td><td>CHF 530</td><td>+ CHF 16</td></tr><tr><td>Cotisation AVS facultative</td><td>CHF 980</td><td>CHF 1'010</td><td>+ CHF 30</td></tr></tbody></table></figure>
+
+<h3>Allocations familiales</h3>
+
+<figure><table><thead><tr><th>Allocation</th><th>2024</th><th>2025</th></tr></thead><tbody><tr><td>Revenu min. salariés</td><td>CHF 7'350</td><td>CHF 7'560</td></tr><tr><td>Plafond sans activité</td><td>CHF 44'100</td><td>CHF 45'360</td></tr><tr><td>Revenu max. enfant formation</td><td>CHF 2'450</td><td>CHF 2'520</td></tr></tbody></table></figure>
+
+<h3>Indemnités journalières AI</h3>
+
+<figure><table><thead><tr><th>Situation</th><th>2024</th><th>2025</th></tr></thead><tbody><tr><td>1ère année formation</td><td>CHF 307</td><td>CHF 315</td></tr><tr><td>2ème année formation</td><td>CHF 409</td><td>CHF 420</td></tr><tr><td>Assurés 25 ans et plus</td><td>CHF 2'450</td><td>CHF 2'520</td></tr></tbody></table></figure>
+
+<h3>Impact pour vous</h3>
+
+<ul>
+<li><strong>Retraités</strong> : Hausse des rentes pour maintenir le pouvoir d'achat</li>
+<li><strong>Indépendants</strong> : Cotisations légèrement plus élevées</li>
+<li><strong>Couples</strong> : Rente conjointe maximale à CHF 3'780/mois</li>
+</ul>
+
+<p><a href="/fr/3eme-pilier-offres">Préparez votre retraite avec le 3ème pilier</a></p>`,
+    category: "2ᵉ pilier ou LPP",
+    categorySlug: "2eme-pilier-lpp",
+    date: "2025-03-18",
+    readTime: 6,
+    image: "",
+    metaDescription: "En 2025, l'AVS augmente de 2,9 %. Découvrez les nouvelles rentes, cotisations et autres ajustements.",
+  },
+  {
+    id: "5503",
+    slug: "cotisation-avs-sans-activite-lucrative",
+    title: "Cotisation AVS sans activité lucrative : tout ce qu'il faut savoir",
+    excerpt: "Les personnes sans activité lucrative doivent cotiser à l'AVS. Découvrez les obligations et le calcul des cotisations.",
+    content: `<h2>Qui est concerné par la cotisation AVS sans activité lucrative ?</h2>
+
+<p>En Suisse, les cotisations AVS sont obligatoires pour toutes les personnes âgées de plus de 20 ans, y compris celles sans revenu d'activité.</p>
+
+<h3>Catégories concernées</h3>
+
+<ul>
+<li><strong>Étudiants</strong> sans activité rémunérée</li>
+<li><strong>Globe-trotters</strong> ou expatriés temporaires</li>
+<li><strong>Chômeurs en fin de droit</strong></li>
+<li><strong>Bénéficiaires d'une rente AI</strong></li>
+<li><strong>Conjoints de retraités</strong> sans activité</li>
+<li><strong>Personnes divorcées ou veuves</strong> sans emploi</li>
+</ul>
+
+<h3>Obligations</h3>
+
+<h4>À partir de quel âge ?</h4>
+<p>L'obligation commence le 1er janvier de la 21ᵉ année et prend fin au mois suivant l'âge de référence (65 ans).</p>
+
+<h4>Cas particulier des conjoints</h4>
+<p>Si votre conjoint travaille à au moins 50 % avec un revenu annuel supérieur à CHF 10'000, vous n'êtes pas considéré comme personne sans activité lucrative.</p>
+
+<h3>Calcul des cotisations</h3>
+
+<p>Les cotisations sont calculées sur la base de :</p>
+
+<ul>
+<li>La fortune</li>
+<li>Le revenu sous forme de rente (multiplié par 20)</li>
+</ul>
+
+<h3>Montants 2025</h3>
+
+<figure><table><thead><tr><th>Base de calcul</th><th>Cotisation annuelle</th></tr></thead><tbody><tr><td>Minimum</td><td>CHF 530</td></tr><tr><td>Maximum</td><td>CHF 26'700</td></tr></tbody></table></figure>
+
+<h3>Comment s'affilier ?</h3>
+
+<ol>
+<li>Contactez la caisse de compensation de votre canton</li>
+<li>Remplissez le formulaire d'inscription</li>
+<li>Fournissez les justificatifs de revenus et fortune</li>
+</ol>
+
+<p><a href="/fr/3eme-pilier-offres">Complétez votre prévoyance avec le 3ème pilier</a></p>`,
+    category: "2ᵉ pilier ou LPP",
+    categorySlug: "2eme-pilier-lpp",
+    date: "2025-03-19",
+    readTime: 7,
+    image: "",
+    metaDescription: "Guide complet sur les cotisations AVS pour les personnes sans activité lucrative en Suisse.",
+  },
+  {
+    id: "5543",
+    slug: "assurance-sous-location",
+    title: "Assurance sous-location en Suisse : ce que vous devez savoir",
+    excerpt: "La sous-location nécessite de respecter des règles spécifiques, notamment en matière d'assurance.",
+    content: `<h2>Règles pour sous-louer en Suisse</h2>
+
+<p>Sous-louer son appartement peut être une excellente solution pour alléger son budget, mais il faut respecter certaines règles.</p>
+
+<h3>Contrat de sous-location</h3>
+
+<p>Le contrat doit être écrit et détailler toutes les conditions :</p>
+
+<ul>
+<li>Montant du loyer</li>
+<li>Durée de la sous-location</li>
+<li>Responsabilités du sous-locataire</li>
+</ul>
+
+<h3>Accord du propriétaire</h3>
+
+<p>Vous devez obtenir l'autorisation préalable de votre propriétaire. Il peut refuser pour des raisons légitimes :</p>
+
+<ul>
+<li>Conditions différentes du contrat principal</li>
+<li>Nuisances pour l'immeuble</li>
+</ul>
+
+<h3>Montant du loyer</h3>
+
+<p>Le loyer de sous-location ne doit pas excéder 10 % du loyer principal. Une majoration de 20 % peut être justifiée si vous avez aménagé l'appartement.</p>
+
+<h3>Assurances nécessaires</h3>
+
+<ul>
+<li><strong>Responsabilité civile</strong> : Recommandée pour le sous-locataire</li>
+<li><strong>Assurance ménage</strong> : Pour couvrir les biens</li>
+<li><strong>Protection juridique</strong> : Pour les litiges</li>
+</ul>
+
+<h3>Résiliation</h3>
+
+<p>Délai de préavis standard : 3 mois. Pour une chambre meublée : 2 semaines.</p>
+
+<h3>Sous-location Airbnb</h3>
+
+<p>Les mêmes règles s'appliquent pour les plateformes type Airbnb. Obtenez l'accord explicite de votre propriétaire.</p>
+
+<p><a href="/fr/assurance-menage-landing">Comparez les assurances ménage sur Optimis</a></p>`,
+    category: "Assurance habitation",
+    categorySlug: "assurance-habitation",
+    date: "2025-03-27",
+    readTime: 7,
+    image: "",
+    metaDescription: "Découvrez les règles pour sous-louer en Suisse et comment éviter les problèmes avec l'assurance sous-location.",
+  },
+  {
+    id: "5603",
+    slug: "vente-vehicule-assurance",
+    title: "Vente véhicule assurance : résilier son assurance auto en Suisse",
+    excerpt: "Comment résilier son assurance auto lors de la vente d'un véhicule ? Délais, démarches et erreurs à éviter.",
+    content: `<h2>Résilier son assurance après la vente</h2>
+
+<p>Lors de la vente de votre véhicule, vous devez gérer la résiliation de votre assurance auto.</p>
+
+<h3>Étapes à suivre</h3>
+
+<ol>
+<li><strong>Informer l'assureur</strong> : Prévenez-le de la vente</li>
+<li><strong>Fournir les documents</strong> : Contrat de vente, nouveau propriétaire</li>
+<li><strong>Restituer les plaques</strong> : Au service des automobiles</li>
+<li><strong>Demander le remboursement</strong> : Au prorata des jours restants</li>
+</ol>
+
+<h3>Délais de résiliation</h3>
+
+<p>La résiliation prend effet :</p>
+
+<ul>
+<li>À la date de vente si les plaques sont restituées</li>
+<li>À la date de transfert du véhicule</li>
+</ul>
+
+<h3>Remboursement ou transfert ?</h3>
+
+<p>Deux options s'offrent à vous :</p>
+
+<ul>
+<li><strong>Remboursement</strong> : Montant calculé au prorata des jours restants</li>
+<li><strong>Transfert</strong> : Report du contrat sur un nouveau véhicule</li>
+</ul>
+
+<h3>Ajuster vos garanties</h3>
+
+<p>Si vous changez de type de véhicule, pensez à ajuster vos garanties :</p>
+
+<ul>
+<li><strong>Voiture neuve</strong> : Casco complète recommandée</li>
+<li><strong>Voiture d'occasion</strong> : Casco partielle peut suffire</li>
+</ul>
+
+<h3>Erreurs à éviter</h3>
+
+<ul>
+<li>Oublier de prévenir l'assureur</li>
+<li>Ne pas restituer les plaques</li>
+<li>Circuler sans assurance pendant la transition</li>
+</ul>
+
+<p><a href="/fr/assurance-voiture-landing">Comparez les assurances auto sur Optimis</a></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2025-04-07",
+    readTime: 7,
+    image: "",
+    metaDescription: "Vente véhicule assurance : comment résilier son assurance auto en Suisse ? Délais et démarches.",
+  },
+  {
+    id: "5606",
+    slug: "assurance-vehicule-provisoire",
+    title: "Assurance véhicule provisoire : tout savoir pour bien s'assurer en Suisse",
+    excerpt: "L'assurance véhicule provisoire offre une solution idéale aux conducteurs ayant des besoins ponctuels de couverture.",
+    content: `<h2>Qu'est-ce qu'une assurance véhicule provisoire ?</h2>
+
+<p>Une assurance véhicule provisoire est une couverture de courte durée, généralement de 1 à 30 jours.</p>
+
+<h3>Différence provisoire vs temporaire</h3>
+
+<ul>
+<li><strong>Assurance provisoire</strong> : En attente d'un contrat long terme</li>
+<li><strong>Assurance temporaire</strong> : Pour des situations ponctuelles</li>
+</ul>
+
+<h3>Véhicules éligibles</h3>
+
+<ul>
+<li>Voitures de tourisme</li>
+<li>Véhicules utilitaires</li>
+<li>Motos</li>
+<li>Véhicules de collection</li>
+<li>Véhicules sans permis (sous conditions)</li>
+</ul>
+
+<h3>Quand souscrire ?</h3>
+
+<ul>
+<li>Achat ou vente de voiture</li>
+<li>Importation temporaire d'un véhicule étranger</li>
+<li>Essai d'une voiture avant achat</li>
+<li>Emprunt d'un véhicule d'un proche</li>
+</ul>
+
+<h3>Comment souscrire ?</h3>
+
+<p>La souscription peut se faire 100 % en ligne. Documents requis :</p>
+
+<ul>
+<li>Permis de conduire valable</li>
+<li>Carte grise du véhicule</li>
+<li>Pièce d'identité</li>
+</ul>
+
+<h3>Garanties incluses</h3>
+
+<figure><table><thead><tr><th>Garantie</th><th>Base</th><th>Optionnelle</th></tr></thead><tbody><tr><td>Responsabilité civile</td><td>✅</td><td>❌</td></tr><tr><td>Casco partielle</td><td>❌</td><td>✅</td></tr><tr><td>Casco complète</td><td>❌</td><td>✅</td></tr><tr><td>Bris de glace</td><td>❌</td><td>✅</td></tr><tr><td>Assistance dépannage</td><td>❌</td><td>✅</td></tr></tbody></table></figure>
+
+<h3>Assurance frontière</h3>
+
+<p>Pour les véhicules étrangers circulant temporairement en Suisse : durée généralement de 30 jours.</p>
+
+<p><a href="/fr/assurance-voiture-landing">Comparez les assurances auto sur Optimis</a></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2025-04-07",
+    readTime: 8,
+    image: "",
+    metaDescription: "Guide complet sur l'assurance véhicule provisoire en Suisse : garanties, souscription et cas d'utilisation.",
+  },
+  {
+    id: "batch8-10",
+    slug: "assurance-responsabilite-civile",
+    title: "L'assurance responsabilité civile en Suisse",
+    excerpt: "L'assurance RC couvre les dommages que vous pourriez causer à des tiers. Découvrez son fonctionnement.",
+    content: `<h2>Qu'est-ce que l'assurance responsabilité civile ?</h2>
+
+<p>L'assurance responsabilité civile (RC) vous protège contre les conséquences financières des dommages que vous pourriez causer à des tiers.</p>
+
+<h3>Pourquoi est-elle importante ?</h3>
+
+<p>En Suisse, vous êtes légalement responsable des dommages que vous causez. Sans assurance RC, vous devrez payer de votre poche :</p>
+
+<ul>
+<li>Les frais médicaux de la victime</li>
+<li>Les dommages matériels</li>
+<li>Les pertes de revenus</li>
+<li>Les frais de justice</li>
+</ul>
+
+<h3>Ce que couvre la RC privée</h3>
+
+<ul>
+<li><strong>Dommages corporels</strong> : Blessures causées à quelqu'un</li>
+<li><strong>Dommages matériels</strong> : Destruction ou détérioration de biens</li>
+<li><strong>Dommages pécuniaires</strong> : Pertes financières consécutives</li>
+</ul>
+
+<h3>Exclusions courantes</h3>
+
+<ul>
+<li>Dommages intentionnels</li>
+<li>Dommages à vos propres biens</li>
+<li>Dommages causés par votre véhicule (assurance auto séparée)</li>
+<li>Dommages professionnels (RC professionnelle séparée)</li>
+</ul>
+
+<h3>Montants de couverture</h3>
+
+<p>Les montants recommandés :</p>
+
+<ul>
+<li><strong>Minimum</strong> : CHF 1 million</li>
+<li><strong>Standard</strong> : CHF 3-5 millions</li>
+<li><strong>Recommandé</strong> : CHF 10 millions</li>
+</ul>
+
+<h3>Comment souscrire ?</h3>
+
+<p>L'assurance RC est généralement incluse dans l'assurance ménage. Vous pouvez aussi la souscrire séparément.</p>
+
+<p><a href="/fr/assurance-menage-landing">Comparez les assurances RC ménage sur Optimis</a></p>`,
+    category: "Assurance habitation",
+    categorySlug: "assurance-habitation",
+    date: "2024-10-15",
+    readTime: 5,
+    image: "",
+    metaDescription: "Guide complet sur l'assurance responsabilité civile en Suisse : couverture, exclusions et montants recommandés.",
+  },
+  {
+    id: "batch8-11",
+    slug: "degat-eau",
+    title: "Dégâts d'eau : que couvre votre assurance ménage ?",
+    excerpt: "Les dégâts d'eau sont l'un des sinistres les plus fréquents. Découvrez ce que couvre votre assurance.",
+    content: `<h2>Les dégâts d'eau : un sinistre fréquent</h2>
+
+<p>Les dégâts d'eau représentent une part importante des sinistres déclarés en Suisse. Voici ce que vous devez savoir sur leur prise en charge.</p>
+
+<h3>Types de dégâts d'eau couverts</h3>
+
+<ul>
+<li><strong>Fuites de canalisation</strong> : Tuyaux défectueux ou rompus</li>
+<li><strong>Débordements</strong> : Baignoire, évier, machine à laver</li>
+<li><strong>Infiltrations</strong> : Toiture, fenêtres, murs</li>
+<li><strong>Refoulements</strong> : Égouts, canalisations bouchées</li>
+</ul>
+
+<h3>Qui paie quoi ?</h3>
+
+<h4>Votre assurance ménage couvre</h4>
+<ul>
+<li>Vos biens personnels endommagés</li>
+<li>Les frais de nettoyage de vos effets</li>
+</ul>
+
+<h4>L'assurance bâtiment du propriétaire couvre</h4>
+<ul>
+<li>Les dommages à la structure (murs, sols, plafonds)</li>
+<li>Les installations fixes (sanitaires, chauffage)</li>
+</ul>
+
+<h4>Votre RC couvre</h4>
+<ul>
+<li>Les dommages causés aux voisins si vous êtes responsable</li>
+</ul>
+
+<h3>Que faire en cas de dégât d'eau ?</h3>
+
+<ol>
+<li><strong>Couper l'eau</strong> : Fermez la vanne d'arrivée</li>
+<li><strong>Protéger les biens</strong> : Éloignez les objets de l'eau</li>
+<li><strong>Documenter</strong> : Prenez des photos</li>
+<li><strong>Informer</strong> : Prévenez votre assureur et le propriétaire</li>
+<li><strong>Ne jetez rien</strong> : Conservez les preuves pour l'expertise</li>
+</ol>
+
+<h3>Délai de déclaration</h3>
+
+<p>Déclarez le sinistre dans les plus brefs délais, idéalement sous 48-72 heures.</p>
+
+<p><a href="/fr/assurance-menage-landing">Vérifiez votre couverture dégâts d'eau sur Optimis</a></p>`,
+    category: "Assurance habitation",
+    categorySlug: "assurance-habitation",
+    date: "2024-09-20",
+    readTime: 5,
+    image: "",
+    metaDescription: "Guide sur les dégâts d'eau : ce que couvre votre assurance ménage et les démarches en cas de sinistre.",
+  },
+  {
+    id: "batch8-12",
+    slug: "assurance-perte-de-cle-voiture",
+    title: "Assurance perte de clé voiture en Suisse",
+    excerpt: "Découvrez tout ce qu'il faut savoir sur l'assurance perte de clé voiture et les frais associés.",
+    content: `<h2>Perte de clé de voiture : que faire ?</h2>
+
+<p>Perdre ses clés de voiture peut coûter cher, surtout avec les systèmes modernes. Découvrez les options d'assurance.</p>
+
+<h3>Coût de remplacement des clés</h3>
+
+<ul>
+<li><strong>Clé simple</strong> : CHF 50-150</li>
+<li><strong>Clé avec télécommande</strong> : CHF 200-400</li>
+<li><strong>Clé avec transpondeur</strong> : CHF 300-500</li>
+<li><strong>Clé intelligente (keyless)</strong> : CHF 500-1'500</li>
+</ul>
+
+<h3>Quelles assurances couvrent ?</h3>
+
+<h4>Assurance casco partielle</h4>
+<p>Certaines polices incluent la perte de clés dans leurs garanties, généralement avec une franchise.</p>
+
+<h4>Assurance ménage</h4>
+<p>Peut couvrir les clés comme "objets personnels" en cas de vol avec effraction.</p>
+
+<h4>Extension spécifique</h4>
+<p>Certains assureurs proposent une option dédiée à la perte de clés.</p>
+
+<h3>Ce qui est généralement couvert</h3>
+
+<ul>
+<li>Remplacement de la clé</li>
+<li>Reprogrammation de l'électronique</li>
+<li>Remplacement du barillet si nécessaire</li>
+<li>Frais de dépannage</li>
+</ul>
+
+<h3>Conseils pratiques</h3>
+
+<ul>
+<li><strong>Double de clé</strong> : Gardez toujours un double en lieu sûr</li>
+<li><strong>Vérifiez votre contrat</strong> : Avant de payer, vérifiez votre couverture</li>
+<li><strong>Concessionnaire vs serrurier</strong> : Comparez les prix</li>
+</ul>
+
+<p><a href="/fr/assurance-voiture-landing">Comparez les assurances auto sur Optimis</a></p>`,
+    category: "Assurance habitation",
+    categorySlug: "assurance-habitation",
+    date: "2025-03-25",
+    readTime: 8,
+    image: "",
+    metaDescription: "Découvrez tout sur l'assurance perte de clé voiture en Suisse : couvertures disponibles et frais de remplacement.",
+  },
+  {
+    id: "batch8-13",
+    slug: "contrat-de-sous-location-suisse",
+    title: "Contrat de sous-location en Suisse : modèle et conseils",
+    excerpt: "Guide complet pour rédiger un contrat de sous-location conforme au droit suisse.",
+    content: `<h2>Le contrat de sous-location en Suisse</h2>
+
+<p>Un contrat de sous-location bien rédigé est essentiel pour protéger toutes les parties impliquées.</p>
+
+<h3>Éléments obligatoires du contrat</h3>
+
+<ul>
+<li><strong>Identité des parties</strong> : Locataire principal et sous-locataire</li>
+<li><strong>Description du logement</strong> : Adresse, surface, nombre de pièces</li>
+<li><strong>Durée de la sous-location</strong> : Date de début et de fin</li>
+<li><strong>Montant du loyer</strong> : Charges comprises ou non</li>
+<li><strong>Modalités de paiement</strong> : Date, mode de paiement</li>
+<li><strong>Dépôt de garantie</strong> : Montant et conditions de restitution</li>
+</ul>
+
+<h3>Conditions légales</h3>
+
+<h4>Autorisation du propriétaire</h4>
+<p>Obligatoire. Conservez une preuve écrite de l'accord.</p>
+
+<h4>Loyer maximum</h4>
+<p>Le loyer de sous-location ne peut excéder de plus de 10 % le loyer principal, sauf aménagements justifiés.</p>
+
+<h4>Durée maximum</h4>
+<p>La sous-location ne peut dépasser la durée du bail principal.</p>
+
+<h3>Clauses recommandées</h3>
+
+<ul>
+<li>Inventaire détaillé du mobilier</li>
+<li>Règlement intérieur de l'immeuble</li>
+<li>Conditions de résiliation anticipée</li>
+<li>Répartition des charges</li>
+<li>Obligation d'assurance RC pour le sous-locataire</li>
+</ul>
+
+<h3>Délais de résiliation</h3>
+
+<ul>
+<li><strong>Appartement</strong> : 3 mois de préavis</li>
+<li><strong>Chambre meublée</strong> : 2 semaines</li>
+</ul>
+
+<h3>Modèle de contrat</h3>
+
+<p>L'ASLOCA propose des modèles de contrats conformes au droit suisse.</p>
+
+<p><a href="/fr/assurance-menage-landing">Assurez votre logement sur Optimis</a></p>`,
+    category: "Assurance habitation",
+    categorySlug: "assurance-habitation",
+    date: "2025-03-26",
+    readTime: 6,
+    image: "",
+    metaDescription: "Guide complet pour rédiger un contrat de sous-location conforme au droit suisse : clauses essentielles et modèle.",
+  },
+  {
+    id: "batch8-14",
+    slug: "rc-assurance",
+    title: "RC Assurance : comprendre la responsabilité civile",
+    excerpt: "Tout savoir sur l'assurance RC : définition, couvertures et pourquoi elle est indispensable.",
+    content: `<h2>La RC Assurance expliquée</h2>
+
+<p>L'assurance responsabilité civile (RC) est l'une des couvertures les plus importantes pour tout particulier.</p>
+
+<h3>Définition de la RC</h3>
+
+<p>La responsabilité civile est l'obligation légale de réparer les dommages causés à autrui. L'assurance RC prend en charge ces réparations à votre place.</p>
+
+<h3>Types de RC</h3>
+
+<h4>RC privée (ménage)</h4>
+<ul>
+<li>Dommages causés dans la vie quotidienne</li>
+<li>Actes de vos enfants mineurs</li>
+<li>Dommages par vos animaux domestiques</li>
+</ul>
+
+<h4>RC véhicule</h4>
+<ul>
+<li>Obligatoire pour tout véhicule</li>
+<li>Couvre les dommages causés aux tiers</li>
+</ul>
+
+<h4>RC professionnelle</h4>
+<ul>
+<li>Pour les indépendants et entreprises</li>
+<li>Couvre les erreurs professionnelles</li>
+</ul>
+
+<h3>Montants de couverture recommandés</h3>
+
+<figure><table><thead><tr><th>Situation</th><th>Montant recommandé</th></tr></thead><tbody><tr><td>Célibataire</td><td>CHF 3-5 millions</td></tr><tr><td>Famille avec enfants</td><td>CHF 5-10 millions</td></tr><tr><td>Propriétaire d'animaux</td><td>CHF 5-10 millions</td></tr></tbody></table></figure>
+
+<h3>Cas pratiques couverts</h3>
+
+<ul>
+<li>Votre enfant casse la vitre d'un voisin</li>
+<li>Vous renversez du café sur l'ordinateur d'un ami</li>
+<li>Votre chien mord un passant</li>
+<li>Un pot de fleurs tombe de votre balcon</li>
+</ul>
+
+<h3>Ce qui n'est pas couvert</h3>
+
+<ul>
+<li>Vos propres biens</li>
+<li>Dommages intentionnels</li>
+<li>Amendes et contraventions</li>
+</ul>
+
+<p><a href="/fr/assurance-menage-landing">Comparez les assurances RC sur Optimis</a></p>`,
+    category: "Assurance habitation",
+    categorySlug: "assurance-habitation",
+    date: "2024-11-10",
+    readTime: 5,
+    image: "",
+    metaDescription: "Guide complet sur l'assurance RC : définition, types de couverture et montants recommandés.",
+  },
+  {
+    id: "batch8-15",
+    slug: "assurance-casco-menage",
+    title: "Assurance casco ménage : protégez vos biens",
+    excerpt: "L'assurance casco ménage offre une protection étendue pour vos biens personnels contre les dommages et le vol.",
+    content: `<h2>L'assurance casco ménage</h2>
+
+<p>Au-delà de la couverture standard, l'assurance casco ménage offre une protection renforcée pour vos biens.</p>
+
+<h3>Différence avec l'assurance ménage standard</h3>
+
+<ul>
+<li><strong>Standard</strong> : Couvre les risques de base (incendie, vol avec effraction, dégâts d'eau)</li>
+<li><strong>Casco</strong> : Ajoute la couverture des dommages accidentels et bris</li>
+</ul>
+
+<h3>Ce que couvre la casco ménage</h3>
+
+<ul>
+<li><strong>Bris accidentel</strong> : Chute d'objets, maladresse</li>
+<li><strong>Vol simple</strong> : Sans effraction</li>
+<li><strong>Dommages par les enfants</strong> : Accidents domestiques</li>
+<li><strong>Appareils électroniques</strong> : Protection étendue</li>
+</ul>
+
+<h3>Pour qui est-elle recommandée ?</h3>
+
+<ul>
+<li>Familles avec enfants</li>
+<li>Propriétaires d'équipements électroniques coûteux</li>
+<li>Personnes avec des objets de valeur</li>
+<li>Locataires en appartement partagé</li>
+</ul>
+
+<h3>Exemples de sinistres couverts</h3>
+
+<ul>
+<li>Vous faites tomber votre téléphone dans l'évier</li>
+<li>Votre enfant renverse du lait sur votre ordinateur</li>
+<li>Un invité casse accidentellement votre téléviseur</li>
+<li>Vol de vélo dans le garage (sans effraction)</li>
+</ul>
+
+<h3>Coût supplémentaire</h3>
+
+<p>La casco ménage ajoute généralement CHF 50-150 par an à votre prime, selon la valeur des biens assurés.</p>
+
+<h3>Franchises</h3>
+
+<p>Une franchise s'applique généralement par sinistre (CHF 50-200).</p>
+
+<p><a href="/fr/assurance-menage-landing">Comparez les offres casco ménage sur Optimis</a></p>`,
+    category: "Assurance ménage",
+    categorySlug: "assurance-menage",
+    date: "2024-12-05",
+    readTime: 5,
+    image: "",
+    metaDescription: "Guide sur l'assurance casco ménage : couverture étendue pour vos biens contre les dommages et le vol.",
+  },
 ];
 // Enforce “image à la une” strictly: if we have a locally downloaded featured image
 // (from WordPress XML _thumbnail_id), it overrides any older placeholder / content image.
