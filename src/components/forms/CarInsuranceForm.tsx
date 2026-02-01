@@ -165,8 +165,34 @@ const CarInsuranceForm = () => {
       {/* Step 1: Vehicle */}
       <FormStep isActive={currentStep === 1}>
         <div className="space-y-6">
-          {/* License Plate Search */}
-          <div className="bg-muted/50 p-4 rounded-lg">
+          {/* Manual Vehicle Selection - Primary method */}
+          <div className="space-y-2">
+            <p className="text-sm font-medium text-center text-muted-foreground mb-4">
+              Sélectionnez votre véhicule ci-dessous
+            </p>
+            <VehicleSelector
+              brand={formData.vehicleBrand}
+              model={formData.vehicleModel}
+              year={formData.vehicleYear}
+              onBrandChange={(brand) => updateFormData({ vehicleBrand: brand })}
+              onModelChange={(model) => updateFormData({ vehicleModel: model })}
+              onYearChange={(year) => updateFormData({ vehicleYear: year })}
+            />
+          </div>
+
+          {/* License Plate - Optional for future use */}
+          <div className="relative mt-4">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">
+                Optionnel
+              </span>
+            </div>
+          </div>
+
+          <div className="bg-muted/30 p-4 rounded-lg">
             <FormFieldWrapper label={t("forms.carInsurance.vehiclePlate")} htmlFor="vehiclePlate">
               <div className="relative">
                 <Input
@@ -174,36 +200,15 @@ const CarInsuranceForm = () => {
                   value={formData.vehiclePlate}
                   onChange={(e) => updateFormData({ vehiclePlate: e.target.value.toUpperCase() })}
                   placeholder="VD 123456"
-                  className="h-14 text-lg pr-12 font-mono tracking-wider"
+                  className="h-12 text-base pr-12 font-mono tracking-wider bg-background"
                 />
-                <Search className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                <Search className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               </div>
               <p className="text-xs text-muted-foreground mt-1">
-                Entrez votre plaque pour identifier automatiquement votre véhicule
+                Facultatif - Pour référence dans votre dossier
               </p>
             </FormFieldWrapper>
           </div>
-
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">
-                {t("forms.carInsurance.orManual")}
-              </span>
-            </div>
-          </div>
-
-          {/* Manual Vehicle Selection */}
-          <VehicleSelector
-            brand={formData.vehicleBrand}
-            model={formData.vehicleModel}
-            year={formData.vehicleYear}
-            onBrandChange={(brand) => updateFormData({ vehicleBrand: brand })}
-            onModelChange={(model) => updateFormData({ vehicleModel: model })}
-            onYearChange={(year) => updateFormData({ vehicleYear: year })}
-          />
         </div>
       </FormStep>
 
