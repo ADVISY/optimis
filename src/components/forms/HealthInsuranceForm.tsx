@@ -255,6 +255,7 @@ const HealthInsuranceForm = () => {
       description={t("forms.healthInsurance.description")}
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
+      size="large"
     >
       {/* Step 1: Location */}
       <FormStep isActive={currentStep === 1}>
