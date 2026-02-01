@@ -4,7 +4,13 @@ import Layout from "@/components/layout/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Clock, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronDown, Filter } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { categories, getPaginatedPostsByCategory } from "@/data/blogPosts";
 
 const POSTS_PER_PAGE = 9;
@@ -80,21 +86,30 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Category Filter */}
+      {/* Category Filter Dropdown */}
       <section className="border-b bg-background py-4">
         <div className="container">
-          <div className="flex flex-wrap justify-center gap-2">
-            {categories.map((category) => (
-              <Button
-                key={category.slug}
-                variant={activeCategory === category.slug ? "default" : "outline"}
-                size="sm"
-                onClick={() => handleCategoryChange(category.slug)}
-                className="rounded-full"
-              >
-                {category.name}
-              </Button>
-            ))}
+          <div className="flex justify-center">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="gap-2 rounded-full">
+                  <Filter className="h-4 w-4" />
+                  {categories.find(c => c.slug === activeCategory)?.name || "Tous"}
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56 max-h-80 overflow-y-auto">
+                {categories.map((category) => (
+                  <DropdownMenuItem
+                    key={category.slug}
+                    onClick={() => handleCategoryChange(category.slug)}
+                    className={activeCategory === category.slug ? "bg-primary/10 font-medium" : ""}
+                  >
+                    {category.name}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </section>
