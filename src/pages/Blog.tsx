@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, ChevronDown, Filter } from "lucide-react";
+import LocalizedLink from "@/components/LocalizedLink";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -119,7 +119,7 @@ const Blog = () => {
         <div className="container">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredPosts.map((post) => (
-              <Link key={post.id} to={`/blog/${post.slug}`}>
+              <LocalizedLink key={post.id} to={`/blog/${post.slug}`}>
                 <Card className="group h-full overflow-hidden border-0 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                   {/* Image with floating category badge */}
                   <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
@@ -133,7 +133,7 @@ const Blog = () => {
                     )}
                     {/* Floating category badge */}
                     <Badge 
-                      className="absolute right-3 top-3 rounded-full bg-emerald-100 px-4 py-1 text-xs font-medium text-emerald-800 shadow-sm"
+                      className="absolute right-3 top-3 rounded-full bg-primary/10 px-4 py-1 text-xs font-medium text-primary shadow-sm"
                     >
                       {post.category}
                     </Badge>
@@ -163,7 +163,7 @@ const Blog = () => {
                     </p>
                   </CardContent>
                 </Card>
-              </Link>
+              </LocalizedLink>
             ))}
           </div>
 
