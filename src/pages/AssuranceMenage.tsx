@@ -227,20 +227,21 @@ const AssuranceMenage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16">
-        <div className="container">
+      <section className="py-8 md:py-16">
+        <div className="container px-4">
           <Card className="bg-primary/5 border-primary/20">
-            <CardContent className="p-8 md:p-12 text-center">
-              <img src={llamaMascot} alt="Mascotte Optimis" className="h-24 mx-auto mb-6" />
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+            <CardContent className="p-4 md:p-12 text-center">
+              <img src={llamaMascot} alt="Mascotte Optimis" className="h-16 md:h-24 mx-auto mb-4 md:mb-6" />
+              <h2 className="text-lg md:text-3xl font-bold text-foreground mb-2 md:mb-4">
                 {t('homeInsurance.getFreeQuote')}
               </h2>
-              <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
+              <p className="text-xs md:text-base text-muted-foreground mb-4 md:mb-6 max-w-xl mx-auto">
                 {t('homeInsurance.compareDescription')}
               </p>
-              <Button size="lg" className="gap-2" onClick={handleCompareClick}>
-                <Home className="h-5 w-5" />
-                {t('homeInsurance.requestQuote')}
+              <Button size="sm" className="gap-1.5 md:gap-2 text-xs md:text-base h-9 md:h-11 px-4 md:px-6" onClick={handleCompareClick}>
+                <Home className="h-3.5 w-3.5 md:h-5 md:w-5" />
+                <span className="hidden sm:inline">{t('homeInsurance.requestQuote')}</span>
+                <span className="sm:hidden">Comparer</span>
               </Button>
             </CardContent>
           </Card>
