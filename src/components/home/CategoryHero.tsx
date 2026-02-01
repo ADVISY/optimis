@@ -51,47 +51,45 @@ const CategoryHero = ({
   const { t } = useTranslation();
 
   return (
-    <section className="gradient-optimis min-h-[35vh] md:min-h-[calc(100vh-6rem)] flex flex-col justify-between overflow-visible relative pb-4 md:pb-8">
-      <div className="container relative flex-1 flex items-center">
+    <section className="gradient-optimis min-h-[calc(100vh-6rem)] flex flex-col justify-between overflow-visible relative pb-4 md:pb-8">
+      <div className="container relative flex-1 flex items-start md:items-center">
         <div className="grid items-center gap-2 lg:grid-cols-2 w-full py-3 md:py-8 lg:py-12">
-          <div className="space-y-1.5 md:space-y-5 animate-fade-in z-10 relative">
+          <div className="space-y-2 md:space-y-5 animate-fade-in z-10 relative text-center md:text-left">
             {/* Breadcrumb */}
             <p className="text-[10px] md:text-sm font-medium text-muted-foreground">
               <LocalizedLink to="/" className="hover:text-primary transition-colors">
                 {t("common.home")}
               </LocalizedLink>{" "}
-              / {breadcrumbKey ? t(breadcrumbKey) : pageTitle}
+              <span className="mx-1">›</span> {breadcrumbKey ? t(breadcrumbKey) : pageTitle}
             </p>
 
-            {/* Mobile mascot - centered above title */}
-            <div className="md:hidden flex justify-center">
-              <img
-                src={mascotPointing}
-                alt="Mascotte Optimis"
-                className="h-20 w-auto drop-shadow-lg animate-fade-in"
-              />
+            {/* 5 Gold Stars */}
+            <div className="flex gap-1 md:gap-1.5 justify-center md:justify-start">
+              {[...Array(5)].map((_, i) => (
+                <span key={i} className="text-accent text-lg md:text-2xl drop-shadow-sm">★</span>
+              ))}
             </div>
 
             {/* Title */}
-            <h1 className="font-heading text-xl sm:text-2xl font-black leading-[1.1] text-foreground md:text-4xl lg:text-5xl xl:text-6xl tracking-tight text-center md:text-left">
+            <h1 className="font-heading text-2xl sm:text-3xl font-black leading-[1.05] text-foreground md:text-4xl lg:text-5xl xl:text-6xl tracking-tight uppercase">
               {pageTitle}
             </h1>
 
             {/* Subtitle */}
-            <p className="text-xs md:text-lg text-muted-foreground lg:text-xl max-w-lg leading-relaxed line-clamp-2 md:line-clamp-none text-center md:text-left">
+            <p className="text-sm md:text-lg text-muted-foreground lg:text-xl max-w-lg leading-relaxed mx-auto md:mx-0">
               {subtitle}
             </p>
 
             {/* CTA Button */}
-            <div className="flex flex-wrap gap-4 pt-1 md:pt-2 justify-center md:justify-start">
-              <Button size="default" className="gap-1.5 md:gap-2 animate-fade-in-delay w-full sm:w-auto text-xs md:text-base h-9 md:h-11" onClick={onButtonClick}>
-                <ButtonIcon className="h-3.5 w-3.5 md:h-5 md:w-5" />
+            <div className="flex flex-wrap gap-4 pt-2 md:pt-2 justify-center md:justify-start">
+              <Button size="default" className="gap-2 animate-fade-in-delay h-11 md:h-12 text-sm md:text-base px-6" onClick={onButtonClick}>
+                <ButtonIcon className="h-4 w-4 md:h-5 md:w-5" />
                 {buttonLabel}
               </Button>
             </div>
           </div>
 
-          {/* Mascot - large, behind the selection bar (desktop only) */}
+          {/* Mascot - desktop only, positioned right */}
           <div className="hidden lg:flex justify-end items-end absolute right-4 xl:right-8 2xl:right-16 bottom-0 translate-y-16 z-10">
             <img
               src={mascotPointing}
@@ -102,20 +100,47 @@ const CategoryHero = ({
         </div>
       </div>
 
+      {/* Mobile mascot - large, centered at bottom */}
+      <div className="md:hidden flex justify-center -mb-4 relative z-10">
+        <img
+          src={mascotPointing}
+          alt="Mascotte Optimis"
+          className="h-64 w-auto drop-shadow-2xl animate-fade-in"
+        />
+      </div>
+
       {/* Quick Selection Bar - full width, compact height */}
       <div className="container relative z-20 mt-2 md:mt-6">
-        <div className="bg-background rounded-lg md:rounded-2xl shadow-premium p-1.5 md:p-3 lg:p-4 border">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-2 lg:gap-3">
+        <div className="bg-background rounded-xl md:rounded-2xl shadow-premium p-3 md:p-4 border">
+          {/* Mobile: vertical list */}
+          <div className="md:hidden flex flex-col gap-1">
             {insuranceCards.map((card) => (
               <LocalizedLink
                 key={card.href}
                 to={card.href}
-                className="flex items-center gap-1 md:gap-2 lg:gap-3 p-1.5 md:p-3 rounded-md md:rounded-xl transition-all duration-300 hover:bg-secondary hover:-translate-y-1 hover:shadow-card group"
+                className="flex flex-col items-center gap-1.5 py-3 rounded-lg transition-all duration-300 hover:bg-secondary group"
               >
                 <div className={`${card.color} transition-transform duration-300 group-hover:scale-110`}>
-                  <card.icon className="h-3.5 w-3.5 md:h-5 md:w-5 lg:h-6 lg:w-6" />
+                  <card.icon className="h-6 w-6" />
                 </div>
-                <span className="font-semibold text-[10px] md:text-sm lg:text-base text-foreground line-clamp-1">
+                <span className="font-semibold text-sm text-foreground">
+                  {t(card.titleKey)}
+                </span>
+              </LocalizedLink>
+            ))}
+          </div>
+          {/* Desktop: horizontal grid */}
+          <div className="hidden md:grid grid-cols-4 gap-3">
+            {insuranceCards.map((card) => (
+              <LocalizedLink
+                key={card.href}
+                to={card.href}
+                className="flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-secondary hover:-translate-y-1 hover:shadow-card group"
+              >
+                <div className={`${card.color} transition-transform duration-300 group-hover:scale-110`}>
+                  <card.icon className="h-6 w-6" />
+                </div>
+                <span className="font-semibold text-base text-foreground">
                   {t(card.titleKey)}
                 </span>
               </LocalizedLink>

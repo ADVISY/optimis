@@ -50,14 +50,15 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section - Full viewport height to show everything above the fold */}
-      <section className="gradient-optimis min-h-[calc(100vh-6rem)] flex flex-col justify-between overflow-visible relative pb-8">
+      <section className="gradient-optimis min-h-[calc(100vh-6rem)] flex flex-col justify-between overflow-visible relative pb-4 md:pb-8">
         <div className="container relative flex-1 flex items-center">
-          <div className="grid items-center gap-4 lg:grid-cols-2 w-full py-8 lg:py-12">
-            <div className="space-y-5 animate-fade-in z-10 relative">
+          <div className="grid items-center gap-4 lg:grid-cols-2 w-full py-6 md:py-8 lg:py-12">
+            {/* Mobile: centered content */}
+            <div className="space-y-3 md:space-y-5 animate-fade-in z-10 relative text-center md:text-left">
               {/* 5 Gold Stars */}
-              <div className="flex gap-1.5 animate-fade-in-delay">
+              <div className="flex gap-1 md:gap-1.5 animate-fade-in-delay justify-center md:justify-start">
                 {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-accent text-2xl md:text-3xl drop-shadow-sm">★</span>
+                  <span key={i} className="text-accent text-xl md:text-3xl drop-shadow-sm">★</span>
                 ))}
               </div>
               <h1 className="font-heading text-2xl font-black leading-[1.05] text-foreground uppercase md:text-3xl lg:text-4xl xl:text-5xl tracking-tight">
@@ -65,10 +66,12 @@ const Index = () => {
                 <span className="block">{t('home.heroLine2')}</span>
                 <span className="block text-gradient-optimis">{t('home.heroLine3')}</span>
               </h1>
-              <p className="text-lg text-muted-foreground md:text-xl max-w-lg leading-relaxed">
+              <p className="text-sm md:text-xl text-muted-foreground max-w-lg leading-relaxed mx-auto md:mx-0">
                 {t('home.heroSubtitle')}
               </p>
-              <div className="flex flex-wrap gap-4 pt-1">
+              
+              {/* Desktop only buttons */}
+              <div className="hidden md:flex flex-wrap gap-4 pt-1 justify-center md:justify-start">
                 <Button asChild size="xl" className="animate-fade-in-delay-2">
                   <LocalizedLink to="/assurance-sante">
                     {t('common.compareNow')}
@@ -82,7 +85,7 @@ const Index = () => {
               </div>
             </div>
             
-            {/* Mascot - large, behind the selection bar */}
+            {/* Mascot - desktop: positioned right, mobile: centered at bottom */}
             <div className="hidden lg:flex justify-end items-end absolute right-4 xl:right-8 2xl:right-16 bottom-0 translate-y-16 z-10">
               <img
                 src={mascotPointing}
@@ -92,21 +95,48 @@ const Index = () => {
             </div>
           </div>
         </div>
+
+        {/* Mobile mascot - centered, large */}
+        <div className="md:hidden flex justify-center -mb-4 relative z-10">
+          <img
+            src={mascotPointing}
+            alt="Mascotte Optimis"
+            className="h-56 w-auto drop-shadow-2xl animate-fade-in"
+          />
+        </div>
         
-        {/* Quick Selection Bar - full width, compact height */}
-        <div className="container relative z-20 mt-6">
-          <div className="bg-background rounded-2xl shadow-premium p-3 md:p-4 border">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3">
+        {/* Quick Selection Bar */}
+        <div className="container relative z-20 mt-2 md:mt-6">
+          <div className="bg-background rounded-xl md:rounded-2xl shadow-premium p-3 md:p-4 border">
+            {/* Mobile: vertical list, centered */}
+            <div className="md:hidden flex flex-col gap-1">
               {insuranceCards.map((card) => (
                 <LocalizedLink
                   key={card.href}
                   to={card.href}
-                  className="flex items-center gap-2 md:gap-3 p-2 md:p-3 rounded-xl transition-all duration-300 hover:bg-secondary hover:-translate-y-1 hover:shadow-card group"
+                  className="flex flex-col items-center gap-1.5 py-3 rounded-lg transition-all duration-300 hover:bg-secondary group"
                 >
                   <div className={`${card.color} transition-transform duration-300 group-hover:scale-110`}>
-                    <card.icon className="h-5 w-5 md:h-6 md:w-6" />
+                    <card.icon className="h-6 w-6" />
                   </div>
-                  <span className="font-semibold text-sm md:text-base text-foreground">
+                  <span className="font-semibold text-sm text-foreground">
+                    {t(card.titleKey)}
+                  </span>
+                </LocalizedLink>
+              ))}
+            </div>
+            {/* Desktop: horizontal grid */}
+            <div className="hidden md:grid grid-cols-4 gap-3">
+              {insuranceCards.map((card) => (
+                <LocalizedLink
+                  key={card.href}
+                  to={card.href}
+                  className="flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-secondary hover:-translate-y-1 hover:shadow-card group"
+                >
+                  <div className={`${card.color} transition-transform duration-300 group-hover:scale-110`}>
+                    <card.icon className="h-6 w-6" />
+                  </div>
+                  <span className="font-semibold text-base text-foreground">
                     {t(card.titleKey)}
                   </span>
                 </LocalizedLink>
