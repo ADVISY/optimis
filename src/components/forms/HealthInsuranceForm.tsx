@@ -258,7 +258,7 @@ const HealthInsuranceForm = () => {
     >
       {/* Step 1: Location */}
       <FormStep isActive={currentStep === 1}>
-        <div className="space-y-6">
+        <div className="space-y-3 md:space-y-6">
           <FormFieldWrapper
             label={t("forms.healthInsurance.canton")}
             htmlFor="canton"
@@ -268,7 +268,7 @@ const HealthInsuranceForm = () => {
               value={formData.canton}
               onValueChange={(value) => updateFormData({ canton: value })}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-9 md:h-11 text-sm md:text-base">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
               </SelectTrigger>
               <SelectContent>
@@ -292,6 +292,7 @@ const HealthInsuranceForm = () => {
               value={formData.postalCode}
               onChange={(e) => updateFormData({ postalCode: e.target.value })}
               placeholder="1000"
+              className="h-9 md:h-11 text-sm md:text-base"
             />
           </FormFieldWrapper>
         </div>
@@ -299,13 +300,13 @@ const HealthInsuranceForm = () => {
 
       {/* Step 2: Persons to insure */}
       <FormStep isActive={currentStep === 2}>
-        <div className="space-y-6">
-          <div className="space-y-4">
+        <div className="space-y-3 md:space-y-6">
+          <div className="space-y-2 md:space-y-4">
             {formData.persons.map((person, index) => (
               <Card key={person.id} className="bg-white/40 border-white/50 backdrop-blur-sm">
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="font-medium text-white">
+                <CardContent className="p-2.5 md:p-4">
+                  <div className="flex items-center justify-between mb-2 md:mb-4">
+                    <span className="font-medium text-white text-sm md:text-base">
                       {person.type === "adult"
                         ? t("forms.healthInsurance.adult")
                         : t("forms.healthInsurance.child")}{" "}
@@ -316,15 +317,15 @@ const HealthInsuranceForm = () => {
                         variant="ghost"
                         size="sm"
                         onClick={() => removePerson(person.id)}
-                        className="text-white/70 hover:text-red-300 hover:bg-red-500/20"
+                        className="text-white/70 hover:text-red-300 hover:bg-red-500/20 h-7 w-7 p-0"
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-3.5 w-3.5 md:h-4 md:w-4" />
                       </Button>
                     )}
                   </div>
 
-                  <div className="space-y-2">
-                    <Label className="text-sm font-medium text-white/90">
+                  <div className="space-y-1 md:space-y-2">
+                    <Label className="text-xs md:text-sm font-medium text-white/90">
                       {t("forms.healthInsurance.birthDate")}
                       <span className="text-red-300 ml-1">*</span>
                     </Label>
@@ -334,6 +335,7 @@ const HealthInsuranceForm = () => {
                       placeholder="JJ/MM/AAAA"
                       maxYear={new Date().getFullYear()}
                       minYear={1900}
+                      className="h-9 md:h-11"
                     />
                   </div>
                 </CardContent>
@@ -346,18 +348,18 @@ const HealthInsuranceForm = () => {
               type="button"
               variant="outline"
               onClick={() => addPerson("adult")}
-              className="flex-1 gap-2 bg-white/40 text-gray-800 border-white/60 hover:bg-white/50 backdrop-blur-sm text-sm md:text-base h-10 md:h-11"
+              className="flex-1 gap-1.5 bg-white/40 text-gray-800 border-white/60 hover:bg-white/50 backdrop-blur-sm text-xs md:text-base h-8 md:h-11"
             >
-              <Plus className="h-4 w-4" />
+              <Plus className="h-3.5 w-3.5 md:h-4 md:w-4" />
               {t("forms.healthInsurance.addAdult")}
             </Button>
             <Button
               type="button"
               variant="outline"
               onClick={() => addPerson("child")}
-              className="flex-1 gap-2 bg-white/40 text-gray-800 border-white/60 hover:bg-white/50 backdrop-blur-sm text-sm md:text-base h-10 md:h-11"
+              className="flex-1 gap-1.5 bg-white/40 text-gray-800 border-white/60 hover:bg-white/50 backdrop-blur-sm text-xs md:text-base h-8 md:h-11"
             >
-              <Plus className="h-4 w-4" />
+              <Plus className="h-3.5 w-3.5 md:h-4 md:w-4" />
               {t("forms.healthInsurance.addChild")}
             </Button>
           </div>
@@ -612,12 +614,12 @@ const HealthInsuranceForm = () => {
 
       {/* Step 5: Name */}
       <FormStep isActive={currentStep === 5}>
-        <div className="space-y-6">
-          <div className="text-center mb-6">
-            <h3 className="text-lg font-semibold mb-2">
+        <div className="space-y-3 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <h3 className="text-sm md:text-lg font-semibold mb-1 md:mb-2">
               {t("forms.contact.almostDone", "Presque terminé !")}
             </h3>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs md:text-sm text-muted-foreground">
               {t("forms.contact.nameStepDescription", "Comment pouvons-nous vous appeler ?")}
             </p>
           </div>
@@ -632,7 +634,7 @@ const HealthInsuranceForm = () => {
               value={formData.firstName}
               onChange={(e) => updateFormData({ firstName: e.target.value })}
               placeholder={t("forms.contact.firstNamePlaceholder", "Votre prénom")}
-              className="h-14 text-lg"
+              className="h-9 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
@@ -646,7 +648,7 @@ const HealthInsuranceForm = () => {
               value={formData.lastName}
               onChange={(e) => updateFormData({ lastName: e.target.value })}
               placeholder={t("forms.contact.lastNamePlaceholder", "Votre nom")}
-              className="h-14 text-lg"
+              className="h-9 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
         </div>
@@ -654,12 +656,12 @@ const HealthInsuranceForm = () => {
 
       {/* Step 6: Contact Details */}
       <FormStep isActive={currentStep === 6}>
-        <div className="space-y-6">
-          <div className="text-center mb-6">
-            <h3 className="text-lg font-semibold mb-2">
+        <div className="space-y-3 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <h3 className="text-sm md:text-lg font-semibold mb-1 md:mb-2">
               {t("forms.contact.contactStepTitle", "Où pouvons-nous vous joindre ?")}
             </h3>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs md:text-sm text-muted-foreground">
               {t("forms.contact.contactStepDescription", "Un conseiller vous contactera pour vous présenter les meilleures offres.")}
             </p>
           </div>
@@ -675,7 +677,7 @@ const HealthInsuranceForm = () => {
               value={formData.email}
               onChange={(e) => updateFormData({ email: e.target.value })}
               placeholder="votre@email.ch"
-              className="h-14 text-lg"
+              className="h-9 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
@@ -690,12 +692,12 @@ const HealthInsuranceForm = () => {
               value={formData.phone}
               onChange={(e) => updateFormData({ phone: e.target.value })}
               placeholder="+41 79 123 45 67"
-              className="h-14 text-lg"
+              className="h-9 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
-          <div className="bg-white/40 border border-white/50 rounded-xl p-4 text-center backdrop-blur-sm">
-            <p className="text-sm text-white/80">
+          <div className="bg-white/40 border border-white/50 rounded-lg md:rounded-xl p-2.5 md:p-4 text-center backdrop-blur-sm">
+            <p className="text-xs md:text-sm text-white/80">
               🔒 {t("forms.contact.privacyNote", "Vos données sont protégées et ne seront jamais partagées.")}
             </p>
           </div>
