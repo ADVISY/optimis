@@ -295,21 +295,21 @@ const Pillar3Form = () => {
       {/* Step 4: Identity */}
       <FormStep isActive={currentStep === 4}>
         <div className="space-y-6">
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-              <User className="h-8 w-8 text-primary" />
+          <div className="text-center mb-4 md:mb-6">
+            <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-3 md:mb-4">
+              <User className="h-6 w-6 md:h-8 md:w-8 text-primary" />
             </div>
-            <h3 className="text-xl font-semibold">{t("forms.contact.almostDone")}</h3>
-            <p className="text-muted-foreground">{t("forms.contact.nameStepDescription")}</p>
+            <h3 className="text-lg md:text-xl font-semibold">{t("forms.contact.almostDone")}</h3>
+            <p className="text-sm md:text-base text-muted-foreground">{t("forms.contact.nameStepDescription")}</p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
             <FormFieldWrapper label={t("forms.contact.firstName")} htmlFor="firstName" required>
               <Input
                 id="firstName"
                 value={formData.firstName}
                 onChange={(e) => updateFormData({ firstName: e.target.value })}
-                className="h-14 text-lg"
+                className="h-12 md:h-14 text-base md:text-lg"
               />
             </FormFieldWrapper>
             <FormFieldWrapper label={t("forms.contact.lastName")} htmlFor="lastName" required>
@@ -317,7 +317,7 @@ const Pillar3Form = () => {
                 id="lastName"
                 value={formData.lastName}
                 onChange={(e) => updateFormData({ lastName: e.target.value })}
-                className="h-14 text-lg"
+                className="h-12 md:h-14 text-base md:text-lg"
               />
             </FormFieldWrapper>
           </div>
@@ -327,12 +327,12 @@ const Pillar3Form = () => {
       {/* Step 5: Contact */}
       <FormStep isActive={currentStep === 5}>
         <div className="space-y-6">
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-              <Phone className="h-8 w-8 text-primary" />
+          <div className="text-center mb-4 md:mb-6">
+            <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-3 md:mb-4">
+              <Phone className="h-6 w-6 md:h-8 md:w-8 text-primary" />
             </div>
-            <h3 className="text-xl font-semibold">{t("forms.contact.contactStepTitle")}</h3>
-            <p className="text-muted-foreground">{t("forms.contact.contactStepDescription")}</p>
+            <h3 className="text-lg md:text-xl font-semibold">{t("forms.contact.contactStepTitle")}</h3>
+            <p className="text-sm md:text-base text-muted-foreground">{t("forms.contact.contactStepDescription")}</p>
           </div>
 
           <FormFieldWrapper label={t("forms.contact.email")} htmlFor="email" required>
@@ -341,7 +341,7 @@ const Pillar3Form = () => {
               type="email"
               value={formData.email}
               onChange={(e) => updateFormData({ email: e.target.value })}
-              className="h-14 text-lg"
+              className="h-12 md:h-14 text-base md:text-lg"
             />
           </FormFieldWrapper>
 
@@ -352,13 +352,13 @@ const Pillar3Form = () => {
               value={formData.phone}
               onChange={(e) => updateFormData({ phone: e.target.value })}
               placeholder="+41 79 123 45 67"
-              className="h-14 text-lg"
+              className="h-12 md:h-14 text-base md:text-lg"
             />
           </FormFieldWrapper>
 
-          <div className="flex items-center gap-2 p-4 bg-muted/50 rounded-lg">
-            <Lock className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-            <p className="text-sm text-muted-foreground">{t("forms.contact.privacyNote")}</p>
+          <div className="flex items-center gap-2 p-3 md:p-4 bg-muted/50 rounded-lg">
+            <Lock className="h-4 w-4 md:h-5 md:w-5 text-muted-foreground flex-shrink-0" />
+            <p className="text-xs md:text-sm text-muted-foreground">{t("forms.contact.privacyNote")}</p>
           </div>
         </div>
       </FormStep>
