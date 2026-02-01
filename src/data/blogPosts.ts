@@ -8289,6 +8289,945 @@ const rawBlogPosts: BlogPost[] = [
     image: "",
     metaDescription: "Guide sur l'assurance casco ménage : couverture étendue pour vos biens contre les dommages et le vol.",
   },
+  // ==================== BATCH 9 - ASSURANCE VIE & PRÉVOYANCE ====================
+  {
+    id: "batch9-1",
+    slug: "quelle-assurance-vie-de-capital-souscrire-suisse",
+    title: "Quelle assurance vie de capital souscrire en Suisse ?",
+    excerpt: "Guide complet pour choisir la meilleure assurance vie de capital en Suisse selon vos objectifs.",
+    content: `<h2>L'assurance vie de capital en Suisse</h2>
+
+<p>L'assurance vie de capital est un produit d'épargne et de prévoyance qui combine protection et constitution d'un capital. Elle vous permet de vous constituer un patrimoine tout en protégeant vos proches.</p>
+
+<h3>Qu'est-ce qu'une assurance vie de capital ?</h3>
+
+<p>Une assurance vie de capital garantit le versement d'un capital défini à l'échéance du contrat ou en cas de décès de l'assuré. Contrairement à l'assurance vie risque pure, elle inclut une composante épargne.</p>
+
+<h3>Les deux types principaux</h3>
+
+<ul>
+<li><strong>Assurance vie classique (3a)</strong> : Capital garanti avec rendement fixe</li>
+<li><strong>Assurance vie liée à des fonds (3b)</strong> : Capital variable selon les marchés</li>
+</ul>
+
+<h3>Avantages fiscaux</h3>
+
+<figure><table><thead><tr><th>Type</th><th>Déductibilité</th><th>Imposition à l'échéance</th></tr></thead><tbody><tr><td>Pilier 3a</td><td>Jusqu'à CHF 7'056/an (salariés)</td><td>Taux réduit séparé</td></tr><tr><td>Pilier 3b</td><td>Non déductible</td><td>Exonéré sous conditions</td></tr></tbody></table></figure>
+
+<h3>Comment choisir ?</h3>
+
+<ul>
+<li><strong>Définissez vos objectifs</strong> : Retraite, achat immobilier, protection famille</li>
+<li><strong>Évaluez votre horizon</strong> : Plus il est long, plus vous pouvez prendre de risques</li>
+<li><strong>Comparez les frais</strong> : Frais d'entrée, de gestion, de sortie</li>
+<li><strong>Vérifiez les garanties</strong> : Décès, invalidité, libération des primes</li>
+</ul>
+
+<h3>Les meilleurs assureurs en Suisse</h3>
+
+<ul>
+<li><strong>Swiss Life</strong> : Leader du marché, large gamme de produits</li>
+<li><strong>AXA</strong> : Solutions flexibles et digitales</li>
+<li><strong>Helvetia</strong> : Bon rapport qualité-prix</li>
+<li><strong>Zurich</strong> : Expertise internationale</li>
+<li><strong>Generali</strong> : Options de placement diversifiées</li>
+</ul>
+
+<h3>Critères de comparaison</h3>
+
+<ul>
+<li>Rendement garanti et historique</li>
+<li>Flexibilité (versements, retraits)</li>
+<li>Couvertures incluses</li>
+<li>Frais totaux (TER)</li>
+<li>Solidité financière de l'assureur</li>
+</ul>
+
+<p><a href="/fr/3eme-pilier-offres">Comparez les assurances vie sur Optimis</a></p>`,
+    category: "Assurance vie",
+    categorySlug: "assurance-vie",
+    date: "2024-10-15",
+    readTime: 6,
+    image: "",
+    metaDescription: "Guide pour choisir la meilleure assurance vie de capital en Suisse : types, avantages fiscaux et comparaison.",
+  },
+  {
+    id: "batch9-2",
+    slug: "pilier-3a-quand-et-comment-commencer-a-epargner",
+    title: "Pilier 3a : quand et comment commencer à épargner ?",
+    excerpt: "Tout savoir sur le pilier 3a : le moment idéal pour commencer et les meilleures stratégies d'épargne.",
+    content: `<h2>Le pilier 3a : votre épargne retraite fiscalement avantageuse</h2>
+
+<p>Le pilier 3a est l'un des meilleurs outils d'épargne en Suisse grâce à ses avantages fiscaux exceptionnels. Mais quand commencer et comment optimiser votre épargne ?</p>
+
+<h3>Qu'est-ce que le pilier 3a ?</h3>
+
+<p>Le 3ème pilier A est un système d'épargne privée lié à la prévoyance professionnelle. Les cotisations sont déductibles du revenu imposable, ce qui vous permet d'économiser immédiatement sur vos impôts.</p>
+
+<h3>Plafonds de cotisation 2024</h3>
+
+<figure><table><thead><tr><th>Situation</th><th>Montant maximum</th></tr></thead><tbody><tr><td>Salariés affiliés à une caisse de pension</td><td>CHF 7'056</td></tr><tr><td>Indépendants sans 2e pilier</td><td>20% du revenu (max CHF 35'280)</td></tr></tbody></table></figure>
+
+<h3>Quand commencer ?</h3>
+
+<p><strong>Le plus tôt possible !</strong> Dès que vous avez un revenu soumis à l'AVS, vous pouvez cotiser. Voici pourquoi commencer jeune est avantageux :</p>
+
+<ul>
+<li><strong>Effet des intérêts composés</strong> : Plus vous épargnez longtemps, plus votre capital grandit</li>
+<li><strong>Économies fiscales</strong> : Chaque année de cotisation réduit vos impôts</li>
+<li><strong>Habitude d'épargne</strong> : Intégrer l'épargne dans son budget devient naturel</li>
+</ul>
+
+<h3>Exemple concret</h3>
+
+<p>Si vous commencez à 25 ans avec CHF 7'056/an à 2% de rendement :</p>
+<ul>
+<li>À 65 ans : environ CHF 430'000</li>
+<li>Économies fiscales totales : environ CHF 100'000 (selon le taux marginal)</li>
+</ul>
+
+<h3>Banque ou assurance ?</h3>
+
+<ul>
+<li><strong>Banque</strong> : Plus flexible, frais généralement plus bas, pas de garantie de capital</li>
+<li><strong>Assurance</strong> : Garanties décès/invalidité, capital garanti possible, moins flexible</li>
+</ul>
+
+<h3>Conseils pour optimiser</h3>
+
+<ul>
+<li>Cotisez le maximum chaque année</li>
+<li>Ouvrez plusieurs comptes 3a (max 5) pour échelonner les retraits</li>
+<li>Choisissez des fonds de placement si votre horizon est long</li>
+<li>Comparez les frais entre les prestataires</li>
+</ul>
+
+<p><a href="/fr/3eme-pilier-offres">Comparez les offres 3a sur Optimis</a></p>`,
+    category: "3ème pilier",
+    categorySlug: "3eme-pilier",
+    date: "2024-09-20",
+    readTime: 6,
+    image: "",
+    metaDescription: "Guide complet sur le pilier 3a : quand commencer, combien cotiser et comment optimiser votre épargne retraite.",
+  },
+  {
+    id: "batch9-3",
+    slug: "la-retraite-en-suisse",
+    title: "La retraite en Suisse : tout ce qu'il faut savoir",
+    excerpt: "Guide complet sur le système de retraite suisse : les 3 piliers, les prestations et la planification.",
+    content: `<h2>Comprendre le système de retraite suisse</h2>
+
+<p>Le système de retraite suisse repose sur trois piliers complémentaires qui, ensemble, visent à maintenir votre niveau de vie après la cessation d'activité.</p>
+
+<h3>Les 3 piliers en bref</h3>
+
+<figure><table><thead><tr><th>Pilier</th><th>Nom</th><th>Objectif</th><th>Financement</th></tr></thead><tbody><tr><td>1er pilier</td><td>AVS/AI</td><td>Couvrir les besoins vitaux</td><td>Cotisations employeur/employé</td></tr><tr><td>2e pilier</td><td>LPP (caisse de pension)</td><td>Maintenir le niveau de vie</td><td>Cotisations employeur/employé</td></tr><tr><td>3e pilier</td><td>Prévoyance privée</td><td>Compléter les deux premiers</td><td>Épargne personnelle</td></tr></tbody></table></figure>
+
+<h3>Le 1er pilier : l'AVS</h3>
+
+<p>L'Assurance-vieillesse et survivants (AVS) est obligatoire pour tous les résidents suisses. Elle verse une rente mensuelle à partir de l'âge de la retraite.</p>
+
+<ul>
+<li><strong>Âge de la retraite</strong> : 65 ans (hommes et femmes dès 2028)</li>
+<li><strong>Rente maximale</strong> : CHF 2'450/mois (2024)</li>
+<li><strong>Rente minimale</strong> : CHF 1'225/mois</li>
+</ul>
+
+<h3>Le 2e pilier : la prévoyance professionnelle</h3>
+
+<p>Obligatoire pour les salariés gagnant plus de CHF 22'050/an, le 2e pilier complète l'AVS.</p>
+
+<ul>
+<li>Financé à parts égales par employeur et employé</li>
+<li>Peut être retiré en capital ou en rente</li>
+<li>Utilisable pour l'achat immobilier (EPL)</li>
+</ul>
+
+<h3>Le 3e pilier : votre épargne personnelle</h3>
+
+<ul>
+<li><strong>3a (lié)</strong> : Déductible fiscalement, conditions de retrait strictes</li>
+<li><strong>3b (libre)</strong> : Pas d'avantage fiscal, totalement flexible</li>
+</ul>
+
+<h3>Planifier sa retraite</h3>
+
+<ul>
+<li>Faites le point sur vos droits acquis (certificat de prévoyance)</li>
+<li>Estimez votre future rente AVS sur le site de votre caisse</li>
+<li>Identifiez le gap entre vos revenus actuels et futurs</li>
+<li>Maximisez vos cotisations au 3e pilier</li>
+<li>Envisagez des rachats dans le 2e pilier</li>
+</ul>
+
+<h3>Quand prendre sa retraite ?</h3>
+
+<ul>
+<li><strong>Retraite anticipée</strong> : Possible dès 58 ans, mais avec réduction des rentes</li>
+<li><strong>Retraite ordinaire</strong> : 65 ans, rentes complètes</li>
+<li><strong>Retraite différée</strong> : Jusqu'à 70 ans, avec majoration</li>
+</ul>
+
+<p><a href="/fr/3eme-pilier-offres">Optimisez votre 3e pilier sur Optimis</a></p>`,
+    category: "Assurance retraite",
+    categorySlug: "assurance-retraite",
+    date: "2024-08-15",
+    readTime: 7,
+    image: "",
+    metaDescription: "Guide complet sur le système de retraite suisse : les 3 piliers, AVS, LPP et prévoyance privée.",
+  },
+  {
+    id: "batch9-4",
+    slug: "amortissement-direct-indirect",
+    title: "Amortissement direct ou indirect : quelle solution pour votre hypothèque ?",
+    excerpt: "Comprendre les différences entre amortissement direct et indirect pour optimiser votre hypothèque.",
+    content: `<h2>Amortissement direct vs indirect</h2>
+
+<p>Lors du remboursement de votre hypothèque, vous avez le choix entre deux méthodes : l'amortissement direct et l'amortissement indirect. Chacune présente des avantages spécifiques.</p>
+
+<h3>Qu'est-ce que l'amortissement ?</h3>
+
+<p>L'amortissement est le remboursement progressif de votre dette hypothécaire. En Suisse, la loi exige que le 2e rang soit amorti en 15 ans maximum ou avant l'âge de la retraite.</p>
+
+<h3>L'amortissement direct</h3>
+
+<p>Vous remboursez directement le capital emprunté, ce qui réduit progressivement votre dette et vos intérêts.</p>
+
+<ul>
+<li><strong>Avantages</strong> : Réduction de la dette, moins d'intérêts à payer</li>
+<li><strong>Inconvénients</strong> : Déduction fiscale des intérêts diminue avec le temps</li>
+</ul>
+
+<h3>L'amortissement indirect</h3>
+
+<p>Au lieu de rembourser la dette, vous versez dans un pilier 3a qui servira à rembourser l'hypothèque à l'échéance.</p>
+
+<ul>
+<li><strong>Avantages</strong> : Double déduction fiscale (intérêts + 3a), capital 3a fructifie</li>
+<li><strong>Inconvénients</strong> : La dette reste intacte, plus d'intérêts sur la durée</li>
+</ul>
+
+<h3>Comparaison chiffrée</h3>
+
+<figure><table><thead><tr><th>Critère</th><th>Amortissement direct</th><th>Amortissement indirect</th></tr></thead><tbody><tr><td>Dette hypothécaire</td><td>Diminue</td><td>Constante</td></tr><tr><td>Intérêts payés</td><td>Diminuent</td><td>Constants</td></tr><tr><td>Déduction fiscale</td><td>Diminue</td><td>Constante + 3a</td></tr><tr><td>Patrimoine 3a</td><td>Non</td><td>Oui</td></tr></tbody></table></figure>
+
+<h3>Quelle solution choisir ?</h3>
+
+<p>L'amortissement indirect est généralement plus avantageux si :</p>
+<ul>
+<li>Votre taux d'imposition marginal est élevé</li>
+<li>Vous n'avez pas encore maximisé votre 3a</li>
+<li>Vous êtes à l'aise avec un niveau d'endettement constant</li>
+</ul>
+
+<p>L'amortissement direct est préférable si :</p>
+<ul>
+<li>Vous souhaitez réduire votre dette rapidement</li>
+<li>Vous êtes proche de la retraite</li>
+<li>Vous préférez la sécurité à l'optimisation fiscale</li>
+</ul>
+
+<p><a href="/fr/hypotheque-offres">Comparez les hypothèques sur Optimis</a></p>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-11-01",
+    readTime: 6,
+    image: "",
+    metaDescription: "Comparaison entre amortissement direct et indirect pour votre hypothèque : avantages fiscaux et stratégies.",
+  },
+  {
+    id: "batch9-5",
+    slug: "taux-hypothecaire-suisse",
+    title: "Taux hypothécaires en Suisse : guide complet 2024",
+    excerpt: "Tout savoir sur les taux hypothécaires en Suisse : évolution, comparaison et conseils pour négocier.",
+    content: `<h2>Les taux hypothécaires en Suisse</h2>
+
+<p>Les taux hypothécaires varient considérablement selon les établissements et le type d'hypothèque. Comprendre ces variations vous permet de mieux négocier et d'économiser des milliers de francs.</p>
+
+<h3>Types d'hypothèques</h3>
+
+<ul>
+<li><strong>Hypothèque à taux fixe</strong> : Taux garanti pour une durée définie (2 à 15 ans)</li>
+<li><strong>Hypothèque SARON</strong> : Taux variable basé sur le marché monétaire</li>
+<li><strong>Hypothèque à taux variable</strong> : Taux ajustable par la banque</li>
+</ul>
+
+<h3>Évolution des taux (indicatif 2024)</h3>
+
+<figure><table><thead><tr><th>Durée</th><th>Taux indicatif</th></tr></thead><tbody><tr><td>SARON</td><td>1.75% - 2.25%</td></tr><tr><td>Fixe 2 ans</td><td>1.80% - 2.30%</td></tr><tr><td>Fixe 5 ans</td><td>1.90% - 2.50%</td></tr><tr><td>Fixe 10 ans</td><td>2.10% - 2.80%</td></tr><tr><td>Fixe 15 ans</td><td>2.30% - 3.00%</td></tr></tbody></table></figure>
+
+<h3>Comment obtenir le meilleur taux ?</h3>
+
+<ul>
+<li><strong>Comparez plusieurs offres</strong> : Les écarts peuvent atteindre 0.5% ou plus</li>
+<li><strong>Négociez</strong> : Les taux affichés ne sont pas définitifs</li>
+<li><strong>Apport personnel</strong> : Plus il est élevé, meilleur sera votre taux</li>
+<li><strong>Profil financier</strong> : Revenus stables et bonne solvabilité aident</li>
+</ul>
+
+<h3>Impact du taux sur votre budget</h3>
+
+<p>Pour une hypothèque de CHF 500'000 :</p>
+<ul>
+<li>À 2.0% : CHF 10'000/an d'intérêts</li>
+<li>À 2.5% : CHF 12'500/an d'intérêts</li>
+<li>Différence : CHF 2'500/an, soit CHF 25'000 sur 10 ans</li>
+</ul>
+
+<h3>Quand renégocier ?</h3>
+
+<ul>
+<li>3-6 mois avant l'échéance de votre contrat</li>
+<li>Lors d'une baisse significative des taux</li>
+<li>Après un changement de situation (revenus, patrimoine)</li>
+</ul>
+
+<p><a href="/fr/hypotheque-offres">Comparez les taux hypothécaires sur Optimis</a></p>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-10-01",
+    readTime: 6,
+    image: "",
+    metaDescription: "Guide complet sur les taux hypothécaires en Suisse : types, évolution et conseils pour négocier.",
+  },
+  {
+    id: "batch9-6",
+    slug: "taux-hypothecaire-raiffeisen",
+    title: "Taux hypothécaire Raiffeisen : offres et conditions 2024",
+    excerpt: "Découvrez les taux hypothécaires Raiffeisen, leurs conditions et comment obtenir la meilleure offre.",
+    content: `<h2>Les hypothèques Raiffeisen</h2>
+
+<p>Raiffeisen est le troisième groupe bancaire suisse et un acteur majeur du marché hypothécaire. Découvrez leurs offres et comment en bénéficier.</p>
+
+<h3>Qui est Raiffeisen ?</h3>
+
+<ul>
+<li>Plus de 220 banques Raiffeisen en Suisse</li>
+<li>1.9 million de sociétaires</li>
+<li>Leader sur le marché hypothécaire suisse</li>
+<li>Approche coopérative et locale</li>
+</ul>
+
+<h3>Types d'hypothèques proposées</h3>
+
+<ul>
+<li><strong>Hypothèque à taux fixe</strong> : Durées de 2 à 15 ans</li>
+<li><strong>Hypothèque SARON</strong> : Taux basé sur le SARON + marge</li>
+<li><strong>Hypothèque variable</strong> : Flexibilité maximale</li>
+<li><strong>Hypothèque écologique</strong> : Réduction pour bâtiments durables</li>
+</ul>
+
+<h3>Taux indicatifs Raiffeisen (2024)</h3>
+
+<figure><table><thead><tr><th>Produit</th><th>Taux indicatif</th></tr></thead><tbody><tr><td>Fixe 2 ans</td><td>1.85% - 2.20%</td></tr><tr><td>Fixe 5 ans</td><td>1.95% - 2.40%</td></tr><tr><td>Fixe 10 ans</td><td>2.15% - 2.70%</td></tr><tr><td>SARON</td><td>SARON + 0.80%</td></tr></tbody></table></figure>
+
+<h3>Conditions d'obtention</h3>
+
+<ul>
+<li>Apport personnel minimum de 20% (dont 10% hors 2e pilier)</li>
+<li>Charge hypothécaire max 33% du revenu brut</li>
+<li>Calcul de capacité à un taux théorique de 5%</li>
+</ul>
+
+<h3>Avantages Raiffeisen</h3>
+
+<ul>
+<li>Conseils personnalisés en agence locale</li>
+<li>Réductions pour les sociétaires</li>
+<li>Produits durables avec bonus écologique</li>
+<li>Flexibilité dans les remboursements</li>
+</ul>
+
+<h3>Comment négocier ?</h3>
+
+<ul>
+<li>Devenez sociétaire pour bénéficier des avantages</li>
+<li>Présentez des offres concurrentes</li>
+<li>Consolidez vos avoirs dans la banque</li>
+<li>Améliorez votre apport personnel</li>
+</ul>
+
+<p><a href="/fr/hypotheque-offres">Comparez avec d'autres banques sur Optimis</a></p>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-10-10",
+    readTime: 5,
+    image: "",
+    metaDescription: "Taux hypothécaires Raiffeisen 2024 : offres, conditions et conseils pour négocier votre prêt immobilier.",
+  },
+  {
+    id: "batch9-7",
+    slug: "taux-hypothecaire-postfinance",
+    title: "Taux hypothécaire PostFinance : offres digitales 2024",
+    excerpt: "Les hypothèques PostFinance : taux compétitifs et gestion entièrement en ligne.",
+    content: `<h2>Les hypothèques PostFinance</h2>
+
+<p>PostFinance propose des hypothèques entièrement gérables en ligne avec des taux parmi les plus compétitifs du marché suisse.</p>
+
+<h3>Profil de PostFinance</h3>
+
+<ul>
+<li>Filiale de La Poste Suisse</li>
+<li>Plus de 2.5 millions de clients</li>
+<li>Approche 100% digitale</li>
+<li>Frais réduits grâce à l'automatisation</li>
+</ul>
+
+<h3>Produits hypothécaires</h3>
+
+<ul>
+<li><strong>Hypothèque à taux fixe</strong> : 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15 ans</li>
+<li><strong>Hypothèque SARON</strong> : Taux variable avec cap optionnel</li>
+<li><strong>Hypothèque combo</strong> : Mix taux fixe et SARON</li>
+</ul>
+
+<h3>Taux indicatifs (2024)</h3>
+
+<figure><table><thead><tr><th>Durée</th><th>Taux</th></tr></thead><tbody><tr><td>Fixe 3 ans</td><td>1.82%</td></tr><tr><td>Fixe 5 ans</td><td>1.88%</td></tr><tr><td>Fixe 10 ans</td><td>2.05%</td></tr><tr><td>SARON</td><td>SARON + 0.75%</td></tr></tbody></table></figure>
+
+<h3>Avantages PostFinance</h3>
+
+<ul>
+<li><strong>Taux très compétitifs</strong> : Parmi les plus bas du marché</li>
+<li><strong>Transparence</strong> : Taux affichés en ligne</li>
+<li><strong>Simplicité</strong> : Demande et gestion 100% en ligne</li>
+<li><strong>Rapidité</strong> : Réponse sous 48h</li>
+</ul>
+
+<h3>Inconvénients</h3>
+
+<ul>
+<li>Pas de conseil en agence physique</li>
+<li>Flexibilité limitée pour cas complexes</li>
+<li>Exigences strictes sur la documentation</li>
+</ul>
+
+<h3>Pour qui ?</h3>
+
+<p>PostFinance convient particulièrement aux emprunteurs :</p>
+<ul>
+<li>À l'aise avec le digital</li>
+<li>Avec un dossier simple et standard</li>
+<li>Cherchant les meilleurs taux</li>
+</ul>
+
+<p><a href="/fr/hypotheque-offres">Comparez les offres sur Optimis</a></p>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-10-05",
+    readTime: 5,
+    image: "",
+    metaDescription: "Taux hypothécaires PostFinance 2024 : offres digitales compétitives et gestion en ligne.",
+  },
+  {
+    id: "batch9-8",
+    slug: "taux-hypothecaire-bcv",
+    title: "Taux hypothécaire BCV : les offres de la Banque Cantonale Vaudoise",
+    excerpt: "Découvrez les taux et conditions hypothécaires de la BCV, première banque du canton de Vaud.",
+    content: `<h2>Les hypothèques BCV</h2>
+
+<p>La Banque Cantonale Vaudoise (BCV) est un acteur majeur du financement immobilier en Suisse romande, avec une présence forte dans le canton de Vaud.</p>
+
+<h3>Profil de la BCV</h3>
+
+<ul>
+<li>Première banque du canton de Vaud</li>
+<li>Plus de 130 ans d'existence</li>
+<li>Réseau dense d'agences</li>
+<li>Expertise immobilière locale</li>
+</ul>
+
+<h3>Gamme de produits</h3>
+
+<ul>
+<li><strong>Hypothèque fixe BCV</strong> : Durées de 1 à 15 ans</li>
+<li><strong>Hypothèque SARON BCV</strong> : Taux révisé trimestriellement</li>
+<li><strong>Hypothèque verte</strong> : Bonus pour bâtiments éco-responsables</li>
+<li><strong>Hypothèque Start</strong> : Offre pour primo-accédants</li>
+</ul>
+
+<h3>Taux indicatifs (2024)</h3>
+
+<figure><table><thead><tr><th>Produit</th><th>Taux indicatif</th></tr></thead><tbody><tr><td>Fixe 2 ans</td><td>1.90%</td></tr><tr><td>Fixe 5 ans</td><td>2.00%</td></tr><tr><td>Fixe 10 ans</td><td>2.25%</td></tr><tr><td>SARON</td><td>SARON + 0.85%</td></tr></tbody></table></figure>
+
+<h3>Conditions</h3>
+
+<ul>
+<li>Apport personnel 20% minimum</li>
+<li>Ratio d'endettement max 33%</li>
+<li>Bien immobilier dans le canton de Vaud (préférence)</li>
+</ul>
+
+<h3>Avantages spécifiques</h3>
+
+<ul>
+<li>Expertise du marché vaudois</li>
+<li>Conseil personnalisé en agence</li>
+<li>Offres groupées (assurance, prévoyance)</li>
+<li>Accompagnement sur tout le projet immobilier</li>
+</ul>
+
+<h3>Offres promotionnelles</h3>
+
+<p>La BCV propose régulièrement des offres spéciales pour les primo-accédants et les projets durables.</p>
+
+<p><a href="/fr/hypotheque-offres">Comparez avec d'autres banques sur Optimis</a></p>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-10-08",
+    readTime: 5,
+    image: "",
+    metaDescription: "Taux hypothécaires BCV 2024 : offres de la Banque Cantonale Vaudoise pour votre projet immobilier.",
+  },
+  {
+    id: "batch9-9",
+    slug: "taux-hypothecaire-migros",
+    title: "Taux hypothécaire Migros Banque : des offres attractives",
+    excerpt: "Les hypothèques Migros Banque : taux compétitifs et avantages pour les détenteurs de la Cumulus.",
+    content: `<h2>Les hypothèques Migros Banque</h2>
+
+<p>Migros Banque, filiale du groupe Migros, propose des hypothèques à des taux parmi les plus attractifs du marché suisse.</p>
+
+<h3>Qui est Migros Banque ?</h3>
+
+<ul>
+<li>Fondée en 1958</li>
+<li>Filiale à 100% de la Fédération des coopératives Migros</li>
+<li>Modèle bancaire coopératif</li>
+<li>Plus de 1 million de clients</li>
+</ul>
+
+<h3>Produits hypothécaires</h3>
+
+<ul>
+<li><strong>Hypothèque fixe</strong> : 2 à 15 ans</li>
+<li><strong>Hypothèque SARON</strong> : Avec ou sans cap</li>
+<li><strong>Hypothèque combinée</strong> : Mix des deux</li>
+<li><strong>Hypothèque Minergie</strong> : Réduction pour bâtiments certifiés</li>
+</ul>
+
+<h3>Taux indicatifs (2024)</h3>
+
+<figure><table><thead><tr><th>Durée</th><th>Taux</th></tr></thead><tbody><tr><td>Fixe 3 ans</td><td>1.80%</td></tr><tr><td>Fixe 5 ans</td><td>1.85%</td></tr><tr><td>Fixe 10 ans</td><td>2.00%</td></tr><tr><td>SARON</td><td>SARON + 0.70%</td></tr></tbody></table></figure>
+
+<h3>Avantages Migros Banque</h3>
+
+<ul>
+<li><strong>Taux très compétitifs</strong> : Politique de prix bas</li>
+<li><strong>Points Cumulus</strong> : Bonus sur les intérêts payés</li>
+<li><strong>Transparence</strong> : Pas de frais cachés</li>
+<li><strong>Demande en ligne</strong> : Processus simplifié</li>
+</ul>
+
+<h3>Conditions spéciales</h3>
+
+<ul>
+<li>Réduction Minergie : -0.25% sur le taux</li>
+<li>Points Cumulus : 1 point par CHF 2.- d'intérêts</li>
+<li>Amortissement flexible</li>
+</ul>
+
+<h3>Pour qui ?</h3>
+
+<p>Migros Banque convient aux emprunteurs :</p>
+<ul>
+<li>Cherchant les meilleurs taux</li>
+<li>Clients de l'univers Migros</li>
+<li>Projets immobiliers standards</li>
+</ul>
+
+<p><a href="/fr/hypotheque-offres">Comparez sur Optimis</a></p>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-09-25",
+    readTime: 5,
+    image: "",
+    metaDescription: "Taux hypothécaires Migros Banque 2024 : offres compétitives et avantages Cumulus.",
+  },
+  {
+    id: "batch9-10",
+    slug: "taux-hypothecaire-swiss-life",
+    title: "Taux hypothécaire Swiss Life : assurance et prévoyance intégrées",
+    excerpt: "Les solutions hypothécaires Swiss Life combinant financement immobilier et prévoyance.",
+    content: `<h2>Les hypothèques Swiss Life</h2>
+
+<p>Swiss Life, leader de la prévoyance en Suisse, propose des solutions hypothécaires intégrant financement et protection.</p>
+
+<h3>Profil Swiss Life</h3>
+
+<ul>
+<li>Leader suisse de la prévoyance</li>
+<li>Plus de 160 ans d'existence</li>
+<li>Expertise en planification financière</li>
+<li>Solutions globales patrimoine</li>
+</ul>
+
+<h3>Approche unique</h3>
+
+<p>Swiss Life combine hypothèque et prévoyance pour une solution complète :</p>
+<ul>
+<li>Financement immobilier</li>
+<li>Amortissement indirect via le 3e pilier</li>
+<li>Protection décès et invalidité</li>
+<li>Optimisation fiscale globale</li>
+</ul>
+
+<h3>Produits proposés</h3>
+
+<ul>
+<li><strong>Hypothèque à taux fixe</strong> : Sécurité et planification</li>
+<li><strong>Hypothèque SARON</strong> : Flexibilité</li>
+<li><strong>Solutions 3a intégrées</strong> : Amortissement indirect optimisé</li>
+</ul>
+
+<h3>Taux indicatifs (2024)</h3>
+
+<figure><table><thead><tr><th>Durée</th><th>Taux indicatif</th></tr></thead><tbody><tr><td>Fixe 5 ans</td><td>2.00% - 2.40%</td></tr><tr><td>Fixe 10 ans</td><td>2.20% - 2.60%</td></tr><tr><td>SARON</td><td>Variable</td></tr></tbody></table></figure>
+
+<h3>Avantages Swiss Life</h3>
+
+<ul>
+<li>Vision globale du patrimoine</li>
+<li>Conseil personnalisé par des experts</li>
+<li>Protection intégrée (décès, invalidité)</li>
+<li>Optimisation fiscale sur mesure</li>
+</ul>
+
+<h3>Pour qui ?</h3>
+
+<p>Swiss Life convient particulièrement aux :</p>
+<ul>
+<li>Familles avec besoins de protection</li>
+<li>Personnes cherchant une approche globale</li>
+<li>Optimisation fiscale poussée</li>
+</ul>
+
+<p><a href="/fr/hypotheque-offres">Comparez les hypothèques sur Optimis</a></p>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-09-15",
+    readTime: 5,
+    image: "",
+    metaDescription: "Hypothèques Swiss Life : solutions combinant financement immobilier et prévoyance en Suisse.",
+  },
+  {
+    id: "batch9-11",
+    slug: "taux-hypothecaire-axa",
+    title: "Taux hypothécaire AXA : financement et protection",
+    excerpt: "Les hypothèques AXA avec solutions de prévoyance intégrées pour votre projet immobilier.",
+    content: `<h2>Les hypothèques AXA</h2>
+
+<p>AXA, acteur majeur de l'assurance en Suisse, propose des solutions hypothécaires complètes avec protection intégrée.</p>
+
+<h3>Profil AXA Suisse</h3>
+
+<ul>
+<li>Parmi les leaders de l'assurance en Suisse</li>
+<li>Réseau d'agences étendu</li>
+<li>Expertise en prévoyance et assurance</li>
+<li>Solutions digitales modernes</li>
+</ul>
+
+<h3>Gamme de produits</h3>
+
+<ul>
+<li><strong>Hypothèque à taux fixe</strong> : 2 à 15 ans</li>
+<li><strong>Hypothèque SARON</strong> : Flexibilité et économies</li>
+<li><strong>Pack immobilier</strong> : Hypothèque + assurances</li>
+</ul>
+
+<h3>Taux indicatifs (2024)</h3>
+
+<figure><table><thead><tr><th>Durée</th><th>Taux</th></tr></thead><tbody><tr><td>Fixe 5 ans</td><td>2.05%</td></tr><tr><td>Fixe 10 ans</td><td>2.25%</td></tr><tr><td>Fixe 15 ans</td><td>2.50%</td></tr></tbody></table></figure>
+
+<h3>Valeur ajoutée AXA</h3>
+
+<ul>
+<li><strong>Pack complet</strong> : Hypothèque + RC + ménage + vie</li>
+<li><strong>Conseil global</strong> : Patrimoine et protection</li>
+<li><strong>Flexibilité</strong> : Adaptations possibles</li>
+<li><strong>Accompagnement</strong> : De l'achat à l'installation</li>
+</ul>
+
+<h3>Protections recommandées</h3>
+
+<p>AXA recommande de combiner l'hypothèque avec :</p>
+<ul>
+<li>Assurance vie pour protéger les proches</li>
+<li>Assurance incapacité de gain</li>
+<li>Assurance ménage et RC</li>
+<li>Protection juridique immobilière</li>
+</ul>
+
+<p><a href="/fr/hypotheque-offres">Comparez les offres sur Optimis</a></p>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-09-10",
+    readTime: 5,
+    image: "",
+    metaDescription: "Hypothèques AXA Suisse : taux, conditions et solutions de protection intégrées.",
+  },
+  {
+    id: "batch9-12",
+    slug: "hypotheque-credit-suisse",
+    title: "Hypothèque Credit Suisse / UBS : les nouvelles offres après la fusion",
+    excerpt: "Les solutions hypothécaires du groupe UBS après l'intégration de Credit Suisse.",
+    content: `<h2>Hypothèques UBS (ex-Credit Suisse)</h2>
+
+<p>Après la fusion avec Credit Suisse, UBS est devenu le plus grand gestionnaire de fortune au monde et un acteur majeur du marché hypothécaire suisse.</p>
+
+<h3>La fusion UBS - Credit Suisse</h3>
+
+<ul>
+<li>Fusion effective en 2023</li>
+<li>Intégration progressive des clients CS</li>
+<li>Maintien des conditions existantes</li>
+<li>Harmonisation des produits en cours</li>
+</ul>
+
+<h3>Produits hypothécaires</h3>
+
+<ul>
+<li><strong>Hypothèque à taux fixe UBS</strong> : 2 à 15 ans</li>
+<li><strong>Hypothèque SARON UBS</strong> : Avec plafond optionnel</li>
+<li><strong>UBS Immo-Cash</strong> : Crédit lombard pour l'immobilier</li>
+<li><strong>Solutions sur mesure</strong> : Pour clients Wealth Management</li>
+</ul>
+
+<h3>Taux indicatifs (2024)</h3>
+
+<figure><table><thead><tr><th>Durée</th><th>Taux indicatif</th></tr></thead><tbody><tr><td>Fixe 2 ans</td><td>1.95%</td></tr><tr><td>Fixe 5 ans</td><td>2.10%</td></tr><tr><td>Fixe 10 ans</td><td>2.35%</td></tr><tr><td>SARON</td><td>SARON + 0.90%</td></tr></tbody></table></figure>
+
+<h3>Avantages UBS</h3>
+
+<ul>
+<li>Solidité financière du premier groupe bancaire</li>
+<li>Réseau mondial et expertise internationale</li>
+<li>Solutions pour les expatriés et frontaliers</li>
+<li>Services premium pour clients fortunés</li>
+</ul>
+
+<h3>Pour les clients Credit Suisse</h3>
+
+<p>Si vous avez une hypothèque Credit Suisse :</p>
+<ul>
+<li>Vos conditions actuelles sont maintenues</li>
+<li>Migration progressive vers UBS</li>
+<li>Nouveaux produits disponibles lors du renouvellement</li>
+</ul>
+
+<p><a href="/fr/hypotheque-offres">Comparez les offres sur Optimis</a></p>`,
+    category: "Hypothèque",
+    categorySlug: "hypotheque",
+    date: "2024-09-05",
+    readTime: 5,
+    image: "",
+    metaDescription: "Hypothèques UBS après la fusion Credit Suisse : nouvelles offres et conditions 2024.",
+  },
+  {
+    id: "batch9-13",
+    slug: "assurance-chien-suisse",
+    title: "Assurance chien en Suisse : guide complet",
+    excerpt: "Tout savoir sur l'assurance pour chien en Suisse : couvertures, tarifs et conseils pour bien choisir.",
+    content: `<h2>L'assurance chien en Suisse</h2>
+
+<p>En Suisse, assurer son chien n'est pas obligatoire mais fortement recommandé pour faire face aux frais vétérinaires et à la responsabilité civile.</p>
+
+<h3>Types d'assurances pour chien</h3>
+
+<ul>
+<li><strong>Responsabilité civile</strong> : Couvre les dommages causés par votre chien à des tiers</li>
+<li><strong>Assurance santé</strong> : Prend en charge les frais vétérinaires</li>
+<li><strong>Pack complet</strong> : Combine RC et santé</li>
+</ul>
+
+<h3>La responsabilité civile</h3>
+
+<p>Obligatoire dans certains cantons, la RC chien couvre :</p>
+<ul>
+<li>Morsures et blessures causées à des personnes</li>
+<li>Dégâts matériels (vêtements, vélos, etc.)</li>
+<li>Accidents de la circulation provoqués</li>
+</ul>
+
+<p><strong>Note</strong> : Souvent incluse dans votre assurance RC ménage, vérifiez vos conditions.</p>
+
+<h3>L'assurance santé</h3>
+
+<figure><table><thead><tr><th>Couverture</th><th>Basique</th><th>Complète</th></tr></thead><tbody><tr><td>Accidents</td><td>Oui</td><td>Oui</td></tr><tr><td>Maladies</td><td>Non</td><td>Oui</td></tr><tr><td>Chirurgie</td><td>Limité</td><td>Oui</td></tr><tr><td>Vaccins/prévention</td><td>Non</td><td>Partiel</td></tr><tr><td>Prime annuelle</td><td>150-300 CHF</td><td>400-800 CHF</td></tr></tbody></table></figure>
+
+<h3>Critères de choix</h3>
+
+<ul>
+<li>Race et âge du chien</li>
+<li>Plafond de remboursement annuel</li>
+<li>Délai de carence</li>
+<li>Exclusions (maladies héréditaires)</li>
+<li>Franchise par sinistre</li>
+</ul>
+
+<h3>Les meilleurs assureurs</h3>
+
+<ul>
+<li><strong>Animalia</strong> : Spécialiste des animaux</li>
+<li><strong>Epona</strong> : Filiale de La Mobilière</li>
+<li><strong>Allianz</strong> : Offres complètes</li>
+<li><strong>Helvetia</strong> : Bon rapport qualité-prix</li>
+</ul>
+
+<h3>Conseils</h3>
+
+<ul>
+<li>Souscrivez jeune (moins de 5 ans) pour éviter les exclusions</li>
+<li>Vérifiez si votre RC ménage couvre déjà le chien</li>
+<li>Comparez les plafonds et franchises</li>
+</ul>
+
+<p><a href="/fr/assurance-menage-landing">Vérifiez votre couverture RC sur Optimis</a></p>`,
+    category: "Assurance habitation",
+    categorySlug: "assurance-habitation",
+    date: "2024-11-15",
+    readTime: 6,
+    image: "",
+    metaDescription: "Guide complet sur l'assurance chien en Suisse : RC, santé, tarifs et conseils pour bien choisir.",
+  },
+  {
+    id: "batch9-14",
+    slug: "assurance-accident-suisse",
+    title: "L'assurance accident en Suisse : LAA et complémentaires",
+    excerpt: "Comprendre l'assurance accident obligatoire LAA et les couvertures complémentaires en Suisse.",
+    content: `<h2>L'assurance accident en Suisse</h2>
+
+<p>En Suisse, l'assurance accident est obligatoire pour tous les salariés. Découvrez comment fonctionne ce système et quelles sont les options complémentaires.</p>
+
+<h3>Le système LAA</h3>
+
+<p>La Loi sur l'assurance-accidents (LAA) protège les salariés contre les conséquences économiques des accidents.</p>
+
+<ul>
+<li><strong>Accidents professionnels</strong> : Couverts dès la 1ère heure de travail</li>
+<li><strong>Accidents non professionnels</strong> : Couverts dès 8h/semaine chez le même employeur</li>
+<li><strong>Maladies professionnelles</strong> : Également couvertes</li>
+</ul>
+
+<h3>Prestations LAA</h3>
+
+<figure><table><thead><tr><th>Prestation</th><th>Montant</th></tr></thead><tbody><tr><td>Frais de traitement</td><td>100% (sans limite)</td></tr><tr><td>Indemnité journalière</td><td>80% du salaire (dès 3e jour)</td></tr><tr><td>Rente d'invalidité</td><td>Jusqu'à 80% du salaire assuré</td></tr><tr><td>Salaire maximum assuré</td><td>CHF 148'200/an (2024)</td></tr></tbody></table></figure>
+
+<h3>Qui paie les primes ?</h3>
+
+<ul>
+<li><strong>Accidents professionnels</strong> : 100% employeur</li>
+<li><strong>Accidents non professionnels</strong> : Généralement employé (déduction sur salaire)</li>
+</ul>
+
+<h3>Les lacunes de la LAA</h3>
+
+<ul>
+<li>Salaire plafonné à CHF 148'200</li>
+<li>Indemnité de 80% seulement (perte de 20%)</li>
+<li>Délai de carence de 2 jours</li>
+<li>Pas de couverture pour les indépendants</li>
+</ul>
+
+<h3>Assurances complémentaires</h3>
+
+<p>Pour combler les lacunes :</p>
+<ul>
+<li><strong>Complémentaire accident</strong> : Couvre les 20% de perte de salaire</li>
+<li><strong>Assurance sur-salaire</strong> : Pour revenus > CHF 148'200</li>
+<li><strong>Indemnité dès le 1er jour</strong> : Supprime le délai de carence</li>
+</ul>
+
+<h3>Pour les indépendants</h3>
+
+<p>L'assurance accident n'est pas obligatoire pour les indépendants, mais fortement recommandée via :</p>
+<ul>
+<li>Affiliation volontaire à la Suva</li>
+<li>Assurance privée accident</li>
+</ul>
+
+<p><a href="/fr/assurance-maladie-landing">Comparez les assurances complémentaires sur Optimis</a></p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-11-20",
+    readTime: 6,
+    image: "",
+    metaDescription: "Guide sur l'assurance accident en Suisse : LAA obligatoire, prestations et complémentaires.",
+  },
+  {
+    id: "batch9-15",
+    slug: "assurance-habitation-suisse",
+    title: "L'assurance habitation en Suisse : guide complet",
+    excerpt: "Tout savoir sur l'assurance habitation en Suisse : ménage, RC, bâtiment et comment bien se protéger.",
+    content: `<h2>L'assurance habitation en Suisse</h2>
+
+<p>L'assurance habitation regroupe plusieurs couvertures pour protéger votre logement et vos biens. Voici le guide complet pour bien comprendre et choisir.</p>
+
+<h3>Les composantes de l'assurance habitation</h3>
+
+<ul>
+<li><strong>Assurance ménage</strong> : Protège vos biens mobiliers</li>
+<li><strong>Responsabilité civile privée</strong> : Couvre les dommages causés à autrui</li>
+<li><strong>Assurance bâtiment</strong> : Protège la structure (propriétaires)</li>
+</ul>
+
+<h3>L'assurance ménage</h3>
+
+<p>Elle couvre vos biens contre :</p>
+<ul>
+<li>Incendie et événements naturels</li>
+<li>Dégâts d'eau</li>
+<li>Vol avec effraction</li>
+<li>Vandalisme</li>
+<li>Bris de glace (option)</li>
+</ul>
+
+<h3>La responsabilité civile privée</h3>
+
+<p>Indispensable pour couvrir les dommages que vous pourriez causer :</p>
+<ul>
+<li>Dégâts chez les voisins (fuite d'eau)</li>
+<li>Accidents causés par vos enfants</li>
+<li>Dommages causés par vos animaux</li>
+</ul>
+
+<h3>Combien ça coûte ?</h3>
+
+<figure><table><thead><tr><th>Couverture</th><th>Prime annuelle</th></tr></thead><tbody><tr><td>Ménage seul</td><td>150-400 CHF</td></tr><tr><td>RC seule</td><td>50-150 CHF</td></tr><tr><td>Pack ménage + RC</td><td>180-450 CHF</td></tr></tbody></table></figure>
+
+<h3>Comment calculer la somme d'assurance ?</h3>
+
+<ul>
+<li><strong>Méthode forfaitaire</strong> : CHF 1'000 x m² habitables</li>
+<li><strong>Inventaire détaillé</strong> : Liste complète de vos biens</li>
+<li><strong>Valeur à neuf</strong> : Coût de remplacement actuel</li>
+</ul>
+
+<h3>Conseils pour bien s'assurer</h3>
+
+<ul>
+<li>Ne sous-estimez pas la valeur de vos biens</li>
+<li>Mettez à jour votre contrat après des achats importants</li>
+<li>Photographiez vos objets de valeur</li>
+<li>Conservez les factures</li>
+</ul>
+
+<h3>Locataires vs propriétaires</h3>
+
+<ul>
+<li><strong>Locataires</strong> : Ménage + RC obligatoire dans la plupart des baux</li>
+<li><strong>Propriétaires</strong> : Ajouter l'assurance bâtiment</li>
+</ul>
+
+<p><a href="/fr/assurance-menage-landing">Comparez les assurances habitation sur Optimis</a></p>`,
+    category: "Assurance habitation",
+    categorySlug: "assurance-habitation",
+    date: "2024-11-25",
+    readTime: 6,
+    image: "",
+    metaDescription: "Guide complet sur l'assurance habitation en Suisse : ménage, RC et bâtiment pour locataires et propriétaires.",
+  },
 ];
 // Enforce “image à la une” strictly: if we have a locally downloaded featured image
 // (from WordPress XML _thumbnail_id), it overrides any older placeholder / content image.
