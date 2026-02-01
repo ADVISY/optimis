@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, ChevronDown, Filter } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronDown, Filter, Info } from "lucide-react";
 import LocalizedLink from "@/components/LocalizedLink";
 import {
   DropdownMenu,
@@ -11,11 +12,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { categories, getPaginatedPostsByCategory } from "@/data/blogPosts";
 
 const POSTS_PER_PAGE = 9;
 
 const Blog = () => {
+  const { t, i18n } = useTranslation();
+  const currentLanguage = i18n.language;
   const [activeCategory, setActiveCategory] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -85,6 +89,20 @@ const Blog = () => {
           </p>
         </div>
       </section>
+
+      {/* Language notice for non-French visitors */}
+      {currentLanguage !== 'fr' && t('common.blogFrenchOnly') && (
+        <section className="bg-secondary/30 border-b">
+          <div className="container py-3">
+            <Alert className="border-primary/20 bg-transparent">
+              <Info className="h-4 w-4 text-primary" />
+              <AlertDescription className="text-foreground">
+                {t('common.blogFrenchOnly')}
+              </AlertDescription>
+            </Alert>
+          </div>
+        </section>
+      )}
 
       {/* Category Filter Dropdown */}
       <section className="border-b bg-background py-4">
