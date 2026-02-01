@@ -4946,6 +4946,709 @@ const rawBlogPosts: BlogPost[] = [
     image: "",
     metaDescription: "Quels les documents à fournir pour souscrire une assurance auto, du permis de conduire au relevé d'information.",
   },
+  // ==================== NOUVEAUX ARTICLES - LOT 2 ====================
+  {
+    id: "3622",
+    slug: "le-subside-dassurance-maladie-a-fribourg-mode-demploi",
+    title: "Le subside d'assurance maladie à Fribourg : mode d'emploi",
+    excerpt: "Le subside d'assurance maladie de Fribourg est une aide financière accordée par le canton pour aider les résidents à payer leurs primes d'assurance maladie.",
+    content: `<h2>Le subside d'assurance maladie à Fribourg</h2>
+
+<p>En Suisse, l'assurance maladie de base obligatoire et ses primes peuvent être trop élevées pour certains foyers. Le subside d'assurance maladie de Fribourg fait référence à une aide financière accordée par le canton pour permettre aux résidents de payer leurs primes d'assurance maladie obligatoire.</p>
+
+<h3>Comment m'enregistrer auprès du subside ?</h3>
+
+<p>Pour obtenir un subside d'assurance maladie à Fribourg, vous devez compléter et adresser un formulaire de demande à la Caisse de Compensation AVS. Vous pouvez transmettre votre demande de subside d'assurance maladie :</p>
+
+<ul>
+<li>Par voie électronique sur le site de l'AVS.</li>
+<li>Par courrier en téléchargeant le formulaire "Demande de réduction des primes" disponible sur le site de l'AVS.</li>
+</ul>
+
+<p>Diverses informations vous sont demandées dans ce formulaire, notamment votre situation personnelle, celle de votre conjoint et de vos enfants, votre adresse et une liste de documents à fournir à la caisse de compensation. Généralement, les documents suivants sont exigés :</p>
+
+<ul>
+<li>Police d'assurance de la caisse maladie.</li>
+<li>Copie du livret de famille.</li>
+<li>Copie de l'autorisation de séjour pour les étrangers.</li>
+<li>Copie de l'attestation de l'impôt à la source pour les personnes assujetties.</li>
+<li>Copie d'un diplôme pour les jeunes de moins de 25 ans révolus.</li>
+</ul>
+
+<h3>À quel moment faut-il faire une demande de subside ?</h3>
+
+<p>La demande de réduction des primes doit être transmise au plus tard le 31 août de l'année courante (la date de réception à la Caisse AVS faisant foi). La Caisse AVS n'examine pas les demandes présentées après cette échéance.</p>
+
+<h3>Pour qui est adressé le subside d'assurance maladie à Fribourg ?</h3>
+
+<p>N'ont pas droit à une réduction des primes à l'assurance-maladie les personnes ou les familles dont le revenu net (code 4.910) ou la fortune imposable (code 7.910) excèdent 150 000 CHF de revenu ou 250 000 CHF de fortune.</p>
+
+<figure><table><thead><tr><th>Situation Familiale</th><th>Revenu Annuel</th></tr></thead><tbody><tr><td>Sans enfant à charge</td><td>37 000 CHF</td></tr><tr><td>1 enfant à charge</td><td>57 400 CHF</td></tr><tr><td>2 enfants à charge</td><td>71 400 CHF</td></tr><tr><td>3 enfants à charge</td><td>85 400 CHF</td></tr></tbody></table></figure>
+
+<h3>Comment rentrer en relation avec l'office des subsides fribourgeois ?</h3>
+
+<ul>
+<li><strong>Téléphone</strong> : 058 277 70 55</li>
+<li><strong>Bureau</strong> : Rue Saint-Pierre 8, 1700 Fribourg</li>
+</ul>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-sante-comparatif/">Optimis est disponible pour vous aider avec vos démarches de subside et pour comparer les assurances.</a></p>`,
+    category: "Aide assurance maladie",
+    categorySlug: "aide-assurance-maladie",
+    date: "2024-07-10",
+    readTime: 6,
+    image: "",
+    metaDescription: "Guide complet du subside d'assurance maladie à Fribourg : conditions, démarches et montants.",
+  },
+  {
+    id: "3635",
+    slug: "assurance-maladie-lamal-permis-b-arrive-en-suisse-resident-suisse-lca-complementaire-prenatale-maternite",
+    title: "Les dépenses de santé mutuelle en Suisse",
+    excerpt: "Les dépenses de santé en Suisse sont un sujet crucial en raison des coûts élevés associés au système de santé.",
+    content: `<h3>Introduction</h3>
+
+<p>Les dépenses de santé en Suisse sont un sujet crucial en raison des coûts élevés associés au système de santé. Comprendre ces coûts et savoir comment les gérer efficacement est essentiel pour tous les résidents suisses.</p>
+
+<h3>Contexte Général</h3>
+
+<h4>Système de Santé Suisse</h4>
+
+<p>Le système de santé suisse repose sur une assurance maladie obligatoire appelée LAMal (Loi sur l'assurance-maladie). Chaque résident en Suisse doit obligatoirement souscrire à une assurance de base, qui couvre les soins essentiels comme les consultations chez le médecin, les hospitalisations et les médicaments prescrits.</p>
+
+<p>En plus de l'assurance de base, il existe des assurances complémentaires qui couvrent des prestations supplémentaires telles que les soins dentaires, les médecines alternatives, et les séjours en chambre privée ou semi-privée à l'hôpital.</p>
+
+<h4>Comparaison Internationale</h4>
+
+<p>La Suisse est l'un des pays où les dépenses de santé sont les plus élevées. Environ 12% du PIB suisse est consacré à la santé, ce qui est bien au-dessus de la moyenne des pays de l'OCDE.</p>
+
+<h3>Dépenses de Santé Mensuelles Moyennes</h3>
+
+<h4>Assurance Maladie</h4>
+
+<p>Les primes d'assurance maladie varient considérablement en Suisse en fonction de plusieurs facteurs :</p>
+
+<ul>
+<li><strong>Primes de l'assurance de base</strong> : Varient entre 300 et 500 CHF par mois.</li>
+<li><strong>Assurances complémentaires</strong> : Ces primes peuvent aller de 50 à 200 CHF par mois.</li>
+</ul>
+
+<p>Il est important de noter que les primes sont également influencées par la franchise choisie. Une franchise plus élevée peut réduire la prime mensuelle.</p>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-sante/">Comparez les assurances avec Optimis pour trouver la meilleure offre.</a></p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-07-11",
+    readTime: 5,
+    image: "",
+    metaDescription: "Comprendre et gérer les dépenses de santé en Suisse : primes, franchises et conseils pratiques.",
+  },
+  {
+    id: "3665",
+    slug: "participation-couts-assurance-maladie-suisse",
+    title: "La participation aux coûts de l'assurance maladie en Suisse",
+    excerpt: "La gestion des coûts de l'assurance maladie en Suisse est essentielle pour optimiser votre budget santé.",
+    content: `<h2>La participation aux coûts de l'assurance maladie</h2>
+
+<p>En tant qu'assuré, il est crucial de comprendre la participation aux coûts pour mieux anticiper vos dépenses de santé. Cette participation comprend trois éléments principaux : la franchise, la quote-part, et la contribution aux frais d'hospitalisation.</p>
+
+<h3>1. La franchise</h3>
+
+<p>La franchise est un montant annuel fixe que l'assuré doit payer de sa poche avant que l'assurance ne commence à rembourser. Les montants de franchise varient généralement entre 300 CHF et 2500 CHF par an pour les adultes.</p>
+
+<h3>2. La quote-part</h3>
+
+<p>Une fois la franchise atteinte, l'assuré doit encore payer une quote-part, qui représente 10% des frais de traitement. Cette quote-part est plafonnée à 700 CHF par an pour les adultes et 350 CHF pour les enfants.</p>
+
+<h3>3. La contribution aux frais d'hospitalisation</h3>
+
+<p>En cas d'hospitalisation, chaque jour passé à l'hôpital entraîne une contribution de 15 CHF. Cependant, les enfants de moins de 18 ans et les jeunes adultes en formation de moins de 25 ans sont exemptés de cette contribution.</p>
+
+<h3>Quel montant de franchise choisir ?</h3>
+
+<p><strong>Évaluer votre situation personnelle</strong> : Le choix de la franchise dépend de plusieurs facteurs :</p>
+
+<ul>
+<li><strong>Âge et état de santé</strong> : Les jeunes adultes en bonne santé peuvent opter pour une franchise plus élevée afin de réduire leurs primes mensuelles.</li>
+<li><strong>Capacité financière</strong> : Il est important d'évaluer votre capacité à couvrir des coûts élevés en cas de besoin médical urgent.</li>
+</ul>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-sante/">Avec Optimis, vous pouvez comparer et choisir les meilleures assurances adaptées à vos besoins spécifiques.</a></p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-07-11",
+    readTime: 4,
+    image: "",
+    metaDescription: "Comprendre la participation aux coûts de l'assurance maladie en Suisse : franchise, quote-part et contribution hospitalière.",
+  },
+  {
+    id: "3673",
+    slug: "quelle-complementaire-sante-pour-la-medecine-alternative-choisir",
+    title: "Quelle complémentaire santé pour la médecine alternative choisir ?",
+    excerpt: "En Suisse, l'intérêt pour les médecines douces ne cesse de croître. Découvrez les complémentaires santé qui remboursent ces pratiques.",
+    content: `<p>En Suisse, et depuis quelques années maintenant, l'intérêt pour les médecines douces ne cesse de croître parmi une population cherchant des alternatives pour améliorer sa santé globale. Ainsi, de nombreuses compagnies d'assurance proposent désormais des <a href="https://le-comparateur-optimis.ch/assurance-sante/">complémentaires santé qui remboursent les consultations et les traitements issus de ces pratiques alternatives.</a></p>
+
+<h2>La complémentaire santé de la médecine alternative : À retenir</h2>
+
+<p>Les médecines alternatives se déclinent en 4 principales catégories :</p>
+
+<ul>
+<li>Médecine ayurvédique</li>
+<li>Homéopathie</li>
+<li>Médecine traditionnelle chinoise</li>
+<li>Naturopathie traditionnelle européenne</li>
+</ul>
+
+<p>L'assurance maladie de base ne prend que peu ou pas en charge ces traitements. Il est donc nécessaire de souscrire une complémentaire santé spécifique à cet effet.</p>
+
+<h2>Médecine alternative : Qu'est-ce que c'est ?</h2>
+
+<p>Contrairement aux méthodes conventionnelles, la médecine alternative adopte une approche holistique visant à travailler en harmonie avec les capacités de guérison naturelles du corps.</p>
+
+<h2>Spécialités de médecine alternative les plus répandues en Suisse</h2>
+
+<ul>
+<li><strong>Médecine ayurvédique (MAV)</strong> : originaire de l'Inde et du Sri Lanka, elle vise à maintenir la santé en équilibrant les doshas.</li>
+<li><strong>Homéopathie</strong> : elle soigne en administrant au patient des doses très diluées de substances.</li>
+<li><strong>Médecine traditionnelle chinoise (MTC)</strong> : considère le corps comme un système d'énergie interconnecté, utilisant l'acupuncture, la diététique, les plantes médicinales.</li>
+<li><strong>Naturopathie traditionnelle européenne (NTE)</strong> : système holistique visant à prévenir les maladies en renforçant les défenses naturelles du corps.</li>
+</ul>
+
+<h2>Coût de l'assurance complémentaire médecine alternative en 2024</h2>
+
+<p>Le prix d'une complémentaire médecine alternative en Suisse dépend de facteurs tels que l'âge de l'assuré, les prestations couvertes, la franchise et le niveau de couverture choisi. En moyenne, les primes mensuelles pour ce type d'assurance varient entre <strong>20 et 150 CHF</strong>.</p>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-sante/">Comparez les meilleures complémentaires santé en Suisse avec Optimis !</a></p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-07-11",
+    readTime: 4,
+    image: "",
+    metaDescription: "Guide des assurances complémentaires pour la médecine alternative en Suisse : homéopathie, acupuncture, naturopathie.",
+  },
+  {
+    id: "3714",
+    slug: "les-differentes-quotes-parts-assurance-maladie-suisse",
+    title: "Les différentes quotes-parts d'assurance maladie en Suisse",
+    excerpt: "La quote-part est une participation obligatoire aux frais de traitement supportée par l'assurance maladie une fois que la franchise est épuisée.",
+    content: `<h2>Qu'est-ce que la quote-part ?</h2>
+
+<p>La quote-part est une participation obligatoire aux frais de traitement supportée par l'assuré une fois que la franchise est épuisée. En général, elle correspond à 10 % des coûts médicaux restants, avec un plafond annuel de 700 CHF pour les adultes.</p>
+
+<h3>Quote-part de l'assurance de base</h3>
+
+<p>Pour l'assurance de base, la quote-part s'applique dès que la franchise choisie est dépassée. Elle correspond à 10 % des frais de traitement, avec un plafond de 700 CHF par année civile.</p>
+
+<h3>Quote-part de l'assurance complémentaire</h3>
+
+<p>Les assurances complémentaires fixent les quotes-parts dans les contrats de souscription. Elles sont souvent similaires à celles de l'assurance de base.</p>
+
+<h3>Différentes quotes-parts de l'assurance maladie</h3>
+
+<p>La quote-part varie en fonction de diverses situations :</p>
+
+<p><strong>Femme enceinte</strong> : Aucune participation aux coûts n'est due pour les prestations légales de maternité à partir de la 13ème semaine de grossesse jusqu'à 8 semaines après l'accouchement.</p>
+
+<p><strong>Enfants</strong> : L'assurance de base prévoit une quote-part de 350 CHF maximum par enfant par année civile.</p>
+
+<figure><table><thead><tr><th>Nombre d'enfants</th><th>Franchise (CHF)</th><th>Quote-part (CHF)</th><th>Plafond (CHF)</th></tr></thead><tbody><tr><td>1</td><td>0</td><td>350</td><td>350</td></tr><tr><td>2</td><td>0</td><td>350</td><td>700</td></tr><tr><td>3 et plus</td><td>0</td><td>350</td><td>1'000</td></tr></tbody></table></figure>
+
+<p><strong>Médicaments</strong> : Deux quotes-parts différentes s'appliquent :</p>
+
+<ul>
+<li>10 % pour les médicaments génériques.</li>
+<li>20 % pour les médicaments originaux avec générique disponible.</li>
+</ul>
+
+<p><strong>Hospitalisation</strong> : Les patients doivent payer une contribution de 15 CHF par jour d'hospitalisation. Les enfants de moins de 18 ans sont exemptés.</p>
+
+<p><a href="https://le-comparateur-optimis.ch/">Optimis est là pour vous accompagner et comparer votre assurance.</a></p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-07-12",
+    readTime: 5,
+    image: "",
+    metaDescription: "Tout sur les quotes-parts d'assurance maladie en Suisse : calcul, plafonds et cas particuliers.",
+  },
+  {
+    id: "3719",
+    slug: "cout-intervention-ambulance-suisse",
+    title: "Les transports médicaux : Quand et comment l'assurance intervient-elle ?",
+    excerpt: "Le transport médical, en particulier l'intervention d'une ambulance, peut représenter un coût important en Suisse.",
+    content: `<p>Le transport médical, en particulier l'intervention d'une ambulance, peut représenter un coût important. En Suisse, ces coûts varient en fonction de plusieurs facteurs, notamment la nature de l'intervention (accident ou maladie) et le canton dans lequel elle se déroule.</p>
+
+<h3>Combien coûte l'intervention d'une ambulance ?</h3>
+
+<p>Le coût d'intervention d'une ambulance se situe généralement entre <strong>700 et 2100 francs</strong>. Toutefois, ce montant varie selon les cantons.</p>
+
+<h3>Qui paie les frais d'ambulance ?</h3>
+
+<p>Pour déterminer qui paie les frais d'ambulance, il est essentiel de connaître la cause de l'intervention : s'agit-il d'un accident ou d'une maladie ?</p>
+
+<figure><table><thead><tr><th>Accident</th><th>Maladie</th></tr></thead><tbody><tr><td>Assurance accidents selon la LAA (employeur) : Totalité en Suisse</td><td>Assurance de base : 50 % des frais, max. 500 CHF/an</td></tr><tr><td>Assurance complémentaire : Selon les conditions</td><td>Assurance complémentaire : Selon les conditions</td></tr></tbody></table></figure>
+
+<h3>Prise en charge des coûts par l'assurance accidents</h3>
+
+<p>Si vous bénéficiez de l'assurance accidents de votre employeur ou d'une assurance privée, l'assurance accidents selon la LAA entre en jeu en cas d'accident.</p>
+
+<h3>Prise en charge des coûts par l'assurance de base</h3>
+
+<p>En cas d'intervention pour cause de maladie, c'est l'assurance maladie obligatoire qui intervient. Elle prend en charge 50 % des coûts après déduction de la franchise et de la quote-part, avec un plafond de 500 francs par an.</p>
+
+<h3>Sauvetage en situation de danger de mort</h3>
+
+<p>Pour les cas de sauvetage en situation de danger de mort, l'assurance de base couvre jusqu'à 5000 francs par an. À l'étranger, l'assurance de base ne prend pas en charge les frais de sauvetage.</p>
+
+<h3>Quand ai-je besoin d'une assurance complémentaire ?</h3>
+
+<p>Les assurances complémentaires prennent en charge les frais de transport et de sauvetage non couverts par l'assurance de base. <a href="https://le-comparateur-optimis.ch/assurance-sante/">Utilisez le comparateur Optimis pour trouver la meilleure offre.</a></p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-07-12",
+    readTime: 4,
+    image: "",
+    metaDescription: "Coût des transports médicaux en Suisse et prise en charge par l'assurance maladie : tout ce qu'il faut savoir.",
+  },
+  {
+    id: "3750",
+    slug: "le-subside-dassurance-maladie-dans-le-valais-comment-ca-fonctionne",
+    title: "Le subside d'assurance maladie dans le Valais : comment ça fonctionne ?",
+    excerpt: "Le subside d'assurance maladie dans le Valais est une aide financière accordée aux résidents pour payer leurs primes.",
+    content: `<h2>Subside d'assurance maladie en Valais</h2>
+
+<p>Le subside d'assurance maladie dans le Valais est une aide financière accordée par le canton pour permettre aux résidents de payer leurs primes d'assurance maladie obligatoire. Cette aide s'adresse principalement aux personnes à revenus modestes.</p>
+
+<h3>Qui peut bénéficier du subside en Valais ?</h3>
+
+<p>Les conditions d'éligibilité dépendent principalement de votre revenu et de votre situation familiale. Les barèmes sont fixés annuellement par le canton.</p>
+
+<h3>Comment faire une demande ?</h3>
+
+<p>La demande de subside doit être adressée à la Caisse de compensation du Valais. Vous pouvez :</p>
+
+<ul>
+<li>Remplir le formulaire en ligne sur le site officiel</li>
+<li>Envoyer le formulaire papier par courrier</li>
+</ul>
+
+<h3>Documents nécessaires</h3>
+
+<ul>
+<li>Attestation d'assurance maladie</li>
+<li>Dernière décision de taxation fiscale</li>
+<li>Attestation de domicile</li>
+</ul>
+
+<h3>Délais à respecter</h3>
+
+<p>La demande doit généralement être effectuée dans les premiers mois de l'année pour l'année en cours.</p>
+
+<p><a href="https://le-comparateur-optimis.ch/subside-assurance-maladie-demande/">Optimis vous accompagne dans vos démarches de subside.</a></p>`,
+    category: "Aide assurance maladie",
+    categorySlug: "aide-assurance-maladie",
+    date: "2024-07-15",
+    readTime: 4,
+    image: "",
+    metaDescription: "Guide du subside d'assurance maladie en Valais : conditions, démarches et formulaires.",
+  },
+  {
+    id: "3800",
+    slug: "comment-avoir-une-assurance-maladie-moins-chere-le-top-10",
+    title: "Comment avoir une assurance maladie moins chère : le top 10 des astuces",
+    excerpt: "Découvrez les 10 meilleures astuces pour réduire vos primes d'assurance maladie en Suisse.",
+    content: `<h2>Top 10 des astuces pour réduire vos primes</h2>
+
+<p>L'assurance maladie représente une part importante du budget des ménages suisses. Voici nos meilleures astuces pour économiser :</p>
+
+<h3>1. Comparer les offres chaque année</h3>
+<p>Les primes varient fortement d'une caisse à l'autre. <a href="https://le-comparateur-optimis.ch/">Utilisez un comparateur comme Optimis</a> pour trouver la meilleure offre.</p>
+
+<h3>2. Choisir une franchise élevée</h3>
+<p>Si vous êtes en bonne santé et consultez rarement, une franchise de 2500 CHF peut réduire vos primes de 40%.</p>
+
+<h3>3. Opter pour un modèle alternatif</h3>
+<p>Les modèles HMO, médecin de famille ou télémédecine offrent des réductions de 10 à 25%.</p>
+
+<h3>4. Demander le subside</h3>
+<p>Selon votre revenu, vous pourriez avoir droit à un subside cantonal.</p>
+
+<h3>5. Regrouper les assurances de la famille</h3>
+<p>Certaines caisses offrent des rabais famille.</p>
+
+<h3>6. Payer annuellement</h3>
+<p>Le paiement annuel plutôt que mensuel peut générer des économies de 1 à 2%.</p>
+
+<h3>7. Vérifier les doublons avec les complémentaires</h3>
+<p>Évitez de payer deux fois pour les mêmes prestations.</p>
+
+<h3>8. Négocier avec votre caisse actuelle</h3>
+<p>Avant de changer, demandez une offre à votre caisse actuelle.</p>
+
+<h3>9. Adapter les complémentaires à vos besoins</h3>
+<p>Ne payez que pour les prestations que vous utilisez réellement.</p>
+
+<h3>10. Utiliser les pharmacies et médecins conventionnés</h3>
+<p>Certains modèles offrent des remises supplémentaires.</p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-07-18",
+    readTime: 5,
+    image: "",
+    metaDescription: "10 astuces efficaces pour réduire vos primes d'assurance maladie en Suisse.",
+  },
+  {
+    id: "3820",
+    slug: "comparateur-assurance-maladie-suisse",
+    title: "Comparateur d'assurance maladie en Suisse : guide complet",
+    excerpt: "Comment utiliser un comparateur d'assurance maladie pour trouver la meilleure offre en Suisse.",
+    content: `<h2>Pourquoi utiliser un comparateur d'assurance maladie ?</h2>
+
+<p>En Suisse, il existe plus de 50 caisses maladie proposant l'assurance de base LAMal. Les primes peuvent varier du simple au double pour les mêmes prestations. Un comparateur vous permet de :</p>
+
+<ul>
+<li>Voir toutes les offres en un coup d'œil</li>
+<li>Comparer les primes selon votre profil</li>
+<li>Économiser jusqu'à plusieurs centaines de francs par an</li>
+</ul>
+
+<h2>Comment fonctionne Optimis ?</h2>
+
+<p>Notre comparateur analyse les offres de toutes les caisses maladie agréées en Suisse :</p>
+
+<ol>
+<li>Renseignez votre canton, âge et franchise souhaitée</li>
+<li>Consultez les résultats triés par prix</li>
+<li>Comparez les options (modèle, services)</li>
+<li>Faites votre demande directement en ligne</li>
+</ol>
+
+<h2>Critères de comparaison importants</h2>
+
+<ul>
+<li><strong>La prime mensuelle</strong> : le coût principal</li>
+<li><strong>La franchise</strong> : de 300 à 2500 CHF</li>
+<li><strong>Le modèle d'assurance</strong> : standard, HMO, médecin de famille, télémédecine</li>
+<li><strong>Le service client</strong> : disponibilité, langues, délais de remboursement</li>
+</ul>
+
+<h2>Quand changer d'assurance ?</h2>
+
+<p>Vous pouvez changer d'assurance de base chaque année en respectant le délai de résiliation au 30 novembre pour une entrée en vigueur au 1er janvier.</p>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-maladie-landing">Comparez maintenant avec Optimis !</a></p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-07-20",
+    readTime: 4,
+    image: "",
+    metaDescription: "Guide d'utilisation du comparateur d'assurance maladie en Suisse : économisez sur vos primes.",
+  },
+  {
+    id: "3850",
+    slug: "lassurance-maladie-et-le-fitness-quels-avantages",
+    title: "L'assurance maladie et le fitness : quels avantages ?",
+    excerpt: "Découvrez comment votre assurance maladie peut contribuer à vos frais de fitness et de sport.",
+    content: `<h2>Le fitness et l'assurance maladie</h2>
+
+<p>De plus en plus de caisses maladie suisses encouragent l'activité physique en proposant des contributions aux abonnements de fitness. Ces avantages font partie des assurances complémentaires.</p>
+
+<h2>Quelles caisses remboursent le fitness ?</h2>
+
+<p>Plusieurs assureurs proposent des contributions :</p>
+
+<ul>
+<li><strong>Helsana</strong> : jusqu'à 200 CHF/an pour le fitness</li>
+<li><strong>CSS</strong> : contributions pour abonnements sportifs</li>
+<li><strong>Swica</strong> : rabais partenaires</li>
+<li><strong>Sanitas</strong> : bonus sport et prévention</li>
+</ul>
+
+<h2>Conditions générales</h2>
+
+<p>Pour bénéficier de ces remboursements :</p>
+
+<ul>
+<li>Souscrire une assurance complémentaire prévention</li>
+<li>Choisir un centre partenaire ou qualityfit</li>
+<li>Présenter les justificatifs de paiement</li>
+</ul>
+
+<h2>Autres activités remboursées</h2>
+
+<ul>
+<li>Cours de yoga et pilates</li>
+<li>Natation et aquagym</li>
+<li>Cours collectifs en salle</li>
+<li>Personal training (selon les caisses)</li>
+</ul>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-sante/">Comparez les complémentaires fitness avec Optimis.</a></p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-07-22",
+    readTime: 3,
+    image: "",
+    metaDescription: "Remboursement fitness par l'assurance maladie en Suisse : caisses partenaires et conditions.",
+  },
+  {
+    id: "3880",
+    slug: "lassurance-maladie-internationale-en-suisse-ce-que-vous-devez-savoir",
+    title: "L'assurance maladie internationale en Suisse : ce que vous devez savoir",
+    excerpt: "Tout sur l'assurance maladie pour les expatriés et les voyageurs fréquents en Suisse.",
+    content: `<h2>Assurance maladie internationale</h2>
+
+<p>Pour les personnes vivant en Suisse mais voyageant fréquemment, ou pour les expatriés, l'assurance maladie internationale offre une couverture adaptée.</p>
+
+<h2>Qui est concerné ?</h2>
+
+<ul>
+<li>Expatriés suisses à l'étranger</li>
+<li>Cadres internationaux en mission</li>
+<li>Étudiants en échange</li>
+<li>Voyageurs fréquents</li>
+</ul>
+
+<h2>Couverture de la LAMal à l'étranger</h2>
+
+<p>L'assurance de base LAMal offre une couverture limitée à l'étranger :</p>
+
+<ul>
+<li>Urgences médicales dans l'UE/AELE (carte européenne)</li>
+<li>Remboursement au tarif suisse (différence à charge)</li>
+<li>Pas de couverture hors urgences</li>
+</ul>
+
+<h2>Pourquoi souscrire une complémentaire voyage ?</h2>
+
+<ul>
+<li>Couverture mondiale complète</li>
+<li>Rapatriement sanitaire inclus</li>
+<li>Pas de limitation de durée</li>
+<li>Prise en charge des frais réels</li>
+</ul>
+
+<h2>Options disponibles</h2>
+
+<p>Plusieurs formules existent selon vos besoins :</p>
+
+<ul>
+<li><strong>Assurance voyage courte durée</strong> : pour les vacances</li>
+<li><strong>Assurance expatrié</strong> : couverture longue durée</li>
+<li><strong>Complémentaire monde entier</strong> : extension de la LAMal</li>
+</ul>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-sante/">Comparez les assurances internationales avec Optimis.</a></p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-07-25",
+    readTime: 4,
+    image: "",
+    metaDescription: "Guide de l'assurance maladie internationale en Suisse pour expatriés et voyageurs.",
+  },
+  {
+    id: "3900",
+    slug: "que-couvre-lamal-pour-lunettes-lentilles",
+    title: "Que couvre la LAMal pour les lunettes et lentilles ?",
+    excerpt: "Découvrez ce que l'assurance de base LAMal rembourse pour vos frais d'optique.",
+    content: `<h2>Lunettes et lentilles : que rembourse la LAMal ?</h2>
+
+<p>La couverture des frais d'optique par l'assurance de base est très limitée en Suisse. Voici ce qu'il faut savoir.</p>
+
+<h3>Remboursement LAMal pour les enfants</h3>
+
+<p>Pour les enfants jusqu'à 18 ans :</p>
+
+<ul>
+<li><strong>180 CHF par an</strong> pour les verres correcteurs</li>
+<li>Les montures ne sont pas remboursées</li>
+<li>Les lentilles sont remboursées dans certains cas médicaux</li>
+</ul>
+
+<h3>Remboursement LAMal pour les adultes</h3>
+
+<p>Pour les adultes de plus de 18 ans :</p>
+
+<ul>
+<li><strong>Aucun remboursement</strong> pour les lunettes standard</li>
+<li>Exception : certaines pathologies oculaires graves</li>
+</ul>
+
+<h3>Les assurances complémentaires optique</h3>
+
+<p>Pour bénéficier d'un remboursement, vous devez souscrire une complémentaire ambulatoire :</p>
+
+<ul>
+<li>Contribution de 100 à 500 CHF par an selon les caisses</li>
+<li>Intervalle de remboursement : 1 à 3 ans selon les contrats</li>
+<li>Lentilles de contact souvent incluses</li>
+</ul>
+
+<h3>Conseils pour économiser</h3>
+
+<ul>
+<li>Comparer les prix des opticiens</li>
+<li>Vérifier les partenariats avec votre caisse</li>
+<li>Envisager les opticiens en ligne pour les montures</li>
+</ul>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-sante/">Trouvez une complémentaire optique avec Optimis.</a></p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-07-28",
+    readTime: 3,
+    image: "",
+    metaDescription: "Remboursement lunettes et lentilles par la LAMal et les complémentaires en Suisse.",
+  },
+  {
+    id: "3920",
+    slug: "maternite-prenatale-enfant-naissance-assurance-complementaire",
+    title: "Maternité et assurance complémentaire prénatale",
+    excerpt: "Tout savoir sur les assurances complémentaires maternité et prénatales en Suisse.",
+    content: `<h2>Assurance maternité en Suisse</h2>
+
+<p>La grossesse et l'accouchement sont couverts par l'assurance de base LAMal, mais de nombreuses prestations supplémentaires nécessitent une complémentaire.</p>
+
+<h3>Ce que couvre la LAMal</h3>
+
+<ul>
+<li>Consultations prénatales</li>
+<li>Échographies de contrôle</li>
+<li>Accouchement en division commune</li>
+<li>Séjour hospitalier standard</li>
+<li>7 séances de préparation à l'accouchement</li>
+</ul>
+
+<h3>Ce que couvre une complémentaire maternité</h3>
+
+<ul>
+<li><strong>Accouchement en chambre privée ou semi-privée</strong></li>
+<li><strong>Libre choix du médecin</strong></li>
+<li><strong>Contribution aux frais d'accouchement à domicile</strong></li>
+<li><strong>Cours de préparation supplémentaires</strong></li>
+<li><strong>Sage-femme indépendante</strong></li>
+</ul>
+
+<h3>L'assurance prénatale pour bébé</h3>
+
+<p>Important : vous pouvez assurer votre enfant avant sa naissance avec une assurance prénatale. Avantages :</p>
+
+<ul>
+<li>Pas de questionnaire de santé</li>
+<li>Couverture dès la naissance</li>
+<li>Accès garanti aux complémentaires</li>
+</ul>
+
+<h3>Quand souscrire ?</h3>
+
+<p>L'idéal est de souscrire <strong>avant la grossesse</strong> ou dès les premières semaines. Après 12 semaines, certaines caisses refusent les nouvelles souscriptions.</p>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-sante/">Comparez les assurances maternité avec Optimis.</a></p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-08-01",
+    readTime: 4,
+    image: "",
+    metaDescription: "Guide des assurances maternité et prénatales en Suisse : couvertures et conseils.",
+  },
+  {
+    id: "3940",
+    slug: "lamal",
+    title: "La LAMal : tout comprendre sur l'assurance maladie obligatoire",
+    excerpt: "Guide complet sur la LAMal, l'assurance maladie obligatoire en Suisse.",
+    content: `<h2>Qu'est-ce que la LAMal ?</h2>
+
+<p>La LAMal (Loi fédérale sur l'assurance-maladie) est le socle de l'assurance maladie en Suisse. Elle garantit à tous les résidents un accès aux soins de base.</p>
+
+<h3>Principes fondamentaux</h3>
+
+<ul>
+<li><strong>Obligatoire</strong> : Toute personne résidant en Suisse doit s'assurer</li>
+<li><strong>Solidaire</strong> : Les primes ne dépendent pas de l'état de santé</li>
+<li><strong>Libre choix</strong> : Vous choisissez votre caisse maladie</li>
+<li><strong>Prestations identiques</strong> : Mêmes soins quelle que soit la caisse</li>
+</ul>
+
+<h3>Ce que couvre la LAMal</h3>
+
+<ul>
+<li>Consultations médicales</li>
+<li>Hospitalisations en division commune</li>
+<li>Médicaments remboursés</li>
+<li>Analyses et examens médicaux</li>
+<li>Maternité</li>
+<li>Physiothérapie (sur ordonnance)</li>
+</ul>
+
+<h3>Participation aux coûts</h3>
+
+<ul>
+<li><strong>Franchise</strong> : 300 à 2500 CHF/an</li>
+<li><strong>Quote-part</strong> : 10% (max 700 CHF/an)</li>
+<li><strong>Contribution hospitalière</strong> : 15 CHF/jour</li>
+</ul>
+
+<h3>Les modèles d'assurance</h3>
+
+<ul>
+<li><strong>Standard</strong> : libre choix du médecin</li>
+<li><strong>Médecin de famille</strong> : passage obligatoire par le généraliste</li>
+<li><strong>HMO</strong> : réseau de soins coordonnés</li>
+<li><strong>Télémédecine</strong> : consultation téléphonique préalable</li>
+</ul>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-maladie-landing">Comparez les primes LAMal avec Optimis.</a></p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-08-05",
+    readTime: 5,
+    image: "",
+    metaDescription: "Guide complet de la LAMal : prestations, franchise, modèles et conseils pour choisir.",
+  },
+  {
+    id: "3960",
+    slug: "prime-lamal",
+    title: "Les primes LAMal en 2024 : évolution et conseils",
+    excerpt: "Analyse des primes d'assurance maladie LAMal en 2024 et conseils pour économiser.",
+    content: `<h2>Évolution des primes LAMal en 2024</h2>
+
+<p>Les primes d'assurance maladie ont connu une hausse significative ces dernières années. En 2024, la prime moyenne pour un adulte avec franchise standard s'élève à environ <strong>360 CHF par mois</strong>.</p>
+
+<h3>Facteurs influençant les primes</h3>
+
+<ul>
+<li><strong>Canton de résidence</strong> : Différences de 50% entre les cantons</li>
+<li><strong>Âge</strong> : 0-18 ans, 19-25 ans, 26+</li>
+<li><strong>Franchise choisie</strong> : 300 à 2500 CHF</li>
+<li><strong>Modèle d'assurance</strong> : Standard, HMO, médecin de famille</li>
+</ul>
+
+<h3>Primes moyennes par région</h3>
+
+<figure><table><thead><tr><th>Canton</th><th>Prime moyenne (CHF/mois)</th></tr></thead><tbody><tr><td>Genève</td><td>450</td></tr><tr><td>Vaud</td><td>400</td></tr><tr><td>Zurich</td><td>380</td></tr><tr><td>Appenzell Rhodes-Intérieures</td><td>280</td></tr></tbody></table></figure>
+
+<h3>Comment réduire vos primes</h3>
+
+<ol>
+<li>Augmenter votre franchise si vous êtes en bonne santé</li>
+<li>Opter pour un modèle alternatif (HMO, télémédecine)</li>
+<li>Comparer annuellement les offres</li>
+<li>Demander les subsides si éligible</li>
+</ol>
+
+<h3>Délais pour changer de caisse</h3>
+
+<ul>
+<li>Résiliation au 30 novembre pour le 1er janvier</li>
+<li>Lettre recommandée conseillée</li>
+</ul>
+
+<p><a href="https://le-comparateur-optimis.ch/assurance-maladie-landing">Comparez les primes avec Optimis et économisez !</a></p>`,
+    category: "Assurance santé",
+    categorySlug: "assurance-sante",
+    date: "2024-08-10",
+    readTime: 4,
+    image: "",
+    metaDescription: "Analyse des primes LAMal 2024 en Suisse : évolution, comparaison par canton et astuces.",
+  },
 ];
 // Enforce “image à la une” strictly: if we have a locally downloaded featured image
 // (from WordPress XML _thumbnail_id), it overrides any older placeholder / content image.
