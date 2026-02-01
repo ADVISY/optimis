@@ -7,6 +7,7 @@ import FormFieldWrapper from "@/components/forms/FormField";
 import ComparisonResults from "@/components/forms/ComparisonResults";
 import LoadingComparison from "@/components/forms/LoadingComparison";
 import VehicleSelector from "@/components/forms/VehicleSelector";
+import PlateSearch from "@/components/forms/PlateSearch";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { Input } from "@/components/ui/input";
@@ -24,7 +25,7 @@ import {
 import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { mockCarInsuranceOffers, InsuranceOffer } from "@/data/mockInsuranceData";
 import DateInput from "@/components/ui/date-input";
-import { Lock, User, Phone, Search } from "lucide-react";
+import { Lock, User, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface CarInsuranceFormData {
@@ -165,50 +166,53 @@ const CarInsuranceForm = () => {
       {/* Step 1: Vehicle */}
       <FormStep isActive={currentStep === 1}>
         <div className="space-y-6">
-          {/* Manual Vehicle Selection - Primary method */}
-          <div className="space-y-2">
-            <p className="text-sm font-medium text-center text-muted-foreground mb-4">
-              Sélectionnez votre véhicule ci-dessous
-            </p>
-            <VehicleSelector
-              brand={formData.vehicleBrand}
-              model={formData.vehicleModel}
-              year={formData.vehicleYear}
-              onBrandChange={(brand) => updateFormData({ vehicleBrand: brand })}
-              onModelChange={(model) => updateFormData({ vehicleModel: model })}
-              onYearChange={(year) => updateFormData({ vehicleYear: year })}
-            />
+          {/* License Plate Search - Primary method */}
+          <div className="bg-muted/50 p-4 rounded-lg">
+            <FormFieldWrapper label={t("forms.carInsurance.vehiclePlate")} htmlFor="vehiclePlate">
+              <PlateSearch
+                plate={formData.vehiclePlate}
+                onPlateChange={(plate) => updateFormData({ vehiclePlate: plate })}
+                onVehicleFound={(brand, model, year) => {
+                  updateFormData({ 
+                    vehicleBrand: brand, 
+                    vehicleModel: model, 
+                    vehicleYear: year 
+                  });
+                }}
+              />
+            </FormFieldWrapper>
           </div>
 
-          {/* License Plate - Optional for future use */}
-          <div className="relative mt-4">
+          <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-background px-2 text-muted-foreground">
-                Optionnel
+                {t("forms.carInsurance.orManual")}
               </span>
             </div>
           </div>
 
-          <div className="bg-muted/30 p-4 rounded-lg">
-            <FormFieldWrapper label={t("forms.carInsurance.vehiclePlate")} htmlFor="vehiclePlate">
-              <div className="relative">
-                <Input
-                  id="vehiclePlate"
-                  value={formData.vehiclePlate}
-                  onChange={(e) => updateFormData({ vehiclePlate: e.target.value.toUpperCase() })}
-                  placeholder="VD 123456"
-                  className="h-12 text-base pr-12 font-mono tracking-wider bg-background"
-                />
-                <Search className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              </div>
-              <p className="text-xs text-muted-foreground mt-1">
-                Facultatif - Pour référence dans votre dossier
+          {/* Manual Vehicle Selection */}
+          <VehicleSelector
+            brand={formData.vehicleBrand}
+            model={formData.vehicleModel}
+            year={formData.vehicleYear}
+            onBrandChange={(brand) => updateFormData({ vehicleBrand: brand })}
+            onModelChange={(model) => updateFormData({ vehicleModel: model })}
+            onYearChange={(year) => updateFormData({ vehicleYear: year })}
+          />
+
+          {/* Show selected vehicle summary */}
+          {formData.vehicleBrand && formData.vehicleModel && formData.vehicleYear && (
+            <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 mt-4">
+              <p className="text-sm font-medium text-primary">Véhicule sélectionné :</p>
+              <p className="text-lg font-bold">
+                {formData.vehicleBrand} {formData.vehicleModel} ({formData.vehicleYear})
               </p>
-            </FormFieldWrapper>
-          </div>
+            </div>
+          )}
         </div>
       </FormStep>
 
