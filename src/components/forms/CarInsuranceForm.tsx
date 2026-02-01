@@ -252,16 +252,16 @@ const CarInsuranceForm = () => {
 
       {/* Step 3: Driver */}
       <FormStep isActive={currentStep === 3}>
-        <div className="space-y-4">
+        <div className="space-y-3 md:space-y-4">
           <FormFieldWrapper label={t("forms.carInsurance.driverBirthDate")} required>
             <DateInput
               value={formData.driverBirthDate}
               onChange={(date) => updateFormData({ driverBirthDate: date })}
               placeholder="JJ/MM/AAAA"
-              className="h-14 text-lg"
+              className="h-9 md:h-14 text-sm md:text-lg"
               maxYear={new Date().getFullYear() - 18}
             />
-            <p className="text-xs text-muted-foreground mt-1">
+            <p className="text-[10px] md:text-xs text-muted-foreground mt-1">
               Le conducteur principal doit avoir au moins 18 ans
             </p>
           </FormFieldWrapper>
@@ -271,7 +271,7 @@ const CarInsuranceForm = () => {
               value={formData.licenseYear}
               onValueChange={(value) => updateFormData({ licenseYear: value })}
             >
-              <SelectTrigger className="h-14 text-lg">
+              <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.carInsurance.selectLicenseYear")} />
               </SelectTrigger>
               <SelectContent>
@@ -293,9 +293,9 @@ const CarInsuranceForm = () => {
               min={0}
               max={5}
               step={1}
-              className="py-4"
+              className="py-2 md:py-4"
             />
-            <div className="flex justify-between text-xs text-muted-foreground">
+            <div className="flex justify-between text-[10px] md:text-xs text-muted-foreground">
               <span>0</span>
               <span>5+</span>
             </div>

@@ -196,21 +196,21 @@ const LegalProtectionForm = () => {
 
       {/* Step 2: Household */}
       <FormStep isActive={currentStep === 2}>
-        <div className="space-y-4">
+        <div className="space-y-3 md:space-y-4">
           <FormFieldWrapper label={t("forms.legalProtection.householdSize")} required>
             <RadioGroup
               value={formData.householdSize}
               onValueChange={(value) => updateFormData({ householdSize: value })}
-              className="grid grid-cols-2 gap-3"
+              className="grid grid-cols-1 sm:grid-cols-3 gap-2 md:gap-3"
             >
               {[
                 { value: "1", label: t("forms.legalProtection.single") },
                 { value: "2", label: t("forms.legalProtection.couple") },
                 { value: "family", label: t("forms.legalProtection.family") },
               ].map((size) => (
-                <div key={size.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+                <div key={size.value} className="flex items-center space-x-2 p-2.5 md:p-4 border rounded-lg hover:bg-muted/50">
                   <RadioGroupItem value={size.value} id={`size-${size.value}`} />
-                  <Label htmlFor={`size-${size.value}`} className="cursor-pointer text-lg">
+                  <Label htmlFor={`size-${size.value}`} className="cursor-pointer text-sm md:text-lg">
                     {size.label}
                   </Label>
                 </div>
@@ -223,7 +223,7 @@ const LegalProtectionForm = () => {
               value={formData.canton}
               onValueChange={(value) => updateFormData({ canton: value })}
             >
-              <SelectTrigger className="h-14 text-lg">
+              <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
               </SelectTrigger>
               <SelectContent>

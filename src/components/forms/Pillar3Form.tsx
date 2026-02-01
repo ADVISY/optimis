@@ -181,7 +181,7 @@ const Pillar3Form = () => {
 
       {/* Step 2: Profile */}
       <FormStep isActive={currentStep === 2}>
-        <div className="space-y-4">
+        <div className="space-y-3 md:space-y-4">
           <FormFieldWrapper label={t("forms.pillar3.age")} htmlFor="age" required>
             <Input
               id="age"
@@ -191,7 +191,7 @@ const Pillar3Form = () => {
               value={formData.age}
               onChange={(e) => updateFormData({ age: e.target.value })}
               placeholder="35"
-              className="h-14 text-lg"
+              className="h-9 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
@@ -200,7 +200,7 @@ const Pillar3Form = () => {
               value={formData.professionalStatus}
               onValueChange={(value) => updateFormData({ professionalStatus: value })}
             >
-              <SelectTrigger className="h-14 text-lg">
+              <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectStatus")} />
               </SelectTrigger>
               <SelectContent>
@@ -217,7 +217,7 @@ const Pillar3Form = () => {
               value={formData.incomeRange}
               onValueChange={(value) => updateFormData({ incomeRange: value })}
             >
-              <SelectTrigger className="h-14 text-lg">
+              <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectIncome")} />
               </SelectTrigger>
               <SelectContent>
@@ -234,13 +234,13 @@ const Pillar3Form = () => {
 
       {/* Step 3: Investment */}
       <FormStep isActive={currentStep === 3}>
-        <div className="space-y-6">
+        <div className="space-y-3 md:space-y-6">
           <FormFieldWrapper label={t("forms.pillar3.savingsAmount")} required>
             <Select
               value={formData.savingsAmount}
               onValueChange={(value) => updateFormData({ savingsAmount: value })}
             >
-              <SelectTrigger className="h-14 text-lg">
+              <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectAmount")} />
               </SelectTrigger>
               <SelectContent>
@@ -256,7 +256,7 @@ const Pillar3Form = () => {
               value={formData.investmentHorizon}
               onValueChange={(value) => updateFormData({ investmentHorizon: value })}
             >
-              <SelectTrigger className="h-14 text-lg">
+              <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectHorizon")} />
               </SelectTrigger>
               <SelectContent>
