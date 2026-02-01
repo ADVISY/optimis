@@ -189,19 +189,19 @@ const ForfaitMobile = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16">
+      <section className="py-8 md:py-16">
         <div className="container">
           <Card className="bg-primary/5 border-primary/20">
-            <CardContent className="p-8 md:p-12 text-center">
-              <img src={llamaMascot} alt="Mascotte Optimis" className="h-24 mx-auto mb-6" />
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+            <CardContent className="p-4 md:p-12 text-center">
+              <img src={llamaMascot} alt="Mascotte Optimis" className="h-16 md:h-24 mx-auto mb-3 md:mb-6" />
+              <h2 className="text-lg md:text-3xl font-bold text-foreground mb-2 md:mb-4">
                 {t('mobile.readyToCompare')}
               </h2>
-              <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
+              <p className="text-sm md:text-base text-muted-foreground mb-4 md:mb-6 max-w-xl mx-auto">
                 {t('mobile.getEstimate')}
               </p>
-              <Button size="lg" className="gap-2" onClick={handleCompareClick}>
-                <Smartphone className="h-5 w-5" />
+              <Button size="default" className="gap-2 h-10 md:h-12 text-sm md:text-base" onClick={handleCompareClick}>
+                <Smartphone className="h-4 w-4 md:h-5 md:w-5" />
                 {t('mobile.compareNow')}
               </Button>
             </CardContent>
