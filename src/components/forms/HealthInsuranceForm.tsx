@@ -341,12 +341,12 @@ const HealthInsuranceForm = () => {
             ))}
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <Button
               type="button"
               variant="outline"
               onClick={() => addPerson("adult")}
-              className="flex-1 gap-2 bg-white/40 text-gray-800 border-white/60 hover:bg-white/50 backdrop-blur-sm"
+              className="flex-1 gap-2 bg-white/40 text-gray-800 border-white/60 hover:bg-white/50 backdrop-blur-sm text-sm md:text-base h-10 md:h-11"
             >
               <Plus className="h-4 w-4" />
               {t("forms.healthInsurance.addAdult")}
@@ -355,7 +355,7 @@ const HealthInsuranceForm = () => {
               type="button"
               variant="outline"
               onClick={() => addPerson("child")}
-              className="flex-1 gap-2 bg-white/40 text-gray-800 border-white/60 hover:bg-white/50 backdrop-blur-sm"
+              className="flex-1 gap-2 bg-white/40 text-gray-800 border-white/60 hover:bg-white/50 backdrop-blur-sm text-sm md:text-base h-10 md:h-11"
             >
               <Plus className="h-4 w-4" />
               {t("forms.healthInsurance.addChild")}
@@ -377,7 +377,7 @@ const HealthInsuranceForm = () => {
               <RadioGroup
                 value={formData.lamalModel}
                 onValueChange={(value) => updateFormData({ lamalModel: value })}
-                className="grid grid-cols-2 gap-3"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3"
               >
                 {[
                   { value: "standard", label: t("forms.healthInsurance.models.standard") },
@@ -385,9 +385,9 @@ const HealthInsuranceForm = () => {
                   { value: "hmo", label: t("forms.healthInsurance.models.hmo") },
                   { value: "telemed", label: t("forms.healthInsurance.models.telemed") },
                 ].map((model) => (
-                  <div key={model.value} className="flex items-center space-x-2 p-3 rounded-lg bg-white/40 hover:bg-white/50 transition-colors">
+                  <div key={model.value} className="flex items-center space-x-2 p-2.5 md:p-3 rounded-lg bg-white/40 hover:bg-white/50 transition-colors">
                     <RadioGroupItem value={model.value} id={model.value} />
-                    <Label htmlFor={model.value} className="cursor-pointer text-white">
+                    <Label htmlFor={model.value} className="cursor-pointer text-white text-sm md:text-base">
                       {model.label}
                     </Label>
                   </div>
@@ -460,7 +460,7 @@ const HealthInsuranceForm = () => {
           </div>
 
           {/* Tier Selection Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
             {/* BASIC */}
             <Card 
               className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-white/40 backdrop-blur-sm ${
