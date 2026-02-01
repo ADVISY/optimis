@@ -51,10 +51,10 @@ const CategoryHero = ({
   const { t } = useTranslation();
 
   return (
-    <section className="gradient-optimis min-h-[40vh] md:min-h-[calc(100vh-6rem)] flex flex-col justify-between overflow-visible relative pb-4 md:pb-8">
+    <section className="gradient-optimis min-h-[35vh] md:min-h-[calc(100vh-6rem)] flex flex-col justify-between overflow-visible relative pb-4 md:pb-8">
       <div className="container relative flex-1 flex items-center">
-        <div className="grid items-center gap-3 lg:grid-cols-2 w-full py-4 md:py-8 lg:py-12">
-          <div className="space-y-2 md:space-y-5 animate-fade-in z-10 relative">
+        <div className="grid items-center gap-2 lg:grid-cols-2 w-full py-3 md:py-8 lg:py-12">
+          <div className="space-y-1.5 md:space-y-5 animate-fade-in z-10 relative">
             {/* Breadcrumb */}
             <p className="text-[10px] md:text-sm font-medium text-muted-foreground">
               <LocalizedLink to="/" className="hover:text-primary transition-colors">
@@ -63,26 +63,27 @@ const CategoryHero = ({
               / {breadcrumbKey ? t(breadcrumbKey) : pageTitle}
             </p>
 
-            {/* Title with mascot for mobile */}
-            <div className="flex items-center gap-3 md:block">
-              <h1 className="font-heading text-xl sm:text-2xl font-black leading-[1.1] text-foreground md:text-4xl lg:text-5xl xl:text-6xl tracking-tight flex-1">
-                {pageTitle}
-              </h1>
-              {/* Mobile mascot - visible only on mobile */}
+            {/* Mobile mascot - centered above title */}
+            <div className="md:hidden flex justify-center">
               <img
                 src={mascotPointing}
                 alt="Mascotte Optimis"
-                className="md:hidden h-16 w-auto drop-shadow-lg animate-fade-in"
+                className="h-20 w-auto drop-shadow-lg animate-fade-in"
               />
             </div>
 
+            {/* Title */}
+            <h1 className="font-heading text-xl sm:text-2xl font-black leading-[1.1] text-foreground md:text-4xl lg:text-5xl xl:text-6xl tracking-tight text-center md:text-left">
+              {pageTitle}
+            </h1>
+
             {/* Subtitle */}
-            <p className="text-xs md:text-lg text-muted-foreground lg:text-xl max-w-lg leading-relaxed line-clamp-2 md:line-clamp-none">
+            <p className="text-xs md:text-lg text-muted-foreground lg:text-xl max-w-lg leading-relaxed line-clamp-2 md:line-clamp-none text-center md:text-left">
               {subtitle}
             </p>
 
             {/* CTA Button */}
-            <div className="flex flex-wrap gap-4 pt-1 md:pt-2">
+            <div className="flex flex-wrap gap-4 pt-1 md:pt-2 justify-center md:justify-start">
               <Button size="default" className="gap-1.5 md:gap-2 animate-fade-in-delay w-full sm:w-auto text-xs md:text-base h-9 md:h-11" onClick={onButtonClick}>
                 <ButtonIcon className="h-3.5 w-3.5 md:h-5 md:w-5" />
                 {buttonLabel}

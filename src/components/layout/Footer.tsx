@@ -10,18 +10,18 @@ const Footer = () => {
   return (
     <footer className="border-t bg-optimis-green-dark text-white">
       {/* CTA Banner */}
-      <div className="container py-12 md:py-16">
-        <div className="bg-primary rounded-2xl p-8 md:p-12 text-center text-primary-foreground">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">
+      <div className="container py-8 md:py-16">
+        <div className="bg-primary rounded-xl md:rounded-2xl p-5 md:p-12 text-center text-primary-foreground">
+          <h3 className="text-lg md:text-3xl font-bold mb-2 md:mb-4">
             {t('footer.ctaTitle', { defaultValue: 'Prêt à économiser sur vos assurances ?' })}
           </h3>
-          <p className="text-lg mb-8 opacity-90 max-w-xl mx-auto">
+          <p className="text-sm md:text-lg mb-4 md:mb-8 opacity-90 max-w-xl mx-auto">
             {t('footer.ctaDescription', { defaultValue: 'Comparez gratuitement et sans engagement les meilleures offres du marché.' })}
           </p>
-          <Button asChild size="xl" variant="secondary" className="gap-2.5">
+          <Button asChild size="default" className="gap-2 h-10 md:h-12 text-sm md:text-base px-4 md:px-6">
             <LocalizedLink to="/assurance-sante">
               {t('common.compareNow')}
-              <ArrowRight className="h-5 w-5" />
+              <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
             </LocalizedLink>
           </Button>
         </div>
