@@ -57,34 +57,34 @@ const FormContainer = ({
           }}
         />
         
-        <CardHeader className="space-y-2 md:space-y-4 pb-2 md:pb-6 px-3 md:px-8 pt-3 md:pt-8 relative z-10">
+        <CardHeader className="space-y-1.5 md:space-y-4 pb-2 md:pb-6 px-3 md:px-8 pt-3 md:pt-8 relative z-10">
           {/* Trust badges - ultra compact on mobile */}
-          <div className="flex flex-wrap items-center justify-center gap-1.5 md:gap-4 text-[10px] md:text-base">
-            <div className="flex items-center gap-1 md:gap-2 text-white font-semibold px-2 md:px-4 py-1 md:py-2 rounded-full bg-white/15 shadow-[0_0_20px_rgba(255,255,255,0.25)] backdrop-blur-sm border border-white/20">
-              <Shield className="h-2.5 w-2.5 md:h-4 md:w-4 text-white" />
+          <div className="flex flex-wrap items-center justify-center gap-1 md:gap-4 text-[9px] md:text-base">
+            <div className="flex items-center gap-0.5 md:gap-2 text-white font-semibold px-1.5 md:px-4 py-0.5 md:py-2 rounded-full bg-white/15 shadow-[0_0_20px_rgba(255,255,255,0.25)] backdrop-blur-sm border border-white/20">
+              <Shield className="h-2 w-2 md:h-4 md:w-4 text-white" />
               <span>{t("forms.free")}</span>
             </div>
-            <div className="flex items-center gap-1 md:gap-2 text-white font-semibold px-2 md:px-4 py-1 md:py-2 rounded-full bg-white/15 shadow-[0_0_20px_rgba(255,255,255,0.25)] backdrop-blur-sm border border-white/20">
-              <Lock className="h-2.5 w-2.5 md:h-4 md:w-4 text-white" />
+            <div className="flex items-center gap-0.5 md:gap-2 text-white font-semibold px-1.5 md:px-4 py-0.5 md:py-2 rounded-full bg-white/15 shadow-[0_0_20px_rgba(255,255,255,0.25)] backdrop-blur-sm border border-white/20">
+              <Lock className="h-2 w-2 md:h-4 md:w-4 text-white" />
               <span>{t("forms.secure")}</span>
             </div>
-            <div className="flex items-center gap-1 md:gap-2 text-white font-semibold px-2 md:px-4 py-1 md:py-2 rounded-full bg-white/15 shadow-[0_0_20px_rgba(255,255,255,0.25)] backdrop-blur-sm border border-white/20">
-              <CheckCircle className="h-2.5 w-2.5 md:h-4 md:w-4 text-white" />
+            <div className="flex items-center gap-0.5 md:gap-2 text-white font-semibold px-1.5 md:px-4 py-0.5 md:py-2 rounded-full bg-white/15 shadow-[0_0_20px_rgba(255,255,255,0.25)] backdrop-blur-sm border border-white/20">
+              <CheckCircle className="h-2 w-2 md:h-4 md:w-4 text-white" />
               <span>{t("forms.noCommitment")}</span>
             </div>
           </div>
           
-          <FormProgress currentStep={currentStep} totalSteps={totalSteps} className="[&_*]:text-xs md:[&_*]:text-base [&_.h-3]:h-2 md:[&_.h-3]:h-3" />
+          <FormProgress currentStep={currentStep} totalSteps={totalSteps} className="[&_*]:text-[10px] md:[&_*]:text-base [&_.h-3]:h-1.5 md:[&_.h-3]:h-3" />
           
-          <div className="space-y-1 md:space-y-3">
-            <CardTitle className="text-base md:text-2xl lg:text-3xl font-bold text-white leading-tight">{title}</CardTitle>
+          <div className="space-y-0.5 md:space-y-3">
+            <CardTitle className="text-sm md:text-2xl lg:text-3xl font-bold text-white leading-tight">{title}</CardTitle>
             {description && (
-              <CardDescription className="text-xs md:text-lg text-white/80 leading-relaxed line-clamp-2 md:line-clamp-none">{description}</CardDescription>
+              <CardDescription className="text-[10px] md:text-lg text-white/80 leading-relaxed line-clamp-1 md:line-clamp-none">{description}</CardDescription>
             )}
           </div>
         </CardHeader>
         
-        <CardContent className="pt-0 px-3 md:px-8 pb-3 md:pb-8 text-white relative z-10">
+        <CardContent className="pt-0 px-2.5 md:px-8 pb-2.5 md:pb-8 text-white relative z-10">
           {children}
         </CardContent>
       </Card>

@@ -258,7 +258,7 @@ const HealthInsuranceForm = () => {
     >
       {/* Step 1: Location */}
       <FormStep isActive={currentStep === 1}>
-        <div className="space-y-3 md:space-y-6">
+        <div className="space-y-2 md:space-y-6">
           <FormFieldWrapper
             label={t("forms.healthInsurance.canton")}
             htmlFor="canton"
@@ -268,7 +268,7 @@ const HealthInsuranceForm = () => {
               value={formData.canton}
               onValueChange={(value) => updateFormData({ canton: value })}
             >
-              <SelectTrigger className="h-9 md:h-11 text-sm md:text-base">
+              <SelectTrigger className="h-8 md:h-11 text-xs md:text-base">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
               </SelectTrigger>
               <SelectContent>
@@ -292,7 +292,7 @@ const HealthInsuranceForm = () => {
               value={formData.postalCode}
               onChange={(e) => updateFormData({ postalCode: e.target.value })}
               placeholder="1000"
-              className="h-9 md:h-11 text-sm md:text-base"
+              className="h-8 md:h-11 text-xs md:text-base"
             />
           </FormFieldWrapper>
         </div>
@@ -300,13 +300,13 @@ const HealthInsuranceForm = () => {
 
       {/* Step 2: Persons to insure */}
       <FormStep isActive={currentStep === 2}>
-        <div className="space-y-3 md:space-y-6">
-          <div className="space-y-2 md:space-y-4">
+        <div className="space-y-2 md:space-y-6">
+          <div className="space-y-1.5 md:space-y-4">
             {formData.persons.map((person, index) => (
               <Card key={person.id} className="bg-white/40 border-white/50 backdrop-blur-sm">
-                <CardContent className="p-2.5 md:p-4">
-                  <div className="flex items-center justify-between mb-2 md:mb-4">
-                    <span className="font-medium text-white text-sm md:text-base">
+                <CardContent className="p-2 md:p-4">
+                  <div className="flex items-center justify-between mb-1.5 md:mb-4">
+                    <span className="font-medium text-white text-xs md:text-base">
                       {person.type === "adult"
                         ? t("forms.healthInsurance.adult")
                         : t("forms.healthInsurance.child")}{" "}
@@ -317,15 +317,15 @@ const HealthInsuranceForm = () => {
                         variant="ghost"
                         size="sm"
                         onClick={() => removePerson(person.id)}
-                        className="text-white/70 hover:text-red-300 hover:bg-red-500/20 h-7 w-7 p-0"
+                        className="text-white/70 hover:text-red-300 hover:bg-red-500/20 h-6 w-6 p-0"
                       >
-                        <Trash2 className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                        <Trash2 className="h-3 w-3 md:h-4 md:w-4" />
                       </Button>
                     )}
                   </div>
 
                   <div className="space-y-1 md:space-y-2">
-                    <Label className="text-xs md:text-sm font-medium text-white/90">
+                    <Label className="text-[10px] md:text-sm font-medium text-white/90">
                       {t("forms.healthInsurance.birthDate")}
                       <span className="text-red-300 ml-1">*</span>
                     </Label>
@@ -335,7 +335,7 @@ const HealthInsuranceForm = () => {
                       placeholder="JJ/MM/AAAA"
                       maxYear={new Date().getFullYear()}
                       minYear={1900}
-                      className="h-9 md:h-11"
+                      className="h-8 md:h-11"
                     />
                   </div>
                 </CardContent>
@@ -343,24 +343,26 @@ const HealthInsuranceForm = () => {
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-2">
+          <div className="flex gap-1.5 md:gap-2">
             <Button
               type="button"
               variant="outline"
               onClick={() => addPerson("adult")}
-              className="flex-1 gap-1.5 bg-white/40 text-gray-800 border-white/60 hover:bg-white/50 backdrop-blur-sm text-xs md:text-base h-8 md:h-11"
+              className="flex-1 gap-1 bg-white/40 text-gray-800 border-white/60 hover:bg-white/50 backdrop-blur-sm text-[10px] md:text-base h-7 md:h-11 px-1.5 md:px-4"
             >
-              <Plus className="h-3.5 w-3.5 md:h-4 md:w-4" />
-              {t("forms.healthInsurance.addAdult")}
+              <Plus className="h-3 w-3 md:h-4 md:w-4" />
+              <span className="hidden sm:inline">{t("forms.healthInsurance.addAdult")}</span>
+              <span className="sm:hidden">Adulte</span>
             </Button>
             <Button
               type="button"
               variant="outline"
               onClick={() => addPerson("child")}
-              className="flex-1 gap-1.5 bg-white/40 text-gray-800 border-white/60 hover:bg-white/50 backdrop-blur-sm text-xs md:text-base h-8 md:h-11"
+              className="flex-1 gap-1 bg-white/40 text-gray-800 border-white/60 hover:bg-white/50 backdrop-blur-sm text-[10px] md:text-base h-7 md:h-11 px-1.5 md:px-4"
             >
-              <Plus className="h-3.5 w-3.5 md:h-4 md:w-4" />
-              {t("forms.healthInsurance.addChild")}
+              <Plus className="h-3 w-3 md:h-4 md:w-4" />
+              <span className="hidden sm:inline">{t("forms.healthInsurance.addChild")}</span>
+              <span className="sm:hidden">Enfant</span>
             </Button>
           </div>
         </div>
@@ -368,18 +370,18 @@ const HealthInsuranceForm = () => {
 
       {/* Step 3: LAMal Model & Franchise */}
       <FormStep isActive={currentStep === 3}>
-        <div className="space-y-6">
+        <div className="space-y-3 md:space-y-6">
           {/* LAMal Model Card */}
           <Card className="bg-white/40 border-white/50 backdrop-blur-sm">
-            <CardContent className="p-5">
-              <Label className="text-sm font-semibold text-white mb-4 block">
+            <CardContent className="p-2.5 md:p-5">
+              <Label className="text-[10px] md:text-sm font-semibold text-white mb-2 md:mb-4 block">
                 {t("forms.healthInsurance.lamalModel")}
                 <span className="text-red-300 ml-1">*</span>
               </Label>
               <RadioGroup
                 value={formData.lamalModel}
                 onValueChange={(value) => updateFormData({ lamalModel: value })}
-                className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3"
+                className="grid grid-cols-2 gap-1.5 md:gap-3"
               >
                 {[
                   { value: "standard", label: t("forms.healthInsurance.models.standard") },
@@ -387,9 +389,9 @@ const HealthInsuranceForm = () => {
                   { value: "hmo", label: t("forms.healthInsurance.models.hmo") },
                   { value: "telemed", label: t("forms.healthInsurance.models.telemed") },
                 ].map((model) => (
-                  <div key={model.value} className="flex items-center space-x-2 p-2.5 md:p-3 rounded-lg bg-white/40 hover:bg-white/50 transition-colors">
-                    <RadioGroupItem value={model.value} id={model.value} />
-                    <Label htmlFor={model.value} className="cursor-pointer text-white text-sm md:text-base">
+                  <div key={model.value} className="flex items-center space-x-1.5 md:space-x-2 p-1.5 md:p-3 rounded-lg bg-white/40 hover:bg-white/50 transition-colors">
+                    <RadioGroupItem value={model.value} id={model.value} className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                    <Label htmlFor={model.value} className="cursor-pointer text-white text-[10px] md:text-base leading-tight">
                       {model.label}
                     </Label>
                   </div>
@@ -400,13 +402,13 @@ const HealthInsuranceForm = () => {
 
           {/* Franchise Card */}
           <Card className="bg-white/40 border-white/50 backdrop-blur-sm">
-            <CardContent className="p-5">
-              <Label className="text-sm font-semibold text-white mb-2 block">
+            <CardContent className="p-2.5 md:p-5">
+              <Label className="text-[10px] md:text-sm font-semibold text-white mb-1 md:mb-2 block">
                 {t("forms.healthInsurance.franchise")}
               </Label>
-              <div className="text-center mb-4">
-                <span className="text-3xl font-bold text-emerald-600">CHF {formData.franchise}</span>
-                <span className="text-white/70 text-sm ml-2">/ an</span>
+              <div className="text-center mb-2 md:mb-4">
+                <span className="text-xl md:text-3xl font-bold text-emerald-600">CHF {formData.franchise}</span>
+                <span className="text-white/70 text-[10px] md:text-sm ml-1 md:ml-2">/ an</span>
               </div>
               <Slider
                 value={[formData.franchise]}
@@ -414,36 +416,31 @@ const HealthInsuranceForm = () => {
                 min={300}
                 max={2500}
                 step={200}
-                className="py-4"
+                className="py-2 md:py-4"
               />
-              <div className="flex justify-between text-xs text-white/70 mt-2">
+              <div className="flex justify-between text-[10px] md:text-xs text-white/70 mt-1 md:mt-2">
                 <span>CHF 300</span>
                 <span>CHF 2500</span>
               </div>
-              <p className="text-xs text-white/60 mt-3 text-center">
-                {t("forms.healthInsurance.franchiseHelp")}
-              </p>
             </CardContent>
           </Card>
 
           {/* Accident Coverage Card */}
           <Card className="bg-white/40 border-white/50 backdrop-blur-sm">
-            <CardContent className="p-5">
-              <div className="flex items-center space-x-3">
+            <CardContent className="p-2.5 md:p-5">
+              <div className="flex items-center space-x-2 md:space-x-3">
                 <Checkbox
                   id="accidentCoverage"
                   checked={formData.accidentCoverage}
                   onCheckedChange={(checked) =>
                     updateFormData({ accidentCoverage: checked as boolean })
                   }
+                  className="h-4 w-4 md:h-5 md:w-5"
                 />
-                <Label htmlFor="accidentCoverage" className="cursor-pointer text-white font-medium">
+                <Label htmlFor="accidentCoverage" className="cursor-pointer text-white font-medium text-xs md:text-base">
                   {t("forms.healthInsurance.includeAccident")}
                 </Label>
               </div>
-              <p className="text-xs text-white/60 mt-2 ml-7">
-                {t("forms.healthInsurance.accidentCoverageHelp", "Couvre les accidents si vous n'êtes pas assuré par votre employeur")}
-              </p>
             </CardContent>
           </Card>
         </div>
@@ -614,12 +611,12 @@ const HealthInsuranceForm = () => {
 
       {/* Step 5: Name */}
       <FormStep isActive={currentStep === 5}>
-        <div className="space-y-3 md:space-y-6">
-          <div className="text-center mb-3 md:mb-6">
-            <h3 className="text-sm md:text-lg font-semibold mb-1 md:mb-2">
+        <div className="space-y-2 md:space-y-6">
+          <div className="text-center mb-2 md:mb-6">
+            <h3 className="text-xs md:text-lg font-semibold mb-0.5 md:mb-2">
               {t("forms.contact.almostDone", "Presque terminé !")}
             </h3>
-            <p className="text-xs md:text-sm text-muted-foreground">
+            <p className="text-[10px] md:text-sm text-muted-foreground">
               {t("forms.contact.nameStepDescription", "Comment pouvons-nous vous appeler ?")}
             </p>
           </div>
@@ -634,7 +631,7 @@ const HealthInsuranceForm = () => {
               value={formData.firstName}
               onChange={(e) => updateFormData({ firstName: e.target.value })}
               placeholder={t("forms.contact.firstNamePlaceholder", "Votre prénom")}
-              className="h-9 md:h-14 text-sm md:text-lg"
+              className="h-8 md:h-14 text-xs md:text-lg"
             />
           </FormFieldWrapper>
 
@@ -648,7 +645,7 @@ const HealthInsuranceForm = () => {
               value={formData.lastName}
               onChange={(e) => updateFormData({ lastName: e.target.value })}
               placeholder={t("forms.contact.lastNamePlaceholder", "Votre nom")}
-              className="h-9 md:h-14 text-sm md:text-lg"
+              className="h-8 md:h-14 text-xs md:text-lg"
             />
           </FormFieldWrapper>
         </div>
@@ -656,12 +653,12 @@ const HealthInsuranceForm = () => {
 
       {/* Step 6: Contact Details */}
       <FormStep isActive={currentStep === 6}>
-        <div className="space-y-3 md:space-y-6">
-          <div className="text-center mb-3 md:mb-6">
-            <h3 className="text-sm md:text-lg font-semibold mb-1 md:mb-2">
+        <div className="space-y-2 md:space-y-6">
+          <div className="text-center mb-2 md:mb-6">
+            <h3 className="text-xs md:text-lg font-semibold mb-0.5 md:mb-2">
               {t("forms.contact.contactStepTitle", "Où pouvons-nous vous joindre ?")}
             </h3>
-            <p className="text-xs md:text-sm text-muted-foreground">
+            <p className="text-[10px] md:text-sm text-muted-foreground">
               {t("forms.contact.contactStepDescription", "Un conseiller vous contactera pour vous présenter les meilleures offres.")}
             </p>
           </div>
@@ -677,7 +674,7 @@ const HealthInsuranceForm = () => {
               value={formData.email}
               onChange={(e) => updateFormData({ email: e.target.value })}
               placeholder="votre@email.ch"
-              className="h-9 md:h-14 text-sm md:text-lg"
+              className="h-8 md:h-14 text-xs md:text-lg"
             />
           </FormFieldWrapper>
 
@@ -692,12 +689,12 @@ const HealthInsuranceForm = () => {
               value={formData.phone}
               onChange={(e) => updateFormData({ phone: e.target.value })}
               placeholder="+41 79 123 45 67"
-              className="h-9 md:h-14 text-sm md:text-lg"
+              className="h-8 md:h-14 text-xs md:text-lg"
             />
           </FormFieldWrapper>
 
-          <div className="bg-white/40 border border-white/50 rounded-lg md:rounded-xl p-2.5 md:p-4 text-center backdrop-blur-sm">
-            <p className="text-xs md:text-sm text-white/80">
+          <div className="bg-white/40 border border-white/50 rounded-md md:rounded-xl p-2 md:p-4 text-center backdrop-blur-sm">
+            <p className="text-[10px] md:text-sm text-white/80">
               🔒 {t("forms.contact.privacyNote", "Vos données sont protégées et ne seront jamais partagées.")}
             </p>
           </div>
