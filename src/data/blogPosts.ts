@@ -6441,6 +6441,972 @@ const rawBlogPosts: BlogPost[] = [
     image: "",
     metaDescription: "Comprendre les 3 piliers du système de retraite suisse : AVS, LPP et prévoyance privée.",
   },
+  // ==================== BATCH 7 - 15 NOUVEAUX ARTICLES ====================
+  {
+    id: "batch7-1",
+    slug: "assurance-rc-menage-quest-ce-que-cest",
+    title: "Assurance RC ménage : qu'est-ce que c'est ?",
+    excerpt: "L'assurance responsabilité civile ménage couvre les dommages que vous ou les membres de votre foyer causez à des tiers dans la vie quotidienne.",
+    content: `<h2>Qu'est-ce que l'assurance RC ménage ?</h2>
+
+<p>L'assurance responsabilité civile (RC) ménage est une protection essentielle qui couvre les dommages que vous, les membres de votre foyer ou vos animaux domestiques pouvez causer à des tiers. Elle intervient lorsque vous êtes civilement responsable d'un préjudice corporel, matériel ou financier causé à autrui.</p>
+
+<h3>Que couvre l'assurance RC ménage ?</h3>
+
+<p>La couverture inclut généralement :</p>
+
+<ul>
+<li><strong>Dommages corporels</strong> : blessures causées à un tiers</li>
+<li><strong>Dommages matériels</strong> : objets endommagés ou détruits</li>
+<li><strong>Dommages financiers</strong> : pertes économiques subies par un tiers</li>
+<li><strong>Dommages causés par vos enfants</strong></li>
+<li><strong>Dommages causés par vos animaux domestiques</strong></li>
+</ul>
+
+<h3>Exemples de sinistres couverts</h3>
+
+<ul>
+<li>Votre enfant casse une vitre chez le voisin</li>
+<li>Votre chien mord un passant</li>
+<li>Vous renversez accidentellement du café sur l'ordinateur d'un ami</li>
+<li>Une tuile de votre toit tombe sur une voiture garée</li>
+</ul>
+
+<h3>Est-elle obligatoire ?</h3>
+
+<p>L'assurance RC ménage n'est pas obligatoire en Suisse, mais elle est fortement recommandée. Les montants réclamés en cas de dommage peuvent être très élevés, surtout en cas de blessures corporelles graves.</p>
+
+<h3>Combien coûte une RC ménage ?</h3>
+
+<p>Les primes varient entre <strong>50 et 150 CHF par an</strong> selon la couverture et l'assureur. C'est un investissement modeste pour une protection importante.</p>
+
+<p><a href="/fr/assurance-menage-landing">Comparez les offres d'assurance ménage et RC avec Optimis.</a></p>`,
+    category: "Assurance habitation",
+    categorySlug: "assurance-habitation",
+    date: "2024-08-15",
+    readTime: 4,
+    image: "",
+    metaDescription: "Tout savoir sur l'assurance responsabilité civile ménage en Suisse : couverture, exemples et tarifs.",
+  },
+  {
+    id: "batch7-2",
+    slug: "assurance-auto-bonus-malus-calcul",
+    title: "Assurance auto : Comment fonctionne le système bonus-malus ?",
+    excerpt: "Le système bonus-malus influence directement le montant de votre prime d'assurance voiture. Découvrez comment il fonctionne et comment l'optimiser.",
+    content: `<h2>Le système bonus-malus en assurance auto</h2>
+
+<p>Le système bonus-malus est un mécanisme utilisé par les assureurs pour ajuster les primes d'assurance automobile en fonction de l'historique de sinistres du conducteur. Plus vous conduisez sans accident, plus votre prime diminue.</p>
+
+<h3>Comment fonctionne le bonus-malus ?</h3>
+
+<p>Le principe est simple :</p>
+
+<ul>
+<li><strong>Bonus</strong> : Chaque année sans sinistre responsable, vous gagnez des points de bonus et votre prime diminue</li>
+<li><strong>Malus</strong> : En cas de sinistre responsable, vous perdez des points et votre prime augmente</li>
+</ul>
+
+<h3>L'échelle des degrés</h3>
+
+<p>En Suisse, l'échelle va généralement de 0 (meilleur bonus) à 22 (pire malus). Voici comment cela fonctionne :</p>
+
+<ul>
+<li>Nouveau conducteur : degré 10-12</li>
+<li>Après 1 an sans sinistre : -1 degré</li>
+<li>Après un sinistre responsable : +3 à +4 degrés</li>
+</ul>
+
+<h3>Impact sur les primes</h3>
+
+<figure><table><thead><tr><th>Degré</th><th>% de la prime de base</th></tr></thead><tbody><tr><td>0 (meilleur)</td><td>35-40%</td></tr><tr><td>5</td><td>55%</td></tr><tr><td>10</td><td>75%</td></tr><tr><td>15</td><td>120%</td></tr><tr><td>22 (pire)</td><td>200%+</td></tr></tbody></table></figure>
+
+<h3>Conseils pour optimiser votre bonus</h3>
+
+<ul>
+<li>Évitez les petits sinistres que vous pouvez payer de votre poche</li>
+<li>Optez pour une protection du bonus si disponible</li>
+<li>Transférez votre bonus si vous changez d'assureur</li>
+</ul>
+
+<p><a href="/fr/assurance-voiture-landing">Comparez les assurances auto et optimisez votre bonus avec Optimis.</a></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-09-10",
+    readTime: 5,
+    image: "",
+    metaDescription: "Comprendre le système bonus-malus en assurance auto suisse et comment optimiser votre prime.",
+  },
+  {
+    id: "batch7-3",
+    slug: "assurance-auto-documents-a-fournir",
+    title: "Assurance auto : quels documents fournir pour souscrire ?",
+    excerpt: "Liste complète des documents nécessaires pour souscrire une assurance voiture en Suisse et faciliter vos démarches.",
+    content: `<h2>Documents requis pour souscrire une assurance auto</h2>
+
+<p>Souscrire une assurance voiture en Suisse nécessite de fournir plusieurs documents. Voici la liste complète pour faciliter vos démarches.</p>
+
+<h3>Documents personnels obligatoires</h3>
+
+<ul>
+<li><strong>Pièce d'identité</strong> : carte d'identité ou passeport valide</li>
+<li><strong>Permis de conduire</strong> : copie recto-verso</li>
+<li><strong>Justificatif de domicile</strong> : facture récente ou attestation</li>
+<li><strong>Permis de séjour</strong> : pour les étrangers résidant en Suisse</li>
+</ul>
+
+<h3>Documents relatifs au véhicule</h3>
+
+<ul>
+<li><strong>Certificat d'immatriculation</strong> (permis de circulation)</li>
+<li><strong>Carte grise</strong> du véhicule</li>
+<li><strong>Facture d'achat</strong> ou contrat de leasing</li>
+<li><strong>Rapport d'expertise</strong> pour les véhicules importés</li>
+</ul>
+
+<h3>Informations à préparer</h3>
+
+<ul>
+<li>Kilométrage annuel estimé</li>
+<li>Usage du véhicule (privé, professionnel)</li>
+<li>Historique des sinistres (attestation de bonus)</li>
+<li>Nombre de conducteurs</li>
+</ul>
+
+<h3>Pour les conducteurs novices</h3>
+
+<p>Si vous êtes jeune conducteur ou nouveau titulaire du permis :</p>
+
+<ul>
+<li>Attestation de formation (cours de sensibilisation)</li>
+<li>Date d'obtention du permis définitif</li>
+</ul>
+
+<h3>Conseil pratique</h3>
+
+<p>Demandez une <strong>attestation de bonus</strong> à votre ancien assureur si vous changez de compagnie. Cela vous permettra de conserver votre niveau de bonus et d'obtenir de meilleures primes.</p>
+
+<p><a href="/fr/assurance-voiture-landing">Souscrivez votre assurance auto en ligne avec Optimis.</a></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-09-05",
+    readTime: 4,
+    image: "",
+    metaDescription: "Liste des documents nécessaires pour souscrire une assurance voiture en Suisse.",
+  },
+  {
+    id: "batch7-4",
+    slug: "assurance-voiture-sans-permis",
+    title: "Assurance voiture sans permis : ce qu'il faut savoir",
+    excerpt: "Tout sur l'assurance des voiturettes et véhicules sans permis en Suisse : obligations, couvertures et tarifs.",
+    content: `<h2>L'assurance pour voiture sans permis en Suisse</h2>
+
+<p>Les voitures sans permis, aussi appelées voiturettes, sont soumises à des obligations d'assurance spécifiques. Voici ce que vous devez savoir.</p>
+
+<h3>Qu'est-ce qu'une voiture sans permis ?</h3>
+
+<p>Une voiture sans permis est un véhicule léger qui peut être conduit :</p>
+
+<ul>
+<li>Sans permis de conduire traditionnel (catégorie B)</li>
+<li>Avec un permis de catégorie AM ou F</li>
+<li>À partir de 16 ans (selon les cantons)</li>
+</ul>
+
+<h3>Caractéristiques techniques</h3>
+
+<ul>
+<li>Vitesse maximale : 45 km/h</li>
+<li>Cylindrée : max 50 cm³ (thermique) ou 4 kW (électrique)</li>
+<li>Poids à vide : max 425 kg</li>
+</ul>
+
+<h3>Assurance obligatoire</h3>
+
+<p>Comme tout véhicule motorisé, la voiture sans permis doit être assurée au minimum en <strong>responsabilité civile</strong>. Cette assurance couvre les dommages que vous causez à des tiers.</p>
+
+<h3>Couvertures recommandées</h3>
+
+<ul>
+<li><strong>Casco partielle</strong> : vol, incendie, bris de glaces</li>
+<li><strong>Casco complète</strong> : dommages au véhicule en cas d'accident</li>
+<li><strong>Protection juridique</strong></li>
+<li><strong>Assistance dépannage</strong></li>
+</ul>
+
+<h3>Tarifs indicatifs</h3>
+
+<p>Les primes pour une voiture sans permis sont généralement moins élevées que pour une voiture classique :</p>
+
+<ul>
+<li>RC seule : 200-400 CHF/an</li>
+<li>Avec casco partielle : 400-600 CHF/an</li>
+<li>Casco complète : 600-900 CHF/an</li>
+</ul>
+
+<p><a href="/fr/assurance-voiture-landing">Comparez les assurances pour voiture sans permis.</a></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-08-28",
+    readTime: 4,
+    image: "",
+    metaDescription: "Guide de l'assurance voiture sans permis en Suisse : obligations, couvertures et prix.",
+  },
+  {
+    id: "batch7-5",
+    slug: "assurance-voiture-parking",
+    title: "Assurance voiture au parking : êtes-vous couvert ?",
+    excerpt: "Que se passe-t-il si votre voiture est endommagée dans un parking ? Découvrez vos droits et les couvertures applicables.",
+    content: `<h2>Votre voiture au parking : quelle assurance ?</h2>
+
+<p>Un sinistre dans un parking peut arriver à tout moment : rayure, bosse, vol ou vandalisme. Découvrez comment vous êtes couvert selon votre assurance.</p>
+
+<h3>Les différents types de sinistres en parking</h3>
+
+<ul>
+<li><strong>Collision avec un autre véhicule</strong></li>
+<li><strong>Rayures et dommages de carrosserie</strong></li>
+<li><strong>Vol ou tentative de vol</strong></li>
+<li><strong>Vandalisme</strong></li>
+<li><strong>Dommages causés par un tiers non identifié</strong></li>
+</ul>
+
+<h3>Quelle assurance intervient ?</h3>
+
+<h4>Responsabilité civile (RC)</h4>
+<p>Si vous êtes responsable d'un dommage causé à un autre véhicule, votre RC prend en charge les réparations du véhicule adverse.</p>
+
+<h4>Casco partielle</h4>
+<p>Couvre le vol, le vandalisme et certains dommages naturels. <strong>Attention</strong> : les rayures et bosses causées par des tiers inconnus ne sont généralement pas couvertes.</p>
+
+<h4>Casco complète</h4>
+<p>C'est la couverture la plus complète. Elle prend en charge :</p>
+<ul>
+<li>Les dommages causés par des tiers non identifiés</li>
+<li>Les dommages en parking (rayures, bosses)</li>
+<li>Le vol et le vandalisme</li>
+</ul>
+
+<h3>Que faire en cas de sinistre ?</h3>
+
+<ol>
+<li>Photographier les dommages</li>
+<li>Chercher des témoins ou caméras de surveillance</li>
+<li>Déposer plainte si vandalisme ou délit de fuite</li>
+<li>Déclarer le sinistre à votre assurance dans les 48h</li>
+</ol>
+
+<h3>Conseil pratique</h3>
+
+<p>Si vous garez souvent dans des parkings publics, une <strong>casco complète</strong> est fortement recommandée pour être couvert en cas de dommages par un tiers inconnu.</p>
+
+<p><a href="/fr/assurance-voiture-landing">Comparez les assurances casco avec Optimis.</a></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-08-20",
+    readTime: 5,
+    image: "",
+    metaDescription: "Couverture d'assurance pour votre voiture garée dans un parking en Suisse.",
+  },
+  {
+    id: "batch7-6",
+    slug: "assurance-voiture-kilometre",
+    title: "Assurance voiture au kilomètre : économisez selon votre usage",
+    excerpt: "L'assurance auto au kilomètre permet de payer en fonction de votre utilisation réelle. Découvrez si cette formule est faite pour vous.",
+    content: `<h2>L'assurance voiture au kilomètre en Suisse</h2>
+
+<p>L'assurance au kilomètre, aussi appelée "pay as you drive", est une formule innovante qui adapte votre prime à votre usage réel du véhicule. Idéale pour les petits rouleurs !</p>
+
+<h3>Comment ça fonctionne ?</h3>
+
+<p>Le principe est simple :</p>
+
+<ul>
+<li>Vous déclarez votre kilométrage annuel estimé</li>
+<li>Votre prime est calculée en conséquence</li>
+<li>Moins vous roulez, moins vous payez</li>
+</ul>
+
+<h3>Pour qui est-ce adapté ?</h3>
+
+<p>L'assurance au kilomètre convient parfaitement aux :</p>
+
+<ul>
+<li><strong>Petits rouleurs</strong> (moins de 10'000 km/an)</li>
+<li><strong>Propriétaires d'un second véhicule</strong></li>
+<li><strong>Télétravailleurs</strong></li>
+<li><strong>Utilisateurs de transports en commun</strong></li>
+<li><strong>Retraités</strong></li>
+</ul>
+
+<h3>Avantages</h3>
+
+<ul>
+<li>Économies significatives pour les petits rouleurs</li>
+<li>Prime adaptée à votre usage réel</li>
+<li>Incitation à moins utiliser la voiture</li>
+<li>Couverture identique à une assurance classique</li>
+</ul>
+
+<h3>Inconvénients potentiels</h3>
+
+<ul>
+<li>Régularisation si vous dépassez le kilométrage déclaré</li>
+<li>Contrôle du kilométrage (boîtier ou relevé compteur)</li>
+<li>Moins avantageux pour les gros rouleurs</li>
+</ul>
+
+<h3>Économies potentielles</h3>
+
+<figure><table><thead><tr><th>Kilométrage annuel</th><th>Économie estimée</th></tr></thead><tbody><tr><td>Moins de 5'000 km</td><td>30-40%</td></tr><tr><td>5'000 - 10'000 km</td><td>15-25%</td></tr><tr><td>10'000 - 15'000 km</td><td>5-10%</td></tr></tbody></table></figure>
+
+<p><a href="/fr/assurance-voiture-landing">Comparez les offres d'assurance au kilomètre avec Optimis.</a></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-09-15",
+    readTime: 5,
+    image: "",
+    metaDescription: "L'assurance voiture au kilomètre en Suisse : fonctionnement, avantages et économies.",
+  },
+  {
+    id: "batch7-7",
+    slug: "assurance-voiture-resiliation",
+    title: "Résiliation assurance voiture : comment et quand résilier ?",
+    excerpt: "Guide complet pour résilier votre assurance auto en Suisse : délais, procédures et modèles de lettres.",
+    content: `<h2>Résilier son assurance voiture en Suisse</h2>
+
+<p>Vous souhaitez changer d'assureur auto ? Voici tout ce que vous devez savoir sur la résiliation de votre contrat d'assurance voiture.</p>
+
+<h3>Quand peut-on résilier ?</h3>
+
+<p>Plusieurs situations permettent de résilier votre assurance auto :</p>
+
+<h4>À l'échéance annuelle</h4>
+<ul>
+<li>Respecter un préavis de <strong>3 mois</strong> avant l'échéance</li>
+<li>Si échéance au 31 décembre, résilier avant le 30 septembre</li>
+</ul>
+
+<h4>Après un sinistre</h4>
+<ul>
+<li>Résiliation possible dans les <strong>14 jours</strong> suivant le règlement</li>
+<li>Valable pour vous ET pour l'assureur</li>
+</ul>
+
+<h4>Vente du véhicule</h4>
+<ul>
+<li>L'assurance prend fin automatiquement</li>
+<li>Vous pouvez transférer le contrat au nouveau véhicule</li>
+</ul>
+
+<h4>Augmentation de prime</h4>
+<ul>
+<li>Résiliation possible en cas d'augmentation non justifiée par un sinistre</li>
+<li>Délai de 30 jours après réception de la nouvelle prime</li>
+</ul>
+
+<h3>Procédure de résiliation</h3>
+
+<ol>
+<li>Rédiger une lettre de résiliation</li>
+<li>Envoyer par <strong>courrier recommandé</strong></li>
+<li>Conserver l'accusé de réception</li>
+<li>Attendre la confirmation de l'assureur</li>
+</ol>
+
+<h3>Modèle de lettre de résiliation</h3>
+
+<p>Votre lettre doit contenir :</p>
+<ul>
+<li>Vos coordonnées complètes</li>
+<li>Numéro de contrat</li>
+<li>Numéro d'immatriculation du véhicule</li>
+<li>Date de résiliation souhaitée</li>
+<li>Demande de remboursement du trop-perçu</li>
+</ul>
+
+<h3>Conseils pratiques</h3>
+
+<ul>
+<li>Souscrivez la nouvelle assurance AVANT de résilier l'ancienne</li>
+<li>Demandez une attestation de bonus à votre ancien assureur</li>
+<li>Vérifiez qu'il n'y a pas de période sans couverture</li>
+</ul>
+
+<p><a href="/fr/resiliation-assurance">Utilisez notre service de résiliation gratuit.</a></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-01",
+    readTime: 6,
+    image: "",
+    metaDescription: "Comment résilier son assurance voiture en Suisse : délais, procédures et conseils.",
+  },
+  {
+    id: "batch7-8",
+    slug: "assurance-camping-car",
+    title: "Assurance camping-car : tout ce qu'il faut savoir",
+    excerpt: "Guide complet de l'assurance camping-car en Suisse : couvertures spécifiques, tarifs et conseils pour bien s'assurer.",
+    content: `<h2>L'assurance camping-car en Suisse</h2>
+
+<p>Posséder un camping-car offre une liberté incomparable, mais nécessite une assurance adaptée. Découvrez les spécificités de l'assurance pour ces véhicules de loisirs.</p>
+
+<h3>Pourquoi une assurance spécifique ?</h3>
+
+<p>Le camping-car combine les caractéristiques d'un véhicule et d'un habitat. Il nécessite donc une couverture qui prend en compte :</p>
+
+<ul>
+<li>La valeur élevée du véhicule</li>
+<li>L'aménagement intérieur (cuisine, couchage, sanitaires)</li>
+<li>Les équipements spécifiques (panneaux solaires, antenne satellite)</li>
+<li>Le mobilier et les effets personnels</li>
+</ul>
+
+<h3>Les couvertures essentielles</h3>
+
+<h4>Responsabilité civile (obligatoire)</h4>
+<p>Couvre les dommages causés à des tiers lors de la circulation.</p>
+
+<h4>Casco partielle</h4>
+<ul>
+<li>Vol du véhicule</li>
+<li>Incendie</li>
+<li>Bris de glaces</li>
+<li>Dommages naturels (grêle, tempête)</li>
+</ul>
+
+<h4>Casco complète</h4>
+<ul>
+<li>Tous les risques de la casco partielle</li>
+<li>Dommages en cas de collision</li>
+<li>Dommages causés par vous-même</li>
+</ul>
+
+<h3>Couvertures spécifiques camping-car</h3>
+
+<ul>
+<li><strong>Aménagement intérieur</strong> : meubles, électroménager</li>
+<li><strong>Équipements</strong> : vélos, kayak, barbecue</li>
+<li><strong>Auvent et accessoires</strong></li>
+<li><strong>Effets personnels</strong> : vêtements, appareils électroniques</li>
+</ul>
+
+<h3>Tarifs indicatifs</h3>
+
+<figure><table><thead><tr><th>Type de couverture</th><th>Prime annuelle</th></tr></thead><tbody><tr><td>RC seule</td><td>400-600 CHF</td></tr><tr><td>Casco partielle</td><td>800-1'200 CHF</td></tr><tr><td>Casco complète</td><td>1'500-2'500 CHF</td></tr></tbody></table></figure>
+
+<h3>Conseils pour économiser</h3>
+
+<ul>
+<li>Comparez plusieurs offres</li>
+<li>Optez pour une franchise plus élevée</li>
+<li>Installez un système antivol certifié</li>
+<li>Regroupez vos assurances chez le même assureur</li>
+</ul>
+
+<p><a href="/fr/assurance-voiture-landing">Comparez les assurances camping-car avec Optimis.</a></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-07-25",
+    readTime: 6,
+    image: "",
+    metaDescription: "Guide complet de l'assurance camping-car en Suisse : couvertures, tarifs et conseils.",
+  },
+  {
+    id: "batch7-9",
+    slug: "assurance-utilitaire-pas-chere",
+    title: "Assurance utilitaire pas chère : comment trouver la meilleure offre ?",
+    excerpt: "Conseils pour trouver une assurance véhicule utilitaire au meilleur prix en Suisse sans sacrifier la qualité des garanties.",
+    content: `<h2>Trouver une assurance utilitaire pas chère</h2>
+
+<p>L'assurance d'un véhicule utilitaire peut représenter un coût important pour les professionnels. Voici comment optimiser votre budget tout en conservant une bonne couverture.</p>
+
+<h3>Les spécificités de l'assurance utilitaire</h3>
+
+<p>Les véhicules utilitaires ont des besoins particuliers :</p>
+
+<ul>
+<li>Usage professionnel intensif</li>
+<li>Transport de marchandises ou d'outils</li>
+<li>Kilométrage élevé</li>
+<li>Risques spécifiques liés à l'activité</li>
+</ul>
+
+<h3>Types de couvertures</h3>
+
+<h4>Responsabilité civile</h4>
+<p>Obligatoire, elle couvre les dommages causés à des tiers. Pour un utilitaire, elle doit être adaptée au poids et à l'usage du véhicule.</p>
+
+<h4>Casco partielle</h4>
+<p>Recommandée pour les utilitaires d'occasion ou de faible valeur.</p>
+
+<h4>Casco complète</h4>
+<p>Indispensable pour les véhicules neufs ou de valeur importante.</p>
+
+<h3>Options importantes pour les utilitaires</h3>
+
+<ul>
+<li><strong>Contenu du véhicule</strong> : outils, marchandises</li>
+<li><strong>Perte d'exploitation</strong> : compensation si immobilisation</li>
+<li><strong>Véhicule de remplacement</strong></li>
+<li><strong>Protection juridique professionnelle</strong></li>
+</ul>
+
+<h3>Conseils pour réduire les primes</h3>
+
+<ol>
+<li><strong>Comparez plusieurs offres</strong> : les écarts peuvent atteindre 30%</li>
+<li><strong>Augmentez la franchise</strong> : économie de 10-20%</li>
+<li><strong>Installez une dashcam</strong> : certains assureurs offrent des réductions</li>
+<li><strong>Formez vos conducteurs</strong> : cours de conduite économique</li>
+<li><strong>Regroupez votre flotte</strong> : tarifs dégressifs</li>
+</ol>
+
+<h3>Tarifs indicatifs</h3>
+
+<figure><table><thead><tr><th>Type de véhicule</th><th>RC seule</th><th>Casco complète</th></tr></thead><tbody><tr><td>Fourgonnette (< 3.5t)</td><td>500-800 CHF</td><td>1'200-2'000 CHF</td></tr><tr><td>Fourgon (3.5t)</td><td>700-1'000 CHF</td><td>1'500-2'500 CHF</td></tr><tr><td>Camionnette avec benne</td><td>600-900 CHF</td><td>1'300-2'200 CHF</td></tr></tbody></table></figure>
+
+<p><a href="/fr/assurance-voiture-landing">Comparez les assurances utilitaires avec Optimis.</a></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-08-10",
+    readTime: 5,
+    image: "",
+    metaDescription: "Trouver une assurance véhicule utilitaire pas chère en Suisse : conseils et comparatif.",
+  },
+  {
+    id: "batch7-10",
+    slug: "assurance-casco-complete",
+    title: "Assurance casco complète : quand et pourquoi la choisir ?",
+    excerpt: "La casco complète offre la protection maximale pour votre véhicule. Découvrez si elle est adaptée à votre situation.",
+    content: `<h2>L'assurance casco complète expliquée</h2>
+
+<p>La casco complète, aussi appelée "tous risques", est la formule d'assurance auto la plus protectrice. Elle couvre pratiquement tous les dommages à votre véhicule, y compris ceux dont vous êtes responsable.</p>
+
+<h3>Que couvre la casco complète ?</h3>
+
+<p>Elle inclut toutes les garanties de la casco partielle, plus :</p>
+
+<ul>
+<li><strong>Collision responsable</strong> : dommages à votre véhicule en cas d'accident dont vous êtes responsable</li>
+<li><strong>Sortie de route</strong></li>
+<li><strong>Dommages au parking</strong> par un tiers non identifié</li>
+<li><strong>Erreur de conduite</strong></li>
+<li><strong>Vandalisme</strong></li>
+</ul>
+
+<h3>Rappel : ce que couvre la casco partielle</h3>
+
+<ul>
+<li>Vol et tentative de vol</li>
+<li>Incendie et explosion</li>
+<li>Forces de la nature (grêle, tempête, inondation)</li>
+<li>Collision avec animaux</li>
+<li>Bris de glaces</li>
+</ul>
+
+<h3>Quand choisir la casco complète ?</h3>
+
+<p>Cette assurance est recommandée si :</p>
+
+<ul>
+<li>Votre véhicule a <strong>moins de 5 ans</strong></li>
+<li>Sa valeur dépasse <strong>15'000 CHF</strong></li>
+<li>Vous êtes en <strong>leasing</strong> (souvent obligatoire)</li>
+<li>Vous êtes <strong>jeune conducteur</strong></li>
+<li>Vous ne pouvez pas assumer une réparation importante</li>
+</ul>
+
+<h3>Comparaison des couvertures</h3>
+
+<figure><table><thead><tr><th>Événement</th><th>RC</th><th>Casco partielle</th><th>Casco complète</th></tr></thead><tbody><tr><td>Accident responsable</td><td>Non</td><td>Non</td><td>Oui</td></tr><tr><td>Vol</td><td>Non</td><td>Oui</td><td>Oui</td></tr><tr><td>Grêle</td><td>Non</td><td>Oui</td><td>Oui</td></tr><tr><td>Vandalisme</td><td>Non</td><td>Partiel</td><td>Oui</td></tr></tbody></table></figure>
+
+<h3>Comment économiser sur la casco complète ?</h3>
+
+<ul>
+<li>Choisir une franchise plus élevée</li>
+<li>Comparer les offres de plusieurs assureurs</li>
+<li>Opter pour une valeur vénale plutôt que valeur à neuf</li>
+<li>Installer des systèmes antivol</li>
+</ul>
+
+<p><a href="/fr/assurance-voiture-landing">Comparez les offres de casco complète avec Optimis.</a></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-09-20",
+    readTime: 5,
+    image: "",
+    metaDescription: "Guide de l'assurance casco complète en Suisse : couvertures, tarifs et conseils.",
+  },
+  {
+    id: "batch7-11",
+    slug: "assurance-responsabilite-civile-voiture",
+    title: "Assurance responsabilité civile voiture : l'essentiel",
+    excerpt: "L'assurance RC auto est obligatoire en Suisse. Découvrez ce qu'elle couvre et comment choisir la bonne formule.",
+    content: `<h2>L'assurance responsabilité civile auto</h2>
+
+<p>L'assurance responsabilité civile (RC) est la seule assurance <strong>obligatoire</strong> pour tout véhicule motorisé en Suisse. Elle protège les tiers des dommages que vous pourriez leur causer.</p>
+
+<h3>Que couvre l'assurance RC auto ?</h3>
+
+<p>Elle prend en charge les dommages causés à des tiers :</p>
+
+<ul>
+<li><strong>Dommages corporels</strong> : blessures, frais médicaux, invalidité, décès</li>
+<li><strong>Dommages matériels</strong> : véhicules, biens endommagés</li>
+<li><strong>Dommages financiers</strong> : perte de revenus du tiers</li>
+</ul>
+
+<h3>Ce qu'elle ne couvre PAS</h3>
+
+<ul>
+<li>Les dommages à votre propre véhicule</li>
+<li>Vos blessures (sauf assurance accident complémentaire)</li>
+<li>Le vol de votre véhicule</li>
+<li>Les dommages causés intentionnellement</li>
+</ul>
+
+<h3>Montants de couverture</h3>
+
+<p>En Suisse, les montants minimaux sont très élevés :</p>
+
+<ul>
+<li><strong>Dommages corporels</strong> : 5 millions CHF minimum</li>
+<li><strong>Dommages matériels</strong> : 1 million CHF minimum</li>
+<li>La plupart des assureurs proposent des couvertures illimitées</li>
+</ul>
+
+<h3>Facteurs influençant la prime</h3>
+
+<ul>
+<li><strong>Profil du conducteur</strong> : âge, expérience, historique</li>
+<li><strong>Type de véhicule</strong> : puissance, valeur</li>
+<li><strong>Lieu de résidence</strong></li>
+<li><strong>Kilométrage annuel</strong></li>
+<li><strong>Usage</strong> : privé ou professionnel</li>
+</ul>
+
+<h3>Options recommandées</h3>
+
+<ul>
+<li><strong>Faute grave</strong> : protection si l'assureur veut se retourner contre vous</li>
+<li><strong>Protection du bonus</strong> : maintient votre niveau après un sinistre</li>
+<li><strong>Assistance dépannage</strong></li>
+</ul>
+
+<h3>Tarifs indicatifs</h3>
+
+<p>La prime RC varie généralement entre <strong>300 et 800 CHF par an</strong> selon votre profil et votre véhicule.</p>
+
+<p><a href="/fr/assurance-voiture-landing">Comparez les assurances RC auto avec Optimis.</a></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-05",
+    readTime: 5,
+    image: "",
+    metaDescription: "Guide de l'assurance responsabilité civile auto obligatoire en Suisse.",
+  },
+  {
+    id: "batch7-12",
+    slug: "comparateur-assurance-voiture-jeune-conducteur",
+    title: "Assurance voiture jeune conducteur : comment payer moins cher ?",
+    excerpt: "Les jeunes conducteurs paient souvent des primes élevées. Découvrez nos astuces pour réduire le coût de votre assurance auto.",
+    content: `<h2>L'assurance auto pour les jeunes conducteurs</h2>
+
+<p>Être jeune conducteur rime souvent avec primes d'assurance élevées. Voici pourquoi et comment réduire significativement vos coûts.</p>
+
+<h3>Pourquoi les primes sont-elles plus élevées ?</h3>
+
+<p>Les statistiques montrent que les jeunes conducteurs :</p>
+
+<ul>
+<li>Ont plus d'accidents</li>
+<li>Causent des sinistres plus coûteux</li>
+<li>N'ont pas encore d'historique de conduite</li>
+</ul>
+
+<p>Les assureurs appliquent donc un <strong>malus jeune conducteur</strong> qui peut doubler la prime par rapport à un conducteur expérimenté.</p>
+
+<h3>Astuces pour réduire votre prime</h3>
+
+<h4>1. Choisir le bon véhicule</h4>
+<ul>
+<li>Petite cylindrée (moins de 100 CV)</li>
+<li>Véhicule d'occasion</li>
+<li>Catégorie d'assurance basse</li>
+</ul>
+
+<h4>2. Augmenter la franchise</h4>
+<p>Passer de 500 à 1'000 CHF de franchise peut réduire la prime de 15-20%.</p>
+
+<h4>3. Limiter les conducteurs</h4>
+<p>Être le seul conducteur du véhicule réduit le risque perçu.</p>
+
+<h4>4. Installer une dashcam ou un boîtier télématique</h4>
+<p>Certains assureurs offrent jusqu'à 30% de réduction pour les bons conducteurs.</p>
+
+<h4>5. Opter pour l'assurance au kilomètre</h4>
+<p>Si vous roulez peu, vous pouvez économiser jusqu'à 40%.</p>
+
+<h3>Comparatif des économies possibles</h3>
+
+<figure><table><thead><tr><th>Action</th><th>Économie potentielle</th></tr></thead><tbody><tr><td>Véhicule moins puissant</td><td>20-30%</td></tr><tr><td>Franchise élevée</td><td>15-20%</td></tr><tr><td>Boîtier télématique</td><td>10-30%</td></tr><tr><td>Assurance au km</td><td>20-40%</td></tr></tbody></table></figure>
+
+<h3>L'importance de comparer</h3>
+
+<p>Les écarts de prix entre assureurs peuvent atteindre <strong>50% pour les jeunes conducteurs</strong>. Comparer est donc essentiel !</p>
+
+<p><a href="/fr/assurance-voiture-landing">Comparez les offres pour jeunes conducteurs avec Optimis.</a></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-10-10",
+    readTime: 6,
+    image: "",
+    metaDescription: "Conseils pour trouver une assurance voiture pas chère pour jeune conducteur en Suisse.",
+  },
+  {
+    id: "batch7-13",
+    slug: "permis-de-conduire-suisse",
+    title: "Permis de conduire suisse : étapes et coûts",
+    excerpt: "Guide complet pour obtenir votre permis de conduire en Suisse : formation, examens, coûts et délais.",
+    content: `<h2>Obtenir son permis de conduire en Suisse</h2>
+
+<p>Le parcours pour obtenir le permis de conduire en Suisse est bien structuré. Voici les étapes à suivre et les coûts à prévoir.</p>
+
+<h3>Les différentes catégories</h3>
+
+<ul>
+<li><strong>Catégorie B</strong> : voitures (dès 18 ans)</li>
+<li><strong>Catégorie A</strong> : motos</li>
+<li><strong>Catégorie C</strong> : camions</li>
+<li><strong>Catégorie D</strong> : bus</li>
+</ul>
+
+<h3>Étapes pour le permis B</h3>
+
+<h4>1. Cours de premiers secours</h4>
+<ul>
+<li>Durée : 10 heures</li>
+<li>Coût : 100-150 CHF</li>
+<li>Validité : 6 ans</li>
+</ul>
+
+<h4>2. Examen de la vue</h4>
+<ul>
+<li>Chez un opticien agréé</li>
+<li>Coût : 10-20 CHF</li>
+</ul>
+
+<h4>3. Demande de permis d'élève conducteur</h4>
+<ul>
+<li>Formulaire au service des automobiles</li>
+<li>Coût : 50-80 CHF selon le canton</li>
+</ul>
+
+<h4>4. Examen théorique</h4>
+<ul>
+<li>50 questions sur la circulation</li>
+<li>Coût : 30-50 CHF</li>
+<li>Préparation : applications et cours</li>
+</ul>
+
+<h4>5. Cours de sensibilisation</h4>
+<ul>
+<li>8 heures obligatoires</li>
+<li>Coût : 200-300 CHF</li>
+</ul>
+
+<h4>6. Leçons de conduite</h4>
+<ul>
+<li>Minimum recommandé : 20-30 leçons</li>
+<li>Coût : 90-110 CHF/leçon</li>
+</ul>
+
+<h4>7. Examen pratique</h4>
+<ul>
+<li>Durée : environ 45 minutes</li>
+<li>Coût : 120-150 CHF</li>
+</ul>
+
+<h3>Coût total estimé</h3>
+
+<figure><table><thead><tr><th>Poste</th><th>Coût moyen</th></tr></thead><tbody><tr><td>Premiers secours</td><td>120 CHF</td></tr><tr><td>Examen vue + demande</td><td>80 CHF</td></tr><tr><td>Examen théorique</td><td>40 CHF</td></tr><tr><td>Cours sensibilisation</td><td>250 CHF</td></tr><tr><td>25 leçons de conduite</td><td>2'500 CHF</td></tr><tr><td>Examen pratique</td><td>130 CHF</td></tr><tr><td><strong>Total</strong></td><td><strong>~3'120 CHF</strong></td></tr></tbody></table></figure>
+
+<h3>Après le permis</h3>
+
+<p>Pendant les 3 premières années (permis probatoire) :</p>
+<ul>
+<li>Cours de formation complémentaire obligatoire (WAB)</li>
+<li>Retrait du permis pour 1 an en cas d'infraction grave</li>
+</ul>
+
+<p><a href="/fr/assurance-voiture-landing">Obtenez une offre d'assurance avant même d'avoir votre permis !</a></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-08-05",
+    readTime: 6,
+    image: "",
+    metaDescription: "Guide complet pour obtenir le permis de conduire en Suisse : étapes, formation et coûts.",
+  },
+  {
+    id: "batch7-14",
+    slug: "plaque-immatriculation-suisse",
+    title: "Plaque d'immatriculation suisse : tout comprendre",
+    excerpt: "Décryptage du système de plaques d'immatriculation en Suisse : cantons, types de plaques et démarches.",
+    content: `<h2>Les plaques d'immatriculation en Suisse</h2>
+
+<p>Le système d'immatriculation suisse est unique avec ses plaques par canton. Voici tout ce qu'il faut savoir.</p>
+
+<h3>Structure des plaques suisses</h3>
+
+<p>Une plaque suisse standard comporte :</p>
+<ul>
+<li>Le <strong>sigle du canton</strong> (2 lettres)</li>
+<li>Un <strong>numéro</strong> (1 à 6 chiffres)</li>
+<li>Le <strong>blason cantonal</strong></li>
+</ul>
+
+<h3>Les 26 cantons et leurs sigles</h3>
+
+<ul>
+<li>AG : Argovie | AI : Appenzell RI | AR : Appenzell RE</li>
+<li>BE : Berne | BL : Bâle-Campagne | BS : Bâle-Ville</li>
+<li>FR : Fribourg | GE : Genève | GL : Glaris</li>
+<li>GR : Grisons | JU : Jura | LU : Lucerne</li>
+<li>NE : Neuchâtel | NW : Nidwald | OW : Obwald</li>
+<li>SG : Saint-Gall | SH : Schaffhouse | SO : Soleure</li>
+<li>SZ : Schwytz | TG : Thurgovie | TI : Tessin</li>
+<li>UR : Uri | VD : Vaud | VS : Valais</li>
+<li>ZG : Zoug | ZH : Zurich</li>
+</ul>
+
+<h3>Types de plaques</h3>
+
+<h4>Plaques blanches</h4>
+<p>Standard pour les véhicules privés.</p>
+
+<h4>Plaques vertes</h4>
+<p>Véhicules agricoles et forestiers, exonérés de certaines taxes.</p>
+
+<h4>Plaques bleues</h4>
+<p>Véhicules de l'armée et de l'administration fédérale.</p>
+
+<h4>Plaques rouges</h4>
+<p>Véhicules de démonstration (garagistes), temporaires.</p>
+
+<h3>Plaques personnalisées</h3>
+
+<p>Vous pouvez demander un numéro spécifique moyennant un supplément. Les petits numéros (1-3 chiffres) sont très prisés et peuvent coûter des milliers de francs aux enchères.</p>
+
+<h3>Démarches d'immatriculation</h3>
+
+<ol>
+<li>Se rendre au service des automobiles de votre canton</li>
+<li>Présenter le véhicule (expertise si nécessaire)</li>
+<li>Fournir l'assurance RC</li>
+<li>Payer la taxe de circulation</li>
+<li>Recevoir les plaques et le permis de circulation</li>
+</ol>
+
+<h3>Coûts</h3>
+
+<ul>
+<li><strong>Première immatriculation</strong> : 50-150 CHF</li>
+<li><strong>Taxe de circulation annuelle</strong> : variable selon le canton et la puissance du véhicule</li>
+<li><strong>Plaques personnalisées</strong> : à partir de 50 CHF</li>
+</ul>
+
+<p><a href="/fr/assurance-voiture-landing">N'oubliez pas : l'assurance RC est obligatoire pour immatriculer votre véhicule !</a></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-07-30",
+    readTime: 5,
+    image: "",
+    metaDescription: "Guide des plaques d'immatriculation en Suisse : cantons, types et démarches.",
+  },
+  {
+    id: "batch7-15",
+    slug: "comment-enregistrer-votre-vehicule-en-suisse",
+    title: "Comment enregistrer votre véhicule en Suisse ?",
+    excerpt: "Guide pratique pour immatriculer votre voiture en Suisse : documents, démarches et délais.",
+    content: `<h2>Immatriculer son véhicule en Suisse</h2>
+
+<p>Que vous achetiez un véhicule neuf, d'occasion ou que vous l'importiez, voici les démarches pour l'immatriculer en Suisse.</p>
+
+<h3>Documents nécessaires</h3>
+
+<h4>Pour tout véhicule</h4>
+<ul>
+<li>Pièce d'identité valide</li>
+<li>Justificatif de domicile</li>
+<li>Attestation d'assurance RC</li>
+<li>Formulaire de demande d'immatriculation</li>
+</ul>
+
+<h4>Pour un véhicule neuf</h4>
+<ul>
+<li>Facture d'achat</li>
+<li>Réception par type (document du constructeur)</li>
+</ul>
+
+<h4>Pour un véhicule d'occasion suisse</h4>
+<ul>
+<li>Ancien permis de circulation</li>
+<li>Anciennes plaques (si transfert de canton)</li>
+</ul>
+
+<h4>Pour un véhicule importé</h4>
+<ul>
+<li>Document de dédouanement</li>
+<li>Ancien titre d'immatriculation étranger</li>
+<li>Rapport d'expertise (contrôle technique)</li>
+</ul>
+
+<h3>Étapes de l'immatriculation</h3>
+
+<h4>1. Souscrire une assurance RC</h4>
+<p>C'est la première étape obligatoire. L'assureur vous fournit une <strong>attestation d'assurance</strong> nécessaire pour l'immatriculation.</p>
+
+<h4>2. Expertise du véhicule (si nécessaire)</h4>
+<ul>
+<li>Obligatoire pour les véhicules importés</li>
+<li>Peut être requise pour les occasions</li>
+<li>Coût : 50-100 CHF</li>
+</ul>
+
+<h4>3. Dépôt du dossier</h4>
+<p>Au service des automobiles de votre canton, sur rendez-vous ou en ligne selon les cantons.</p>
+
+<h4>4. Paiement des taxes</h4>
+<ul>
+<li>Taxe d'immatriculation</li>
+<li>Taxe de circulation (au prorata de l'année)</li>
+</ul>
+
+<h4>5. Réception des documents</h4>
+<ul>
+<li>Plaques d'immatriculation</li>
+<li>Permis de circulation</li>
+<li>Vignette autoroutière (si souhaitée)</li>
+</ul>
+
+<h3>Délais</h3>
+
+<ul>
+<li>Véhicule neuf ou occasion suisse : <strong>quelques jours</strong></li>
+<li>Véhicule importé : <strong>1-3 semaines</strong> (expertise nécessaire)</li>
+</ul>
+
+<h3>Coûts totaux estimés</h3>
+
+<figure><table><thead><tr><th>Poste</th><th>Coût</th></tr></thead><tbody><tr><td>Immatriculation</td><td>50-150 CHF</td></tr><tr><td>Plaques</td><td>30-50 CHF</td></tr><tr><td>Expertise (si nécessaire)</td><td>50-100 CHF</td></tr><tr><td>Taxe de circulation</td><td>Variable</td></tr></tbody></table></figure>
+
+<p><a href="/fr/assurance-voiture-landing">Obtenez votre attestation d'assurance en quelques clics avec Optimis.</a></p>`,
+    category: "Assurance voiture",
+    categorySlug: "assurance-voiture",
+    date: "2024-08-01",
+    readTime: 5,
+    image: "",
+    metaDescription: "Guide pratique pour immatriculer votre véhicule en Suisse : documents et démarches.",
+  },
 ];
 // Enforce “image à la une” strictly: if we have a locally downloaded featured image
 // (from WordPress XML _thumbnail_id), it overrides any older placeholder / content image.
