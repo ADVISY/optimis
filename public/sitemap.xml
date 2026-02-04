@@ -373,35 +373,51 @@
 
   <!-- Legal Pages -->
   <url>
-    <loc>https://optimis.lovable.app/fr/politique-confidentialite</loc>
-    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/politique-confidentialite"/>
-    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/politique-confidentialite"/>
-    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/politique-confidentialite"/>
+    <loc>https://optimis.lovable.app/fr/politique-de-confidentialite</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/politique-de-confidentialite"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/politique-de-confidentialite"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/politique-de-confidentialite"/>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://optimis.lovable.app/de/politique-confidentialite</loc>
-    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/politique-confidentialite"/>
-    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/politique-confidentialite"/>
-    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/politique-confidentialite"/>
+    <loc>https://optimis.lovable.app/de/politique-de-confidentialite</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/politique-de-confidentialite"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/politique-de-confidentialite"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/politique-de-confidentialite"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://optimis.lovable.app/it/politique-de-confidentialite</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/politique-de-confidentialite"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/politique-de-confidentialite"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/politique-de-confidentialite"/>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://optimis.lovable.app/fr/mentions-legales</loc>
-    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/mentions-legales"/>
+    <loc>https://optimis.lovable.app/fr/legal</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/legal"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/legal"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/legal"/>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://optimis.lovable.app/de/mentions-legales</loc>
-    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/mentions-legales"/>
-    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/mentions-legales"/>
+    <loc>https://optimis.lovable.app/it/legal</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/legal"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/legal"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/legal"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://optimis.lovable.app/de/legal</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/legal"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/legal"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/legal"/>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
@@ -421,6 +437,107 @@
     <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/cgu"/>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+
+  <!-- New Pages: About, Contact, FAQ, Assurances -->
+  <url>
+    <loc>https://optimis.lovable.app/fr/a-propos</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/a-propos"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://optimis.lovable.app/de/a-propos</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/a-propos"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://optimis.lovable.app/it/a-propos</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/a-propos"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/a-propos"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://optimis.lovable.app/fr/contactez-nous</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/contactez-nous"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/contactez-nous"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/contactez-nous"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://optimis.lovable.app/de/contactez-nous</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/contactez-nous"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/contactez-nous"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/contactez-nous"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://optimis.lovable.app/it/contactez-nous</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/contactez-nous"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/contactez-nous"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/contactez-nous"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://optimis.lovable.app/fr/faqs</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/faqs"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/faqs"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/faqs"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://optimis.lovable.app/de/faqs</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/faqs"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/faqs"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/faqs"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://optimis.lovable.app/it/faqs</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/faqs"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/faqs"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/faqs"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://optimis.lovable.app/fr/assurances</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/assurances"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/assurances"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/assurances"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://optimis.lovable.app/de/assurances</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/assurances"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/assurances"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/assurances"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://optimis.lovable.app/it/assurances</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr/assurances"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de/assurances"/>
+    <xhtml:link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it/assurances"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
 
 </urlset>

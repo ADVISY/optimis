@@ -1310,5 +1310,57 @@
       "title": "Confronta le assicurazioni per indipendenti",
       "subtitle": "RC professionale, perdita di guadagno, LPP: proteggi la tua attività"
     }
+  },
+  "about": {
+    "title": "Chi siamo",
+    "missionTitle": "La nostra missione",
+    "missionContent": "Optimis è stata fondata con una missione chiara: semplificare il confronto delle assicurazioni in Svizzera e aiutare privati e aziende a trovare le migliori offerte per le loro esigenze. Crediamo che ogni persona meriti un accesso facile a una protezione ottimale al miglior prezzo.",
+    "valuesTitle": "I nostri valori",
+    "valuesContent": "Indipendenza, trasparenza e servizio clienti sono al centro del nostro approccio. Non siamo legati a nessun assicuratore, il che ci permette di offrire confronti oggettivi e imparziali. Il nostro team si impegna ad accompagnarvi in ogni fase della vostra ricerca assicurativa.",
+    "historyTitle": "La nostra storia",
+    "historyContent": "Dalla nostra fondazione, abbiamo aiutato migliaia di svizzeri a risparmiare sulle loro assicurazioni. La nostra piattaforma confronta le offerte di oltre 30 compagnie assicurative partner, coprendo tutti i tipi di assicurazioni: malattia, auto, casa, protezione giuridica, vita e molto altro.",
+    "teamTitle": "Il nostro team",
+    "teamContent": "Il nostro team di esperti assicurativi ha sede nella Svizzera romanda. Combiniamo una conoscenza approfondita del mercato assicurativo svizzero con tecnologia all'avanguardia per offrirvi il miglior servizio possibile."
+  },
+  "contact": {
+    "title": "Contattaci",
+    "getInTouch": "Mettiti in contatto con il nostro team",
+    "description": "Hai una domanda sui nostri servizi o hai bisogno di aiuto per trovare la migliore assicurazione? Il nostro team è a tua disposizione per assisterti.",
+    "hoursTitle": "Orari di apertura",
+    "hoursContent": "Lunedì - Venerdì: 9:00 - 18:00. Il nostro team risponde generalmente entro 24 ore lavorative.",
+    "formTitle": "Inviaci un messaggio",
+    "messageLabel": "Il tuo messaggio",
+    "messagePlaceholder": "Descrivi la tua richiesta..."
+  },
+  "faq": {
+    "title": "Domande frequenti",
+    "subtitle": "Trova le risposte alle domande più comuni sui nostri servizi e sulle assicurazioni in Svizzera.",
+    "q1": "Come funziona il comparatore Optimis?",
+    "a1": "Il nostro comparatore analizza le offerte di oltre 30 assicuratori partner per presentarti le migliori opzioni per il tuo profilo. Compila semplicemente il modulo e ti mostriamo istantaneamente le offerte più adatte alle tue esigenze.",
+    "q2": "Il servizio è davvero gratuito?",
+    "a2": "Sì, il nostro servizio di confronto è 100% gratuito e senza impegno. Siamo remunerati dagli assicuratori quando sottoscrivi tramite la nostra piattaforma, il che ci permette di offrirti questo servizio gratuitamente.",
+    "q3": "Posso cambiare assicurazione malattia in qualsiasi momento?",
+    "a3": "L'assicurazione di base può essere disdetta ogni anno entro il 30 novembre con effetto dal 1° gennaio. Le assicurazioni complementari hanno le proprie condizioni di disdetta, generalmente con un preavviso di 3 mesi.",
+    "q4": "Come vengono calcolati i premi dell'assicurazione malattia?",
+    "a4": "I premi dipendono da diversi fattori: il tuo cantone di residenza, la tua età, il modello assicurativo scelto (standard, medico di famiglia, HMO, telemedicina) e l'importo della tua franchigia.",
+    "q5": "Cos'è il sussidio per l'assicurazione malattia?",
+    "a5": "Il sussidio è un aiuto finanziario versato dai cantoni per aiutare le persone a reddito modesto a pagare i premi dell'assicurazione malattia. Le condizioni di idoneità variano a seconda del cantone.",
+    "q6": "Qual è la differenza tra casco parziale e casco completa?",
+    "a6": "La casco parziale copre i danni causati da terzi, furto, eventi naturali e rottura vetri. La casco completa include anche i danni che causi al tuo veicolo.",
+    "q7": "Quanto tempo ci vuole per ricevere un preventivo?",
+    "a7": "I nostri confronti sono istantanei. Non appena hai compilato il modulo, ricevi immediatamente le offerte corrispondenti al tuo profilo.",
+    "q8": "I miei dati personali sono protetti?",
+    "a8": "Assolutamente. Rispettiamo la legislazione svizzera sulla protezione dei dati. Le tue informazioni sono crittografate e non vengono mai condivise senza il tuo consenso esplicito."
+  },
+  "thankYou": {
+    "title": "Grazie per la tua richiesta!",
+    "message": "La tua richiesta è stata inviata con successo. Uno dei nostri consulenti ti contatterà al più presto.",
+    "nextSteps": "Riceverai presto un'email di conferma con i dettagli della tua richiesta. Non esitare a preparare le tue domande per il colloquio.",
+    "backHome": "Torna alla home"
+  },
+  "insurances": {
+    "title": "Le nostre assicurazioni",
+    "subtitle": "Scopri tutti i tipi di assicurazioni che confrontiamo per aiutarti a trovare la migliore protezione.",
+    "lifeInsuranceDesc": "Prepara il tuo futuro e proteggi i tuoi cari"
   }
 }
