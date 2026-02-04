@@ -23,7 +23,7 @@
     "no": "Nein",
     "included": "Inklusive",
     "excluded": "Nicht inbegriffen",
-    "close": "Schließen",
+    "close": "Schliessen",
     "cancel": "Abbrechen",
     "send": "Senden",
     "sending": "Senden..."
@@ -528,13 +528,16 @@
   },
   "footer": {
     "about": "Über uns",
-    "aboutDescription": "Optimis ist Ihr Versicherungsvergleicher in der Schweiz. Wir helfen Ihnen, die besten Angebote zu finden, die Ihren Bedürfnissen entsprechen.",
+    "aboutDescription": "Optimis ist Ihr unabhängiger Versicherungsvergleicher in der Schweiz. Wir helfen Ihnen, die passenden Angebote für Ihre Bedürfnisse zu finden.",
     "quickLinks": "Schnelllinks",
     "legal": "Rechtliches",
-    "privacyPolicy": "Datenschutzrichtlinie",
-    "termsOfService": "Nutzungsbedingungen",
+    "privacyPolicy": "Datenschutz",
+    "termsOfService": "AGB",
     "legalNotice": "Impressum",
-    "allRightsReserved": "Alle Rechte vorbehalten."
+    "allRightsReserved": "Alle Rechte vorbehalten.",
+    "madeInSwitzerland": "Mit ❤️ in der Schweiz entwickelt",
+    "ctaTitle": "Bereit zu sparen?",
+    "ctaDescription": "Vergleichen Sie kostenlos und unverbindlich die besten Angebote auf dem Markt."
   },
   "mortgage": {
     "title": "Hypothek",
