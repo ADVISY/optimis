@@ -22,6 +22,11 @@ import Resiliation from "./pages/Resiliation";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import LegalNotice from "./pages/LegalNotice";
 import TermsOfService from "./pages/TermsOfService";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import FAQ from "./pages/FAQ";
+import ThankYou from "./pages/ThankYou";
+import Insurances from "./pages/Insurances";
 import NotFound from "./pages/NotFound";
 import { languages } from "./i18n";
 
@@ -76,9 +81,21 @@ const LanguageRoutes = () => {
         <Route path="/resiliation" element={<Resiliation />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
-        <Route path="/politique-confidentialite" element={<PrivacyPolicy />} />
-        <Route path="/mentions-legales" element={<LegalNotice />} />
+        
+        {/* WordPress SEO-aligned slugs */}
+        <Route path="/politique-de-confidentialite" element={<PrivacyPolicy />} />
+        <Route path="/legal" element={<LegalNotice />} />
         <Route path="/cgu" element={<TermsOfService />} />
+        <Route path="/a-propos" element={<About />} />
+        <Route path="/contactez-nous" element={<Contact />} />
+        <Route path="/qui-sommes-nous" element={<About />} />
+        <Route path="/faqs" element={<FAQ />} />
+        <Route path="/assurances" element={<Insurances />} />
+        <Route path="/merci" element={<ThankYou />} />
+        
+        {/* Legacy routes - redirect to WordPress slugs */}
+        <Route path="/politique-confidentialite" element={<Navigate to="politique-de-confidentialite" replace />} />
+        <Route path="/mentions-legales" element={<Navigate to="legal" replace />} />
         
         {/* Landing/Comparator routes - using original WordPress URLs for SEO */}
         <Route path="/assurance-maladie-landing" element={<ComparateurSante />} />
@@ -136,6 +153,16 @@ const App = () => (
           <Route path="/resiliation" element={<Navigate to="/fr/resiliation" replace />} />
         <Route path="/blog" element={<Navigate to="/fr/blog" replace />} />
         <Route path="/blog/:slug" element={<Navigate to="/fr/blog/:slug" replace />} />
+        
+        {/* New pages without language prefix */}
+        <Route path="/a-propos" element={<Navigate to="/fr/a-propos" replace />} />
+        <Route path="/contactez-nous" element={<Navigate to="/fr/contactez-nous" replace />} />
+        <Route path="/qui-sommes-nous" element={<Navigate to="/fr/qui-sommes-nous" replace />} />
+        <Route path="/faqs" element={<Navigate to="/fr/faqs" replace />} />
+        <Route path="/assurances" element={<Navigate to="/fr/assurances" replace />} />
+        <Route path="/merci" element={<Navigate to="/fr/merci" replace />} />
+        <Route path="/politique-de-confidentialite" element={<Navigate to="/fr/politique-de-confidentialite" replace />} />
+        <Route path="/legal" element={<Navigate to="/fr/legal" replace />} />
         
         {/* Legacy WordPress URLs without language prefix - SEO redirects */}
         <Route path="/assurance-maladie-landing" element={<Navigate to="/fr/assurance-maladie-landing" replace />} />

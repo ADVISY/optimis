@@ -1313,5 +1313,57 @@
       "title": "Versicherungen für Selbständige vergleichen",
       "subtitle": "Berufshaftpflicht, Erwerbsausfall, BVG: Schützen Sie Ihre Tätigkeit"
     }
+  },
+  "about": {
+    "title": "Über Optimis",
+    "missionTitle": "Unsere Mission",
+    "missionContent": "Optimis wurde mit einer klaren Mission gegründet: den Versicherungsvergleich in der Schweiz zu vereinfachen und Privatpersonen sowie Unternehmen zu helfen, die besten Angebote für ihre Bedürfnisse zu finden. Wir glauben, dass jeder Mensch einfachen Zugang zu optimalem Schutz zum besten Preis verdient.",
+    "valuesTitle": "Unsere Werte",
+    "valuesContent": "Unabhängigkeit, Transparenz und Kundenservice stehen im Mittelpunkt unseres Ansatzes. Wir sind an keinen Versicherer gebunden, was uns ermöglicht, objektive und unparteiische Vergleiche anzubieten. Unser Team begleitet Sie bei jedem Schritt Ihrer Versicherungssuche.",
+    "historyTitle": "Unsere Geschichte",
+    "historyContent": "Seit unserer Gründung haben wir Tausenden von Schweizern geholfen, bei ihren Versicherungen zu sparen. Unsere Plattform vergleicht Angebote von über 30 Versicherungspartnern und deckt alle Versicherungsarten ab: Krankheit, Auto, Hausrat, Rechtsschutz, Leben und mehr.",
+    "teamTitle": "Unser Team",
+    "teamContent": "Unser Expertenteam für Versicherungen ist in der Westschweiz ansässig. Wir kombinieren fundiertes Wissen über den Schweizer Versicherungsmarkt mit modernster Technologie, um Ihnen den bestmöglichen Service zu bieten."
+  },
+  "contact": {
+    "title": "Kontaktieren Sie uns",
+    "getInTouch": "Nehmen Sie Kontakt mit unserem Team auf",
+    "description": "Haben Sie eine Frage zu unseren Dienstleistungen oder benötigen Sie Hilfe bei der Suche nach der besten Versicherung? Unser Team steht Ihnen zur Verfügung.",
+    "hoursTitle": "Öffnungszeiten",
+    "hoursContent": "Montag - Freitag: 9:00 - 18:00 Uhr. Unser Team antwortet in der Regel innerhalb von 24 Geschäftsstunden.",
+    "formTitle": "Senden Sie uns eine Nachricht",
+    "messageLabel": "Ihre Nachricht",
+    "messagePlaceholder": "Beschreiben Sie Ihr Anliegen..."
+  },
+  "faq": {
+    "title": "Häufig gestellte Fragen",
+    "subtitle": "Finden Sie Antworten auf die häufigsten Fragen zu unseren Dienstleistungen und Versicherungen in der Schweiz.",
+    "q1": "Wie funktioniert der Optimis-Vergleicher?",
+    "a1": "Unser Vergleicher analysiert Angebote von über 30 Versicherungspartnern, um Ihnen die besten Optionen für Ihr Profil zu präsentieren. Füllen Sie einfach das Formular aus, und wir zeigen Ihnen sofort die am besten geeigneten Angebote.",
+    "q2": "Ist der Service wirklich kostenlos?",
+    "a2": "Ja, unser Vergleichsdienst ist 100% kostenlos und unverbindlich. Wir werden von den Versicherern vergütet, wenn Sie über unsere Plattform abschliessen, was uns ermöglicht, Ihnen diesen Service kostenlos anzubieten.",
+    "q3": "Kann ich meine Krankenversicherung jederzeit wechseln?",
+    "a3": "Die Grundversicherung kann jährlich bis zum 30. November mit Wirkung zum 1. Januar gekündigt werden. Zusatzversicherungen haben ihre eigenen Kündigungsbedingungen, in der Regel mit einer Frist von 3 Monaten.",
+    "q4": "Wie werden die Krankenversicherungsprämien berechnet?",
+    "a4": "Die Prämien hängen von mehreren Faktoren ab: Ihrem Wohnkanton, Ihrem Alter, dem gewählten Versicherungsmodell (Standard, Hausarzt, HMO, Telemedizin) und der Höhe Ihrer Franchise.",
+    "q5": "Was ist die Prämienverbilligung?",
+    "a5": "Die Prämienverbilligung ist eine finanzielle Unterstützung der Kantone, um Personen mit bescheidenem Einkommen bei der Zahlung ihrer Krankenversicherungsprämien zu helfen. Die Berechtigungsbedingungen variieren je nach Kanton.",
+    "q6": "Was ist der Unterschied zwischen Teilkasko und Vollkasko?",
+    "a6": "Die Teilkasko deckt Schäden durch Dritte, Diebstahl, Naturereignisse und Glasbruch. Die Vollkasko umfasst zusätzlich Schäden, die Sie an Ihrem eigenen Fahrzeug verursachen.",
+    "q7": "Wie lange dauert es, ein Angebot zu erhalten?",
+    "a7": "Unsere Vergleiche sind sofort verfügbar. Sobald Sie das Formular ausgefüllt haben, erhalten Sie umgehend die Angebote, die Ihrem Profil entsprechen.",
+    "q8": "Sind meine persönlichen Daten geschützt?",
+    "a8": "Absolut. Wir halten uns an das Schweizer Datenschutzgesetz. Ihre Informationen sind verschlüsselt und werden niemals ohne Ihre ausdrückliche Zustimmung weitergegeben."
+  },
+  "thankYou": {
+    "title": "Vielen Dank für Ihre Anfrage!",
+    "message": "Ihre Anfrage wurde erfolgreich gesendet. Einer unserer Berater wird sich schnellstmöglich mit Ihnen in Verbindung setzen.",
+    "nextSteps": "Sie erhalten in Kürze eine Bestätigungs-E-Mail mit den Details Ihrer Anfrage. Bereiten Sie gerne Ihre Fragen für Ihr Gespräch vor.",
+    "backHome": "Zurück zur Startseite"
+  },
+  "insurances": {
+    "title": "Unsere Versicherungen",
+    "subtitle": "Entdecken Sie alle Versicherungsarten, die wir vergleichen, um Ihnen zu helfen, den besten Schutz zu finden.",
+    "lifeInsuranceDesc": "Bereiten Sie Ihre Zukunft vor und schützen Sie Ihre Angehörigen"
   }
 }
