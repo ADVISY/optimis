@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { languages, LanguageCode } from '@/i18n';
+import { localizedRoutes } from '@/utils/localizedRoutes';
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
@@ -19,6 +20,16 @@ const LanguageSwitcher = () => {
   const currentLangCode = lang && languages.some(l => l.code === lang) ? lang : i18n.language;
   const currentLang = languages.find(l => l.code === currentLangCode) || languages[0];
 
+  // Find the route key for a given slug in any language
+  const findRouteKeyFromSlug = (slug: string): string | null => {
+    for (const [key, routes] of Object.entries(localizedRoutes)) {
+      if (routes.fr === slug || routes.de === slug || routes.it === slug) {
+        return key;
+      }
+    }
+    return null;
+  };
+
   const handleLanguageChange = (newLangCode: LanguageCode) => {
     if (newLangCode === currentLangCode) return;
 
@@ -28,15 +39,29 @@ const LanguageSwitcher = () => {
     // Check if first part is a language code
     const firstPartIsLang = languages.some(l => l.code === pathParts[0]);
     
-    let newPath: string;
-    if (firstPartIsLang) {
-      // Replace the language prefix
+    if (firstPartIsLang && pathParts.length > 1) {
+      // Translate the slug if it's a known route
+      const currentSlug = pathParts[1];
+      const routeKey = findRouteKeyFromSlug(currentSlug);
+      
+      if (routeKey) {
+        const routes = localizedRoutes[routeKey];
+        const newSlug = routes[newLangCode as keyof typeof routes] || routes.fr;
+        pathParts[0] = newLangCode;
+        pathParts[1] = newSlug;
+      } else {
+        // Just change the language prefix, keep the slug as is
+        pathParts[0] = newLangCode;
+      }
+    } else if (firstPartIsLang) {
+      // Just the language prefix, replace it
       pathParts[0] = newLangCode;
-      newPath = '/' + pathParts.join('/');
     } else {
       // Add language prefix (shouldn't happen normally)
-      newPath = '/' + newLangCode + location.pathname;
+      pathParts.unshift(newLangCode);
     }
+
+    const newPath = '/' + pathParts.join('/');
 
     // Change i18n language
     i18n.changeLanguage(newLangCode);

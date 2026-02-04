@@ -30,7 +30,7 @@ import Insurances from "./pages/Insurances";
 import NotFound from "./pages/NotFound";
 import { languages } from "./i18n";
 
-// Comparator/Landing pages (using original WordPress URLs for SEO)
+// Comparator/Landing pages
 import ComparateurSante from "./pages/comparateurs/ComparateurSante";
 import ComparateurVoiture from "./pages/comparateurs/ComparateurVoiture";
 import ComparateurMenage from "./pages/comparateurs/ComparateurMenage";
@@ -40,6 +40,8 @@ import ComparateurResiliation from "./pages/comparateurs/ComparateurResiliation"
 import ComparateurPilier3 from "./pages/comparateurs/ComparateurPilier3";
 import ComparateurHypotheque from "./pages/comparateurs/ComparateurHypotheque";
 import ComparateurProfessionnel from "./pages/comparateurs/ComparateurProfessionnel";
+
+import { localizedRoutes } from "./utils/localizedRoutes";
 
 const queryClient = new QueryClient();
 
@@ -57,10 +59,13 @@ const LanguageWrapper = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
-// Redirect component that uses language from URL
-const LegacyRedirect = ({ to }: { to: string }) => {
-  const { lang } = useParams<{ lang: string }>();
-  return <Navigate to={`/${lang || 'fr'}${to}`} replace />;
+// Helper to create routes for all language variants of a path
+const createLocalizedRoutes = (routeKey: keyof typeof localizedRoutes, element: React.ReactNode) => {
+  const routes = localizedRoutes[routeKey];
+  const uniqueSlugs = [...new Set([routes.fr, routes.de, routes.it])];
+  return uniqueSlugs.map(slug => (
+    <Route key={`${routeKey}-${slug}`} path={`/${slug}`} element={element} />
+  ));
 };
 
 // Routes component with language prefix
@@ -69,55 +74,59 @@ const LanguageRoutes = () => {
     <LanguageWrapper>
       <Routes>
         <Route path="/" element={<Index />} />
-        <Route path="/assurance-voiture" element={<AssuranceVoiture />} />
-        <Route path="/assurance-sante" element={<AssuranceSante />} />
-        <Route path="/protection-juridique" element={<ProtectionJuridique />} />
-        <Route path="/assurance-menage" element={<AssuranceMenage />} />
-        <Route path="/assurance-vie" element={<AssuranceVie />} />
-        <Route path="/hypotheque" element={<Hypotheque />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/forfait-mobile" element={<ForfaitMobile />} />
-        <Route path="/subside-assurance-maladie" element={<SubsideAssuranceMaladie />} />
-        <Route path="/resiliation" element={<Resiliation />} />
+        
+        {/* Main pages - all language variants */}
+        {createLocalizedRoutes("carInsurance", <AssuranceVoiture />)}
+        {createLocalizedRoutes("healthInsurance", <AssuranceSante />)}
+        {createLocalizedRoutes("legalProtection", <ProtectionJuridique />)}
+        {createLocalizedRoutes("homeInsurance", <AssuranceMenage />)}
+        {createLocalizedRoutes("lifeInsurance", <AssuranceVie />)}
+        {createLocalizedRoutes("mortgage", <Hypotheque />)}
+        {createLocalizedRoutes("services", <Services />)}
+        {createLocalizedRoutes("mobilePackage", <ForfaitMobile />)}
+        {createLocalizedRoutes("healthSubsidy", <SubsideAssuranceMaladie />)}
+        {createLocalizedRoutes("termination", <Resiliation />)}
+        
+        {/* Blog */}
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         
-        {/* WordPress SEO-aligned slugs */}
-        <Route path="/politique-de-confidentialite" element={<PrivacyPolicy />} />
-        <Route path="/legal" element={<LegalNotice />} />
-        <Route path="/cgu" element={<TermsOfService />} />
-        <Route path="/a-propos" element={<About />} />
-        <Route path="/contactez-nous" element={<Contact />} />
-        <Route path="/qui-sommes-nous" element={<About />} />
-        <Route path="/faqs" element={<FAQ />} />
-        <Route path="/assurances" element={<Insurances />} />
-        <Route path="/merci" element={<ThankYou />} />
+        {/* Institutional pages - all language variants */}
+        {createLocalizedRoutes("privacyPolicy", <PrivacyPolicy />)}
+        {createLocalizedRoutes("legalNotice", <LegalNotice />)}
+        {createLocalizedRoutes("terms", <TermsOfService />)}
+        {createLocalizedRoutes("about", <About />)}
+        {createLocalizedRoutes("aboutAlt", <About />)}
+        {createLocalizedRoutes("contact", <Contact />)}
+        {createLocalizedRoutes("faq", <FAQ />)}
+        {createLocalizedRoutes("insurances", <Insurances />)}
+        {createLocalizedRoutes("thankYou", <ThankYou />)}
         
-        {/* Legacy routes - redirect to WordPress slugs */}
-        <Route path="/politique-confidentialite" element={<Navigate to="politique-de-confidentialite" replace />} />
-        <Route path="/mentions-legales" element={<Navigate to="legal" replace />} />
+        {/* Landing/Comparator pages - all language variants */}
+        {createLocalizedRoutes("healthLanding", <ComparateurSante />)}
+        {createLocalizedRoutes("carLanding", <ComparateurVoiture />)}
+        {createLocalizedRoutes("homeLanding", <ComparateurMenage />)}
+        {createLocalizedRoutes("legalLanding", <ComparateurProtectionJuridique />)}
+        {createLocalizedRoutes("subsidyLanding", <ComparateurSubside />)}
+        {createLocalizedRoutes("terminationLanding", <ComparateurResiliation />)}
+        {createLocalizedRoutes("pillar3Landing", <ComparateurPilier3 />)}
+        {createLocalizedRoutes("mortgageLanding", <ComparateurHypotheque />)}
+        {createLocalizedRoutes("businessLanding", <ComparateurProfessionnel />)}
         
-        {/* Landing/Comparator routes - using original WordPress URLs for SEO */}
-        <Route path="/assurance-maladie-landing" element={<ComparateurSante />} />
-        <Route path="/assurance-voiture-landing" element={<ComparateurVoiture />} />
-        <Route path="/assurance-menage-landing" element={<ComparateurMenage />} />
-        <Route path="/protection-juridique-landing" element={<ComparateurProtectionJuridique />} />
-        <Route path="/subside-assurance-maladie-demande" element={<ComparateurSubside />} />
-        <Route path="/resiliation-assurance" element={<ComparateurResiliation />} />
-        <Route path="/3eme-pilier-offres" element={<ComparateurPilier3 />} />
-        <Route path="/hypotheque-offres" element={<ComparateurHypotheque />} />
-        <Route path="/assurance-entreprise-offres" element={<ComparateurProfessionnel />} />
+        {/* Legacy comparateur routes - redirect to new URLs */}
+        <Route path="/comparateur/sante" element={<Navigate to="../assurance-maladie-landing" replace />} />
+        <Route path="/comparateur/voiture" element={<Navigate to="../assurance-voiture-landing" replace />} />
+        <Route path="/comparateur/menage" element={<Navigate to="../assurance-menage-landing" replace />} />
+        <Route path="/comparateur/protection-juridique" element={<Navigate to="../protection-juridique-landing" replace />} />
+        <Route path="/comparateur/subside" element={<Navigate to="../subside-assurance-maladie-demande" replace />} />
+        <Route path="/comparateur/resiliation" element={<Navigate to="../resiliation-assurance" replace />} />
+        <Route path="/comparateur/pilier-3a" element={<Navigate to="../3eme-pilier-offres" replace />} />
+        <Route path="/comparateur/hypotheque" element={<Navigate to="../hypotheque-offres" replace />} />
+        <Route path="/comparateur/professionnel" element={<Navigate to="../assurance-entreprise-offres" replace />} />
         
-        {/* Legacy comparateur routes - redirect to new WordPress URLs */}
-        <Route path="/comparateur/sante" element={<LegacyRedirect to="/assurance-maladie-landing" />} />
-        <Route path="/comparateur/voiture" element={<LegacyRedirect to="/assurance-voiture-landing" />} />
-        <Route path="/comparateur/menage" element={<LegacyRedirect to="/assurance-menage-landing" />} />
-        <Route path="/comparateur/protection-juridique" element={<LegacyRedirect to="/protection-juridique-landing" />} />
-        <Route path="/comparateur/subside" element={<LegacyRedirect to="/subside-assurance-maladie-demande" />} />
-        <Route path="/comparateur/resiliation" element={<LegacyRedirect to="/resiliation-assurance" />} />
-        <Route path="/comparateur/pilier-3a" element={<LegacyRedirect to="/3eme-pilier-offres" />} />
-        <Route path="/comparateur/hypotheque" element={<LegacyRedirect to="/hypotheque-offres" />} />
-        <Route path="/comparateur/professionnel" element={<LegacyRedirect to="/assurance-entreprise-offres" />} />
+        {/* Legacy routes - redirect to new slugs */}
+        <Route path="/politique-confidentialite" element={<Navigate to="../politique-de-confidentialite" replace />} />
+        <Route path="/mentions-legales" element={<Navigate to="../legal" replace />} />
         
         <Route path="*" element={<NotFound />} />
       </Routes>
@@ -151,32 +160,32 @@ const App = () => (
           <Route path="/subside-assurance-maladie" element={<Navigate to="/fr/subside-assurance-maladie" replace />} />
           <Route path="/forfait-mobile" element={<Navigate to="/fr/forfait-mobile" replace />} />
           <Route path="/resiliation" element={<Navigate to="/fr/resiliation" replace />} />
-        <Route path="/blog" element={<Navigate to="/fr/blog" replace />} />
-        <Route path="/blog/:slug" element={<Navigate to="/fr/blog/:slug" replace />} />
-        
-        {/* New pages without language prefix */}
-        <Route path="/a-propos" element={<Navigate to="/fr/a-propos" replace />} />
-        <Route path="/contactez-nous" element={<Navigate to="/fr/contactez-nous" replace />} />
-        <Route path="/qui-sommes-nous" element={<Navigate to="/fr/qui-sommes-nous" replace />} />
-        <Route path="/faqs" element={<Navigate to="/fr/faqs" replace />} />
-        <Route path="/assurances" element={<Navigate to="/fr/assurances" replace />} />
-        <Route path="/merci" element={<Navigate to="/fr/merci" replace />} />
-        <Route path="/politique-de-confidentialite" element={<Navigate to="/fr/politique-de-confidentialite" replace />} />
-        <Route path="/legal" element={<Navigate to="/fr/legal" replace />} />
-        
-        {/* Legacy WordPress URLs without language prefix - SEO redirects */}
-        <Route path="/assurance-maladie-landing" element={<Navigate to="/fr/assurance-maladie-landing" replace />} />
-        <Route path="/assurance-voiture-landing" element={<Navigate to="/fr/assurance-voiture-landing" replace />} />
-        <Route path="/assurance-menage-landing" element={<Navigate to="/fr/assurance-menage-landing" replace />} />
-        <Route path="/protection-juridique-landing" element={<Navigate to="/fr/protection-juridique-landing" replace />} />
-        <Route path="/subside-assurance-maladie-demande" element={<Navigate to="/fr/subside-assurance-maladie-demande" replace />} />
-        <Route path="/resiliation-assurance" element={<Navigate to="/fr/resiliation-assurance" replace />} />
-        <Route path="/3eme-pilier-offres" element={<Navigate to="/fr/3eme-pilier-offres" replace />} />
-        <Route path="/hypotheque-offres" element={<Navigate to="/fr/hypotheque-offres" replace />} />
-        <Route path="/assurance-entreprise-offres" element={<Navigate to="/fr/assurance-entreprise-offres" replace />} />
-        
-        {/* Catch-all */}
-        <Route path="*" element={<NotFound />} />
+          <Route path="/blog" element={<Navigate to="/fr/blog" replace />} />
+          <Route path="/blog/:slug" element={<Navigate to="/fr/blog/:slug" replace />} />
+          
+          {/* Institutional pages without language prefix */}
+          <Route path="/a-propos" element={<Navigate to="/fr/a-propos" replace />} />
+          <Route path="/contactez-nous" element={<Navigate to="/fr/contactez-nous" replace />} />
+          <Route path="/qui-sommes-nous" element={<Navigate to="/fr/qui-sommes-nous" replace />} />
+          <Route path="/faqs" element={<Navigate to="/fr/faqs" replace />} />
+          <Route path="/assurances" element={<Navigate to="/fr/assurances" replace />} />
+          <Route path="/merci" element={<Navigate to="/fr/merci" replace />} />
+          <Route path="/politique-de-confidentialite" element={<Navigate to="/fr/politique-de-confidentialite" replace />} />
+          <Route path="/legal" element={<Navigate to="/fr/legal" replace />} />
+          
+          {/* Legacy WordPress URLs without language prefix - SEO redirects */}
+          <Route path="/assurance-maladie-landing" element={<Navigate to="/fr/assurance-maladie-landing" replace />} />
+          <Route path="/assurance-voiture-landing" element={<Navigate to="/fr/assurance-voiture-landing" replace />} />
+          <Route path="/assurance-menage-landing" element={<Navigate to="/fr/assurance-menage-landing" replace />} />
+          <Route path="/protection-juridique-landing" element={<Navigate to="/fr/protection-juridique-landing" replace />} />
+          <Route path="/subside-assurance-maladie-demande" element={<Navigate to="/fr/subside-assurance-maladie-demande" replace />} />
+          <Route path="/resiliation-assurance" element={<Navigate to="/fr/resiliation-assurance" replace />} />
+          <Route path="/3eme-pilier-offres" element={<Navigate to="/fr/3eme-pilier-offres" replace />} />
+          <Route path="/hypotheque-offres" element={<Navigate to="/fr/hypotheque-offres" replace />} />
+          <Route path="/assurance-entreprise-offres" element={<Navigate to="/fr/assurance-entreprise-offres" replace />} />
+          
+          {/* Catch-all */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
