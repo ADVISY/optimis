@@ -901,6 +901,29 @@
         "glassBreakage": "Rottura vetri",
         "assistance": "Assistenza stradale",
         "replacementVehicle": "Veicolo sostitutivo"
+      },
+      "searchBrand": "Cerca marca...",
+      "searchModel": "Cerca modello...",
+      "selectBrandFirst": "Prima seleziona una marca",
+      "selectModelFirst": "Prima seleziona un modello",
+      "brandNotFound": "Marca non trovata",
+      "modelNotFound": "Modello non trovato",
+      "yearNotAvailable": "Anno non disponibile",
+      "vehicleBrand": "Marca del veicolo",
+      "vehicleModel": "Modello",
+      "vehicleYear": "Anno di immatricolazione",
+      "vehicleSelected": "Veicolo selezionato",
+      "datePlaceholder": "GG/MM/AAAA",
+      "driverMinAge": "Il conducente principale deve avere almeno 18 anni",
+      "plateSearch": {
+        "search": "Cerca",
+        "enterPlate": "Inserisci una targa",
+        "invalidFormat": "Formato targa non valido. Esempio: TI 123456",
+        "notFound": "Nessun veicolo trovato. Seleziona manualmente.",
+        "popularVehicles": "Veicoli popolari per {{canton}}",
+        "selectOrManual": "Seleziona il tuo veicolo o scegli manualmente",
+        "year": "Anno",
+        "hint": "Inserisci la tua targa per identificare automaticamente il tuo veicolo"
       }
     },
     "pillar3": {

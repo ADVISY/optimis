@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { Check, ChevronDown, Search, Car } from "lucide-react";
@@ -169,6 +170,8 @@ const VehicleSelector = ({
   onYearChange,
   className,
 }: VehicleSelectorProps) => {
+  const { t } = useTranslation();
+  
   // Get available options based on selections
   const brandNames = vehicleBrands.map((b) => b.name);
   const modelNames = brand ? getModelNamesForBrand(brand) : [];
@@ -197,46 +200,46 @@ const VehicleSelector = ({
       {/* Brand Selection */}
       <div>
         <label className="block text-sm font-medium mb-1.5">
-          Marque du véhicule
+          {t("forms.carInsurance.vehicleBrand")}
         </label>
         <Combobox
           value={brand}
           onChange={handleBrandChange}
           options={brandNames}
-          placeholder="Rechercher une marque..."
+          placeholder={t("forms.carInsurance.searchBrand")}
           icon={<Car className="h-4 w-4" />}
-          emptyMessage="Marque non trouvée"
+          emptyMessage={t("forms.carInsurance.brandNotFound")}
         />
       </div>
 
       {/* Model Selection */}
       <div>
         <label className="block text-sm font-medium mb-1.5">
-          Modèle
+          {t("forms.carInsurance.vehicleModel")}
         </label>
         <Combobox
           value={model}
           onChange={handleModelChange}
           options={modelNames}
-          placeholder={brand ? "Rechercher un modèle..." : "Sélectionnez d'abord une marque"}
+          placeholder={brand ? t("forms.carInsurance.searchModel") : t("forms.carInsurance.selectBrandFirst")}
           disabled={!brand}
           icon={<Search className="h-4 w-4" />}
-          emptyMessage="Modèle non trouvé"
+          emptyMessage={t("forms.carInsurance.modelNotFound")}
         />
       </div>
 
       {/* Year Selection */}
       <div>
         <label className="block text-sm font-medium mb-1.5">
-          Année de mise en circulation
+          {t("forms.carInsurance.vehicleYear")}
         </label>
         <Combobox
           value={year}
           onChange={onYearChange}
           options={yearStrings.length > 0 ? yearStrings : Array.from({ length: 30 }, (_, i) => (new Date().getFullYear() - i).toString())}
-          placeholder={model ? "Sélectionner l'année..." : "Sélectionnez d'abord un modèle"}
+          placeholder={model ? t("forms.carInsurance.selectYear") : t("forms.carInsurance.selectModelFirst")}
           disabled={!model && !!brand}
-          emptyMessage="Année non disponible"
+          emptyMessage={t("forms.carInsurance.yearNotAvailable")}
         />
       </div>
     </div>

@@ -904,6 +904,29 @@
         "glassBreakage": "Glasbruch",
         "assistance": "Pannenhilfe",
         "replacementVehicle": "Ersatzfahrzeug"
+      },
+      "searchBrand": "Marke suchen...",
+      "searchModel": "Modell suchen...",
+      "selectBrandFirst": "Bitte zuerst Marke auswählen",
+      "selectModelFirst": "Bitte zuerst Modell auswählen",
+      "brandNotFound": "Marke nicht gefunden",
+      "modelNotFound": "Modell nicht gefunden",
+      "yearNotAvailable": "Jahr nicht verfügbar",
+      "vehicleBrand": "Fahrzeugmarke",
+      "vehicleModel": "Modell",
+      "vehicleYear": "Erstzulassung",
+      "vehicleSelected": "Ausgewähltes Fahrzeug",
+      "datePlaceholder": "TT/MM/JJJJ",
+      "driverMinAge": "Der Hauptfahrer muss mindestens 18 Jahre alt sein",
+      "plateSearch": {
+        "search": "Suchen",
+        "enterPlate": "Bitte Kennzeichen eingeben",
+        "invalidFormat": "Ungültiges Kennzeichen-Format. Beispiel: ZH 123456",
+        "notFound": "Kein Fahrzeug gefunden. Bitte manuell auswählen.",
+        "popularVehicles": "Beliebte Fahrzeuge für {{canton}}",
+        "selectOrManual": "Wählen Sie Ihr Fahrzeug oder geben Sie es manuell ein",
+        "year": "Jahrgang",
+        "hint": "Geben Sie Ihr Kennzeichen ein, um Ihr Fahrzeug automatisch zu identifizieren"
       }
     },
     "pillar3": {
