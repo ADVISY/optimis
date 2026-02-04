@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, Loader2, Car, Check, AlertCircle, ChevronRight } from "lucide-react";
@@ -113,6 +114,7 @@ const PlateSearch = ({
   onVehicleFound,
   className,
 }: PlateSearchProps) => {
+  const { t } = useTranslation();
   const [isSearching, setIsSearching] = useState(false);
   const [suggestions, setSuggestions] = useState<VehicleSuggestion[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -133,12 +135,12 @@ const PlateSearch = ({
 
   const handleSearch = async () => {
     if (!plate.trim()) {
-      setError("Veuillez entrer une plaque d'immatriculation");
+      setError(t("forms.carInsurance.plateSearch.enterPlate"));
       return;
     }
 
     if (!isValidSwissPlate(plate)) {
-      setError("Format de plaque invalide. Exemple: VD 123456");
+      setError(t("forms.carInsurance.plateSearch.invalidFormat"));
       return;
     }
 
@@ -155,7 +157,7 @@ const PlateSearch = ({
       setSuggestions(results);
       setShowSuggestions(true);
     } else {
-      setError("Aucun véhicule trouvé. Veuillez sélectionner manuellement.");
+      setError(t("forms.carInsurance.plateSearch.notFound"));
     }
 
     setIsSearching(false);
@@ -216,7 +218,7 @@ const PlateSearch = ({
             ) : (
               <>
                 <Search className="h-5 w-5 mr-2" />
-                Rechercher
+                {t("forms.carInsurance.plateSearch.search")}
               </>
             )}
           </Button>
@@ -233,8 +235,8 @@ const PlateSearch = ({
         {showSuggestions && suggestions.length > 0 && (
           <div className="absolute z-50 w-full mt-2 bg-popover border rounded-xl shadow-lg overflow-hidden">
             <div className="p-3 bg-muted/50 border-b">
-              <p className="text-sm font-medium">Véhicules populaires pour {cantonInfo?.name || canton}</p>
-              <p className="text-xs text-muted-foreground">Sélectionnez votre véhicule ou choisissez manuellement</p>
+              <p className="text-sm font-medium">{t("forms.carInsurance.plateSearch.popularVehicles", { canton: cantonInfo?.name || canton })}</p>
+              <p className="text-xs text-muted-foreground">{t("forms.carInsurance.plateSearch.selectOrManual")}</p>
             </div>
             <div className="max-h-64 overflow-auto">
               {suggestions.map((suggestion, index) => (
@@ -250,7 +252,7 @@ const PlateSearch = ({
                     </div>
                     <div>
                       <p className="font-medium">{suggestion.brand} {suggestion.model}</p>
-                      <p className="text-sm text-muted-foreground">Année {suggestion.year}</p>
+                      <p className="text-sm text-muted-foreground">{t("forms.carInsurance.plateSearch.year")} {suggestion.year}</p>
                     </div>
                   </div>
                   <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
@@ -262,7 +264,7 @@ const PlateSearch = ({
       </div>
 
       <p className="text-xs text-muted-foreground">
-        Entrez votre plaque d'immatriculation pour identifier automatiquement votre véhicule
+        {t("forms.carInsurance.plateSearch.hint")}
       </p>
     </div>
   );

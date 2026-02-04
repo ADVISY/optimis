@@ -207,7 +207,7 @@ const CarInsuranceForm = () => {
           {/* Show selected vehicle summary */}
           {formData.vehicleBrand && formData.vehicleModel && formData.vehicleYear && (
             <div className="bg-primary/10 border border-primary/20 rounded-lg p-4 mt-4">
-              <p className="text-sm font-medium text-primary">Véhicule sélectionné :</p>
+              <p className="text-sm font-medium text-primary">{t("forms.carInsurance.vehicleSelected")}:</p>
               <p className="text-lg font-bold">
                 {formData.vehicleBrand} {formData.vehicleModel} ({formData.vehicleYear})
               </p>
@@ -266,12 +266,12 @@ const CarInsuranceForm = () => {
             <DateInput
               value={formData.driverBirthDate}
               onChange={(date) => updateFormData({ driverBirthDate: date })}
-              placeholder="JJ/MM/AAAA"
+              placeholder={t("forms.carInsurance.datePlaceholder")}
               className="h-9 md:h-14 text-sm md:text-lg"
               maxYear={new Date().getFullYear() - 18}
             />
             <p className="text-[10px] md:text-xs text-muted-foreground mt-1">
-              Le conducteur principal doit avoir au moins 18 ans
+              {t("forms.carInsurance.driverMinAge")}
             </p>
           </FormFieldWrapper>
 

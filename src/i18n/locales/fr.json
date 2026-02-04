@@ -936,6 +936,29 @@
         "glassBreakage": "Bris de glace",
         "assistance": "Assistance dépannage",
         "replacementVehicle": "Véhicule de remplacement"
+      },
+      "searchBrand": "Rechercher une marque...",
+      "searchModel": "Rechercher un modèle...",
+      "selectBrandFirst": "Sélectionnez d'abord une marque",
+      "selectModelFirst": "Sélectionnez d'abord un modèle",
+      "brandNotFound": "Marque non trouvée",
+      "modelNotFound": "Modèle non trouvé",
+      "yearNotAvailable": "Année non disponible",
+      "vehicleBrand": "Marque du véhicule",
+      "vehicleModel": "Modèle",
+      "vehicleYear": "Année de mise en circulation",
+      "vehicleSelected": "Véhicule sélectionné",
+      "datePlaceholder": "JJ/MM/AAAA",
+      "driverMinAge": "Le conducteur principal doit avoir au moins 18 ans",
+      "plateSearch": {
+        "search": "Rechercher",
+        "enterPlate": "Veuillez entrer une plaque d'immatriculation",
+        "invalidFormat": "Format de plaque invalide. Exemple: VD 123456",
+        "notFound": "Aucun véhicule trouvé. Veuillez sélectionner manuellement.",
+        "popularVehicles": "Véhicules populaires pour {{canton}}",
+        "selectOrManual": "Sélectionnez votre véhicule ou choisissez manuellement",
+        "year": "Année",
+        "hint": "Entrez votre plaque d'immatriculation pour identifier automatiquement votre véhicule"
       }
     },
     "pillar3": {
