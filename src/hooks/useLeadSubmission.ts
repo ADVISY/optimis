@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 
-// Zapier webhook URL - replace with your own
-const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/YOUR_HOOK_ID";
+// Zapier webhook URL for lead submissions
+const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/21326682/ul72n92/";
 
 interface LeadData {
   formType: string;
@@ -64,8 +64,8 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
     // Use provided webhook URL or default Zapier URL
     const targetUrl = webhookUrl || ZAPIER_WEBHOOK_URL;
     
-    // Only send if URL is configured (not the placeholder)
-    if (targetUrl && !targetUrl.includes("YOUR_HOOK_ID")) {
+    // Send to Zapier webhook
+    if (targetUrl) {
       try {
         await fetch(targetUrl, {
           method: "POST",
