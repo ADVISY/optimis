@@ -80,6 +80,61 @@ const Pillar3Form = () => {
     },
   });
 
+  // Helper function to get translated labels for lead submission
+  const getTranslatedFormData = () => {
+    const objectiveLabels: Record<string, string> = {
+      tax: t("forms.pillar3.objectives.tax"),
+      retirement: t("forms.pillar3.objectives.retirement"),
+      protection: t("forms.pillar3.objectives.protection"),
+      mix: t("forms.pillar3.objectives.mix"),
+    };
+
+    const statusLabels: Record<string, string> = {
+      employee: t("forms.pillar3.status.employee"),
+      "self-employed": t("forms.pillar3.status.selfEmployed"),
+      executive: t("forms.pillar3.status.executive"),
+      student: t("forms.pillar3.status.student"),
+    };
+
+    const incomeLabels: Record<string, string> = {
+      "0-50000": "< CHF 50'000",
+      "50000-80000": "CHF 50'000 - 80'000",
+      "80000-120000": "CHF 80'000 - 120'000",
+      "120000-200000": "CHF 120'000 - 200'000",
+      "200000+": "> CHF 200'000",
+    };
+
+    const savingsLabels: Record<string, string> = {
+      "100-300": `CHF 100 - 300 / ${t("forms.pillar3.perMonth")}`,
+      "300-500": `CHF 300 - 500 / ${t("forms.pillar3.perMonth")}`,
+      "500-max": `CHF 500 - max (${t("forms.pillar3.maxAmount")})`,
+    };
+
+    const horizonLabels: Record<string, string> = {
+      "5-10": `5-10 ${t("forms.pillar3.years")}`,
+      "10-20": `10-20 ${t("forms.pillar3.years")}`,
+      "20-30": `20-30 ${t("forms.pillar3.years")}`,
+      "30+": `30+ ${t("forms.pillar3.years")}`,
+    };
+
+    const riskLabels: Record<string, string> = {
+      conservative: t("forms.pillar3.risks.conservative"),
+      moderate: t("forms.pillar3.risks.moderate"),
+      dynamic: t("forms.pillar3.risks.dynamic"),
+      aggressive: t("forms.pillar3.risks.aggressive"),
+    };
+
+    return {
+      ...formData,
+      objective: objectiveLabels[formData.objective] || formData.objective,
+      professionalStatus: statusLabels[formData.professionalStatus] || formData.professionalStatus,
+      incomeRange: incomeLabels[formData.incomeRange] || formData.incomeRange,
+      savingsAmount: savingsLabels[formData.savingsAmount] || formData.savingsAmount,
+      investmentHorizon: horizonLabels[formData.investmentHorizon] || formData.investmentHorizon,
+      riskProfile: riskLabels[formData.riskProfile] || formData.riskProfile,
+    };
+  };
+
   const handleSubmit = async () => {
     setIsLoading(true);
     setLoadingStep("analyzing");
@@ -100,7 +155,8 @@ const Pillar3Form = () => {
     
     setTimeout(() => setLoadingStep("preparing"), 2000);
     
-    await submitLead(formData as unknown as Record<string, unknown>);
+    // Submit with translated labels for better readability in sheets
+    await submitLead(getTranslatedFormData() as unknown as Record<string, unknown>);
     
     setTimeout(() => {
       setProjections(calculatedProjections);
