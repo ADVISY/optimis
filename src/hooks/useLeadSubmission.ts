@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
-
-// Zapier webhook URL for lead submissions
-const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/21326682/ul72n92/";
+import { supabase } from "@/integrations/supabase/client";
 
 interface LeadData {
   formType: string;
@@ -57,45 +55,34 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
       leadId: generateLeadId(),
       pageUrl: window.location.href,
       userAgent: navigator.userAgent,
+      webhookUrl: webhookUrl, // Pass custom webhook if provided
     };
 
     console.log("Lead data to submit:", leadData);
 
-    // Use provided webhook URL or default Zapier URL
-    const targetUrl = webhookUrl || ZAPIER_WEBHOOK_URL;
-    
-    // Send to Zapier webhook
-    if (targetUrl) {
-      try {
-        await fetch(targetUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          mode: "no-cors",
-          body: JSON.stringify(leadData),
-        });
+    try {
+      // Use Edge Function to submit lead (proper server-side request)
+      const { data, error } = await supabase.functions.invoke('submit-lead', {
+        body: leadData,
+      });
 
-        toast({
-          title: t("forms.successTitle"),
-          description: t("forms.successDescription"),
-        });
-        
-        console.log("Lead sent successfully to webhook");
-      } catch (error) {
-        console.error("Error submitting lead:", error);
-        toast({
-          title: t("forms.errorTitle"),
-          description: t("forms.errorDescription"),
-          variant: "destructive",
-        });
+      if (error) {
+        console.error("Error from submit-lead function:", error);
+        throw error;
       }
-    } else {
-      // Demo mode - just log and show success
-      console.log("Demo mode - Lead captured (configure ZAPIER_WEBHOOK_URL to send):", leadData);
+
+      console.log("Lead submitted successfully:", data);
+      
       toast({
         title: t("forms.successTitle"),
         description: t("forms.successDescription"),
+      });
+    } catch (error) {
+      console.error("Error submitting lead:", error);
+      toast({
+        title: t("forms.errorTitle"),
+        description: t("forms.errorDescription"),
+        variant: "destructive",
       });
     }
 
