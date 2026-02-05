@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 
+// Zapier webhook URL - replace with your own
+const ZAPIER_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/YOUR_HOOK_ID";
+
 interface LeadData {
   formType: string;
   language: string;
@@ -29,22 +32,42 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
   const submitLead = async (formData: Record<string, unknown>) => {
     setIsSubmitting(true);
 
+    // Flatten nested objects for Zapier compatibility
+    const flattenObject = (obj: Record<string, unknown>, prefix = ''): Record<string, unknown> => {
+      const result: Record<string, unknown> = {};
+      for (const key in obj) {
+        const newKey = prefix ? `${prefix}_${key}` : key;
+        if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
+          Object.assign(result, flattenObject(obj[key] as Record<string, unknown>, newKey));
+        } else {
+          result[newKey] = obj[key];
+        }
+      }
+      return result;
+    };
+
+    const flatFormData = flattenObject(formData as Record<string, unknown>);
+
     const leadData: LeadData = {
-      ...formData,
+      ...flatFormData,
       formType,
       language: i18n.language,
       source: document.referrer || "direct",
       timestamp: new Date().toISOString(),
       leadId: generateLeadId(),
       pageUrl: window.location.href,
+      userAgent: navigator.userAgent,
     };
 
     console.log("Lead data to submit:", leadData);
 
-    // If webhook URL is provided, send to Zapier
-    if (webhookUrl) {
+    // Use provided webhook URL or default Zapier URL
+    const targetUrl = webhookUrl || ZAPIER_WEBHOOK_URL;
+    
+    // Only send if URL is configured (not the placeholder)
+    if (targetUrl && !targetUrl.includes("YOUR_HOOK_ID")) {
       try {
-        await fetch(webhookUrl, {
+        await fetch(targetUrl, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -57,6 +80,8 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
           title: t("forms.successTitle"),
           description: t("forms.successDescription"),
         });
+        
+        console.log("Lead sent successfully to webhook");
       } catch (error) {
         console.error("Error submitting lead:", error);
         toast({
@@ -67,7 +92,7 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
       }
     } else {
       // Demo mode - just log and show success
-      console.log("Demo mode - Lead captured:", leadData);
+      console.log("Demo mode - Lead captured (configure ZAPIER_WEBHOOK_URL to send):", leadData);
       toast({
         title: t("forms.successTitle"),
         description: t("forms.successDescription"),
