@@ -7,8 +7,8 @@ import de from './locales/de.json';
 import it from './locales/it.json';
 
 export const languages = [
-  { code: 'fr', name: 'Français', flag: '🇫🇷' },
   { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷' },
   { code: 'it', name: 'Italiano', flag: '🇮🇹' },
 ] as const;
 
@@ -25,7 +25,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: 'fr',
+    fallbackLng: 'de',
     supportedLngs: ['fr', 'de', 'it'],
     interpolation: {
       escapeValue: false,
