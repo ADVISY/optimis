@@ -40,7 +40,7 @@ interface Pillar3FormData {
 const TOTAL_STEPS = 5;
 
 const Pillar3Form = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
@@ -81,57 +81,61 @@ const Pillar3Form = () => {
   });
 
   // Helper function to get translated labels for lead submission
+  // Labels are sent in the language the user filled out the form
   const getTranslatedFormData = () => {
-    const objectiveLabels: Record<string, string> = {
-      tax: t("forms.pillar3.objectives.tax"),
-      retirement: t("forms.pillar3.objectives.retirement"),
-      protection: t("forms.pillar3.objectives.protection"),
-      mix: t("forms.pillar3.objectives.mix"),
+    const objectiveLabels: Record<string, Record<string, string>> = {
+      tax: { fr: "Économies d'impôts", de: "Steuerersparnis", it: "Risparmio fiscale" },
+      retirement: { fr: "Préparation retraite", de: "Altersvorsorge", it: "Previdenza pensionistica" },
+      protection: { fr: "Protection famille", de: "Familienschutz", it: "Protezione famiglia" },
+      mix: { fr: "Objectif mixte", de: "Gemischtes Ziel", it: "Obiettivo misto" },
     };
 
-    const statusLabels: Record<string, string> = {
-      employee: t("forms.pillar3.status.employee"),
-      "self-employed": t("forms.pillar3.status.selfEmployed"),
-      executive: t("forms.pillar3.status.executive"),
-      student: t("forms.pillar3.status.student"),
+    const statusLabels: Record<string, Record<string, string>> = {
+      employee: { fr: "Employé(e)", de: "Angestellt", it: "Dipendente" },
+      "self-employed": { fr: "Indépendant(e)", de: "Selbstständig", it: "Lavoratore autonomo" },
+      executive: { fr: "Cadre dirigeant", de: "Führungskraft", it: "Dirigente" },
+      student: { fr: "Étudiant(e)", de: "Student(in)", it: "Studente" },
     };
 
     const incomeLabels: Record<string, string> = {
       "0-50000": "< CHF 50'000",
-      "50000-80000": "CHF 50'000 - 80'000",
-      "80000-120000": "CHF 80'000 - 120'000",
-      "120000-200000": "CHF 120'000 - 200'000",
+      "50000-80000": "CHF 50'000 – 80'000",
+      "80000-120000": "CHF 80'000 – 120'000",
+      "120000-200000": "CHF 120'000 – 200'000",
       "200000+": "> CHF 200'000",
     };
 
-    const savingsLabels: Record<string, string> = {
-      "100-300": `CHF 100 - 300 / ${t("forms.pillar3.perMonth")}`,
-      "300-500": `CHF 300 - 500 / ${t("forms.pillar3.perMonth")}`,
-      "500-max": `CHF 500 - max (${t("forms.pillar3.maxAmount")})`,
+    const savingsLabels: Record<string, Record<string, string>> = {
+      "100-300": { fr: "CHF 100 – 300 / mois", de: "CHF 100 – 300 / Monat", it: "CHF 100 – 300 / mese" },
+      "300-500": { fr: "CHF 300 – 500 / mois", de: "CHF 300 – 500 / Monat", it: "CHF 300 – 500 / mese" },
+      "500-max": { fr: "CHF 500 – max / mois", de: "CHF 500 – max / Monat", it: "CHF 500 – max / mese" },
     };
 
-    const horizonLabels: Record<string, string> = {
-      "5-10": `5-10 ${t("forms.pillar3.years")}`,
-      "10-20": `10-20 ${t("forms.pillar3.years")}`,
-      "20-30": `20-30 ${t("forms.pillar3.years")}`,
-      "30+": `30+ ${t("forms.pillar3.years")}`,
+    const horizonLabels: Record<string, Record<string, string>> = {
+      "5-10": { fr: "5 – 10 ans", de: "5 – 10 Jahre", it: "5 – 10 anni" },
+      "10-20": { fr: "10 – 20 ans", de: "10 – 20 Jahre", it: "10 – 20 anni" },
+      "20-30": { fr: "20 – 30 ans", de: "20 – 30 Jahre", it: "20 – 30 anni" },
+      "30+": { fr: "30+ ans", de: "30+ Jahre", it: "30+ anni" },
     };
 
-    const riskLabels: Record<string, string> = {
-      conservative: t("forms.pillar3.risks.conservative"),
-      moderate: t("forms.pillar3.risks.moderate"),
-      dynamic: t("forms.pillar3.risks.dynamic"),
-      aggressive: t("forms.pillar3.risks.aggressive"),
+    const riskLabels: Record<string, Record<string, string>> = {
+      conservative: { fr: "Conservateur", de: "Konservativ", it: "Conservativo" },
+      moderate: { fr: "Modéré", de: "Moderat", it: "Moderato" },
+      dynamic: { fr: "Dynamique", de: "Dynamisch", it: "Dinamico" },
+      aggressive: { fr: "Offensif", de: "Offensiv", it: "Offensivo" },
     };
+
+    const lang = i18n.language as "fr" | "de" | "it";
+    const getLang = (labels: Record<string, string>) => labels[lang] || labels["fr"];
 
     return {
       ...formData,
-      objective: objectiveLabels[formData.objective] || formData.objective,
-      professionalStatus: statusLabels[formData.professionalStatus] || formData.professionalStatus,
+      objective: objectiveLabels[formData.objective]?.[lang] || formData.objective,
+      professionalStatus: statusLabels[formData.professionalStatus]?.[lang] || formData.professionalStatus,
       incomeRange: incomeLabels[formData.incomeRange] || formData.incomeRange,
-      savingsAmount: savingsLabels[formData.savingsAmount] || formData.savingsAmount,
-      investmentHorizon: horizonLabels[formData.investmentHorizon] || formData.investmentHorizon,
-      riskProfile: riskLabels[formData.riskProfile] || formData.riskProfile,
+      savingsAmount: savingsLabels[formData.savingsAmount]?.[lang] || formData.savingsAmount,
+      investmentHorizon: horizonLabels[formData.investmentHorizon]?.[lang] || formData.investmentHorizon,
+      riskProfile: riskLabels[formData.riskProfile]?.[lang] || formData.riskProfile,
     };
   };
 
