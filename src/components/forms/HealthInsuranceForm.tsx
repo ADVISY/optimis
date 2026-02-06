@@ -24,20 +24,16 @@ import {
 import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { InsuranceOffer } from "@/data/mockInsuranceData";
 import { Button } from "@/components/ui/button";
-import { Plus, Trash2 } from "lucide-react";
 import DateInput from "@/components/ui/date-input";
 import { Card, CardContent } from "@/components/ui/card";
 
-interface Person {
-  id: string;
-  birthDate: Date | null;
-  type: "adult" | "child";
-}
-
 interface HealthInsuranceFormData {
+  hasCurrentInsurance: boolean | null;
+  currentInsurer: string;
+  familySituation: string;
+  birthDate: Date | null;
   canton: string;
   postalCode: string;
-  persons: Person[];
   lamalModel: string;
   franchise: number;
   accidentCoverage: boolean;
@@ -56,7 +52,7 @@ interface HealthInsuranceFormData {
   availability: string;
 }
 
-const TOTAL_STEPS = 6;
+const TOTAL_STEPS = 7;
 
 const HealthInsuranceForm = () => {
   const { t, i18n } = useTranslation();
@@ -69,9 +65,12 @@ const HealthInsuranceForm = () => {
 
 
   const initialData: HealthInsuranceFormData = {
+    hasCurrentInsurance: null,
+    currentInsurer: "",
+    familySituation: "",
+    birthDate: null,
     canton: "",
     postalCode: "",
-    persons: [{ id: "1", birthDate: null, type: "adult" }],
     lamalModel: "standard",
     franchise: 2500,
     accidentCoverage: true,
@@ -143,11 +142,21 @@ const HealthInsuranceForm = () => {
     return value ? (yes[i18n.language] || yes.fr) : (no[i18n.language] || no.fr);
   };
 
+  // Helper function to get translated family situation label
+  const getFamilySituationLabel = (situation: string): string => {
+    const labels: Record<string, Record<string, string>> = {
+      single: { fr: "Seul(e)", de: "Allein", it: "Single" },
+      couple: { fr: "Couple", de: "Paar", it: "Coppia" },
+      coupleWithChildren: { fr: "Couple avec enfants", de: "Paar mit Kindern", it: "Coppia con figli" },
+      singleWithChildren: { fr: "Seul(e) avec enfants", de: "Alleinerziehend", it: "Single con figli" },
+    };
+    return labels[situation]?.[i18n.language] || labels[situation]?.fr || situation;
+  };
+
   // Prepare lead data with translated labels
   const prepareLeadData = () => {
-    const firstPerson = formData.persons[0];
-    const birthDate = firstPerson?.birthDate 
-      ? firstPerson.birthDate.toLocaleDateString(i18n.language === 'de' ? 'de-CH' : i18n.language === 'it' ? 'it-CH' : 'fr-CH')
+    const birthDate = formData.birthDate 
+      ? formData.birthDate.toLocaleDateString(i18n.language === 'de' ? 'de-CH' : i18n.language === 'it' ? 'it-CH' : 'fr-CH')
       : "";
     
     // Get complementary options as readable list
@@ -168,10 +177,10 @@ const HealthInsuranceForm = () => {
       canton: formData.canton,
       postalCode: formData.postalCode,
       // Insurance details with translated labels
+      hasCurrentInsurance: getBooleanLabel(formData.hasCurrentInsurance === true),
+      currentInsurer: formData.currentInsurer || "-",
+      familySituation: getFamilySituationLabel(formData.familySituation),
       birthDate,
-      personsCount: formData.persons.length,
-      adultsCount: formData.persons.filter(p => p.type === "adult").length,
-      childrenCount: formData.persons.filter(p => p.type === "child").length,
       lamalModel: getLamalModelLabel(formData.lamalModel),
       franchise: `CHF ${formData.franchise}`,
       accidentCoverage: getBooleanLabel(formData.accidentCoverage),
@@ -184,10 +193,9 @@ const HealthInsuranceForm = () => {
     setIsLoading(true);
     setLoadingStep("analyzing");
 
-    // Calculate birth year from first person's birth date
-    const firstPerson = formData.persons[0];
-    const birthYear = firstPerson?.birthDate 
-      ? firstPerson.birthDate.getFullYear() 
+    // Calculate birth year from birth date
+    const birthYear = formData.birthDate 
+      ? formData.birthDate.getFullYear() 
       : 1990; // Fallback for testing
 
     // Validate canton
@@ -244,31 +252,6 @@ const HealthInsuranceForm = () => {
     } else {
       nextStep();
     }
-  };
-
-  const addPerson = (type: "adult" | "child") => {
-    const newPerson: Person = {
-      id: Date.now().toString(),
-      birthDate: null,
-      type,
-    };
-    updateFormData({ persons: [...formData.persons, newPerson] });
-  };
-
-  const removePerson = (id: string) => {
-    if (formData.persons.length > 1) {
-      updateFormData({
-        persons: formData.persons.filter((p) => p.id !== id),
-      });
-    }
-  };
-
-  const updatePersonBirthDate = (id: string, date: Date | null) => {
-    updateFormData({
-      persons: formData.persons.map((p) =>
-        p.id === id ? { ...p, birthDate: date } : p
-      ),
-    });
   };
 
   if (isLoading) {
@@ -328,8 +311,115 @@ const HealthInsuranceForm = () => {
       totalSteps={TOTAL_STEPS}
       size="large"
     >
-      {/* Step 1: Location */}
+      {/* Step 1: Current Insurance */}
       <FormStep isActive={currentStep === 1}>
+        <div className="space-y-4 md:space-y-6">
+          <FormFieldWrapper
+            label={t("forms.healthInsurance.hasCurrentInsurance")}
+            required
+          >
+            <RadioGroup
+              value={formData.hasCurrentInsurance === null ? "" : formData.hasCurrentInsurance ? "yes" : "no"}
+              onValueChange={(value) => updateFormData({ 
+                hasCurrentInsurance: value === "yes",
+                currentInsurer: value === "no" ? "" : formData.currentInsurer
+              })}
+              className="grid grid-cols-2 gap-3"
+            >
+              <div className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-white/40 hover:bg-white/50 transition-colors border border-white/50">
+                <RadioGroupItem value="yes" id="hasInsurance-yes" className="h-4 w-4" />
+                <Label htmlFor="hasInsurance-yes" className="cursor-pointer text-white text-sm md:text-base">
+                  {t("common.yes")}
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-white/40 hover:bg-white/50 transition-colors border border-white/50">
+                <RadioGroupItem value="no" id="hasInsurance-no" className="h-4 w-4" />
+                <Label htmlFor="hasInsurance-no" className="cursor-pointer text-white text-sm md:text-base">
+                  {t("common.no")}
+                </Label>
+              </div>
+            </RadioGroup>
+          </FormFieldWrapper>
+
+          {formData.hasCurrentInsurance === true && (
+            <FormFieldWrapper
+              label={t("forms.healthInsurance.currentInsurer")}
+              htmlFor="currentInsurer"
+            >
+              <Select
+                value={formData.currentInsurer}
+                onValueChange={(value) => updateFormData({ currentInsurer: value })}
+              >
+                <SelectTrigger className="h-10 md:h-12 text-sm md:text-base">
+                  <SelectValue placeholder={t("forms.healthInsurance.selectInsurer")} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="assura">Assura</SelectItem>
+                  <SelectItem value="css">CSS</SelectItem>
+                  <SelectItem value="groupe-mutuel">Groupe Mutuel</SelectItem>
+                  <SelectItem value="helsana">Helsana</SelectItem>
+                  <SelectItem value="sanitas">Sanitas</SelectItem>
+                  <SelectItem value="swica">Swica</SelectItem>
+                  <SelectItem value="visana">Visana</SelectItem>
+                  <SelectItem value="concordia">Concordia</SelectItem>
+                  <SelectItem value="kpt">KPT</SelectItem>
+                  <SelectItem value="atupri">Atupri</SelectItem>
+                  <SelectItem value="sympany">Sympany</SelectItem>
+                  <SelectItem value="other">{t("forms.healthInsurance.otherInsurer")}</SelectItem>
+                </SelectContent>
+              </Select>
+            </FormFieldWrapper>
+          )}
+        </div>
+      </FormStep>
+
+      {/* Step 2: Family Situation & Birth Date */}
+      <FormStep isActive={currentStep === 2}>
+        <div className="space-y-4 md:space-y-6">
+          <FormFieldWrapper
+            label={t("forms.healthInsurance.familySituation")}
+            required
+          >
+            <RadioGroup
+              value={formData.familySituation}
+              onValueChange={(value) => updateFormData({ familySituation: value })}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+            >
+              {[
+                { value: "single", label: t("forms.healthInsurance.situations.single") },
+                { value: "couple", label: t("forms.healthInsurance.situations.couple") },
+                { value: "coupleWithChildren", label: t("forms.healthInsurance.situations.coupleWithChildren") },
+                { value: "singleWithChildren", label: t("forms.healthInsurance.situations.singleWithChildren") },
+              ].map((situation) => (
+                <div key={situation.value} className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-white/40 hover:bg-white/50 transition-colors border border-white/50">
+                  <RadioGroupItem value={situation.value} id={situation.value} className="h-4 w-4" />
+                  <Label htmlFor={situation.value} className="cursor-pointer text-white text-sm md:text-base">
+                    {situation.label}
+                  </Label>
+                </div>
+              ))}
+            </RadioGroup>
+          </FormFieldWrapper>
+
+          <FormFieldWrapper
+            label={t("forms.healthInsurance.birthDate")}
+            htmlFor="birthDate"
+            required
+          >
+            <DateInput
+              value={formData.birthDate}
+              onChange={(date) => updateFormData({ birthDate: date })}
+              placeholder="JJ/MM/AAAA"
+              maxYear={new Date().getFullYear()}
+              minYear={1900}
+              className="h-10 md:h-12"
+            />
+          </FormFieldWrapper>
+        </div>
+      </FormStep>
+
+      {/* Step 3: Location */}
+      <FormStep isActive={currentStep === 3}>
         <div className="space-y-2 md:space-y-6">
           <FormFieldWrapper
             label={t("forms.healthInsurance.canton")}
@@ -370,78 +460,8 @@ const HealthInsuranceForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 2: Persons to insure */}
-      <FormStep isActive={currentStep === 2}>
-        <div className="space-y-2 md:space-y-6">
-          <div className="space-y-1.5 md:space-y-4">
-            {formData.persons.map((person, index) => (
-              <Card key={person.id} className="bg-white/40 border-white/50 backdrop-blur-sm">
-                <CardContent className="p-2 md:p-4">
-                  <div className="flex items-center justify-between mb-1.5 md:mb-4">
-                    <span className="font-medium text-white text-xs md:text-base">
-                      {person.type === "adult"
-                        ? t("forms.healthInsurance.adult")
-                        : t("forms.healthInsurance.child")}{" "}
-                      {index + 1}
-                    </span>
-                    {formData.persons.length > 1 && (
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => removePerson(person.id)}
-                        className="text-white/70 hover:text-red-300 hover:bg-red-500/20 h-6 w-6 p-0"
-                      >
-                        <Trash2 className="h-3 w-3 md:h-4 md:w-4" />
-                      </Button>
-                    )}
-                  </div>
-
-                  <div className="space-y-1 md:space-y-2">
-                    <Label className="text-[10px] md:text-sm font-medium text-white/90">
-                      {t("forms.healthInsurance.birthDate")}
-                      <span className="text-red-300 ml-1">*</span>
-                    </Label>
-                    <DateInput
-                      value={person.birthDate}
-                      onChange={(date) => updatePersonBirthDate(person.id, date)}
-                      placeholder="JJ/MM/AAAA"
-                      maxYear={new Date().getFullYear()}
-                      minYear={1900}
-                      className="h-8 md:h-11"
-                    />
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="flex gap-1.5 md:gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => addPerson("adult")}
-              className="flex-1 gap-1 bg-white/40 text-gray-800 border-white/60 hover:bg-white/50 backdrop-blur-sm text-[10px] md:text-base h-7 md:h-11 px-1.5 md:px-4"
-            >
-              <Plus className="h-3 w-3 md:h-4 md:w-4" />
-              <span className="hidden sm:inline">{t("forms.healthInsurance.addAdult")}</span>
-              <span className="sm:hidden">Adulte</span>
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => addPerson("child")}
-              className="flex-1 gap-1 bg-white/40 text-gray-800 border-white/60 hover:bg-white/50 backdrop-blur-sm text-[10px] md:text-base h-7 md:h-11 px-1.5 md:px-4"
-            >
-              <Plus className="h-3 w-3 md:h-4 md:w-4" />
-              <span className="hidden sm:inline">{t("forms.healthInsurance.addChild")}</span>
-              <span className="sm:hidden">Enfant</span>
-            </Button>
-          </div>
-        </div>
-      </FormStep>
-
-      {/* Step 3: LAMal Model & Franchise */}
-      <FormStep isActive={currentStep === 3}>
+      {/* Step 4: LAMal Model & Franchise */}
+      <FormStep isActive={currentStep === 4}>
         <div className="space-y-3 md:space-y-6">
           {/* LAMal Model Card */}
           <Card className="bg-white/40 border-white/50 backdrop-blur-sm">
@@ -518,8 +538,8 @@ const HealthInsuranceForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 4: Complementary Insurance - Tier Selection */}
-      <FormStep isActive={currentStep === 4}>
+      {/* Step 5: Complementary Insurance - Tier Selection */}
+      <FormStep isActive={currentStep === 5}>
         <div className="space-y-6">
           <div className="text-center mb-6">
             <h3 className="text-lg font-semibold mb-2">
@@ -681,8 +701,8 @@ const HealthInsuranceForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 5: Name */}
-      <FormStep isActive={currentStep === 5}>
+      {/* Step 6: Name */}
+      <FormStep isActive={currentStep === 6}>
         <div className="space-y-2 md:space-y-6">
           <div className="text-center mb-2 md:mb-6">
             <h3 className="text-xs md:text-lg font-semibold mb-0.5 md:mb-2">
@@ -723,8 +743,8 @@ const HealthInsuranceForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 6: Contact Details */}
-      <FormStep isActive={currentStep === 6}>
+      {/* Step 7: Contact Details */}
+      <FormStep isActive={currentStep === 7}>
         <div className="space-y-2 md:space-y-6">
           <div className="text-center mb-2 md:mb-6">
             <h3 className="text-xs md:text-lg font-semibold mb-0.5 md:mb-2">
