@@ -23,6 +23,8 @@ import { calculateAllProjections, Pillar3aProjection } from "@/utils/pillar3aCal
 import { Lock, User, Phone } from "lucide-react";
 
 interface Pillar3FormData {
+  hasExistingPillar3: boolean | null;
+  existingProvider: string;
   objective: string;
   age: string;
   professionalStatus: string;
@@ -37,7 +39,7 @@ interface Pillar3FormData {
   canton: string;
 }
 
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 6;
 
 const Pillar3Form = () => {
   const { t, i18n } = useTranslation();
@@ -47,6 +49,8 @@ const Pillar3Form = () => {
   const [projections, setProjections] = useState<Pillar3aProjection[]>([]);
 
   const initialData: Pillar3FormData = {
+    hasExistingPillar3: null,
+    existingProvider: "",
     objective: "",
     age: "",
     professionalStatus: "",
@@ -79,6 +83,13 @@ const Pillar3Form = () => {
       await submitLead(data as unknown as Record<string, unknown>);
     },
   });
+
+  // Helper function to get translated boolean
+  const getBooleanLabel = (value: boolean): string => {
+    const yes: Record<string, string> = { fr: "Oui", de: "Ja", it: "Sì" };
+    const no: Record<string, string> = { fr: "Non", de: "Nein", it: "No" };
+    return value ? (yes[i18n.language] || yes.fr) : (no[i18n.language] || no.fr);
+  };
 
   // Helper function to get translated labels for lead submission
   // Labels are sent in the language the user filled out the form
@@ -126,10 +137,11 @@ const Pillar3Form = () => {
     };
 
     const lang = i18n.language as "fr" | "de" | "it";
-    const getLang = (labels: Record<string, string>) => labels[lang] || labels["fr"];
 
     return {
       ...formData,
+      hasExistingPillar3: getBooleanLabel(formData.hasExistingPillar3 === true),
+      existingProvider: formData.existingProvider || "-",
       objective: objectiveLabels[formData.objective]?.[lang] || formData.objective,
       professionalStatus: statusLabels[formData.professionalStatus]?.[lang] || formData.professionalStatus,
       incomeRange: incomeLabels[formData.incomeRange] || formData.incomeRange,
@@ -212,9 +224,59 @@ const Pillar3Form = () => {
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
     >
-      {/* Step 1: Objective */}
+      {/* Step 1: Existing Pillar 3 + Objective */}
       <FormStep isActive={currentStep === 1}>
         <div className="space-y-6">
+          <FormFieldWrapper label={t("forms.pillar3.hasExistingPillar3")} required>
+            <RadioGroup
+              value={formData.hasExistingPillar3 === null ? "" : formData.hasExistingPillar3 ? "yes" : "no"}
+              onValueChange={(value) => updateFormData({ 
+                hasExistingPillar3: value === "yes",
+                existingProvider: value === "no" ? "" : formData.existingProvider
+              })}
+              className="grid grid-cols-2 gap-3"
+            >
+              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+                <RadioGroupItem value="yes" id="hasPillar3-yes" />
+                <Label htmlFor="hasPillar3-yes" className="cursor-pointer flex-1 text-lg">
+                  {t("common.yes")}
+                </Label>
+              </div>
+              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+                <RadioGroupItem value="no" id="hasPillar3-no" />
+                <Label htmlFor="hasPillar3-no" className="cursor-pointer flex-1 text-lg">
+                  {t("common.no")}
+                </Label>
+              </div>
+            </RadioGroup>
+          </FormFieldWrapper>
+
+          {formData.hasExistingPillar3 === true && (
+            <FormFieldWrapper label={t("forms.pillar3.existingProvider")} htmlFor="existingProvider">
+              <Select
+                value={formData.existingProvider}
+                onValueChange={(value) => updateFormData({ existingProvider: value })}
+              >
+                <SelectTrigger className="h-12 md:h-14 text-base md:text-lg">
+                  <SelectValue placeholder={t("forms.pillar3.selectProvider")} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="viac">VIAC</SelectItem>
+                  <SelectItem value="frankly">Frankly</SelectItem>
+                  <SelectItem value="finpension">Finpension</SelectItem>
+                  <SelectItem value="postfinance">PostFinance</SelectItem>
+                  <SelectItem value="ubs">UBS</SelectItem>
+                  <SelectItem value="credit-suisse">Credit Suisse</SelectItem>
+                  <SelectItem value="raiffeisen">Raiffeisen</SelectItem>
+                  <SelectItem value="zurich">Zurich</SelectItem>
+                  <SelectItem value="axa">AXA</SelectItem>
+                  <SelectItem value="swiss-life">Swiss Life</SelectItem>
+                  <SelectItem value="other">{t("forms.pillar3.otherProvider")}</SelectItem>
+                </SelectContent>
+              </Select>
+            </FormFieldWrapper>
+          )}
+
           <FormFieldWrapper label={t("forms.pillar3.objective")} required>
             <RadioGroup
               value={formData.objective}
