@@ -110,6 +110,75 @@ const HealthInsuranceForm = () => {
     },
   });
 
+  // Helper function to get translated LAMal model label
+  const getLamalModelLabel = (model: string): string => {
+    const labels: Record<string, Record<string, string>> = {
+      standard: { fr: "Standard", de: "Standard", it: "Standard" },
+      "family-doctor": { fr: "Médecin de famille", de: "Hausarztmodell", it: "Medico di famiglia" },
+      hmo: { fr: "HMO", de: "HMO", it: "HMO" },
+      telemed: { fr: "Télémédecine", de: "Telemedizin", it: "Telemedicina" },
+    };
+    return labels[model]?.[i18n.language] || labels[model]?.fr || model;
+  };
+
+  // Helper function to get translated complementary tier label
+  const getComplementaryTierLabel = (tier: string | null): string => {
+    if (!tier) {
+      const none: Record<string, string> = { fr: "Aucune", de: "Keine", it: "Nessuna" };
+      return none[i18n.language] || none.fr;
+    }
+    const labels: Record<string, Record<string, string>> = {
+      basic: { fr: "Basic", de: "Basic", it: "Basic" },
+      premium: { fr: "Premium", de: "Premium", it: "Premium" },
+      diamond: { fr: "Diamond", de: "Diamond", it: "Diamond" },
+    };
+    return labels[tier]?.[i18n.language] || labels[tier]?.fr || tier;
+  };
+
+  // Helper function to get translated boolean
+  const getBooleanLabel = (value: boolean): string => {
+    const yes: Record<string, string> = { fr: "Oui", de: "Ja", it: "Sì" };
+    const no: Record<string, string> = { fr: "Non", de: "Nein", it: "No" };
+    return value ? (yes[i18n.language] || yes.fr) : (no[i18n.language] || no.fr);
+  };
+
+  // Prepare lead data with translated labels
+  const prepareLeadData = () => {
+    const firstPerson = formData.persons[0];
+    const birthDate = firstPerson?.birthDate 
+      ? firstPerson.birthDate.toLocaleDateString(i18n.language === 'de' ? 'de-CH' : i18n.language === 'it' ? 'it-CH' : 'fr-CH')
+      : "";
+    
+    // Get complementary options as readable list
+    const complementaryOptions: string[] = [];
+    if (formData.complementary.dental) complementaryOptions.push(t("forms.healthInsurance.complementary.dental"));
+    if (formData.complementary.hospitalization) complementaryOptions.push(t("forms.healthInsurance.complementary.hospitalization"));
+    if (formData.complementary.glasses) complementaryOptions.push(t("forms.healthInsurance.complementary.glasses"));
+    if (formData.complementary.alternativeMedicine) complementaryOptions.push(t("forms.healthInsurance.complementary.alternativeMedicine"));
+    if (formData.complementary.worldwide) complementaryOptions.push(t("forms.healthInsurance.complementary.worldwide"));
+
+    return {
+      // Contact info
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      // Location
+      canton: formData.canton,
+      postalCode: formData.postalCode,
+      // Insurance details with translated labels
+      birthDate,
+      personsCount: formData.persons.length,
+      adultsCount: formData.persons.filter(p => p.type === "adult").length,
+      childrenCount: formData.persons.filter(p => p.type === "child").length,
+      lamalModel: getLamalModelLabel(formData.lamalModel),
+      franchise: `CHF ${formData.franchise}`,
+      accidentCoverage: getBooleanLabel(formData.accidentCoverage),
+      complementaryTier: getComplementaryTierLabel(formData.complementaryTier),
+      complementaryOptions: complementaryOptions.length > 0 ? complementaryOptions.join(", ") : getBooleanLabel(false),
+    };
+  };
+
   const handleSubmit = async () => {
     setIsLoading(true);
     setLoadingStep("analyzing");
@@ -158,8 +227,9 @@ const HealthInsuranceForm = () => {
     
     setRealOffers(offers);
 
-    // Submit lead
-    await submitLead(formData as unknown as Record<string, unknown>);
+    // Submit lead with translated labels
+    const leadData = prepareLeadData();
+    await submitLead(leadData);
 
     setTimeout(() => {
       setIsLoading(false);
