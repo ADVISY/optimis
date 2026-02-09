@@ -79,6 +79,12 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
         console.log("Meta Pixel: Lead event tracked");
       }
       
+      // Track Lead event for TikTok Pixel
+      if ((window as any).ttq) {
+        (window as any).ttq.track('SubmitForm');
+        console.log("TikTok Pixel: SubmitForm event tracked");
+      }
+      
       toast({
         title: t("forms.successTitle"),
         description: t("forms.successDescription"),
