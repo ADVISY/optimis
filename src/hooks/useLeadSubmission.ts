@@ -73,6 +73,12 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
 
       console.log("Lead submitted successfully:", data);
       
+      // Track Lead event for Meta Pixel
+      if ((window as any).fbq) {
+        (window as any).fbq('track', 'Lead');
+        console.log("Meta Pixel: Lead event tracked");
+      }
+      
       toast({
         title: t("forms.successTitle"),
         description: t("forms.successDescription"),
