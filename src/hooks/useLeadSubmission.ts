@@ -35,10 +35,17 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
       const result: Record<string, unknown> = {};
       for (const key in obj) {
         const newKey = prefix ? `${prefix}_${key}` : key;
-        if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
-          Object.assign(result, flattenObject(obj[key] as Record<string, unknown>, newKey));
+        const value = obj[key];
+        if (value instanceof Date) {
+          // Format dates as DD/MM/YYYY for readability in Google Sheets
+          const day = value.getDate().toString().padStart(2, '0');
+          const month = (value.getMonth() + 1).toString().padStart(2, '0');
+          const year = value.getFullYear().toString();
+          result[newKey] = `${day}/${month}/${year}`;
+        } else if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+          Object.assign(result, flattenObject(value as Record<string, unknown>, newKey));
         } else {
-          result[newKey] = obj[key];
+          result[newKey] = value;
         }
       }
       return result;
