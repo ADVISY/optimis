@@ -270,8 +270,8 @@ const HealthInsuranceForm = () => {
       case 7:
         // Must provide valid email and phone
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const phoneRegex = /^[\d\s+()-]{8,}$/;
-        return emailRegex.test(formData.email.trim()) && phoneRegex.test(formData.phone.trim());
+        const phoneValid = formData.phone.replace(/\s/g, '').length >= 10;
+        return emailRegex.test(formData.email.trim()) && phoneValid;
       default:
         return true;
     }
@@ -279,9 +279,66 @@ const HealthInsuranceForm = () => {
 
   const canProceed = validateStep(currentStep);
 
+  // Get validation error messages for current step
+  const getStepErrors = (step: number): Record<string, string> => {
+    const errs: Record<string, string> = {};
+    if (step === 7) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (formData.email.trim() && !emailRegex.test(formData.email.trim())) {
+        errs.email = t("forms.validation.invalidEmail", "Adresse email non valide");
+      }
+      const phoneDigits = formData.phone.replace(/\s/g, '');
+      if (formData.phone.trim() && phoneDigits.length < 10) {
+        errs.phone = t("forms.validation.invalidPhone", "Numéro de téléphone non valide (min. 10 chiffres)");
+      }
+    }
+    if (step === 6) {
+      if (formData.firstName.trim() === "" && formData.lastName.trim() !== "") {
+        errs.firstName = t("forms.validation.required", "Ce champ est obligatoire");
+      }
+      if (formData.lastName.trim() === "" && formData.firstName.trim() !== "") {
+        errs.lastName = t("forms.validation.required", "Ce champ est obligatoire");
+      }
+    }
+    return errs;
+  };
+
+  const stepErrors = getStepErrors(currentStep);
+
+  // Auto-format Swiss phone number
+  const handlePhoneChange = (value: string) => {
+    // Keep only digits and leading +
+    let cleaned = value.replace(/[^\d+]/g, '');
+    
+    // Auto-add Swiss prefix if user starts typing a number
+    if (cleaned.length > 0 && !cleaned.startsWith('+') && !cleaned.startsWith('0')) {
+      cleaned = '+41' + cleaned;
+    }
+    
+    // Format: +41 XX XXX XX XX
+    if (cleaned.startsWith('+41')) {
+      const digits = cleaned.slice(3);
+      let formatted = '+41';
+      if (digits.length > 0) formatted += ' ' + digits.slice(0, 2);
+      if (digits.length > 2) formatted += ' ' + digits.slice(2, 5);
+      if (digits.length > 5) formatted += ' ' + digits.slice(5, 7);
+      if (digits.length > 7) formatted += ' ' + digits.slice(7, 9);
+      updateFormData({ phone: formatted });
+    } else if (cleaned.startsWith('0')) {
+      const digits = cleaned;
+      let formatted = digits.slice(0, 3);
+      if (digits.length > 3) formatted += ' ' + digits.slice(3, 6);
+      if (digits.length > 6) formatted += ' ' + digits.slice(6, 8);
+      if (digits.length > 8) formatted += ' ' + digits.slice(8, 10);
+      updateFormData({ phone: formatted });
+    } else {
+      updateFormData({ phone: cleaned });
+    }
+  };
+
   const handleNext = () => {
     if (!canProceed) {
-      return; // Don't proceed if validation fails
+      return;
     }
     if (isLastStep) {
       handleSubmit();
@@ -792,14 +849,17 @@ const HealthInsuranceForm = () => {
             label={t("forms.contact.email")}
             htmlFor="email"
             required
+            error={stepErrors.email}
           >
             <Input
               id="email"
               type="email"
+              inputMode="email"
+              autoComplete="email"
               value={formData.email}
-              onChange={(e) => updateFormData({ email: e.target.value })}
+              onChange={(e) => updateFormData({ email: e.target.value.toLowerCase().trim() })}
               placeholder="votre@email.ch"
-              className="h-8 md:h-14 text-xs md:text-lg"
+              className={`h-8 md:h-14 text-xs md:text-lg ${stepErrors.email ? 'border-red-400 focus-visible:ring-red-400' : ''}`}
             />
           </FormFieldWrapper>
 
@@ -807,14 +867,17 @@ const HealthInsuranceForm = () => {
             label={t("forms.contact.phone")}
             htmlFor="phone"
             required
+            error={stepErrors.phone}
           >
             <Input
               id="phone"
               type="tel"
+              inputMode="tel"
+              autoComplete="tel"
               value={formData.phone}
-              onChange={(e) => updateFormData({ phone: e.target.value })}
+              onChange={(e) => handlePhoneChange(e.target.value)}
               placeholder="+41 79 123 45 67"
-              className="h-8 md:h-14 text-xs md:text-lg"
+              className={`h-8 md:h-14 text-xs md:text-lg ${stepErrors.phone ? 'border-red-400 focus-visible:ring-red-400' : ''}`}
             />
           </FormFieldWrapper>
 
