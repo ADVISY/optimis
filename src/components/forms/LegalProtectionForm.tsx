@@ -23,6 +23,7 @@ import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { mockLegalProtectionOffers, InsuranceOffer } from "@/data/mockInsuranceData";
 import { Lock, User, Phone } from "lucide-react";
 import { useFormValidation } from "@/hooks/useFormValidation";
+import { useAutoAdvance } from "@/hooks/useAutoAdvance";
 import { cn } from "@/lib/utils";
 
 interface LegalProtectionFormData {
@@ -115,6 +116,7 @@ const LegalProtectionForm = () => {
   };
 
   const canProceed = validateStep(currentStep);
+  const notify = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep);
   const stepErrors = attemptedNext ? getStepErrors(currentStep) : {};
 
   const handleNext = () => {
@@ -172,7 +174,7 @@ const LegalProtectionForm = () => {
           <FormFieldWrapper label={t("forms.legalProtection.coverageType")} required>
             <RadioGroup
               value={formData.coverageType}
-              onValueChange={(value) => updateFormData({ coverageType: value })}
+              onValueChange={(value) => { updateFormData({ coverageType: value }); notify(); }}
               className="grid gap-3"
             >
               {[
@@ -227,7 +229,7 @@ const LegalProtectionForm = () => {
           <FormFieldWrapper label={t("forms.legalProtection.householdSize")} required>
             <RadioGroup
               value={formData.householdSize}
-              onValueChange={(value) => updateFormData({ householdSize: value })}
+              onValueChange={(value) => { updateFormData({ householdSize: value }); notify(); }}
               className="grid grid-cols-1 sm:grid-cols-3 gap-2 md:gap-3"
             >
               {[
@@ -248,7 +250,7 @@ const LegalProtectionForm = () => {
           <FormFieldWrapper label={t("forms.healthInsurance.canton")} required>
             <Select
               value={formData.canton}
-              onValueChange={(value) => updateFormData({ canton: value })}
+              onValueChange={(value) => { updateFormData({ canton: value }); notify(); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />

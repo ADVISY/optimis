@@ -27,6 +27,7 @@ import { InsuranceOffer } from "@/data/mockInsuranceData";
 import { Button } from "@/components/ui/button";
 import DateInput from "@/components/ui/date-input";
 import { Card, CardContent } from "@/components/ui/card";
+import { useAutoAdvance } from "@/hooks/useAutoAdvance";
 
 interface HealthInsuranceFormData {
   hasCurrentInsurance: boolean | null;
@@ -280,6 +281,7 @@ const HealthInsuranceForm = () => {
   };
 
   const canProceed = validateStep(currentStep);
+  const notify = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep);
 
   const [attemptedNext, setAttemptedNext] = useState(false);
 
@@ -440,10 +442,10 @@ const HealthInsuranceForm = () => {
           >
             <RadioGroup
               value={formData.hasCurrentInsurance === null ? "" : formData.hasCurrentInsurance ? "yes" : "no"}
-              onValueChange={(value) => updateFormData({ 
+              onValueChange={(value) => { updateFormData({ 
                 hasCurrentInsurance: value === "yes",
                 currentInsurer: value === "no" ? "" : formData.currentInsurer
-              })}
+              }); notify(); }}
               className="grid grid-cols-2 gap-3"
             >
               <label htmlFor="hasInsurance-yes" className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-white/40 hover:bg-white/50 transition-colors border border-white/50 cursor-pointer">
@@ -468,7 +470,7 @@ const HealthInsuranceForm = () => {
             >
               <Select
                 value={formData.currentInsurer}
-                onValueChange={(value) => updateFormData({ currentInsurer: value })}
+                onValueChange={(value) => { updateFormData({ currentInsurer: value }); notify(); }}
               >
                 <SelectTrigger className="h-10 md:h-12 text-sm md:text-base">
                   <SelectValue placeholder={t("forms.healthInsurance.selectInsurer")} />
@@ -502,7 +504,7 @@ const HealthInsuranceForm = () => {
           >
             <RadioGroup
               value={formData.familySituation}
-              onValueChange={(value) => updateFormData({ familySituation: value })}
+              onValueChange={(value) => { updateFormData({ familySituation: value }); notify(); }}
               className="grid grid-cols-1 sm:grid-cols-2 gap-3"
             >
               {[
@@ -548,7 +550,7 @@ const HealthInsuranceForm = () => {
           >
             <Select
               value={formData.canton}
-              onValueChange={(value) => updateFormData({ canton: value })}
+              onValueChange={(value) => { updateFormData({ canton: value }); notify(); }}
             >
               <SelectTrigger className="h-8 md:h-11 text-xs md:text-base">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
@@ -592,7 +594,7 @@ const HealthInsuranceForm = () => {
               </Label>
               <RadioGroup
                 value={formData.lamalModel}
-                onValueChange={(value) => updateFormData({ lamalModel: value })}
+                onValueChange={(value) => { updateFormData({ lamalModel: value }); notify(); }}
                 className="grid grid-cols-2 gap-1.5 md:gap-3"
               >
                 {[
@@ -679,12 +681,12 @@ const HealthInsuranceForm = () => {
                   ? "ring-2 ring-white border-white/80" 
                   : "border-white/50 hover:border-white/70"
               }`}
-              onClick={() => updateFormData({ 
+              onClick={() => { updateFormData({ 
                 complementaryTier: formData.complementaryTier === "basic" ? null : "basic",
                 complementary: formData.complementaryTier === "basic" 
                   ? { dental: false, hospitalization: false, glasses: false, alternativeMedicine: false, worldwide: false }
                   : { dental: true, hospitalization: true, glasses: true, alternativeMedicine: true, worldwide: true }
-              })}
+              }); notify(); }}
             >
               <CardContent className="p-2 md:p-4 text-center">
                 <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-white/50 mb-1 md:mb-3">
@@ -707,12 +709,12 @@ const HealthInsuranceForm = () => {
                   ? "ring-2 ring-violet-400 border-violet-400" 
                   : "border-white/50 hover:border-violet-400"
               }`}
-              onClick={() => updateFormData({ 
+              onClick={() => { updateFormData({ 
                 complementaryTier: formData.complementaryTier === "premium" ? null : "premium",
                 complementary: formData.complementaryTier === "premium" 
                   ? { dental: false, hospitalization: false, glasses: false, alternativeMedicine: false, worldwide: false }
                   : { dental: true, hospitalization: true, glasses: true, alternativeMedicine: true, worldwide: true }
-              })}
+              }); notify(); }}
             >
               <div className="absolute -top-2 md:-top-3 left-1/2 -translate-x-1/2">
                 <span className="bg-violet-500 text-white text-[8px] md:text-xs font-semibold px-1.5 md:px-3 py-0.5 md:py-1 rounded-full whitespace-nowrap">
@@ -740,12 +742,12 @@ const HealthInsuranceForm = () => {
                   ? "ring-2 ring-amber-400 border-amber-400" 
                   : "border-white/50 hover:border-amber-400"
               }`}
-              onClick={() => updateFormData({ 
+              onClick={() => { updateFormData({ 
                 complementaryTier: formData.complementaryTier === "diamond" ? null : "diamond",
                 complementary: formData.complementaryTier === "diamond" 
                   ? { dental: false, hospitalization: false, glasses: false, alternativeMedicine: false, worldwide: false }
                   : { dental: true, hospitalization: true, glasses: true, alternativeMedicine: true, worldwide: true }
-              })}
+              }); notify(); }}
             >
               <CardContent className="p-2 md:p-4 text-center">
                 <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-amber-500/30 mb-1 md:mb-3">
@@ -767,10 +769,10 @@ const HealthInsuranceForm = () => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => updateFormData({ 
+              onClick={() => { updateFormData({ 
                 complementaryTier: null,
                 complementary: { dental: false, hospitalization: false, glasses: false, alternativeMedicine: false, worldwide: false }
-              })}
+              }); notify(); }}
               className="text-white hover:text-white hover:bg-white/40 text-xs md:text-sm h-8 md:h-auto"
             >
               {t("forms.healthInsurance.skipComplementary", "Passer")}

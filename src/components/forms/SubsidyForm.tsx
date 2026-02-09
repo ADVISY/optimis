@@ -21,6 +21,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Download, FileText, Lock, User, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useFormValidation } from "@/hooks/useFormValidation";
+import { useAutoAdvance } from "@/hooks/useAutoAdvance";
 import { cn } from "@/lib/utils";
 
 interface SubsidyFormData {
@@ -103,6 +104,7 @@ const SubsidyForm = () => {
   };
 
   const canProceed = validateStep(currentStep);
+  const notify = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep);
   const stepErrors = attemptedNext ? getStepErrors(currentStep) : {};
 
   const handleNext = () => {
@@ -183,7 +185,7 @@ const SubsidyForm = () => {
           <FormFieldWrapper label={t("forms.healthInsurance.canton")} required>
             <Select
               value={formData.canton}
-              onValueChange={(value) => updateFormData({ canton: value })}
+              onValueChange={(value) => { updateFormData({ canton: value }); notify(); }}
             >
               <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
@@ -212,7 +214,7 @@ const SubsidyForm = () => {
             <FormFieldWrapper label={t("forms.subsidy.adultsCount")} htmlFor="adultsCount">
               <Select
                 value={formData.adultsCount}
-                onValueChange={(value) => updateFormData({ adultsCount: value })}
+                onValueChange={(value) => { updateFormData({ adultsCount: value }); notify(); }}
               >
                 <SelectTrigger className="h-14 text-lg">
                   <SelectValue />
@@ -228,7 +230,7 @@ const SubsidyForm = () => {
             <FormFieldWrapper label={t("forms.subsidy.childrenCount")} htmlFor="childrenCount">
               <Select
                 value={formData.childrenCount}
-                onValueChange={(value) => updateFormData({ childrenCount: value })}
+                onValueChange={(value) => { updateFormData({ childrenCount: value }); notify(); }}
               >
                 <SelectTrigger className="h-14 text-lg">
                   <SelectValue />
@@ -250,7 +252,7 @@ const SubsidyForm = () => {
           <FormFieldWrapper label={t("forms.subsidy.incomeRange")} required>
             <Select
               value={formData.incomeRange}
-              onValueChange={(value) => updateFormData({ incomeRange: value })}
+              onValueChange={(value) => { updateFormData({ incomeRange: value }); notify(); }}
             >
               <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.subsidy.selectIncome")} />
@@ -268,7 +270,7 @@ const SubsidyForm = () => {
           <FormFieldWrapper label={t("forms.subsidy.specialSituation")}>
             <RadioGroup
               value={formData.specialSituation}
-              onValueChange={(value) => updateFormData({ specialSituation: value })}
+              onValueChange={(value) => { updateFormData({ specialSituation: value }); notify(); }}
               className="grid gap-3"
             >
               {[

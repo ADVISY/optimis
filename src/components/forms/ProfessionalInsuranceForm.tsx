@@ -23,6 +23,7 @@ import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { mockLegalProtectionOffers, InsuranceOffer } from "@/data/mockInsuranceData";
 import { Lock, User, Phone } from "lucide-react";
 import { useFormValidation } from "@/hooks/useFormValidation";
+import { useAutoAdvance } from "@/hooks/useAutoAdvance";
 import { cn } from "@/lib/utils";
 
 interface ProfessionalInsuranceFormData {
@@ -121,6 +122,7 @@ const ProfessionalInsuranceForm = () => {
   };
 
   const canProceed = validateStep(currentStep);
+  const notify = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep);
   const stepErrors = attemptedNext ? getStepErrors(currentStep) : {};
 
   const handleNext = () => {
@@ -221,7 +223,7 @@ const ProfessionalInsuranceForm = () => {
           <FormFieldWrapper label={t("forms.professionalInsurance.legalForm")} required>
             <Select
               value={formData.legalForm}
-              onValueChange={(value) => updateFormData({ legalForm: value })}
+              onValueChange={(value) => { updateFormData({ legalForm: value }); notify(); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-xs md:text-lg">
                 <SelectValue placeholder={t("forms.professionalInsurance.selectLegalForm")} />
@@ -238,7 +240,7 @@ const ProfessionalInsuranceForm = () => {
           <FormFieldWrapper label={t("forms.professionalInsurance.employeesCount")} required>
             <Select
               value={formData.employeesCount}
-              onValueChange={(value) => updateFormData({ employeesCount: value })}
+              onValueChange={(value) => { updateFormData({ employeesCount: value }); notify(); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-xs md:text-lg">
                 <SelectValue placeholder={t("forms.professionalInsurance.selectEmployees")} />
@@ -256,7 +258,7 @@ const ProfessionalInsuranceForm = () => {
           <FormFieldWrapper label={t("forms.healthInsurance.canton")} htmlFor="canton" required>
             <Select
               value={formData.canton}
-              onValueChange={(value) => updateFormData({ canton: value })}
+              onValueChange={(value) => { updateFormData({ canton: value }); notify(); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-xs md:text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
