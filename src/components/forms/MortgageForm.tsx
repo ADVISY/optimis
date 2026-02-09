@@ -122,7 +122,7 @@ const MortgageForm = () => {
 
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 1: return formData.projectType !== "";
+      case 1: return formData.projectType !== "" && formData.propertyType !== "";
       case 2: return formData.propertyValue !== "" && formData.canton !== "";
       case 3: return formData.professionalStatus !== "" && formData.incomeRange !== "" && formData.ownFundsRange !== "";
       case 4: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
@@ -248,7 +248,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.healthInsurance.canton")} required>
             <Select
               value={formData.canton}
-              onValueChange={(value) => { updateFormData({ canton: value }); notify(); }}
+              onValueChange={(value) => updateFormData({ canton: value })}
             >
               <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
@@ -276,7 +276,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.numberOfBorrowers")} required>
             <RadioGroup
               value={formData.numberOfBorrowers}
-              onValueChange={(value) => { updateFormData({ numberOfBorrowers: value }); notify(); }}
+              onValueChange={(value) => updateFormData({ numberOfBorrowers: value })}
               className="flex gap-4"
             >
               <label htmlFor="borrowers-1" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">

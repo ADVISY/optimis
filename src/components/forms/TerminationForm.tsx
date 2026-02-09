@@ -184,7 +184,7 @@ const TerminationForm = () => {
           <FormFieldWrapper label={t("forms.termination.contractType")} required>
             <RadioGroup
               value={formData.contractType}
-              onValueChange={(value) => { updateFormData({ contractType: value }); notify(); }}
+              onValueChange={(value) => updateFormData({ contractType: value })}
               className="grid gap-3"
             >
               {[

@@ -185,7 +185,7 @@ const SubsidyForm = () => {
           <FormFieldWrapper label={t("forms.healthInsurance.canton")} required>
             <Select
               value={formData.canton}
-              onValueChange={(value) => { updateFormData({ canton: value }); notify(); }}
+              onValueChange={(value) => updateFormData({ canton: value })}
             >
               <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
@@ -214,7 +214,7 @@ const SubsidyForm = () => {
             <FormFieldWrapper label={t("forms.subsidy.adultsCount")} htmlFor="adultsCount">
               <Select
                 value={formData.adultsCount}
-                onValueChange={(value) => { updateFormData({ adultsCount: value }); notify(); }}
+                onValueChange={(value) => updateFormData({ adultsCount: value })}
               >
                 <SelectTrigger className="h-14 text-lg">
                   <SelectValue />
@@ -230,7 +230,7 @@ const SubsidyForm = () => {
             <FormFieldWrapper label={t("forms.subsidy.childrenCount")} htmlFor="childrenCount">
               <Select
                 value={formData.childrenCount}
-                onValueChange={(value) => { updateFormData({ childrenCount: value }); notify(); }}
+                onValueChange={(value) => updateFormData({ childrenCount: value })}
               >
                 <SelectTrigger className="h-14 text-lg">
                   <SelectValue />
@@ -252,7 +252,7 @@ const SubsidyForm = () => {
           <FormFieldWrapper label={t("forms.subsidy.incomeRange")} required>
             <Select
               value={formData.incomeRange}
-              onValueChange={(value) => { updateFormData({ incomeRange: value }); notify(); }}
+              onValueChange={(value) => updateFormData({ incomeRange: value })}
             >
               <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.subsidy.selectIncome")} />
