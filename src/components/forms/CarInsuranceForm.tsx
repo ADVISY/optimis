@@ -293,7 +293,7 @@ const CarInsuranceForm = () => {
           <FormFieldWrapper label={t("forms.carInsurance.driverBirthDate")} required>
             <DateInput
               value={formData.driverBirthDate}
-              onChange={(date) => updateFormData({ driverBirthDate: date })}
+              onChange={(date) => { updateFormData({ driverBirthDate: date }); notify(); }}
               placeholder={t("forms.carInsurance.datePlaceholder")}
               className="h-9 md:h-14 text-sm md:text-lg"
               maxYear={new Date().getFullYear() - 18}
@@ -306,7 +306,7 @@ const CarInsuranceForm = () => {
           <FormFieldWrapper label={t("forms.carInsurance.licenseYear")} htmlFor="licenseYear" required>
             <Select
               value={formData.licenseYear}
-              onValueChange={(value) => updateFormData({ licenseYear: value })}
+              onValueChange={(value) => { updateFormData({ licenseYear: value }); notify(); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.carInsurance.selectLicenseYear")} />
@@ -415,7 +415,7 @@ const CarInsuranceForm = () => {
               <Input
                 id="firstName"
                 value={formData.firstName}
-                onChange={(e) => updateFormData({ firstName: e.target.value })}
+                onChange={(e) => { updateFormData({ firstName: e.target.value }); notify(); }}
                 className="h-12 md:h-14 text-base md:text-lg"
               />
             </FormFieldWrapper>
@@ -423,7 +423,7 @@ const CarInsuranceForm = () => {
               <Input
                 id="lastName"
                 value={formData.lastName}
-                onChange={(e) => updateFormData({ lastName: e.target.value })}
+                onChange={(e) => { updateFormData({ lastName: e.target.value }); notify(); }}
                 className="h-12 md:h-14 text-base md:text-lg"
               />
             </FormFieldWrapper>
@@ -467,7 +467,7 @@ const CarInsuranceForm = () => {
               inputMode="email"
               autoComplete="email"
               value={formData.email}
-              onChange={(e) => updateFormData({ email: e.target.value })}
+              onChange={(e) => { updateFormData({ email: e.target.value }); notify(); }}
               className={cn("h-12 md:h-14 text-base md:text-lg", stepErrors.email && "border-red-400")}
             />
           </FormFieldWrapper>
@@ -479,7 +479,7 @@ const CarInsuranceForm = () => {
               inputMode="tel"
               autoComplete="tel"
               value={formData.phone}
-              onChange={(e) => updateFormData({ phone: formatSwissPhone(e.target.value) })}
+              onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); notify(); }}
               placeholder="+41 79 123 45 67"
               className={cn("h-12 md:h-14 text-base md:text-lg", stepErrors.phone && "border-red-400")}
             />
