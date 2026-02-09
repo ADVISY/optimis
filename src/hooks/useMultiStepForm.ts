@@ -33,17 +33,30 @@ export function useMultiStepForm<T extends object>({
     }
   }, [totalSteps]);
 
+  const scrollToFormTop = useCallback(() => {
+    // Scroll to top of form container or window
+    const formContainer = document.querySelector('[data-form-container]');
+    if (formContainer) {
+      formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, []);
+
   const nextStep = useCallback(() => {
     if (currentStep < totalSteps) {
       setCurrentStep((prev) => prev + 1);
+      // Small delay to allow state update before scrolling
+      setTimeout(scrollToFormTop, 50);
     }
-  }, [currentStep, totalSteps]);
+  }, [currentStep, totalSteps, scrollToFormTop]);
 
   const previousStep = useCallback(() => {
     if (currentStep > 1) {
       setCurrentStep((prev) => prev - 1);
+      setTimeout(scrollToFormTop, 50);
     }
-  }, [currentStep]);
+  }, [currentStep, scrollToFormTop]);
 
   const handleSubmit = useCallback(async () => {
     setIsSubmitting(true);

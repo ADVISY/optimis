@@ -540,18 +540,18 @@ const HealthInsuranceForm = () => {
 
       {/* Step 5: Complementary Insurance - Tier Selection */}
       <FormStep isActive={currentStep === 5}>
-        <div className="space-y-6">
-          <div className="text-center mb-6">
-            <h3 className="text-lg font-semibold mb-2">
+        <div className="space-y-3 md:space-y-6">
+          <div className="text-center mb-2 md:mb-6">
+            <h3 className="text-sm md:text-lg font-semibold mb-1 md:mb-2 text-white">
               {t("forms.healthInsurance.complementaryTitle", "Assurances complémentaires")}
             </h3>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs md:text-sm text-white/70">
               {t("forms.healthInsurance.complementaryDescription")}
             </p>
           </div>
 
-          {/* Tier Selection Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
+          {/* Tier Selection Cards - Compact horizontal layout on mobile */}
+          <div className="grid grid-cols-3 gap-2 md:gap-4">
             {/* BASIC */}
             <Card 
               className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-white/40 backdrop-blur-sm ${
@@ -566,20 +566,17 @@ const HealthInsuranceForm = () => {
                   : { dental: true, hospitalization: true, glasses: true, alternativeMedicine: true, worldwide: true }
               })}
             >
-              <CardContent className="p-4 text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/50 mb-3">
-                  <span className="text-white text-xl font-bold">B</span>
+              <CardContent className="p-2 md:p-4 text-center">
+                <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-white/50 mb-1 md:mb-3">
+                  <span className="text-white text-sm md:text-xl font-bold">B</span>
                 </div>
-                <h4 className="font-bold text-lg text-white">BASIC</h4>
-                <p className="text-xs text-white/70 mb-3">
+                <h4 className="font-bold text-xs md:text-lg text-white">BASIC</h4>
+                <p className="text-[10px] md:text-xs text-white/70 mb-1 md:mb-3 hidden md:block">
                   {t("forms.healthInsurance.tiers.basicDesc", "Couverture essentielle")}
                 </p>
-                <div className="text-2xl font-bold text-white">
-                  ~CHF 39<span className="text-sm font-normal text-white/70">/mois</span>
+                <div className="text-sm md:text-2xl font-bold text-white">
+                  ~39<span className="text-[10px] md:text-sm font-normal text-white/70">/m</span>
                 </div>
-                <p className="text-xs text-white/60 mt-1">
-                  {t("forms.healthInsurance.tiers.allOptions", "Toutes options incluses")}
-                </p>
               </CardContent>
             </Card>
 
@@ -597,25 +594,22 @@ const HealthInsuranceForm = () => {
                   : { dental: true, hospitalization: true, glasses: true, alternativeMedicine: true, worldwide: true }
               })}
             >
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span className="bg-violet-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                  {t("forms.healthInsurance.tiers.popular", "Populaire")}
+              <div className="absolute -top-2 md:-top-3 left-1/2 -translate-x-1/2">
+                <span className="bg-violet-500 text-white text-[8px] md:text-xs font-semibold px-1.5 md:px-3 py-0.5 md:py-1 rounded-full whitespace-nowrap">
+                  ★
                 </span>
               </div>
-              <CardContent className="p-4 text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-violet-500/30 mb-3">
-                  <span className="text-violet-300 text-xl font-bold">P</span>
+              <CardContent className="p-2 md:p-4 text-center pt-3 md:pt-4">
+                <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-violet-500/30 mb-1 md:mb-3">
+                  <span className="text-violet-300 text-sm md:text-xl font-bold">P</span>
                 </div>
-                <h4 className="font-bold text-lg text-violet-300">PREMIUM</h4>
-                <p className="text-xs text-white/70 mb-3">
+                <h4 className="font-bold text-xs md:text-lg text-violet-300">PREMIUM</h4>
+                <p className="text-[10px] md:text-xs text-white/70 mb-1 md:mb-3 hidden md:block">
                   {t("forms.healthInsurance.tiers.premiumDesc", "Rapport qualité-prix optimal")}
                 </p>
-                <div className="text-2xl font-bold text-violet-300">
-                  ~CHF 91<span className="text-sm font-normal text-white/70">/mois</span>
+                <div className="text-sm md:text-2xl font-bold text-violet-300">
+                  ~91<span className="text-[10px] md:text-sm font-normal text-white/70">/m</span>
                 </div>
-                <p className="text-xs text-white/60 mt-1">
-                  {t("forms.healthInsurance.tiers.allOptions", "Toutes options incluses")}
-                </p>
               </CardContent>
             </Card>
 
@@ -633,26 +627,23 @@ const HealthInsuranceForm = () => {
                   : { dental: true, hospitalization: true, glasses: true, alternativeMedicine: true, worldwide: true }
               })}
             >
-              <CardContent className="p-4 text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-500/30 mb-3">
-                  <span className="text-amber-300 text-xl font-bold">D</span>
+              <CardContent className="p-2 md:p-4 text-center">
+                <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-amber-500/30 mb-1 md:mb-3">
+                  <span className="text-amber-300 text-sm md:text-xl font-bold">D</span>
                 </div>
-                <h4 className="font-bold text-lg text-amber-300">DIAMOND</h4>
-                <p className="text-xs text-white/70 mb-3">
+                <h4 className="font-bold text-xs md:text-lg text-amber-300">DIAMOND</h4>
+                <p className="text-[10px] md:text-xs text-white/70 mb-1 md:mb-3 hidden md:block">
                   {t("forms.healthInsurance.tiers.diamondDesc", "Couverture maximale")}
                 </p>
-                <div className="text-2xl font-bold text-amber-300">
-                  ~CHF 175<span className="text-sm font-normal text-white/70">/mois</span>
+                <div className="text-sm md:text-2xl font-bold text-amber-300">
+                  ~175<span className="text-[10px] md:text-sm font-normal text-white/70">/m</span>
                 </div>
-                <p className="text-xs text-white/60 mt-1">
-                  {t("forms.healthInsurance.tiers.allOptions", "Toutes options incluses")}
-                </p>
               </CardContent>
             </Card>
           </div>
 
           {/* Skip option */}
-          <div className="text-center pt-4">
+          <div className="text-center pt-2 md:pt-4">
             <Button
               variant="ghost"
               size="sm"
@@ -660,15 +651,15 @@ const HealthInsuranceForm = () => {
                 complementaryTier: null,
                 complementary: { dental: false, hospitalization: false, glasses: false, alternativeMedicine: false, worldwide: false }
               })}
-              className="text-white hover:text-white hover:bg-white/40"
+              className="text-white hover:text-white hover:bg-white/40 text-xs md:text-sm h-8 md:h-auto"
             >
-              {t("forms.healthInsurance.skipComplementary", "Continuer sans complémentaire")}
+              {t("forms.healthInsurance.skipComplementary", "Passer")}
             </Button>
           </div>
 
-          {/* Selected tier details */}
+          {/* Selected tier details - hidden on mobile to save space */}
           {formData.complementaryTier && (
-            <Card className="bg-white/40 border-white/50 backdrop-blur-sm">
+            <Card className="bg-white/40 border-white/50 backdrop-blur-sm hidden md:block">
               <CardContent className="p-4">
                 <h5 className="font-semibold mb-3 text-sm text-white">
                   {t("forms.healthInsurance.includedInPackage", "Inclus dans votre package")} {formData.complementaryTier.toUpperCase()}:

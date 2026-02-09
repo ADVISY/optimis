@@ -42,6 +42,7 @@ const FormContainer = ({
   return (
     <Card 
       ref={cardRef}
+      data-form-container
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={`w-full mx-auto shadow-2xl border-2 md:border-4 border-emerald-800 rounded-xl md:rounded-3xl overflow-hidden ring-2 ring-emerald-400/30 animate-fade-in text-white relative ${
