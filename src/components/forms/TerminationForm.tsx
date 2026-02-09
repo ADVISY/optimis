@@ -90,7 +90,7 @@ const TerminationForm = () => {
   const validateStep = (step: number): boolean => {
     switch (step) {
       case 1: return formData.contractType !== "" && formData.currentInsurer.trim() !== "";
-      case 2: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "" && formData.address.trim() !== "" && formData.postalCode.trim() !== "" && formData.city.trim() !== "";
+      case 2: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "" && formData.address.trim() !== "" && formData.postalCode.replace(/\D/g, '').length >= 4 && formData.city.trim() !== "";
       case 3: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
     }

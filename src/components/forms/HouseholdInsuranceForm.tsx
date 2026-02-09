@@ -95,7 +95,7 @@ const HouseholdInsuranceForm = () => {
 
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 2: return formData.canton !== "" && formData.propertyValue !== "";
+      case 2: return formData.canton !== "" && formData.propertyValue !== "" && formData.postalCode.replace(/\D/g, '').length >= 4;
       case 3: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
       case 4: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
