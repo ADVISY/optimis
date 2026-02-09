@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, Loader2, Sparkles } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -22,6 +23,16 @@ const FormNavigation = ({
   canProceed = true,
 }: FormNavigationProps) => {
   const { t } = useTranslation();
+  const [shaking, setShaking] = useState(false);
+
+  const handleNextClick = () => {
+    onNext();
+    // If canProceed is false, trigger shake animation for visual feedback
+    if (!canProceed) {
+      setShaking(true);
+      setTimeout(() => setShaking(false), 500);
+    }
+  };
 
   return (
     <div className="flex flex-col-reverse sm:flex-row justify-between gap-1.5 sm:gap-4 pt-3 md:pt-8">
@@ -40,7 +51,7 @@ const FormNavigation = ({
       <Button
         type="button"
         size="sm"
-        onClick={onNext}
+        onClick={handleNextClick}
         disabled={isSubmitting}
         className={`
           gap-1 sm:gap-2.5 w-full sm:w-auto sm:min-w-[160px] md:min-w-[200px] h-8 md:h-14 text-[10px] md:text-base font-bold
@@ -51,6 +62,7 @@ const FormNavigation = ({
           transition-all duration-300 ease-out
           disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none
           ${isLastStep ? 'animate-pulse ring-2 ring-primary/50 ring-offset-2' : ''}
+          ${shaking ? 'animate-[shake_0.4s_ease-in-out]' : ''}
         `}
       >
         {isSubmitting ? (
