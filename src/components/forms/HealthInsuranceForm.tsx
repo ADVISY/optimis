@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
@@ -8,6 +8,7 @@ import HealthComparisonResults from "@/components/forms/HealthComparisonResults"
 import LoadingComparison from "@/components/forms/LoadingComparison";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
+import { useToast } from "@/hooks/use-toast";
 import { useHealthPremiums, premiumToInsuranceOffer } from "@/hooks/useHealthPremiums";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -56,6 +57,7 @@ const TOTAL_STEPS = 7;
 
 const HealthInsuranceForm = () => {
   const { t, i18n } = useTranslation();
+  const { toast } = useToast();
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
@@ -279,31 +281,43 @@ const HealthInsuranceForm = () => {
 
   const canProceed = validateStep(currentStep);
 
-  // Get validation error messages for current step
+  const [attemptedNext, setAttemptedNext] = useState(false);
+
+  // Get validation error messages for current step (only shown after user tries to advance)
   const getStepErrors = (step: number): Record<string, string> => {
     const errs: Record<string, string> = {};
     if (step === 7) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (formData.email.trim() && !emailRegex.test(formData.email.trim())) {
+      if (!formData.email.trim() || !emailRegex.test(formData.email.trim())) {
         errs.email = t("forms.validation.invalidEmail", "Adresse email non valide");
       }
       const phoneDigits = formData.phone.replace(/\s/g, '');
-      if (formData.phone.trim() && phoneDigits.length < 10) {
+      if (!formData.phone.trim() || phoneDigits.length < 10) {
         errs.phone = t("forms.validation.invalidPhone", "Numéro de téléphone non valide (min. 10 chiffres)");
       }
     }
     if (step === 6) {
-      if (formData.firstName.trim() === "" && formData.lastName.trim() !== "") {
+      if (formData.firstName.trim() === "") {
         errs.firstName = t("forms.validation.required", "Ce champ est obligatoire");
       }
-      if (formData.lastName.trim() === "" && formData.firstName.trim() !== "") {
+      if (formData.lastName.trim() === "") {
         errs.lastName = t("forms.validation.required", "Ce champ est obligatoire");
       }
+    }
+    if (step === 1 && formData.hasCurrentInsurance === null) {
+      errs.hasCurrentInsurance = t("forms.validation.required", "Ce champ est obligatoire");
+    }
+    if (step === 2) {
+      if (!formData.familySituation) errs.familySituation = t("forms.validation.required", "Ce champ est obligatoire");
+      if (!formData.birthDate) errs.birthDate = t("forms.validation.required", "Ce champ est obligatoire");
+    }
+    if (step === 3 && !formData.canton) {
+      errs.canton = t("forms.validation.required", "Ce champ est obligatoire");
     }
     return errs;
   };
 
-  const stepErrors = getStepErrors(currentStep);
+  const stepErrors = attemptedNext ? getStepErrors(currentStep) : {};
 
   // Auto-format Swiss phone number
   const handlePhoneChange = (value: string) => {
@@ -337,9 +351,16 @@ const HealthInsuranceForm = () => {
   };
 
   const handleNext = () => {
+    setAttemptedNext(true);
     if (!canProceed) {
+      toast({
+        title: t("forms.validation.fillRequired", "Veuillez remplir les champs obligatoires"),
+        description: t("forms.validation.checkFields", "Vérifiez les champs marqués en rouge"),
+        variant: "destructive",
+      });
       return;
     }
+    setAttemptedNext(false);
     if (isLastStep) {
       handleSubmit();
     } else {
@@ -857,7 +878,7 @@ const HealthInsuranceForm = () => {
               inputMode="email"
               autoComplete="email"
               value={formData.email}
-              onChange={(e) => updateFormData({ email: e.target.value.toLowerCase().trim() })}
+              onChange={(e) => updateFormData({ email: e.target.value.toLowerCase() })}
               placeholder="votre@email.ch"
               className={`h-8 md:h-14 text-xs md:text-lg ${stepErrors.email ? 'border-red-400 focus-visible:ring-red-400' : ''}`}
             />

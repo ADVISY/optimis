@@ -41,7 +41,7 @@ const FormNavigation = ({
         type="button"
         size="sm"
         onClick={onNext}
-        disabled={!canProceed || isSubmitting}
+        disabled={isSubmitting}
         className={`
           gap-1 sm:gap-2.5 w-full sm:w-auto sm:min-w-[160px] md:min-w-[200px] h-8 md:h-14 text-[10px] md:text-base font-bold
           bg-gradient-to-r from-primary via-primary to-emerald-600 
