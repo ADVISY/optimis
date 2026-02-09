@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
@@ -6,6 +7,13 @@ import LocalizedLink from "@/components/LocalizedLink";
 
 const ThankYou = () => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    // Track Lead event for Meta Pixel
+    if ((window as any).fbq) {
+      (window as any).fbq('track', 'Lead');
+    }
+  }, []);
 
   return (
     <Layout>
