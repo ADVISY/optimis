@@ -237,18 +237,18 @@ const Pillar3Form = () => {
               })}
               className="grid grid-cols-2 gap-3"
             >
-              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+              <label htmlFor="hasPillar3-yes" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="yes" id="hasPillar3-yes" />
-                <Label htmlFor="hasPillar3-yes" className="cursor-pointer flex-1 text-lg">
+                <span className="flex-1 text-lg">
                   {t("common.yes")}
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+                </span>
+              </label>
+              <label htmlFor="hasPillar3-no" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="no" id="hasPillar3-no" />
-                <Label htmlFor="hasPillar3-no" className="cursor-pointer flex-1 text-lg">
+                <span className="flex-1 text-lg">
                   {t("common.no")}
-                </Label>
-              </div>
+                </span>
+              </label>
             </RadioGroup>
           </FormFieldWrapper>
 
@@ -290,12 +290,12 @@ const Pillar3Form = () => {
                 { value: "protection", label: t("forms.pillar3.objectives.protection") },
                 { value: "mix", label: t("forms.pillar3.objectives.mix") },
               ].map((obj) => (
-                <div key={obj.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+                <label key={obj.value} htmlFor={obj.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                   <RadioGroupItem value={obj.value} id={obj.value} />
-                  <Label htmlFor={obj.value} className="cursor-pointer flex-1 text-lg">
+                  <span className="flex-1 text-lg">
                     {obj.label}
-                  </Label>
-                </div>
+                  </span>
+                </label>
               ))}
             </RadioGroup>
           </FormFieldWrapper>
@@ -403,12 +403,12 @@ const Pillar3Form = () => {
                 { value: "dynamic", label: t("forms.pillar3.risks.dynamic") },
                 { value: "aggressive", label: t("forms.pillar3.risks.aggressive") },
               ].map((risk) => (
-                <div key={risk.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+                <label key={risk.value} htmlFor={risk.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                   <RadioGroupItem value={risk.value} id={risk.value} />
-                  <Label htmlFor={risk.value} className="cursor-pointer flex-1 text-lg">
+                  <span className="flex-1 text-lg">
                     {risk.label}
-                  </Label>
-                </div>
+                  </span>
+                </label>
               ))}
             </RadioGroup>
           </FormFieldWrapper>

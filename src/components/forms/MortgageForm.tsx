@@ -171,12 +171,12 @@ const MortgageForm = () => {
                 { value: "renewal", label: t("forms.mortgage.projects.renewal") },
                 { value: "refinancing", label: t("forms.mortgage.projects.refinancing") },
               ].map((proj) => (
-                <div key={proj.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+                <label key={proj.value} htmlFor={proj.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                   <RadioGroupItem value={proj.value} id={proj.value} />
-                  <Label htmlFor={proj.value} className="cursor-pointer flex-1 text-lg">
+                  <span className="flex-1 text-lg">
                     {proj.label}
-                  </Label>
-                </div>
+                  </span>
+                </label>
               ))}
             </RadioGroup>
           </FormFieldWrapper>
@@ -248,14 +248,14 @@ const MortgageForm = () => {
               onValueChange={(value) => updateFormData({ numberOfBorrowers: value })}
               className="flex gap-4"
             >
-              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+              <label htmlFor="borrowers-1" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="1" id="borrowers-1" />
-                <Label htmlFor="borrowers-1" className="cursor-pointer text-lg">1 {t("forms.mortgage.person")}</Label>
-              </div>
-              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+                <span className="text-lg">1 {t("forms.mortgage.person")}</span>
+              </label>
+              <label htmlFor="borrowers-2" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="2" id="borrowers-2" />
-                <Label htmlFor="borrowers-2" className="cursor-pointer text-lg">2 {t("forms.mortgage.persons")}</Label>
-              </div>
+                <span className="text-lg">2 {t("forms.mortgage.persons")}</span>
+              </label>
             </RadioGroup>
           </FormFieldWrapper>
         </div>
