@@ -125,7 +125,7 @@ const CarInsuranceForm = () => {
 
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 3: return formData.driverBirthDate !== null;
+      case 3: return formData.driverBirthDate !== null && formData.licenseYear !== "";
       case 5: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
       case 6: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
@@ -250,7 +250,7 @@ const CarInsuranceForm = () => {
           <FormFieldWrapper label={t("forms.carInsurance.usage")} required>
             <RadioGroup
               value={formData.usage}
-              onValueChange={(value) => { updateFormData({ usage: value }); notify(); }}
+              onValueChange={(value) => updateFormData({ usage: value })}
               className="grid gap-3"
             >
               <label htmlFor="private" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
@@ -306,7 +306,7 @@ const CarInsuranceForm = () => {
           <FormFieldWrapper label={t("forms.carInsurance.licenseYear")} htmlFor="licenseYear" required>
             <Select
               value={formData.licenseYear}
-              onValueChange={(value) => { updateFormData({ licenseYear: value }); notify(); }}
+              onValueChange={(value) => updateFormData({ licenseYear: value })}
             >
               <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.carInsurance.selectLicenseYear")} />
@@ -346,7 +346,7 @@ const CarInsuranceForm = () => {
           <FormFieldWrapper label={t("forms.carInsurance.coverage")} required>
             <RadioGroup
               value={formData.coverageType}
-              onValueChange={(value) => { updateFormData({ coverageType: value }); notify(); }}
+              onValueChange={(value) => updateFormData({ coverageType: value })}
               className="grid gap-3"
             >
               <label htmlFor="rc" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">

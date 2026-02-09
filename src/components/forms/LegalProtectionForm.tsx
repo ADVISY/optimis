@@ -174,7 +174,10 @@ const LegalProtectionForm = () => {
           <FormFieldWrapper label={t("forms.legalProtection.coverageType")} required>
             <RadioGroup
               value={formData.coverageType}
-              onValueChange={(value) => { updateFormData({ coverageType: value }); notify(); }}
+              onValueChange={(value) => {
+                updateFormData({ coverageType: value });
+                if (value !== "custom") notify();
+              }}
               className="grid gap-3"
             >
               {[

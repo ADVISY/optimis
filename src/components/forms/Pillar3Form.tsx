@@ -262,10 +262,10 @@ const Pillar3Form = () => {
           <FormFieldWrapper label={t("forms.pillar3.hasExistingPillar3")} required>
             <RadioGroup
               value={formData.hasExistingPillar3 === null ? "" : formData.hasExistingPillar3 ? "yes" : "no"}
-              onValueChange={(value) => { updateFormData({ 
+              onValueChange={(value) => updateFormData({ 
                 hasExistingPillar3: value === "yes",
                 existingProvider: value === "no" ? "" : formData.existingProvider
-              }); notify(); }}
+              })}
               className="grid grid-cols-2 gap-3"
             >
               <label htmlFor="hasPillar3-yes" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">

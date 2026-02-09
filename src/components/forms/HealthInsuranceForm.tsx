@@ -442,10 +442,13 @@ const HealthInsuranceForm = () => {
           >
             <RadioGroup
               value={formData.hasCurrentInsurance === null ? "" : formData.hasCurrentInsurance ? "yes" : "no"}
-              onValueChange={(value) => { updateFormData({ 
-                hasCurrentInsurance: value === "yes",
-                currentInsurer: value === "no" ? "" : formData.currentInsurer
-              }); notify(); }}
+              onValueChange={(value) => {
+                updateFormData({ 
+                  hasCurrentInsurance: value === "yes",
+                  currentInsurer: value === "no" ? "" : formData.currentInsurer
+                });
+                if (value === "no") notify();
+              }}
               className="grid grid-cols-2 gap-3"
             >
               <label htmlFor="hasInsurance-yes" className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-white/40 hover:bg-white/50 transition-colors border border-white/50 cursor-pointer">
@@ -504,7 +507,7 @@ const HealthInsuranceForm = () => {
           >
             <RadioGroup
               value={formData.familySituation}
-              onValueChange={(value) => { updateFormData({ familySituation: value }); notify(); }}
+              onValueChange={(value) => updateFormData({ familySituation: value })}
               className="grid grid-cols-1 sm:grid-cols-2 gap-3"
             >
               {[
@@ -550,7 +553,7 @@ const HealthInsuranceForm = () => {
           >
             <Select
               value={formData.canton}
-              onValueChange={(value) => { updateFormData({ canton: value }); notify(); }}
+              onValueChange={(value) => updateFormData({ canton: value })}
             >
               <SelectTrigger className="h-8 md:h-11 text-xs md:text-base">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
@@ -594,7 +597,7 @@ const HealthInsuranceForm = () => {
               </Label>
               <RadioGroup
                 value={formData.lamalModel}
-                onValueChange={(value) => { updateFormData({ lamalModel: value }); notify(); }}
+                onValueChange={(value) => updateFormData({ lamalModel: value })}
                 className="grid grid-cols-2 gap-1.5 md:gap-3"
               >
                 {[
