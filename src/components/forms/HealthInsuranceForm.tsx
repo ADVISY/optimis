@@ -259,8 +259,8 @@ const HealthInsuranceForm = () => {
         // Must select family situation AND provide birth date
         return formData.familySituation !== "" && formData.birthDate !== null;
       case 3:
-        // Must select canton
-        return formData.canton !== "";
+        // Must select canton + valid postal code (4 digits)
+        return formData.canton !== "" && formData.postalCode.replace(/\D/g, '').length >= 4;
       case 4:
         // LAMal model and franchise have defaults, always valid
         return formData.lamalModel !== "";
@@ -598,6 +598,7 @@ const HealthInsuranceForm = () => {
               <RadioGroup
                 value={formData.lamalModel}
                 onValueChange={(value) => updateFormData({ lamalModel: value })}
+
                 className="grid grid-cols-2 gap-1.5 md:gap-3"
               >
                 {[
