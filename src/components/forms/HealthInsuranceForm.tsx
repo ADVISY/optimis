@@ -347,6 +347,12 @@ const HealthInsuranceForm = () => {
       totalSteps={TOTAL_STEPS}
       size="large"
     >
+      {/* Required fields note */}
+      <div className="mb-4 md:mb-6 text-xs md:text-sm text-white/70 flex items-center gap-1.5">
+        <span className="text-red-300 font-bold text-sm md:text-base">*</span>
+        <span>{t("forms.requiredFields", "Champs obligatoires")}</span>
+      </div>
+
       {/* Step 1: Current Insurance */}
       <FormStep isActive={currentStep === 1}>
         <div className="space-y-4 md:space-y-6">
