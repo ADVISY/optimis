@@ -27,6 +27,7 @@ import { mockCarInsuranceOffers, InsuranceOffer } from "@/data/mockInsuranceData
 import DateInput from "@/components/ui/date-input";
 import { Lock, User, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useFormValidation } from "@/hooks/useFormValidation";
 
 interface CarInsuranceFormData {
   // Vehicle info
@@ -65,6 +66,7 @@ const CarInsuranceForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
   const [plateSearching, setPlateSearching] = useState(false);
+  const { attemptedNext, markAttempted, resetAttempted, formatSwissPhone, isValidEmail, isValidPhone, getContactErrors, getIdentityErrors, showValidationToast } = useFormValidation();
 
   const initialData: CarInsuranceFormData = {
     vehiclePlate: "",
@@ -120,7 +122,31 @@ const CarInsuranceForm = () => {
     }, 3000);
   };
 
+  const validateStep = (step: number): boolean => {
+    switch (step) {
+      case 3: return formData.driverBirthDate !== null;
+      case 5: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
+      case 6: return isValidEmail(formData.email) && isValidPhone(formData.phone);
+      default: return true;
+    }
+  };
+
+  const getStepErrors = (step: number): Record<string, string> => {
+    if (step === 5) return getIdentityErrors(formData.firstName, formData.lastName);
+    if (step === 6) return getContactErrors(formData.email, formData.phone);
+    return {};
+  };
+
+  const canProceed = validateStep(currentStep);
+  const stepErrors = attemptedNext ? getStepErrors(currentStep) : {};
+
   const handleNext = () => {
+    markAttempted();
+    if (!canProceed) {
+      showValidationToast();
+      return;
+    }
+    resetAttempted();
     if (isLastStep) {
       handleSubmit();
     } else {
@@ -432,24 +458,28 @@ const CarInsuranceForm = () => {
             <p className="text-sm md:text-base text-muted-foreground">{t("forms.contact.contactStepDescription")}</p>
           </div>
 
-          <FormFieldWrapper label={t("forms.contact.email")} htmlFor="email" required>
+          <FormFieldWrapper label={t("forms.contact.email")} htmlFor="email" required error={stepErrors.email}>
             <Input
               id="email"
               type="email"
+              inputMode="email"
+              autoComplete="email"
               value={formData.email}
               onChange={(e) => updateFormData({ email: e.target.value })}
-              className="h-12 md:h-14 text-base md:text-lg"
+              className={cn("h-12 md:h-14 text-base md:text-lg", stepErrors.email && "border-red-400")}
             />
           </FormFieldWrapper>
 
-          <FormFieldWrapper label={t("forms.contact.phone")} htmlFor="phone" required>
+          <FormFieldWrapper label={t("forms.contact.phone")} htmlFor="phone" required error={stepErrors.phone}>
             <Input
               id="phone"
               type="tel"
+              inputMode="tel"
+              autoComplete="tel"
               value={formData.phone}
-              onChange={(e) => updateFormData({ phone: e.target.value })}
+              onChange={(e) => updateFormData({ phone: formatSwissPhone(e.target.value) })}
               placeholder="+41 79 123 45 67"
-              className="h-12 md:h-14 text-base md:text-lg"
+              className={cn("h-12 md:h-14 text-base md:text-lg", stepErrors.phone && "border-red-400")}
             />
           </FormFieldWrapper>
 
@@ -467,7 +497,7 @@ const CarInsuranceForm = () => {
         onNext={handleNext}
         isSubmitting={isSubmitting}
         isLastStep={isLastStep}
-        canProceed={true}
+        canProceed={canProceed}
       />
     </FormContainer>
   );
