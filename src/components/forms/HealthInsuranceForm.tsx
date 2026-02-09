@@ -246,7 +246,43 @@ const HealthInsuranceForm = () => {
     }, 500);
   };
 
+  // Validation function for each step
+  const validateStep = (step: number): boolean => {
+    switch (step) {
+      case 1:
+        // Must answer hasCurrentInsurance question
+        return formData.hasCurrentInsurance !== null;
+      case 2:
+        // Must select family situation AND provide birth date
+        return formData.familySituation !== "" && formData.birthDate !== null;
+      case 3:
+        // Must select canton
+        return formData.canton !== "";
+      case 4:
+        // LAMal model and franchise have defaults, always valid
+        return formData.lamalModel !== "";
+      case 5:
+        // Complementary is optional, always valid
+        return true;
+      case 6:
+        // Must provide first and last name
+        return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
+      case 7:
+        // Must provide valid email and phone
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^[\d\s+()-]{8,}$/;
+        return emailRegex.test(formData.email.trim()) && phoneRegex.test(formData.phone.trim());
+      default:
+        return true;
+    }
+  };
+
+  const canProceed = validateStep(currentStep);
+
   const handleNext = () => {
+    if (!canProceed) {
+      return; // Don't proceed if validation fails
+    }
     if (isLastStep) {
       handleSubmit();
     } else {
@@ -791,7 +827,7 @@ const HealthInsuranceForm = () => {
         onNext={handleNext}
         isSubmitting={isSubmitting}
         isLastStep={isLastStep}
-        canProceed={true}
+        canProceed={canProceed}
       />
     </FormContainer>
   );
