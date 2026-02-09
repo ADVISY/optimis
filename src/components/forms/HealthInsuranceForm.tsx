@@ -326,18 +326,18 @@ const HealthInsuranceForm = () => {
               })}
               className="grid grid-cols-2 gap-3"
             >
-              <div className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-white/40 hover:bg-white/50 transition-colors border border-white/50">
+              <label htmlFor="hasInsurance-yes" className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-white/40 hover:bg-white/50 transition-colors border border-white/50 cursor-pointer">
                 <RadioGroupItem value="yes" id="hasInsurance-yes" className="h-4 w-4" />
-                <Label htmlFor="hasInsurance-yes" className="cursor-pointer text-white text-sm md:text-base">
+                <span className="text-white text-sm md:text-base">
                   {t("common.yes")}
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-white/40 hover:bg-white/50 transition-colors border border-white/50">
+                </span>
+              </label>
+              <label htmlFor="hasInsurance-no" className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-white/40 hover:bg-white/50 transition-colors border border-white/50 cursor-pointer">
                 <RadioGroupItem value="no" id="hasInsurance-no" className="h-4 w-4" />
-                <Label htmlFor="hasInsurance-no" className="cursor-pointer text-white text-sm md:text-base">
+                <span className="text-white text-sm md:text-base">
                   {t("common.no")}
-                </Label>
-              </div>
+                </span>
+              </label>
             </RadioGroup>
           </FormFieldWrapper>
 
@@ -391,12 +391,12 @@ const HealthInsuranceForm = () => {
                 { value: "coupleWithChildren", label: t("forms.healthInsurance.situations.coupleWithChildren") },
                 { value: "singleWithChildren", label: t("forms.healthInsurance.situations.singleWithChildren") },
               ].map((situation) => (
-                <div key={situation.value} className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-white/40 hover:bg-white/50 transition-colors border border-white/50">
+                <label key={situation.value} htmlFor={situation.value} className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-white/40 hover:bg-white/50 transition-colors border border-white/50 cursor-pointer">
                   <RadioGroupItem value={situation.value} id={situation.value} className="h-4 w-4" />
-                  <Label htmlFor={situation.value} className="cursor-pointer text-white text-sm md:text-base">
+                  <span className="text-white text-sm md:text-base">
                     {situation.label}
-                  </Label>
-                </div>
+                  </span>
+                </label>
               ))}
             </RadioGroup>
           </FormFieldWrapper>
@@ -481,12 +481,12 @@ const HealthInsuranceForm = () => {
                   { value: "hmo", label: t("forms.healthInsurance.models.hmo") },
                   { value: "telemed", label: t("forms.healthInsurance.models.telemed") },
                 ].map((model) => (
-                  <div key={model.value} className="flex items-center space-x-1.5 md:space-x-2 p-1.5 md:p-3 rounded-lg bg-white/40 hover:bg-white/50 transition-colors">
+                  <label key={model.value} htmlFor={model.value} className="flex items-center space-x-1.5 md:space-x-2 p-1.5 md:p-3 rounded-lg bg-white/40 hover:bg-white/50 transition-colors cursor-pointer">
                     <RadioGroupItem value={model.value} id={model.value} className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                    <Label htmlFor={model.value} className="cursor-pointer text-white text-[10px] md:text-base leading-tight">
+                    <span className="text-white text-[10px] md:text-base leading-tight">
                       {model.label}
-                    </Label>
-                  </div>
+                    </span>
+                  </label>
                 ))}
               </RadioGroup>
             </CardContent>

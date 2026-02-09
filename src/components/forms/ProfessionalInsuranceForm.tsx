@@ -159,7 +159,7 @@ const ProfessionalInsuranceForm = () => {
             { key: "legalProtection", label: t("forms.professionalInsurance.types.legalProtection") },
             { key: "multiRisk", label: t("forms.professionalInsurance.types.multiRisk") },
           ].map((type) => (
-            <div key={type.key} className="flex items-center space-x-2 md:space-x-3 p-2 md:p-4 border rounded-lg hover:bg-muted/50">
+            <label key={type.key} htmlFor={type.key} className="flex items-center space-x-2 md:space-x-3 p-2 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
               <Checkbox
                 id={type.key}
                 checked={formData.insuranceTypes[type.key as keyof typeof formData.insuranceTypes]}
@@ -170,10 +170,10 @@ const ProfessionalInsuranceForm = () => {
                 }
                 className="h-4 w-4 md:h-5 md:w-5"
               />
-              <Label htmlFor={type.key} className="cursor-pointer flex-1 text-xs md:text-lg">
+              <span className="flex-1 text-xs md:text-lg">
                 {type.label}
-              </Label>
-            </div>
+              </span>
+            </label>
           ))}
         </div>
       </FormStep>

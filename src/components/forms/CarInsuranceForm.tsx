@@ -225,18 +225,18 @@ const CarInsuranceForm = () => {
               onValueChange={(value) => updateFormData({ usage: value })}
               className="grid gap-3"
             >
-              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+              <label htmlFor="private" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="private" id="private" />
-                <Label htmlFor="private" className="cursor-pointer flex-1 text-lg">
+                <span className="flex-1 text-lg">
                   {t("forms.carInsurance.usagePrivate")}
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+                </span>
+              </label>
+              <label htmlFor="professional" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="professional" id="professional" />
-                <Label htmlFor="professional" className="cursor-pointer flex-1 text-lg">
+                <span className="flex-1 text-lg">
                   {t("forms.carInsurance.usageProfessional")}
-                </Label>
-              </div>
+                </span>
+              </label>
             </RadioGroup>
           </FormFieldWrapper>
 
@@ -321,27 +321,27 @@ const CarInsuranceForm = () => {
               onValueChange={(value) => updateFormData({ coverageType: value })}
               className="grid gap-3"
             >
-              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+              <label htmlFor="rc" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="rc" id="rc" />
-                <Label htmlFor="rc" className="cursor-pointer flex-1">
+                <span className="flex-1">
                   <span className="font-medium text-lg">{t("forms.carInsurance.coverageRC")}</span>
                   <p className="text-sm text-muted-foreground">{t("forms.carInsurance.coverageRCDesc")}</p>
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+                </span>
+              </label>
+              <label htmlFor="rc-partial" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="rc-partial" id="rc-partial" />
-                <Label htmlFor="rc-partial" className="cursor-pointer flex-1">
+                <span className="flex-1">
                   <span className="font-medium text-lg">{t("forms.carInsurance.coveragePartial")}</span>
                   <p className="text-sm text-muted-foreground">{t("forms.carInsurance.coveragePartialDesc")}</p>
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+                </span>
+              </label>
+              <label htmlFor="rc-full" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="rc-full" id="rc-full" />
-                <Label htmlFor="rc-full" className="cursor-pointer flex-1">
+                <span className="flex-1">
                   <span className="font-medium text-lg">{t("forms.carInsurance.coverageFull")}</span>
                   <p className="text-sm text-muted-foreground">{t("forms.carInsurance.coverageFullDesc")}</p>
-                </Label>
-              </div>
+                </span>
+              </label>
             </RadioGroup>
           </FormFieldWrapper>
 
@@ -352,7 +352,7 @@ const CarInsuranceForm = () => {
               { key: "assistance", label: t("forms.carInsurance.options.assistance") },
               { key: "replacementVehicle", label: t("forms.carInsurance.options.replacementVehicle") },
             ].map((option) => (
-              <div key={option.key} className="flex items-center space-x-3 p-4 border rounded-lg hover:bg-muted/50">
+              <label key={option.key} htmlFor={option.key} className="flex items-center space-x-3 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <Checkbox
                   id={option.key}
                   checked={formData.options[option.key as keyof typeof formData.options]}
@@ -362,10 +362,10 @@ const CarInsuranceForm = () => {
                     })
                   }
                 />
-                <Label htmlFor={option.key} className="cursor-pointer flex-1 text-lg">
+                <span className="flex-1 text-lg">
                   {option.label}
-                </Label>
-              </div>
+                </span>
+              </label>
             ))}
           </div>
         </div>

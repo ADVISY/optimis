@@ -145,12 +145,12 @@ const HouseholdInsuranceForm = () => {
                 { value: "apartment", label: t("forms.mortgage.propertyTypes.apartment") },
                 { value: "house", label: t("forms.mortgage.propertyTypes.house") },
               ].map((type) => (
-                <div key={type.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+                <label key={type.value} htmlFor={type.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                   <RadioGroupItem value={type.value} id={type.value} />
-                  <Label htmlFor={type.value} className="cursor-pointer flex-1 text-lg">
+                  <span className="flex-1 text-lg">
                     {type.label}
-                  </Label>
-                </div>
+                  </span>
+                </label>
               ))}
             </RadioGroup>
           </FormFieldWrapper>
@@ -161,18 +161,18 @@ const HouseholdInsuranceForm = () => {
               onValueChange={(value) => updateFormData({ ownershipStatus: value })}
               className="grid grid-cols-2 gap-3"
             >
-              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+              <label htmlFor="tenant" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="tenant" id="tenant" />
-                <Label htmlFor="tenant" className="cursor-pointer text-lg">
+                <span className="text-lg">
                   {t("forms.householdInsurance.tenant")}
-                </Label>
-              </div>
-              <div className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+                </span>
+              </label>
+              <label htmlFor="owner" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="owner" id="owner" />
-                <Label htmlFor="owner" className="cursor-pointer text-lg">
+                <span className="text-lg">
                   {t("forms.householdInsurance.owner")}
-                </Label>
-              </div>
+                </span>
+              </label>
             </RadioGroup>
           </FormFieldWrapper>
 

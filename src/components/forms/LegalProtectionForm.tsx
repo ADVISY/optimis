@@ -153,13 +153,13 @@ const LegalProtectionForm = () => {
                 { value: "traffic", label: t("forms.legalProtection.types.traffic"), desc: t("forms.legalProtection.types.trafficDesc") },
                 { value: "custom", label: t("forms.legalProtection.types.custom"), desc: t("forms.legalProtection.types.customDesc") },
               ].map((type) => (
-                <div key={type.value} className="flex items-start space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+                <label key={type.value} htmlFor={type.value} className="flex items-start space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                   <RadioGroupItem value={type.value} id={type.value} className="mt-1" />
-                  <Label htmlFor={type.value} className="cursor-pointer flex-1">
+                  <span className="flex-1">
                     <span className="font-medium text-lg">{type.label}</span>
                     <p className="text-sm text-muted-foreground">{type.desc}</p>
-                  </Label>
-                </div>
+                  </span>
+                </label>
               ))}
             </RadioGroup>
           </FormFieldWrapper>
@@ -174,7 +174,7 @@ const LegalProtectionForm = () => {
                 { key: "property", label: t("forms.legalProtection.areas.property") },
                 { key: "tenant", label: t("forms.legalProtection.areas.tenant") },
               ].map((area) => (
-                <div key={area.key} className="flex items-center space-x-2">
+                <label key={area.key} htmlFor={area.key} className="flex items-center space-x-2 cursor-pointer">
                   <Checkbox
                     id={area.key}
                     checked={formData.coverageAreas[area.key as keyof typeof formData.coverageAreas]}
@@ -184,10 +184,10 @@ const LegalProtectionForm = () => {
                       })
                     }
                   />
-                  <Label htmlFor={area.key} className="cursor-pointer">
+                  <span>
                     {area.label}
-                  </Label>
-                </div>
+                  </span>
+                </label>
               ))}
             </div>
           )}
@@ -208,12 +208,12 @@ const LegalProtectionForm = () => {
                 { value: "2", label: t("forms.legalProtection.couple") },
                 { value: "family", label: t("forms.legalProtection.family") },
               ].map((size) => (
-                <div key={size.value} className="flex items-center space-x-2 p-2.5 md:p-4 border rounded-lg hover:bg-muted/50">
+                <label key={size.value} htmlFor={`size-${size.value}`} className="flex items-center space-x-2 p-2.5 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                   <RadioGroupItem value={size.value} id={`size-${size.value}`} />
-                  <Label htmlFor={`size-${size.value}`} className="cursor-pointer text-sm md:text-lg">
+                  <span className="text-sm md:text-lg">
                     {size.label}
-                  </Label>
-                </div>
+                  </span>
+                </label>
               ))}
             </RadioGroup>
           </FormFieldWrapper>

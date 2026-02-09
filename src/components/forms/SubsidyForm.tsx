@@ -250,12 +250,12 @@ const SubsidyForm = () => {
                 { value: "student", label: t("forms.subsidy.situations.student") },
                 { value: "unemployed", label: t("forms.subsidy.situations.unemployed") },
               ].map((situation) => (
-                <div key={situation.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50">
+                <label key={situation.value} htmlFor={situation.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                   <RadioGroupItem value={situation.value} id={situation.value} />
-                  <Label htmlFor={situation.value} className="cursor-pointer flex-1 text-lg">
+                  <span className="flex-1 text-lg">
                     {situation.label}
-                  </Label>
-                </div>
+                  </span>
+                </label>
               ))}
             </RadioGroup>
           </FormFieldWrapper>
