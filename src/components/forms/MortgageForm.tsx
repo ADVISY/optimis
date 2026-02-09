@@ -23,6 +23,7 @@ import { mortgageProducts } from "@/data/mortgageProducts";
 import { simulateMortgage, MortgageSimulationResult } from "@/utils/mortgageCalculations";
 import { Lock, User, Phone } from "lucide-react";
 import { useFormValidation } from "@/hooks/useFormValidation";
+import { useAutoAdvance } from "@/hooks/useAutoAdvance";
 import { cn } from "@/lib/utils";
 
 interface MortgageFormData {
@@ -137,6 +138,7 @@ const MortgageForm = () => {
   };
 
   const canProceed = validateStep(currentStep);
+  const notify = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep);
   const stepErrors = attemptedNext ? getStepErrors(currentStep) : {};
 
   const handleNext = () => {
@@ -192,7 +194,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.projectType")} required>
             <RadioGroup
               value={formData.projectType}
-              onValueChange={(value) => updateFormData({ projectType: value })}
+              onValueChange={(value) => { updateFormData({ projectType: value }); notify(); }}
               className="grid gap-3"
             >
               {[
@@ -213,7 +215,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.propertyType")} required>
             <Select
               value={formData.propertyType}
-              onValueChange={(value) => updateFormData({ propertyType: value })}
+              onValueChange={(value) => { updateFormData({ propertyType: value }); notify(); }}
             >
               <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.mortgage.selectPropertyType")} />
@@ -246,7 +248,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.healthInsurance.canton")} required>
             <Select
               value={formData.canton}
-              onValueChange={(value) => updateFormData({ canton: value })}
+              onValueChange={(value) => { updateFormData({ canton: value }); notify(); }}
             >
               <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
@@ -274,7 +276,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.numberOfBorrowers")} required>
             <RadioGroup
               value={formData.numberOfBorrowers}
-              onValueChange={(value) => updateFormData({ numberOfBorrowers: value })}
+              onValueChange={(value) => { updateFormData({ numberOfBorrowers: value }); notify(); }}
               className="flex gap-4"
             >
               <label htmlFor="borrowers-1" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
@@ -296,7 +298,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.professionalStatus")} required>
             <Select
               value={formData.professionalStatus}
-              onValueChange={(value) => updateFormData({ professionalStatus: value })}
+              onValueChange={(value) => { updateFormData({ professionalStatus: value }); notify(); }}
             >
               <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectStatus")} />
@@ -313,7 +315,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.incomeRange")} required>
             <Select
               value={formData.incomeRange}
-              onValueChange={(value) => updateFormData({ incomeRange: value })}
+              onValueChange={(value) => { updateFormData({ incomeRange: value }); notify(); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectIncome")} />
@@ -331,7 +333,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.ownFundsRange")} required>
             <Select
               value={formData.ownFundsRange}
-              onValueChange={(value) => updateFormData({ ownFundsRange: value })}
+              onValueChange={(value) => { updateFormData({ ownFundsRange: value }); notify(); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.mortgage.selectOwnFunds")} />

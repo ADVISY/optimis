@@ -22,6 +22,7 @@ import { getMatchingProducts } from "@/data/pillar3aProducts";
 import { calculateAllProjections, Pillar3aProjection } from "@/utils/pillar3aCalculations";
 import { Lock, User, Phone } from "lucide-react";
 import { useFormValidation } from "@/hooks/useFormValidation";
+import { useAutoAdvance } from "@/hooks/useAutoAdvance";
 import { cn } from "@/lib/utils";
 
 interface Pillar3FormData {
@@ -203,6 +204,7 @@ const Pillar3Form = () => {
   };
 
   const canProceed = validateStep(currentStep);
+  const notify = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep);
   const stepErrors = attemptedNext ? getStepErrors(currentStep) : {};
 
   const handleNext = () => {
@@ -260,10 +262,10 @@ const Pillar3Form = () => {
           <FormFieldWrapper label={t("forms.pillar3.hasExistingPillar3")} required>
             <RadioGroup
               value={formData.hasExistingPillar3 === null ? "" : formData.hasExistingPillar3 ? "yes" : "no"}
-              onValueChange={(value) => updateFormData({ 
+              onValueChange={(value) => { updateFormData({ 
                 hasExistingPillar3: value === "yes",
                 existingProvider: value === "no" ? "" : formData.existingProvider
-              })}
+              }); notify(); }}
               className="grid grid-cols-2 gap-3"
             >
               <label htmlFor="hasPillar3-yes" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
@@ -285,7 +287,7 @@ const Pillar3Form = () => {
             <FormFieldWrapper label={t("forms.pillar3.existingProvider")} htmlFor="existingProvider">
               <Select
                 value={formData.existingProvider}
-                onValueChange={(value) => updateFormData({ existingProvider: value })}
+                onValueChange={(value) => { updateFormData({ existingProvider: value }); notify(); }}
               >
                 <SelectTrigger className="h-12 md:h-14 text-base md:text-lg">
                   <SelectValue placeholder={t("forms.pillar3.selectProvider")} />
@@ -310,7 +312,7 @@ const Pillar3Form = () => {
           <FormFieldWrapper label={t("forms.pillar3.objective")} required>
             <RadioGroup
               value={formData.objective}
-              onValueChange={(value) => updateFormData({ objective: value })}
+              onValueChange={(value) => { updateFormData({ objective: value }); notify(); }}
               className="grid gap-3"
             >
               {[
@@ -350,7 +352,7 @@ const Pillar3Form = () => {
           <FormFieldWrapper label={t("forms.pillar3.professionalStatus")} required>
             <Select
               value={formData.professionalStatus}
-              onValueChange={(value) => updateFormData({ professionalStatus: value })}
+              onValueChange={(value) => { updateFormData({ professionalStatus: value }); notify(); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectStatus")} />
@@ -367,7 +369,7 @@ const Pillar3Form = () => {
           <FormFieldWrapper label={t("forms.pillar3.incomeRange")} required>
             <Select
               value={formData.incomeRange}
-              onValueChange={(value) => updateFormData({ incomeRange: value })}
+              onValueChange={(value) => { updateFormData({ incomeRange: value }); notify(); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectIncome")} />
@@ -390,7 +392,7 @@ const Pillar3Form = () => {
           <FormFieldWrapper label={t("forms.pillar3.savingsAmount")} required>
             <Select
               value={formData.savingsAmount}
-              onValueChange={(value) => updateFormData({ savingsAmount: value })}
+              onValueChange={(value) => { updateFormData({ savingsAmount: value }); notify(); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectAmount")} />
@@ -406,7 +408,7 @@ const Pillar3Form = () => {
           <FormFieldWrapper label={t("forms.pillar3.investmentHorizon")} required>
             <Select
               value={formData.investmentHorizon}
-              onValueChange={(value) => updateFormData({ investmentHorizon: value })}
+              onValueChange={(value) => { updateFormData({ investmentHorizon: value }); notify(); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectHorizon")} />
@@ -423,7 +425,7 @@ const Pillar3Form = () => {
           <FormFieldWrapper label={t("forms.pillar3.riskProfile")} required>
             <RadioGroup
               value={formData.riskProfile}
-              onValueChange={(value) => updateFormData({ riskProfile: value })}
+              onValueChange={(value) => { updateFormData({ riskProfile: value }); notify(); }}
               className="grid gap-3"
             >
               {[

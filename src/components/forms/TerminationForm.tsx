@@ -18,6 +18,7 @@ import { fr, de, it } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { useFormValidation } from "@/hooks/useFormValidation";
+import { useAutoAdvance } from "@/hooks/useAutoAdvance";
 
 interface TerminationFormData {
   contractType: string;
@@ -102,6 +103,7 @@ const TerminationForm = () => {
   };
 
   const canProceed = validateStep(currentStep);
+  const notify = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep);
   const stepErrors = attemptedNext ? getStepErrors(currentStep) : {};
 
   const handleNext = () => {
@@ -182,7 +184,7 @@ const TerminationForm = () => {
           <FormFieldWrapper label={t("forms.termination.contractType")} required>
             <RadioGroup
               value={formData.contractType}
-              onValueChange={(value) => updateFormData({ contractType: value })}
+              onValueChange={(value) => { updateFormData({ contractType: value }); notify(); }}
               className="grid gap-3"
             >
               {[

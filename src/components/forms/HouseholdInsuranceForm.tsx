@@ -22,6 +22,7 @@ import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { mockHouseholdInsuranceOffers, InsuranceOffer } from "@/data/mockInsuranceData";
 import { Lock, User, Phone } from "lucide-react";
 import { useFormValidation } from "@/hooks/useFormValidation";
+import { useAutoAdvance } from "@/hooks/useAutoAdvance";
 import { cn } from "@/lib/utils";
 
 interface HouseholdInsuranceFormData {
@@ -108,6 +109,7 @@ const HouseholdInsuranceForm = () => {
   };
 
   const canProceed = validateStep(currentStep);
+  const notify = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep);
   const stepErrors = attemptedNext ? getStepErrors(currentStep) : {};
 
   const handleNext = () => {
@@ -165,7 +167,7 @@ const HouseholdInsuranceForm = () => {
           <FormFieldWrapper label={t("forms.householdInsurance.propertyType")} required>
             <RadioGroup
               value={formData.propertyType}
-              onValueChange={(value) => updateFormData({ propertyType: value })}
+              onValueChange={(value) => { updateFormData({ propertyType: value }); notify(); }}
               className="grid gap-3"
             >
               {[
@@ -185,7 +187,7 @@ const HouseholdInsuranceForm = () => {
           <FormFieldWrapper label={t("forms.householdInsurance.ownershipStatus")} required>
             <RadioGroup
               value={formData.ownershipStatus}
-              onValueChange={(value) => updateFormData({ ownershipStatus: value })}
+              onValueChange={(value) => { updateFormData({ ownershipStatus: value }); notify(); }}
               className="grid grid-cols-2 gap-3"
             >
               <label htmlFor="tenant" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
@@ -218,7 +220,7 @@ const HouseholdInsuranceForm = () => {
             <FormFieldWrapper label={t("forms.householdInsurance.numberOfRooms")} htmlFor="numberOfRooms">
               <Select
                 value={formData.numberOfRooms}
-                onValueChange={(value) => updateFormData({ numberOfRooms: value })}
+                onValueChange={(value) => { updateFormData({ numberOfRooms: value }); notify(); }}
               >
                 <SelectTrigger className="h-14 text-lg">
                   <SelectValue placeholder={t("forms.householdInsurance.selectRooms")} />
@@ -240,7 +242,7 @@ const HouseholdInsuranceForm = () => {
           <FormFieldWrapper label={t("forms.healthInsurance.canton")} required>
             <Select
               value={formData.canton}
-              onValueChange={(value) => updateFormData({ canton: value })}
+              onValueChange={(value) => { updateFormData({ canton: value }); notify(); }}
             >
               <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
@@ -270,7 +272,7 @@ const HouseholdInsuranceForm = () => {
           <FormFieldWrapper label={t("forms.householdInsurance.propertyValue")} htmlFor="propertyValue" required>
             <Select
               value={formData.propertyValue}
-              onValueChange={(value) => updateFormData({ propertyValue: value })}
+              onValueChange={(value) => { updateFormData({ propertyValue: value }); notify(); }}
             >
               <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.householdInsurance.selectValue")} />
