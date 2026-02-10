@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import HealthInsuranceForm from "@/components/forms/HealthInsuranceForm";
-import { Shield, CheckCircle } from "lucide-react";
+import { Shield, CheckCircle, Clock, BadgePercent, HeartPulse } from "lucide-react";
 
 const ComparateurSante = () => {
   const { t } = useTranslation();
@@ -11,7 +11,36 @@ const ComparateurSante = () => {
       <div className="min-h-screen bg-gradient-to-b from-primary/5 to-background">
         <section className="py-8 md:py-12">
           <div className="container mx-auto px-4">
-            {/* Form First - En haut */}
+            {/* Hero intro section */}
+            <div className="max-w-3xl mx-auto text-center mb-8 md:mb-10">
+              <div className="flex gap-1 justify-center mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-accent text-xl md:text-2xl drop-shadow-sm">★</span>
+                ))}
+              </div>
+              <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-foreground tracking-tight uppercase mb-4">
+                {t("comparators.health.heroTitle", "COMPARATEUR 2026 : L'ASSURANCE MALADIE LA MOINS CHÈRE")}
+              </h1>
+              <p className="text-base md:text-lg text-muted-foreground mb-6 max-w-xl mx-auto">
+                {t("comparators.health.heroSubtitle", "Comparez et obtenez les meilleures garanties au meilleur prix pour vos proches et vous-même.")}
+              </p>
+              <div className="flex flex-col items-start gap-2.5 max-w-md mx-auto text-left">
+                <div className="flex items-center gap-2.5 text-primary font-semibold text-sm md:text-base">
+                  <Clock className="h-5 w-5 shrink-0" />
+                  {t("comparators.health.heroBullet1", "En 2 minutes")}
+                </div>
+                <div className="flex items-center gap-2.5 text-primary font-semibold text-sm md:text-base">
+                  <BadgePercent className="h-5 w-5 shrink-0" />
+                  {t("comparators.health.heroBullet2", "Plus de 2'900 CHF d'économies")}
+                </div>
+                <div className="flex items-center gap-2.5 text-primary font-semibold text-sm md:text-base">
+                  <HeartPulse className="h-5 w-5 shrink-0" />
+                  {t("comparators.health.heroBullet3", "Assurance Maladie et Complémentaire Santé")}
+                </div>
+              </div>
+            </div>
+
+            {/* Form */}
             <HealthInsuranceForm />
 
             {/* Text Content - En bas */}

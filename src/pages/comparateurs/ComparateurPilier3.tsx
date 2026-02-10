@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import Pillar3Form from "@/components/forms/Pillar3Form";
-import { PiggyBank, CheckCircle } from "lucide-react";
+import { PiggyBank, CheckCircle, Clock, BadgePercent, ShieldCheck } from "lucide-react";
 
 const ComparateurPilier3 = () => {
   const { t } = useTranslation();
@@ -11,7 +11,36 @@ const ComparateurPilier3 = () => {
       <div className="min-h-screen bg-gradient-to-b from-primary/5 to-background">
         <section className="py-8 md:py-12">
           <div className="container mx-auto px-4">
-            {/* Form First */}
+            {/* Hero intro section */}
+            <div className="max-w-3xl mx-auto text-center mb-8 md:mb-10">
+              <div className="flex gap-1 justify-center mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-accent text-xl md:text-2xl drop-shadow-sm">★</span>
+                ))}
+              </div>
+              <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-foreground tracking-tight uppercase mb-4">
+                {t("comparators.pillar3.heroTitle", "COMPARATEUR 3ÈME PILIER 2026 : TROUVEZ LA MEILLEURE OFFRE")}
+              </h1>
+              <p className="text-base md:text-lg text-muted-foreground mb-6 max-w-xl mx-auto">
+                {t("comparators.pillar3.heroSubtitle", "Comparez les meilleurs 3ème piliers et maximisez vos économies d'impôts.")}
+              </p>
+              <div className="flex flex-col items-start gap-2.5 max-w-md mx-auto text-left">
+                <div className="flex items-center gap-2.5 text-primary font-semibold text-sm md:text-base">
+                  <Clock className="h-5 w-5 shrink-0" />
+                  {t("comparators.pillar3.heroBullet1", "En 2 minutes")}
+                </div>
+                <div className="flex items-center gap-2.5 text-primary font-semibold text-sm md:text-base">
+                  <BadgePercent className="h-5 w-5 shrink-0" />
+                  {t("comparators.pillar3.heroBullet2", "Jusqu'à 2'500 CHF d'économies d'impôts")}
+                </div>
+                <div className="flex items-center gap-2.5 text-primary font-semibold text-sm md:text-base">
+                  <ShieldCheck className="h-5 w-5 shrink-0" />
+                  {t("comparators.pillar3.heroBullet3", "Prévoyance et épargne optimisées")}
+                </div>
+              </div>
+            </div>
+
+            {/* Form */}
             <Pillar3Form />
 
             {/* Text Content - En bas */}
