@@ -14,6 +14,7 @@ export function useAutoAdvance(
   nextStep: () => void,
   isStepValid: boolean,
   isLastStep: boolean,
+  onLastStepComplete?: () => void,
 ) {
   const [trigger, setTrigger] = useState(0);
   const [delayMs, setDelayMs] = useState(200);
@@ -26,12 +27,21 @@ export function useAutoAdvance(
 
   // Auto-advance when triggered and step is valid
   useEffect(() => {
-    if (trigger === 0 || !isStepValid || isLastStep) return;
+    if (trigger === 0 || !isStepValid) return;
+    if (isLastStep) {
+      if (onLastStepComplete) {
+        const timer = setTimeout(() => {
+          onLastStepComplete();
+        }, delayMs);
+        return () => clearTimeout(timer);
+      }
+      return;
+    }
     const timer = setTimeout(() => {
       nextStep();
     }, delayMs);
     return () => clearTimeout(timer);
-  }, [trigger, isStepValid, isLastStep, nextStep, delayMs]);
+  }, [trigger, isStepValid, isLastStep, nextStep, delayMs, onLastStepComplete]);
 
   const notify = useCallback(() => {
     setDelayMs(200);

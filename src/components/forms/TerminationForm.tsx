@@ -103,7 +103,7 @@ const TerminationForm = () => {
   };
 
   const canProceed = validateStep(currentStep);
-  const { notify, notifyDelayed } = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep);
+  const { notify, notifyDelayed } = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep, handleSubmit);
   const stepErrors = attemptedNext ? getStepErrors(currentStep) : {};
 
   const handleNext = () => {
