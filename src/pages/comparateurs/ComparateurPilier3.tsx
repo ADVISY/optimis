@@ -12,29 +12,29 @@ const ComparateurPilier3 = () => {
         <section className="py-8 md:py-12">
           <div className="container mx-auto px-4">
             {/* Hero intro section */}
-            <div className="max-w-3xl mx-auto text-center mb-8 md:mb-10">
-              <div className="flex gap-1 justify-center mb-4">
+            <div className="max-w-3xl mx-auto text-center mb-5 md:mb-8">
+              <div className="flex gap-1 justify-center mb-2">
                 {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-accent text-xl md:text-2xl drop-shadow-sm">★</span>
+                  <span key={i} className="text-accent text-lg md:text-xl drop-shadow-sm">★</span>
                 ))}
               </div>
-              <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-foreground tracking-tight uppercase mb-4">
+              <h1 className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black leading-tight text-foreground tracking-tight uppercase mb-2">
                 {t("comparators.pillar3.heroTitle", "COMPARATEUR 3ÈME PILIER 2026 : TROUVEZ LA MEILLEURE OFFRE")}
               </h1>
-              <p className="text-base md:text-lg text-muted-foreground mb-6 max-w-xl mx-auto">
+              <p className="text-sm md:text-base text-muted-foreground mb-3 max-w-xl mx-auto">
                 {t("comparators.pillar3.heroSubtitle", "Comparez les meilleurs 3ème piliers et maximisez vos économies d'impôts.")}
               </p>
-              <div className="flex flex-col items-start gap-2.5 max-w-md mx-auto text-left">
-                <div className="flex items-center gap-2.5 text-primary font-semibold text-sm md:text-base">
-                  <Clock className="h-5 w-5 shrink-0" />
+              <div className="flex flex-col items-start gap-1.5 max-w-md mx-auto text-left">
+                <div className="flex items-center gap-2 text-primary font-semibold text-xs md:text-sm">
+                  <Clock className="h-4 w-4 shrink-0" />
                   {t("comparators.pillar3.heroBullet1", "En 2 minutes")}
                 </div>
-                <div className="flex items-center gap-2.5 text-primary font-semibold text-sm md:text-base">
-                  <BadgePercent className="h-5 w-5 shrink-0" />
+                <div className="flex items-center gap-2 text-primary font-semibold text-xs md:text-sm">
+                  <BadgePercent className="h-4 w-4 shrink-0" />
                   {t("comparators.pillar3.heroBullet2", "Jusqu'à 2'500 CHF d'économies d'impôts")}
                 </div>
-                <div className="flex items-center gap-2.5 text-primary font-semibold text-sm md:text-base">
-                  <ShieldCheck className="h-5 w-5 shrink-0" />
+                <div className="flex items-center gap-2 text-primary font-semibold text-xs md:text-sm">
+                  <ShieldCheck className="h-4 w-4 shrink-0" />
                   {t("comparators.pillar3.heroBullet3", "Prévoyance et épargne optimisées")}
                 </div>
               </div>
