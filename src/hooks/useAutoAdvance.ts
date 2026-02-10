@@ -19,17 +19,20 @@ export function useAutoAdvance(
   const [trigger, setTrigger] = useState(0);
   const [delayMs, setDelayMs] = useState(200);
   const textTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastStepFiredRef = useRef(false);
 
   // Reset trigger when step changes (prevents auto-advance when going back)
   useEffect(() => {
     setTrigger(0);
+    lastStepFiredRef.current = false;
   }, [currentStep]);
 
   // Auto-advance when triggered and step is valid
   useEffect(() => {
     if (trigger === 0 || !isStepValid) return;
     if (isLastStep) {
-      if (onLastStepComplete) {
+      if (onLastStepComplete && !lastStepFiredRef.current) {
+        lastStepFiredRef.current = true;
         const timer = setTimeout(() => {
           onLastStepComplete();
         }, delayMs);
