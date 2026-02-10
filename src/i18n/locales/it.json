@@ -1299,7 +1299,12 @@
     "health": {
       "badge": "Comparatore Assicurazione Malattia",
       "title": "Confronta le offerte di assicurazione malattia",
-      "subtitle": "Trova la migliore copertura al miglior prezzo in pochi minuti"
+      "subtitle": "Trova la migliore copertura al miglior prezzo in pochi minuti",
+      "heroTitle": "COMPARATORE 2026: L'ASSICURAZIONE MALATTIA PIÙ CONVENIENTE",
+      "heroSubtitle": "Confronta e ottieni le migliori garanzie al miglior prezzo per te e la tua famiglia.",
+      "heroBullet1": "In 2 minuti",
+      "heroBullet2": "Oltre CHF 2'900 di risparmio",
+      "heroBullet3": "Assicurazione malattia e complementare"
     },
     "car": {
       "badge": "Comparatore Assicurazione Auto",
@@ -1329,7 +1334,12 @@
     "pillar3": {
       "badge": "Comparatore 3° Pilastro",
       "title": "Confronta le soluzioni 3° pilastro",
-      "subtitle": "Ottimizza i tuoi risparmi e riduci le tue tasse"
+      "subtitle": "Ottimizza i tuoi risparmi e riduci le tue tasse",
+      "heroTitle": "COMPARATORE 3° PILASTRO 2026: TROVA LA MIGLIORE OFFERTA",
+      "heroSubtitle": "Confronta i migliori 3° pilastri e massimizza il tuo risparmio fiscale.",
+      "heroBullet1": "In 2 minuti",
+      "heroBullet2": "Fino a CHF 2'500 di risparmio fiscale",
+      "heroBullet3": "Previdenza e risparmio ottimizzati"
     },
     "mortgage": {
       "badge": "Comparatore Ipoteca",

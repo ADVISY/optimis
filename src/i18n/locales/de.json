@@ -1302,7 +1302,12 @@
     "health": {
       "badge": "Krankenversicherungsvergleich",
       "title": "Krankenversicherungsangebote vergleichen",
-      "subtitle": "Finden Sie die beste Deckung zum besten Preis in wenigen Minuten"
+      "subtitle": "Finden Sie die beste Deckung zum besten Preis in wenigen Minuten",
+      "heroTitle": "VERGLEICH 2026: DIE GÜNSTIGSTE KRANKENKASSE FINDEN",
+      "heroSubtitle": "Vergleichen Sie und erhalten Sie den besten Schutz zum besten Preis für Sie und Ihre Familie.",
+      "heroBullet1": "In 2 Minuten",
+      "heroBullet2": "Über CHF 2'900 Ersparnis",
+      "heroBullet3": "Grundversicherung und Zusatzversicherung"
     },
     "car": {
       "badge": "Autoversicherungsvergleich",
@@ -1332,7 +1337,12 @@
     "pillar3": {
       "badge": "Säule 3a Vergleich",
       "title": "Säule 3a Lösungen vergleichen",
-      "subtitle": "Optimieren Sie Ihre Ersparnisse und reduzieren Sie Ihre Steuern"
+      "subtitle": "Optimieren Sie Ihre Ersparnisse und reduzieren Sie Ihre Steuern",
+      "heroTitle": "SÄULE 3A VERGLEICH 2026: DAS BESTE ANGEBOT FINDEN",
+      "heroSubtitle": "Vergleichen Sie die besten Säule 3a Lösungen und maximieren Sie Ihre Steuerersparnis.",
+      "heroBullet1": "In 2 Minuten",
+      "heroBullet2": "Bis zu CHF 2'500 Steuerersparnis",
+      "heroBullet3": "Optimierte Vorsorge und Sparen"
     },
     "mortgage": {
       "badge": "Hypothekenvergleich",
