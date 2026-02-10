@@ -1,12 +1,13 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 /**
- * Auto-advance to next form step when a selection-type input (radio, select, card)
- * makes the current step valid.
+ * Auto-advance to next form step when the current step becomes valid.
  *
- * Call the returned `notify()` function from onValueChange/onClick handlers
- * of radio buttons, selects, and clickable cards.
- * Do NOT call it from text inputs, checkboxes, or sliders.
+ * Returns two functions:
+ *  - `notify()`        – for instant selections (radio, select, card). Advances after 200ms.
+ *  - `notifyDelayed()` – for text inputs (name, email, phone…). Advances after 1500ms of inactivity.
+ *
+ * Do NOT call either from checkboxes or sliders.
  */
 export function useAutoAdvance(
   currentStep: number,
@@ -15,6 +16,8 @@ export function useAutoAdvance(
   isLastStep: boolean,
 ) {
   const [trigger, setTrigger] = useState(0);
+  const [delayMs, setDelayMs] = useState(200);
+  const textTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Reset trigger when step changes (prevents auto-advance when going back)
   useEffect(() => {
@@ -26,11 +29,30 @@ export function useAutoAdvance(
     if (trigger === 0 || !isStepValid || isLastStep) return;
     const timer = setTimeout(() => {
       nextStep();
-    }, 200);
+    }, delayMs);
     return () => clearTimeout(timer);
-  }, [trigger, isStepValid, isLastStep, nextStep]);
+  }, [trigger, isStepValid, isLastStep, nextStep, delayMs]);
 
-  return useCallback(() => {
+  const notify = useCallback(() => {
+    setDelayMs(200);
     setTrigger((prev) => prev + 1);
   }, []);
+
+  const notifyDelayed = useCallback(() => {
+    // Debounce: restart the 1.5s timer on every keystroke
+    if (textTimerRef.current) clearTimeout(textTimerRef.current);
+    textTimerRef.current = setTimeout(() => {
+      setDelayMs(300);
+      setTrigger((prev) => prev + 1);
+    }, 1500);
+  }, []);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (textTimerRef.current) clearTimeout(textTimerRef.current);
+    };
+  }, []);
+
+  return { notify, notifyDelayed };
 }

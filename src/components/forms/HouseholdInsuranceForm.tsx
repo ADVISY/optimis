@@ -109,7 +109,7 @@ const HouseholdInsuranceForm = () => {
   };
 
   const canProceed = validateStep(currentStep);
-  const notify = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep);
+  const { notify, notifyDelayed } = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep);
   const stepErrors = attemptedNext ? getStepErrors(currentStep) : {};
 
   const handleNext = () => {
@@ -211,7 +211,7 @@ const HouseholdInsuranceForm = () => {
                 id="livingSpace"
                 type="number"
                 value={formData.livingSpace}
-              onChange={(e) => updateFormData({ livingSpace: e.target.value })}
+              onChange={(e) => { updateFormData({ livingSpace: e.target.value }); notifyDelayed(); }}
               placeholder="80 m²"
               className="h-14 text-lg"
               />
@@ -263,7 +263,7 @@ const HouseholdInsuranceForm = () => {
               type="text"
               maxLength={4}
               value={formData.postalCode}
-              onChange={(e) => updateFormData({ postalCode: e.target.value })}
+              onChange={(e) => { updateFormData({ postalCode: e.target.value }); notifyDelayed(); }}
               placeholder="1000"
               className="h-14 text-lg"
             />
@@ -305,7 +305,7 @@ const HouseholdInsuranceForm = () => {
               <Input
                 id="firstName"
                 value={formData.firstName}
-                onChange={(e) => updateFormData({ firstName: e.target.value })}
+                onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayed(); }}
                 className="h-14 text-lg"
               />
             </FormFieldWrapper>
@@ -313,7 +313,7 @@ const HouseholdInsuranceForm = () => {
               <Input
                 id="lastName"
                 value={formData.lastName}
-                onChange={(e) => updateFormData({ lastName: e.target.value })}
+                onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayed(); }}
                 className="h-14 text-lg"
               />
             </FormFieldWrapper>
@@ -339,7 +339,7 @@ const HouseholdInsuranceForm = () => {
               inputMode="email"
               autoComplete="email"
               value={formData.email}
-              onChange={(e) => updateFormData({ email: e.target.value })}
+              onChange={(e) => { updateFormData({ email: e.target.value }); notifyDelayed(); }}
               className={cn("h-14 text-lg", stepErrors.email && "border-red-400")}
             />
           </FormFieldWrapper>
@@ -351,7 +351,7 @@ const HouseholdInsuranceForm = () => {
               inputMode="tel"
               autoComplete="tel"
               value={formData.phone}
-              onChange={(e) => updateFormData({ phone: formatSwissPhone(e.target.value) })}
+              onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); notifyDelayed(); }}
               placeholder="+41 79 123 45 67"
               className={cn("h-14 text-lg", stepErrors.phone && "border-red-400")}
             />

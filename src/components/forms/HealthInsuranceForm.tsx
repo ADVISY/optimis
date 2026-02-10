@@ -281,7 +281,7 @@ const HealthInsuranceForm = () => {
   };
 
   const canProceed = validateStep(currentStep);
-  const notify = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep);
+  const { notify, notifyDelayed } = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep);
 
   const [attemptedNext, setAttemptedNext] = useState(false);
 
@@ -838,7 +838,7 @@ const HealthInsuranceForm = () => {
             <Input
               id="firstName"
               value={formData.firstName}
-              onChange={(e) => updateFormData({ firstName: e.target.value })}
+              onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayed(); }}
               placeholder={t("forms.contact.firstNamePlaceholder", "Votre prénom")}
               className="h-8 md:h-14 text-xs md:text-lg"
             />
@@ -852,7 +852,7 @@ const HealthInsuranceForm = () => {
             <Input
               id="lastName"
               value={formData.lastName}
-              onChange={(e) => updateFormData({ lastName: e.target.value })}
+              onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayed(); }}
               placeholder={t("forms.contact.lastNamePlaceholder", "Votre nom")}
               className="h-8 md:h-14 text-xs md:text-lg"
             />
@@ -884,7 +884,7 @@ const HealthInsuranceForm = () => {
               inputMode="email"
               autoComplete="email"
               value={formData.email}
-              onChange={(e) => updateFormData({ email: e.target.value.toLowerCase() })}
+              onChange={(e) => { updateFormData({ email: e.target.value.toLowerCase() }); notifyDelayed(); }}
               placeholder="votre@email.ch"
               className={`h-8 md:h-14 text-xs md:text-lg ${stepErrors.email ? 'border-red-400 focus-visible:ring-red-400' : ''}`}
             />
@@ -902,7 +902,7 @@ const HealthInsuranceForm = () => {
               inputMode="tel"
               autoComplete="tel"
               value={formData.phone}
-              onChange={(e) => handlePhoneChange(e.target.value)}
+              onChange={(e) => { handlePhoneChange(e.target.value); notifyDelayed(); }}
               placeholder="+41 79 123 45 67"
               className={`h-8 md:h-14 text-xs md:text-lg ${stepErrors.phone ? 'border-red-400 focus-visible:ring-red-400' : ''}`}
             />
