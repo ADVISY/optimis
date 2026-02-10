@@ -1334,7 +1334,12 @@
     "health": {
       "badge": "Comparateur Assurance Maladie",
       "title": "Comparez les offres d'assurance maladie",
-      "subtitle": "Trouvez la meilleure couverture au meilleur prix en quelques minutes"
+      "subtitle": "Trouvez la meilleure couverture au meilleur prix en quelques minutes",
+      "heroTitle": "COMPARATEUR 2026 : L'ASSURANCE MALADIE LA MOINS CHÈRE",
+      "heroSubtitle": "Comparez et obtenez les meilleures garanties au meilleur prix pour vos proches et vous-même.",
+      "heroBullet1": "En 2 minutes",
+      "heroBullet2": "Plus de 2'900 CHF d'économies",
+      "heroBullet3": "Assurance Maladie et Complémentaire Santé"
     },
     "car": {
       "badge": "Comparateur Assurance Auto",
@@ -1364,7 +1369,12 @@
     "pillar3": {
       "badge": "Comparateur 3ème Pilier",
       "title": "Comparez les solutions 3ème pilier",
-      "subtitle": "Optimisez votre épargne et réduisez vos impôts"
+      "subtitle": "Optimisez votre épargne et réduisez vos impôts",
+      "heroTitle": "COMPARATEUR 3ÈME PILIER 2026 : TROUVEZ LA MEILLEURE OFFRE",
+      "heroSubtitle": "Comparez les meilleurs 3ème piliers et maximisez vos économies d'impôts.",
+      "heroBullet1": "En 2 minutes",
+      "heroBullet2": "Jusqu'à 2'500 CHF d'économies d'impôts",
+      "heroBullet3": "Prévoyance et épargne optimisées"
     },
     "mortgage": {
       "badge": "Comparateur Hypothèque",
