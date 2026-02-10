@@ -209,7 +209,7 @@ const TerminationForm = () => {
             <Input
               id="currentInsurer"
               value={formData.currentInsurer}
-              onChange={(e) => { updateFormData({ currentInsurer: e.target.value }); notify(); }}
+              onChange={(e) => updateFormData({ currentInsurer: e.target.value })}
               placeholder="CSS, Helsana, La Mobilière..."
               className="h-14 text-lg"
             />
@@ -272,7 +272,7 @@ const TerminationForm = () => {
               <Input
                 id="firstName"
                 value={formData.firstName}
-                onChange={(e) => { updateFormData({ firstName: e.target.value }); notify(); }}
+                onChange={(e) => updateFormData({ firstName: e.target.value })}
                 className="h-14 text-lg"
               />
             </FormFieldWrapper>
@@ -280,7 +280,7 @@ const TerminationForm = () => {
               <Input
                 id="lastName"
                 value={formData.lastName}
-                onChange={(e) => { updateFormData({ lastName: e.target.value }); notify(); }}
+                onChange={(e) => updateFormData({ lastName: e.target.value })}
                 className="h-14 text-lg"
               />
             </FormFieldWrapper>
@@ -290,7 +290,7 @@ const TerminationForm = () => {
             <Input
               id="address"
               value={formData.address}
-              onChange={(e) => { updateFormData({ address: e.target.value }); notify(); }}
+              onChange={(e) => updateFormData({ address: e.target.value })}
               placeholder="Rue de Lausanne 10"
               className="h-14 text-lg"
             />
@@ -301,7 +301,7 @@ const TerminationForm = () => {
               <Input
                 id="postalCode"
                 value={formData.postalCode}
-              onChange={(e) => { updateFormData({ postalCode: e.target.value }); notify(); }}
+              onChange={(e) => updateFormData({ postalCode: e.target.value })}
               placeholder="1000"
               maxLength={4}
               className="h-14 text-lg"
@@ -312,7 +312,7 @@ const TerminationForm = () => {
                 <Input
                   id="city"
                   value={formData.city}
-              onChange={(e) => { updateFormData({ city: e.target.value }); notify(); }}
+              onChange={(e) => updateFormData({ city: e.target.value })}
               placeholder="Lausanne"
               className="h-14 text-lg"
                 />
@@ -340,7 +340,7 @@ const TerminationForm = () => {
               inputMode="email"
               autoComplete="email"
               value={formData.email}
-              onChange={(e) => { updateFormData({ email: e.target.value }); notify(); }}
+              onChange={(e) => updateFormData({ email: e.target.value })}
               className={cn("h-14 text-lg", stepErrors.email && "border-red-400")}
             />
           </FormFieldWrapper>
@@ -352,7 +352,7 @@ const TerminationForm = () => {
               inputMode="tel"
               autoComplete="tel"
               value={formData.phone}
-              onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); notify(); }}
+              onChange={(e) => updateFormData({ phone: formatSwissPhone(e.target.value) })}
               placeholder="+41 79 123 45 67"
               className={cn("h-14 text-lg", stepErrors.phone && "border-red-400")}
             />

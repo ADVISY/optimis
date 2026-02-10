@@ -214,7 +214,7 @@ const ProfessionalInsuranceForm = () => {
             <Input
               id="activityType"
               value={formData.activityType}
-              onChange={(e) => { updateFormData({ activityType: e.target.value }); notify(); }}
+              onChange={(e) => updateFormData({ activityType: e.target.value })}
               placeholder={t("forms.professionalInsurance.activityPlaceholder")}
               className="h-9 md:h-14 text-xs md:text-lg"
             />
@@ -291,7 +291,7 @@ const ProfessionalInsuranceForm = () => {
               <Input
                 id="firstName"
                 value={formData.firstName}
-                onChange={(e) => { updateFormData({ firstName: e.target.value }); notify(); }}
+                onChange={(e) => updateFormData({ firstName: e.target.value })}
                 className="h-9 md:h-14 text-xs md:text-lg"
               />
             </FormFieldWrapper>
@@ -299,7 +299,7 @@ const ProfessionalInsuranceForm = () => {
               <Input
                 id="lastName"
                 value={formData.lastName}
-                onChange={(e) => { updateFormData({ lastName: e.target.value }); notify(); }}
+                onChange={(e) => updateFormData({ lastName: e.target.value })}
                 className="h-9 md:h-14 text-xs md:text-lg"
               />
             </FormFieldWrapper>
@@ -325,7 +325,7 @@ const ProfessionalInsuranceForm = () => {
               inputMode="email"
               autoComplete="email"
               value={formData.email}
-              onChange={(e) => { updateFormData({ email: e.target.value }); notify(); }}
+              onChange={(e) => updateFormData({ email: e.target.value })}
               className={cn("h-9 md:h-14 text-xs md:text-lg", stepErrors.email && "border-red-400")}
             />
           </FormFieldWrapper>
@@ -337,7 +337,7 @@ const ProfessionalInsuranceForm = () => {
               inputMode="tel"
               autoComplete="tel"
               value={formData.phone}
-              onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); notify(); }}
+              onChange={(e) => updateFormData({ phone: formatSwissPhone(e.target.value) })}
               placeholder="+41 79 123 45 67"
               className={cn("h-9 md:h-14 text-xs md:text-lg", stepErrors.phone && "border-red-400")}
             />
