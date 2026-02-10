@@ -116,7 +116,7 @@ const LegalProtectionForm = () => {
   };
 
   const canProceed = validateStep(currentStep);
-  const notify = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep);
+  const { notify, notifyDelayed } = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep);
   const stepErrors = attemptedNext ? getStepErrors(currentStep) : {};
 
   const handleNext = () => {
@@ -286,7 +286,7 @@ const LegalProtectionForm = () => {
               <Input
                 id="firstName"
                 value={formData.firstName}
-                onChange={(e) => updateFormData({ firstName: e.target.value })}
+                onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayed(); }}
                 className="h-12 md:h-14 text-base md:text-lg"
               />
             </FormFieldWrapper>
@@ -294,7 +294,7 @@ const LegalProtectionForm = () => {
               <Input
                 id="lastName"
                 value={formData.lastName}
-                onChange={(e) => updateFormData({ lastName: e.target.value })}
+                onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayed(); }}
                 className="h-12 md:h-14 text-base md:text-lg"
               />
             </FormFieldWrapper>
@@ -320,7 +320,7 @@ const LegalProtectionForm = () => {
               inputMode="email"
               autoComplete="email"
               value={formData.email}
-              onChange={(e) => updateFormData({ email: e.target.value })}
+              onChange={(e) => { updateFormData({ email: e.target.value }); notifyDelayed(); }}
               className={cn("h-12 md:h-14 text-base md:text-lg", stepErrors.email && "border-red-400")}
             />
           </FormFieldWrapper>
@@ -332,7 +332,7 @@ const LegalProtectionForm = () => {
               inputMode="tel"
               autoComplete="tel"
               value={formData.phone}
-              onChange={(e) => updateFormData({ phone: formatSwissPhone(e.target.value) })}
+              onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); notifyDelayed(); }}
               placeholder="+41 79 123 45 67"
               className={cn("h-12 md:h-14 text-base md:text-lg", stepErrors.phone && "border-red-400")}
             />
