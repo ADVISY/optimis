@@ -65,7 +65,7 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
         const year = now.getFullYear();
         const hours = now.getHours().toString().padStart(2, '0');
         const minutes = now.getMinutes().toString().padStart(2, '0');
-        return `${day}/${month}/${year} ${hours}:${minutes}`;
+        return `${year}-${month}-${day} ${hours}:${minutes}`;
       })(),
       leadId: generateLeadId(),
       pageUrl: window.location.href,
