@@ -428,8 +428,8 @@ const HealthInsuranceForm = () => {
       size="large"
     >
       {/* Required fields note */}
-      <div className="mb-4 md:mb-6 text-xs md:text-sm text-white/70 flex items-center gap-1.5">
-        <span className="text-red-300 font-bold text-sm md:text-base">*</span>
+      <div className="mb-4 md:mb-6 text-xs md:text-sm text-emerald-600 flex items-center gap-1.5">
+        <span className="text-red-500 font-bold text-sm md:text-base">*</span>
         <span>{t("forms.requiredFields", "Champs obligatoires")}</span>
       </div>
 
@@ -451,15 +451,15 @@ const HealthInsuranceForm = () => {
               }}
               className="grid grid-cols-2 gap-3"
             >
-              <label htmlFor="hasInsurance-yes" className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-white/40 hover:bg-white/50 transition-colors border border-white/50 cursor-pointer">
+              <label htmlFor="hasInsurance-yes" className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
                 <RadioGroupItem value="yes" id="hasInsurance-yes" className="h-4 w-4" />
-                <span className="text-white text-sm md:text-base">
+                <span className="text-emerald-900 text-sm md:text-base">
                   {t("common.yes")}
                 </span>
               </label>
-              <label htmlFor="hasInsurance-no" className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-white/40 hover:bg-white/50 transition-colors border border-white/50 cursor-pointer">
+              <label htmlFor="hasInsurance-no" className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
                 <RadioGroupItem value="no" id="hasInsurance-no" className="h-4 w-4" />
-                <span className="text-white text-sm md:text-base">
+                <span className="text-emerald-900 text-sm md:text-base">
                   {t("common.no")}
                 </span>
               </label>
@@ -516,9 +516,9 @@ const HealthInsuranceForm = () => {
                 { value: "coupleWithChildren", label: t("forms.healthInsurance.situations.coupleWithChildren") },
                 { value: "singleWithChildren", label: t("forms.healthInsurance.situations.singleWithChildren") },
               ].map((situation) => (
-                <label key={situation.value} htmlFor={situation.value} className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-white/40 hover:bg-white/50 transition-colors border border-white/50 cursor-pointer">
+                <label key={situation.value} htmlFor={situation.value} className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
                   <RadioGroupItem value={situation.value} id={situation.value} className="h-4 w-4" />
-                  <span className="text-white text-sm md:text-base">
+                  <span className="text-emerald-900 text-sm md:text-base">
                     {situation.label}
                   </span>
                 </label>
@@ -589,11 +589,11 @@ const HealthInsuranceForm = () => {
       <FormStep isActive={currentStep === 4}>
         <div className="space-y-3 md:space-y-6">
           {/* LAMal Model Card */}
-          <Card className="bg-white/40 border-white/50 backdrop-blur-sm">
+          <Card className="bg-emerald-50 border-emerald-200">
             <CardContent className="p-2.5 md:p-5">
-              <Label className="text-[10px] md:text-sm font-semibold text-white mb-2 md:mb-4 block">
+              <Label className="text-[10px] md:text-sm font-semibold text-emerald-900 mb-2 md:mb-4 block">
                 {t("forms.healthInsurance.lamalModel")}
-                <span className="text-red-300 ml-1">*</span>
+                <span className="text-red-500 ml-1">*</span>
               </Label>
               <RadioGroup
                 value={formData.lamalModel}
@@ -607,9 +607,9 @@ const HealthInsuranceForm = () => {
                   { value: "hmo", label: t("forms.healthInsurance.models.hmo") },
                   { value: "telemed", label: t("forms.healthInsurance.models.telemed") },
                 ].map((model) => (
-                  <label key={model.value} htmlFor={model.value} className="flex items-center space-x-1.5 md:space-x-2 p-1.5 md:p-3 rounded-lg bg-white/40 hover:bg-white/50 transition-colors cursor-pointer">
+                  <label key={model.value} htmlFor={model.value} className="flex items-center space-x-1.5 md:space-x-2 p-1.5 md:p-3 rounded-lg bg-white hover:bg-emerald-100 transition-colors cursor-pointer border border-emerald-200">
                     <RadioGroupItem value={model.value} id={model.value} className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                    <span className="text-white text-[10px] md:text-base leading-tight">
+                    <span className="text-emerald-900 text-[10px] md:text-base leading-tight">
                       {model.label}
                     </span>
                   </label>
@@ -619,14 +619,14 @@ const HealthInsuranceForm = () => {
           </Card>
 
           {/* Franchise Card */}
-          <Card className="bg-white/40 border-white/50 backdrop-blur-sm">
+          <Card className="bg-emerald-50 border-emerald-200">
             <CardContent className="p-2.5 md:p-5">
-              <Label className="text-[10px] md:text-sm font-semibold text-white mb-1 md:mb-2 block">
+              <Label className="text-[10px] md:text-sm font-semibold text-emerald-900 mb-1 md:mb-2 block">
                 {t("forms.healthInsurance.franchise")}
               </Label>
               <div className="text-center mb-2 md:mb-4">
                 <span className="text-xl md:text-3xl font-bold text-emerald-600">CHF {formData.franchise}</span>
-                <span className="text-white/70 text-[10px] md:text-sm ml-1 md:ml-2">/ an</span>
+                <span className="text-emerald-500 text-[10px] md:text-sm ml-1 md:ml-2">/ an</span>
               </div>
               <Slider
                 value={[formData.franchise]}
@@ -636,7 +636,7 @@ const HealthInsuranceForm = () => {
                 step={200}
                 className="py-2 md:py-4"
               />
-              <div className="flex justify-between text-[10px] md:text-xs text-white/70 mt-1 md:mt-2">
+              <div className="flex justify-between text-[10px] md:text-xs text-emerald-500 mt-1 md:mt-2">
                 <span>CHF 300</span>
                 <span>CHF 2500</span>
               </div>
@@ -644,7 +644,7 @@ const HealthInsuranceForm = () => {
           </Card>
 
           {/* Accident Coverage Card */}
-          <Card className="bg-white/40 border-white/50 backdrop-blur-sm">
+          <Card className="bg-emerald-50 border-emerald-200">
             <CardContent className="p-2.5 md:p-5">
               <div className="flex items-center space-x-2 md:space-x-3">
                 <Checkbox
@@ -655,7 +655,7 @@ const HealthInsuranceForm = () => {
                   }
                   className="h-4 w-4 md:h-5 md:w-5"
                 />
-                <Label htmlFor="accidentCoverage" className="cursor-pointer text-white font-medium text-xs md:text-base">
+                <Label htmlFor="accidentCoverage" className="cursor-pointer text-emerald-900 font-medium text-xs md:text-base">
                   {t("forms.healthInsurance.includeAccident")}
                 </Label>
               </div>
@@ -668,10 +668,10 @@ const HealthInsuranceForm = () => {
       <FormStep isActive={currentStep === 5}>
         <div className="space-y-3 md:space-y-6">
           <div className="text-center mb-2 md:mb-6">
-            <h3 className="text-sm md:text-lg font-semibold mb-1 md:mb-2 text-white">
+            <h3 className="text-sm md:text-lg font-semibold mb-1 md:mb-2 text-emerald-900">
               {t("forms.healthInsurance.complementaryTitle", "Assurances complémentaires")}
             </h3>
-            <p className="text-xs md:text-sm text-white/70">
+            <p className="text-xs md:text-sm text-emerald-600">
               {t("forms.healthInsurance.complementaryDescription")}
             </p>
           </div>
@@ -680,10 +680,10 @@ const HealthInsuranceForm = () => {
           <div className="grid grid-cols-3 gap-2 md:gap-4">
             {/* BASIC */}
             <Card 
-              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-white/40 backdrop-blur-sm ${
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-emerald-50 ${
                 formData.complementaryTier === "basic" 
-                  ? "ring-2 ring-white border-white/80" 
-                  : "border-white/50 hover:border-white/70"
+                  ? "ring-2 ring-emerald-500 border-emerald-400" 
+                  : "border-emerald-200 hover:border-emerald-400"
               }`}
               onClick={() => { updateFormData({ 
                 complementaryTier: formData.complementaryTier === "basic" ? null : "basic",
@@ -693,25 +693,25 @@ const HealthInsuranceForm = () => {
               }); notify(); }}
             >
               <CardContent className="p-2 md:p-4 text-center">
-                <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-white/50 mb-1 md:mb-3">
-                  <span className="text-white text-sm md:text-xl font-bold">B</span>
+                <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-emerald-100 mb-1 md:mb-3">
+                  <span className="text-emerald-700 text-sm md:text-xl font-bold">B</span>
                 </div>
-                <h4 className="font-bold text-xs md:text-lg text-white">BASIC</h4>
-                <p className="text-[10px] md:text-xs text-white/70 mb-1 md:mb-3 hidden md:block">
+                <h4 className="font-bold text-xs md:text-lg text-emerald-800">BASIC</h4>
+                <p className="text-[10px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
                   {t("forms.healthInsurance.tiers.basicDesc", "Couverture essentielle")}
                 </p>
-                <div className="text-sm md:text-2xl font-bold text-white">
-                  ~39<span className="text-[10px] md:text-sm font-normal text-white/70">/m</span>
+                <div className="text-sm md:text-2xl font-bold text-emerald-700">
+                  ~39<span className="text-[10px] md:text-sm font-normal text-emerald-500">/m</span>
                 </div>
               </CardContent>
             </Card>
 
             {/* PREMIUM */}
             <Card 
-              className={`cursor-pointer transition-all duration-200 hover:shadow-md relative bg-white/40 backdrop-blur-sm ${
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md relative bg-emerald-50 ${
                 formData.complementaryTier === "premium" 
                   ? "ring-2 ring-violet-400 border-violet-400" 
-                  : "border-white/50 hover:border-violet-400"
+                  : "border-emerald-200 hover:border-violet-400"
               }`}
               onClick={() => { updateFormData({ 
                 complementaryTier: formData.complementaryTier === "premium" ? null : "premium",
@@ -726,25 +726,25 @@ const HealthInsuranceForm = () => {
                 </span>
               </div>
               <CardContent className="p-2 md:p-4 text-center pt-3 md:pt-4">
-                <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-violet-500/30 mb-1 md:mb-3">
-                  <span className="text-violet-300 text-sm md:text-xl font-bold">P</span>
+                <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-violet-100 mb-1 md:mb-3">
+                  <span className="text-violet-600 text-sm md:text-xl font-bold">P</span>
                 </div>
-                <h4 className="font-bold text-xs md:text-lg text-violet-300">PREMIUM</h4>
-                <p className="text-[10px] md:text-xs text-white/70 mb-1 md:mb-3 hidden md:block">
+                <h4 className="font-bold text-xs md:text-lg text-violet-600">PREMIUM</h4>
+                <p className="text-[10px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
                   {t("forms.healthInsurance.tiers.premiumDesc", "Rapport qualité-prix optimal")}
                 </p>
-                <div className="text-sm md:text-2xl font-bold text-violet-300">
-                  ~91<span className="text-[10px] md:text-sm font-normal text-white/70">/m</span>
+                <div className="text-sm md:text-2xl font-bold text-violet-600">
+                  ~91<span className="text-[10px] md:text-sm font-normal text-emerald-500">/m</span>
                 </div>
               </CardContent>
             </Card>
 
             {/* DIAMOND */}
             <Card 
-              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-white/40 backdrop-blur-sm ${
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-emerald-50 ${
                 formData.complementaryTier === "diamond" 
                   ? "ring-2 ring-amber-400 border-amber-400" 
-                  : "border-white/50 hover:border-amber-400"
+                  : "border-emerald-200 hover:border-amber-400"
               }`}
               onClick={() => { updateFormData({ 
                 complementaryTier: formData.complementaryTier === "diamond" ? null : "diamond",
@@ -754,15 +754,15 @@ const HealthInsuranceForm = () => {
               }); notify(); }}
             >
               <CardContent className="p-2 md:p-4 text-center">
-                <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-amber-500/30 mb-1 md:mb-3">
-                  <span className="text-amber-300 text-sm md:text-xl font-bold">D</span>
+                <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-amber-100 mb-1 md:mb-3">
+                  <span className="text-amber-600 text-sm md:text-xl font-bold">D</span>
                 </div>
-                <h4 className="font-bold text-xs md:text-lg text-amber-300">DIAMOND</h4>
-                <p className="text-[10px] md:text-xs text-white/70 mb-1 md:mb-3 hidden md:block">
+                <h4 className="font-bold text-xs md:text-lg text-amber-600">DIAMOND</h4>
+                <p className="text-[10px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
                   {t("forms.healthInsurance.tiers.diamondDesc", "Couverture maximale")}
                 </p>
-                <div className="text-sm md:text-2xl font-bold text-amber-300">
-                  ~175<span className="text-[10px] md:text-sm font-normal text-white/70">/m</span>
+                <div className="text-sm md:text-2xl font-bold text-amber-600">
+                  ~175<span className="text-[10px] md:text-sm font-normal text-emerald-500">/m</span>
                 </div>
               </CardContent>
             </Card>
@@ -777,7 +777,7 @@ const HealthInsuranceForm = () => {
                 complementaryTier: null,
                 complementary: { dental: false, hospitalization: false, glasses: false, alternativeMedicine: false, worldwide: false }
               }); notify(); }}
-              className="text-white hover:text-white hover:bg-white/40 text-xs md:text-sm h-8 md:h-auto"
+              className="text-emerald-700 hover:text-emerald-900 hover:bg-emerald-50 text-xs md:text-sm h-8 md:h-auto"
             >
               {t("forms.healthInsurance.skipComplementary", "Passer")}
             </Button>
@@ -785,30 +785,30 @@ const HealthInsuranceForm = () => {
 
           {/* Selected tier details - hidden on mobile to save space */}
           {formData.complementaryTier && (
-            <Card className="bg-white/40 border-white/50 backdrop-blur-sm hidden md:block">
+            <Card className="bg-emerald-50 border-emerald-200 hidden md:block">
               <CardContent className="p-4">
-                <h5 className="font-semibold mb-3 text-sm text-white">
+                <h5 className="font-semibold mb-3 text-sm text-emerald-900">
                   {t("forms.healthInsurance.includedInPackage", "Inclus dans votre package")} {formData.complementaryTier.toUpperCase()}:
                 </h5>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-white/90">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-emerald-800">
                   <div className="flex items-center gap-2">
-                    <span className="text-emerald-300">✓</span>
+                    <span className="text-emerald-500">✓</span>
                     {t("forms.healthInsurance.complementary.dental")}
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-emerald-300">✓</span>
+                    <span className="text-emerald-500">✓</span>
                     {t("forms.healthInsurance.complementary.hospitalization")}
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-emerald-300">✓</span>
+                    <span className="text-emerald-500">✓</span>
                     {t("forms.healthInsurance.complementary.glasses")}
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-emerald-300">✓</span>
+                    <span className="text-emerald-500">✓</span>
                     {t("forms.healthInsurance.complementary.alternativeMedicine")}
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-emerald-300">✓</span>
+                    <span className="text-emerald-500">✓</span>
                     {t("forms.healthInsurance.complementary.worldwide")}
                   </div>
                 </div>
@@ -908,8 +908,8 @@ const HealthInsuranceForm = () => {
             />
           </FormFieldWrapper>
 
-          <div className="bg-white/40 border border-white/50 rounded-md md:rounded-xl p-2 md:p-4 text-center backdrop-blur-sm">
-            <p className="text-[10px] md:text-sm text-white/80">
+          <div className="bg-emerald-50 border border-emerald-200 rounded-md md:rounded-xl p-2 md:p-4 text-center">
+            <p className="text-[10px] md:text-sm text-emerald-700">
               🔒 {t("forms.contact.privacyNote", "Vos données sont protégées et ne seront jamais partagées.")}
             </p>
           </div>
