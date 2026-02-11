@@ -42,7 +42,7 @@ const FormNavigation = ({
         size="sm"
         onClick={onPrevious}
         disabled={currentStep === 1 || isSubmitting}
-        className="gap-1 sm:gap-2.5 w-full sm:w-auto sm:min-w-[120px] md:min-w-[140px] h-8 md:h-14 text-[10px] md:text-base font-semibold border-2 border-white/40 bg-white/10 text-white hover:bg-white/20 hover:border-white/60 transition-all duration-200 backdrop-blur-sm"
+        className="gap-1 sm:gap-2.5 w-full sm:w-auto sm:min-w-[120px] md:min-w-[140px] h-8 md:h-14 text-[10px] md:text-base font-semibold border-2 border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 hover:border-emerald-400 transition-all duration-200"
       >
         <ArrowLeft className="h-3 w-3 md:h-5 md:w-5" />
         {t("forms.previous")}
