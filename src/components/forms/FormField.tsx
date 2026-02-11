@@ -25,7 +25,7 @@ const FormFieldWrapper = ({
     <div className={cn("space-y-1 md:space-y-2", className)}>
       <Label htmlFor={htmlFor} className="text-xs md:text-sm font-medium text-emerald-900">
         {label}
-        {required && <span className="text-red-500 ml-1">*</span>}
+        {required && <span className="text-red-500 ml-1 font-bold">*</span>}
       </Label>
       
       {children}
