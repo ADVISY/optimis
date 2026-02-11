@@ -8,7 +8,7 @@ const ComparateurMenage = () => {
 
   return (
     <Layout>
-      <div className="min-h-screen bg-gradient-to-b from-primary/5 to-background">
+      <div className="min-h-screen bg-gradient-to-b from-emerald-50 to-background">
         <section className="py-8 md:py-12">
           <div className="container mx-auto px-4">
             {/* Form First */}
