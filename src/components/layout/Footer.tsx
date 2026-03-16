@@ -52,15 +52,15 @@ const Footer = () => {
                 <div className="p-2 rounded-lg bg-white/10">
                   <Mail className="h-5 w-5 text-white" />
                 </div>
-                <a href="mailto:contact@optimis.ch" className="text-base hover:text-optimis-gold transition-colors">
-                  contact@optimis.ch
+                <a href="mailto:contact@le-comparateur-optimis.ch" className="text-base hover:text-optimis-gold transition-colors">
+                  contact@le-comparateur-optimis.ch
                 </a>
               </li>
               <li className="flex items-center gap-3 text-white/80">
                 <div className="p-2 rounded-lg bg-white/10">
                   <MapPin className="h-5 w-5 text-white" />
                 </div>
-                <span className="text-base">Genève, Suisse</span>
+                <span className="text-base">Genève, Vaud, Valais, Zurich, Zug, Suisse</span>
               </li>
             </ul>
           </div>
