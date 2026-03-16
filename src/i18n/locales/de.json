@@ -2,7 +2,7 @@
   "common": {
     "home": "Startseite",
     "compareOffers": "Angebote vergleichen",
-    "getQuote": "Angebot einholen",
+    "getQuote": "Offerte einholen",
     "freeAndNoCommitment": "Kostenlos & unverbindlich",
     "readMore": "Mehr erfahren",
     "contact": "Kontakt",
@@ -572,7 +572,7 @@
     "choosePoint3": "Vergleichen Sie die Angebote mehrerer Institute",
     "requiredDocuments": "Erforderliche Dokumente",
     "documentsContent": "Für einen Hypothekenantrag müssen Sie mehrere Dokumente vorlegen.",
-    "document1": "Einkommensnachweise (3 letzte Gehaltsabrechnungen)",
+    "document1": "Einkommensnachweise (3 letzte Lohnabrechnungen)",
     "document2": "Steuererklärung der letzten 2 Jahre",
     "document3": "Betreibungsregisterauszug",
     "document4": "Dokumente zur Immobilie",
@@ -893,7 +893,7 @@
       },
       "driverBirthDate": "Geburtsdatum des Fahrers",
       "driverInfo": "Fahrerinformationen",
-      "licenseYear": "Jahr des Führerscheinerwerbs",
+      "licenseYear": "Jahr des Fahrausweiserwerbs",
       "selectLicenseYear": "Jahr auswählen",
       "accidents": "Schäden (letzte 5 Jahre)",
       "claimsLast5Years": "Schäden (letzte 5 Jahre)",
@@ -1164,7 +1164,7 @@
         "water": "Wasserschäden",
         "glass": "Glasbruch",
         "electronics": "Elektronische Geräte",
-        "bicycle": "Fahrrad",
+        "bicycle": "Velo",
         "valuables": "Wertsachen"
       }
     },
