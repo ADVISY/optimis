@@ -318,7 +318,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.incomeRange")} required>
             <Select
               value={formData.incomeRange}
-              onValueChange={(value) => { updateFormData({ incomeRange: value }); }}
+              onValueChange={(value) => { updateFormData({ incomeRange: value }); notify(); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectIncome")} />
