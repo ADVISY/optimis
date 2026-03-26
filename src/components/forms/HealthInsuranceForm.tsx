@@ -451,13 +451,13 @@ const HealthInsuranceForm = () => {
               }}
               className="grid grid-cols-2 gap-3"
             >
-              <label htmlFor="hasInsurance-yes" className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
+              <label htmlFor="hasInsurance-yes" className="flex items-center space-x-2 p-3.5 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
                 <RadioGroupItem value="yes" id="hasInsurance-yes" className="h-4 w-4" />
                 <span className="text-emerald-900 text-sm md:text-base">
                   {t("common.yes")}
                 </span>
               </label>
-              <label htmlFor="hasInsurance-no" className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
+              <label htmlFor="hasInsurance-no" className="flex items-center space-x-2 p-3.5 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
                 <RadioGroupItem value="no" id="hasInsurance-no" className="h-4 w-4" />
                 <span className="text-emerald-900 text-sm md:text-base">
                   {t("common.no")}
