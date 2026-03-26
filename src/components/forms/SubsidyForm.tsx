@@ -30,6 +30,9 @@ interface SubsidyFormData {
   householdSize: string;
   adultsCount: string;
   childrenCount: string;
+  hasCurrentInsurance: string;
+  currentInsurer: string;
+  currentDeductible: string;
   incomeRange: string;
   specialSituation: string;
   firstName: string;
@@ -52,6 +55,9 @@ const SubsidyForm = () => {
     householdSize: "",
     adultsCount: "1",
     childrenCount: "0",
+    hasCurrentInsurance: "",
+    currentInsurer: "",
+    currentDeductible: "",
     incomeRange: "",
     specialSituation: "",
     firstName: "",
@@ -90,7 +96,7 @@ const SubsidyForm = () => {
 
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 1: return formData.canton !== "";
+      case 1: return formData.canton !== "" && formData.hasCurrentInsurance !== "";
       case 2: return formData.incomeRange !== "";
       case 3: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
       case 4: return isValidEmail(formData.email) && isValidPhone(formData.phone);
@@ -244,6 +250,79 @@ const SubsidyForm = () => {
               </Select>
             </FormFieldWrapper>
           </div>
+
+          <FormFieldWrapper label={t("forms.subsidy.hasCurrentInsurance")} required>
+            <RadioGroup
+              value={formData.hasCurrentInsurance}
+              onValueChange={(value) => {
+                updateFormData({ 
+                  hasCurrentInsurance: value,
+                  currentInsurer: value === "no" ? "" : formData.currentInsurer,
+                  currentDeductible: value === "no" ? "" : formData.currentDeductible,
+                });
+                if (value === "no") notify();
+              }}
+              className="grid grid-cols-2 gap-3"
+            >
+              {[
+                { value: "yes", label: t("common.yes") },
+                { value: "no", label: t("common.no") },
+              ].map((option) => (
+                <label key={option.value} htmlFor={`insurance-${option.value}`} className={cn("flex items-center space-x-2 p-4 border-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-all", formData.hasCurrentInsurance === option.value && "border-primary bg-primary/5")}>
+                  <RadioGroupItem value={option.value} id={`insurance-${option.value}`} />
+                  <span className="flex-1 text-lg">{option.label}</span>
+                </label>
+              ))}
+            </RadioGroup>
+          </FormFieldWrapper>
+
+          {formData.hasCurrentInsurance === "yes" && (
+            <>
+              <FormFieldWrapper label={t("forms.subsidy.currentInsurer")} htmlFor="currentInsurer">
+                <Select
+                  value={formData.currentInsurer}
+                  onValueChange={(value) => { updateFormData({ currentInsurer: value }); notify(); }}
+                >
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder={t("forms.subsidy.selectInsurer")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="assura">Assura</SelectItem>
+                    <SelectItem value="css">CSS</SelectItem>
+                    <SelectItem value="groupe-mutuel">Groupe Mutuel</SelectItem>
+                    <SelectItem value="helsana">Helsana</SelectItem>
+                    <SelectItem value="sanitas">Sanitas</SelectItem>
+                    <SelectItem value="swica">Swica</SelectItem>
+                    <SelectItem value="visana">Visana</SelectItem>
+                    <SelectItem value="concordia">Concordia</SelectItem>
+                    <SelectItem value="kpt">KPT</SelectItem>
+                    <SelectItem value="atupri">Atupri</SelectItem>
+                    <SelectItem value="sympany">Sympany</SelectItem>
+                    <SelectItem value="other">{t("forms.subsidy.otherInsurer")}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormFieldWrapper>
+
+              <FormFieldWrapper label={t("forms.subsidy.currentDeductible")} htmlFor="currentDeductible">
+                <Select
+                  value={formData.currentDeductible}
+                  onValueChange={(value) => { updateFormData({ currentDeductible: value }); notify(); }}
+                >
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder={t("forms.subsidy.selectDeductible")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="300">CHF 300</SelectItem>
+                    <SelectItem value="500">CHF 500</SelectItem>
+                    <SelectItem value="1000">CHF 1'000</SelectItem>
+                    <SelectItem value="1500">CHF 1'500</SelectItem>
+                    <SelectItem value="2000">CHF 2'000</SelectItem>
+                    <SelectItem value="2500">CHF 2'500</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormFieldWrapper>
+            </>
+          )}
         </div>
       </FormStep>
 
