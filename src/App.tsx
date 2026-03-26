@@ -26,6 +26,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import ThankYou from "./pages/ThankYou";
+import MerciHypotheque from "./pages/MerciHypotheque";
 import Insurances from "./pages/Insurances";
 import NotFound from "./pages/NotFound";
 import { languages } from "./i18n";
