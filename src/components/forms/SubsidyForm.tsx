@@ -349,7 +349,7 @@ const SubsidyForm = () => {
 
       {/* Step 2: Income & Situation */}
       <FormStep isActive={currentStep === 2}>
-        <div className="space-y-4">
+        <div className="space-y-3">
           <FormFieldWrapper label={t("forms.subsidy.incomeRange")} htmlFor="incomeRange" required>
             <Input
               id="incomeRange"
@@ -358,7 +358,7 @@ const SubsidyForm = () => {
               value={formData.incomeRange}
               onChange={(e) => updateFormData({ incomeRange: e.target.value })}
               placeholder="65000"
-              className="h-14 text-lg"
+              className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
