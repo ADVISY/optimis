@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
@@ -46,6 +47,7 @@ const TOTAL_STEPS = 5;
 
 const MortgageForm = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
@@ -116,7 +118,7 @@ const MortgageForm = () => {
     await submitLead(formData as unknown as Record<string, unknown>);
     setTimeout(() => {
       setIsLoading(false);
-      setShowResults(true);
+      navigate(`/${i18n.language}/merci-hypotheque`);
     }, 3000);
   };
 

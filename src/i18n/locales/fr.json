@@ -1392,7 +1392,12 @@
     "mortgage": {
       "badge": "Comparateur Hypothèque",
       "title": "Comparez les offres hypothécaires",
-      "subtitle": "Trouvez les meilleurs taux pour votre projet immobilier"
+      "subtitle": "Trouvez les meilleurs taux pour votre projet immobilier",
+      "heroTitle": "COMPAREZ RAPIDEMENT LES TAUX HYPOTHÉCAIRES EN SUISSE",
+      "heroSubtitle": "Trouvez le meilleur taux hypothécaire et économisez des milliers de francs sur votre projet immobilier.",
+      "heroBullet1": "Comparaison en 2 minutes",
+      "heroBullet2": "Économisez jusqu'à 15'000 CHF sur votre hypothèque",
+      "heroBullet3": "Trouvez le meilleur taux parmi les banques suisses"
     },
     "professional": {
       "badge": "Assurances Professionnelles",
@@ -1446,6 +1451,17 @@
     "message": "Votre demande a été envoyée avec succès. Un de nos conseillers vous contactera dans les plus brefs délais.",
     "nextSteps": "Vous recevrez bientôt un email de confirmation avec les détails de votre demande. N'hésitez pas à préparer vos questions pour votre entretien.",
     "backHome": "Retour à l'accueil"
+  },
+  "thankYouMortgage": {
+    "title": "Merci pour votre demande hypothécaire !",
+    "message": "Votre demande de comparaison hypothécaire a été envoyée avec succès. Un de nos conseillers spécialisés vous contactera dans les plus brefs délais.",
+    "nextStepsTitle": "Prochaines étapes",
+    "step1Title": "Analyse de votre dossier",
+    "step1Desc": "Notre équipe analyse votre profil pour vous trouver les meilleurs taux hypothécaires disponibles.",
+    "step2Title": "Contact par un conseiller",
+    "step2Desc": "Un conseiller hypothécaire vous contactera sous 24h pour discuter de votre projet immobilier.",
+    "step3Title": "Offres personnalisées",
+    "step3Desc": "Vous recevrez par email une sélection des meilleures offres hypothécaires adaptées à votre situation."
   },
   "insurances": {
     "title": "Nos assurances",
