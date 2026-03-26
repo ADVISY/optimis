@@ -282,13 +282,13 @@ const MortgageForm = () => {
               onValueChange={(value) => { updateFormData({ numberOfBorrowers: value }); notify(); }}
               className="flex gap-4"
             >
-              <label htmlFor="borrowers-1" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+              <label htmlFor="borrowers-1" className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="1" id="borrowers-1" />
-                <span className="text-lg">1 {t("forms.mortgage.person")}</span>
+                <span className="text-sm md:text-lg">1 {t("forms.mortgage.person")}</span>
               </label>
-              <label htmlFor="borrowers-2" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+              <label htmlFor="borrowers-2" className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="2" id="borrowers-2" />
-                <span className="text-lg">2 {t("forms.mortgage.persons")}</span>
+                <span className="text-sm md:text-lg">2 {t("forms.mortgage.persons")}</span>
               </label>
             </RadioGroup>
           </FormFieldWrapper>
