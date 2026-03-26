@@ -435,7 +435,7 @@ const HealthInsuranceForm = () => {
 
       {/* Step 1: Current Insurance */}
       <FormStep isActive={currentStep === 1}>
-        <div className="space-y-4 md:space-y-6">
+        <div className="space-y-3 md:space-y-6">
           <FormFieldWrapper
             label={t("forms.healthInsurance.hasCurrentInsurance")}
             required
