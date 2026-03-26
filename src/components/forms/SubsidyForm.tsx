@@ -329,7 +329,7 @@ const SubsidyForm = () => {
                   value={formData.currentDeductible}
                   onValueChange={(value) => updateFormData({ currentDeductible: value })}
                 >
-                  <SelectTrigger className="h-14 text-lg">
+                  <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                     <SelectValue placeholder={t("forms.subsidy.selectDeductible")} />
                   </SelectTrigger>
                   <SelectContent>
