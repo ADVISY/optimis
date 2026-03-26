@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 interface LeadData {
   formType: string;
   language: string;
-  source: string;
+  source?: string;
   timestamp: string;
   leadId: string;
   [key: string]: unknown;
