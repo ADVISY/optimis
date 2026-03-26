@@ -321,9 +321,9 @@ const Pillar3Form = () => {
                 { value: "protection", label: t("forms.pillar3.objectives.protection") },
                 { value: "mix", label: t("forms.pillar3.objectives.mix") },
               ].map((obj) => (
-                <label key={obj.value} htmlFor={obj.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+                <label key={obj.value} htmlFor={obj.value} className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                   <RadioGroupItem value={obj.value} id={obj.value} />
-                  <span className="flex-1 text-lg">
+                  <span className="flex-1 text-sm md:text-lg">
                     {obj.label}
                   </span>
                 </label>
