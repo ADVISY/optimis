@@ -251,7 +251,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.healthInsurance.canton")} required>
             <Select
               value={formData.canton}
-              onValueChange={(value) => updateFormData({ canton: value })}
+              onValueChange={(value) => { updateFormData({ canton: value }); notify(); }}
             >
               <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
