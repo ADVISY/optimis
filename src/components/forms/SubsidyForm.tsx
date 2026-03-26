@@ -51,8 +51,6 @@ const SubsidyForm = () => {
     canton: "",
     commune: "",
     householdSize: "",
-    adultsCount: "1",
-    childrenCount: "0",
     hasCurrentInsurance: "",
     currentInsurer: "",
     currentDeductible: "",
