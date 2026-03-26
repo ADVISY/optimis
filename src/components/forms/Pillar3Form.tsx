@@ -426,7 +426,7 @@ const Pillar3Form = () => {
             <RadioGroup
               value={formData.riskProfile}
               onValueChange={(value) => { updateFormData({ riskProfile: value }); notify(); }}
-              className="grid gap-3"
+              className="grid gap-2 md:gap-3"
             >
               {[
                 { value: "conservative", label: t("forms.pillar3.risks.conservative") },
