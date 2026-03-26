@@ -402,7 +402,7 @@ const MortgageForm = () => {
               inputMode="email"
               autoComplete="email"
               value={formData.email}
-              onChange={(e) => { updateFormData({ email: e.target.value }); notifyDelayed(); }}
+              onChange={(e) => { updateFormData({ email: e.target.value }); }}
               className={cn("h-9 md:h-14 text-sm md:text-lg", stepErrors.email && "border-red-400")}
             />
           </FormFieldWrapper>
