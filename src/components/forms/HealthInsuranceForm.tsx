@@ -537,7 +537,7 @@ const HealthInsuranceForm = () => {
               placeholder="JJ/MM/AAAA"
               maxYear={new Date().getFullYear()}
               minYear={1900}
-              className="h-10 md:h-12"
+              className="h-11 md:h-12"
             />
           </FormFieldWrapper>
         </div>
