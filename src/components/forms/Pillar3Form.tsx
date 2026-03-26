@@ -258,7 +258,7 @@ const Pillar3Form = () => {
     >
       {/* Step 1: Existing Pillar 3 + Objective */}
       <FormStep isActive={currentStep === 1}>
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
           <FormFieldWrapper label={t("forms.pillar3.hasExistingPillar3")} required>
             <RadioGroup
               value={formData.hasExistingPillar3 === null ? "" : formData.hasExistingPillar3 ? "yes" : "no"}
