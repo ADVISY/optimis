@@ -7,7 +7,7 @@ import FormFieldWrapper from "@/components/forms/FormField";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import DateInput from "@/components/ui/date-input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
@@ -16,7 +16,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Download, FileText, Lock, User, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -25,8 +24,8 @@ import { useAutoAdvance } from "@/hooks/useAutoAdvance";
 import { cn } from "@/lib/utils";
 
 interface SubsidyFormData {
-  canton: string;
-  commune: string;
+  postalCode: string;
+  birthDate: Date | null;
   householdSize: string;
   hasCurrentInsurance: string;
   currentInsurer: string;
@@ -48,8 +47,8 @@ const SubsidyForm = () => {
   const { attemptedNext, markAttempted, resetAttempted, formatSwissPhone, isValidEmail, isValidPhone, getContactErrors, getIdentityErrors, showValidationToast } = useFormValidation();
 
   const initialData: SubsidyFormData = {
-    canton: "",
-    commune: "",
+    postalCode: "",
+    birthDate: null,
     householdSize: "",
     hasCurrentInsurance: "",
     currentInsurer: "",
@@ -83,8 +82,38 @@ const SubsidyForm = () => {
   });
 
   const handleSubmit = async () => {
-    await submitLead(formData as unknown as Record<string, unknown>);
-    // Simple eligibility check based on income
+    // Translate values for Google Sheets
+    const householdMap: Record<string, string> = {
+      single: t("forms.subsidy.household.single"),
+      couple: t("forms.subsidy.household.couple"),
+      coupleChildren: t("forms.subsidy.household.coupleChildren"),
+      singleChildren: t("forms.subsidy.household.singleChildren"),
+    };
+
+    const situationMap: Record<string, string> = {
+      none: t("forms.subsidy.situations.none"),
+      avs: t("forms.subsidy.situations.avs"),
+      ai: t("forms.subsidy.situations.ai"),
+      student: t("forms.subsidy.situations.student"),
+      unemployed: t("forms.subsidy.situations.unemployed"),
+    };
+
+    const hasInsuranceMap: Record<string, string> = {
+      yes: t("common.yes"),
+      no: t("common.no"),
+    };
+
+    const translatedData = {
+      ...formData,
+      householdSize: householdMap[formData.householdSize] ?? formData.householdSize,
+      specialSituation: situationMap[formData.specialSituation] ?? formData.specialSituation,
+      hasCurrentInsurance: hasInsuranceMap[formData.hasCurrentInsurance] ?? formData.hasCurrentInsurance,
+      currentDeductible: formData.currentDeductible ? `CHF ${formData.currentDeductible}` : "-",
+      currentInsurer: formData.currentInsurer || "-",
+      incomeRange: formData.incomeRange ? `CHF ${formData.incomeRange}` : "-",
+    };
+
+    await submitLead(translatedData as unknown as Record<string, unknown>);
     const incomeValue = parseInt(formData.incomeRange) || 0;
     setIsEligible(incomeValue > 0 && incomeValue <= 70000);
     setShowResults(true);
@@ -92,7 +121,7 @@ const SubsidyForm = () => {
 
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 1: return formData.canton !== "" && formData.householdSize !== "" && formData.hasCurrentInsurance !== "";
+      case 1: return formData.postalCode.replace(/\D/g, '').length >= 4 && formData.birthDate !== null && formData.householdSize !== "" && formData.hasCurrentInsurance !== "";
       case 2: return formData.incomeRange !== "";
       case 3: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
       case 4: return isValidEmail(formData.email) && isValidPhone(formData.phone);
@@ -182,33 +211,29 @@ const SubsidyForm = () => {
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
     >
-      {/* Step 1: Location & Household */}
+      {/* Step 1: Profile & Insurance */}
       <FormStep isActive={currentStep === 1}>
         <div className="space-y-4">
-          <FormFieldWrapper label={t("forms.healthInsurance.canton")} required>
-            <Select
-              value={formData.canton}
-              onValueChange={(value) => updateFormData({ canton: value })}
-            >
-              <SelectTrigger className="h-14 text-lg">
-                <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
-              </SelectTrigger>
-              <SelectContent>
-                {swissCantons.map((canton) => (
-                  <SelectItem key={canton.code} value={canton.code}>
-                    {getCantonName(canton.code, i18n.language)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          <FormFieldWrapper label={t("forms.subsidy.postalCode")} htmlFor="postalCode" required>
+            <Input
+              id="postalCode"
+              type="text"
+              inputMode="numeric"
+              value={formData.postalCode}
+              onChange={(e) => {
+                const val = e.target.value.replace(/\D/g, '').slice(0, 4);
+                updateFormData({ postalCode: val });
+              }}
+              placeholder="1000"
+              className="h-14 text-lg"
+              maxLength={4}
+            />
           </FormFieldWrapper>
 
-          <FormFieldWrapper label={t("forms.mortgage.commune")} htmlFor="commune">
-            <Input
-              id="commune"
-              value={formData.commune}
-              onChange={(e) => updateFormData({ commune: e.target.value })}
-              placeholder="Lausanne, Genève..."
+          <FormFieldWrapper label={t("forms.subsidy.birthDate")} htmlFor="birthDate" required>
+            <DateInput
+              value={formData.birthDate}
+              onChange={(date) => updateFormData({ birthDate: date })}
               className="h-14 text-lg"
             />
           </FormFieldWrapper>
@@ -242,7 +267,6 @@ const SubsidyForm = () => {
                   currentInsurer: value === "no" ? "" : formData.currentInsurer,
                   currentDeductible: value === "no" ? "" : formData.currentDeductible,
                 });
-                if (value === "no") notifyDelayed();
               }}
               className="grid grid-cols-2 gap-3"
             >

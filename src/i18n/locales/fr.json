@@ -1203,6 +1203,8 @@
     "subsidy": {
       "title": "Demande de subside",
       "description": "Vérifiez votre éligibilité aux aides cantonales",
+      "postalCode": "Code postal",
+      "birthDate": "Date de naissance",
       "householdComposition": "Combien de personnes dans votre foyer ?",
       "household": {
         "single": "Seul",
