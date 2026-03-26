@@ -1203,8 +1203,13 @@
     "subsidy": {
       "title": "Demande de subside",
       "description": "Vérifiez votre éligibilité aux aides cantonales",
-      "adultsCount": "Nombre d'adultes",
-      "childrenCount": "Nombre d'enfants",
+      "householdComposition": "Combien de personnes dans votre foyer ?",
+      "household": {
+        "single": "Seul",
+        "couple": "Couple",
+        "coupleChildren": "Couple + enfant(s)",
+        "singleChildren": "Seul + enfant(s)"
+      },
       "hasCurrentInsurance": "Avez-vous une assurance maladie actuellement ?",
       "currentInsurer": "Quelle est votre compagnie actuelle ?",
       "selectInsurer": "Sélectionnez votre assureur",
