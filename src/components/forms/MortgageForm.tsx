@@ -368,7 +368,7 @@ const MortgageForm = () => {
               <Input
                 id="firstName"
                 value={formData.firstName}
-                onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayed(); }}
+                onChange={(e) => { updateFormData({ firstName: e.target.value }); }}
                 className="h-9 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
