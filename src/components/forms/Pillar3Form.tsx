@@ -388,7 +388,7 @@ const Pillar3Form = () => {
 
       {/* Step 3: Investment */}
       <FormStep isActive={currentStep === 3}>
-        <div className="space-y-3 md:space-y-6">
+        <div className="space-y-4 md:space-y-6">
           <FormFieldWrapper label={t("forms.pillar3.savingsAmount")} required>
             <Select
               value={formData.savingsAmount}
