@@ -418,7 +418,7 @@ const MortgageForm = () => {
               inputMode="tel"
               autoComplete="tel"
               value={formData.phone}
-              onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); }}
+              onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); notifyDelayed(); }}
               placeholder="+41 79 123 45 67"
               className={cn("h-9 md:h-14 text-sm md:text-lg", stepErrors.phone && "border-red-400")}
             />
