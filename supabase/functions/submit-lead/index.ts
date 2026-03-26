@@ -28,7 +28,7 @@ serve(async (req) => {
     const webhookUrl = leadData.webhookUrl || DEFAULT_WEBHOOK_URL;
     
     // Remove technical/internal fields before sending to Zapier
-    const { webhookUrl: _, userAgent: _ua, pageUrl: _pu, source: _src, ...dataToSend } = leadData;
+    const { webhookUrl: _, userAgent: _ua, ...dataToSend } = leadData;
 
     console.log("Sending to Zapier webhook:", webhookUrl);
 
