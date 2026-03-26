@@ -265,9 +265,9 @@ const SubsidyForm = () => {
                 { value: "coupleChildren", label: t("forms.subsidy.household.coupleChildren") },
                 { value: "singleChildren", label: t("forms.subsidy.household.singleChildren") },
               ].map((option) => (
-                <label key={option.value} htmlFor={`household-${option.value}`} className={cn("flex items-center space-x-2 p-4 border-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-all", formData.householdSize === option.value && "border-primary bg-primary/5")}>
+                <label key={option.value} htmlFor={`household-${option.value}`} className={cn("flex items-center space-x-2 p-3 md:p-4 border-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-all", formData.householdSize === option.value && "border-primary bg-primary/5")}>
                   <RadioGroupItem value={option.value} id={`household-${option.value}`} />
-                  <span className="flex-1 text-lg">{option.label}</span>
+                  <span className="flex-1 text-sm md:text-lg">{option.label}</span>
                 </label>
               ))}
             </RadioGroup>
