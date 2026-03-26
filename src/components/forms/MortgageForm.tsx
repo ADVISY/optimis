@@ -193,7 +193,7 @@ const MortgageForm = () => {
     >
       {/* Step 1: Project */}
       <FormStep isActive={currentStep === 1}>
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
           <FormFieldWrapper label={t("forms.mortgage.projectType")} required>
             <RadioGroup
               value={formData.projectType}
