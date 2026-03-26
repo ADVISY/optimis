@@ -228,7 +228,7 @@ const SubsidyForm = () => {
     >
       {/* Step 1: Profile & Insurance */}
       <FormStep isActive={currentStep === 1}>
-        <div className="space-y-4">
+        <div className="space-y-3">
           <FormFieldWrapper label={t("forms.subsidy.postalCode")} htmlFor="postalCode" required>
             <Input
               id="postalCode"
@@ -240,7 +240,7 @@ const SubsidyForm = () => {
                 updateFormData({ postalCode: val });
               }}
               placeholder="1000"
-              className="h-14 text-lg"
+              className="h-11 md:h-14 text-sm md:text-lg"
               maxLength={4}
             />
           </FormFieldWrapper>
