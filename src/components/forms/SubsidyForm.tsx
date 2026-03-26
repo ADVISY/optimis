@@ -329,22 +329,16 @@ const SubsidyForm = () => {
       {/* Step 2: Income & Situation */}
       <FormStep isActive={currentStep === 2}>
         <div className="space-y-4">
-          <FormFieldWrapper label={t("forms.subsidy.incomeRange")} required>
-            <Select
+          <FormFieldWrapper label={t("forms.subsidy.incomeRange")} htmlFor="incomeRange" required>
+            <Input
+              id="incomeRange"
+              type="number"
+              inputMode="numeric"
               value={formData.incomeRange}
-              onValueChange={(value) => updateFormData({ incomeRange: value })}
-            >
-              <SelectTrigger className="h-14 text-lg">
-                <SelectValue placeholder={t("forms.subsidy.selectIncome")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="0-30000">&lt; CHF 30'000</SelectItem>
-                <SelectItem value="30000-50000">CHF 30'000 - 50'000</SelectItem>
-                <SelectItem value="50000-70000">CHF 50'000 - 70'000</SelectItem>
-                <SelectItem value="70000-100000">CHF 70'000 - 100'000</SelectItem>
-                <SelectItem value="100000+">&gt; CHF 100'000</SelectItem>
-              </SelectContent>
-            </Select>
+              onChange={(e) => { updateFormData({ incomeRange: e.target.value }); notifyDelayed(); }}
+              placeholder="65000"
+              className="h-14 text-lg"
+            />
           </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.subsidy.specialSituation")}>
