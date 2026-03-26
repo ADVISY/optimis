@@ -253,7 +253,7 @@ const MortgageForm = () => {
               value={formData.canton}
               onValueChange={(value) => { updateFormData({ canton: value }); notify(); }}
             >
-              <SelectTrigger className="h-14 text-lg">
+              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
               </SelectTrigger>
               <SelectContent>
