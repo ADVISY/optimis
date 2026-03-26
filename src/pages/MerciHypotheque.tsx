@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,15 @@ import LocalizedLink from "@/components/LocalizedLink";
 
 const MerciHypotheque = () => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    // Google Ads conversion tracking
+    if (typeof (window as any).gtag === "function") {
+      (window as any).gtag('event', 'conversion', {
+        'send_to': 'AW-16586911321/1MwiCK30gpAcENncoOU9'
+      });
+    }
+  }, []);
 
   return (
     <Layout>
