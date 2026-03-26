@@ -279,7 +279,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.numberOfBorrowers")} required>
             <RadioGroup
               value={formData.numberOfBorrowers}
-              onValueChange={(value) => updateFormData({ numberOfBorrowers: value })}
+              onValueChange={(value) => { updateFormData({ numberOfBorrowers: value }); notify(); }}
               className="flex gap-4"
             >
               <label htmlFor="borrowers-1" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
