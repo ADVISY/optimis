@@ -1168,6 +1168,8 @@
     "subsidy": {
       "title": "Richiesta sussidio",
       "description": "Verifica la tua idoneità agli aiuti cantonali",
+      "postalCode": "Codice postale",
+      "birthDate": "Data di nascita",
       "householdComposition": "Quante persone nel vostro nucleo familiare?",
       "household": {
         "single": "Solo/a",

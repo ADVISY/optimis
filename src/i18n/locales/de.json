@@ -1171,6 +1171,8 @@
     "subsidy": {
       "title": "Prämienverbilligung beantragen",
       "description": "Prüfen Sie Ihre Berechtigung für kantonale Unterstützung",
+      "postalCode": "Postleitzahl",
+      "birthDate": "Geburtsdatum",
       "householdComposition": "Wie viele Personen in Ihrem Haushalt?",
       "household": {
         "single": "Allein",
