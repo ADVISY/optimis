@@ -301,7 +301,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.professionalStatus")} required>
             <Select
               value={formData.professionalStatus}
-              onValueChange={(value) => { updateFormData({ professionalStatus: value }); notify(); }}
+              onValueChange={(value) => { updateFormData({ professionalStatus: value }); }}
             >
               <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectStatus")} />
