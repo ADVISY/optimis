@@ -306,7 +306,7 @@ const SubsidyForm = () => {
               <FormFieldWrapper label={t("forms.subsidy.currentDeductible")} htmlFor="currentDeductible">
                 <Select
                   value={formData.currentDeductible}
-                  onValueChange={(value) => { updateFormData({ currentDeductible: value }); notify(); }}
+                  onValueChange={(value) => updateFormData({ currentDeductible: value })}
                 >
                   <SelectTrigger className="h-14 text-lg">
                     <SelectValue placeholder={t("forms.subsidy.selectDeductible")} />
