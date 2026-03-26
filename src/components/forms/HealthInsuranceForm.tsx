@@ -475,7 +475,7 @@ const HealthInsuranceForm = () => {
                 value={formData.currentInsurer}
                 onValueChange={(value) => { updateFormData({ currentInsurer: value }); notify(); }}
               >
-                <SelectTrigger className="h-10 md:h-12 text-sm md:text-base">
+                <SelectTrigger className="h-11 md:h-12 text-sm md:text-base">
                   <SelectValue placeholder={t("forms.healthInsurance.selectInsurer")} />
                 </SelectTrigger>
                 <SelectContent>
