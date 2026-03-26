@@ -249,7 +249,7 @@ const SubsidyForm = () => {
             <DateInput
               value={formData.birthDate}
               onChange={(date) => updateFormData({ birthDate: date })}
-              className="h-14 text-lg"
+              className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
