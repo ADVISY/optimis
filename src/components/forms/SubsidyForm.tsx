@@ -213,39 +213,25 @@ const SubsidyForm = () => {
             />
           </FormFieldWrapper>
 
-          <div className="grid grid-cols-2 gap-4">
-            <FormFieldWrapper label={t("forms.subsidy.adultsCount")} htmlFor="adultsCount">
-              <Select
-                value={formData.adultsCount}
-                onValueChange={(value) => updateFormData({ adultsCount: value })}
-              >
-                <SelectTrigger className="h-14 text-lg">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {["1", "2", "3", "4+"].map((num) => (
-                    <SelectItem key={num} value={num}>{num}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </FormFieldWrapper>
-
-            <FormFieldWrapper label={t("forms.subsidy.childrenCount")} htmlFor="childrenCount">
-              <Select
-                value={formData.childrenCount}
-                onValueChange={(value) => updateFormData({ childrenCount: value })}
-              >
-                <SelectTrigger className="h-14 text-lg">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {["0", "1", "2", "3", "4+"].map((num) => (
-                    <SelectItem key={num} value={num}>{num}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </FormFieldWrapper>
-          </div>
+          <FormFieldWrapper label={t("forms.subsidy.householdComposition")} required>
+            <RadioGroup
+              value={formData.householdSize}
+              onValueChange={(value) => updateFormData({ householdSize: value })}
+              className="grid grid-cols-2 gap-3"
+            >
+              {[
+                { value: "single", label: t("forms.subsidy.household.single") },
+                { value: "couple", label: t("forms.subsidy.household.couple") },
+                { value: "coupleChildren", label: t("forms.subsidy.household.coupleChildren") },
+                { value: "singleChildren", label: t("forms.subsidy.household.singleChildren") },
+              ].map((option) => (
+                <label key={option.value} htmlFor={`household-${option.value}`} className={cn("flex items-center space-x-2 p-4 border-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-all", formData.householdSize === option.value && "border-primary bg-primary/5")}>
+                  <RadioGroupItem value={option.value} id={`household-${option.value}`} />
+                  <span className="flex-1 text-lg">{option.label}</span>
+                </label>
+              ))}
+            </RadioGroup>
+          </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.subsidy.hasCurrentInsurance")} required>
             <RadioGroup
