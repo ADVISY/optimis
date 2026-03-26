@@ -428,7 +428,7 @@ const HealthInsuranceForm = () => {
       size="large"
     >
       {/* Required fields note */}
-      <div className="mb-4 md:mb-6 text-xs md:text-sm text-red-500 flex items-center gap-1.5">
+      <div className="mb-3 md:mb-6 text-xs md:text-sm text-red-500 flex items-center gap-1.5">
         <span className="text-red-500 font-bold text-sm md:text-base">*</span>
         <span>{t("forms.requiredFields", "Champs obligatoires")}</span>
       </div>
