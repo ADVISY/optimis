@@ -94,7 +94,7 @@ const HealthInsuranceForm = () => {
 
   const { submitLead, isSubmitting } = useLeadSubmission({
     formType: "health-insurance",
-    webhookUrl: "https://hooks.zapier.com/hooks/catch/21326682/uebsy69/",
+    webhookUrl: "https://hooks.zapier.com/hooks/catch/21326682/unuyrh7/",
   });
 
   const {
