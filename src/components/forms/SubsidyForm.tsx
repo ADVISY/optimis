@@ -89,8 +89,8 @@ const SubsidyForm = () => {
   const handleSubmit = async () => {
     await submitLead(formData as unknown as Record<string, unknown>);
     // Simple eligibility check based on income
-    const incomeValue = formData.incomeRange;
-    setIsEligible(["0-30000", "30000-50000", "50000-70000"].includes(incomeValue));
+    const incomeValue = parseInt(formData.incomeRange) || 0;
+    setIsEligible(incomeValue > 0 && incomeValue <= 70000);
     setShowResults(true);
   };
 
