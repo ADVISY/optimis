@@ -555,7 +555,7 @@ const HealthInsuranceForm = () => {
               value={formData.canton}
               onValueChange={(value) => updateFormData({ canton: value })}
             >
-              <SelectTrigger className="h-8 md:h-11 text-xs md:text-base">
+              <SelectTrigger className="h-11 md:h-12 text-sm md:text-base">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
               </SelectTrigger>
               <SelectContent>
