@@ -336,7 +336,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.ownFundsRange")} required>
             <Select
               value={formData.ownFundsRange}
-              onValueChange={(value) => { updateFormData({ ownFundsRange: value }); notify(); }}
+              onValueChange={(value) => { updateFormData({ ownFundsRange: value }); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.mortgage.selectOwnFunds")} />
