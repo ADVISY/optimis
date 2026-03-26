@@ -516,7 +516,7 @@ const HealthInsuranceForm = () => {
                 { value: "coupleWithChildren", label: t("forms.healthInsurance.situations.coupleWithChildren") },
                 { value: "singleWithChildren", label: t("forms.healthInsurance.situations.singleWithChildren") },
               ].map((situation) => (
-                <label key={situation.value} htmlFor={situation.value} className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
+                <label key={situation.value} htmlFor={situation.value} className="flex items-center space-x-2 p-3.5 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
                   <RadioGroupItem value={situation.value} id={situation.value} className="h-4 w-4" />
                   <span className="text-emerald-900 text-sm md:text-base">
                     {situation.label}
