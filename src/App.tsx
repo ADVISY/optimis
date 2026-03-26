@@ -102,6 +102,7 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("faq", <FAQ />)}
         {createLocalizedRoutes("insurances", <Insurances />)}
         {createLocalizedRoutes("thankYou", <ThankYou />)}
+        {createLocalizedRoutes("thankYouMortgage", <MerciHypotheque />)}
         
         {/* Landing/Comparator pages - all language variants */}
         {createLocalizedRoutes("healthLanding", <ComparateurSante />)}

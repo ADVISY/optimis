@@ -34,6 +34,7 @@ export const localizedRoutes: LocalizedRoutes = {
   faq: { fr: "faqs", de: "faq", it: "faq" },
   insurances: { fr: "assurances", de: "versicherungen", it: "assicurazioni" },
   thankYou: { fr: "merci", de: "danke", it: "grazie" },
+  thankYouMortgage: { fr: "merci-hypotheque", de: "danke-hypothek", it: "grazie-ipoteca" },
   
   // Landing/Comparator pages
   healthLanding: { fr: "assurance-maladie-landing", de: "krankenversicherung-vergleich", it: "confronto-assicurazione-malattia" },
