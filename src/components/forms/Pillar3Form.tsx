@@ -289,7 +289,7 @@ const Pillar3Form = () => {
                 value={formData.existingProvider}
                 onValueChange={(value) => { updateFormData({ existingProvider: value }); notify(); }}
               >
-                <SelectTrigger className="h-12 md:h-14 text-base md:text-lg">
+                <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                   <SelectValue placeholder={t("forms.pillar3.selectProvider")} />
                 </SelectTrigger>
                 <SelectContent>
