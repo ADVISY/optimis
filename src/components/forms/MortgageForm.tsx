@@ -205,9 +205,9 @@ const MortgageForm = () => {
                 { value: "renewal", label: t("forms.mortgage.projects.renewal") },
                 { value: "refinancing", label: t("forms.mortgage.projects.refinancing") },
               ].map((proj) => (
-                <label key={proj.value} htmlFor={proj.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+                <label key={proj.value} htmlFor={proj.value} className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                   <RadioGroupItem value={proj.value} id={proj.value} />
-                  <span className="flex-1 text-lg">
+                  <span className="flex-1 text-sm md:text-lg">
                     {proj.label}
                   </span>
                 </label>
