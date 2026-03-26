@@ -103,13 +103,28 @@ const SubsidyForm = () => {
       no: t("common.no"),
     };
 
+    const insurerMap: Record<string, string> = {
+      assura: "Assura",
+      css: "CSS",
+      "groupe-mutuel": "Groupe Mutuel",
+      helsana: "Helsana",
+      sanitas: "Sanitas",
+      swica: "Swica",
+      visana: "Visana",
+      concordia: "Concordia",
+      kpt: "KPT",
+      atupri: "Atupri",
+      sympany: "Sympany",
+      other: t("forms.subsidy.otherInsurer"),
+    };
+
     const translatedData = {
       ...formData,
       householdSize: householdMap[formData.householdSize] ?? formData.householdSize,
       specialSituation: situationMap[formData.specialSituation] ?? formData.specialSituation,
       hasCurrentInsurance: hasInsuranceMap[formData.hasCurrentInsurance] ?? formData.hasCurrentInsurance,
       currentDeductible: formData.currentDeductible ? `CHF ${formData.currentDeductible}` : "-",
-      currentInsurer: formData.currentInsurer || "-",
+      currentInsurer: (insurerMap[formData.currentInsurer] ?? formData.currentInsurer) || "-",
       incomeRange: formData.incomeRange ? `CHF ${formData.incomeRange}` : "-",
     };
 
