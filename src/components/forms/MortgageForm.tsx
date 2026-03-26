@@ -197,7 +197,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.projectType")} required>
             <RadioGroup
               value={formData.projectType}
-              onValueChange={(value) => { updateFormData({ projectType: value }); notify(); }}
+              onValueChange={(value) => { updateFormData({ projectType: value }); }}
               className="grid gap-3"
             >
               {[
@@ -218,7 +218,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.propertyType")} required>
             <Select
               value={formData.propertyType}
-              onValueChange={(value) => { updateFormData({ propertyType: value }); notify(); }}
+              onValueChange={(value) => { updateFormData({ propertyType: value }); }}
             >
               <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.mortgage.selectPropertyType")} />
@@ -242,7 +242,7 @@ const MortgageForm = () => {
               id="propertyValue"
               type="text"
               value={formData.propertyValue}
-              onChange={(e) => { updateFormData({ propertyValue: e.target.value }); notifyDelayed(); }}
+              onChange={(e) => { updateFormData({ propertyValue: e.target.value }); }}
               placeholder="CHF 800'000"
               className="h-14 text-lg"
             />
@@ -270,7 +270,7 @@ const MortgageForm = () => {
             <Input
               id="commune"
               value={formData.commune}
-              onChange={(e) => { updateFormData({ commune: e.target.value }); notifyDelayed(); }}
+              onChange={(e) => { updateFormData({ commune: e.target.value }); }}
               placeholder="Lausanne, Genève..."
               className="h-14 text-lg"
             />
@@ -301,7 +301,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.professionalStatus")} required>
             <Select
               value={formData.professionalStatus}
-              onValueChange={(value) => { updateFormData({ professionalStatus: value }); notify(); }}
+              onValueChange={(value) => { updateFormData({ professionalStatus: value }); }}
             >
               <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectStatus")} />
@@ -318,7 +318,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.incomeRange")} required>
             <Select
               value={formData.incomeRange}
-              onValueChange={(value) => { updateFormData({ incomeRange: value }); notify(); }}
+              onValueChange={(value) => { updateFormData({ incomeRange: value }); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectIncome")} />
@@ -336,7 +336,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.ownFundsRange")} required>
             <Select
               value={formData.ownFundsRange}
-              onValueChange={(value) => { updateFormData({ ownFundsRange: value }); notify(); }}
+              onValueChange={(value) => { updateFormData({ ownFundsRange: value }); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.mortgage.selectOwnFunds")} />
@@ -368,7 +368,7 @@ const MortgageForm = () => {
               <Input
                 id="firstName"
                 value={formData.firstName}
-                onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayed(); }}
+                onChange={(e) => { updateFormData({ firstName: e.target.value }); }}
                 className="h-9 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
@@ -376,7 +376,7 @@ const MortgageForm = () => {
               <Input
                 id="lastName"
                 value={formData.lastName}
-                onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayed(); }}
+                onChange={(e) => { updateFormData({ lastName: e.target.value }); }}
                 className="h-9 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
@@ -402,7 +402,7 @@ const MortgageForm = () => {
               inputMode="email"
               autoComplete="email"
               value={formData.email}
-              onChange={(e) => { updateFormData({ email: e.target.value }); notifyDelayed(); }}
+              onChange={(e) => { updateFormData({ email: e.target.value }); }}
               className={cn("h-9 md:h-14 text-sm md:text-lg", stepErrors.email && "border-red-400")}
             />
           </FormFieldWrapper>
@@ -414,7 +414,7 @@ const MortgageForm = () => {
               inputMode="tel"
               autoComplete="tel"
               value={formData.phone}
-              onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); notifyDelayed(); }}
+              onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); }}
               placeholder="+41 79 123 45 67"
               className={cn("h-9 md:h-14 text-sm md:text-lg", stepErrors.phone && "border-red-400")}
             />
