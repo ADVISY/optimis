@@ -124,7 +124,7 @@ const SubsidyForm = () => {
       specialSituation: situationMap[formData.specialSituation] ?? formData.specialSituation,
       hasCurrentInsurance: hasInsuranceMap[formData.hasCurrentInsurance] ?? formData.hasCurrentInsurance,
       currentDeductible: formData.currentDeductible ? `CHF ${formData.currentDeductible}` : "-",
-      currentInsurer: insurerMap[formData.currentInsurer] ?? formData.currentInsurer || "-",
+      currentInsurer: (insurerMap[formData.currentInsurer] ?? formData.currentInsurer) || "-",
       incomeRange: formData.incomeRange ? `CHF ${formData.incomeRange}` : "-",
     };
 
