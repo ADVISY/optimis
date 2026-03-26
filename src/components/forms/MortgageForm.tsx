@@ -118,7 +118,7 @@ const MortgageForm = () => {
     await submitLead(formData as unknown as Record<string, unknown>);
     setTimeout(() => {
       setIsLoading(false);
-      setShowResults(true);
+      navigate(`/${i18n.language}/merci-hypotheque`);
     }, 3000);
   };
 
