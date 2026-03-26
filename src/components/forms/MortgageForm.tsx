@@ -244,7 +244,7 @@ const MortgageForm = () => {
               value={formData.propertyValue}
               onChange={(e) => { updateFormData({ propertyValue: e.target.value }); }}
               placeholder="CHF 800'000"
-              className="h-14 text-lg"
+              className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
