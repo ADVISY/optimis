@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 interface LeadData {
   formType: string;
   language: string;
-  source?: string;
+  source: string;
   timestamp: string;
   leadId: string;
   [key: string]: unknown;
@@ -94,6 +94,8 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
       ...normalizedFormData,
       formType,
       language: i18n.language,
+      source: document.referrer || "direct",
+      pageUrl: window.location.href,
       timestamp: (() => {
         const now = new Date();
         const day = now.getDate().toString().padStart(2, '0');
