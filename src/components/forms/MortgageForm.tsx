@@ -197,7 +197,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.projectType")} required>
             <RadioGroup
               value={formData.projectType}
-              onValueChange={(value) => { updateFormData({ projectType: value }); }}
+              onValueChange={(value) => { updateFormData({ projectType: value }); notify(); }}
               className="grid gap-3"
             >
               {[
