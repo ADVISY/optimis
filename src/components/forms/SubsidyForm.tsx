@@ -30,6 +30,9 @@ interface SubsidyFormData {
   householdSize: string;
   adultsCount: string;
   childrenCount: string;
+  hasCurrentInsurance: string;
+  currentInsurer: string;
+  currentDeductible: string;
   incomeRange: string;
   specialSituation: string;
   firstName: string;
