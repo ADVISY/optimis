@@ -272,7 +272,7 @@ const MortgageForm = () => {
               value={formData.commune}
               onChange={(e) => { updateFormData({ commune: e.target.value }); }}
               placeholder="Lausanne, Genève..."
-              className="h-14 text-lg"
+              className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
