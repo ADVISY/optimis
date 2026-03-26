@@ -1171,8 +1171,13 @@
     "subsidy": {
       "title": "Prämienverbilligung beantragen",
       "description": "Prüfen Sie Ihre Berechtigung für kantonale Unterstützung",
-      "adultsCount": "Anzahl Erwachsene",
-      "childrenCount": "Anzahl Kinder",
+      "householdComposition": "Wie viele Personen in Ihrem Haushalt?",
+      "household": {
+        "single": "Allein",
+        "couple": "Paar",
+        "coupleChildren": "Paar + Kind(er)",
+        "singleChildren": "Allein + Kind(er)"
+      },
       "hasCurrentInsurance": "Haben Sie derzeit eine Krankenversicherung?",
       "currentInsurer": "Welche Versicherung haben Sie aktuell?",
       "selectInsurer": "Versicherer auswählen",

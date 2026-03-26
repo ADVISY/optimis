@@ -1168,8 +1168,13 @@
     "subsidy": {
       "title": "Richiesta sussidio",
       "description": "Verifica la tua idoneità agli aiuti cantonali",
-      "adultsCount": "Numero di adulti",
-      "childrenCount": "Numero di bambini",
+      "householdComposition": "Quante persone nel vostro nucleo familiare?",
+      "household": {
+        "single": "Solo/a",
+        "couple": "Coppia",
+        "coupleChildren": "Coppia + figli",
+        "singleChildren": "Solo/a + figli"
+      },
       "hasCurrentInsurance": "Hai attualmente un'assicurazione malattia?",
       "currentInsurer": "Qual è la tua compagnia attuale?",
       "selectInsurer": "Seleziona il tuo assicuratore",
