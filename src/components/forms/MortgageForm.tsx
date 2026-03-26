@@ -47,6 +47,7 @@ const TOTAL_STEPS = 5;
 
 const MortgageForm = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
