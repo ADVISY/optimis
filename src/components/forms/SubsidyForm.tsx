@@ -335,7 +335,7 @@ const SubsidyForm = () => {
               type="number"
               inputMode="numeric"
               value={formData.incomeRange}
-              onChange={(e) => { updateFormData({ incomeRange: e.target.value }); notifyDelayed(); }}
+              onChange={(e) => updateFormData({ incomeRange: e.target.value })}
               placeholder="65000"
               className="h-14 text-lg"
             />
