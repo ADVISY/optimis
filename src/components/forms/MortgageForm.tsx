@@ -218,7 +218,7 @@ const MortgageForm = () => {
           <FormFieldWrapper label={t("forms.mortgage.propertyType")} required>
             <Select
               value={formData.propertyType}
-              onValueChange={(value) => { updateFormData({ propertyType: value }); }}
+              onValueChange={(value) => { updateFormData({ propertyType: value }); notify(); }}
             >
               <SelectTrigger className="h-14 text-lg">
                 <SelectValue placeholder={t("forms.mortgage.selectPropertyType")} />
