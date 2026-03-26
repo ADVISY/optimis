@@ -500,7 +500,7 @@ const HealthInsuranceForm = () => {
 
       {/* Step 2: Family Situation & Birth Date */}
       <FormStep isActive={currentStep === 2}>
-        <div className="space-y-4 md:space-y-6">
+        <div className="space-y-3 md:space-y-6">
           <FormFieldWrapper
             label={t("forms.healthInsurance.familySituation")}
             required
