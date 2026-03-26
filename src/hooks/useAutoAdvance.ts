@@ -47,7 +47,7 @@ export function useAutoAdvance(
   }, [trigger, isStepValid, isLastStep, nextStep, delayMs, onLastStepComplete]);
 
   const notify = useCallback(() => {
-    setDelayMs(200);
+    setDelayMs(400);
     setTrigger((prev) => prev + 1);
   }, []);
 
