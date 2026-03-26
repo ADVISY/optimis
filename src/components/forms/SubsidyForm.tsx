@@ -96,7 +96,7 @@ const SubsidyForm = () => {
 
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 1: return formData.canton !== "";
+      case 1: return formData.canton !== "" && formData.hasCurrentInsurance !== "";
       case 2: return formData.incomeRange !== "";
       case 3: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
       case 4: return isValidEmail(formData.email) && isValidPhone(formData.phone);
