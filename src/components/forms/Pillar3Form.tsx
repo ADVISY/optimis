@@ -480,12 +480,12 @@ const Pillar3Form = () => {
 
       {/* Step 5: Contact */}
       <FormStep isActive={currentStep === 5}>
-        <div className="space-y-6">
-          <div className="text-center mb-4 md:mb-6">
-            <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-3 md:mb-4">
+        <div className="space-y-4 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
               <Phone className="h-6 w-6 md:h-8 md:w-8 text-primary" />
             </div>
-            <h3 className="text-lg md:text-xl font-semibold">{t("forms.contact.contactStepTitle")}</h3>
+            <h3 className="text-base md:text-xl font-semibold">{t("forms.contact.contactStepTitle")}</h3>
             <p className="text-sm md:text-base text-muted-foreground">{t("forms.contact.contactStepDescription")}</p>
           </div>
 
@@ -497,7 +497,7 @@ const Pillar3Form = () => {
               autoComplete="email"
               value={formData.email}
               onChange={(e) => { updateFormData({ email: e.target.value }); notifyDelayed(); }}
-              className={cn("h-12 md:h-14 text-base md:text-lg", stepErrors.email && "border-red-400")}
+              className={cn("h-11 md:h-14 text-sm md:text-lg", stepErrors.email && "border-red-400")}
             />
           </FormFieldWrapper>
 
@@ -510,7 +510,7 @@ const Pillar3Form = () => {
               value={formData.phone}
               onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); notifyDelayed(); }}
               placeholder="+41 79 123 45 67"
-              className={cn("h-12 md:h-14 text-base md:text-lg", stepErrors.phone && "border-red-400")}
+              className={cn("h-11 md:h-14 text-sm md:text-lg", stepErrors.phone && "border-red-400")}
             />
           </FormFieldWrapper>
 

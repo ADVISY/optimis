@@ -421,13 +421,13 @@ const SubsidyForm = () => {
 
       {/* Step 4: Contact */}
       <FormStep isActive={currentStep === 4}>
-        <div className="space-y-6">
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-              <Phone className="h-8 w-8 text-primary" />
+        <div className="space-y-4 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
+              <Phone className="h-6 w-6 md:h-8 md:w-8 text-primary" />
             </div>
-            <h3 className="text-xl font-semibold">{t("forms.contact.contactStepTitle")}</h3>
-            <p className="text-muted-foreground">{t("forms.contact.contactStepDescription")}</p>
+            <h3 className="text-base md:text-xl font-semibold">{t("forms.contact.contactStepTitle")}</h3>
+            <p className="text-sm md:text-base text-muted-foreground">{t("forms.contact.contactStepDescription")}</p>
           </div>
 
           <FormFieldWrapper label={t("forms.contact.email")} htmlFor="email" required error={stepErrors.email}>
@@ -438,7 +438,7 @@ const SubsidyForm = () => {
               autoComplete="email"
               value={formData.email}
               onChange={(e) => { updateFormData({ email: e.target.value }); notifyDelayed(); }}
-              className={cn("h-14 text-lg", stepErrors.email && "border-red-400")}
+              className={cn("h-11 md:h-14 text-sm md:text-lg", stepErrors.email && "border-red-400")}
             />
           </FormFieldWrapper>
 
@@ -451,13 +451,13 @@ const SubsidyForm = () => {
               value={formData.phone}
               onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); notifyDelayed(); }}
               placeholder="+41 79 123 45 67"
-              className={cn("h-14 text-lg", stepErrors.phone && "border-red-400")}
+              className={cn("h-11 md:h-14 text-sm md:text-lg", stepErrors.phone && "border-red-400")}
             />
           </FormFieldWrapper>
 
-          <div className="flex items-center gap-2 p-4 bg-muted/50 rounded-lg">
-            <Lock className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-            <p className="text-sm text-muted-foreground">{t("forms.contact.privacyNote")}</p>
+          <div className="flex items-center gap-2 p-3 md:p-4 bg-muted/50 rounded-lg">
+            <Lock className="h-4 w-4 md:h-5 md:w-5 text-muted-foreground flex-shrink-0" />
+            <p className="text-xs md:text-sm text-muted-foreground">{t("forms.contact.privacyNote")}</p>
           </div>
         </div>
       </FormStep>

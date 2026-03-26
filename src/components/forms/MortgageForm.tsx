@@ -303,7 +303,7 @@ const MortgageForm = () => {
               value={formData.professionalStatus}
               onValueChange={(value) => { updateFormData({ professionalStatus: value }); notify(); }}
             >
-              <SelectTrigger className="h-14 text-lg">
+              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectStatus")} />
               </SelectTrigger>
               <SelectContent>
