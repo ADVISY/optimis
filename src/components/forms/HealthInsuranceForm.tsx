@@ -28,6 +28,7 @@ import { Button } from "@/components/ui/button";
 import DateInput from "@/components/ui/date-input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
+import { User, Phone } from "lucide-react";
 
 interface HealthInsuranceFormData {
   hasCurrentInsurance: boolean | null;
@@ -428,14 +429,14 @@ const HealthInsuranceForm = () => {
       size="large"
     >
       {/* Required fields note */}
-      <div className="mb-4 md:mb-6 text-xs md:text-sm text-red-500 flex items-center gap-1.5">
+      <div className="mb-3 md:mb-6 text-xs md:text-sm text-red-500 flex items-center gap-1.5">
         <span className="text-red-500 font-bold text-sm md:text-base">*</span>
         <span>{t("forms.requiredFields", "Champs obligatoires")}</span>
       </div>
 
       {/* Step 1: Current Insurance */}
       <FormStep isActive={currentStep === 1}>
-        <div className="space-y-4 md:space-y-6">
+        <div className="space-y-3 md:space-y-6">
           <FormFieldWrapper
             label={t("forms.healthInsurance.hasCurrentInsurance")}
             required
@@ -451,13 +452,13 @@ const HealthInsuranceForm = () => {
               }}
               className="grid grid-cols-2 gap-3"
             >
-              <label htmlFor="hasInsurance-yes" className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
+              <label htmlFor="hasInsurance-yes" className="flex items-center space-x-2 p-3.5 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
                 <RadioGroupItem value="yes" id="hasInsurance-yes" className="h-4 w-4" />
                 <span className="text-emerald-900 text-sm md:text-base">
                   {t("common.yes")}
                 </span>
               </label>
-              <label htmlFor="hasInsurance-no" className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
+              <label htmlFor="hasInsurance-no" className="flex items-center space-x-2 p-3.5 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
                 <RadioGroupItem value="no" id="hasInsurance-no" className="h-4 w-4" />
                 <span className="text-emerald-900 text-sm md:text-base">
                   {t("common.no")}
@@ -475,7 +476,7 @@ const HealthInsuranceForm = () => {
                 value={formData.currentInsurer}
                 onValueChange={(value) => { updateFormData({ currentInsurer: value }); notify(); }}
               >
-                <SelectTrigger className="h-10 md:h-12 text-sm md:text-base">
+                <SelectTrigger className="h-11 md:h-12 text-sm md:text-base">
                   <SelectValue placeholder={t("forms.healthInsurance.selectInsurer")} />
                 </SelectTrigger>
                 <SelectContent>
@@ -500,7 +501,7 @@ const HealthInsuranceForm = () => {
 
       {/* Step 2: Family Situation & Birth Date */}
       <FormStep isActive={currentStep === 2}>
-        <div className="space-y-4 md:space-y-6">
+        <div className="space-y-3 md:space-y-6">
           <FormFieldWrapper
             label={t("forms.healthInsurance.familySituation")}
             required
@@ -516,7 +517,7 @@ const HealthInsuranceForm = () => {
                 { value: "coupleWithChildren", label: t("forms.healthInsurance.situations.coupleWithChildren") },
                 { value: "singleWithChildren", label: t("forms.healthInsurance.situations.singleWithChildren") },
               ].map((situation) => (
-                <label key={situation.value} htmlFor={situation.value} className="flex items-center space-x-2 p-3 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
+                <label key={situation.value} htmlFor={situation.value} className="flex items-center space-x-2 p-3.5 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
                   <RadioGroupItem value={situation.value} id={situation.value} className="h-4 w-4" />
                   <span className="text-emerald-900 text-sm md:text-base">
                     {situation.label}
@@ -537,7 +538,7 @@ const HealthInsuranceForm = () => {
               placeholder="JJ/MM/AAAA"
               maxYear={new Date().getFullYear()}
               minYear={1900}
-              className="h-10 md:h-12"
+              className="h-11 md:h-12"
             />
           </FormFieldWrapper>
         </div>
@@ -545,7 +546,7 @@ const HealthInsuranceForm = () => {
 
       {/* Step 3: Location */}
       <FormStep isActive={currentStep === 3}>
-        <div className="space-y-2 md:space-y-6">
+        <div className="space-y-3 md:space-y-6">
           <FormFieldWrapper
             label={t("forms.healthInsurance.canton")}
             htmlFor="canton"
@@ -555,7 +556,7 @@ const HealthInsuranceForm = () => {
               value={formData.canton}
               onValueChange={(value) => updateFormData({ canton: value })}
             >
-              <SelectTrigger className="h-8 md:h-11 text-xs md:text-base">
+              <SelectTrigger className="h-11 md:h-12 text-sm md:text-base">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
               </SelectTrigger>
               <SelectContent>
@@ -579,7 +580,7 @@ const HealthInsuranceForm = () => {
               value={formData.postalCode}
               onChange={(e) => { updateFormData({ postalCode: e.target.value }); notify(); }}
               placeholder="1000"
-              className="h-8 md:h-11 text-xs md:text-base"
+              className="h-11 md:h-12 text-sm md:text-base"
             />
           </FormFieldWrapper>
         </div>
@@ -607,9 +608,9 @@ const HealthInsuranceForm = () => {
                   { value: "hmo", label: t("forms.healthInsurance.models.hmo") },
                   { value: "telemed", label: t("forms.healthInsurance.models.telemed") },
                 ].map((model) => (
-                  <label key={model.value} htmlFor={model.value} className="flex items-center space-x-1.5 md:space-x-2 p-1.5 md:p-3 rounded-lg bg-white hover:bg-emerald-100 transition-colors cursor-pointer border border-emerald-200">
+                  <label key={model.value} htmlFor={model.value} className="flex items-center space-x-1.5 md:space-x-2 p-2 md:p-3 rounded-lg bg-white hover:bg-emerald-100 transition-colors cursor-pointer border border-emerald-200">
                     <RadioGroupItem value={model.value} id={model.value} className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                    <span className="text-emerald-900 text-[10px] md:text-base leading-tight">
+                    <span className="text-emerald-900 text-xs md:text-base leading-tight">
                       {model.label}
                     </span>
                   </label>
@@ -820,54 +821,62 @@ const HealthInsuranceForm = () => {
 
       {/* Step 6: Name */}
       <FormStep isActive={currentStep === 6}>
-        <div className="space-y-2 md:space-y-6">
-          <div className="text-center mb-2 md:mb-6">
-            <h3 className="text-xs md:text-lg font-semibold mb-0.5 md:mb-2">
+        <div className="space-y-3 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <div className="inline-flex items-center justify-center w-11 h-11 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
+              <User className="h-5 w-5 md:h-8 md:w-8 text-primary" />
+            </div>
+            <h3 className="text-sm md:text-lg font-semibold mb-0.5 md:mb-2">
               {t("forms.contact.almostDone", "Presque terminé !")}
             </h3>
-            <p className="text-[10px] md:text-sm text-muted-foreground">
+            <p className="text-xs md:text-sm text-muted-foreground">
               {t("forms.contact.nameStepDescription", "Comment pouvons-nous vous appeler ?")}
             </p>
           </div>
           
-          <FormFieldWrapper
-            label={t("forms.contact.firstName")}
-            htmlFor="firstName"
-            required
-          >
-            <Input
-              id="firstName"
-              value={formData.firstName}
-              onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayed(); }}
-              placeholder={t("forms.contact.firstNamePlaceholder", "Votre prénom")}
-              className="h-8 md:h-14 text-xs md:text-lg"
-            />
-          </FormFieldWrapper>
+          <div className="grid grid-cols-2 gap-3 md:gap-4">
+            <FormFieldWrapper
+              label={t("forms.contact.firstName")}
+              htmlFor="firstName"
+              required
+            >
+              <Input
+                id="firstName"
+                value={formData.firstName}
+                onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayed(); }}
+                placeholder={t("forms.contact.firstNamePlaceholder", "Votre prénom")}
+                className="h-11 md:h-14 text-sm md:text-lg"
+              />
+            </FormFieldWrapper>
 
-          <FormFieldWrapper
-            label={t("forms.contact.lastName")}
-            htmlFor="lastName"
-            required
-          >
-            <Input
-              id="lastName"
-              value={formData.lastName}
-              onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayed(); }}
-              placeholder={t("forms.contact.lastNamePlaceholder", "Votre nom")}
-              className="h-8 md:h-14 text-xs md:text-lg"
-            />
-          </FormFieldWrapper>
+            <FormFieldWrapper
+              label={t("forms.contact.lastName")}
+              htmlFor="lastName"
+              required
+            >
+              <Input
+                id="lastName"
+                value={formData.lastName}
+                onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayed(); }}
+                placeholder={t("forms.contact.lastNamePlaceholder", "Votre nom")}
+                className="h-11 md:h-14 text-sm md:text-lg"
+              />
+            </FormFieldWrapper>
+          </div>
         </div>
       </FormStep>
 
       {/* Step 7: Contact Details */}
       <FormStep isActive={currentStep === 7}>
-        <div className="space-y-2 md:space-y-6">
-          <div className="text-center mb-2 md:mb-6">
-            <h3 className="text-xs md:text-lg font-semibold mb-0.5 md:mb-2">
+        <div className="space-y-3 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <div className="inline-flex items-center justify-center w-11 h-11 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
+              <Phone className="h-5 w-5 md:h-8 md:w-8 text-primary" />
+            </div>
+            <h3 className="text-sm md:text-lg font-semibold mb-0.5 md:mb-2">
               {t("forms.contact.contactStepTitle", "Où pouvons-nous vous joindre ?")}
             </h3>
-            <p className="text-[10px] md:text-sm text-muted-foreground">
+            <p className="text-xs md:text-sm text-muted-foreground">
               {t("forms.contact.contactStepDescription", "Un conseiller vous contactera pour vous présenter les meilleures offres.")}
             </p>
           </div>
@@ -886,7 +895,7 @@ const HealthInsuranceForm = () => {
               value={formData.email}
               onChange={(e) => { updateFormData({ email: e.target.value.toLowerCase() }); notifyDelayed(); }}
               placeholder="votre@email.ch"
-              className={`h-8 md:h-14 text-xs md:text-lg ${stepErrors.email ? 'border-red-400 focus-visible:ring-red-400' : ''}`}
+              className={`h-11 md:h-14 text-sm md:text-lg ${stepErrors.email ? 'border-red-400 focus-visible:ring-red-400' : ''}`}
             />
           </FormFieldWrapper>
 
@@ -904,12 +913,12 @@ const HealthInsuranceForm = () => {
               value={formData.phone}
               onChange={(e) => { handlePhoneChange(e.target.value); notifyDelayed(); }}
               placeholder="+41 79 123 45 67"
-              className={`h-8 md:h-14 text-xs md:text-lg ${stepErrors.phone ? 'border-red-400 focus-visible:ring-red-400' : ''}`}
+              className={`h-11 md:h-14 text-sm md:text-lg ${stepErrors.phone ? 'border-red-400 focus-visible:ring-red-400' : ''}`}
             />
           </FormFieldWrapper>
 
-          <div className="bg-emerald-50 border border-emerald-200 rounded-md md:rounded-xl p-2 md:p-4 text-center">
-            <p className="text-[10px] md:text-sm text-emerald-700">
+          <div className="bg-emerald-50 border border-emerald-200 rounded-lg md:rounded-xl p-3 md:p-4 text-center">
+            <p className="text-xs md:text-sm text-emerald-700">
               🔒 {t("forms.contact.privacyNote", "Vos données sont protégées et ne seront jamais partagées.")}
             </p>
           </div>

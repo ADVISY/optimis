@@ -193,7 +193,7 @@ const MortgageForm = () => {
     >
       {/* Step 1: Project */}
       <FormStep isActive={currentStep === 1}>
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
           <FormFieldWrapper label={t("forms.mortgage.projectType")} required>
             <RadioGroup
               value={formData.projectType}
@@ -205,9 +205,9 @@ const MortgageForm = () => {
                 { value: "renewal", label: t("forms.mortgage.projects.renewal") },
                 { value: "refinancing", label: t("forms.mortgage.projects.refinancing") },
               ].map((proj) => (
-                <label key={proj.value} htmlFor={proj.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+                <label key={proj.value} htmlFor={proj.value} className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                   <RadioGroupItem value={proj.value} id={proj.value} />
-                  <span className="flex-1 text-lg">
+                  <span className="flex-1 text-sm md:text-lg">
                     {proj.label}
                   </span>
                 </label>
@@ -220,7 +220,7 @@ const MortgageForm = () => {
               value={formData.propertyType}
               onValueChange={(value) => { updateFormData({ propertyType: value }); notify(); }}
             >
-              <SelectTrigger className="h-14 text-lg">
+              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.mortgage.selectPropertyType")} />
               </SelectTrigger>
               <SelectContent>
@@ -236,7 +236,7 @@ const MortgageForm = () => {
 
       {/* Step 2: Property Details */}
       <FormStep isActive={currentStep === 2}>
-        <div className="space-y-4">
+        <div className="space-y-3 md:space-y-4">
           <FormFieldWrapper label={t("forms.mortgage.propertyValue")} htmlFor="propertyValue" required>
             <Input
               id="propertyValue"
@@ -244,7 +244,7 @@ const MortgageForm = () => {
               value={formData.propertyValue}
               onChange={(e) => { updateFormData({ propertyValue: e.target.value }); }}
               placeholder="CHF 800'000"
-              className="h-14 text-lg"
+              className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
@@ -253,7 +253,7 @@ const MortgageForm = () => {
               value={formData.canton}
               onValueChange={(value) => { updateFormData({ canton: value }); notify(); }}
             >
-              <SelectTrigger className="h-14 text-lg">
+              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
               </SelectTrigger>
               <SelectContent>
@@ -272,7 +272,7 @@ const MortgageForm = () => {
               value={formData.commune}
               onChange={(e) => { updateFormData({ commune: e.target.value }); }}
               placeholder="Lausanne, Genève..."
-              className="h-14 text-lg"
+              className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
@@ -282,13 +282,13 @@ const MortgageForm = () => {
               onValueChange={(value) => { updateFormData({ numberOfBorrowers: value }); notify(); }}
               className="flex gap-4"
             >
-              <label htmlFor="borrowers-1" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+              <label htmlFor="borrowers-1" className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="1" id="borrowers-1" />
-                <span className="text-lg">1 {t("forms.mortgage.person")}</span>
+                <span className="text-sm md:text-lg">1 {t("forms.mortgage.person")}</span>
               </label>
-              <label htmlFor="borrowers-2" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+              <label htmlFor="borrowers-2" className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="2" id="borrowers-2" />
-                <span className="text-lg">2 {t("forms.mortgage.persons")}</span>
+                <span className="text-sm md:text-lg">2 {t("forms.mortgage.persons")}</span>
               </label>
             </RadioGroup>
           </FormFieldWrapper>
@@ -297,13 +297,13 @@ const MortgageForm = () => {
 
       {/* Step 3: Financial Situation */}
       <FormStep isActive={currentStep === 3}>
-        <div className="space-y-4">
+        <div className="space-y-3 md:space-y-4">
           <FormFieldWrapper label={t("forms.mortgage.professionalStatus")} required>
             <Select
               value={formData.professionalStatus}
               onValueChange={(value) => { updateFormData({ professionalStatus: value }); notify(); }}
             >
-              <SelectTrigger className="h-14 text-lg">
+              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectStatus")} />
               </SelectTrigger>
               <SelectContent>

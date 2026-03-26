@@ -27,7 +27,6 @@ const FormNavigation = ({
 
   const handleNextClick = () => {
     onNext();
-    // If canProceed is false, trigger shake animation for visual feedback
     if (!canProceed) {
       setShaking(true);
       setTimeout(() => setShaking(false), 500);
@@ -35,26 +34,24 @@ const FormNavigation = ({
   };
 
   return (
-    <div className="flex flex-col-reverse sm:flex-row justify-between gap-1.5 sm:gap-4 pt-3 md:pt-8">
+    <div className="flex flex-col-reverse sm:flex-row justify-between gap-2 sm:gap-4 pt-4 md:pt-8">
       <Button
         type="button"
         variant="outline"
-        size="sm"
         onClick={onPrevious}
         disabled={currentStep === 1 || isSubmitting}
-        className="gap-1 sm:gap-2.5 w-full sm:w-auto sm:min-w-[120px] md:min-w-[140px] h-8 md:h-14 text-[10px] md:text-base font-semibold border-2 border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 hover:border-emerald-400 transition-all duration-200"
+        className="gap-1.5 sm:gap-2.5 w-full sm:w-auto sm:min-w-[120px] md:min-w-[140px] h-11 md:h-14 text-xs md:text-base font-semibold border-2 border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 hover:border-emerald-400 transition-all duration-200"
       >
-        <ArrowLeft className="h-3 w-3 md:h-5 md:w-5" />
+        <ArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
         {t("forms.previous")}
       </Button>
 
       <Button
         type="button"
-        size="sm"
         onClick={handleNextClick}
         disabled={isSubmitting}
         className={`
-          gap-1 sm:gap-2.5 w-full sm:w-auto sm:min-w-[160px] md:min-w-[200px] h-8 md:h-14 text-[10px] md:text-base font-bold
+          gap-1.5 sm:gap-2.5 w-full sm:w-auto sm:min-w-[160px] md:min-w-[200px] h-11 md:h-14 text-sm md:text-base font-bold
           bg-gradient-to-r from-primary via-primary to-emerald-600 
           hover:from-emerald-600 hover:via-primary hover:to-primary
           shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40
@@ -67,20 +64,20 @@ const FormNavigation = ({
       >
         {isSubmitting ? (
           <>
-            <Loader2 className="h-3 w-3 md:h-5 md:w-5 animate-spin" />
+            <Loader2 className="h-4 w-4 md:h-5 md:w-5 animate-spin" />
             <span className="hidden sm:inline">{t("forms.processing")}</span>
             <span className="sm:hidden">...</span>
           </>
         ) : isLastStep ? (
           <>
-            <Sparkles className="h-3 w-3 md:h-5 md:w-5 animate-bounce" />
+            <Sparkles className="h-4 w-4 md:h-5 md:w-5 animate-bounce" />
             <span className="hidden sm:inline">{t("forms.seeMyOffers", { defaultValue: t("forms.compare") })}</span>
             <span className="sm:hidden">{t("forms.compare")}</span>
           </>
         ) : (
           <>
             {t("forms.next")}
-            <ArrowRight className="h-3 w-3 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="h-4 w-4 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
           </>
         )}
       </Button>

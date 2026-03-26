@@ -62,53 +62,41 @@ const FormContainer = ({
         }}
       />
       
-      <CardHeader className={`space-y-1.5 md:space-y-4 pb-2 md:pb-6 relative z-10 ${
-        isLarge ? "px-4 md:px-10 pt-4 md:pt-10" : "px-3 md:px-8 pt-3 md:pt-8"
+      <CardHeader className={`space-y-1 md:space-y-4 pb-1.5 md:pb-6 relative z-10 ${
+        isLarge ? "px-4 md:px-10 pt-3 md:pt-10" : "px-3.5 md:px-8 pt-3 md:pt-8"
       }`}>
-        {/* Trust badges - ultra compact on mobile */}
-        <div className={`flex flex-wrap items-center justify-center gap-1 md:gap-4 ${
-          isLarge ? "text-[10px] md:text-base" : "text-[9px] md:text-base"
-        }`}>
-          <div className={`flex items-center text-emerald-800 font-semibold rounded-full bg-emerald-50 shadow-sm border border-emerald-200 ${
-            isLarge ? "gap-1 md:gap-2 px-2 md:px-4 py-1 md:py-2" : "gap-0.5 md:gap-2 px-1.5 md:px-4 py-0.5 md:py-2"
-          }`}>
-            <Shield className={isLarge ? "h-2.5 w-2.5 md:h-4 md:w-4 text-emerald-600" : "h-2 w-2 md:h-4 md:w-4 text-emerald-600"} />
+        {/* Trust badges - single line on mobile */}
+        <div className="flex items-center justify-center gap-1.5 md:gap-4 text-[9px] md:text-base">
+          <div className="flex items-center text-emerald-800 font-semibold rounded-full bg-emerald-50 shadow-sm border border-emerald-200 gap-0.5 md:gap-2 px-2 md:px-4 py-0.5 md:py-2">
+            <Shield className="h-2.5 w-2.5 md:h-4 md:w-4 text-emerald-600" />
             <span>{t("forms.free")}</span>
           </div>
-          <div className={`flex items-center text-emerald-800 font-semibold rounded-full bg-emerald-50 shadow-sm border border-emerald-200 ${
-            isLarge ? "gap-1 md:gap-2 px-2 md:px-4 py-1 md:py-2" : "gap-0.5 md:gap-2 px-1.5 md:px-4 py-0.5 md:py-2"
-          }`}>
-            <Lock className={isLarge ? "h-2.5 w-2.5 md:h-4 md:w-4 text-emerald-600" : "h-2 w-2 md:h-4 md:w-4 text-emerald-600"} />
+          <div className="flex items-center text-emerald-800 font-semibold rounded-full bg-emerald-50 shadow-sm border border-emerald-200 gap-0.5 md:gap-2 px-2 md:px-4 py-0.5 md:py-2">
+            <Lock className="h-2.5 w-2.5 md:h-4 md:w-4 text-emerald-600" />
             <span>{t("forms.secure")}</span>
           </div>
-          <div className={`flex items-center text-emerald-800 font-semibold rounded-full bg-emerald-50 shadow-sm border border-emerald-200 ${
-            isLarge ? "gap-1 md:gap-2 px-2 md:px-4 py-1 md:py-2" : "gap-0.5 md:gap-2 px-1.5 md:px-4 py-0.5 md:py-2"
-          }`}>
-            <CheckCircle className={isLarge ? "h-2.5 w-2.5 md:h-4 md:w-4 text-emerald-600" : "h-2 w-2 md:h-4 md:w-4 text-emerald-600"} />
+          <div className="flex items-center text-emerald-800 font-semibold rounded-full bg-emerald-50 shadow-sm border border-emerald-200 gap-0.5 md:gap-2 px-2 md:px-4 py-0.5 md:py-2">
+            <CheckCircle className="h-2.5 w-2.5 md:h-4 md:w-4 text-emerald-600" />
             <span>{t("forms.noCommitment")}</span>
           </div>
         </div>
         
-        <FormProgress currentStep={currentStep} totalSteps={totalSteps} className={
-          isLarge 
-            ? "[&_*]:text-[11px] md:[&_*]:text-base [&_.h-3]:h-2 md:[&_.h-3]:h-3" 
-            : "[&_*]:text-[10px] md:[&_*]:text-base [&_.h-3]:h-1.5 md:[&_.h-3]:h-3"
-        } />
+        <FormProgress currentStep={currentStep} totalSteps={totalSteps} className="[&_*]:text-[10px] md:[&_*]:text-base [&_.h-2]:h-1.5 md:[&_.h-2]:h-3 [&_.h-3]:h-1.5 md:[&_.h-3]:h-3" />
         
         <div className="space-y-0.5 md:space-y-3">
           <CardTitle className={`font-bold text-emerald-900 leading-tight ${
             isLarge ? "text-base md:text-2xl lg:text-3xl" : "text-sm md:text-2xl lg:text-3xl"
           }`}>{title}</CardTitle>
           {description && (
-            <CardDescription className={`text-emerald-700 leading-relaxed ${
-              isLarge ? "text-xs md:text-lg line-clamp-2 md:line-clamp-none" : "text-[10px] md:text-lg line-clamp-1 md:line-clamp-none"
+            <CardDescription className={`text-emerald-700 leading-snug ${
+              isLarge ? "text-xs md:text-lg line-clamp-2 md:line-clamp-none" : "text-[10px] md:text-lg line-clamp-2 md:line-clamp-none"
             }`}>{description}</CardDescription>
           )}
         </div>
       </CardHeader>
       
       <CardContent className={`pt-0 text-emerald-900 relative z-10 ${
-        isLarge ? "px-3 md:px-10 pb-3 md:pb-10" : "px-2.5 md:px-8 pb-2.5 md:pb-8"
+        isLarge ? "px-3.5 md:px-10 pb-3 md:pb-10" : "px-3 md:px-8 pb-3 md:pb-8"
       }`}>
         {children}
       </CardContent>

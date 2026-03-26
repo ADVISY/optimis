@@ -228,7 +228,7 @@ const SubsidyForm = () => {
     >
       {/* Step 1: Profile & Insurance */}
       <FormStep isActive={currentStep === 1}>
-        <div className="space-y-4">
+        <div className="space-y-3">
           <FormFieldWrapper label={t("forms.subsidy.postalCode")} htmlFor="postalCode" required>
             <Input
               id="postalCode"
@@ -240,7 +240,7 @@ const SubsidyForm = () => {
                 updateFormData({ postalCode: val });
               }}
               placeholder="1000"
-              className="h-14 text-lg"
+              className="h-11 md:h-14 text-sm md:text-lg"
               maxLength={4}
             />
           </FormFieldWrapper>
@@ -249,7 +249,7 @@ const SubsidyForm = () => {
             <DateInput
               value={formData.birthDate}
               onChange={(date) => updateFormData({ birthDate: date })}
-              className="h-14 text-lg"
+              className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
@@ -265,9 +265,9 @@ const SubsidyForm = () => {
                 { value: "coupleChildren", label: t("forms.subsidy.household.coupleChildren") },
                 { value: "singleChildren", label: t("forms.subsidy.household.singleChildren") },
               ].map((option) => (
-                <label key={option.value} htmlFor={`household-${option.value}`} className={cn("flex items-center space-x-2 p-4 border-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-all", formData.householdSize === option.value && "border-primary bg-primary/5")}>
+                <label key={option.value} htmlFor={`household-${option.value}`} className={cn("flex items-center space-x-2 p-3 md:p-4 border-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-all", formData.householdSize === option.value && "border-primary bg-primary/5")}>
                   <RadioGroupItem value={option.value} id={`household-${option.value}`} />
-                  <span className="flex-1 text-lg">{option.label}</span>
+                  <span className="flex-1 text-sm md:text-lg">{option.label}</span>
                 </label>
               ))}
             </RadioGroup>
@@ -289,9 +289,9 @@ const SubsidyForm = () => {
                 { value: "yes", label: t("common.yes") },
                 { value: "no", label: t("common.no") },
               ].map((option) => (
-                <label key={option.value} htmlFor={`insurance-${option.value}`} className={cn("flex items-center space-x-2 p-4 border-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-all", formData.hasCurrentInsurance === option.value && "border-primary bg-primary/5")}>
+                <label key={option.value} htmlFor={`insurance-${option.value}`} className={cn("flex items-center space-x-2 p-3 md:p-4 border-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-all", formData.hasCurrentInsurance === option.value && "border-primary bg-primary/5")}>
                   <RadioGroupItem value={option.value} id={`insurance-${option.value}`} />
-                  <span className="flex-1 text-lg">{option.label}</span>
+                  <span className="flex-1 text-sm md:text-lg">{option.label}</span>
                 </label>
               ))}
             </RadioGroup>
@@ -304,7 +304,7 @@ const SubsidyForm = () => {
                   value={formData.currentInsurer}
                   onValueChange={(value) => updateFormData({ currentInsurer: value })}
                 >
-                  <SelectTrigger className="h-14 text-lg">
+                  <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                     <SelectValue placeholder={t("forms.subsidy.selectInsurer")} />
                   </SelectTrigger>
                   <SelectContent>
@@ -329,7 +329,7 @@ const SubsidyForm = () => {
                   value={formData.currentDeductible}
                   onValueChange={(value) => updateFormData({ currentDeductible: value })}
                 >
-                  <SelectTrigger className="h-14 text-lg">
+                  <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                     <SelectValue placeholder={t("forms.subsidy.selectDeductible")} />
                   </SelectTrigger>
                   <SelectContent>
@@ -349,7 +349,7 @@ const SubsidyForm = () => {
 
       {/* Step 2: Income & Situation */}
       <FormStep isActive={currentStep === 2}>
-        <div className="space-y-4">
+        <div className="space-y-3">
           <FormFieldWrapper label={t("forms.subsidy.incomeRange")} htmlFor="incomeRange" required>
             <Input
               id="incomeRange"
@@ -358,7 +358,7 @@ const SubsidyForm = () => {
               value={formData.incomeRange}
               onChange={(e) => updateFormData({ incomeRange: e.target.value })}
               placeholder="65000"
-              className="h-14 text-lg"
+              className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
@@ -375,9 +375,9 @@ const SubsidyForm = () => {
                 { value: "student", label: t("forms.subsidy.situations.student") },
                 { value: "unemployed", label: t("forms.subsidy.situations.unemployed") },
               ].map((situation) => (
-                <label key={situation.value} htmlFor={situation.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+                <label key={situation.value} htmlFor={situation.value} className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                   <RadioGroupItem value={situation.value} id={situation.value} />
-                  <span className="flex-1 text-lg">
+                  <span className="flex-1 text-sm md:text-lg">
                     {situation.label}
                   </span>
                 </label>
@@ -389,22 +389,22 @@ const SubsidyForm = () => {
 
       {/* Step 3: Identity */}
       <FormStep isActive={currentStep === 3}>
-        <div className="space-y-6">
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-              <User className="h-8 w-8 text-primary" />
+        <div className="space-y-4 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
+              <User className="h-6 w-6 md:h-8 md:w-8 text-primary" />
             </div>
-            <h3 className="text-xl font-semibold">{t("forms.contact.almostDone")}</h3>
-            <p className="text-muted-foreground">{t("forms.contact.nameStepDescription")}</p>
+            <h3 className="text-base md:text-xl font-semibold">{t("forms.contact.almostDone")}</h3>
+            <p className="text-sm md:text-base text-muted-foreground">{t("forms.contact.nameStepDescription")}</p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3 md:gap-4">
             <FormFieldWrapper label={t("forms.contact.firstName")} htmlFor="firstName" required>
               <Input
                 id="firstName"
                 value={formData.firstName}
                 onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayed(); }}
-                className="h-14 text-lg"
+                className="h-11 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
             <FormFieldWrapper label={t("forms.contact.lastName")} htmlFor="lastName" required>
@@ -412,7 +412,7 @@ const SubsidyForm = () => {
                 id="lastName"
                 value={formData.lastName}
                 onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayed(); }}
-                className="h-14 text-lg"
+                className="h-11 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
           </div>
@@ -421,13 +421,13 @@ const SubsidyForm = () => {
 
       {/* Step 4: Contact */}
       <FormStep isActive={currentStep === 4}>
-        <div className="space-y-6">
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-              <Phone className="h-8 w-8 text-primary" />
+        <div className="space-y-4 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
+              <Phone className="h-6 w-6 md:h-8 md:w-8 text-primary" />
             </div>
-            <h3 className="text-xl font-semibold">{t("forms.contact.contactStepTitle")}</h3>
-            <p className="text-muted-foreground">{t("forms.contact.contactStepDescription")}</p>
+            <h3 className="text-base md:text-xl font-semibold">{t("forms.contact.contactStepTitle")}</h3>
+            <p className="text-sm md:text-base text-muted-foreground">{t("forms.contact.contactStepDescription")}</p>
           </div>
 
           <FormFieldWrapper label={t("forms.contact.email")} htmlFor="email" required error={stepErrors.email}>
@@ -438,7 +438,7 @@ const SubsidyForm = () => {
               autoComplete="email"
               value={formData.email}
               onChange={(e) => { updateFormData({ email: e.target.value }); notifyDelayed(); }}
-              className={cn("h-14 text-lg", stepErrors.email && "border-red-400")}
+              className={cn("h-11 md:h-14 text-sm md:text-lg", stepErrors.email && "border-red-400")}
             />
           </FormFieldWrapper>
 
@@ -451,13 +451,13 @@ const SubsidyForm = () => {
               value={formData.phone}
               onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); notifyDelayed(); }}
               placeholder="+41 79 123 45 67"
-              className={cn("h-14 text-lg", stepErrors.phone && "border-red-400")}
+              className={cn("h-11 md:h-14 text-sm md:text-lg", stepErrors.phone && "border-red-400")}
             />
           </FormFieldWrapper>
 
-          <div className="flex items-center gap-2 p-4 bg-muted/50 rounded-lg">
-            <Lock className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-            <p className="text-sm text-muted-foreground">{t("forms.contact.privacyNote")}</p>
+          <div className="flex items-center gap-2 p-3 md:p-4 bg-muted/50 rounded-lg">
+            <Lock className="h-4 w-4 md:h-5 md:w-5 text-muted-foreground flex-shrink-0" />
+            <p className="text-xs md:text-sm text-muted-foreground">{t("forms.contact.privacyNote")}</p>
           </div>
         </div>
       </FormStep>

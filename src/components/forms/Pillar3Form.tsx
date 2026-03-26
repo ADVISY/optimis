@@ -258,7 +258,7 @@ const Pillar3Form = () => {
     >
       {/* Step 1: Existing Pillar 3 + Objective */}
       <FormStep isActive={currentStep === 1}>
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
           <FormFieldWrapper label={t("forms.pillar3.hasExistingPillar3")} required>
             <RadioGroup
               value={formData.hasExistingPillar3 === null ? "" : formData.hasExistingPillar3 ? "yes" : "no"}
@@ -268,15 +268,15 @@ const Pillar3Form = () => {
               })}
               className="grid grid-cols-2 gap-3"
             >
-              <label htmlFor="hasPillar3-yes" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+              <label htmlFor="hasPillar3-yes" className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="yes" id="hasPillar3-yes" />
-                <span className="flex-1 text-lg">
+                <span className="flex-1 text-sm md:text-lg">
                   {t("common.yes")}
                 </span>
               </label>
-              <label htmlFor="hasPillar3-no" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+              <label htmlFor="hasPillar3-no" className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="no" id="hasPillar3-no" />
-                <span className="flex-1 text-lg">
+                <span className="flex-1 text-sm md:text-lg">
                   {t("common.no")}
                 </span>
               </label>
@@ -289,7 +289,7 @@ const Pillar3Form = () => {
                 value={formData.existingProvider}
                 onValueChange={(value) => { updateFormData({ existingProvider: value }); notify(); }}
               >
-                <SelectTrigger className="h-12 md:h-14 text-base md:text-lg">
+                <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                   <SelectValue placeholder={t("forms.pillar3.selectProvider")} />
                 </SelectTrigger>
                 <SelectContent>
@@ -321,9 +321,9 @@ const Pillar3Form = () => {
                 { value: "protection", label: t("forms.pillar3.objectives.protection") },
                 { value: "mix", label: t("forms.pillar3.objectives.mix") },
               ].map((obj) => (
-                <label key={obj.value} htmlFor={obj.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+                <label key={obj.value} htmlFor={obj.value} className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                   <RadioGroupItem value={obj.value} id={obj.value} />
-                  <span className="flex-1 text-lg">
+                  <span className="flex-1 text-sm md:text-lg">
                     {obj.label}
                   </span>
                 </label>
@@ -345,7 +345,7 @@ const Pillar3Form = () => {
               value={formData.age}
               onChange={(e) => { updateFormData({ age: e.target.value }); notifyDelayed(); }}
               placeholder="35"
-              className="h-9 md:h-14 text-sm md:text-lg"
+              className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
@@ -354,7 +354,7 @@ const Pillar3Form = () => {
               value={formData.professionalStatus}
               onValueChange={(value) => { updateFormData({ professionalStatus: value }); notify(); }}
             >
-              <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
+              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectStatus")} />
               </SelectTrigger>
               <SelectContent>
@@ -371,7 +371,7 @@ const Pillar3Form = () => {
               value={formData.incomeRange}
               onValueChange={(value) => { updateFormData({ incomeRange: value }); notify(); }}
             >
-              <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
+              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectIncome")} />
               </SelectTrigger>
               <SelectContent>
@@ -388,13 +388,13 @@ const Pillar3Form = () => {
 
       {/* Step 3: Investment */}
       <FormStep isActive={currentStep === 3}>
-        <div className="space-y-3 md:space-y-6">
+        <div className="space-y-4 md:space-y-6">
           <FormFieldWrapper label={t("forms.pillar3.savingsAmount")} required>
             <Select
               value={formData.savingsAmount}
               onValueChange={(value) => { updateFormData({ savingsAmount: value }); notify(); }}
             >
-              <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
+              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectAmount")} />
               </SelectTrigger>
               <SelectContent>
@@ -410,7 +410,7 @@ const Pillar3Form = () => {
               value={formData.investmentHorizon}
               onValueChange={(value) => { updateFormData({ investmentHorizon: value }); notify(); }}
             >
-              <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
+              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.pillar3.selectHorizon")} />
               </SelectTrigger>
               <SelectContent>
@@ -426,7 +426,7 @@ const Pillar3Form = () => {
             <RadioGroup
               value={formData.riskProfile}
               onValueChange={(value) => { updateFormData({ riskProfile: value }); notify(); }}
-              className="grid gap-3"
+              className="grid gap-2 md:gap-3"
             >
               {[
                 { value: "conservative", label: t("forms.pillar3.risks.conservative") },
@@ -434,9 +434,9 @@ const Pillar3Form = () => {
                 { value: "dynamic", label: t("forms.pillar3.risks.dynamic") },
                 { value: "aggressive", label: t("forms.pillar3.risks.aggressive") },
               ].map((risk) => (
-                <label key={risk.value} htmlFor={risk.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+                <label key={risk.value} htmlFor={risk.value} className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                   <RadioGroupItem value={risk.value} id={risk.value} />
-                  <span className="flex-1 text-lg">
+                  <span className="flex-1 text-sm md:text-lg">
                     {risk.label}
                   </span>
                 </label>
@@ -448,22 +448,22 @@ const Pillar3Form = () => {
 
       {/* Step 4: Identity */}
       <FormStep isActive={currentStep === 4}>
-        <div className="space-y-6">
-          <div className="text-center mb-4 md:mb-6">
-            <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-3 md:mb-4">
+        <div className="space-y-4 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
               <User className="h-6 w-6 md:h-8 md:w-8 text-primary" />
             </div>
-            <h3 className="text-lg md:text-xl font-semibold">{t("forms.contact.almostDone")}</h3>
+            <h3 className="text-base md:text-xl font-semibold">{t("forms.contact.almostDone")}</h3>
             <p className="text-sm md:text-base text-muted-foreground">{t("forms.contact.nameStepDescription")}</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+          <div className="grid grid-cols-2 gap-3 md:gap-4">
             <FormFieldWrapper label={t("forms.contact.firstName")} htmlFor="firstName" required>
               <Input
                 id="firstName"
                 value={formData.firstName}
                 onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayed(); }}
-                className="h-12 md:h-14 text-base md:text-lg"
+                className="h-11 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
             <FormFieldWrapper label={t("forms.contact.lastName")} htmlFor="lastName" required>
@@ -471,7 +471,7 @@ const Pillar3Form = () => {
                 id="lastName"
                 value={formData.lastName}
                 onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayed(); }}
-                className="h-12 md:h-14 text-base md:text-lg"
+                className="h-11 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
           </div>
@@ -480,12 +480,12 @@ const Pillar3Form = () => {
 
       {/* Step 5: Contact */}
       <FormStep isActive={currentStep === 5}>
-        <div className="space-y-6">
-          <div className="text-center mb-4 md:mb-6">
-            <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-3 md:mb-4">
+        <div className="space-y-4 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
               <Phone className="h-6 w-6 md:h-8 md:w-8 text-primary" />
             </div>
-            <h3 className="text-lg md:text-xl font-semibold">{t("forms.contact.contactStepTitle")}</h3>
+            <h3 className="text-base md:text-xl font-semibold">{t("forms.contact.contactStepTitle")}</h3>
             <p className="text-sm md:text-base text-muted-foreground">{t("forms.contact.contactStepDescription")}</p>
           </div>
 
@@ -497,7 +497,7 @@ const Pillar3Form = () => {
               autoComplete="email"
               value={formData.email}
               onChange={(e) => { updateFormData({ email: e.target.value }); notifyDelayed(); }}
-              className={cn("h-12 md:h-14 text-base md:text-lg", stepErrors.email && "border-red-400")}
+              className={cn("h-11 md:h-14 text-sm md:text-lg", stepErrors.email && "border-red-400")}
             />
           </FormFieldWrapper>
 
@@ -510,7 +510,7 @@ const Pillar3Form = () => {
               value={formData.phone}
               onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); notifyDelayed(); }}
               placeholder="+41 79 123 45 67"
-              className={cn("h-12 md:h-14 text-base md:text-lg", stepErrors.phone && "border-red-400")}
+              className={cn("h-11 md:h-14 text-sm md:text-lg", stepErrors.phone && "border-red-400")}
             />
           </FormFieldWrapper>
 
