@@ -1360,7 +1360,12 @@
     "mortgage": {
       "badge": "Hypothekenvergleich",
       "title": "Hypothekenangebote vergleichen",
-      "subtitle": "Finden Sie die besten Zinsen für Ihr Immobilienprojekt"
+      "subtitle": "Finden Sie die besten Zinsen für Ihr Immobilienprojekt",
+      "heroTitle": "VERGLEICHEN SIE SCHNELL DIE HYPOTHEKARZINSEN IN DER SCHWEIZ",
+      "heroSubtitle": "Finden Sie den besten Hypothekarzins und sparen Sie Tausende Franken bei Ihrem Immobilienprojekt.",
+      "heroBullet1": "Vergleich in 2 Minuten",
+      "heroBullet2": "Sparen Sie bis zu 15'000 CHF bei Ihrer Hypothek",
+      "heroBullet3": "Finden Sie den besten Zinssatz bei Schweizer Banken"
     },
     "professional": {
       "badge": "Berufsversicherungen",
