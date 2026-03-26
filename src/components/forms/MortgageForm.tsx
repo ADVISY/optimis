@@ -242,7 +242,7 @@ const MortgageForm = () => {
               id="propertyValue"
               type="text"
               value={formData.propertyValue}
-              onChange={(e) => { updateFormData({ propertyValue: e.target.value }); notifyDelayed(); }}
+              onChange={(e) => { updateFormData({ propertyValue: e.target.value }); }}
               placeholder="CHF 800'000"
               className="h-14 text-lg"
             />
