@@ -1417,6 +1417,17 @@
     "nextSteps": "Riceverai presto un'email di conferma con i dettagli della tua richiesta. Non esitare a preparare le tue domande per il colloquio.",
     "backHome": "Torna alla home"
   },
+  "thankYouMortgage": {
+    "title": "Grazie per la tua richiesta ipotecaria!",
+    "message": "La tua richiesta di confronto ipotecario è stata inviata con successo. Un consulente specializzato ti contatterà al più presto.",
+    "nextStepsTitle": "Prossimi passi",
+    "step1Title": "Analisi del tuo dossier",
+    "step1Desc": "Il nostro team analizza il tuo profilo per trovare i migliori tassi ipotecari disponibili.",
+    "step2Title": "Contatto da un consulente",
+    "step2Desc": "Un consulente ipotecario ti contatterà entro 24 ore per discutere del tuo progetto immobiliare.",
+    "step3Title": "Offerte personalizzate",
+    "step3Desc": "Riceverai via email una selezione delle migliori offerte ipotecarie adatte alla tua situazione."
+  },
   "insurances": {
     "title": "Le nostre assicurazioni",
     "subtitle": "Scopri tutti i tipi di assicurazioni che confrontiamo per aiutarti a trovare la migliore protezione.",

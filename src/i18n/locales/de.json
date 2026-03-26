@@ -1420,6 +1420,17 @@
     "nextSteps": "Sie erhalten in Kürze eine Bestätigungs-E-Mail mit den Details Ihrer Anfrage. Bereiten Sie gerne Ihre Fragen für Ihr Gespräch vor.",
     "backHome": "Zurück zur Startseite"
   },
+  "thankYouMortgage": {
+    "title": "Vielen Dank für Ihre Hypothekaranfrage!",
+    "message": "Ihre Anfrage für einen Hypothekenvergleich wurde erfolgreich gesendet. Ein spezialisierter Berater wird sich schnellstmöglich mit Ihnen in Verbindung setzen.",
+    "nextStepsTitle": "Nächste Schritte",
+    "step1Title": "Analyse Ihres Dossiers",
+    "step1Desc": "Unser Team analysiert Ihr Profil, um die besten verfügbaren Hypothekarzinsen für Sie zu finden.",
+    "step2Title": "Kontakt durch einen Berater",
+    "step2Desc": "Ein Hypothekarberater wird Sie innerhalb von 24 Stunden kontaktieren, um Ihr Immobilienprojekt zu besprechen.",
+    "step3Title": "Persönliche Offerten",
+    "step3Desc": "Sie erhalten per E-Mail eine Auswahl der besten Hypothekenangebote, die auf Ihre Situation zugeschnitten sind."
+  },
   "insurances": {
     "title": "Unsere Versicherungen",
     "subtitle": "Entdecken Sie alle Versicherungsarten, die wir vergleichen, um Ihnen zu helfen, den besten Schutz zu finden.",
