@@ -211,7 +211,7 @@ const SubsidyForm = () => {
             <Input
               id="commune"
               value={formData.commune}
-              onChange={(e) => { updateFormData({ commune: e.target.value }); notifyDelayed(); }}
+              onChange={(e) => updateFormData({ commune: e.target.value })}
               placeholder="Lausanne, Genève..."
               className="h-14 text-lg"
             />
@@ -260,7 +260,7 @@ const SubsidyForm = () => {
                   currentInsurer: value === "no" ? "" : formData.currentInsurer,
                   currentDeductible: value === "no" ? "" : formData.currentDeductible,
                 });
-                if (value === "no") notify();
+                if (value === "no") notifyDelayed();
               }}
               className="grid grid-cols-2 gap-3"
             >
@@ -281,7 +281,7 @@ const SubsidyForm = () => {
               <FormFieldWrapper label={t("forms.subsidy.currentInsurer")} htmlFor="currentInsurer">
                 <Select
                   value={formData.currentInsurer}
-                  onValueChange={(value) => { updateFormData({ currentInsurer: value }); notify(); }}
+                  onValueChange={(value) => updateFormData({ currentInsurer: value })}
                 >
                   <SelectTrigger className="h-14 text-lg">
                     <SelectValue placeholder={t("forms.subsidy.selectInsurer")} />
@@ -306,7 +306,7 @@ const SubsidyForm = () => {
               <FormFieldWrapper label={t("forms.subsidy.currentDeductible")} htmlFor="currentDeductible">
                 <Select
                   value={formData.currentDeductible}
-                  onValueChange={(value) => { updateFormData({ currentDeductible: value }); notify(); }}
+                  onValueChange={(value) => updateFormData({ currentDeductible: value })}
                 >
                   <SelectTrigger className="h-14 text-lg">
                     <SelectValue placeholder={t("forms.subsidy.selectDeductible")} />
@@ -335,7 +335,7 @@ const SubsidyForm = () => {
               type="number"
               inputMode="numeric"
               value={formData.incomeRange}
-              onChange={(e) => { updateFormData({ incomeRange: e.target.value }); notifyDelayed(); }}
+              onChange={(e) => updateFormData({ incomeRange: e.target.value })}
               placeholder="65000"
               className="h-14 text-lg"
             />
@@ -344,7 +344,7 @@ const SubsidyForm = () => {
           <FormFieldWrapper label={t("forms.subsidy.specialSituation")}>
             <RadioGroup
               value={formData.specialSituation}
-              onValueChange={(value) => { updateFormData({ specialSituation: value }); notify(); }}
+              onValueChange={(value) => updateFormData({ specialSituation: value })}
               className="grid gap-3"
             >
               {[
