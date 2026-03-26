@@ -28,8 +28,6 @@ interface SubsidyFormData {
   canton: string;
   commune: string;
   householdSize: string;
-  adultsCount: string;
-  childrenCount: string;
   hasCurrentInsurance: string;
   currentInsurer: string;
   currentDeductible: string;
