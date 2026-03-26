@@ -1357,7 +1357,12 @@
     "mortgage": {
       "badge": "Comparatore Ipoteca",
       "title": "Confronta le offerte ipotecarie",
-      "subtitle": "Trova i migliori tassi per il tuo progetto immobiliare"
+      "subtitle": "Trova i migliori tassi per il tuo progetto immobiliare",
+      "heroTitle": "CONFRONTA RAPIDAMENTE I TASSI IPOTECARI IN SVIZZERA",
+      "heroSubtitle": "Trova il miglior tasso ipotecario e risparmia migliaia di franchi sul tuo progetto immobiliare.",
+      "heroBullet1": "Confronto in 2 minuti",
+      "heroBullet2": "Risparmia fino a 15'000 CHF sulla tua ipoteca",
+      "heroBullet3": "Trova il miglior tasso tra le banche svizzere"
     },
     "professional": {
       "badge": "Assicurazioni Professionali",
