@@ -1392,7 +1392,12 @@
     "mortgage": {
       "badge": "Comparateur Hypothèque",
       "title": "Comparez les offres hypothécaires",
-      "subtitle": "Trouvez les meilleurs taux pour votre projet immobilier"
+      "subtitle": "Trouvez les meilleurs taux pour votre projet immobilier",
+      "heroTitle": "COMPAREZ RAPIDEMENT LES TAUX HYPOTHÉCAIRES EN SUISSE",
+      "heroSubtitle": "Trouvez le meilleur taux hypothécaire et économisez des milliers de francs sur votre projet immobilier.",
+      "heroBullet1": "Comparaison en 2 minutes",
+      "heroBullet2": "Économisez jusqu'à 15'000 CHF sur votre hypothèque",
+      "heroBullet3": "Trouvez le meilleur taux parmi les banques suisses"
     },
     "professional": {
       "badge": "Assurances Professionnelles",

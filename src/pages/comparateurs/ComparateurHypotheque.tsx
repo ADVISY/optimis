@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import MortgageForm from "@/components/forms/MortgageForm";
-import { Building2, CheckCircle } from "lucide-react";
+import { Building2, CheckCircle, Clock, BadgePercent, TrendingDown } from "lucide-react";
 
 const ComparateurHypotheque = () => {
   const { t } = useTranslation();
@@ -11,7 +11,36 @@ const ComparateurHypotheque = () => {
       <div className="min-h-screen bg-gradient-to-b from-emerald-50 to-background">
         <section className="py-8 md:py-12">
           <div className="container mx-auto px-4">
-            {/* Form First */}
+            {/* Hero intro section */}
+            <div className="max-w-3xl mx-auto text-center mb-5 md:mb-8">
+              <div className="flex gap-1 justify-center mb-2">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-accent text-lg md:text-xl drop-shadow-sm">★</span>
+                ))}
+              </div>
+              <h1 className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black leading-tight text-foreground tracking-tight uppercase mb-2">
+                {t("comparators.mortgage.heroTitle")}
+              </h1>
+              <p className="text-sm md:text-base text-muted-foreground mb-3 max-w-xl mx-auto">
+                {t("comparators.mortgage.heroSubtitle")}
+              </p>
+              <div className="flex flex-col items-start gap-1.5 max-w-md mx-auto text-left">
+                <div className="flex items-center gap-2 text-primary font-semibold text-xs md:text-sm">
+                  <Clock className="h-4 w-4 shrink-0" />
+                  {t("comparators.mortgage.heroBullet1")}
+                </div>
+                <div className="flex items-center gap-2 text-primary font-semibold text-xs md:text-sm">
+                  <TrendingDown className="h-4 w-4 shrink-0" />
+                  {t("comparators.mortgage.heroBullet2")}
+                </div>
+                <div className="flex items-center gap-2 text-primary font-semibold text-xs md:text-sm">
+                  <BadgePercent className="h-4 w-4 shrink-0" />
+                  {t("comparators.mortgage.heroBullet3")}
+                </div>
+              </div>
+            </div>
+
+            {/* Form */}
             <MortgageForm />
 
             {/* Text Content - En bas */}
