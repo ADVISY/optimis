@@ -345,7 +345,7 @@ const Pillar3Form = () => {
               value={formData.age}
               onChange={(e) => { updateFormData({ age: e.target.value }); notifyDelayed(); }}
               placeholder="35"
-              className="h-9 md:h-14 text-sm md:text-lg"
+              className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
