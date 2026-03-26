@@ -820,43 +820,48 @@ const HealthInsuranceForm = () => {
 
       {/* Step 6: Name */}
       <FormStep isActive={currentStep === 6}>
-        <div className="space-y-2 md:space-y-6">
-          <div className="text-center mb-2 md:mb-6">
-            <h3 className="text-xs md:text-lg font-semibold mb-0.5 md:mb-2">
+        <div className="space-y-3 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <div className="inline-flex items-center justify-center w-11 h-11 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
+              <User className="h-5 w-5 md:h-8 md:w-8 text-primary" />
+            </div>
+            <h3 className="text-sm md:text-lg font-semibold mb-0.5 md:mb-2">
               {t("forms.contact.almostDone", "Presque terminé !")}
             </h3>
-            <p className="text-[10px] md:text-sm text-muted-foreground">
+            <p className="text-xs md:text-sm text-muted-foreground">
               {t("forms.contact.nameStepDescription", "Comment pouvons-nous vous appeler ?")}
             </p>
           </div>
           
-          <FormFieldWrapper
-            label={t("forms.contact.firstName")}
-            htmlFor="firstName"
-            required
-          >
-            <Input
-              id="firstName"
-              value={formData.firstName}
-              onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayed(); }}
-              placeholder={t("forms.contact.firstNamePlaceholder", "Votre prénom")}
-              className="h-8 md:h-14 text-xs md:text-lg"
-            />
-          </FormFieldWrapper>
+          <div className="grid grid-cols-2 gap-3 md:gap-4">
+            <FormFieldWrapper
+              label={t("forms.contact.firstName")}
+              htmlFor="firstName"
+              required
+            >
+              <Input
+                id="firstName"
+                value={formData.firstName}
+                onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayed(); }}
+                placeholder={t("forms.contact.firstNamePlaceholder", "Votre prénom")}
+                className="h-11 md:h-14 text-sm md:text-lg"
+              />
+            </FormFieldWrapper>
 
-          <FormFieldWrapper
-            label={t("forms.contact.lastName")}
-            htmlFor="lastName"
-            required
-          >
-            <Input
-              id="lastName"
-              value={formData.lastName}
-              onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayed(); }}
-              placeholder={t("forms.contact.lastNamePlaceholder", "Votre nom")}
-              className="h-8 md:h-14 text-xs md:text-lg"
-            />
-          </FormFieldWrapper>
+            <FormFieldWrapper
+              label={t("forms.contact.lastName")}
+              htmlFor="lastName"
+              required
+            >
+              <Input
+                id="lastName"
+                value={formData.lastName}
+                onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayed(); }}
+                placeholder={t("forms.contact.lastNamePlaceholder", "Votre nom")}
+                className="h-11 md:h-14 text-sm md:text-lg"
+              />
+            </FormFieldWrapper>
+          </div>
         </div>
       </FormStep>
 
