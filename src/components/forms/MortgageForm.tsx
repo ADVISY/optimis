@@ -297,7 +297,7 @@ const MortgageForm = () => {
 
       {/* Step 3: Financial Situation */}
       <FormStep isActive={currentStep === 3}>
-        <div className="space-y-4">
+        <div className="space-y-3 md:space-y-4">
           <FormFieldWrapper label={t("forms.mortgage.professionalStatus")} required>
             <Select
               value={formData.professionalStatus}
