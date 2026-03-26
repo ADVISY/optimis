@@ -344,6 +344,8 @@ const MortgageForm = () => {
                 <SelectValue placeholder={t("forms.mortgage.selectOwnFunds")} />
               </SelectTrigger>
               <SelectContent>
+                <SelectItem value="0-50000">&lt; CHF 50'000</SelectItem>
+                <SelectItem value="50000-100000">CHF 50'000 - 100'000</SelectItem>
                 <SelectItem value="100000-200000">CHF 100'000 - 200'000</SelectItem>
                 <SelectItem value="200000-300000">CHF 200'000 - 300'000</SelectItem>
                 <SelectItem value="300000-500000">CHF 300'000 - 500'000</SelectItem>
