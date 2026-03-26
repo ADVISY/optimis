@@ -260,7 +260,7 @@ const SubsidyForm = () => {
                   currentInsurer: value === "no" ? "" : formData.currentInsurer,
                   currentDeductible: value === "no" ? "" : formData.currentDeductible,
                 });
-                if (value === "no") notify();
+                if (value === "no") notifyDelayed();
               }}
               className="grid grid-cols-2 gap-3"
             >
