@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 interface LeadData {
   formType: string;
   language: string;
-  source: string;
+  source?: string;
   timestamp: string;
   leadId: string;
   [key: string]: unknown;
@@ -53,11 +53,47 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
 
     const flatFormData = flattenObject(formData as Record<string, unknown>);
 
+    // Keep payload clean for Zapier/Google Sheets and convert technical codes to readable labels
+    const normalizedFormData = { ...flatFormData };
+
+    if (formType === "mortgage") {
+      const projectTypeMap: Record<string, string> = {
+        acquisition: t("forms.mortgage.projects.acquisition"),
+        renewal: t("forms.mortgage.projects.renewal"),
+        refinancing: t("forms.mortgage.projects.refinancing"),
+      };
+
+      const propertyTypeMap: Record<string, string> = {
+        apartment: t("forms.mortgage.propertyTypes.apartment"),
+        house: t("forms.mortgage.propertyTypes.house"),
+        building: t("forms.mortgage.propertyTypes.building"),
+        other: t("forms.mortgage.propertyTypes.other"),
+      };
+
+      const statusMap: Record<string, string> = {
+        employee: t("forms.pillar3.status.employee"),
+        "self-employed": t("forms.pillar3.status.selfEmployed"),
+        executive: t("forms.pillar3.status.executive"),
+        retired: t("forms.mortgage.status.retired"),
+      };
+
+      if (typeof normalizedFormData.projectType === "string") {
+        normalizedFormData.projectType = projectTypeMap[normalizedFormData.projectType] ?? normalizedFormData.projectType;
+      }
+
+      if (typeof normalizedFormData.propertyType === "string") {
+        normalizedFormData.propertyType = propertyTypeMap[normalizedFormData.propertyType] ?? normalizedFormData.propertyType;
+      }
+
+      if (typeof normalizedFormData.professionalStatus === "string") {
+        normalizedFormData.professionalStatus = statusMap[normalizedFormData.professionalStatus] ?? normalizedFormData.professionalStatus;
+      }
+    }
+
     const leadData: LeadData = {
-      ...flatFormData,
+      ...normalizedFormData,
       formType,
       language: i18n.language,
-      source: document.referrer || "direct",
       timestamp: (() => {
         const now = new Date();
         const day = now.getDate().toString().padStart(2, '0');
@@ -68,8 +104,6 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
         return `${year}-${month}-${day} ${hours}:${minutes}`;
       })(),
       leadId: generateLeadId(),
-      pageUrl: window.location.href,
-      userAgent: navigator.userAgent,
       webhookUrl: webhookUrl, // Pass custom webhook if provided
     };
 
