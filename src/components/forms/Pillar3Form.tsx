@@ -268,15 +268,15 @@ const Pillar3Form = () => {
               })}
               className="grid grid-cols-2 gap-3"
             >
-              <label htmlFor="hasPillar3-yes" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+              <label htmlFor="hasPillar3-yes" className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="yes" id="hasPillar3-yes" />
-                <span className="flex-1 text-lg">
+                <span className="flex-1 text-sm md:text-lg">
                   {t("common.yes")}
                 </span>
               </label>
-              <label htmlFor="hasPillar3-no" className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+              <label htmlFor="hasPillar3-no" className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                 <RadioGroupItem value="no" id="hasPillar3-no" />
-                <span className="flex-1 text-lg">
+                <span className="flex-1 text-sm md:text-lg">
                   {t("common.no")}
                 </span>
               </label>
