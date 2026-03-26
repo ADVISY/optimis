@@ -389,22 +389,22 @@ const SubsidyForm = () => {
 
       {/* Step 3: Identity */}
       <FormStep isActive={currentStep === 3}>
-        <div className="space-y-6">
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-              <User className="h-8 w-8 text-primary" />
+        <div className="space-y-4 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
+              <User className="h-6 w-6 md:h-8 md:w-8 text-primary" />
             </div>
-            <h3 className="text-xl font-semibold">{t("forms.contact.almostDone")}</h3>
-            <p className="text-muted-foreground">{t("forms.contact.nameStepDescription")}</p>
+            <h3 className="text-base md:text-xl font-semibold">{t("forms.contact.almostDone")}</h3>
+            <p className="text-sm md:text-base text-muted-foreground">{t("forms.contact.nameStepDescription")}</p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3 md:gap-4">
             <FormFieldWrapper label={t("forms.contact.firstName")} htmlFor="firstName" required>
               <Input
                 id="firstName"
                 value={formData.firstName}
                 onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayed(); }}
-                className="h-14 text-lg"
+                className="h-11 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
             <FormFieldWrapper label={t("forms.contact.lastName")} htmlFor="lastName" required>
@@ -412,7 +412,7 @@ const SubsidyForm = () => {
                 id="lastName"
                 value={formData.lastName}
                 onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayed(); }}
-                className="h-14 text-lg"
+                className="h-11 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
           </div>
