@@ -270,7 +270,7 @@ const MortgageForm = () => {
             <Input
               id="commune"
               value={formData.commune}
-              onChange={(e) => { updateFormData({ commune: e.target.value }); notifyDelayed(); }}
+              onChange={(e) => { updateFormData({ commune: e.target.value }); }}
               placeholder="Lausanne, Genève..."
               className="h-14 text-lg"
             />
