@@ -344,7 +344,7 @@ const SubsidyForm = () => {
           <FormFieldWrapper label={t("forms.subsidy.specialSituation")}>
             <RadioGroup
               value={formData.specialSituation}
-              onValueChange={(value) => { updateFormData({ specialSituation: value }); notify(); }}
+              onValueChange={(value) => updateFormData({ specialSituation: value })}
               className="grid gap-3"
             >
               {[
