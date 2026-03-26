@@ -434,9 +434,9 @@ const Pillar3Form = () => {
                 { value: "dynamic", label: t("forms.pillar3.risks.dynamic") },
                 { value: "aggressive", label: t("forms.pillar3.risks.aggressive") },
               ].map((risk) => (
-                <label key={risk.value} htmlFor={risk.value} className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+                <label key={risk.value} htmlFor={risk.value} className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
                   <RadioGroupItem value={risk.value} id={risk.value} />
-                  <span className="flex-1 text-lg">
+                  <span className="flex-1 text-sm md:text-lg">
                     {risk.label}
                   </span>
                 </label>
