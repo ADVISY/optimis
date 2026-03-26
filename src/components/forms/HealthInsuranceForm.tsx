@@ -579,7 +579,7 @@ const HealthInsuranceForm = () => {
               value={formData.postalCode}
               onChange={(e) => { updateFormData({ postalCode: e.target.value }); notify(); }}
               placeholder="1000"
-              className="h-8 md:h-11 text-xs md:text-base"
+              className="h-11 md:h-12 text-sm md:text-base"
             />
           </FormFieldWrapper>
         </div>
