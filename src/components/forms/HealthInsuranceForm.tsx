@@ -867,12 +867,15 @@ const HealthInsuranceForm = () => {
 
       {/* Step 7: Contact Details */}
       <FormStep isActive={currentStep === 7}>
-        <div className="space-y-2 md:space-y-6">
-          <div className="text-center mb-2 md:mb-6">
-            <h3 className="text-xs md:text-lg font-semibold mb-0.5 md:mb-2">
+        <div className="space-y-3 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <div className="inline-flex items-center justify-center w-11 h-11 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
+              <Phone className="h-5 w-5 md:h-8 md:w-8 text-primary" />
+            </div>
+            <h3 className="text-sm md:text-lg font-semibold mb-0.5 md:mb-2">
               {t("forms.contact.contactStepTitle", "Où pouvons-nous vous joindre ?")}
             </h3>
-            <p className="text-[10px] md:text-sm text-muted-foreground">
+            <p className="text-xs md:text-sm text-muted-foreground">
               {t("forms.contact.contactStepDescription", "Un conseiller vous contactera pour vous présenter les meilleures offres.")}
             </p>
           </div>
@@ -891,7 +894,7 @@ const HealthInsuranceForm = () => {
               value={formData.email}
               onChange={(e) => { updateFormData({ email: e.target.value.toLowerCase() }); notifyDelayed(); }}
               placeholder="votre@email.ch"
-              className={`h-8 md:h-14 text-xs md:text-lg ${stepErrors.email ? 'border-red-400 focus-visible:ring-red-400' : ''}`}
+              className={`h-11 md:h-14 text-sm md:text-lg ${stepErrors.email ? 'border-red-400 focus-visible:ring-red-400' : ''}`}
             />
           </FormFieldWrapper>
 
@@ -909,12 +912,12 @@ const HealthInsuranceForm = () => {
               value={formData.phone}
               onChange={(e) => { handlePhoneChange(e.target.value); notifyDelayed(); }}
               placeholder="+41 79 123 45 67"
-              className={`h-8 md:h-14 text-xs md:text-lg ${stepErrors.phone ? 'border-red-400 focus-visible:ring-red-400' : ''}`}
+              className={`h-11 md:h-14 text-sm md:text-lg ${stepErrors.phone ? 'border-red-400 focus-visible:ring-red-400' : ''}`}
             />
           </FormFieldWrapper>
 
-          <div className="bg-emerald-50 border border-emerald-200 rounded-md md:rounded-xl p-2 md:p-4 text-center">
-            <p className="text-[10px] md:text-sm text-emerald-700">
+          <div className="bg-emerald-50 border border-emerald-200 rounded-lg md:rounded-xl p-3 md:p-4 text-center">
+            <p className="text-xs md:text-sm text-emerald-700">
               🔒 {t("forms.contact.privacyNote", "Vos données sont protégées et ne seront jamais partagées.")}
             </p>
           </div>
