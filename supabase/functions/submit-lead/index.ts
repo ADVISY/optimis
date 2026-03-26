@@ -27,8 +27,8 @@ serve(async (req) => {
     // Use custom webhook URL if provided, otherwise use default
     const webhookUrl = leadData.webhookUrl || DEFAULT_WEBHOOK_URL;
     
-    // Remove webhookUrl from lead data before sending to Zapier
-    const { webhookUrl: _, ...dataToSend } = leadData;
+    // Remove technical/internal fields before sending to Zapier
+    const { webhookUrl: _, userAgent: _ua, pageUrl: _pu, source: _src, ...dataToSend } = leadData;
 
     console.log("Sending to Zapier webhook:", webhookUrl);
 
