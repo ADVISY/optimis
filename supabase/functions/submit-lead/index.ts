@@ -7,7 +7,7 @@ const corsHeaders = {
 };
 
 // Default Zapier webhook URL
-const DEFAULT_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/21326682/ul72n92/";
+const DEFAULT_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/21326682/un2n4oc/";
 
 serve(async (req) => {
   // Handle CORS preflight requests
