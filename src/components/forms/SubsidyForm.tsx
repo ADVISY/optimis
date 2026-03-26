@@ -62,6 +62,7 @@ const SubsidyForm = () => {
 
   const { submitLead, isSubmitting } = useLeadSubmission({
     formType: "subsidy",
+    webhookUrl: "https://hooks.zapier.com/hooks/catch/21326682/unuyk5n/",
   });
 
   const {
