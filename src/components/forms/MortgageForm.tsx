@@ -236,7 +236,7 @@ const MortgageForm = () => {
 
       {/* Step 2: Property Details */}
       <FormStep isActive={currentStep === 2}>
-        <div className="space-y-4">
+        <div className="space-y-3 md:space-y-4">
           <FormFieldWrapper label={t("forms.mortgage.propertyValue")} htmlFor="propertyValue" required>
             <Input
               id="propertyValue"
