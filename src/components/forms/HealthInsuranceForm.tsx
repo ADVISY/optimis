@@ -545,7 +545,7 @@ const HealthInsuranceForm = () => {
 
       {/* Step 3: Location */}
       <FormStep isActive={currentStep === 3}>
-        <div className="space-y-2 md:space-y-6">
+        <div className="space-y-3 md:space-y-6">
           <FormFieldWrapper
             label={t("forms.healthInsurance.canton")}
             htmlFor="canton"
