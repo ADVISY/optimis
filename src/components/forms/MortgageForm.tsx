@@ -220,7 +220,7 @@ const MortgageForm = () => {
               value={formData.propertyType}
               onValueChange={(value) => { updateFormData({ propertyType: value }); notify(); }}
             >
-              <SelectTrigger className="h-14 text-lg">
+              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.mortgage.selectPropertyType")} />
               </SelectTrigger>
               <SelectContent>
