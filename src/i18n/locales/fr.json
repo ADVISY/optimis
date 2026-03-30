@@ -1358,6 +1358,34 @@
       "byEmail": "Recevoir par email",
       "callMe": "Être rappelé",
       "chooseOffer": "Choisir cette offre"
+    },
+    "lpp": {
+      "title": "Vérifiez votre avoir LPP en 1 minute",
+      "description": "Gratuit • Sans engagement • 100% confidentiel",
+      "objectiveQuestion": "Que souhaitez-vous faire ?",
+      "situationQuestion": "Quelle est votre situation actuelle ?",
+      "yearsQuestion": "Combien d'années avez-vous travaillé en Suisse ?",
+      "birthDateQuestion": "Quelle est votre date de naissance ?",
+      "birthDate": "Date de naissance",
+      "ctaFinal": "Recevoir mon analyse gratuite",
+      "thankYouTitle": "Merci pour votre demande !",
+      "thankYouDescription": "Un conseiller vous contactera prochainement pour analyser votre situation LPP.",
+      "objectives": {
+        "find": "🔍 Retrouver mes fonds LPP",
+        "consolidate": "🔄 Réunir mes fonds LPP"
+      },
+      "situations": {
+        "employed": "Salarié",
+        "selfEmployed": "Indépendant",
+        "unemployed": "Chômage",
+        "other": "Autre"
+      },
+      "years": {
+        "less10": "Moins de 10 ans",
+        "plus10": "Plus de 10 ans",
+        "plus20": "Plus de 20 ans",
+        "plus30": "Plus de 30 ans"
+      }
     }
   },
   "comparators": {
