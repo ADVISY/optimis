@@ -43,16 +43,16 @@ const Partenaires = () => {
 
         <div className="container mx-auto px-4 relative z-10 py-4 md:py-8 lg:py-14">
           {/* Logo bar */}
-          <div className="mb-6 md:mb-10">
-            <img src={logo} alt="Optimis" className="h-8 md:h-10 w-auto" />
+          <div className="mb-4 md:mb-10">
+            <img src={logo} alt="Optimis" className="h-7 md:h-10 w-auto" />
           </div>
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-start">
             {/* Left: text content */}
             <motion.div
               initial="hidden"
               animate="visible"
               variants={stagger}
-              className="text-left pt-4 md:pt-8"
+              className="text-left"
             >
               <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-accent/20 text-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
                 <Zap className="h-4 w-4" />
