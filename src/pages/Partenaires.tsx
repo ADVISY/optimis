@@ -59,12 +59,12 @@ const Partenaires = () => {
                 B2B — Partenariat exclusif
               </motion.div>
 
-              <motion.h1 variants={fadeUp} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.1] mb-5 tracking-tight">
+              <motion.h1 variants={fadeUp} className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-black text-white leading-[1.1] mb-3 md:mb-5 tracking-tight">
                 Recevez des leads ultra qualifiés,{" "}
                 <span className="text-accent">prêts à être convertis</span>
               </motion.h1>
 
-              <motion.p variants={fadeUp} className="text-base md:text-lg text-white/70 mb-8 max-w-lg">
+              <motion.p variants={fadeUp} className="text-sm md:text-lg text-white/70 mb-4 md:mb-8 max-w-lg">
                 Optimis génère chaque jour des prospects en assurance, finance, immobilier et télécom.
               </motion.p>
 
