@@ -432,6 +432,12 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
         address: "Adresse",
         city: "Ville",
       },
+      partner: {
+        budget: "Budget mensuel",
+        sector: "Secteur d'activité",
+        companyName: "Entreprise",
+        salesForce: "Force de vente",
+      },
     };
 
     // Apply field renaming
