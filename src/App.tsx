@@ -42,6 +42,7 @@ import ComparateurResiliation from "./pages/comparateurs/ComparateurResiliation"
 import ComparateurPilier3 from "./pages/comparateurs/ComparateurPilier3";
 import ComparateurHypotheque from "./pages/comparateurs/ComparateurHypotheque";
 import ComparateurProfessionnel from "./pages/comparateurs/ComparateurProfessionnel";
+import ComparateurLpp from "./pages/comparateurs/ComparateurLpp";
 
 import { localizedRoutes } from "./utils/localizedRoutes";
 
