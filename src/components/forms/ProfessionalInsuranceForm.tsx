@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { format } from "date-fns";
 import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
@@ -10,7 +9,6 @@ import LoadingComparison from "@/components/forms/LoadingComparison";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -20,15 +18,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { mockLegalProtectionOffers, InsuranceOffer } from "@/data/mockInsuranceData";
-import { Lock, User, Phone, CalendarIcon } from "lucide-react";
+import { Lock, User, Phone } from "lucide-react";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
 import { cn } from "@/lib/utils";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { Button } from "@/components/ui/button";
 
 interface ProfessionalInsuranceFormData {
   insuranceTypes: {
@@ -42,9 +36,8 @@ interface ProfessionalInsuranceFormData {
   activityType: string;
   legalForm: string;
   employeesCount: string;
-  canton: string;
   revenue: string;
-  contractStartDate: Date | undefined;
+  contractStartDate: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -52,7 +45,7 @@ interface ProfessionalInsuranceFormData {
   message: string;
 }
 
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 6;
 
 const ProfessionalInsuranceForm = () => {
   const { t, i18n } = useTranslation();
@@ -73,9 +66,8 @@ const ProfessionalInsuranceForm = () => {
     activityType: "",
     legalForm: "",
     employeesCount: "",
-    canton: "",
     revenue: "",
-    contractStartDate: undefined,
+    contractStartDate: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -114,18 +106,21 @@ const ProfessionalInsuranceForm = () => {
     }, 3000);
   };
 
+  const isValidDate = (d: string) => /^\d{2}\/\d{2}\/\d{4}$/.test(d);
+
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 2: return formData.activityType.trim() !== "" && formData.legalForm !== "" && formData.employeesCount !== "" && formData.canton !== "" && formData.revenue.trim() !== "";
-      case 3: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
-      case 4: return isValidEmail(formData.email) && isValidPhone(formData.phone);
+      case 2: return formData.activityType.trim() !== "" && formData.legalForm !== "" && formData.employeesCount !== "";
+      case 3: return formData.revenue.trim() !== "" && isValidDate(formData.contractStartDate);
+      case 4: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
+      case 5: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
     }
   };
 
   const getStepErrors = (step: number): Record<string, string> => {
-    if (step === 3) return getIdentityErrors(formData.firstName, formData.lastName);
-    if (step === 4) return getContactErrors(formData.email, formData.phone);
+    if (step === 4) return getIdentityErrors(formData.firstName, formData.lastName);
+    if (step === 5) return getContactErrors(formData.email, formData.phone);
     return {};
   };
 
@@ -224,7 +219,7 @@ const ProfessionalInsuranceForm = () => {
               value={formData.activityType}
               onChange={(e) => { updateFormData({ activityType: e.target.value }); notifyDelayed(); }}
               placeholder={t("forms.professionalInsurance.activityPlaceholder")}
-              className="h-9 md:h-14 text-xs md:text-lg"
+              className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
@@ -233,7 +228,7 @@ const ProfessionalInsuranceForm = () => {
               value={formData.legalForm}
               onValueChange={(value) => { updateFormData({ legalForm: value }); notifyDelayed(); }}
             >
-              <SelectTrigger className="h-9 md:h-14 text-xs md:text-lg">
+              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.professionalInsurance.selectLegalForm")} />
               </SelectTrigger>
               <SelectContent>
@@ -250,7 +245,7 @@ const ProfessionalInsuranceForm = () => {
               value={formData.employeesCount}
               onValueChange={(value) => { updateFormData({ employeesCount: value }); notifyDelayed(); }}
             >
-              <SelectTrigger className="h-9 md:h-14 text-xs md:text-lg">
+              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.professionalInsurance.selectEmployees")} />
               </SelectTrigger>
               <SelectContent>
@@ -262,67 +257,48 @@ const ProfessionalInsuranceForm = () => {
               </SelectContent>
             </Select>
           </FormFieldWrapper>
+        </div>
+      </FormStep>
 
-          <FormFieldWrapper label={t("forms.healthInsurance.canton")} htmlFor="canton" required>
-            <Select
-              value={formData.canton}
-              onValueChange={(value) => { updateFormData({ canton: value }); notifyDelayed(); }}
-            >
-              <SelectTrigger className="h-9 md:h-14 text-xs md:text-lg">
-                <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
-              </SelectTrigger>
-              <SelectContent>
-                {swissCantons.map((canton) => (
-                  <SelectItem key={canton.code} value={canton.code}>
-                    {getCantonName(canton.code, i18n.language)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </FormFieldWrapper>
-
+      {/* Step 3: Revenue & Contract Start */}
+      <FormStep isActive={currentStep === 3}>
+        <div className="space-y-2 md:space-y-4">
           <FormFieldWrapper label={t("forms.professionalInsurance.revenue")} htmlFor="revenue" required>
             <Input
               id="revenue"
               value={formData.revenue}
               onChange={(e) => { updateFormData({ revenue: e.target.value }); notifyDelayed(); }}
               placeholder={t("forms.professionalInsurance.revenuePlaceholder")}
-              className="h-9 md:h-14 text-xs md:text-lg"
+              className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
-          <FormFieldWrapper label={t("forms.professionalInsurance.contractStartDate")} required>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    "w-full h-9 md:h-14 text-xs md:text-lg justify-start text-left font-normal",
-                    !formData.contractStartDate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {formData.contractStartDate
-                    ? format(formData.contractStartDate, "dd/MM/yyyy")
-                    : t("forms.professionalInsurance.selectDate")}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={formData.contractStartDate}
-                  onSelect={(date) => { updateFormData({ contractStartDate: date }); notify(); }}
-                  initialFocus
-                  className={cn("p-3 pointer-events-auto")}
-                />
-              </PopoverContent>
-            </Popover>
+          <FormFieldWrapper label={t("forms.professionalInsurance.contractStartDate")} htmlFor="contractStartDate" required>
+            <Input
+              id="contractStartDate"
+              value={formData.contractStartDate}
+              onChange={(e) => {
+                const val = e.target.value;
+                // Auto-format: add slashes after DD and MM
+                let formatted = val.replace(/[^\d/]/g, '');
+                if (formatted.length === 2 && !formatted.includes('/')) formatted += '/';
+                if (formatted.length === 5 && formatted.split('/').length === 2) formatted += '/';
+                if (formatted.length <= 10) {
+                  updateFormData({ contractStartDate: formatted });
+                  notifyDelayed();
+                }
+              }}
+              placeholder="JJ/MM/AAAA"
+              inputMode="numeric"
+              maxLength={10}
+              className="h-11 md:h-14 text-sm md:text-lg"
+            />
           </FormFieldWrapper>
         </div>
       </FormStep>
 
-      {/* Step 3: Identity */}
-      <FormStep isActive={currentStep === 3}>
+      {/* Step 4: Identity */}
+      <FormStep isActive={currentStep === 4}>
         <div className="space-y-3 md:space-y-6">
           <div className="text-center mb-3 md:mb-6">
             <div className="inline-flex items-center justify-center w-10 h-10 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
@@ -338,7 +314,7 @@ const ProfessionalInsuranceForm = () => {
                 id="firstName"
                 value={formData.firstName}
                 onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayed(); }}
-                className="h-9 md:h-14 text-xs md:text-lg"
+                className="h-11 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
             <FormFieldWrapper label={t("forms.contact.lastName")} htmlFor="lastName" required>
@@ -346,15 +322,15 @@ const ProfessionalInsuranceForm = () => {
                 id="lastName"
                 value={formData.lastName}
                 onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayed(); }}
-                className="h-9 md:h-14 text-xs md:text-lg"
+                className="h-11 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
           </div>
         </div>
       </FormStep>
 
-      {/* Step 4: Contact */}
-      <FormStep isActive={currentStep === 4}>
+      {/* Step 5: Contact */}
+      <FormStep isActive={currentStep === 5}>
         <div className="space-y-3 md:space-y-6">
           <div className="text-center mb-3 md:mb-6">
             <div className="inline-flex items-center justify-center w-10 h-10 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
@@ -372,7 +348,7 @@ const ProfessionalInsuranceForm = () => {
               autoComplete="email"
               value={formData.email}
               onChange={(e) => { updateFormData({ email: e.target.value }); notifyDelayed(); }}
-              className={cn("h-9 md:h-14 text-xs md:text-lg", stepErrors.email && "border-red-400")}
+              className={cn("h-11 md:h-14 text-sm md:text-lg", stepErrors.email && "border-destructive")}
             />
           </FormFieldWrapper>
 
@@ -385,7 +361,7 @@ const ProfessionalInsuranceForm = () => {
               value={formData.phone}
               onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); notifyDelayed(); }}
               placeholder="+41 79 123 45 67"
-              className={cn("h-9 md:h-14 text-xs md:text-lg", stepErrors.phone && "border-red-400")}
+              className={cn("h-11 md:h-14 text-sm md:text-lg", stepErrors.phone && "border-destructive")}
             />
           </FormFieldWrapper>
 
@@ -396,8 +372,8 @@ const ProfessionalInsuranceForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 5: Message */}
-      <FormStep isActive={currentStep === 5}>
+      {/* Step 6: Message */}
+      <FormStep isActive={currentStep === 6}>
         <div className="space-y-2 md:space-y-4">
           <FormFieldWrapper label={t("forms.professionalInsurance.message")} htmlFor="message">
             <Textarea
@@ -406,7 +382,7 @@ const ProfessionalInsuranceForm = () => {
               onChange={(e) => updateFormData({ message: e.target.value })}
               placeholder={t("forms.professionalInsurance.messagePlaceholder")}
               rows={3}
-              className="text-xs md:text-lg min-h-[80px] md:min-h-[120px]"
+              className="text-sm md:text-lg min-h-[80px] md:min-h-[120px]"
             />
           </FormFieldWrapper>
         </div>
