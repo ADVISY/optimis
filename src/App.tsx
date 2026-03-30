@@ -42,6 +42,7 @@ import ComparateurResiliation from "./pages/comparateurs/ComparateurResiliation"
 import ComparateurPilier3 from "./pages/comparateurs/ComparateurPilier3";
 import ComparateurHypotheque from "./pages/comparateurs/ComparateurHypotheque";
 import ComparateurProfessionnel from "./pages/comparateurs/ComparateurProfessionnel";
+import ComparateurLpp from "./pages/comparateurs/ComparateurLpp";
 
 import { localizedRoutes } from "./utils/localizedRoutes";
 
@@ -116,6 +117,7 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("pillar3Landing", <ComparateurPilier3 />)}
         {createLocalizedRoutes("mortgageLanding", <ComparateurHypotheque />)}
         {createLocalizedRoutes("businessLanding", <ComparateurProfessionnel />)}
+        {createLocalizedRoutes("lppLanding", <ComparateurLpp />)}
         
         {/* Legacy comparateur routes - redirect to new URLs */}
         <Route path="/comparateur/sante" element={<Navigate to="../assurance-maladie-landing" replace />} />

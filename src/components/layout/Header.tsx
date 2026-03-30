@@ -12,7 +12,8 @@ import {
   CreditCard,
   FileX,
   Banknote,
-  Briefcase
+  Briefcase,
+  Landmark
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -120,6 +121,15 @@ const financesCategories = [
       { labelKey: "megaMenu.compareMortgages", href: "/hypotheque-offres" },
       { labelKey: "megaMenu.mortgageTypes", href: "/hypotheque" },
       { labelKey: "megaMenu.currentRates", href: "/hypotheque" },
+    ]
+  },
+  { 
+    id: "lpp",
+    labelKey: "nav.lpp", 
+    icon: Landmark,
+    href: "/avoirs-lpp-libre-passage",
+    subLinks: [
+      { labelKey: "lpp.heroBadge", href: "/avoirs-lpp-libre-passage" },
     ]
   },
 ];
