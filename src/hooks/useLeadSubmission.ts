@@ -90,6 +90,23 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
       }
     }
 
+    // Professional insurance: combine insuranceTypes into a single readable string
+    if (formType === "professional-insurance") {
+      const typeLabels: Record<string, string> = {
+        insuranceTypes_rcProfessional: "RC Professionnelle",
+        insuranceTypes_lossOfEarnings: "Perte de gain",
+        insuranceTypes_laa: "LAA (Accident)",
+        insuranceTypes_lpp: "LPP (Prévoyance)",
+        insuranceTypes_legalProtection: "Protection juridique",
+        insuranceTypes_multiRisk: "Multirisque entreprise",
+      };
+      const selected = Object.entries(typeLabels)
+        .filter(([key]) => normalizedFormData[key] === true)
+        .map(([, label]) => label);
+      Object.keys(typeLabels).forEach((key) => delete normalizedFormData[key]);
+      normalizedFormData.insuranceTypes = selected.join(", ") || "Aucun";
+    }
+
     // Rename fields to clean French labels for Google Sheets
     const fieldLabels: Record<string, Record<string, string>> = {
       // Common fields (applied to all forms)
