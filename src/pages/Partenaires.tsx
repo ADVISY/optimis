@@ -30,7 +30,7 @@ const Partenaires = () => {
   return (
     <div className="flex min-h-screen flex-col">
       {/* ── HERO WITH FORM ── */}
-      <section id="partner-form" className="relative overflow-hidden !py-0">
+      <section id="partner-form" className="relative overflow-hidden !py-0 !mb-0">
         <div className="absolute inset-0 bg-gradient-to-br from-foreground via-primary to-foreground opacity-95" />
         <div className="absolute inset-0 opacity-10" style={{
           backgroundImage: "radial-gradient(circle at 20% 50%, hsl(var(--accent)) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(var(--primary)) 0%, transparent 40%)",
