@@ -69,7 +69,9 @@
     "mortgage": "Ipoteca",
     "professionalInsurance": "Assicurazioni Aziendali",
     "lpp": "Averi LPP",
-    "lppCompare": "Verifica averi LPP"
+    "lppCompare": "Verifica averi LPP",
+    "realEstate": "Valutazione immobiliare",
+    "realEstateCompare": "Valutazione gratuita"
   },
   "stats": {
     "recommended": "Raccomandato",

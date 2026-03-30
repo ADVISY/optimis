@@ -69,7 +69,9 @@
     "mortgage": "Hypothek",
     "professionalInsurance": "Firmenversicherungen",
     "lpp": "BVG-Guthaben",
-    "lppCompare": "BVG-Guthaben prüfen"
+    "lppCompare": "BVG-Guthaben prüfen",
+    "realEstate": "Immobilienbewertung",
+    "realEstateCompare": "Kostenlose Bewertung"
   },
   "stats": {
     "recommended": "Empfohlen",
