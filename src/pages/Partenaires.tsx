@@ -83,7 +83,7 @@ const Partenaires = () => {
                 ))}
               </motion.div>
 
-              <motion.p variants={fadeUp} className="text-sm text-white/50 flex items-center gap-1.5">
+              <motion.p variants={fadeUp} className="hidden md:flex text-sm text-white/50 items-center gap-1.5">
                 <Lock className="h-3.5 w-3.5" />
                 Partenaires limités par secteur — places limitées
               </motion.p>
