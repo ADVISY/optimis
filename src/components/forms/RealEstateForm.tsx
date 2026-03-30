@@ -21,7 +21,6 @@ interface RealEstateFormData {
   surface: string;
   saleTimeline: string;
   hasMandate: string;
-  availableForEstimation: string;
   firstName: string;
   lastName: string;
   phone: string;
@@ -42,7 +41,7 @@ const RealEstateForm = () => {
     surface: "",
     saleTimeline: "",
     hasMandate: "",
-    availableForEstimation: "",
+    
     firstName: "",
     lastName: "",
     phone: "",
@@ -79,7 +78,7 @@ const RealEstateForm = () => {
       case 2: return formData.propertyType !== "";
       case 3: return formData.rooms !== "";
       case 4: return formData.surface.trim() !== "";
-      case 5: return formData.saleTimeline !== "" && formData.hasMandate !== "" && formData.availableForEstimation !== "";
+      case 5: return formData.saleTimeline !== "" && formData.hasMandate !== "";
       case 6: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
       case 7: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
@@ -293,31 +292,6 @@ const RealEstateForm = () => {
                 >
                   <RadioGroupItem value={option.value} id={`mandate-${option.value}`} />
                   <Label htmlFor={`mandate-${option.value}`} className="text-sm md:text-base cursor-pointer">{option.label}</Label>
-                </label>
-              ))}
-            </RadioGroup>
-          </div>
-
-          <div>
-            <p className="text-xs md:text-base font-medium text-foreground mb-2 md:mb-3">{t("forms.realEstate.availabilityQuestion")}</p>
-            <RadioGroup
-              value={formData.availableForEstimation}
-              onValueChange={(value) => { updateFormData({ availableForEstimation: value }); }}
-              className="flex gap-3"
-            >
-              {yesNoOptions.map((option) => (
-                <label
-                  key={`avail-${option.value}`}
-                  htmlFor={`avail-${option.value}`}
-                  className={cn(
-                    "flex items-center space-x-2 p-3 border-2 rounded-xl cursor-pointer transition-all flex-1 justify-center",
-                    formData.availableForEstimation === option.value
-                      ? "border-primary bg-primary/5"
-                      : "border-border hover:border-primary/50"
-                  )}
-                >
-                  <RadioGroupItem value={option.value} id={`avail-${option.value}`} />
-                  <Label htmlFor={`avail-${option.value}`} className="text-sm md:text-base cursor-pointer">{option.label}</Label>
                 </label>
               ))}
             </RadioGroup>
