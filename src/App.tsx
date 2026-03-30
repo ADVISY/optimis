@@ -174,6 +174,7 @@ const App = () => (
           <Route path="/qui-sommes-nous" element={<Navigate to="/fr/qui-sommes-nous" replace />} />
           <Route path="/faqs" element={<Navigate to="/fr/faqs" replace />} />
           <Route path="/assurances" element={<Navigate to="/fr/assurances" replace />} />
+          <Route path="/assurance-professionnelle" element={<Navigate to="/fr/assurance-professionnelle" replace />} />
           <Route path="/merci" element={<Navigate to="/fr/merci" replace />} />
           <Route path="/politique-de-confidentialite" element={<Navigate to="/fr/politique-de-confidentialite" replace />} />
           <Route path="/legal" element={<Navigate to="/fr/legal" replace />} />
