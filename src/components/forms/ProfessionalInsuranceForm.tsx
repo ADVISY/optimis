@@ -280,6 +280,44 @@ const ProfessionalInsuranceForm = () => {
               </SelectContent>
             </Select>
           </FormFieldWrapper>
+
+          <FormFieldWrapper label={t("forms.professionalInsurance.revenue")} htmlFor="revenue" required>
+            <Input
+              id="revenue"
+              value={formData.revenue}
+              onChange={(e) => { updateFormData({ revenue: e.target.value }); notifyDelayed(); }}
+              placeholder={t("forms.professionalInsurance.revenuePlaceholder")}
+              className="h-9 md:h-14 text-xs md:text-lg"
+            />
+          </FormFieldWrapper>
+
+          <FormFieldWrapper label={t("forms.professionalInsurance.contractStartDate")} required>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className={cn(
+                    "w-full h-9 md:h-14 text-xs md:text-lg justify-start text-left font-normal",
+                    !formData.contractStartDate && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {formData.contractStartDate
+                    ? format(formData.contractStartDate, "dd/MM/yyyy")
+                    : t("forms.professionalInsurance.selectDate")}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={formData.contractStartDate}
+                  onSelect={(date) => { updateFormData({ contractStartDate: date }); notify(); }}
+                  initialFocus
+                  className={cn("p-3 pointer-events-auto")}
+                />
+              </PopoverContent>
+            </Popover>
+          </FormFieldWrapper>
         </div>
       </FormStep>
 
