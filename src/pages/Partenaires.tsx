@@ -54,7 +54,7 @@ const Partenaires = () => {
               variants={stagger}
               className="text-left"
             >
-              <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-accent/20 text-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+              <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-accent/20 text-accent px-3 py-1 rounded-full text-xs md:text-sm font-semibold mb-3 md:mb-6">
                 <Zap className="h-4 w-4" />
                 B2B — Partenariat exclusif
               </motion.div>
