@@ -19,11 +19,11 @@ export function useFormValidation() {
     let cleaned = value.replace(/[^\d+]/g, '');
 
     if (cleaned.length > 0 && !cleaned.startsWith('+') && !cleaned.startsWith('0')) {
-      cleaned = '+41' + cleaned;
+      cleaned = '0' + cleaned;
     }
 
     if (cleaned.startsWith('+41')) {
-      const digits = cleaned.slice(3);
+      const digits = cleaned.slice(3).slice(0, 9);
       let formatted = '+41';
       if (digits.length > 0) formatted += ' ' + digits.slice(0, 2);
       if (digits.length > 2) formatted += ' ' + digits.slice(2, 5);
@@ -33,7 +33,7 @@ export function useFormValidation() {
     }
 
     if (cleaned.startsWith('0')) {
-      const digits = cleaned;
+      const digits = cleaned.slice(0, 10);
       let formatted = digits.slice(0, 3);
       if (digits.length > 3) formatted += ' ' + digits.slice(3, 6);
       if (digits.length > 6) formatted += ' ' + digits.slice(6, 8);
@@ -48,8 +48,15 @@ export function useFormValidation() {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
   }, []);
 
+  /** Validate Swiss phone: must have exactly 10 digits (0XX) or +41 + 9 digits */
   const isValidPhone = useCallback((phone: string): boolean => {
-    return phone.replace(/\s/g, '').length >= 10;
+    const digitsOnly = phone.replace(/[^\d]/g, '');
+    // +41 format: 41 + 9 digits = 11 digits total
+    if (phone.trim().startsWith('+41')) {
+      return digitsOnly.length === 11;
+    }
+    // 0XX format: exactly 10 digits
+    return digitsOnly.length === 10;
   }, []);
 
   /** Get contact step errors (email + phone) */
