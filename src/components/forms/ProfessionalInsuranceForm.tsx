@@ -43,6 +43,8 @@ interface ProfessionalInsuranceFormData {
   legalForm: string;
   employeesCount: string;
   canton: string;
+  revenue: string;
+  contractStartDate: Date | undefined;
   firstName: string;
   lastName: string;
   email: string;
