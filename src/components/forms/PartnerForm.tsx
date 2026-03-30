@@ -348,7 +348,7 @@ const PartnerForm = () => {
         isSubmitting={isSubmitting}
         isLastStep={isLastStep}
         canProceed={canProceed}
-        submitLabel={t("partner.submitCta", "Être contacté par Optimis")}
+        
       />
     </FormContainer>
   );
