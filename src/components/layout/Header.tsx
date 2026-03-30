@@ -123,6 +123,15 @@ const financesCategories = [
       { labelKey: "megaMenu.currentRates", href: "/hypotheque" },
     ]
   },
+  { 
+    id: "lpp",
+    labelKey: "nav.lpp", 
+    icon: Landmark,
+    href: "/avoirs-lpp-libre-passage",
+    subLinks: [
+      { labelKey: "lpp.heroBadge", href: "/avoirs-lpp-libre-passage" },
+    ]
+  },
 ];
 
 // Services menu data
