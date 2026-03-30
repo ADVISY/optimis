@@ -69,7 +69,7 @@ const Partenaires = () => {
               </motion.p>
 
               {/* Impact stats */}
-              <motion.div variants={fadeUp} className="grid grid-cols-2 gap-3 mb-8 max-w-lg">
+              <motion.div variants={fadeUp} className="hidden md:grid grid-cols-2 gap-3 mb-8 max-w-lg">
                 {[
                   { icon: CalendarDays, text: "Leads ultra frais (< 24h)" },
                   { icon: Clock, text: "Date & heure enregistrées" },
