@@ -231,7 +231,7 @@ const ProfessionalInsuranceForm = () => {
           <FormFieldWrapper label={t("forms.professionalInsurance.legalForm")} required>
             <Select
               value={formData.legalForm}
-              onValueChange={(value) => updateFormData({ legalForm: value })}
+              onValueChange={(value) => { updateFormData({ legalForm: value }); notifyDelayed(); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-xs md:text-lg">
                 <SelectValue placeholder={t("forms.professionalInsurance.selectLegalForm")} />
@@ -248,7 +248,7 @@ const ProfessionalInsuranceForm = () => {
           <FormFieldWrapper label={t("forms.professionalInsurance.employeesCount")} required>
             <Select
               value={formData.employeesCount}
-              onValueChange={(value) => updateFormData({ employeesCount: value })}
+              onValueChange={(value) => { updateFormData({ employeesCount: value }); notifyDelayed(); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-xs md:text-lg">
                 <SelectValue placeholder={t("forms.professionalInsurance.selectEmployees")} />
@@ -266,7 +266,7 @@ const ProfessionalInsuranceForm = () => {
           <FormFieldWrapper label={t("forms.healthInsurance.canton")} htmlFor="canton" required>
             <Select
               value={formData.canton}
-              onValueChange={(value) => updateFormData({ canton: value })}
+              onValueChange={(value) => { updateFormData({ canton: value }); notifyDelayed(); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-xs md:text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
