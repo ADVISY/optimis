@@ -108,7 +108,7 @@ const Partenaires = () => {
       </section>
 
       {/* ── POUR QUI ? ── */}
-      <section className="bg-background py-10 md:py-16">
+      <section className="bg-background py-12 md:py-16">
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-4xl mx-auto text-center">
             <motion.h2 variants={fadeUp} className="text-headline mb-4">
