@@ -245,58 +245,59 @@ const RealEstateForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 5: Timeline + Mandate + Availability */}
+      {/* Step 5: Timeline */}
       <FormStep isActive={currentStep === 5}>
-        <div className="space-y-4 md:space-y-6">
-          <div>
-            <p className="text-xs md:text-base font-medium text-foreground mb-2 md:mb-3">{t("forms.realEstate.timelineQuestion")}</p>
-            <RadioGroup
-              value={formData.saleTimeline}
-              onValueChange={(value) => { updateFormData({ saleTimeline: value }); }}
-              className="space-y-2"
-            >
-              {timelineOptions.map((option) => (
-                <label
-                  key={option.value}
-                  htmlFor={`timeline-${option.value}`}
-                  className={cn(
-                    "flex items-center space-x-3 p-3 border-2 rounded-xl cursor-pointer transition-all",
-                    formData.saleTimeline === option.value
-                      ? "border-primary bg-primary/5"
-                      : "border-border hover:border-primary/50"
-                  )}
-                >
-                  <RadioGroupItem value={option.value} id={`timeline-${option.value}`} />
-                  <Label htmlFor={`timeline-${option.value}`} className="text-sm md:text-base cursor-pointer flex-1">{option.label}</Label>
-                </label>
-              ))}
-            </RadioGroup>
-          </div>
+        <div className="space-y-2 md:space-y-3">
+          <p className="text-xs md:text-base font-medium text-foreground mb-2 md:mb-4">{t("forms.realEstate.timelineQuestion")}</p>
+          <RadioGroup
+            value={formData.saleTimeline}
+            onValueChange={(value) => { updateFormData({ saleTimeline: value }); notify(); }}
+            className="space-y-2 md:space-y-3"
+          >
+            {timelineOptions.map((option) => (
+              <label
+                key={option.value}
+                htmlFor={`timeline-${option.value}`}
+                className={cn(
+                  "flex items-center space-x-3 p-3 md:p-4 border-2 rounded-xl cursor-pointer transition-all",
+                  formData.saleTimeline === option.value
+                    ? "border-primary bg-primary/5"
+                    : "border-border hover:border-primary/50"
+                )}
+              >
+                <RadioGroupItem value={option.value} id={`timeline-${option.value}`} />
+                <Label htmlFor={`timeline-${option.value}`} className="text-sm md:text-lg cursor-pointer flex-1">{option.label}</Label>
+              </label>
+            ))}
+          </RadioGroup>
+        </div>
+      </FormStep>
 
-          <div>
-            <p className="text-xs md:text-base font-medium text-foreground mb-2 md:mb-3">{t("forms.realEstate.mandateQuestion")}</p>
-            <RadioGroup
-              value={formData.hasMandate}
-              onValueChange={(value) => { updateFormData({ hasMandate: value }); }}
-              className="flex gap-3"
-            >
-              {yesNoOptions.map((option) => (
-                <label
-                  key={`mandate-${option.value}`}
-                  htmlFor={`mandate-${option.value}`}
-                  className={cn(
-                    "flex items-center space-x-2 p-3 border-2 rounded-xl cursor-pointer transition-all flex-1 justify-center",
-                    formData.hasMandate === option.value
-                      ? "border-primary bg-primary/5"
-                      : "border-border hover:border-primary/50"
-                  )}
-                >
-                  <RadioGroupItem value={option.value} id={`mandate-${option.value}`} />
-                  <Label htmlFor={`mandate-${option.value}`} className="text-sm md:text-base cursor-pointer">{option.label}</Label>
-                </label>
-              ))}
-            </RadioGroup>
-          </div>
+      {/* Step 6: Mandate */}
+      <FormStep isActive={currentStep === 6}>
+        <div className="space-y-2 md:space-y-3">
+          <p className="text-xs md:text-base font-medium text-foreground mb-2 md:mb-4">{t("forms.realEstate.mandateQuestion")}</p>
+          <RadioGroup
+            value={formData.hasMandate}
+            onValueChange={(value) => { updateFormData({ hasMandate: value }); notify(); }}
+            className="space-y-2 md:space-y-3"
+          >
+            {yesNoOptions.map((option) => (
+              <label
+                key={`mandate-${option.value}`}
+                htmlFor={`mandate-${option.value}`}
+                className={cn(
+                  "flex items-center space-x-3 p-3 md:p-4 border-2 rounded-xl cursor-pointer transition-all",
+                  formData.hasMandate === option.value
+                    ? "border-primary bg-primary/5"
+                    : "border-border hover:border-primary/50"
+                )}
+              >
+                <RadioGroupItem value={option.value} id={`mandate-${option.value}`} />
+                <Label htmlFor={`mandate-${option.value}`} className="text-sm md:text-lg cursor-pointer flex-1">{option.label}</Label>
+              </label>
+            ))}
+          </RadioGroup>
         </div>
       </FormStep>
 
