@@ -90,6 +90,36 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
       }
     }
 
+    // LPP: convert technical codes to translated labels
+    if (formType === "lpp-libre-passage") {
+      const objectiveMap: Record<string, string> = {
+        find: t("forms.lpp.objectives.find"),
+        consolidate: t("forms.lpp.objectives.consolidate"),
+      };
+      const situationMap: Record<string, string> = {
+        employed: t("forms.lpp.situations.employed"),
+        "self-employed": t("forms.lpp.situations.selfEmployed"),
+        unemployed: t("forms.lpp.situations.unemployed"),
+        other: t("forms.lpp.situations.other"),
+      };
+      const yearsMap: Record<string, string> = {
+        "less-10": t("forms.lpp.years.less10"),
+        "10-plus": t("forms.lpp.years.plus10"),
+        "20-plus": t("forms.lpp.years.plus20"),
+        "30-plus": t("forms.lpp.years.plus30"),
+      };
+
+      if (typeof normalizedFormData.objective === "string") {
+        normalizedFormData.objective = objectiveMap[normalizedFormData.objective] ?? normalizedFormData.objective;
+      }
+      if (typeof normalizedFormData.situation === "string") {
+        normalizedFormData.situation = situationMap[normalizedFormData.situation] ?? normalizedFormData.situation;
+      }
+      if (typeof normalizedFormData.yearsWorked === "string") {
+        normalizedFormData.yearsWorked = yearsMap[normalizedFormData.yearsWorked] ?? normalizedFormData.yearsWorked;
+      }
+    }
+
     // Professional insurance: combine insuranceTypes into a single readable string
     if (formType === "professional-insurance") {
       const typeLabels: Record<string, string> = {
