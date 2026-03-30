@@ -266,7 +266,7 @@ const ProfessionalInsuranceForm = () => {
           <FormFieldWrapper label={t("forms.healthInsurance.canton")} htmlFor="canton" required>
             <Select
               value={formData.canton}
-              onValueChange={(value) => updateFormData({ canton: value })}
+              onValueChange={(value) => { updateFormData({ canton: value }); notifyDelayed(); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-xs md:text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
