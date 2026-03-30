@@ -302,7 +302,7 @@ const RealEstateForm = () => {
       </FormStep>
 
       {/* Step 6: Identity */}
-      <FormStep isActive={currentStep === 6}>
+      <FormStep isActive={currentStep === 7}>
         <div className="space-y-3 md:space-y-6">
           <div className="text-center mb-3 md:mb-6">
             <div className="inline-flex items-center justify-center w-10 h-10 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
