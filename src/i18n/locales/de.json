@@ -47,7 +47,10 @@
     "terminateInsurance": "Versicherung kündigen",
     "compareMortgages": "Hypotheken vergleichen",
     "mortgageTypes": "Hypothekenarten",
-    "currentRates": "Aktuelle Zinssätze"
+    "currentRates": "Aktuelle Zinssätze",
+    "proRcPro": "Berufshaftpflicht",
+    "proLaa": "UVG-Versicherung",
+    "proLpp": "BVG-Vorsorge"
   },
   "nav": {
     "insurances": "Versicherungen",
