@@ -127,9 +127,9 @@ const financesCategories = [
     id: "lpp",
     labelKey: "nav.lpp", 
     icon: Landmark,
-    href: "/avoirs-lpp-libre-passage",
+    href: "/avoirs-lpp",
     subLinks: [
-      { labelKey: "lpp.heroBadge", href: "/avoirs-lpp-libre-passage" },
+      { labelKey: "nav.lppCompare", href: "/avoirs-lpp-libre-passage" },
     ]
   },
 ];

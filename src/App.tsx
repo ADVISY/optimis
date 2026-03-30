@@ -91,6 +91,7 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("mobilePackage", <ForfaitMobile />)}
         {createLocalizedRoutes("healthSubsidy", <SubsideAssuranceMaladie />)}
         {createLocalizedRoutes("termination", <Resiliation />)}
+        {createLocalizedRoutes("lpp", <AvoirsLpp />)}
         
         {/* Blog */}
         <Route path="/blog" element={<Blog />} />
