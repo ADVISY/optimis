@@ -736,22 +736,14 @@
     "recommendedForYou": "Empfohlen für Sie"
   },
   "contact": {
-    "callbackTitle": "Rückruf anfordern",
-    "callbackDescription": "Ein Berater ruft Sie schnellstmöglich zurück",
-    "emailTitle": "Per E-Mail erhalten",
-    "emailDescription": "Erhalten Sie die Details dieses Angebots per E-Mail",
-    "offerTitle": "Dieses Angebot anfragen",
-    "offerDescription": "Vervollständigen Sie Ihre Angaben für ein personalisiertes Angebot",
-    "successTitle": "Anfrage gesendet!",
-    "successCallMessage": "Ein Berater wird Sie bald kontaktieren.",
-    "successEmailMessage": "Sie erhalten die Details per E-Mail.",
-    "successOfferMessage": "Wir bearbeiten Ihre Anfrage und melden uns schnellstmöglich.",
-    "preferredTime": "Wann möchten Sie zurückgerufen werden?",
-    "morning": "Morgen",
-    "afternoon": "Nachmittag",
-    "evening": "Abend",
-    "message": "Nachricht (optional)",
-    "messagePlaceholder": "Haben Sie besondere Fragen?"
+    "title": "Kontaktieren Sie uns",
+    "getInTouch": "Nehmen Sie Kontakt mit unserem Team auf",
+    "description": "Haben Sie eine Frage zu unseren Dienstleistungen oder benötigen Sie Hilfe bei der Suche nach der besten Versicherung? Unser Team steht Ihnen zur Verfügung.",
+    "hoursTitle": "Öffnungszeiten",
+    "hoursContent": "Montag - Freitag: 9:00 - 18:00 Uhr. Unser Team antwortet in der Regel innerhalb von 24 Geschäftsstunden.",
+    "formTitle": "Senden Sie uns eine Nachricht",
+    "messageLabel": "Ihre Nachricht",
+    "messagePlaceholder": "Beschreiben Sie Ihr Anliegen..."
   },
   "forms": {
     "free": "100% kostenlos",
@@ -767,13 +759,13 @@
     "errorTitle": "Fehler",
     "errorDescription": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
     "seeMyOffers": "Meine Angebote anzeigen",
-    "stepOf": "von",
+    "stepOf": "Schritt {{current}} von {{total}}",
     "loading": {
-      "title": "Suche nach den besten Angeboten...",
-      "analyzing": "Analyse Ihrer Bedürfnisse",
-      "comparing": "Vergleich der Angebote",
-      "preparing": "Vorbereitung der Ergebnisse",
-      "message": "Wir analysieren die besten Angebote auf dem Markt für Sie."
+      "title": "Suche nach den besten Angeboten",
+      "analyzing": "Analyse Ihres Profils...",
+      "comparing": "Vergleich der Angebote...",
+      "preparing": "Vorbereitung der Ergebnisse...",
+      "message": "Wir analysieren Ihr Profil, um Ihnen die passendsten Angebote zu unterbreiten."
     },
     "common": {
       "step": "Schritt",
@@ -839,8 +831,6 @@
       "includeAccident": "Ja, Unfall einschliessen",
       "accidentYes": "Ja, Unfall einschliessen",
       "accidentNo": "Nein, Unfall ausschliessen",
-      "complementary": "Zusatzversicherungen",
-      "complementaryDescription": "Wählen Sie die Zusatzleistungen, die Sie interessieren.",
       "complementary": {
         "dental": "Zahnpflege",
         "hospitalization": "Hospitalisation",
@@ -848,6 +838,7 @@
         "alternativeMedicine": "Alternativmedizin",
         "worldwide": "Weltweite Deckung"
       },
+      "complementaryDescription": "Wählen Sie die Zusatzleistungen, die Sie interessieren.",
       "complementaryOptions": {
         "dental": "Zahnpflege",
         "hospitalization": "Hospitalisation",
@@ -882,9 +873,9 @@
       "vehicleInfo": "Fahrzeuginformationen",
       "licensePlate": "Kennzeichen",
       "or": "oder",
-      "vehicleBrand": "Marke",
+      "vehicleBrand": "Fahrzeugmarke",
       "vehicleModel": "Modell",
-      "vehicleYear": "Jahr",
+      "vehicleYear": "Erstzulassung",
       "selectBrand": "Marke auswählen",
       "selectModel": "Modell auswählen",
       "usage": "Fahrzeugnutzung",
@@ -937,9 +928,6 @@
       "brandNotFound": "Marke nicht gefunden",
       "modelNotFound": "Modell nicht gefunden",
       "yearNotAvailable": "Jahr nicht verfügbar",
-      "vehicleBrand": "Fahrzeugmarke",
-      "vehicleModel": "Modell",
-      "vehicleYear": "Erstzulassung",
       "vehicleSelected": "Ausgewähltes Fahrzeug",
       "datePlaceholder": "TT/MM/JJJJ",
       "driverMinAge": "Der Hauptfahrer muss mindestens 18 Jahre alt sein",
@@ -1305,13 +1293,6 @@
         "unsure": "Ich weiss nicht"
       }
     },
-    "loading": {
-      "title": "Suche nach den besten Angeboten",
-      "analyzing": "Analyse Ihres Profils...",
-      "comparing": "Vergleich der Angebote...",
-      "preparing": "Vorbereitung der Ergebnisse...",
-      "message": "Wir analysieren Ihr Profil, um Ihnen die passendsten Angebote zu unterbreiten."
-    },
     "results": {
       "title": "Ihre personalisierten Angebote",
       "subtitle": "Basierend auf Ihrem Profil",
@@ -1467,16 +1448,6 @@
     "historyContent": "Seit unserer Gründung haben wir Tausenden von Schweizern geholfen, bei ihren Versicherungen zu sparen. Unsere Plattform vergleicht Angebote von über 30 Versicherungspartnern und deckt alle Versicherungsarten ab: Krankheit, Auto, Hausrat, Rechtsschutz, Leben und mehr.",
     "teamTitle": "Unser Team",
     "teamContent": "Unser Expertenteam für Versicherungen ist in der Westschweiz ansässig. Wir kombinieren fundiertes Wissen über den Schweizer Versicherungsmarkt mit modernster Technologie, um Ihnen den bestmöglichen Service zu bieten."
-  },
-  "contact": {
-    "title": "Kontaktieren Sie uns",
-    "getInTouch": "Nehmen Sie Kontakt mit unserem Team auf",
-    "description": "Haben Sie eine Frage zu unseren Dienstleistungen oder benötigen Sie Hilfe bei der Suche nach der besten Versicherung? Unser Team steht Ihnen zur Verfügung.",
-    "hoursTitle": "Öffnungszeiten",
-    "hoursContent": "Montag - Freitag: 9:00 - 18:00 Uhr. Unser Team antwortet in der Regel innerhalb von 24 Geschäftsstunden.",
-    "formTitle": "Senden Sie uns eine Nachricht",
-    "messageLabel": "Ihre Nachricht",
-    "messagePlaceholder": "Beschreiben Sie Ihr Anliegen..."
   },
   "faq": {
     "title": "Häufig gestellte Fragen",

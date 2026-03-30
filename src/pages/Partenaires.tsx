@@ -30,7 +30,7 @@ const Partenaires = () => {
   return (
     <div className="flex min-h-screen flex-col">
       {/* ── HERO WITH FORM ── */}
-      <section id="partner-form" className="relative overflow-hidden !py-0">
+      <section id="partner-form" className="relative overflow-hidden !py-0 !mb-0">
         <div className="absolute inset-0 bg-gradient-to-br from-foreground via-primary to-foreground opacity-95" />
         <div className="absolute inset-0 opacity-10" style={{
           backgroundImage: "radial-gradient(circle at 20% 50%, hsl(var(--accent)) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(var(--primary)) 0%, transparent 40%)",
@@ -41,35 +41,35 @@ const Partenaires = () => {
           <img src={mascotHd} alt="" className="h-[500px] xl:h-[600px] w-auto" />
         </div>
 
-        <div className="container mx-auto px-4 relative z-10 py-6 md:py-10 lg:py-14">
+        <div className="container mx-auto px-4 relative z-10 py-4 md:py-8 lg:py-14">
           {/* Logo bar */}
-          <div className="mb-6 md:mb-10">
-            <img src={logo} alt="Optimis" className="h-8 md:h-10 w-auto" />
+          <div className="mb-4 md:mb-10">
+            <img src={logo} alt="Optimis" className="h-7 md:h-10 w-auto" />
           </div>
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-start">
             {/* Left: text content */}
             <motion.div
               initial="hidden"
               animate="visible"
               variants={stagger}
-              className="text-left pt-4 md:pt-8"
+              className="text-left"
             >
-              <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-accent/20 text-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+              <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-accent/20 text-accent px-3 py-1 rounded-full text-xs md:text-sm font-semibold mb-3 md:mb-6">
                 <Zap className="h-4 w-4" />
                 B2B — Partenariat exclusif
               </motion.div>
 
-              <motion.h1 variants={fadeUp} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.1] mb-5 tracking-tight">
+              <motion.h1 variants={fadeUp} className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-black text-white leading-[1.1] mb-3 md:mb-5 tracking-tight">
                 Recevez des leads ultra qualifiés,{" "}
                 <span className="text-accent">prêts à être convertis</span>
               </motion.h1>
 
-              <motion.p variants={fadeUp} className="text-base md:text-lg text-white/70 mb-8 max-w-lg">
+              <motion.p variants={fadeUp} className="text-sm md:text-lg text-white/70 mb-4 md:mb-8 max-w-lg">
                 Optimis génère chaque jour des prospects en assurance, finance, immobilier et télécom.
               </motion.p>
 
               {/* Impact stats */}
-              <motion.div variants={fadeUp} className="grid grid-cols-2 gap-3 mb-8 max-w-lg">
+              <motion.div variants={fadeUp} className="hidden md:grid grid-cols-2 gap-3 mb-8 max-w-lg">
                 {[
                   { icon: CalendarDays, text: "Leads ultra frais (< 24h)" },
                   { icon: Clock, text: "Date & heure enregistrées" },
@@ -83,7 +83,7 @@ const Partenaires = () => {
                 ))}
               </motion.div>
 
-              <motion.p variants={fadeUp} className="text-sm text-white/50 flex items-center gap-1.5">
+              <motion.p variants={fadeUp} className="hidden md:flex text-sm text-white/50 items-center gap-1.5">
                 <Lock className="h-3.5 w-3.5" />
                 Partenaires limités par secteur — places limitées
               </motion.p>
@@ -102,7 +102,7 @@ const Partenaires = () => {
       </section>
 
       {/* ── POUR QUI ? ── */}
-      <section className="bg-background">
+      <section className="bg-background py-10 md:py-16">
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-4xl mx-auto text-center">
             <motion.h2 variants={fadeUp} className="text-headline mb-4">

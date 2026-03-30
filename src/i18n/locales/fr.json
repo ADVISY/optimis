@@ -768,22 +768,14 @@
     "recommendedForYou": "Recommandé pour vous"
   },
   "contact": {
-    "callbackTitle": "Être rappelé",
-    "callbackDescription": "Un conseiller vous rappellera dans les plus brefs délais",
-    "emailTitle": "Recevoir par email",
-    "emailDescription": "Recevez le détail de cette offre par email",
-    "offerTitle": "Demander cette offre",
-    "offerDescription": "Complétez vos informations pour recevoir cette offre personnalisée",
-    "successTitle": "Demande envoyée !",
-    "successCallMessage": "Un conseiller vous contactera très bientôt.",
-    "successEmailMessage": "Vous allez recevoir les détails par email.",
-    "successOfferMessage": "Nous traitons votre demande et vous recontactons rapidement.",
-    "preferredTime": "Quand souhaitez-vous être rappelé ?",
-    "morning": "Matin",
-    "afternoon": "Après-midi",
-    "evening": "Soir",
-    "message": "Message (optionnel)",
-    "messagePlaceholder": "Avez-vous des questions particulières ?"
+    "title": "Contactez-nous",
+    "getInTouch": "Prenez contact avec notre équipe",
+    "description": "Vous avez une question sur nos services ou besoin d'aide pour trouver la meilleure assurance ? Notre équipe est à votre disposition pour vous accompagner.",
+    "hoursTitle": "Horaires d'ouverture",
+    "hoursContent": "Lundi - Vendredi : 9h00 - 18h00. Notre équipe répond généralement dans les 24 heures ouvrées.",
+    "formTitle": "Envoyez-nous un message",
+    "messageLabel": "Votre message",
+    "messagePlaceholder": "Décrivez votre demande..."
   },
   "forms": {
     "free": "100% gratuit",
@@ -799,13 +791,13 @@
     "errorTitle": "Erreur",
     "errorDescription": "Une erreur est survenue. Veuillez réessayer.",
     "seeMyOffers": "Voir mes offres",
-    "stepOf": "sur",
+    "stepOf": "Étape {{current}} sur {{total}}",
     "loading": {
-      "title": "Recherche des meilleures offres...",
-      "analyzing": "Analyse de vos besoins",
-      "comparing": "Comparaison des offres",
-      "preparing": "Préparation des résultats",
-      "message": "Nous analysons les meilleures offres du marché pour vous."
+      "title": "Recherche des meilleures offres",
+      "analyzing": "Analyse de votre profil...",
+      "comparing": "Comparaison des offres...",
+      "preparing": "Préparation des résultats...",
+      "message": "Nous analysons votre profil pour vous proposer les offres les plus adaptées."
     },
     "common": {
       "step": "Étape",
@@ -871,8 +863,6 @@
       "includeAccident": "Oui, inclure l'accident",
       "accidentYes": "Oui, inclure l'accident",
       "accidentNo": "Non, exclure l'accident",
-      "complementary": "Assurances complémentaires",
-      "complementaryDescription": "Sélectionnez les options complémentaires qui vous intéressent.",
       "complementary": {
         "dental": "Soins dentaires",
         "hospitalization": "Hospitalisation",
@@ -880,6 +870,7 @@
         "alternativeMedicine": "Médecines alternatives",
         "worldwide": "Couverture monde"
       },
+      "complementaryDescription": "Sélectionnez les options complémentaires qui vous intéressent.",
       "complementaryOptions": {
         "dental": "Soins dentaires",
         "hospitalization": "Hospitalisation",
@@ -914,9 +905,9 @@
       "vehicleInfo": "Informations véhicule",
       "licensePlate": "Plaque d'immatriculation",
       "or": "ou",
-      "vehicleBrand": "Marque",
+      "vehicleBrand": "Marque du véhicule",
       "vehicleModel": "Modèle",
-      "vehicleYear": "Année",
+      "vehicleYear": "Année de mise en circulation",
       "selectBrand": "Sélectionnez une marque",
       "selectModel": "Sélectionnez un modèle",
       "usage": "Utilisation du véhicule",
@@ -969,9 +960,6 @@
       "brandNotFound": "Marque non trouvée",
       "modelNotFound": "Modèle non trouvé",
       "yearNotAvailable": "Année non disponible",
-      "vehicleBrand": "Marque du véhicule",
-      "vehicleModel": "Modèle",
-      "vehicleYear": "Année de mise en circulation",
       "vehicleSelected": "Véhicule sélectionné",
       "datePlaceholder": "JJ/MM/AAAA",
       "driverMinAge": "Le conducteur principal doit avoir au moins 18 ans",
@@ -1337,13 +1325,6 @@
         "unsure": "Je ne sais pas"
       }
     },
-    "loading": {
-      "title": "Recherche des meilleures offres",
-      "analyzing": "Analyse de votre profil...",
-      "comparing": "Comparaison des offres...",
-      "preparing": "Préparation des résultats...",
-      "message": "Nous analysons votre profil pour vous proposer les offres les plus adaptées."
-    },
     "results": {
       "title": "Vos offres personnalisées",
       "subtitle": "Basées sur votre profil",
@@ -1486,7 +1467,7 @@
     "professional": {
       "badge": "Assurances Professionnelles",
       "title": "Comparez les assurances pour indépendants",
-    "subtitle": "RC pro, perte de gain, LPP : protégez votre activité"
+      "subtitle": "RC pro, perte de gain, LPP : protégez votre activité"
     }
   },
   "about": {
@@ -1499,16 +1480,6 @@
     "historyContent": "Depuis notre création, nous avons aidé des milliers de Suisses à économiser sur leurs assurances. Notre plateforme compare les offres de plus de 30 compagnies d'assurance partenaires, couvrant tous les types d'assurances : maladie, auto, ménage, protection juridique, vie et bien plus encore.",
     "teamTitle": "Notre équipe",
     "teamContent": "Notre équipe d'experts en assurance est basée en Suisse romande. Nous combinons une connaissance approfondie du marché suisse de l'assurance avec une technologie de pointe pour vous offrir le meilleur service possible."
-  },
-  "contact": {
-    "title": "Contactez-nous",
-    "getInTouch": "Prenez contact avec notre équipe",
-    "description": "Vous avez une question sur nos services ou besoin d'aide pour trouver la meilleure assurance ? Notre équipe est à votre disposition pour vous accompagner.",
-    "hoursTitle": "Horaires d'ouverture",
-    "hoursContent": "Lundi - Vendredi : 9h00 - 18h00. Notre équipe répond généralement dans les 24 heures ouvrées.",
-    "formTitle": "Envoyez-nous un message",
-    "messageLabel": "Votre message",
-    "messagePlaceholder": "Décrivez votre demande..."
   },
   "faq": {
     "title": "Questions fréquentes",

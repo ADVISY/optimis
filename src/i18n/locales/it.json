@@ -733,22 +733,14 @@
     "recommendedForYou": "Consigliato per te"
   },
   "contact": {
-    "callbackTitle": "Essere richiamato",
-    "callbackDescription": "Un consulente ti richiamerà al più presto",
-    "emailTitle": "Ricevi via email",
-    "emailDescription": "Ricevi i dettagli di questa offerta via email",
-    "offerTitle": "Richiedi questa offerta",
-    "offerDescription": "Completa i tuoi dati per ricevere questa offerta personalizzata",
-    "successTitle": "Richiesta inviata!",
-    "successCallMessage": "Un consulente ti contatterà presto.",
-    "successEmailMessage": "Riceverai i dettagli via email.",
-    "successOfferMessage": "Stiamo elaborando la tua richiesta e ti ricontatteremo rapidamente.",
-    "preferredTime": "Quando vorresti essere richiamato?",
-    "morning": "Mattina",
-    "afternoon": "Pomeriggio",
-    "evening": "Sera",
-    "message": "Messaggio (opzionale)",
-    "messagePlaceholder": "Hai domande particolari?"
+    "title": "Contattaci",
+    "getInTouch": "Mettiti in contatto con il nostro team",
+    "description": "Hai una domanda sui nostri servizi o hai bisogno di aiuto per trovare la migliore assicurazione? Il nostro team è a tua disposizione per assisterti.",
+    "hoursTitle": "Orari di apertura",
+    "hoursContent": "Lunedì - Venerdì: 9:00 - 18:00. Il nostro team risponde generalmente entro 24 ore lavorative.",
+    "formTitle": "Inviaci un messaggio",
+    "messageLabel": "Il tuo messaggio",
+    "messagePlaceholder": "Descrivi la tua richiesta..."
   },
   "forms": {
     "free": "100% gratuito",
@@ -764,13 +756,13 @@
     "errorTitle": "Errore",
     "errorDescription": "Si è verificato un errore. Riprova.",
     "seeMyOffers": "Vedi le mie offerte",
-    "stepOf": "di",
+    "stepOf": "Passaggio {{current}} di {{total}}",
     "loading": {
-      "title": "Ricerca delle migliori offerte...",
-      "analyzing": "Analisi delle tue esigenze",
-      "comparing": "Confronto delle offerte",
-      "preparing": "Preparazione dei risultati",
-      "message": "Stiamo analizzando le migliori offerte del mercato per te."
+      "title": "Ricerca delle migliori offerte",
+      "analyzing": "Analisi del tuo profilo...",
+      "comparing": "Confronto delle offerte...",
+      "preparing": "Preparazione dei risultati...",
+      "message": "Stiamo analizzando il tuo profilo per proporti le offerte più adatte."
     },
     "common": {
       "step": "Passo",
@@ -836,8 +828,6 @@
       "includeAccident": "Sì, includere infortuni",
       "accidentYes": "Sì, includere infortuni",
       "accidentNo": "No, escludere infortuni",
-      "complementary": "Assicurazioni complementari",
-      "complementaryDescription": "Seleziona le coperture complementari che ti interessano.",
       "complementary": {
         "dental": "Cure dentali",
         "hospitalization": "Ospedalizzazione",
@@ -845,6 +835,7 @@
         "alternativeMedicine": "Medicine alternative",
         "worldwide": "Copertura mondiale"
       },
+      "complementaryDescription": "Seleziona le coperture complementari che ti interessano.",
       "complementaryOptions": {
         "dental": "Cure dentali",
         "hospitalization": "Ospedalizzazione",
@@ -879,9 +870,9 @@
       "vehicleInfo": "Informazioni veicolo",
       "licensePlate": "Targa",
       "or": "o",
-      "vehicleBrand": "Marca",
+      "vehicleBrand": "Marca del veicolo",
       "vehicleModel": "Modello",
-      "vehicleYear": "Anno",
+      "vehicleYear": "Anno di immatricolazione",
       "selectBrand": "Seleziona marca",
       "selectModel": "Seleziona modello",
       "usage": "Utilizzo del veicolo",
@@ -934,9 +925,6 @@
       "brandNotFound": "Marca non trovata",
       "modelNotFound": "Modello non trovato",
       "yearNotAvailable": "Anno non disponibile",
-      "vehicleBrand": "Marca del veicolo",
-      "vehicleModel": "Modello",
-      "vehicleYear": "Anno di immatricolazione",
       "vehicleSelected": "Veicolo selezionato",
       "datePlaceholder": "GG/MM/AAAA",
       "driverMinAge": "Il conducente principale deve avere almeno 18 anni",
@@ -1302,13 +1290,6 @@
         "unsure": "Non lo so"
       }
     },
-    "loading": {
-      "title": "Ricerca delle migliori offerte",
-      "analyzing": "Analisi del tuo profilo...",
-      "comparing": "Confronto delle offerte...",
-      "preparing": "Preparazione dei risultati...",
-      "message": "Stiamo analizzando il tuo profilo per proporti le offerte più adatte."
-    },
     "results": {
       "title": "Le tue offerte personalizzate",
       "subtitle": "Basate sul tuo profilo",
@@ -1464,16 +1445,6 @@
     "historyContent": "Dalla nostra fondazione, abbiamo aiutato migliaia di svizzeri a risparmiare sulle loro assicurazioni. La nostra piattaforma confronta le offerte di oltre 30 compagnie assicurative partner, coprendo tutti i tipi di assicurazioni: malattia, auto, casa, protezione giuridica, vita e molto altro.",
     "teamTitle": "Il nostro team",
     "teamContent": "Il nostro team di esperti assicurativi ha sede nella Svizzera romanda. Combiniamo una conoscenza approfondita del mercato assicurativo svizzero con tecnologia all'avanguardia per offrirvi il miglior servizio possibile."
-  },
-  "contact": {
-    "title": "Contattaci",
-    "getInTouch": "Mettiti in contatto con il nostro team",
-    "description": "Hai una domanda sui nostri servizi o hai bisogno di aiuto per trovare la migliore assicurazione? Il nostro team è a tua disposizione per assisterti.",
-    "hoursTitle": "Orari di apertura",
-    "hoursContent": "Lunedì - Venerdì: 9:00 - 18:00. Il nostro team risponde generalmente entro 24 ore lavorative.",
-    "formTitle": "Inviaci un messaggio",
-    "messageLabel": "Il tuo messaggio",
-    "messagePlaceholder": "Descrivi la tua richiesta..."
   },
   "faq": {
     "title": "Domande frequenti",
