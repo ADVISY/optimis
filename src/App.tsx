@@ -201,6 +201,27 @@ const App = () => (
           <Route path="/hypotheque-offres" element={<Navigate to="/fr/hypotheque-offres" replace />} />
           <Route path="/assurance-entreprise-offres" element={<Navigate to="/fr/assurance-entreprise-offres" replace />} />
           
+          {/* WordPress landing page slugs (-lp) → redirect to Lovable equivalents */}
+          <Route path="/assurance-sante-lp" element={<Navigate to="/fr/assurance-maladie-landing" replace />} />
+          <Route path="/assurance-voiture-lp" element={<Navigate to="/fr/assurance-voiture-landing" replace />} />
+          <Route path="/assurance-menage-lp" element={<Navigate to="/fr/assurance-menage-landing" replace />} />
+          <Route path="/protection-juridique-lp" element={<Navigate to="/fr/protection-juridique-landing" replace />} />
+          <Route path="/subside-assurance-maladie-lp" element={<Navigate to="/fr/subside-assurance-maladie-demande" replace />} />
+          <Route path="/resiliation-lp" element={<Navigate to="/fr/resiliation-assurance" replace />} />
+          <Route path="/3eme-pilier-lp" element={<Navigate to="/fr/3eme-pilier-offres" replace />} />
+          <Route path="/hypotheque-lp" element={<Navigate to="/fr/hypotheque-offres" replace />} />
+          <Route path="/assurance-entreprise-lp" element={<Navigate to="/fr/assurance-entreprise-offres" replace />} />
+          <Route path="/estimation-immobiliere-lp" element={<Navigate to="/fr/estimation-immobiliere-gratuite" replace />} />
+          <Route path="/avoirs-lpp-lp" element={<Navigate to="/fr/avoirs-lpp-libre-passage" replace />} />
+          
+          {/* WordPress /loans page → redirect to hypothèque */}
+          <Route path="/loans" element={<Navigate to="/fr/hypotheque" replace />} />
+
+          {/* WordPress blog posts used root slugs (/:slug) → redirect to /fr/blog/:slug */}
+          {blogPosts.map(post => (
+            <Route key={`legacy-blog-${post.slug}`} path={`/${post.slug}`} element={<Navigate to={`/fr/blog/${post.slug}`} replace />} />
+          ))}
+          
           {/* Catch-all */}
           <Route path="*" element={<NotFound />} />
         </Routes>
