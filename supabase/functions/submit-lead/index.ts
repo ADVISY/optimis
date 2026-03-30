@@ -9,6 +9,11 @@ const corsHeaders = {
 // Default Zapier webhook URL
 const DEFAULT_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/21326682/un2n4oc/";
 
+// Form-specific webhook URLs
+const FORM_WEBHOOKS: Record<string, string> = {
+  "lpp-libre-passage": "https://hooks.zapier.com/hooks/catch/21326682/un855tt/",
+};
+
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
