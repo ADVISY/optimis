@@ -74,6 +74,8 @@ const ProfessionalInsuranceForm = () => {
     legalForm: "",
     employeesCount: "",
     canton: "",
+    revenue: "",
+    contractStartDate: undefined,
     firstName: "",
     lastName: "",
     email: "",
