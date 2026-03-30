@@ -14,7 +14,7 @@ const FORM_WEBHOOKS: Record<string, string> = {
   "lpp-libre-passage": "https://hooks.zapier.com/hooks/catch/21326682/un855tt/",
   "professional-insurance": "https://hooks.zapier.com/hooks/catch/21326682/un8i19a/",
   "estimation-immobiliere": "https://hooks.zapier.com/hooks/catch/21326682/un8s2j4/",
-  "partner": "https://hooks.zapier.com/hooks/catch/21326682/un2n4oc/",
+  "partner": "https://hooks.zapier.com/hooks/catch/21326682/un8k5nv/",
 };
 
 serve(async (req) => {
