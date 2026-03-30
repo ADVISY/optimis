@@ -303,8 +303,8 @@ const ProfessionalInsuranceForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 3: Identity */}
-      <FormStep isActive={currentStep === 3}>
+      {/* Step 4: Identity */}
+      <FormStep isActive={currentStep === 4}>
         <div className="space-y-3 md:space-y-6">
           <div className="text-center mb-3 md:mb-6">
             <div className="inline-flex items-center justify-center w-10 h-10 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
@@ -320,7 +320,7 @@ const ProfessionalInsuranceForm = () => {
                 id="firstName"
                 value={formData.firstName}
                 onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayed(); }}
-                className="h-9 md:h-14 text-xs md:text-lg"
+                className="h-11 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
             <FormFieldWrapper label={t("forms.contact.lastName")} htmlFor="lastName" required>
@@ -328,15 +328,15 @@ const ProfessionalInsuranceForm = () => {
                 id="lastName"
                 value={formData.lastName}
                 onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayed(); }}
-                className="h-9 md:h-14 text-xs md:text-lg"
+                className="h-11 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
           </div>
         </div>
       </FormStep>
 
-      {/* Step 4: Contact */}
-      <FormStep isActive={currentStep === 4}>
+      {/* Step 5: Contact */}
+      <FormStep isActive={currentStep === 5}>
         <div className="space-y-3 md:space-y-6">
           <div className="text-center mb-3 md:mb-6">
             <div className="inline-flex items-center justify-center w-10 h-10 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
@@ -354,7 +354,7 @@ const ProfessionalInsuranceForm = () => {
               autoComplete="email"
               value={formData.email}
               onChange={(e) => { updateFormData({ email: e.target.value }); notifyDelayed(); }}
-              className={cn("h-9 md:h-14 text-xs md:text-lg", stepErrors.email && "border-red-400")}
+              className={cn("h-11 md:h-14 text-sm md:text-lg", stepErrors.email && "border-destructive")}
             />
           </FormFieldWrapper>
 
@@ -367,7 +367,7 @@ const ProfessionalInsuranceForm = () => {
               value={formData.phone}
               onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); notifyDelayed(); }}
               placeholder="+41 79 123 45 67"
-              className={cn("h-9 md:h-14 text-xs md:text-lg", stepErrors.phone && "border-red-400")}
+              className={cn("h-11 md:h-14 text-sm md:text-lg", stepErrors.phone && "border-destructive")}
             />
           </FormFieldWrapper>
 
@@ -378,8 +378,8 @@ const ProfessionalInsuranceForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 5: Message */}
-      <FormStep isActive={currentStep === 5}>
+      {/* Step 6: Message */}
+      <FormStep isActive={currentStep === 6}>
         <div className="space-y-2 md:space-y-4">
           <FormFieldWrapper label={t("forms.professionalInsurance.message")} htmlFor="message">
             <Textarea
@@ -388,7 +388,7 @@ const ProfessionalInsuranceForm = () => {
               onChange={(e) => updateFormData({ message: e.target.value })}
               placeholder={t("forms.professionalInsurance.messagePlaceholder")}
               rows={3}
-              className="text-xs md:text-lg min-h-[80px] md:min-h-[120px]"
+              className="text-sm md:text-lg min-h-[80px] md:min-h-[120px]"
             />
           </FormFieldWrapper>
         </div>
