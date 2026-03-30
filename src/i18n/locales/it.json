@@ -1323,6 +1323,34 @@
       "byEmail": "Ricevi via email",
       "callMe": "Essere richiamato",
       "chooseOffer": "Scegli questa offerta"
+    },
+    "lpp": {
+      "title": "Verifica il tuo avere LPP in 1 minuto",
+      "description": "Gratuito • Senza impegno • 100% confidenziale",
+      "objectiveQuestion": "Cosa desideri fare?",
+      "situationQuestion": "Qual è la tua situazione attuale?",
+      "yearsQuestion": "Quanti anni hai lavorato in Svizzera?",
+      "birthDateQuestion": "Qual è la tua data di nascita?",
+      "birthDate": "Data di nascita",
+      "ctaFinal": "Ricevere la mia analisi gratuita",
+      "thankYouTitle": "Grazie per la tua richiesta!",
+      "thankYouDescription": "Un consulente ti contatterà a breve per analizzare la tua situazione LPP.",
+      "objectives": {
+        "find": "🔍 Ritrovare i miei fondi LPP",
+        "consolidate": "🔄 Riunire i miei fondi LPP"
+      },
+      "situations": {
+        "employed": "Dipendente",
+        "selfEmployed": "Indipendente",
+        "unemployed": "Disoccupazione",
+        "other": "Altro"
+      },
+      "years": {
+        "less10": "Meno di 10 anni",
+        "plus10": "Più di 10 anni",
+        "plus20": "Più di 20 anni",
+        "plus30": "Più di 30 anni"
+      }
     }
   },
   "comparators": {
