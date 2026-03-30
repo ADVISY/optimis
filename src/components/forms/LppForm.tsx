@@ -336,7 +336,7 @@ const LppForm = () => {
         isSubmitting={isSubmitting}
         isLastStep={isLastStep}
         canProceed={canProceed}
-        submitLabel={t("forms.lpp.ctaFinal")}
+        
       />
     </FormContainer>
   );
