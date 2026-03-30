@@ -69,7 +69,9 @@
     "mortgage": "Hypothek",
     "professionalInsurance": "Firmenversicherungen",
     "lpp": "BVG-Guthaben",
-    "lppCompare": "BVG-Guthaben prüfen"
+    "lppCompare": "BVG-Guthaben prüfen",
+    "realEstate": "Immobilienbewertung",
+    "realEstateCompare": "Kostenlose Bewertung"
   },
   "stats": {
     "recommended": "Empfohlen",
@@ -1354,6 +1356,37 @@
         "plus10": "Mehr als 10 Jahre",
         "plus20": "Mehr als 20 Jahre",
         "plus30": "Mehr als 30 Jahre"
+      }
+    },
+    "realEstate": {
+      "title": "Immobilienbewertung in 2 Minuten",
+      "description": "Kostenlos • Unverbindlich • 100% vertraulich",
+      "addressQuestion": "Wie lautet die Adresse der Immobilie?",
+      "address": "Adresse der Immobilie",
+      "addressPlaceholder": "Strasse, Nr., PLZ, Ort",
+      "propertyQuestion": "Was für eine Immobilie ist es?",
+      "roomsQuestion": "Wie viele Zimmer hat die Immobilie?",
+      "rooms": "Zimmer",
+      "surfaceQuestion": "Wie gross ist die Fläche?",
+      "surface": "Fläche (m²)",
+      "timelineQuestion": "Wann möchten Sie verkaufen?",
+      "mandateQuestion": "Haben Sie bereits einen Maklervertrag unterschrieben?",
+      "availabilityQuestion": "Sind Sie für eine Vor-Ort-Bewertung innerhalb von 30 Tagen verfügbar?",
+      "ctaFinal": "Kostenlose Bewertung erhalten",
+      "thankYouTitle": "Vielen Dank für Ihre Anfrage!",
+      "thankYouDescription": "Ein Immobilienexperte wird Sie in Kürze kontaktieren.",
+      "propertyTypes": {
+        "apartment": "Wohnung",
+        "house": "Haus",
+        "villa": "Villa",
+        "commercial": "Gewerbefläche",
+        "land": "Grundstück"
+      },
+      "timelines": {
+        "urgent": "So schnell wie möglich",
+        "threeMonths": "Innerhalb von 3 Monaten",
+        "sixMonths": "Innerhalb von 6 Monaten",
+        "noRush": "Kein Zeitdruck / nur Bewertung"
       }
     }
   },

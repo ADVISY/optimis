@@ -69,7 +69,9 @@
     "mortgage": "Hypothèque",
     "professionalInsurance": "Assurances Pro",
     "lpp": "Avoirs LPP",
-    "lppCompare": "Vérifier mon avoir LPP"
+    "lppCompare": "Vérifier mon avoir LPP",
+    "realEstate": "Estimation immobilière",
+    "realEstateCompare": "Estimer mon bien gratuitement"
   },
   "stats": {
     "recommended": "Recommandé",
@@ -1386,6 +1388,37 @@
         "plus10": "Plus de 10 ans",
         "plus20": "Plus de 20 ans",
         "plus30": "Plus de 30 ans"
+      }
+    },
+    "realEstate": {
+      "title": "Estimation immobilière en 2 minutes",
+      "description": "Gratuit • Sans engagement • 100% confidentiel",
+      "addressQuestion": "Quelle est l'adresse du bien ?",
+      "address": "Adresse du bien",
+      "addressPlaceholder": "Rue, numéro, NPA, ville",
+      "propertyQuestion": "Quel est votre bien ?",
+      "roomsQuestion": "Quel est le nombre de pièces ?",
+      "rooms": "pièces",
+      "surfaceQuestion": "Quelle est la surface du bien ?",
+      "surface": "Surface (m²)",
+      "timelineQuestion": "Quel est votre délai de vente ?",
+      "mandateQuestion": "Avez-vous déjà signé un mandat avec une agence ?",
+      "availabilityQuestion": "Êtes-vous disponible pour une estimation sur place sous 30 jours ?",
+      "ctaFinal": "Recevoir mon estimation gratuite",
+      "thankYouTitle": "Merci pour votre demande !",
+      "thankYouDescription": "Un expert immobilier vous contactera prochainement pour estimer votre bien.",
+      "propertyTypes": {
+        "apartment": "Appartement",
+        "house": "Maison",
+        "villa": "Villa",
+        "commercial": "Local commercial",
+        "land": "Terrain"
+      },
+      "timelines": {
+        "urgent": "Le plus vite possible",
+        "threeMonths": "Dans les 3 mois",
+        "sixMonths": "Dans les 6 mois",
+        "noRush": "Pas pressé / juste une estimation"
       }
     }
   },

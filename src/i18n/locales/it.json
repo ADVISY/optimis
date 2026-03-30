@@ -69,7 +69,9 @@
     "mortgage": "Ipoteca",
     "professionalInsurance": "Assicurazioni Aziendali",
     "lpp": "Averi LPP",
-    "lppCompare": "Verifica averi LPP"
+    "lppCompare": "Verifica averi LPP",
+    "realEstate": "Valutazione immobiliare",
+    "realEstateCompare": "Valutazione gratuita"
   },
   "stats": {
     "recommended": "Raccomandato",
@@ -1351,6 +1353,37 @@
         "plus10": "Più di 10 anni",
         "plus20": "Più di 20 anni",
         "plus30": "Più di 30 anni"
+      }
+    },
+    "realEstate": {
+      "title": "Valutazione immobiliare in 2 minuti",
+      "description": "Gratuito • Senza impegno • 100% confidenziale",
+      "addressQuestion": "Qual è l'indirizzo dell'immobile?",
+      "address": "Indirizzo dell'immobile",
+      "addressPlaceholder": "Via, numero, CAP, città",
+      "propertyQuestion": "Che tipo di immobile è?",
+      "roomsQuestion": "Quante stanze ha l'immobile?",
+      "rooms": "stanze",
+      "surfaceQuestion": "Qual è la superficie dell'immobile?",
+      "surface": "Superficie (m²)",
+      "timelineQuestion": "Qual è il vostro termine di vendita?",
+      "mandateQuestion": "Avete già firmato un mandato con un'agenzia?",
+      "availabilityQuestion": "Siete disponibili per una valutazione in loco entro 30 giorni?",
+      "ctaFinal": "Ricevere la valutazione gratuita",
+      "thankYouTitle": "Grazie per la vostra richiesta!",
+      "thankYouDescription": "Un esperto immobiliare vi contatterà a breve.",
+      "propertyTypes": {
+        "apartment": "Appartamento",
+        "house": "Casa",
+        "villa": "Villa",
+        "commercial": "Locale commerciale",
+        "land": "Terreno"
+      },
+      "timelines": {
+        "urgent": "Il più presto possibile",
+        "threeMonths": "Entro 3 mesi",
+        "sixMonths": "Entro 6 mesi",
+        "noRush": "Senza fretta / solo valutazione"
       }
     }
   },
