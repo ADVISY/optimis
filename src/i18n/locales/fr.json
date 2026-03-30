@@ -1072,7 +1072,11 @@
       "selectEmployees": "Sélectionnez le nombre",
       "soloEntrepreneur": "Entrepreneur solo",
       "message": "Message ou précisions",
-      "messagePlaceholder": "Décrivez vos besoins spécifiques..."
+      "messagePlaceholder": "Décrivez vos besoins spécifiques...",
+      "revenue": "Chiffre d'affaires annuel (CHF)",
+      "revenuePlaceholder": "Ex: 150'000",
+      "contractStartDate": "Date de début de contrat souhaitée",
+      "selectDate": "Sélectionnez une date"
     },
     "mortgage": {
       "title": "Comparateur hypothécaire",

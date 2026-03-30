@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { format } from "date-fns";
 import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
@@ -21,10 +22,13 @@ import {
 } from "@/components/ui/select";
 import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { mockLegalProtectionOffers, InsuranceOffer } from "@/data/mockInsuranceData";
-import { Lock, User, Phone } from "lucide-react";
+import { Lock, User, Phone, CalendarIcon } from "lucide-react";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
 import { cn } from "@/lib/utils";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { Button } from "@/components/ui/button";
 
 interface ProfessionalInsuranceFormData {
   insuranceTypes: {
@@ -39,6 +43,8 @@ interface ProfessionalInsuranceFormData {
   legalForm: string;
   employeesCount: string;
   canton: string;
+  revenue: string;
+  contractStartDate: Date | undefined;
   firstName: string;
   lastName: string;
   email: string;
@@ -68,6 +74,8 @@ const ProfessionalInsuranceForm = () => {
     legalForm: "",
     employeesCount: "",
     canton: "",
+    revenue: "",
+    contractStartDate: undefined,
     firstName: "",
     lastName: "",
     email: "",
@@ -108,7 +116,7 @@ const ProfessionalInsuranceForm = () => {
 
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 2: return formData.activityType.trim() !== "" && formData.legalForm !== "" && formData.employeesCount !== "" && formData.canton !== "";
+      case 2: return formData.activityType.trim() !== "" && formData.legalForm !== "" && formData.employeesCount !== "" && formData.canton !== "" && formData.revenue.trim() !== "";
       case 3: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
       case 4: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
@@ -271,6 +279,44 @@ const ProfessionalInsuranceForm = () => {
                 ))}
               </SelectContent>
             </Select>
+          </FormFieldWrapper>
+
+          <FormFieldWrapper label={t("forms.professionalInsurance.revenue")} htmlFor="revenue" required>
+            <Input
+              id="revenue"
+              value={formData.revenue}
+              onChange={(e) => { updateFormData({ revenue: e.target.value }); notifyDelayed(); }}
+              placeholder={t("forms.professionalInsurance.revenuePlaceholder")}
+              className="h-9 md:h-14 text-xs md:text-lg"
+            />
+          </FormFieldWrapper>
+
+          <FormFieldWrapper label={t("forms.professionalInsurance.contractStartDate")} required>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className={cn(
+                    "w-full h-9 md:h-14 text-xs md:text-lg justify-start text-left font-normal",
+                    !formData.contractStartDate && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {formData.contractStartDate
+                    ? format(formData.contractStartDate, "dd/MM/yyyy")
+                    : t("forms.professionalInsurance.selectDate")}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={formData.contractStartDate}
+                  onSelect={(date) => { updateFormData({ contractStartDate: date }); notify(); }}
+                  initialFocus
+                  className={cn("p-3 pointer-events-auto")}
+                />
+              </PopoverContent>
+            </Popover>
           </FormFieldWrapper>
         </div>
       </FormStep>
