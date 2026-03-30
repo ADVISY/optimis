@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { format } from "date-fns";
 import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
@@ -10,7 +9,6 @@ import LoadingComparison from "@/components/forms/LoadingComparison";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -20,15 +18,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { mockLegalProtectionOffers, InsuranceOffer } from "@/data/mockInsuranceData";
-import { Lock, User, Phone, CalendarIcon } from "lucide-react";
+import { Lock, User, Phone } from "lucide-react";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
 import { cn } from "@/lib/utils";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { Button } from "@/components/ui/button";
 
 interface ProfessionalInsuranceFormData {
   insuranceTypes: {
