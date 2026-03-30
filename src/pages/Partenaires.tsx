@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import Layout from "@/components/layout/Layout";
+import Footer from "@/components/layout/Footer";
 import PartnerForm from "@/components/forms/PartnerForm";
 import { motion } from "framer-motion";
 import {
