@@ -165,7 +165,7 @@ const Partenaires = () => {
       </section>
 
       {/* ── LA SOLUTION OPTIMIS ── */}
-      <section className="bg-background">
+      <section className="bg-background py-12 md:py-16">
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-4xl mx-auto">
             <motion.div variants={fadeUp} className="text-center mb-12">
