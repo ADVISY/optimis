@@ -47,7 +47,10 @@
     "terminateInsurance": "Disdici la tua assicurazione",
     "compareMortgages": "Confronta i mutui",
     "mortgageTypes": "Tipi di mutuo",
-    "currentRates": "Tassi attuali"
+    "currentRates": "Tassi attuali",
+    "proRcPro": "RC Professionale",
+    "proLaa": "Assicurazione LAINF",
+    "proLpp": "Previdenza LPP"
   },
   "nav": {
     "insurances": "Assicurazioni",
