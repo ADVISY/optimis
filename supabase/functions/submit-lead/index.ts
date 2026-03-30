@@ -29,8 +29,8 @@ serve(async (req) => {
     console.log("Timestamp:", leadData.timestamp);
     console.log("Full lead data:", JSON.stringify(leadData, null, 2));
 
-    // Use custom webhook URL if provided, otherwise use default
-    const webhookUrl = leadData.webhookUrl || DEFAULT_WEBHOOK_URL;
+    // Use form-specific webhook, then custom webhook, then default
+    const webhookUrl = leadData.webhookUrl || FORM_WEBHOOKS[leadData.formType] || DEFAULT_WEBHOOK_URL;
     
     // Remove technical/internal fields before sending to Zapier
     const { webhookUrl: _, userAgent: _ua, ...dataToSend } = leadData;
