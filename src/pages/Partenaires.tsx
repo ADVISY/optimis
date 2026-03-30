@@ -158,7 +158,7 @@ const Partenaires = () => {
               ))}
             </motion.div>
             <motion.p variants={fadeUp} className="text-xl md:text-2xl font-bold text-foreground">
-              Vous payez pour des leads… <span className="text-primary">pas pour des clients.</span>
+              Vous méritez de payer pour des <span className="text-primary">résultats, pas du vent.</span>
             </motion.p>
           </motion.div>
         </div>
