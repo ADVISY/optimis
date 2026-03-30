@@ -26,7 +26,7 @@ const Partenaires = () => {
   };
 
   return (
-    <Layout>
+    <div className="flex min-h-screen flex-col">
       {/* ── HERO WITH FORM ── */}
       <section id="partner-form" className="relative overflow-hidden !py-0">
         <div className="absolute inset-0 bg-gradient-to-br from-foreground via-primary to-foreground opacity-95" />
