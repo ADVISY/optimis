@@ -36,23 +36,29 @@ const Partenaires = () => {
           backgroundImage: "radial-gradient(circle at 20% 50%, hsl(var(--accent)) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(var(--primary)) 0%, transparent 40%)",
         }} />
 
-        {/* Mascot background - desktop only */}
-        <div className="hidden lg:block absolute -left-10 bottom-0 z-[1] opacity-20 pointer-events-none">
-          <img src={mascotHd} alt="" className="h-[500px] xl:h-[600px] w-auto" />
+        {/* Mascot background - visible on all screens */}
+        <div className="absolute right-0 md:-right-5 bottom-0 z-[1] opacity-15 md:opacity-20 pointer-events-none">
+          <img src={mascotHd} alt="" className="h-[280px] md:h-[400px] lg:h-[500px] xl:h-[600px] w-auto" />
         </div>
 
-        <div className="container mx-auto px-4 relative z-10 py-4 md:py-8 lg:py-14">
-          {/* Logo bar */}
-          <div className="mb-4 md:mb-10">
-            <img src={logo} alt="Optimis" className="h-7 md:h-10 w-auto" />
-          </div>
+        <div className="container mx-auto px-4 relative z-10 py-5 md:py-8 lg:py-14">
+          {/* Logo centered & large */}
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex justify-center mb-5 md:mb-10"
+          >
+            <img src={logo} alt="Optimis" className="h-12 md:h-16 lg:h-20 w-auto drop-shadow-lg" />
+          </motion.div>
+
           <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-start">
             {/* Left: text content */}
             <motion.div
               initial="hidden"
               animate="visible"
               variants={stagger}
-              className="text-left"
+              className="text-left lg:text-left text-center"
             >
               <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-accent/20 text-accent px-3 py-1 rounded-full text-xs md:text-sm font-semibold mb-3 md:mb-6">
                 <Zap className="h-4 w-4" />
@@ -64,7 +70,7 @@ const Partenaires = () => {
                 <span className="text-accent">prêts à être convertis</span>
               </motion.h1>
 
-              <motion.p variants={fadeUp} className="text-sm md:text-lg text-white/70 mb-4 md:mb-8 max-w-lg">
+              <motion.p variants={fadeUp} className="text-sm md:text-lg text-white/70 mb-4 md:mb-8 max-w-lg mx-auto lg:mx-0">
                 Optimis génère chaque jour des prospects en assurance, finance, immobilier et télécom.
               </motion.p>
 
