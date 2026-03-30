@@ -274,6 +274,39 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
       }
     }
 
+    // Partner: translate budget, sector, salesForce
+    if (formType === "partner") {
+      const budgetMap: Record<string, string> = {
+        "less-3000": t("partner.budgets.less3000", "Moins de CHF 3'000"),
+        "3000-5000": t("partner.budgets.3000to5000", "CHF 3'000 – 5'000"),
+        "5000-10000": t("partner.budgets.5000to10000", "CHF 5'000 – 10'000"),
+        "10000-plus": t("partner.budgets.10000plus", "Plus de CHF 10'000"),
+      };
+      const sectorMap: Record<string, string> = {
+        insurance: t("partner.sectors.insurance", "Assurance"),
+        "real-estate": t("partner.sectors.realEstate", "Immobilier"),
+        finance: t("partner.sectors.finance", "Finance"),
+        telecom: t("partner.sectors.telecom", "Télécom"),
+        other: t("partner.sectors.other", "Autre"),
+      };
+      const salesMap: Record<string, string> = {
+        "1": "1 commercial",
+        "2-5": "2 – 5 commerciaux",
+        "6-10": "6 – 10 commerciaux",
+        "11-20": "11 – 20 commerciaux",
+        "20-plus": "20+ commerciaux",
+      };
+      if (typeof normalizedFormData.budget === "string") {
+        normalizedFormData.budget = budgetMap[normalizedFormData.budget] ?? normalizedFormData.budget;
+      }
+      if (typeof normalizedFormData.sector === "string") {
+        normalizedFormData.sector = sectorMap[normalizedFormData.sector] ?? normalizedFormData.sector;
+      }
+      if (typeof normalizedFormData.salesForce === "string") {
+        normalizedFormData.salesForce = salesMap[normalizedFormData.salesForce] ?? normalizedFormData.salesForce;
+      }
+    }
+
     // Rename fields to clean French labels for Google Sheets
     const fieldLabels: Record<string, Record<string, string>> = {
       // Common fields (applied to all forms)
