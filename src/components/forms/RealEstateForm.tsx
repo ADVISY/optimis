@@ -296,31 +296,6 @@ const RealEstateForm = () => {
               ))}
             </RadioGroup>
           </div>
-
-          <div>
-            <p className="text-xs md:text-base font-medium text-foreground mb-2 md:mb-3">{t("forms.realEstate.availabilityQuestion")}</p>
-            <RadioGroup
-              value={formData.availableForEstimation}
-              onValueChange={(value) => { updateFormData({ availableForEstimation: value }); }}
-              className="flex gap-3"
-            >
-              {yesNoOptions.map((option) => (
-                <label
-                  key={`avail-${option.value}`}
-                  htmlFor={`avail-${option.value}`}
-                  className={cn(
-                    "flex items-center space-x-2 p-3 border-2 rounded-xl cursor-pointer transition-all flex-1 justify-center",
-                    formData.availableForEstimation === option.value
-                      ? "border-primary bg-primary/5"
-                      : "border-border hover:border-primary/50"
-                  )}
-                >
-                  <RadioGroupItem value={option.value} id={`avail-${option.value}`} />
-                  <Label htmlFor={`avail-${option.value}`} className="text-sm md:text-base cursor-pointer">{option.label}</Label>
-                </label>
-              ))}
-            </RadioGroup>
-          </div>
         </div>
       </FormStep>
 
