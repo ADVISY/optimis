@@ -44,6 +44,8 @@ import ComparateurHypotheque from "./pages/comparateurs/ComparateurHypotheque";
 import ComparateurProfessionnel from "./pages/comparateurs/ComparateurProfessionnel";
 import ComparateurLpp from "./pages/comparateurs/ComparateurLpp";
 import AvoirsLpp from "./pages/AvoirsLpp";
+import EstimationImmobiliere from "./pages/EstimationImmobiliere";
+import ComparateurEstimation from "./pages/comparateurs/ComparateurEstimation";
 
 import { localizedRoutes } from "./utils/localizedRoutes";
 
