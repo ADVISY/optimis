@@ -41,7 +41,7 @@ const Partenaires = () => {
           <img src={mascotHd} alt="" className="h-[500px] xl:h-[600px] w-auto" />
         </div>
 
-        <div className="container mx-auto px-4 relative z-10 py-6 md:py-10 lg:py-14">
+        <div className="container mx-auto px-4 relative z-10 py-4 md:py-8 lg:py-14">
           {/* Logo bar */}
           <div className="mb-6 md:mb-10">
             <img src={logo} alt="Optimis" className="h-8 md:h-10 w-auto" />
