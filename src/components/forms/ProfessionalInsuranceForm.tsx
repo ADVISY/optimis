@@ -112,11 +112,14 @@ const ProfessionalInsuranceForm = () => {
     }, 3000);
   };
 
+  const isValidDate = (d: string) => /^\d{2}\/\d{2}\/\d{4}$/.test(d);
+
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 2: return formData.activityType.trim() !== "" && formData.legalForm !== "" && formData.employeesCount !== "" && formData.canton !== "" && formData.revenue.trim() !== "";
-      case 3: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
-      case 4: return isValidEmail(formData.email) && isValidPhone(formData.phone);
+      case 2: return formData.activityType.trim() !== "" && formData.legalForm !== "" && formData.employeesCount !== "";
+      case 3: return formData.revenue.trim() !== "" && isValidDate(formData.contractStartDate);
+      case 4: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
+      case 5: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
     }
   };
