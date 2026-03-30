@@ -44,6 +44,13 @@ const Insurances = () => {
       link: "/assurance-vie",
       compareLink: "/3eme-pilier-offres"
     },
+    {
+      icon: Briefcase,
+      title: t('nav.professionalInsurance'),
+      description: t('insurances.professionalInsuranceDesc'),
+      link: "/assurance-professionnelle",
+      compareLink: "/assurance-entreprise-offres"
+    },
   ];
 
   return (

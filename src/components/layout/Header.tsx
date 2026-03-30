@@ -76,6 +76,17 @@ const assurancesCategories = [
     ]
   },
   { 
+    id: "professionnel",
+    labelKey: "nav.professionalInsurance", 
+    icon: Briefcase,
+    href: "/assurance-professionnelle",
+    subLinks: [
+      { labelKey: "megaMenu.proRcPro", href: "/assurance-entreprise-offres" },
+      { labelKey: "megaMenu.proLaa", href: "/assurance-entreprise-offres" },
+      { labelKey: "megaMenu.proLpp", href: "/assurance-entreprise-offres" },
+    ]
+  },
+  { 
     id: "autres",
     labelKey: "nav.otherInsurances", 
     icon: Plus,
