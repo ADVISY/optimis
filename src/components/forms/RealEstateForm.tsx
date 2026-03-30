@@ -78,7 +78,7 @@ const RealEstateForm = () => {
       case 2: return formData.propertyType !== "";
       case 3: return formData.rooms !== "";
       case 4: return formData.surface.trim() !== "";
-      case 5: return formData.saleTimeline !== "" && formData.hasMandate !== "" && formData.availableForEstimation !== "";
+      case 5: return formData.saleTimeline !== "" && formData.hasMandate !== "";
       case 6: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
       case 7: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
