@@ -37,7 +37,7 @@ const Partenaires = () => {
         }} />
 
         {/* Mascot background - visible on all screens */}
-        <div className="absolute right-0 md:-right-5 bottom-0 z-[1] opacity-15 md:opacity-20 pointer-events-none">
+        <div className="absolute left-0 md:-left-5 bottom-0 z-[1] opacity-15 md:opacity-20 pointer-events-none">
           <img src={mascotHd} alt="" className="h-[280px] md:h-[400px] lg:h-[500px] xl:h-[600px] w-auto" />
         </div>
 
