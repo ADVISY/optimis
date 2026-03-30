@@ -1604,35 +1604,5 @@
     "faq3Answer": "Ja, unter bestimmten Bedingungen: Immobilienkauf, endgültige Ausreise aus der Schweiz, Wechsel in die Selbstständigkeit oder Pensionierung.",
     "faq4Question": "Wohin geht das Geld, wenn ich nichts tue?",
     "faq4Answer": "Wenn Sie Ihr Guthaben nicht einfordern, wird es nach einer gewissen Frist an die Stiftung Auffangeinrichtung BVG übertragen."
-  },
-  "forms": {
-    "lpp": {
-      "title": "Prüfen Sie Ihr BVG-Guthaben in 1 Minute",
-      "description": "Kostenlos • Unverbindlich • 100% vertraulich",
-      "objectiveQuestion": "Was möchten Sie tun?",
-      "situationQuestion": "Was ist Ihre aktuelle Situation?",
-      "yearsQuestion": "Wie viele Jahre haben Sie in der Schweiz gearbeitet?",
-      "birthDateQuestion": "Was ist Ihr Geburtsdatum?",
-      "birthDate": "Geburtsdatum",
-      "ctaFinal": "Kostenlose Analyse erhalten",
-      "thankYouTitle": "Vielen Dank für Ihre Anfrage!",
-      "thankYouDescription": "Ein Berater wird sich in Kürze mit Ihnen in Verbindung setzen.",
-      "objectives": {
-        "find": "🔍 Meine BVG-Gelder finden",
-        "consolidate": "🔄 Meine BVG-Gelder zusammenführen"
-      },
-      "situations": {
-        "employed": "Angestellt",
-        "selfEmployed": "Selbstständig",
-        "unemployed": "Arbeitslos",
-        "other": "Andere"
-      },
-      "years": {
-        "less10": "Weniger als 10 Jahre",
-        "plus10": "Mehr als 10 Jahre",
-        "plus20": "Mehr als 20 Jahre",
-        "plus30": "Mehr als 30 Jahre"
-      }
-    }
   }
 }
