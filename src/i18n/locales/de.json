@@ -67,7 +67,8 @@
     "subsidyInsurance": "Prämienverbilligung",
     "termination": "Kündigung",
     "mortgage": "Hypothek",
-    "professionalInsurance": "Firmenversicherungen"
+    "professionalInsurance": "Firmenversicherungen",
+    "lpp": "BVG-Guthaben"
   },
   "stats": {
     "recommended": "Empfohlen",

@@ -67,7 +67,8 @@
     "subsidyInsurance": "Sussidio Assicurazione",
     "termination": "Disdetta",
     "mortgage": "Ipoteca",
-    "professionalInsurance": "Assicurazioni Aziendali"
+    "professionalInsurance": "Assicurazioni Aziendali",
+    "lpp": "Averi LPP"
   },
   "stats": {
     "recommended": "Raccomandato",
