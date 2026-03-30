@@ -1483,6 +1483,71 @@
   "insurances": {
     "title": "Nos assurances",
     "subtitle": "Découvrez tous les types d'assurances que nous comparons pour vous aider à trouver la meilleure protection.",
-    "lifeInsuranceDesc": "Préparez votre avenir et protégez vos proches"
+    "lifeInsuranceDesc": "Préparez votre avenir et protégez vos proches",
+    "professionalInsuranceDesc": "Protégez votre activité avec des assurances adaptées aux professionnels"
+  },
+  "professionalInsurancePage": {
+    "heroTitle": "Assurances Professionnelles",
+    "heroSubtitle": "RC Pro, LAA, LPP, Protection juridique – Comparez les meilleures offres pour votre entreprise en Suisse.",
+    "compareButton": "Comparer les offres",
+    "typesTitle": "Les assurances essentielles pour les professionnels",
+    "typesSubtitle": "Découvrez les couvertures indispensables pour protéger votre activité, vos employés et votre patrimoine professionnel.",
+    "toc": {
+      "rcPro": "RC Professionnelle",
+      "laa": "Assurance LAA (accidents)",
+      "lpp": "Prévoyance LPP",
+      "legalProtection": "Protection juridique pro",
+      "lossOfEarnings": "Perte de gain maladie",
+      "multiRisk": "Multirisque entreprise",
+      "cyber": "Assurance Cyber"
+    },
+    "rcPro": {
+      "title": "RC Professionnelle",
+      "desc": "La responsabilité civile professionnelle couvre les dommages causés à des tiers dans le cadre de votre activité. Elle est obligatoire pour de nombreuses professions en Suisse.",
+      "details": "Cette assurance prend en charge les dommages corporels, matériels et financiers que vous pourriez causer involontairement à un client ou un tiers. Le montant de la couverture varie selon votre secteur d'activité. Les professions réglementées (médecins, avocats, architectes, fiduciaires) sont tenues par la loi de souscrire une RC professionnelle."
+    },
+    "laa": {
+      "title": "Assurance LAA (Accidents)",
+      "desc": "L'assurance accidents LAA est obligatoire pour tout employeur en Suisse. Elle couvre les accidents professionnels et non professionnels de vos collaborateurs.",
+      "details": "La LAA couvre les frais médicaux, les indemnités journalières en cas d'incapacité de travail et les rentes d'invalidité. Les employés travaillant plus de 8 heures par semaine sont couverts pour les accidents professionnels ET non professionnels. Les indépendants peuvent souscrire volontairement à la LAA."
+    },
+    "lpp": {
+      "title": "Prévoyance LPP (2ème pilier)",
+      "desc": "La prévoyance professionnelle LPP est obligatoire dès un salaire annuel de CHF 22'050. Elle garantit le maintien du niveau de vie à la retraite pour vos employés.",
+      "details": "Le 2ème pilier complète l'AVS (1er pilier) et constitue une part essentielle de la prévoyance en Suisse. En tant qu'employeur, vous devez affilier vos collaborateurs à une institution de prévoyance. Les cotisations sont partagées entre l'employeur (au minimum 50%) et l'employé. Comparer les offres permet de trouver les meilleures conditions et rendements."
+    },
+    "legalProtection": {
+      "title": "Protection juridique professionnelle",
+      "desc": "La protection juridique professionnelle vous défend en cas de litiges liés à votre activité : contrats, droit du travail, baux commerciaux, etc.",
+      "details": "Cette assurance prend en charge les frais d'avocat, les frais de justice et les expertises en cas de conflit. Elle couvre les litiges contractuels avec vos clients ou fournisseurs, les conflits avec les employés (droit du travail), les contentieux fiscaux et les litiges liés à vos locaux commerciaux."
+    },
+    "lossOfEarnings": {
+      "title": "Assurance perte de gain maladie",
+      "desc": "L'assurance perte de gain maladie garantit le versement du salaire en cas d'incapacité de travail due à une maladie, pour vous ou vos employés.",
+      "details": "Sans cette assurance, l'employeur est tenu de verser le salaire selon l'échelle bernoise ou bâloise (de 3 semaines à 6 mois selon l'ancienneté). L'assurance perte de gain prend le relais et verse généralement 80% du salaire pendant 720 jours. C'est un élément clé pour attirer et fidéliser les talents."
+    },
+    "multiRisk": {
+      "title": "Assurance multirisque entreprise",
+      "desc": "L'assurance multirisque protège vos locaux, votre matériel, vos stocks et votre activité contre les dommages imprévus (incendie, dégâts d'eau, vol, etc.).",
+      "details": "Cette couverture complète englobe les bâtiments commerciaux, le mobilier et l'équipement professionnel, les stocks et marchandises, ainsi que la perte d'exploitation en cas de sinistre. Elle vous permet de reprendre rapidement votre activité après un événement imprévu."
+    },
+    "cyber": {
+      "title": "Assurance Cyber",
+      "desc": "L'assurance cyber protège votre entreprise contre les risques numériques : piratage, ransomware, fuite de données, interruption de service.",
+      "details": "Avec la digitalisation croissante, les cyberattaques représentent un risque majeur pour les PME suisses. Cette assurance couvre les frais de restauration des données, la gestion de crise, les notifications aux personnes concernées (RGPD/LPD), les dommages aux tiers et la perte d'exploitation liée à une cyberattaque."
+    },
+    "faqTitle": "Questions fréquentes sur les assurances professionnelles",
+    "faq": {
+      "q1": "Quelles assurances sont obligatoires pour une entreprise en Suisse ?",
+      "a1": "Les assurances obligatoires dépendent de votre statut et secteur : la LAA (accidents) est obligatoire pour tout employeur, la LPP (prévoyance) dès un salaire annuel de CHF 22'050, et la RC professionnelle est imposée pour certaines professions réglementées (médecins, avocats, architectes, etc.).",
+      "q2": "Un indépendant doit-il prendre les mêmes assurances qu'une Sàrl ?",
+      "a2": "Non. Un indépendant sans employé n'est pas soumis aux mêmes obligations. Il peut souscrire volontairement à la LAA et à la LPP. En revanche, dès qu'il emploie du personnel, les obligations sont les mêmes qu'une Sàrl ou SA.",
+      "q3": "Combien coûtent les assurances professionnelles en Suisse ?",
+      "a3": "Les coûts varient considérablement selon le secteur, la taille de l'entreprise et les couvertures choisies. Une RC pro peut coûter de CHF 300 à 5'000/an, la LAA représente 0.5% à 3% de la masse salariale, et la LPP entre 7% et 18% du salaire coordonné.",
+      "q4": "Comment choisir le bon prestataire pour mes assurances d'entreprise ?",
+      "a4": "Comparez les offres de plusieurs assureurs en tenant compte du prix, de l'étendue des couvertures, des franchises et du service client. Utilisez notre comparateur pour recevoir des offres personnalisées et gratuites adaptées à votre situation."
+    },
+    "ctaTitle": "Protégez votre activité professionnelle",
+    "ctaDescription": "Comparez gratuitement les assurances professionnelles et trouvez les meilleures offres pour votre entreprise en Suisse."
   }
 }
