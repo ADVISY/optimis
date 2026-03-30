@@ -12,6 +12,7 @@ const DEFAULT_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/21326682/un2n4
 // Form-specific webhook URLs
 const FORM_WEBHOOKS: Record<string, string> = {
   "lpp-libre-passage": "https://hooks.zapier.com/hooks/catch/21326682/un855tt/",
+  "professional-insurance": "https://hooks.zapier.com/hooks/catch/21326682/un8i19a/",
 };
 
 serve(async (req) => {
