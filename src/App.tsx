@@ -15,6 +15,7 @@ import ProtectionJuridique from "./pages/ProtectionJuridique";
 import AssuranceMenage from "./pages/AssuranceMenage";
 import AssuranceVie from "./pages/AssuranceVie";
 import Hypotheque from "./pages/Hypotheque";
+import AssurancePro from "./pages/AssurancePro";
 import Services from "./pages/Services";
 import ForfaitMobile from "./pages/ForfaitMobile";
 import SubsideAssuranceMaladie from "./pages/SubsideAssuranceMaladie";
