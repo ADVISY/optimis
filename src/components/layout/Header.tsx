@@ -137,6 +137,15 @@ const financesCategories = [
 // Services menu data
 const servicesCategories = [
   { 
+    id: "estimation",
+    labelKey: "nav.realEstate", 
+    icon: Home,
+    href: "/estimation-immobiliere",
+    subLinks: [
+      { labelKey: "nav.realEstateCompare", href: "/estimation-immobiliere-gratuite" },
+    ]
+  },
+  { 
     id: "mobile",
     labelKey: "nav.mobilePackage", 
     icon: Smartphone,

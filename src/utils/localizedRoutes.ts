@@ -49,6 +49,8 @@ export const localizedRoutes: LocalizedRoutes = {
   businessLanding: { fr: "assurance-entreprise-offres", de: "unternehmensversicherung-vergleich", it: "confronto-assicurazione-azienda" },
   lpp: { fr: "avoirs-lpp", de: "bvg-guthaben", it: "averi-lpp" },
   lppLanding: { fr: "avoirs-lpp-libre-passage", de: "bvg-freizuegigkeit", it: "averi-lpp-libero-passaggio" },
+  realEstate: { fr: "estimation-immobiliere", de: "immobilienbewertung", it: "valutazione-immobiliare" },
+  realEstateLanding: { fr: "estimation-immobiliere-gratuite", de: "kostenlose-immobilienbewertung", it: "valutazione-immobiliare-gratuita" },
 };
 
 // Helper function to get the localized path for a route
