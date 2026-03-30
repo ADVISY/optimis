@@ -68,7 +68,8 @@
     "termination": "Kündigung",
     "mortgage": "Hypothek",
     "professionalInsurance": "Firmenversicherungen",
-    "lpp": "BVG-Guthaben"
+    "lpp": "BVG-Guthaben",
+    "lppCompare": "BVG-Guthaben prüfen"
   },
   "stats": {
     "recommended": "Empfohlen",
