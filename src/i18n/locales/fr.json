@@ -69,7 +69,9 @@
     "mortgage": "Hypothèque",
     "professionalInsurance": "Assurances Pro",
     "lpp": "Avoirs LPP",
-    "lppCompare": "Vérifier mon avoir LPP"
+    "lppCompare": "Vérifier mon avoir LPP",
+    "realEstate": "Estimation immobilière",
+    "realEstateCompare": "Estimer mon bien gratuitement"
   },
   "stats": {
     "recommended": "Recommandé",
