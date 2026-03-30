@@ -352,7 +352,7 @@ const Partenaires = () => {
           </motion.div>
         </div>
       </section>
-    </Layout>
+    </div>
   );
 };
 
