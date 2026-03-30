@@ -231,7 +231,7 @@ const ProfessionalInsuranceForm = () => {
           <FormFieldWrapper label={t("forms.professionalInsurance.legalForm")} required>
             <Select
               value={formData.legalForm}
-              onValueChange={(value) => updateFormData({ legalForm: value })}
+              onValueChange={(value) => { updateFormData({ legalForm: value }); notifyDelayed(); }}
             >
               <SelectTrigger className="h-9 md:h-14 text-xs md:text-lg">
                 <SelectValue placeholder={t("forms.professionalInsurance.selectLegalForm")} />
