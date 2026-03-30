@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import Layout from "@/components/layout/Layout";
+import Footer from "@/components/layout/Footer";
 import PartnerForm from "@/components/forms/PartnerForm";
 import { motion } from "framer-motion";
 import {
@@ -26,7 +26,7 @@ const Partenaires = () => {
   };
 
   return (
-    <Layout>
+    <div className="flex min-h-screen flex-col">
       {/* ── HERO WITH FORM ── */}
       <section id="partner-form" className="relative overflow-hidden !py-0">
         <div className="absolute inset-0 bg-gradient-to-br from-foreground via-primary to-foreground opacity-95" />
@@ -352,7 +352,8 @@ const Partenaires = () => {
           </motion.div>
         </div>
       </section>
-    </Layout>
+      <Footer />
+    </div>
   );
 };
 
