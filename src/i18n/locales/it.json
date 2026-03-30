@@ -1037,7 +1037,11 @@
       "selectEmployees": "Seleziona il numero",
       "soloEntrepreneur": "Imprenditore individuale",
       "message": "Messaggio o precisazioni",
-      "messagePlaceholder": "Descrivi le tue esigenze specifiche..."
+      "messagePlaceholder": "Descrivi le tue esigenze specifiche...",
+      "revenue": "Fatturato annuo (CHF)",
+      "revenuePlaceholder": "Es. 150'000",
+      "contractStartDate": "Data di inizio contratto desiderata",
+      "selectDate": "Seleziona una data"
     },
     "mortgage": {
       "title": "Confronto ipoteche",
