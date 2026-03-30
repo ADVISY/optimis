@@ -36,7 +36,16 @@ const Partenaires = () => {
           backgroundImage: "radial-gradient(circle at 20% 50%, hsl(var(--accent)) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(var(--primary)) 0%, transparent 40%)",
         }} />
 
-        <div className="container mx-auto px-4 relative z-10 py-10 md:py-16 lg:py-20">
+        {/* Mascot background - desktop only */}
+        <div className="hidden lg:block absolute -left-10 bottom-0 z-[1] opacity-20 pointer-events-none">
+          <img src={mascotHd} alt="" className="h-[500px] xl:h-[600px] w-auto" />
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10 py-6 md:py-10 lg:py-14">
+          {/* Logo bar */}
+          <div className="mb-6 md:mb-10">
+            <img src={logo} alt="Optimis" className="h-8 md:h-10 w-auto" />
+          </div>
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             {/* Left: text content */}
             <motion.div
