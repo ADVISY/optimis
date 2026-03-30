@@ -90,32 +90,148 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
       }
     }
 
-    // Professional insurance: combine insuranceTypes into a single readable string
-    if (formType === "professional-insurance") {
-      const typeLabels: Record<string, string> = {
-        insuranceTypes_rcProfessional: "RC Professionnelle",
-        insuranceTypes_lossOfEarnings: "Perte de gain",
-        insuranceTypes_laa: "LAA (Accident)",
-        insuranceTypes_lpp: "LPP (Prévoyance)",
-        insuranceTypes_legalProtection: "Protection juridique",
-        insuranceTypes_multiRisk: "Multirisque entreprise",
-      };
-      const selected = Object.entries(typeLabels)
-        .filter(([key]) => normalizedFormData[key] === true)
-        .map(([, label]) => label);
-      // Remove individual boolean fields
-      Object.keys(typeLabels).forEach((key) => delete normalizedFormData[key]);
-      // Add single combined field
-      normalizedFormData.insuranceTypes = selected.join(", ") || "Aucun";
+    // Rename fields to clean French labels for Google Sheets
+    const fieldLabels: Record<string, Record<string, string>> = {
+      // Common fields (applied to all forms)
+      _common: {
+        firstName: "Prénom",
+        lastName: "Nom",
+        email: "Email",
+        phone: "Téléphone",
+        canton: "Canton",
+        postalCode: "Code postal",
+        formType: "Type de formulaire",
+        language: "Langue",
+        source: "Source",
+        pageUrl: "URL de la page",
+        timestamp: "Date et heure",
+        leadId: "ID du lead",
+      },
+      "health-insurance": {
+        hasCurrentInsurance: "Assurance actuelle",
+        currentInsurer: "Assureur actuel",
+        familySituation: "Situation familiale",
+        birthDate: "Date de naissance",
+        lamalModel: "Modèle LAMal",
+        franchise: "Franchise",
+        accidentCoverage: "Couverture accident",
+        complementaryTier: "Niveau complémentaire",
+        complementary_dental: "Complémentaire dentaire",
+        complementary_hospitalization: "Complémentaire hospitalisation",
+        complementary_glasses: "Complémentaire lunettes",
+        complementary_alternativeMedicine: "Complémentaire médecine alternative",
+        complementary_worldwide: "Complémentaire monde entier",
+        availability: "Disponibilité",
+      },
+      "car-insurance": {
+        vehiclePlate: "Plaque d'immatriculation",
+        vehicleBrand: "Marque du véhicule",
+        vehicleModel: "Modèle du véhicule",
+        vehicleYear: "Année du véhicule",
+        usage: "Utilisation",
+        annualKm: "Km annuels",
+        driverBirthDate: "Date de naissance du conducteur",
+        licenseYear: "Année du permis",
+        accidentsLast5Years: "Accidents (5 dernières années)",
+        coverageType: "Type de couverture",
+        options_glassBreakage: "Option bris de glace",
+        options_assistance: "Option assistance",
+        options_replacementVehicle: "Option véhicule de remplacement",
+      },
+      "household-insurance": {
+        propertyType: "Type de bien",
+        ownershipStatus: "Statut de propriété",
+        livingSpace: "Surface habitable",
+        numberOfRooms: "Nombre de pièces",
+        propertyValue: "Valeur du bien",
+      },
+      "legal-protection": {
+        coverageType: "Type de couverture",
+        coverageAreas_traffic: "Couverture circulation",
+        coverageAreas_private: "Couverture privée",
+        coverageAreas_work: "Couverture travail",
+        coverageAreas_property: "Couverture propriété",
+        coverageAreas_tenant: "Couverture locataire",
+        householdSize: "Taille du ménage",
+      },
+      "pillar-3a": {
+        hasExistingPillar3: "3ème pilier existant",
+        existingProvider: "Prestataire actuel",
+        objective: "Objectif",
+        age: "Âge",
+        professionalStatus: "Statut professionnel",
+        incomeRange: "Tranche de revenu",
+        savingsAmount: "Montant d'épargne",
+        investmentHorizon: "Horizon de placement",
+        riskProfile: "Profil de risque",
+      },
+      mortgage: {
+        projectType: "Type de projet",
+        propertyType: "Type de bien",
+        propertyValue: "Valeur du bien",
+        commune: "Commune",
+        numberOfBorrowers: "Nombre d'emprunteurs",
+        professionalStatus: "Statut professionnel",
+        incomeRange: "Tranche de revenu",
+        ownFundsRange: "Fonds propres",
+      },
+      "professional-insurance": {
+        insuranceTypes: "Types d'assurance",
+        activityType: "Type d'activité",
+        legalForm: "Forme juridique",
+        employeesCount: "Nombre d'employés",
+        revenue: "Chiffre d'affaires annuel",
+        contractStartDate: "Date de début de contrat",
+        message: "Message",
+      },
+      "lpp-libre-passage": {
+        objective: "Objectif",
+        situation: "Situation actuelle",
+        yearsWorked: "Années travaillées en Suisse",
+        birthDate: "Date de naissance",
+      },
+      "estimation-immobiliere": {
+        address: "Adresse du bien",
+        propertyType: "Type de bien",
+        rooms: "Nombre de pièces",
+        surface: "Surface (m²)",
+        saleTimeline: "Délai de vente",
+        hasMandate: "Mandat agence signé",
+      },
+      subsidy: {
+        birthDate: "Date de naissance",
+        householdSize: "Composition du ménage",
+        hasCurrentInsurance: "Assurance actuelle",
+        currentInsurer: "Assureur actuel",
+        currentDeductible: "Franchise actuelle",
+        incomeRange: "Revenu annuel",
+        specialSituation: "Situation particulière",
+      },
+      termination: {
+        contractType: "Type de contrat",
+        currentInsurer: "Assureur actuel",
+        policyNumber: "Numéro de police",
+        terminationDate: "Date de résiliation",
+        address: "Adresse",
+        city: "Ville",
+      },
+    };
+
+    // Apply field renaming
+    const formLabels = { ...fieldLabels._common, ...(fieldLabels[formType] || {}) };
+    const renamedData: Record<string, unknown> = {};
+    for (const [key, value] of Object.entries(normalizedFormData)) {
+      const label = formLabels[key] || key;
+      renamedData[label] = value;
     }
 
     const leadData: LeadData = {
-      ...normalizedFormData,
-      formType,
-      language: i18n.language,
-      source: document.referrer || "direct",
-      pageUrl: window.location.href,
-      timestamp: (() => {
+      ...renamedData as Record<string, unknown>,
+      "Type de formulaire": formType,
+      "Langue": i18n.language,
+      "Source": document.referrer || "direct",
+      "URL de la page": window.location.href,
+      "Date et heure": (() => {
         const now = new Date();
         const day = now.getDate().toString().padStart(2, '0');
         const month = (now.getMonth() + 1).toString().padStart(2, '0');
@@ -124,9 +240,13 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
         const minutes = now.getMinutes().toString().padStart(2, '0');
         return `${year}-${month}-${day} ${hours}:${minutes}`;
       })(),
+      "ID du lead": generateLeadId(),
+      formType, // Keep for edge function routing
+      language: i18n.language,
       leadId: generateLeadId(),
-      webhookUrl: webhookUrl, // Pass custom webhook if provided
-    };
+      timestamp: new Date().toISOString(),
+      webhookUrl: webhookUrl,
+    } as unknown as LeadData;
 
     console.log("Lead data to submit:", leadData);
 
