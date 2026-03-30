@@ -138,7 +138,7 @@ const Partenaires = () => {
       </section>
 
       {/* ── PROBLÈME MARCHÉ ── */}
-      <section className="bg-muted/30">
+      <section className="bg-muted/30 py-12 md:py-16">
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-3xl mx-auto text-center">
             <motion.h2 variants={fadeUp} className="text-headline mb-6">
