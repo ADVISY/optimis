@@ -78,16 +78,17 @@ const RealEstateForm = () => {
       case 2: return formData.propertyType !== "";
       case 3: return formData.rooms !== "";
       case 4: return formData.surface.trim() !== "";
-      case 5: return formData.saleTimeline !== "" && formData.hasMandate !== "";
-      case 6: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
-      case 7: return isValidEmail(formData.email) && isValidPhone(formData.phone);
+      case 5: return formData.saleTimeline !== "";
+      case 6: return formData.hasMandate !== "";
+      case 7: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
+      case 8: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
     }
   };
 
   const getStepErrors = (step: number): Record<string, string> => {
-    if (step === 6) return getIdentityErrors(formData.firstName, formData.lastName);
-    if (step === 7) return getContactErrors(formData.email, formData.phone);
+    if (step === 7) return getIdentityErrors(formData.firstName, formData.lastName);
+    if (step === 8) return getContactErrors(formData.email, formData.phone);
     return {};
   };
 
