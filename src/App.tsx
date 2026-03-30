@@ -43,6 +43,7 @@ import ComparateurPilier3 from "./pages/comparateurs/ComparateurPilier3";
 import ComparateurHypotheque from "./pages/comparateurs/ComparateurHypotheque";
 import ComparateurProfessionnel from "./pages/comparateurs/ComparateurProfessionnel";
 import ComparateurLpp from "./pages/comparateurs/ComparateurLpp";
+import AvoirsLpp from "./pages/AvoirsLpp";
 
 import { localizedRoutes } from "./utils/localizedRoutes";
 
@@ -90,6 +91,7 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("mobilePackage", <ForfaitMobile />)}
         {createLocalizedRoutes("healthSubsidy", <SubsideAssuranceMaladie />)}
         {createLocalizedRoutes("termination", <Resiliation />)}
+        {createLocalizedRoutes("lpp", <AvoirsLpp />)}
         
         {/* Blog */}
         <Route path="/blog" element={<Blog />} />

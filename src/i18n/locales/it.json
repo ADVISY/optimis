@@ -68,7 +68,8 @@
     "termination": "Disdetta",
     "mortgage": "Ipoteca",
     "professionalInsurance": "Assicurazioni Aziendali",
-    "lpp": "Averi LPP"
+    "lpp": "Averi LPP",
+    "lppCompare": "Verifica averi LPP"
   },
   "stats": {
     "recommended": "Raccomandato",

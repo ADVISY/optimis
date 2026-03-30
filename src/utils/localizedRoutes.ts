@@ -47,6 +47,7 @@ export const localizedRoutes: LocalizedRoutes = {
   pillar3Landing: { fr: "3eme-pilier-offres", de: "saeule-3a-vergleich", it: "confronto-pilastro-3a" },
   mortgageLanding: { fr: "hypotheque-offres", de: "hypotheken-vergleich", it: "confronto-ipoteche" },
   businessLanding: { fr: "assurance-entreprise-offres", de: "unternehmensversicherung-vergleich", it: "confronto-assicurazione-azienda" },
+  lpp: { fr: "avoirs-lpp", de: "bvg-guthaben", it: "averi-lpp" },
   lppLanding: { fr: "avoirs-lpp-libre-passage", de: "bvg-freizuegigkeit", it: "averi-lpp-libero-passaggio" },
 };
 
