@@ -542,7 +542,9 @@
     "privacyPolicy": "Informativa sulla privacy",
     "termsOfService": "Termini di servizio",
     "legalNotice": "Note legali",
-    "allRightsReserved": "Tutti i diritti riservati."
+    "allRightsReserved": "Tutti i diritti riservati.",
+    "ctaTitle": "Pronti a risparmiare sulle vostre assicurazioni?",
+    "ctaDescription": "Confrontate gratuitamente e senza impegno le migliori offerte sul mercato."
   },
   "mortgage": {
     "title": "Ipoteca",

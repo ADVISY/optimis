@@ -577,7 +577,9 @@
     "privacyPolicy": "Politique de confidentialité",
     "termsOfService": "Conditions d'utilisation",
     "legalNotice": "Mentions légales",
-    "allRightsReserved": "Tous droits réservés."
+    "allRightsReserved": "Tous droits réservés.",
+    "ctaTitle": "Prêt à économiser sur vos assurances ?",
+    "ctaDescription": "Comparez gratuitement et sans engagement les meilleures offres du marché."
   },
   "mortgage": {
     "title": "Hypothèque",
