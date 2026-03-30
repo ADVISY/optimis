@@ -199,7 +199,7 @@ const Partenaires = () => {
       </section>
 
       {/* ── FRAÎCHEUR DES LEADS ── */}
-      <section className="bg-primary text-primary-foreground relative overflow-hidden">
+      <section className="bg-primary text-primary-foreground relative overflow-hidden py-12 md:py-16">
         <div className="absolute inset-0 opacity-10" style={{
           backgroundImage: "radial-gradient(circle at 30% 70%, hsl(var(--accent)) 0%, transparent 50%)",
         }} />
