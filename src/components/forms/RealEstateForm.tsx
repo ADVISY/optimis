@@ -27,7 +27,7 @@ interface RealEstateFormData {
   email: string;
 }
 
-const TOTAL_STEPS = 7;
+const TOTAL_STEPS = 8;
 
 const RealEstateForm = () => {
   const { t } = useTranslation();
