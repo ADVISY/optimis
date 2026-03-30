@@ -41,7 +41,7 @@ const RealEstateForm = () => {
     surface: "",
     saleTimeline: "",
     hasMandate: "",
-    availableForEstimation: "",
+    
     firstName: "",
     lastName: "",
     phone: "",
