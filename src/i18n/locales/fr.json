@@ -392,7 +392,22 @@
     "tip7": "Prenez en compte les délais de carence et modalités de résiliation.",
     "tip8": "Assurez-vous que les litiges spécifiques qui vous concernent sont inclus.",
     "tip9": "Demandez des recommandations à votre entourage ou consultez les avis en ligne.",
-    "tip10": "Déterminez avec précision le type de contrat dont vous avez besoin."
+    "tip10": "Déterminez avec précision le type de contrat dont vous avez besoin.",
+    "coverageTypes": "Types de couverture",
+    "coverageTypesContent": "La protection juridique couvre différents domaines du droit pour vous protéger au quotidien.",
+    "coverage1": "Droit du travail",
+    "coverage2": "Droit du bail",
+    "coverage3": "Droit de la circulation",
+    "coverage4": "Droit des assurances",
+    "coverage5": "Droit pénal",
+    "whyNeedItContent": "Les frais juridiques peuvent rapidement atteindre des milliers de francs. Une protection juridique vous permet de faire valoir vos droits sans souci financier.",
+    "howToChoose": "Comment choisir ?",
+    "howToChooseContent": "Comparez les offres selon vos besoins spécifiques et votre situation personnelle.",
+    "criteria1": "Étendue de la couverture",
+    "criteria2": "Délai de carence",
+    "criteria3": "Libre choix de l’avocat",
+    "costs": "Coûts",
+    "costsContent": "Les primes varient selon l’étendue de la couverture et votre profil. Comparez pour trouver le meilleur rapport qualité-prix."
   },
   "lifeInsurance": {
     "title": "Assurance Vie",
