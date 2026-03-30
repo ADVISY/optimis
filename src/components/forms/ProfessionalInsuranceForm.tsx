@@ -42,9 +42,8 @@ interface ProfessionalInsuranceFormData {
   activityType: string;
   legalForm: string;
   employeesCount: string;
-  canton: string;
   revenue: string;
-  contractStartDate: Date | undefined;
+  contractStartDate: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -52,7 +51,7 @@ interface ProfessionalInsuranceFormData {
   message: string;
 }
 
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 6;
 
 const ProfessionalInsuranceForm = () => {
   const { t, i18n } = useTranslation();
