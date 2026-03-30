@@ -18,6 +18,7 @@ export const localizedRoutes: LocalizedRoutes = {
   homeInsurance: { fr: "assurance-menage", de: "hausratversicherung", it: "assicurazione-mobilia" },
   lifeInsurance: { fr: "assurance-vie", de: "lebensversicherung", it: "assicurazione-vita" },
   mortgage: { fr: "hypotheque", de: "hypothek", it: "ipoteca" },
+  professionalInsurance: { fr: "assurance-professionnelle", de: "unternehmensversicherung", it: "assicurazione-professionale" },
   services: { fr: "services", de: "dienstleistungen", it: "servizi" },
   mobilePackage: { fr: "forfait-mobile", de: "handy-abo", it: "abbonamento-mobile" },
   healthSubsidy: { fr: "subside-assurance-maladie", de: "praemienverbilligung", it: "riduzione-premi" },

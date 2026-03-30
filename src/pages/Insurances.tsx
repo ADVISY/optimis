@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Car, Heart, Shield, Home, Umbrella } from "lucide-react";
+import { Car, Heart, Shield, Home, Umbrella, Briefcase } from "lucide-react";
 import LocalizedLink from "@/components/LocalizedLink";
 
 const Insurances = () => {
@@ -43,6 +43,13 @@ const Insurances = () => {
       description: t('insurances.lifeInsuranceDesc'),
       link: "/assurance-vie",
       compareLink: "/3eme-pilier-offres"
+    },
+    {
+      icon: Briefcase,
+      title: t('nav.professionalInsurance'),
+      description: t('insurances.professionalInsuranceDesc'),
+      link: "/assurance-professionnelle",
+      compareLink: "/assurance-entreprise-offres"
     },
   ];
 

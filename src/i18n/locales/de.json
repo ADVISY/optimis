@@ -47,7 +47,10 @@
     "terminateInsurance": "Versicherung kündigen",
     "compareMortgages": "Hypotheken vergleichen",
     "mortgageTypes": "Hypothekenarten",
-    "currentRates": "Aktuelle Zinssätze"
+    "currentRates": "Aktuelle Zinssätze",
+    "proRcPro": "Berufshaftpflicht",
+    "proLaa": "UVG-Versicherung",
+    "proLpp": "BVG-Vorsorge"
   },
   "nav": {
     "insurances": "Versicherungen",
@@ -63,7 +66,8 @@
     "mobilePackage": "Mobilfunktarif",
     "subsidyInsurance": "Prämienverbilligung",
     "termination": "Kündigung",
-    "mortgage": "Hypothek"
+    "mortgage": "Hypothek",
+    "professionalInsurance": "Firmenversicherungen"
   },
   "stats": {
     "recommended": "Empfohlen",
@@ -1447,6 +1451,71 @@
   "insurances": {
     "title": "Unsere Versicherungen",
     "subtitle": "Entdecken Sie alle Versicherungsarten, die wir vergleichen, um Ihnen zu helfen, den besten Schutz zu finden.",
-    "lifeInsuranceDesc": "Bereiten Sie Ihre Zukunft vor und schützen Sie Ihre Angehörigen"
+    "lifeInsuranceDesc": "Bereiten Sie Ihre Zukunft vor und schützen Sie Ihre Angehörigen",
+    "professionalInsuranceDesc": "Schützen Sie Ihr Unternehmen mit massgeschneiderten Versicherungen"
+  },
+  "professionalInsurancePage": {
+    "heroTitle": "Firmenversicherungen",
+    "heroSubtitle": "Berufshaftpflicht, UVG, BVG, Rechtsschutz – Vergleichen Sie die besten Angebote für Ihr Unternehmen in der Schweiz.",
+    "compareButton": "Angebote vergleichen",
+    "typesTitle": "Die wichtigsten Versicherungen für Unternehmen",
+    "typesSubtitle": "Entdecken Sie die unverzichtbaren Versicherungen zum Schutz Ihrer Tätigkeit, Ihrer Mitarbeiter und Ihres Geschäftsvermögens.",
+    "toc": {
+      "rcPro": "Berufshaftpflicht",
+      "laa": "UVG (Unfallversicherung)",
+      "lpp": "BVG-Vorsorge",
+      "legalProtection": "Rechtsschutz für Firmen",
+      "lossOfEarnings": "Krankentaggeld",
+      "multiRisk": "Multirisk-Versicherung",
+      "cyber": "Cyber-Versicherung"
+    },
+    "rcPro": {
+      "title": "Berufshaftpflichtversicherung",
+      "desc": "Die Berufshaftpflichtversicherung deckt Schäden, die Dritten im Rahmen Ihrer Tätigkeit zugefügt werden. Sie ist für viele Berufe in der Schweiz obligatorisch.",
+      "details": "Diese Versicherung übernimmt Personen-, Sach- und Vermögensschäden, die Sie einem Kunden oder Dritten unbeabsichtigt zufügen. Die Deckungshöhe variiert je nach Branche. Regulierte Berufe (Ärzte, Anwälte, Architekten, Treuhänder) sind gesetzlich verpflichtet, eine Berufshaftpflicht abzuschliessen."
+    },
+    "laa": {
+      "title": "UVG-Unfallversicherung",
+      "desc": "Die UVG-Unfallversicherung ist für jeden Arbeitgeber in der Schweiz obligatorisch. Sie deckt Berufs- und Nichtberufsunfälle Ihrer Mitarbeiter.",
+      "details": "Das UVG deckt Arztkosten, Taggelder bei Arbeitsunfähigkeit und Invalidenrenten. Arbeitnehmer mit mehr als 8 Stunden pro Woche sind für Berufs- UND Nichtberufsunfälle versichert. Selbständige können freiwillig dem UVG beitreten."
+    },
+    "lpp": {
+      "title": "BVG-Vorsorge (2. Säule)",
+      "desc": "Die berufliche Vorsorge BVG ist ab einem Jahreslohn von CHF 22'050 obligatorisch. Sie sichert den Lebensstandard im Alter für Ihre Mitarbeiter.",
+      "details": "Die 2. Säule ergänzt die AHV (1. Säule) und ist ein wesentlicher Teil der Vorsorge in der Schweiz. Als Arbeitgeber müssen Sie Ihre Mitarbeiter bei einer Vorsorgeeinrichtung anmelden. Die Beiträge werden zwischen Arbeitgeber (mindestens 50%) und Arbeitnehmer aufgeteilt."
+    },
+    "legalProtection": {
+      "title": "Firmen-Rechtsschutzversicherung",
+      "desc": "Die Firmen-Rechtsschutzversicherung verteidigt Sie bei Streitigkeiten im Zusammenhang mit Ihrer Tätigkeit: Verträge, Arbeitsrecht, Geschäftsmieten usw.",
+      "details": "Diese Versicherung übernimmt Anwaltskosten, Gerichtskosten und Gutachten im Streitfall. Sie deckt vertragliche Streitigkeiten mit Kunden oder Lieferanten, Konflikte mit Mitarbeitern, Steuerstreitigkeiten und Mietstreitigkeiten für Geschäftsräume."
+    },
+    "lossOfEarnings": {
+      "title": "Krankentaggeldversicherung",
+      "desc": "Die Krankentaggeldversicherung garantiert die Lohnfortzahlung bei krankheitsbedingter Arbeitsunfähigkeit Ihrer Mitarbeiter.",
+      "details": "Ohne diese Versicherung ist der Arbeitgeber verpflichtet, den Lohn nach Berner oder Basler Skala weiterzuzahlen. Die Versicherung zahlt in der Regel 80% des Lohnes während 720 Tagen."
+    },
+    "multiRisk": {
+      "title": "Multirisk-Unternehmensversicherung",
+      "desc": "Die Multirisk-Versicherung schützt Ihre Räumlichkeiten, Ausrüstung und Bestände gegen unvorhergesehene Schäden (Brand, Wasserschaden, Diebstahl usw.).",
+      "details": "Diese umfassende Deckung umfasst Geschäftsgebäude, Mobiliar und Berufsausrüstung, Waren und Vorräte sowie den Betriebsunterbruch bei einem Schadenereignis."
+    },
+    "cyber": {
+      "title": "Cyber-Versicherung",
+      "desc": "Die Cyber-Versicherung schützt Ihr Unternehmen vor digitalen Risiken: Hacking, Ransomware, Datenlecks, Betriebsunterbrechung.",
+      "details": "Mit der zunehmenden Digitalisierung stellen Cyberangriffe ein grosses Risiko für Schweizer KMU dar. Diese Versicherung deckt Datenwiederherstellungskosten, Krisenmanagement, Benachrichtigungen (DSGVO/DSG), Drittschäden und Betriebsunterbrechung."
+    },
+    "faqTitle": "Häufige Fragen zu Firmenversicherungen",
+    "faq": {
+      "q1": "Welche Versicherungen sind für ein Unternehmen in der Schweiz obligatorisch?",
+      "a1": "Die obligatorischen Versicherungen hängen von Ihrem Status und Ihrer Branche ab: UVG (Unfälle) ist für jeden Arbeitgeber obligatorisch, BVG (Vorsorge) ab einem Jahreslohn von CHF 22'050, und die Berufshaftpflicht ist für bestimmte regulierte Berufe vorgeschrieben.",
+      "q2": "Muss ein Selbständiger die gleichen Versicherungen wie eine GmbH abschliessen?",
+      "a2": "Nein. Ein Selbständiger ohne Angestellte unterliegt nicht den gleichen Pflichten. Er kann freiwillig dem UVG und BVG beitreten. Sobald er Personal beschäftigt, gelten die gleichen Pflichten wie für eine GmbH oder AG.",
+      "q3": "Wie viel kosten Firmenversicherungen in der Schweiz?",
+      "a3": "Die Kosten variieren erheblich je nach Branche, Unternehmensgrösse und gewählten Deckungen. Eine Berufshaftpflicht kann CHF 300 bis 5'000/Jahr kosten, das UVG 0.5% bis 3% der Lohnsumme und das BVG 7% bis 18% des koordinierten Lohnes.",
+      "q4": "Wie wähle ich den richtigen Anbieter für meine Firmenversicherungen?",
+      "a4": "Vergleichen Sie Angebote mehrerer Versicherer unter Berücksichtigung von Preis, Deckungsumfang, Franchisen und Kundenservice. Nutzen Sie unseren Vergleichsrechner für kostenlose, massgeschneiderte Angebote."
+    },
+    "ctaTitle": "Schützen Sie Ihr Unternehmen",
+    "ctaDescription": "Vergleichen Sie kostenlos Firmenversicherungen und finden Sie die besten Angebote für Ihr Unternehmen in der Schweiz."
   }
 }

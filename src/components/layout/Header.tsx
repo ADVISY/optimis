@@ -11,7 +11,8 @@ import {
   Smartphone,
   CreditCard,
   FileX,
-  Banknote
+  Banknote,
+  Briefcase
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -72,6 +73,17 @@ const assurancesCategories = [
     href: "/assurance-menage",
     subLinks: [
       { labelKey: "megaMenu.homeInsurance7Things", href: "/blog/lassurance-menage-en-suisse-les-7-choses-a-savoir" },
+    ]
+  },
+  { 
+    id: "professionnel",
+    labelKey: "nav.professionalInsurance", 
+    icon: Briefcase,
+    href: "/assurance-professionnelle",
+    subLinks: [
+      { labelKey: "megaMenu.proRcPro", href: "/assurance-entreprise-offres" },
+      { labelKey: "megaMenu.proLaa", href: "/assurance-entreprise-offres" },
+      { labelKey: "megaMenu.proLpp", href: "/assurance-entreprise-offres" },
     ]
   },
   { 

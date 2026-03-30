@@ -15,6 +15,7 @@ import ProtectionJuridique from "./pages/ProtectionJuridique";
 import AssuranceMenage from "./pages/AssuranceMenage";
 import AssuranceVie from "./pages/AssuranceVie";
 import Hypotheque from "./pages/Hypotheque";
+import AssurancePro from "./pages/AssurancePro";
 import Services from "./pages/Services";
 import ForfaitMobile from "./pages/ForfaitMobile";
 import SubsideAssuranceMaladie from "./pages/SubsideAssuranceMaladie";
@@ -83,6 +84,7 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("homeInsurance", <AssuranceMenage />)}
         {createLocalizedRoutes("lifeInsurance", <AssuranceVie />)}
         {createLocalizedRoutes("mortgage", <Hypotheque />)}
+        {createLocalizedRoutes("professionalInsurance", <AssurancePro />)}
         {createLocalizedRoutes("services", <Services />)}
         {createLocalizedRoutes("mobilePackage", <ForfaitMobile />)}
         {createLocalizedRoutes("healthSubsidy", <SubsideAssuranceMaladie />)}
@@ -172,6 +174,7 @@ const App = () => (
           <Route path="/qui-sommes-nous" element={<Navigate to="/fr/qui-sommes-nous" replace />} />
           <Route path="/faqs" element={<Navigate to="/fr/faqs" replace />} />
           <Route path="/assurances" element={<Navigate to="/fr/assurances" replace />} />
+          <Route path="/assurance-professionnelle" element={<Navigate to="/fr/assurance-professionnelle" replace />} />
           <Route path="/merci" element={<Navigate to="/fr/merci" replace />} />
           <Route path="/politique-de-confidentialite" element={<Navigate to="/fr/politique-de-confidentialite" replace />} />
           <Route path="/legal" element={<Navigate to="/fr/legal" replace />} />
