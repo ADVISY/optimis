@@ -56,6 +56,7 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
     // Keep payload clean for Zapier/Google Sheets and convert technical codes to readable labels
     const normalizedFormData = { ...flatFormData };
 
+    // Mortgage: translate technical codes
     if (formType === "mortgage") {
       const projectTypeMap: Record<string, string> = {
         acquisition: t("forms.mortgage.projects.acquisition"),
@@ -120,21 +121,157 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
       }
     }
 
-    // Professional insurance: combine insuranceTypes into a single readable string
+    // Professional insurance: translate legalForm + combine insuranceTypes
     if (formType === "professional-insurance") {
       const typeLabels: Record<string, string> = {
-        insuranceTypes_rcProfessional: "RC Professionnelle",
-        insuranceTypes_lossOfEarnings: "Perte de gain",
-        insuranceTypes_laa: "LAA (Accident)",
-        insuranceTypes_lpp: "LPP (Prévoyance)",
-        insuranceTypes_legalProtection: "Protection juridique",
-        insuranceTypes_multiRisk: "Multirisque entreprise",
+        insuranceTypes_rcProfessional: t("forms.professionalInsurance.types.rcProfessional"),
+        insuranceTypes_lossOfEarnings: t("forms.professionalInsurance.types.lossOfEarnings"),
+        insuranceTypes_laa: t("forms.professionalInsurance.types.laa"),
+        insuranceTypes_lpp: t("forms.professionalInsurance.types.lpp"),
+        insuranceTypes_legalProtection: t("forms.professionalInsurance.types.legalProtection"),
+        insuranceTypes_multiRisk: t("forms.professionalInsurance.types.multiRisk"),
       };
       const selected = Object.entries(typeLabels)
         .filter(([key]) => normalizedFormData[key] === true)
         .map(([, label]) => label);
       Object.keys(typeLabels).forEach((key) => delete normalizedFormData[key]);
-      normalizedFormData.insuranceTypes = selected.join(", ") || "Aucun";
+      normalizedFormData.insuranceTypes = selected.join(", ") || "-";
+
+      const legalFormMap: Record<string, string> = {
+        "self-employed": t("forms.professionalInsurance.legalForms.selfEmployed"),
+        sarl: t("forms.professionalInsurance.legalForms.sarl"),
+        sa: t("forms.professionalInsurance.legalForms.sa"),
+        snc: t("forms.professionalInsurance.legalForms.snc"),
+      };
+      if (typeof normalizedFormData.legalForm === "string") {
+        normalizedFormData.legalForm = legalFormMap[normalizedFormData.legalForm] ?? normalizedFormData.legalForm;
+      }
+    }
+
+    // Real Estate: translate property types, timelines, yes/no
+    if (formType === "estimation-immobiliere") {
+      const propertyMap: Record<string, string> = {
+        apartment: t("forms.realEstate.propertyTypes.apartment"),
+        house: t("forms.realEstate.propertyTypes.house"),
+        villa: t("forms.realEstate.propertyTypes.villa"),
+        commercial: t("forms.realEstate.propertyTypes.commercial"),
+        land: t("forms.realEstate.propertyTypes.land"),
+      };
+      const timelineMap: Record<string, string> = {
+        urgent: t("forms.realEstate.timelines.urgent"),
+        "3-months": t("forms.realEstate.timelines.threeMonths"),
+        "6-months": t("forms.realEstate.timelines.sixMonths"),
+        "no-rush": t("forms.realEstate.timelines.noRush"),
+      };
+      const yesNoMap: Record<string, string> = {
+        yes: t("common.yes"),
+        no: t("common.no"),
+      };
+      if (typeof normalizedFormData.propertyType === "string") {
+        normalizedFormData.propertyType = propertyMap[normalizedFormData.propertyType] ?? normalizedFormData.propertyType;
+      }
+      if (typeof normalizedFormData.saleTimeline === "string") {
+        normalizedFormData.saleTimeline = timelineMap[normalizedFormData.saleTimeline] ?? normalizedFormData.saleTimeline;
+      }
+      if (typeof normalizedFormData.hasMandate === "string") {
+        normalizedFormData.hasMandate = yesNoMap[normalizedFormData.hasMandate] ?? normalizedFormData.hasMandate;
+      }
+      if (typeof normalizedFormData.rooms === "string") {
+        normalizedFormData.rooms = normalizedFormData.rooms + " " + t("forms.realEstate.rooms");
+      }
+    }
+
+    // Car Insurance: translate usage, coverage, options
+    if (formType === "car-insurance") {
+      const usageMap: Record<string, string> = {
+        private: t("forms.carInsurance.usagePrivate"),
+        professional: t("forms.carInsurance.usageProfessional"),
+      };
+      const coverageMap: Record<string, string> = {
+        rc: t("forms.carInsurance.coverageRC"),
+        "rc-partial": t("forms.carInsurance.coveragePartial"),
+        "rc-full": t("forms.carInsurance.coverageFull"),
+      };
+      const boolLabel = (v: unknown) => v === true ? t("common.yes") : t("common.no");
+
+      if (typeof normalizedFormData.usage === "string") {
+        normalizedFormData.usage = usageMap[normalizedFormData.usage] ?? normalizedFormData.usage;
+      }
+      if (typeof normalizedFormData.coverageType === "string") {
+        normalizedFormData.coverageType = coverageMap[normalizedFormData.coverageType] ?? normalizedFormData.coverageType;
+      }
+      // Translate boolean options
+      if ("options_glassBreakage" in normalizedFormData) {
+        normalizedFormData.options_glassBreakage = boolLabel(normalizedFormData.options_glassBreakage);
+      }
+      if ("options_assistance" in normalizedFormData) {
+        normalizedFormData.options_assistance = boolLabel(normalizedFormData.options_assistance);
+      }
+      if ("options_replacementVehicle" in normalizedFormData) {
+        normalizedFormData.options_replacementVehicle = boolLabel(normalizedFormData.options_replacementVehicle);
+      }
+    }
+
+    // Household Insurance: translate property type, ownership
+    if (formType === "household-insurance") {
+      const propertyMap: Record<string, string> = {
+        apartment: t("forms.mortgage.propertyTypes.apartment"),
+        house: t("forms.mortgage.propertyTypes.house"),
+      };
+      const ownershipMap: Record<string, string> = {
+        tenant: t("forms.householdInsurance.tenant"),
+        owner: t("forms.householdInsurance.owner"),
+      };
+      if (typeof normalizedFormData.propertyType === "string") {
+        normalizedFormData.propertyType = propertyMap[normalizedFormData.propertyType] ?? normalizedFormData.propertyType;
+      }
+      if (typeof normalizedFormData.ownershipStatus === "string") {
+        normalizedFormData.ownershipStatus = ownershipMap[normalizedFormData.ownershipStatus] ?? normalizedFormData.ownershipStatus;
+      }
+    }
+
+    // Legal Protection: translate coverage type, household size, coverage areas
+    if (formType === "legal-protection") {
+      const coverageTypeMap: Record<string, string> = {
+        complete: t("forms.legalProtection.types.complete"),
+        traffic: t("forms.legalProtection.types.traffic"),
+        custom: t("forms.legalProtection.types.custom"),
+      };
+      const householdMap: Record<string, string> = {
+        "1": t("forms.legalProtection.single"),
+        "2": t("forms.legalProtection.couple"),
+        family: t("forms.legalProtection.family"),
+      };
+      const boolLabel = (v: unknown) => v === true ? t("common.yes") : t("common.no");
+
+      if (typeof normalizedFormData.coverageType === "string") {
+        normalizedFormData.coverageType = coverageTypeMap[normalizedFormData.coverageType] ?? normalizedFormData.coverageType;
+      }
+      if (typeof normalizedFormData.householdSize === "string") {
+        normalizedFormData.householdSize = householdMap[normalizedFormData.householdSize] ?? normalizedFormData.householdSize;
+      }
+      // Translate boolean coverage areas
+      const areaKeys = ["coverageAreas_traffic", "coverageAreas_private", "coverageAreas_work", "coverageAreas_property", "coverageAreas_tenant"];
+      areaKeys.forEach((key) => {
+        if (key in normalizedFormData) {
+          normalizedFormData[key] = boolLabel(normalizedFormData[key]);
+        }
+      });
+    }
+
+    // Termination: translate contract type
+    if (formType === "termination") {
+      const contractMap: Record<string, string> = {
+        health: t("forms.termination.types.health"),
+        car: t("forms.termination.types.car"),
+        household: t("forms.termination.types.household"),
+        legal: t("forms.termination.types.legal"),
+        life: t("forms.termination.types.life"),
+        other: t("forms.termination.types.other"),
+      };
+      if (typeof normalizedFormData.contractType === "string") {
+        normalizedFormData.contractType = contractMap[normalizedFormData.contractType] ?? normalizedFormData.contractType;
+      }
     }
 
     // Rename fields to clean French labels for Google Sheets
