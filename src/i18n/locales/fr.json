@@ -47,7 +47,10 @@
     "terminateInsurance": "Résilier votre assurance",
     "compareMortgages": "Comparer les hypothèques",
     "mortgageTypes": "Types d'hypothèques",
-    "currentRates": "Taux actuels"
+    "currentRates": "Taux actuels",
+    "proRcPro": "RC Professionnelle",
+    "proLaa": "Assurance LAA",
+    "proLpp": "Prévoyance LPP"
   },
   "nav": {
     "insurances": "Assurances",
