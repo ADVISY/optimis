@@ -1448,6 +1448,71 @@
   "insurances": {
     "title": "Le nostre assicurazioni",
     "subtitle": "Scopri tutti i tipi di assicurazioni che confrontiamo per aiutarti a trovare la migliore protezione.",
-    "lifeInsuranceDesc": "Prepara il tuo futuro e proteggi i tuoi cari"
+    "lifeInsuranceDesc": "Prepara il tuo futuro e proteggi i tuoi cari",
+    "professionalInsuranceDesc": "Proteggi la tua attività con assicurazioni su misura per professionisti"
+  },
+  "professionalInsurancePage": {
+    "heroTitle": "Assicurazioni Aziendali",
+    "heroSubtitle": "RC Professionale, LAINF, LPP, Protezione giuridica – Confronta le migliori offerte per la tua azienda in Svizzera.",
+    "compareButton": "Confronta le offerte",
+    "typesTitle": "Le assicurazioni essenziali per le aziende",
+    "typesSubtitle": "Scopri le coperture indispensabili per proteggere la tua attività, i tuoi dipendenti e il tuo patrimonio professionale.",
+    "toc": {
+      "rcPro": "RC Professionale",
+      "laa": "Assicurazione LAINF",
+      "lpp": "Previdenza LPP",
+      "legalProtection": "Protezione giuridica aziendale",
+      "lossOfEarnings": "Indennità giornaliera malattia",
+      "multiRisk": "Multirischio aziendale",
+      "cyber": "Assicurazione Cyber"
+    },
+    "rcPro": {
+      "title": "RC Professionale",
+      "desc": "L'assicurazione di responsabilità civile professionale copre i danni causati a terzi nell'ambito della vostra attività. È obbligatoria per molte professioni in Svizzera.",
+      "details": "Questa assicurazione copre danni a persone, cose e patrimoni che potreste causare involontariamente a un cliente o a un terzo. L'importo della copertura varia a seconda del settore di attività."
+    },
+    "laa": {
+      "title": "Assicurazione LAINF (Infortuni)",
+      "desc": "L'assicurazione infortuni LAINF è obbligatoria per ogni datore di lavoro in Svizzera. Copre gli infortuni professionali e non professionali dei vostri collaboratori.",
+      "details": "La LAINF copre le spese mediche, le indennità giornaliere in caso di incapacità lavorativa e le rendite di invalidità. I dipendenti che lavorano più di 8 ore settimanali sono coperti per infortuni professionali E non professionali."
+    },
+    "lpp": {
+      "title": "Previdenza LPP (2° pilastro)",
+      "desc": "La previdenza professionale LPP è obbligatoria a partire da un salario annuo di CHF 22'050. Garantisce il mantenimento del tenore di vita in pensione per i vostri dipendenti.",
+      "details": "Il 2° pilastro completa l'AVS (1° pilastro) e costituisce una parte essenziale della previdenza in Svizzera. Come datore di lavoro, dovete affiliare i vostri collaboratori a un istituto di previdenza."
+    },
+    "legalProtection": {
+      "title": "Protezione giuridica aziendale",
+      "desc": "La protezione giuridica aziendale vi difende in caso di controversie legate alla vostra attività: contratti, diritto del lavoro, locazioni commerciali ecc.",
+      "details": "Questa assicurazione copre le spese legali, le spese giudiziarie e le perizie in caso di conflitto. Copre le controversie contrattuali con clienti o fornitori e i conflitti con i dipendenti."
+    },
+    "lossOfEarnings": {
+      "title": "Indennità giornaliera malattia",
+      "desc": "L'assicurazione indennità giornaliera malattia garantisce il pagamento dello stipendio in caso di incapacità lavorativa dovuta a malattia.",
+      "details": "Senza questa assicurazione, il datore di lavoro è tenuto a continuare a pagare lo stipendio. L'assicurazione versa generalmente l'80% dello stipendio per 720 giorni."
+    },
+    "multiRisk": {
+      "title": "Assicurazione multirischio aziendale",
+      "desc": "L'assicurazione multirischio protegge i vostri locali, le attrezzature e le scorte contro danni imprevisti (incendio, danni d'acqua, furto ecc.).",
+      "details": "Questa copertura completa include edifici commerciali, mobili e attrezzature professionali, scorte e merci, nonché la perdita di esercizio in caso di sinistro."
+    },
+    "cyber": {
+      "title": "Assicurazione Cyber",
+      "desc": "L'assicurazione cyber protegge la vostra azienda dai rischi digitali: hacking, ransomware, fuga di dati, interruzione del servizio.",
+      "details": "Con la crescente digitalizzazione, gli attacchi informatici rappresentano un rischio importante per le PMI svizzere. Questa assicurazione copre i costi di ripristino dei dati, la gestione delle crisi e la perdita di esercizio."
+    },
+    "faqTitle": "Domande frequenti sulle assicurazioni aziendali",
+    "faq": {
+      "q1": "Quali assicurazioni sono obbligatorie per un'azienda in Svizzera?",
+      "a1": "Le assicurazioni obbligatorie dipendono dal vostro statuto e settore: la LAINF (infortuni) è obbligatoria per ogni datore di lavoro, la LPP (previdenza) a partire da un salario annuo di CHF 22'050, e la RC professionale è imposta per alcune professioni regolamentate.",
+      "q2": "Un indipendente deve sottoscrivere le stesse assicurazioni di una Sagl?",
+      "a2": "No. Un indipendente senza dipendenti non è soggetto agli stessi obblighi. Può aderire volontariamente alla LAINF e alla LPP. Non appena assume personale, gli obblighi sono gli stessi di una Sagl o SA.",
+      "q3": "Quanto costano le assicurazioni aziendali in Svizzera?",
+      "a3": "I costi variano notevolmente a seconda del settore, delle dimensioni dell'azienda e delle coperture scelte. Una RC professionale può costare da CHF 300 a 5'000/anno, la LAINF dallo 0,5% al 3% della massa salariale.",
+      "q4": "Come scegliere il giusto fornitore per le mie assicurazioni aziendali?",
+      "a4": "Confrontate le offerte di diversi assicuratori tenendo conto del prezzo, dell'ampiezza delle coperture, delle franchigie e del servizio clienti. Utilizzate il nostro comparatore per ricevere offerte personalizzate e gratuite."
+    },
+    "ctaTitle": "Proteggi la tua attività professionale",
+    "ctaDescription": "Confronta gratuitamente le assicurazioni aziendali e trova le migliori offerte per la tua azienda in Svizzera."
   }
 }
