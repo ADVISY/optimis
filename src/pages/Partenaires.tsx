@@ -108,7 +108,7 @@ const Partenaires = () => {
       </section>
 
       {/* ── POUR QUI ? ── */}
-      <section className="bg-background py-10 md:py-16">
+      <section className="bg-background py-12 md:py-16">
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-4xl mx-auto text-center">
             <motion.h2 variants={fadeUp} className="text-headline mb-4">
@@ -138,7 +138,7 @@ const Partenaires = () => {
       </section>
 
       {/* ── PROBLÈME MARCHÉ ── */}
-      <section className="bg-muted/30">
+      <section className="bg-muted/30 py-12 md:py-16">
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-3xl mx-auto text-center">
             <motion.h2 variants={fadeUp} className="text-headline mb-6">
@@ -165,7 +165,7 @@ const Partenaires = () => {
       </section>
 
       {/* ── LA SOLUTION OPTIMIS ── */}
-      <section className="bg-background">
+      <section className="bg-background py-12 md:py-16">
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-4xl mx-auto">
             <motion.div variants={fadeUp} className="text-center mb-12">
@@ -199,7 +199,7 @@ const Partenaires = () => {
       </section>
 
       {/* ── FRAÎCHEUR DES LEADS ── */}
-      <section className="bg-primary text-primary-foreground relative overflow-hidden">
+      <section className="bg-primary text-primary-foreground relative overflow-hidden py-12 md:py-16">
         <div className="absolute inset-0 opacity-10" style={{
           backgroundImage: "radial-gradient(circle at 30% 70%, hsl(var(--accent)) 0%, transparent 50%)",
         }} />
@@ -231,7 +231,7 @@ const Partenaires = () => {
       </section>
 
       {/* ── COMMENT ÇA MARCHE ── */}
-      <section className="bg-background">
+      <section className="bg-background py-12 md:py-16">
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-3xl mx-auto">
             <motion.h2 variants={fadeUp} className="text-headline text-center mb-12">
@@ -263,7 +263,7 @@ const Partenaires = () => {
       </section>
 
       {/* ── GARANTIES + PARTENARIAT ── */}
-      <section className="bg-muted/30">
+      <section className="bg-muted/30 py-12 md:py-16">
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8">
@@ -316,7 +316,7 @@ const Partenaires = () => {
       </section>
 
       {/* ── EXPERTISE TERRAIN ── */}
-      <section className="bg-background">
+      <section className="bg-background py-12 md:py-16">
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-3xl mx-auto text-center">
             <motion.div variants={fadeUp}>
@@ -347,7 +347,7 @@ const Partenaires = () => {
       </section>
 
       {/* ── CTA FINAL ── */}
-      <section className="bg-gradient-to-b from-muted/50 to-background">
+      <section className="bg-gradient-to-b from-muted/50 to-background py-12 md:py-16">
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-3xl mx-auto text-center">
             <motion.h2 variants={fadeUp} className="text-headline mb-4">
