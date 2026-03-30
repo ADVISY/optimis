@@ -329,25 +329,25 @@ const Partenaires = () => {
         </div>
       </section>
 
-      {/* ── FORMULAIRE + CTA FINAL ── */}
-      <section id="partner-form" className="bg-gradient-to-b from-muted/50 to-background">
+      {/* ── CTA FINAL ── */}
+      <section className="bg-gradient-to-b from-muted/50 to-background">
         <div className="container mx-auto px-4">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-3xl mx-auto">
-            <motion.div variants={fadeUp} className="text-center mb-8">
-              <h2 className="text-headline mb-4">
-                Prêt à recevoir des leads <span className="text-primary">qualifiés</span> ?
-              </h2>
-              <p className="text-body-lg text-muted-foreground">
-                Remplissez ce formulaire et un membre de notre équipe vous contactera sous 24h.
-              </p>
-              <p className="text-sm text-muted-foreground mt-2 flex items-center justify-center gap-1.5">
-                <Lock className="h-3.5 w-3.5" />
-                Partenaires limités par secteur — places limitées
-              </p>
-            </motion.div>
-
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-3xl mx-auto text-center">
+            <motion.h2 variants={fadeUp} className="text-headline mb-4">
+              Prêt à recevoir des leads <span className="text-primary">qualifiés</span> ?
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-body-lg text-muted-foreground mb-6">
+              Remplissez le formulaire ci-dessus et un membre de notre équipe vous contactera sous 24h.
+            </motion.p>
             <motion.div variants={fadeUp}>
-              <PartnerForm />
+              <Button
+                size="lg"
+                onClick={scrollToForm}
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-lg px-8 py-6 rounded-xl shadow-xl"
+              >
+                Devenir partenaire maintenant
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
             </motion.div>
           </motion.div>
         </div>
