@@ -22,10 +22,13 @@ import {
 } from "@/components/ui/select";
 import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { mockLegalProtectionOffers, InsuranceOffer } from "@/data/mockInsuranceData";
-import { Lock, User, Phone } from "lucide-react";
+import { Lock, User, Phone, CalendarIcon } from "lucide-react";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
 import { cn } from "@/lib/utils";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { Button } from "@/components/ui/button";
 
 interface ProfessionalInsuranceFormData {
   insuranceTypes: {
