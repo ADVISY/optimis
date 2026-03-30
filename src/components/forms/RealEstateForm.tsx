@@ -21,7 +21,6 @@ interface RealEstateFormData {
   surface: string;
   saleTimeline: string;
   hasMandate: string;
-  availableForEstimation: string;
   firstName: string;
   lastName: string;
   phone: string;
