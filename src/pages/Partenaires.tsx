@@ -27,60 +27,66 @@ const Partenaires = () => {
 
   return (
     <Layout>
-      {/* ── HERO ── */}
-      <section className="relative overflow-hidden !py-0">
+      {/* ── HERO WITH FORM ── */}
+      <section id="partner-form" className="relative overflow-hidden !py-0">
         <div className="absolute inset-0 bg-gradient-to-br from-foreground via-primary to-foreground opacity-95" />
         <div className="absolute inset-0 opacity-10" style={{
           backgroundImage: "radial-gradient(circle at 20% 50%, hsl(var(--accent)) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(var(--primary)) 0%, transparent 40%)",
         }} />
 
-        <div className="container mx-auto px-4 relative z-10 py-20 md:py-28 lg:py-36">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={stagger}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-accent/20 text-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
-              <Zap className="h-4 w-4" />
-              B2B — Partenariat exclusif
+        <div className="container mx-auto px-4 relative z-10 py-10 md:py-16 lg:py-20">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+            {/* Left: text content */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={stagger}
+              className="text-left pt-4 md:pt-8"
+            >
+              <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-accent/20 text-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+                <Zap className="h-4 w-4" />
+                B2B — Partenariat exclusif
+              </motion.div>
+
+              <motion.h1 variants={fadeUp} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.1] mb-5 tracking-tight">
+                Recevez des leads ultra qualifiés,{" "}
+                <span className="text-accent">prêts à être convertis</span>
+              </motion.h1>
+
+              <motion.p variants={fadeUp} className="text-base md:text-lg text-white/70 mb-8 max-w-lg">
+                Optimis génère chaque jour des prospects en assurance, finance, immobilier et télécom.
+              </motion.p>
+
+              {/* Impact stats */}
+              <motion.div variants={fadeUp} className="grid grid-cols-2 gap-3 mb-8 max-w-lg">
+                {[
+                  { icon: CalendarDays, text: "Leads ultra frais (< 24h)" },
+                  { icon: Clock, text: "Date & heure enregistrées" },
+                  { icon: Target, text: "Intention réelle vérifiée" },
+                  { icon: TrendingUp, text: "Jusqu'à CHF 50'000+ / mois" },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-2.5 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-3">
+                    <item.icon className="h-4 w-4 text-accent flex-shrink-0" />
+                    <span className="text-xs text-white/80 font-medium">{item.text}</span>
+                  </div>
+                ))}
+              </motion.div>
+
+              <motion.p variants={fadeUp} className="text-sm text-white/50 flex items-center gap-1.5">
+                <Lock className="h-3.5 w-3.5" />
+                Partenaires limités par secteur — places limitées
+              </motion.p>
             </motion.div>
 
-            <motion.h1 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-6 tracking-tight">
-              Recevez des leads ultra qualifiés,{" "}
-              <span className="text-accent">prêts à être convertis</span>
-            </motion.h1>
-
-            <motion.p variants={fadeUp} className="text-lg md:text-xl text-white/70 mb-8 max-w-2xl mx-auto">
-              Optimis génère chaque jour des prospects en assurance, finance, immobilier et télécom.
-            </motion.p>
-
-            {/* Impact stats */}
-            <motion.div variants={fadeUp} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 max-w-3xl mx-auto">
-              {[
-                { icon: CalendarDays, text: "Leads ultra frais (< 24h)" },
-                { icon: Clock, text: "Date & heure enregistrées" },
-                { icon: Target, text: "Intention réelle vérifiée" },
-                { icon: TrendingUp, text: "Jusqu'à CHF 50'000+ / mois" },
-              ].map((item, i) => (
-                <div key={i} className="flex flex-col items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4">
-                  <item.icon className="h-5 w-5 text-accent" />
-                  <span className="text-xs md:text-sm text-white/80 text-center font-medium">{item.text}</span>
-                </div>
-              ))}
+            {/* Right: form */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+            >
+              <PartnerForm />
             </motion.div>
-
-            <motion.div variants={fadeUp}>
-              <Button
-                size="lg"
-                onClick={scrollToForm}
-                className="bg-accent hover:bg-accent/90 text-foreground font-bold text-lg px-8 py-6 rounded-xl shadow-xl animate-cta-pulse"
-              >
-                Devenir partenaire
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </motion.div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
