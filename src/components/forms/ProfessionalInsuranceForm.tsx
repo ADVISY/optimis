@@ -125,8 +125,8 @@ const ProfessionalInsuranceForm = () => {
   };
 
   const getStepErrors = (step: number): Record<string, string> => {
-    if (step === 3) return getIdentityErrors(formData.firstName, formData.lastName);
-    if (step === 4) return getContactErrors(formData.email, formData.phone);
+    if (step === 4) return getIdentityErrors(formData.firstName, formData.lastName);
+    if (step === 5) return getContactErrors(formData.email, formData.phone);
     return {};
   };
 
