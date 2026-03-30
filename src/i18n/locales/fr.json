@@ -68,7 +68,8 @@
     "termination": "Résiliation",
     "mortgage": "Hypothèque",
     "professionalInsurance": "Assurances Pro",
-    "lpp": "Avoirs LPP"
+    "lpp": "Avoirs LPP",
+    "lppCompare": "Vérifier mon avoir LPP"
   },
   "stats": {
     "recommended": "Recommandé",
