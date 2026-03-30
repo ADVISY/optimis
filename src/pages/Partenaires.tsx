@@ -1,6 +1,8 @@
 import { useTranslation } from "react-i18next";
 import Footer from "@/components/layout/Footer";
 import PartnerForm from "@/components/forms/PartnerForm";
+import logo from "@/assets/logo-white.svg";
+import mascotHd from "@/assets/mascotte-optimis-hd.png";
 import { motion } from "framer-motion";
 import {
   Zap, Clock, Target, TrendingUp, Users, Shield,
