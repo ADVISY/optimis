@@ -225,7 +225,7 @@ const ProfessionalInsuranceForm = () => {
               value={formData.activityType}
               onChange={(e) => { updateFormData({ activityType: e.target.value }); notifyDelayed(); }}
               placeholder={t("forms.professionalInsurance.activityPlaceholder")}
-              className="h-9 md:h-14 text-xs md:text-lg"
+              className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
@@ -234,7 +234,7 @@ const ProfessionalInsuranceForm = () => {
               value={formData.legalForm}
               onValueChange={(value) => { updateFormData({ legalForm: value }); notifyDelayed(); }}
             >
-              <SelectTrigger className="h-9 md:h-14 text-xs md:text-lg">
+              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.professionalInsurance.selectLegalForm")} />
               </SelectTrigger>
               <SelectContent>
@@ -251,7 +251,7 @@ const ProfessionalInsuranceForm = () => {
               value={formData.employeesCount}
               onValueChange={(value) => { updateFormData({ employeesCount: value }); notifyDelayed(); }}
             >
-              <SelectTrigger className="h-9 md:h-14 text-xs md:text-lg">
+              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.professionalInsurance.selectEmployees")} />
               </SelectTrigger>
               <SelectContent>
@@ -263,61 +263,42 @@ const ProfessionalInsuranceForm = () => {
               </SelectContent>
             </Select>
           </FormFieldWrapper>
+        </div>
+      </FormStep>
 
-          <FormFieldWrapper label={t("forms.healthInsurance.canton")} htmlFor="canton" required>
-            <Select
-              value={formData.canton}
-              onValueChange={(value) => { updateFormData({ canton: value }); notifyDelayed(); }}
-            >
-              <SelectTrigger className="h-9 md:h-14 text-xs md:text-lg">
-                <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
-              </SelectTrigger>
-              <SelectContent>
-                {swissCantons.map((canton) => (
-                  <SelectItem key={canton.code} value={canton.code}>
-                    {getCantonName(canton.code, i18n.language)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </FormFieldWrapper>
-
+      {/* Step 3: Revenue & Contract Start */}
+      <FormStep isActive={currentStep === 3}>
+        <div className="space-y-2 md:space-y-4">
           <FormFieldWrapper label={t("forms.professionalInsurance.revenue")} htmlFor="revenue" required>
             <Input
               id="revenue"
               value={formData.revenue}
               onChange={(e) => { updateFormData({ revenue: e.target.value }); notifyDelayed(); }}
               placeholder={t("forms.professionalInsurance.revenuePlaceholder")}
-              className="h-9 md:h-14 text-xs md:text-lg"
+              className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
 
-          <FormFieldWrapper label={t("forms.professionalInsurance.contractStartDate")} required>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    "w-full h-9 md:h-14 text-xs md:text-lg justify-start text-left font-normal",
-                    !formData.contractStartDate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {formData.contractStartDate
-                    ? format(formData.contractStartDate, "dd/MM/yyyy")
-                    : t("forms.professionalInsurance.selectDate")}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={formData.contractStartDate}
-                  onSelect={(date) => { updateFormData({ contractStartDate: date }); notify(); }}
-                  initialFocus
-                  className={cn("p-3 pointer-events-auto")}
-                />
-              </PopoverContent>
-            </Popover>
+          <FormFieldWrapper label={t("forms.professionalInsurance.contractStartDate")} htmlFor="contractStartDate" required>
+            <Input
+              id="contractStartDate"
+              value={formData.contractStartDate}
+              onChange={(e) => {
+                const val = e.target.value;
+                // Auto-format: add slashes after DD and MM
+                let formatted = val.replace(/[^\d/]/g, '');
+                if (formatted.length === 2 && !formatted.includes('/')) formatted += '/';
+                if (formatted.length === 5 && formatted.split('/').length === 2) formatted += '/';
+                if (formatted.length <= 10) {
+                  updateFormData({ contractStartDate: formatted });
+                  notifyDelayed();
+                }
+              }}
+              placeholder="JJ/MM/AAAA"
+              inputMode="numeric"
+              maxLength={10}
+              className="h-11 md:h-14 text-sm md:text-lg"
+            />
           </FormFieldWrapper>
         </div>
       </FormStep>
