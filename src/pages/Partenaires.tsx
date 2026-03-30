@@ -263,7 +263,7 @@ const Partenaires = () => {
       </section>
 
       {/* ── GARANTIES + PARTENARIAT ── */}
-      <section className="bg-muted/30">
+      <section className="bg-muted/30 py-12 md:py-16">
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8">
