@@ -46,10 +46,8 @@ export function useMultiStepForm<T extends object>({
   const nextStep = useCallback(() => {
     if (currentStep < totalSteps) {
       setCurrentStep((prev) => prev + 1);
-      // Small delay to allow state update before scrolling
-      setTimeout(scrollToFormTop, 50);
     }
-  }, [currentStep, totalSteps, scrollToFormTop]);
+  }, [currentStep, totalSteps]);
 
   const previousStep = useCallback(() => {
     if (currentStep > 1) {
