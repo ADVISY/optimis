@@ -52,9 +52,8 @@ export function useMultiStepForm<T extends object>({
   const previousStep = useCallback(() => {
     if (currentStep > 1) {
       setCurrentStep((prev) => prev - 1);
-      setTimeout(scrollToFormTop, 50);
     }
-  }, [currentStep, scrollToFormTop]);
+  }, [currentStep]);
 
   const handleSubmit = useCallback(async () => {
     setIsSubmitting(true);
