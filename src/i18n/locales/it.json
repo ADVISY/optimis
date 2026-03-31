@@ -1609,5 +1609,126 @@
     "faq3Answer": "Sì, a determinate condizioni: acquisto immobiliare, partenza definitiva dalla Svizzera, passaggio all'indipendenza o pensionamento.",
     "faq4Question": "Dove va il denaro se non faccio nulla?",
     "faq4Answer": "Se non reclami il tuo avere, viene trasferito all'Istituto collettore LPP dopo un certo periodo."
+  },
+  "partner": {
+    "badge": "B2B — Partnership esclusivo",
+    "heroTitle1": "Ricevi lead ultra qualificati,",
+    "heroTitle2": "pronti per essere convertiti",
+    "heroDescription": "Optimis genera ogni giorno prospect nei settori assicurazioni, finanza, immobiliare e telecomunicazioni.",
+    "stats": {
+      "freshLeads": "Lead ultra freschi (< 24h)",
+      "dateTime": "Data e ora registrate",
+      "verifiedIntent": "Intenzione reale verificata",
+      "revenue": "Fino a CHF 50'000+ / mese"
+    },
+    "limitedPartners": "Partner limitati per settore — posti limitati",
+    "forWho": {
+      "title": "Questa soluzione è fatta per",
+      "titleHighlight": "te",
+      "description": "Sei un professionista che vuole sviluppare il proprio portafoglio clienti?",
+      "broker": "Broker assicurativo",
+      "realEstate": "Agenzia immobiliare",
+      "financialAdvisor": "Consulente finanziario",
+      "telecom": "Operatore telecom",
+      "business": "Impresa commerciale"
+    },
+    "marketProblem": {
+      "title": "Il problema del mercato",
+      "resold": "Lead rivenduti a più concorrenti",
+      "obsolete": "Dati obsoleti e incorretti",
+      "lowQuality": "Qualità mediocre, tasso di conversione basso",
+      "wastedTime": "Tempo perso su contatti non qualificati",
+      "punchline": "Meriti di pagare per",
+      "punchlineHighlight": "risultati, non aria fritta."
+    },
+    "solution": {
+      "title": "Lead ultra qualificati e",
+      "titleHighlight": "utilizzabili",
+      "detailed": "Lead ultra dettagliati",
+      "detailedDesc": "Contatti completi, situazione cliente, esigenza precisa",
+      "qualified": "Qualificazione avanzata",
+      "qualifiedDesc": "Ogni prospect ha compilato un modulo completo e mirato",
+      "intent": "Intenzione forte",
+      "intentDesc": "Il prospect cerca attivamente una soluzione",
+      "optimized": "Moduli ottimizzati",
+      "optimizedDesc": "Alto tasso di completamento grazie alla nostra UX premium",
+      "reliable": "Dati affidabili",
+      "reliableDesc": "Validazione email e telefono in tempo reale",
+      "proven": "Performance provata",
+      "provenDesc": "I nostri partner convertono fino al 30% dei lead",
+      "footer": "Ogni lead è un'opportunità reale."
+    },
+    "freshness": {
+      "title": "Lead recenti = più vendite",
+      "realtime": "Generati in tempo reale",
+      "under24h": "Meno di 24 ore",
+      "timestamp": "Timestamp preciso",
+      "noRecycling": "Nessun riciclo",
+      "conversionTip": "⚡ Un lead contattato in meno di 5 minuti = conversione x3"
+    },
+    "howItWorks": {
+      "title": "Come funziona",
+      "step1Title": "Diventi partner",
+      "step1Desc": "Compila il modulo e il nostro team ti contatta.",
+      "step2Title": "Definisci i tuoi criteri",
+      "step2Desc": "Settore, zona geografica, volume desiderato.",
+      "step3Title": "Ricevi i lead",
+      "step3Desc": "Distribuzione quotidiana, lead freschi e qualificati.",
+      "step4Title": "Converti",
+      "step4Desc": "Contatta i tuoi prospect e sviluppa la tua attività."
+    },
+    "guarantee": {
+      "title": "La nostra garanzia",
+      "replaced": "Lead non validi sostituiti gratuitamente",
+      "quality": "Monitoraggio qualità permanente",
+      "optimization": "Ottimizzazione continua delle performance"
+    },
+    "selective": {
+      "title": "Partnership selettivo",
+      "weSelect": "Selezioniamo i nostri partner",
+      "longTerm": "Collaborazione a lungo termine privilegiata",
+      "controlled": "Volume controllato per settore",
+      "exclusive": "Esclusività possibile",
+      "warning": "⚠️ Non vendiamo lead a chiunque."
+    },
+    "expertise": {
+      "title": "Esperienza sul campo + marketing digitale",
+      "description": "Optimis capisce i tuoi clienti, le loro obiezioni, i cicli di vendita e i prodotti. Il nostro approccio combina competenza commerciale e tecnologia per massimizzare le tue conversioni.",
+      "knowledge": "Conoscenza clienti",
+      "objections": "Gestione obiezioni",
+      "salesCycles": "Cicli di vendita",
+      "products": "Padronanza prodotti"
+    },
+    "cta": {
+      "title": "Pronto a ricevere lead",
+      "titleHighlight": "qualificati",
+      "description": "Compila il modulo qui sopra e un membro del nostro team ti contatterà entro 24 ore.",
+      "button": "Diventa partner ora"
+    },
+    "formTitle": "Diventa partner",
+    "formDescription": "Compila questo modulo in meno di 30 secondi",
+    "budgetQuestion": "Qual è il tuo budget mensile per l'acquisto di lead?",
+    "budgets": {
+      "less3000": "Meno di CHF 3'000",
+      "3000to5000": "CHF 3'000 – 5'000",
+      "5000to10000": "CHF 5'000 – 10'000",
+      "10000plus": "Più di CHF 10'000"
+    },
+    "sectorQuestion": "In quale settore operi?",
+    "sectors": {
+      "insurance": "Assicurazione",
+      "realEstate": "Immobiliare",
+      "finance": "Finanza",
+      "telecom": "Telecomunicazioni",
+      "other": "Altro"
+    },
+    "companyQuestion": "Nome della tua azienda",
+    "companyName": "Azienda",
+    "companyPlaceholder": "Es: La Mia Azienda SA",
+    "salesForceQuestion": "Quanti commerciali hai?",
+    "salesPeople": "commerciali",
+    "contactTitle": "Essere contattato da Optimis",
+    "thankYouTitle": "Grazie per la tua richiesta",
+    "thankYouDescription": "Un membro del nostro team ti contatterà entro 24 ore per discutere della tua partnership."
   }
 }

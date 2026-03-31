@@ -1609,5 +1609,126 @@
     "faq3Answer": "Ja, unter bestimmten Bedingungen: Immobilienkauf, endgültige Ausreise aus der Schweiz, Wechsel in die Selbstständigkeit oder Pensionierung.",
     "faq4Question": "Wohin geht das Geld, wenn ich nichts tue?",
     "faq4Answer": "Wenn Sie Ihr Guthaben nicht einfordern, wird es nach einer gewissen Frist an die Stiftung Auffangeinrichtung BVG übertragen."
+  },
+  "partner": {
+    "badge": "B2B — Exklusive Partnerschaft",
+    "heroTitle1": "Erhalten Sie hochqualifizierte Leads,",
+    "heroTitle2": "bereit zur Konvertierung",
+    "heroDescription": "Optimis generiert täglich Interessenten in den Bereichen Versicherung, Finanzen, Immobilien und Telekommunikation.",
+    "stats": {
+      "freshLeads": "Ultra-frische Leads (< 24h)",
+      "dateTime": "Datum & Uhrzeit erfasst",
+      "verifiedIntent": "Echte Absicht verifiziert",
+      "revenue": "Bis zu CHF 50'000+ / Monat"
+    },
+    "limitedPartners": "Begrenzte Partner pro Branche — limitierte Plätze",
+    "forWho": {
+      "title": "Diese Lösung ist für",
+      "titleHighlight": "Sie gemacht",
+      "description": "Sind Sie ein Fachmann, der sein Kundenportfolio ausbauen möchte?",
+      "broker": "Versicherungsmakler",
+      "realEstate": "Immobilienagentur",
+      "financialAdvisor": "Finanzberater",
+      "telecom": "Telekomanbieter",
+      "business": "Handelsunternehmen"
+    },
+    "marketProblem": {
+      "title": "Das Marktproblem",
+      "resold": "Leads an mehrere Konkurrenten weiterverkauft",
+      "obsolete": "Veraltete und falsche Daten",
+      "lowQuality": "Schlechte Qualität, niedrige Konversionsrate",
+      "wastedTime": "Zeitverschwendung mit unqualifizierten Kontakten",
+      "punchline": "Sie verdienen es, für",
+      "punchlineHighlight": "Ergebnisse zu zahlen, nicht für leere Versprechen."
+    },
+    "solution": {
+      "title": "Hochqualifizierte und",
+      "titleHighlight": "verwertbare Leads",
+      "detailed": "Ultra-detaillierte Leads",
+      "detailedDesc": "Vollständige Kontaktdaten, Kundensituation, präziser Bedarf",
+      "qualified": "Erweiterte Qualifizierung",
+      "qualifiedDesc": "Jeder Interessent hat ein vollständiges und gezieltes Formular ausgefüllt",
+      "intent": "Starke Absicht",
+      "intentDesc": "Der Interessent sucht aktiv nach einer Lösung",
+      "optimized": "Optimierte Formulare",
+      "optimizedDesc": "Hohe Abschlussrate dank unserer Premium-UX",
+      "reliable": "Zuverlässige Daten",
+      "reliableDesc": "E-Mail- und Telefonvalidierung in Echtzeit",
+      "proven": "Bewiesene Leistung",
+      "provenDesc": "Unsere Partner konvertieren bis zu 30% der Leads",
+      "footer": "Jeder Lead ist eine echte Chance."
+    },
+    "freshness": {
+      "title": "Frische Leads = mehr Verkäufe",
+      "realtime": "In Echtzeit generiert",
+      "under24h": "Weniger als 24 Stunden",
+      "timestamp": "Präziser Zeitstempel",
+      "noRecycling": "Kein Recycling",
+      "conversionTip": "⚡ Ein Lead, der in weniger als 5 Minuten kontaktiert wird = 3x Konversion"
+    },
+    "howItWorks": {
+      "title": "So funktioniert es",
+      "step1Title": "Sie werden Partner",
+      "step1Desc": "Füllen Sie das Formular aus und unser Team kontaktiert Sie.",
+      "step2Title": "Sie definieren Ihre Kriterien",
+      "step2Desc": "Branche, geografisches Gebiet, gewünschtes Volumen.",
+      "step3Title": "Sie erhalten Leads",
+      "step3Desc": "Tägliche Verteilung, frische und qualifizierte Leads.",
+      "step4Title": "Sie konvertieren",
+      "step4Desc": "Kontaktieren Sie Ihre Interessenten und bauen Sie Ihr Geschäft aus."
+    },
+    "guarantee": {
+      "title": "Unsere Garantie",
+      "replaced": "Ungültige Leads werden kostenlos ersetzt",
+      "quality": "Permanente Qualitätsüberwachung",
+      "optimization": "Kontinuierliche Leistungsoptimierung"
+    },
+    "selective": {
+      "title": "Selektive Partnerschaft",
+      "weSelect": "Wir wählen unsere Partner aus",
+      "longTerm": "Bevorzugte langfristige Zusammenarbeit",
+      "controlled": "Kontrolliertes Volumen pro Branche",
+      "exclusive": "Exklusivität möglich",
+      "warning": "⚠️ Wir verkaufen nicht an jeden Leads."
+    },
+    "expertise": {
+      "title": "Felderfahrung + digitales Marketing",
+      "description": "Optimis versteht Ihre Kunden, ihre Einwände, die Verkaufszyklen und die Produkte. Unser Ansatz kombiniert Handelsexpertise und Technologie, um Ihre Konversionen zu maximieren.",
+      "knowledge": "Kundenkenntnis",
+      "objections": "Einwandbehandlung",
+      "salesCycles": "Verkaufszyklen",
+      "products": "Produktbeherrschung"
+    },
+    "cta": {
+      "title": "Bereit, qualifizierte Leads zu erhalten",
+      "titleHighlight": "qualifizierte",
+      "description": "Füllen Sie das obige Formular aus und ein Teammitglied wird Sie innerhalb von 24 Stunden kontaktieren.",
+      "button": "Jetzt Partner werden"
+    },
+    "formTitle": "Partner werden",
+    "formDescription": "Füllen Sie dieses Formular in weniger als 30 Sekunden aus",
+    "budgetQuestion": "Wie hoch ist Ihr monatliches Budget für den Lead-Kauf?",
+    "budgets": {
+      "less3000": "Weniger als CHF 3'000",
+      "3000to5000": "CHF 3'000 – 5'000",
+      "5000to10000": "CHF 5'000 – 10'000",
+      "10000plus": "Mehr als CHF 10'000"
+    },
+    "sectorQuestion": "In welcher Branche sind Sie tätig?",
+    "sectors": {
+      "insurance": "Versicherung",
+      "realEstate": "Immobilien",
+      "finance": "Finanzen",
+      "telecom": "Telekommunikation",
+      "other": "Andere"
+    },
+    "companyQuestion": "Name Ihres Unternehmens",
+    "companyName": "Unternehmen",
+    "companyPlaceholder": "z.B.: Meine Firma AG",
+    "salesForceQuestion": "Wie viele Verkäufer haben Sie?",
+    "salesPeople": "Verkäufer",
+    "contactTitle": "Von Optimis kontaktiert werden",
+    "thankYouTitle": "Vielen Dank für Ihre Anfrage",
+    "thankYouDescription": "Ein Mitglied unseres Teams wird Sie innerhalb von 24 Stunden kontaktieren, um Ihre Partnerschaft zu besprechen."
   }
 }
