@@ -36,13 +36,11 @@ const Partenaires = () => {
           backgroundImage: "radial-gradient(circle at 20% 50%, hsl(var(--accent)) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(var(--primary)) 0%, transparent 40%)",
         }} />
 
-        {/* Mascot background - visible on all screens */}
         <div className="absolute left-0 md:-left-5 bottom-0 z-[1] opacity-15 md:opacity-20 pointer-events-none">
           <img src={mascotHd} alt="" className="h-[280px] md:h-[400px] lg:h-[500px] xl:h-[600px] w-auto" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10 py-5 md:py-8 lg:py-14">
-          {/* Logo centered & large */}
           <motion.div 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -53,7 +51,6 @@ const Partenaires = () => {
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-start">
-            {/* Left: text content */}
             <motion.div
               initial="hidden"
               animate="visible"
@@ -62,25 +59,24 @@ const Partenaires = () => {
             >
               <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-accent/20 text-accent px-3 py-1 rounded-full text-xs md:text-sm font-semibold mb-3 md:mb-6">
                 <Zap className="h-4 w-4" />
-                B2B — Partenariat exclusif
+                {t("partner.badge")}
               </motion.div>
 
               <motion.h1 variants={fadeUp} className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-black text-white leading-[1.1] mb-3 md:mb-5 tracking-tight">
-                Recevez des leads ultra qualifiés,{" "}
-                <span className="text-accent">prêts à être convertis</span>
+                {t("partner.heroTitle1")}{" "}
+                <span className="text-accent">{t("partner.heroTitle2")}</span>
               </motion.h1>
 
               <motion.p variants={fadeUp} className="text-sm md:text-lg text-white/70 mb-4 md:mb-8 max-w-lg mx-auto lg:mx-0">
-                Optimis génère chaque jour des prospects en assurance, finance, immobilier et télécom.
+                {t("partner.heroDescription")}
               </motion.p>
 
-              {/* Impact stats */}
               <motion.div variants={fadeUp} className="hidden md:grid grid-cols-2 gap-3 mb-8 max-w-lg">
                 {[
-                  { icon: CalendarDays, text: "Leads ultra frais (< 24h)" },
-                  { icon: Clock, text: "Date & heure enregistrées" },
-                  { icon: Target, text: "Intention réelle vérifiée" },
-                  { icon: TrendingUp, text: "Jusqu'à CHF 50'000+ / mois" },
+                  { icon: CalendarDays, text: t("partner.stats.freshLeads") },
+                  { icon: Clock, text: t("partner.stats.dateTime") },
+                  { icon: Target, text: t("partner.stats.verifiedIntent") },
+                  { icon: TrendingUp, text: t("partner.stats.revenue") },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-2.5 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-3">
                     <item.icon className="h-4 w-4 text-accent flex-shrink-0" />
@@ -91,11 +87,10 @@ const Partenaires = () => {
 
               <motion.p variants={fadeUp} className="hidden md:flex text-sm text-white/50 items-center gap-1.5">
                 <Lock className="h-3.5 w-3.5" />
-                Partenaires limités par secteur — places limitées
+                {t("partner.limitedPartners")}
               </motion.p>
             </motion.div>
 
-            {/* Right: form */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -112,18 +107,18 @@ const Partenaires = () => {
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-4xl mx-auto text-center">
             <motion.h2 variants={fadeUp} className="text-headline mb-4">
-              Cette solution est faite pour <span className="text-primary">vous</span>
+              {t("partner.forWho.title")} <span className="text-primary">{t("partner.forWho.titleHighlight")}</span>
             </motion.h2>
             <motion.p variants={fadeUp} className="text-body-lg text-muted-foreground mb-10">
-              Vous êtes un professionnel qui souhaite développer son portefeuille clients ?
+              {t("partner.forWho.description")}
             </motion.p>
             <motion.div variants={fadeUp} className="grid grid-cols-2 md:grid-cols-5 gap-4">
               {[
-                { icon: Shield, label: "Courtier en assurance" },
-                { icon: Target, label: "Agence immobilière" },
-                { icon: BarChart3, label: "Conseiller financier" },
-                { icon: Zap, label: "Opérateur télécom" },
-                { icon: Users, label: "Entreprise commerciale" },
+                { icon: Shield, label: t("partner.forWho.broker") },
+                { icon: Target, label: t("partner.forWho.realEstate") },
+                { icon: BarChart3, label: t("partner.forWho.financialAdvisor") },
+                { icon: Zap, label: t("partner.forWho.telecom") },
+                { icon: Users, label: t("partner.forWho.business") },
               ].map((item, i) => (
                 <div key={i} className="flex flex-col items-center gap-3 bg-secondary/50 rounded-2xl p-6 hover-lift">
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
@@ -142,14 +137,14 @@ const Partenaires = () => {
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-3xl mx-auto text-center">
             <motion.h2 variants={fadeUp} className="text-headline mb-6">
-              Le problème du marché
+              {t("partner.marketProblem.title")}
             </motion.h2>
             <motion.div variants={fadeUp} className="grid sm:grid-cols-2 gap-4 mb-8">
               {[
-                "Leads revendus à plusieurs concurrents",
-                "Données obsolètes et incorrectes",
-                "Qualité médiocre, taux de conversion faible",
-                "Temps perdu sur des contacts non qualifiés",
+                t("partner.marketProblem.resold"),
+                t("partner.marketProblem.obsolete"),
+                t("partner.marketProblem.lowQuality"),
+                t("partner.marketProblem.wastedTime"),
               ].map((text, i) => (
                 <div key={i} className="flex items-start gap-3 bg-destructive/5 border border-destructive/10 rounded-xl p-4 text-left">
                   <span className="text-destructive font-bold text-lg mt-0.5">✕</span>
@@ -158,7 +153,7 @@ const Partenaires = () => {
               ))}
             </motion.div>
             <motion.p variants={fadeUp} className="text-xl md:text-2xl font-bold text-foreground">
-              Vous méritez de payer pour des <span className="text-primary">résultats, pas du vent.</span>
+              {t("partner.marketProblem.punchline")} <span className="text-primary">{t("partner.marketProblem.punchlineHighlight")}</span>
             </motion.p>
           </motion.div>
         </div>
@@ -170,17 +165,17 @@ const Partenaires = () => {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-4xl mx-auto">
             <motion.div variants={fadeUp} className="text-center mb-12">
               <h2 className="text-headline mb-4">
-                Des leads ultra qualifiés et <span className="text-primary">exploitables</span>
+                {t("partner.solution.title")} <span className="text-primary">{t("partner.solution.titleHighlight")}</span>
               </h2>
             </motion.div>
             <motion.div variants={fadeUp} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { icon: CheckCircle, title: "Leads ultra détaillés", desc: "Coordonnées complètes, situation client, besoin précis" },
-                { icon: Target, title: "Qualification avancée", desc: "Chaque prospect a rempli un formulaire complet et ciblé" },
-                { icon: Zap, title: "Intention forte", desc: "Le prospect recherche activement une solution" },
-                { icon: BarChart3, title: "Formulaires optimisés", desc: "Taux de complétion élevé grâce à notre UX premium" },
-                { icon: Shield, title: "Données fiables", desc: "Validation email et téléphone en temps réel" },
-                { icon: TrendingUp, title: "Performance prouvée", desc: "Nos partenaires convertissent jusqu'à 30% des leads" },
+                { icon: CheckCircle, title: t("partner.solution.detailed"), desc: t("partner.solution.detailedDesc") },
+                { icon: Target, title: t("partner.solution.qualified"), desc: t("partner.solution.qualifiedDesc") },
+                { icon: Zap, title: t("partner.solution.intent"), desc: t("partner.solution.intentDesc") },
+                { icon: BarChart3, title: t("partner.solution.optimized"), desc: t("partner.solution.optimizedDesc") },
+                { icon: Shield, title: t("partner.solution.reliable"), desc: t("partner.solution.reliableDesc") },
+                { icon: TrendingUp, title: t("partner.solution.proven"), desc: t("partner.solution.provenDesc") },
               ].map((item, i) => (
                 <div key={i} className="bg-card border border-border rounded-2xl p-6 hover-lift">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
@@ -192,7 +187,7 @@ const Partenaires = () => {
               ))}
             </motion.div>
             <motion.p variants={fadeUp} className="text-center text-xl font-bold mt-10 text-primary">
-              Chaque lead est une opportunité réelle.
+              {t("partner.solution.footer")}
             </motion.p>
           </motion.div>
         </div>
@@ -206,14 +201,14 @@ const Partenaires = () => {
         <div className="container mx-auto px-4 relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-3xl mx-auto text-center">
             <motion.h2 variants={fadeUp} className="text-headline text-white mb-6">
-              Des leads récents = plus de ventes
+              {t("partner.freshness.title")}
             </motion.h2>
             <motion.div variants={fadeUp} className="grid sm:grid-cols-2 gap-4 mb-8">
               {[
-                { icon: Zap, text: "Générés en temps réel" },
-                { icon: Clock, text: "Moins de 24 heures" },
-                { icon: CalendarDays, text: "Horodatage précis" },
-                { icon: RefreshCw, text: "Aucun recyclage" },
+                { icon: Zap, text: t("partner.freshness.realtime") },
+                { icon: Clock, text: t("partner.freshness.under24h") },
+                { icon: CalendarDays, text: t("partner.freshness.timestamp") },
+                { icon: RefreshCw, text: t("partner.freshness.noRecycling") },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl p-4">
                   <item.icon className="h-5 w-5 text-accent flex-shrink-0" />
@@ -223,7 +218,7 @@ const Partenaires = () => {
             </motion.div>
             <motion.div variants={fadeUp} className="bg-accent/20 border border-accent/30 rounded-2xl p-6">
               <p className="text-lg md:text-xl font-bold text-accent">
-                ⚡ Un lead contacté en moins de 5 minutes = conversion x3
+                {t("partner.freshness.conversionTip")}
               </p>
             </motion.div>
           </motion.div>
@@ -235,14 +230,14 @@ const Partenaires = () => {
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-3xl mx-auto">
             <motion.h2 variants={fadeUp} className="text-headline text-center mb-12">
-              Comment ça marche
+              {t("partner.howItWorks.title")}
             </motion.h2>
             <motion.div variants={fadeUp} className="space-y-0">
               {[
-                { step: "01", title: "Vous devenez partenaire", desc: "Remplissez le formulaire et notre équipe vous contacte." },
-                { step: "02", title: "Vous définissez vos critères", desc: "Secteur, zone géographique, volume souhaité." },
-                { step: "03", title: "Vous recevez des leads", desc: "Distribution quotidienne, leads frais et qualifiés." },
-                { step: "04", title: "Vous convertissez", desc: "Contactez vos prospects et développez votre activité." },
+                { step: "01", title: t("partner.howItWorks.step1Title"), desc: t("partner.howItWorks.step1Desc") },
+                { step: "02", title: t("partner.howItWorks.step2Title"), desc: t("partner.howItWorks.step2Desc") },
+                { step: "03", title: t("partner.howItWorks.step3Title"), desc: t("partner.howItWorks.step3Desc") },
+                { step: "04", title: t("partner.howItWorks.step4Title"), desc: t("partner.howItWorks.step4Desc") },
               ].map((item, i) => (
                 <div key={i} className="flex gap-6 items-start relative">
                   {i < 3 && (
@@ -267,17 +262,16 @@ const Partenaires = () => {
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8">
-              {/* Garantie */}
               <motion.div variants={fadeUp} className="bg-card border border-border rounded-2xl p-8">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                   <Shield className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="text-title mb-4">Notre garantie</h3>
+                <h3 className="text-title mb-4">{t("partner.guarantee.title")}</h3>
                 <ul className="space-y-3">
                   {[
-                    "Leads invalides remplacés gratuitement",
-                    "Suivi qualité permanent",
-                    "Optimisation continue des performances",
+                    t("partner.guarantee.replaced"),
+                    t("partner.guarantee.quality"),
+                    t("partner.guarantee.optimization"),
                   ].map((text, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
@@ -287,18 +281,17 @@ const Partenaires = () => {
                 </ul>
               </motion.div>
 
-              {/* Partenariat sélectif */}
               <motion.div variants={fadeUp} className="bg-card border border-border rounded-2xl p-8">
                 <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-4">
                   <Handshake className="h-6 w-6 text-accent" />
                 </div>
-                <h3 className="text-title mb-4">Partenariat sélectif</h3>
+                <h3 className="text-title mb-4">{t("partner.selective.title")}</h3>
                 <ul className="space-y-3">
                   {[
-                    "Nous sélectionnons nos partenaires",
-                    "Collaboration long terme privilégiée",
-                    "Volume contrôlé par secteur",
-                    "Exclusivité possible",
+                    t("partner.selective.weSelect"),
+                    t("partner.selective.longTerm"),
+                    t("partner.selective.controlled"),
+                    t("partner.selective.exclusive"),
                   ].map((text, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <CheckCircle className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
@@ -307,7 +300,7 @@ const Partenaires = () => {
                   ))}
                 </ul>
                 <p className="mt-6 text-sm font-bold text-foreground bg-accent/10 rounded-lg p-3">
-                  ⚠️ Nous ne vendons pas des leads à tout le monde.
+                  {t("partner.selective.warning")}
                 </p>
               </motion.div>
             </div>
@@ -324,18 +317,18 @@ const Partenaires = () => {
                 <Brain className="h-7 w-7 text-primary" />
               </div>
               <h2 className="text-headline mb-4">
-                Expertise terrain + marketing digital
+                {t("partner.expertise.title")}
               </h2>
               <p className="text-body-lg text-muted-foreground mb-8">
-                Optimis comprend vos clients, leurs objections, les cycles de vente et les produits. Notre approche combine expertise commerciale et technologie pour maximiser vos conversions.
+                {t("partner.expertise.description")}
               </p>
             </motion.div>
             <motion.div variants={fadeUp} className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                "Connaissance clients",
-                "Gestion des objections",
-                "Cycles de vente",
-                "Maîtrise produits",
+                t("partner.expertise.knowledge"),
+                t("partner.expertise.objections"),
+                t("partner.expertise.salesCycles"),
+                t("partner.expertise.products"),
               ].map((text, i) => (
                 <div key={i} className="bg-secondary/50 rounded-xl p-4">
                   <span className="text-sm font-semibold">{text}</span>
@@ -351,10 +344,10 @@ const Partenaires = () => {
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-3xl mx-auto text-center">
             <motion.h2 variants={fadeUp} className="text-headline mb-4">
-              Prêt à recevoir des leads <span className="text-primary">qualifiés</span> ?
+              {t("partner.cta.title")} <span className="text-primary">{t("partner.cta.titleHighlight")}</span> ?
             </motion.h2>
             <motion.p variants={fadeUp} className="text-body-lg text-muted-foreground mb-6">
-              Remplissez le formulaire ci-dessus et un membre de notre équipe vous contactera sous 24h.
+              {t("partner.cta.description")}
             </motion.p>
             <motion.div variants={fadeUp}>
               <Button
@@ -362,7 +355,7 @@ const Partenaires = () => {
                 onClick={scrollToForm}
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-lg px-8 py-6 rounded-xl shadow-xl"
               >
-                Devenir partenaire maintenant
+                {t("partner.cta.button")}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </motion.div>
