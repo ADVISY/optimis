@@ -175,9 +175,10 @@ const AssuranceVoiture = () => {
               </section>
 
               <img 
-                src="https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/Vous-ne-savezpas-si-votre-assurance-copie-2-1024x576.jpg" 
+                src={resolveLegacyImageUrl("Vous-ne-savezpas-si-votre-assurance-copie-2-1024x576.jpg")}
                 alt="Assurance automobile Suisse"
                 className="rounded-lg my-6 w-full"
+                loading="lazy"
               />
             </div>
           </div>

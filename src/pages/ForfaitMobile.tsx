@@ -7,12 +7,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import llamaMascot from "@/assets/llama-mascot.png";
 import CategoryHero from "@/components/home/CategoryHero";
 import StatsBar from "@/components/home/StatsBar";
+import { resolveLegacyImageUrl } from "@/data/legacyImageResolver";
 
 const providers = [
-  { name: "Swisscom", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/swisscom-logo.svg" },
-  { name: "Sunrise", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/sunrise-logo.svg" },
-  { name: "Salt", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/salt-logo.svg" },
-  { name: "Wingo", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/wingo-logo.svg" },
+  { name: "Swisscom", logo: resolveLegacyImageUrl("swisscom-logo.svg") },
+  { name: "Sunrise", logo: resolveLegacyImageUrl("sunrise-logo.svg") },
+  { name: "Salt", logo: resolveLegacyImageUrl("salt-logo.svg") },
+  { name: "Wingo", logo: resolveLegacyImageUrl("wingo-logo.svg") },
 ];
 
 const ForfaitMobile = () => {
