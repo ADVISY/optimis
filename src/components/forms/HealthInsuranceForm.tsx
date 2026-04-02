@@ -29,7 +29,7 @@ import { Button } from "@/components/ui/button";
 import DateInput from "@/components/ui/date-input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
-import { User, Phone, CheckCircle, ArrowRight } from "lucide-react";
+import { User, Phone } from "lucide-react";
 
 interface HealthInsuranceFormData {
   hasCurrentInsurance: boolean | null;
