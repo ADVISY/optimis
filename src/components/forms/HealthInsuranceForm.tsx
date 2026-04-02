@@ -1,12 +1,13 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
 import HealthComparisonResults from "@/components/forms/HealthComparisonResults";
 import LoadingComparison from "@/components/forms/LoadingComparison";
-import FormThankYouScreen from "@/components/forms/FormThankYouScreen";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { useToast } from "@/hooks/use-toast";
@@ -61,12 +62,13 @@ const TOTAL_STEPS = 7;
 const HealthInsuranceForm = () => {
   const { t, i18n } = useTranslation();
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { localizedPath } = useLocalizedPath();
   const [showResults, setShowResults] = useState(false);
-  const [showThankYou, setShowThankYou] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
   const [realOffers, setRealOffers] = useState<InsuranceOffer[]>([]);
-  const [premiumsFetched, setPremiumsFetched] = useState(false);
   
   const { fetchPremiums, error: premiumsError } = useHealthPremiums();
 
@@ -196,25 +198,37 @@ const HealthInsuranceForm = () => {
     };
   };
 
+  // On mount: check if returning from /merci to show results
+  useEffect(() => {
+    if ((location.state as any)?.showResults) {
+      const stored = sessionStorage.getItem("health_form_params");
+      if (stored) {
+        const params = JSON.parse(stored);
+        setIsLoading(true);
+        setLoadingStep("analyzing");
+        
+        // Fetch premiums
+        fetchPremiums(params).then((premiums) => {
+          const offers = premiums.map((premium, index) => premiumToInsuranceOffer(premium, index));
+          setRealOffers(offers);
+          setLoadingStep("comparing");
+          setTimeout(() => setLoadingStep("preparing"), 800);
+          setTimeout(() => { setIsLoading(false); setShowResults(true); }, 1600);
+        });
+        sessionStorage.removeItem("health_form_params");
+      }
+      window.history.replaceState({}, '');
+    }
+  }, []);
+
   const handleSubmit = async () => {
-    // Submit lead with translated labels
+    // Submit lead
     const leadData = prepareLeadData();
     await submitLead(leadData);
 
-    // Show thank you screen (pixels fire here)
-    setShowThankYou(true);
-
-    // Fetch premiums in background while user sees thank you
-    const birthYear = formData.birthDate 
-      ? formData.birthDate.getFullYear() 
-      : 1990;
-
-    if (!formData.canton) {
-      console.error("Canton is required");
-      return;
-    }
-
-    const premiums = await fetchPremiums({
+    // Store params for fetching after redirect
+    const birthYear = formData.birthDate ? formData.birthDate.getFullYear() : 1990;
+    sessionStorage.setItem("health_form_params", JSON.stringify({
       canton: formData.canton,
       postalCode: formData.postalCode,
       birthYear,
@@ -222,26 +236,9 @@ const HealthInsuranceForm = () => {
       model: formData.lamalModel,
       withAccident: formData.accidentCoverage,
       language: i18n.language,
-    });
+    }));
 
-    const offers = premiums.map((premium, index) => 
-      premiumToInsuranceOffer(premium, index)
-    );
-    
-    setRealOffers(offers);
-    setPremiumsFetched(true);
-  };
-
-  const handleDiscoverResults = () => {
-    setShowThankYou(false);
-    setIsLoading(true);
-    setLoadingStep("analyzing");
-    setTimeout(() => setLoadingStep("comparing"), 800);
-    setTimeout(() => setLoadingStep("preparing"), 1600);
-    setTimeout(() => {
-      setIsLoading(false);
-      setShowResults(true);
-    }, 2400);
+    navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
   };
 
   // Validation function for each step
@@ -364,10 +361,6 @@ const HealthInsuranceForm = () => {
       nextStep();
     }
   };
-
-  if (showThankYou) {
-    return <FormThankYouScreen onDiscoverResults={handleDiscoverResults} resultsReady={premiumsFetched} />;
-  }
 
   if (isLoading) {
     return (

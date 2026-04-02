@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
 import ComparisonResults from "@/components/forms/ComparisonResults";
 import LoadingComparison from "@/components/forms/LoadingComparison";
-import FormThankYouScreen from "@/components/forms/FormThankYouScreen";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { Input } from "@/components/ui/input";
@@ -44,6 +45,9 @@ const TOTAL_STEPS = 4;
 
 const HouseholdInsuranceForm = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { localizedPath } = useLocalizedPath();
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
@@ -82,23 +86,20 @@ const HouseholdInsuranceForm = () => {
     },
   });
 
-  const [showThankYou, setShowThankYou] = useState(false);
+  useEffect(() => {
+    if ((location.state as any)?.showResults) {
+      setIsLoading(true);
+      setLoadingStep("analyzing");
+      setTimeout(() => setLoadingStep("comparing"), 800);
+      setTimeout(() => setLoadingStep("preparing"), 1600);
+      setTimeout(() => { setIsLoading(false); setShowResults(true); }, 2400);
+      window.history.replaceState({}, '');
+    }
+  }, []);
 
   const handleSubmit = async () => {
     await submitLead(formData as unknown as Record<string, unknown>);
-    setShowThankYou(true);
-  };
-
-  const handleDiscoverResults = () => {
-    setShowThankYou(false);
-    setIsLoading(true);
-    setLoadingStep("analyzing");
-    setTimeout(() => setLoadingStep("comparing"), 800);
-    setTimeout(() => setLoadingStep("preparing"), 1600);
-    setTimeout(() => {
-      setIsLoading(false);
-      setShowResults(true);
-    }, 2400);
+    navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
   };
 
   const validateStep = (step: number): boolean => {
@@ -141,10 +142,6 @@ const HouseholdInsuranceForm = () => {
   const handleContactRequest = (offer: InsuranceOffer, type: "call" | "email") => {
     console.log("Contact request:", offer, type);
   };
-
-  if (showThankYou) {
-    return <FormThankYouScreen onDiscoverResults={handleDiscoverResults} />;
-  }
 
   if (isLoading) {
     return (
