@@ -86,23 +86,20 @@ const HouseholdInsuranceForm = () => {
     },
   });
 
-  const [showThankYou, setShowThankYou] = useState(false);
+  useEffect(() => {
+    if ((location.state as any)?.showResults) {
+      setIsLoading(true);
+      setLoadingStep("analyzing");
+      setTimeout(() => setLoadingStep("comparing"), 800);
+      setTimeout(() => setLoadingStep("preparing"), 1600);
+      setTimeout(() => { setIsLoading(false); setShowResults(true); }, 2400);
+      window.history.replaceState({}, '');
+    }
+  }, []);
 
   const handleSubmit = async () => {
     await submitLead(formData as unknown as Record<string, unknown>);
-    setShowThankYou(true);
-  };
-
-  const handleDiscoverResults = () => {
-    setShowThankYou(false);
-    setIsLoading(true);
-    setLoadingStep("analyzing");
-    setTimeout(() => setLoadingStep("comparing"), 800);
-    setTimeout(() => setLoadingStep("preparing"), 1600);
-    setTimeout(() => {
-      setIsLoading(false);
-      setShowResults(true);
-    }, 2400);
+    navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
   };
 
   const validateStep = (step: number): boolean => {
