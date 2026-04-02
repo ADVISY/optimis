@@ -458,7 +458,7 @@ const HealthComparisonResults = ({
 
                         {/* Savings indicator */}
                         {savings.monthly > 1 && (
-                          <div className="flex items-center justify-center gap-1.5 text-emerald-700 bg-emerald-50 rounded-lg py-1.5 px-3 text-sm font-medium">
+                          <div className="flex items-center justify-center gap-1.5 text-primary bg-primary/10 rounded-lg py-1.5 px-3 text-sm font-medium">
                             <TrendingDown className="h-4 w-4" />
                             <span>Économie de CHF {savings.yearly.toFixed(0)} / an</span>
                           </div>
