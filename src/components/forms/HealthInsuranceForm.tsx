@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
@@ -28,7 +28,7 @@ import { Button } from "@/components/ui/button";
 import DateInput from "@/components/ui/date-input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
-import { User, Phone } from "lucide-react";
+import { User, Phone, CheckCircle, ArrowRight } from "lucide-react";
 
 interface HealthInsuranceFormData {
   hasCurrentInsurance: boolean | null;
@@ -57,13 +57,24 @@ interface HealthInsuranceFormData {
 
 const TOTAL_STEPS = 7;
 
+// Fires Meta & TikTok conversion pixels on mount
+const PixelFire = () => {
+  useEffect(() => {
+    if ((window as any).fbq) (window as any).fbq('track', 'Lead');
+    if ((window as any).ttq) (window as any).ttq.track('SubmitForm');
+  }, []);
+  return null;
+};
+
 const HealthInsuranceForm = () => {
   const { t, i18n } = useTranslation();
   const { toast } = useToast();
   const [showResults, setShowResults] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
   const [realOffers, setRealOffers] = useState<InsuranceOffer[]>([]);
+  const [premiumsFetched, setPremiumsFetched] = useState(false);
   
   const { fetchPremiums, error: premiumsError } = useHealthPremiums();
 
@@ -194,31 +205,23 @@ const HealthInsuranceForm = () => {
   };
 
   const handleSubmit = async () => {
-    setIsLoading(true);
-    setLoadingStep("analyzing");
+    // Submit lead with translated labels
+    const leadData = prepareLeadData();
+    await submitLead(leadData);
 
-    // Calculate birth year from birth date
+    // Show thank you screen (pixels fire here)
+    setShowThankYou(true);
+
+    // Fetch premiums in background while user sees thank you
     const birthYear = formData.birthDate 
       ? formData.birthDate.getFullYear() 
-      : 1990; // Fallback for testing
+      : 1990;
 
-    // Validate canton
     if (!formData.canton) {
       console.error("Canton is required");
-      setIsLoading(false);
       return;
     }
 
-    console.log("Fetching premiums with:", {
-      canton: formData.canton,
-      birthYear,
-      franchise: formData.franchise,
-      model: formData.lamalModel,
-    });
-
-    setTimeout(() => setLoadingStep("comparing"), 1000);
-
-    // Fetch real premiums from OFSP API
     const premiums = await fetchPremiums({
       canton: formData.canton,
       postalCode: formData.postalCode,
@@ -229,25 +232,24 @@ const HealthInsuranceForm = () => {
       language: i18n.language,
     });
 
-    console.log("Received premiums:", premiums.length);
-
-    setLoadingStep("preparing");
-
-    // Convert premiums to InsuranceOffer format
     const offers = premiums.map((premium, index) => 
       premiumToInsuranceOffer(premium, index)
     );
     
     setRealOffers(offers);
+    setPremiumsFetched(true);
+  };
 
-    // Submit lead with translated labels
-    const leadData = prepareLeadData();
-    await submitLead(leadData);
-
+  const handleDiscoverResults = () => {
+    setShowThankYou(false);
+    setIsLoading(true);
+    setLoadingStep("analyzing");
+    setTimeout(() => setLoadingStep("comparing"), 800);
+    setTimeout(() => setLoadingStep("preparing"), 1600);
     setTimeout(() => {
       setIsLoading(false);
       setShowResults(true);
-    }, 500);
+    }, 2400);
   };
 
   // Validation function for each step
@@ -370,6 +372,40 @@ const HealthInsuranceForm = () => {
       nextStep();
     }
   };
+
+  if (showThankYou) {
+    return (
+      <div className="max-w-2xl mx-auto py-12">
+        <div className="text-center space-y-6">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mx-auto">
+            <CheckCircle className="h-10 w-10 text-primary" />
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+            {t("thankYou.title", "Merci pour votre demande !")}
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-md mx-auto">
+            {t("thankYou.message", "Nous avons bien reçu vos informations. Un conseiller vous contactera dans les plus brefs délais.")}
+          </p>
+          <p className="text-muted-foreground">
+            {t("thankYou.nextSteps", "En attendant, découvrez les offres qui correspondent à votre profil.")}
+          </p>
+          <Button
+            size="lg"
+            onClick={handleDiscoverResults}
+            disabled={!premiumsFetched}
+            className="mt-4 text-lg px-8 py-6"
+          >
+            {premiumsFetched 
+              ? t("forms.healthInsurance.discoverResults", "Découvrir les résultats")
+              : t("forms.healthInsurance.loadingResults", "Chargement des offres...")}
+            {premiumsFetched && <ArrowRight className="ml-2 h-5 w-5" />}
+          </Button>
+        </div>
+        {/* Fire conversion pixels */}
+        <PixelFire />
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (
