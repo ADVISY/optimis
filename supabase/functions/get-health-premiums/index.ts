@@ -320,10 +320,10 @@ async function findPremiums(request: PremiumRequest): Promise<PremiumResult[]> {
     if (seenInsurers.has(uniqueKey)) continue;
     seenInsurers.add(uniqueKey);
     
-    // Get insurer name from cache or use default
-    let insurerName = insurers.get(insurerId);
+    // Get insurer name - prefer default (clean French names) over CSV (German legal names)
+    let insurerName = getDefaultInsurers().get(insurerId);
     if (!insurerName) {
-      insurerName = getDefaultInsurers().get(insurerId) || `Assureur #${insurerId}`;
+      insurerName = insurers.get(insurerId) || `Assureur #${insurerId}`;
     }
     
     results.push({
