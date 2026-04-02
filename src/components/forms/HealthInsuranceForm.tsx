@@ -1,12 +1,13 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
 import HealthComparisonResults from "@/components/forms/HealthComparisonResults";
 import LoadingComparison from "@/components/forms/LoadingComparison";
-import FormThankYouScreen from "@/components/forms/FormThankYouScreen";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { useToast } from "@/hooks/use-toast";

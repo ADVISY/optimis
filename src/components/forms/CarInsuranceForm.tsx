@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
 import ComparisonResults from "@/components/forms/ComparisonResults";
 import LoadingComparison from "@/components/forms/LoadingComparison";
-import FormThankYouScreen from "@/components/forms/FormThankYouScreen";
 import VehicleSelector from "@/components/forms/VehicleSelector";
 import PlateSearch from "@/components/forms/PlateSearch";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
