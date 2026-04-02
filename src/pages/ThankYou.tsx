@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,17 @@ import LocalizedLink from "@/components/LocalizedLink";
 
 const ThankYou = () => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    // Meta Pixel conversion
+    if ((window as any).fbq) {
+      (window as any).fbq('track', 'Lead');
+    }
+    // TikTok Pixel conversion
+    if ((window as any).ttq) {
+      (window as any).ttq.track('SubmitForm');
+    }
+  }, []);
 
   return (
     <Layout>
