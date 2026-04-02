@@ -141,7 +141,7 @@ export function parseWordPressContent(content: string): React.ReactNode[] {
         const src = element.getAttribute('src') || '';
         const alt = element.getAttribute('alt') || '';
         // Skip images from the old WordPress site (they return 421/404)
-        if (src.includes('le-comparateur-optimis.ch/wp-content/uploads')) {
+        if (src.includes('le-comparateur-optimis.ch/wp-content/uploads') || src.includes('${WP_IMAGE_BASE}') || src.includes('WP_IMAGE_BASE')) {
           return null;
         }
         return (
