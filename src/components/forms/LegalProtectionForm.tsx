@@ -150,10 +150,6 @@ const LegalProtectionForm = () => {
     console.log("Contact request:", offer, type);
   };
 
-  if (showThankYou) {
-    return <FormThankYouScreen onDiscoverResults={handleDiscoverResults} />;
-  }
-
   if (isLoading) {
     return (
       <div className="max-w-2xl mx-auto">
