@@ -6,6 +6,7 @@ import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
 import Pillar3ComparisonResults from "@/components/forms/Pillar3ComparisonResults";
 import LoadingComparison from "@/components/forms/LoadingComparison";
+import FormThankYouScreen from "@/components/forms/FormThankYouScreen";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { Input } from "@/components/ui/input";
