@@ -168,59 +168,53 @@ async function fetchInsurers(): Promise<Map<string, string>> {
 }
 
 function getDefaultInsurers(): Map<string, string> {
-  // Complete list of Swiss health insurers (2026) - BAG number -> Name
+  // Complete list of Swiss health insurers (2026) - BAG number -> Name (user-friendly French)
   const insurers = new Map<string, string>([
     // Major insurers
-    ["32", "EGK-Gesundheitskasse"],
-    ["290", "Helsana Versicherungen AG"],
-    ["312", "CSS Kranken-Versicherung AG"],
-    ["376", "Philos Assurance Maladie SA"],
+    ["8", "Agrisano"],
+    ["32", "EGK"],
+    ["290", "Helsana"],
+    ["312", "CSS"],
+    ["343", "Vivao Sympany"],
+    ["376", "Philos"],
     ["455", "Groupe Mutuel"],
-    ["509", "Sanitas Grundversicherungen AG"],
-    ["1386", "Assura SA"],
-    ["1509", "Concordia Schweiz"],
-    ["1542", "SWICA Krankenversicherung AG"],
-    ["1560", "Visana AG"],
-    ["1568", "Atupri Gesundheitsversicherung AG"],
-    ["1587", "KPT Krankenkasse AG"],
-    ["1593", "ÖKK Kranken- und Unfallversicherungen AG"],
-    ["1601", "Sympany Versicherungen AG"],
-    ["1613", "Aquilana Versicherungen AG"],
-    ["1630", "Agrisano Krankenkasse AG"],
-    ["1668", "Avenir Assurance Maladie SA"],
-    ["1672", "Mutuel Assurance Maladie SA"],
-    ["1699", "Sanagate AG"],
-    ["1705", "Compact Grundversicherungen AG"],
-    ["1717", "Easy Sana Assurance Maladie SA"],
-    ["1723", "Sana24 AG"],
-    ["1729", "Arcosana AG"],
-    ["1747", "Progrès Versicherungen AG"],
-    ["1753", "Sumiswalder Krankenkasse"],
-    ["1759", "Steffisburg Krankenkasse"],
-    ["1765", "Kolping Krankenkasse AG"],
-    ["1771", "Rhenusana Kranken- und Unfallversicherung"],
-    ["1777", "Sanavals Gesundheitskasse"],
-    ["1783", "SLKK Krankenkasse"],
-    ["1789", "Vivao Sympany AG"],
-    ["1795", "Intras Assurance-maladie SA"],
-    ["1807", "Moove Sympany AG"],
-    ["1819", "AMB Assurances SA"],
-    // Additional common numbers
-    ["8", "Agrisano Krankenkasse AG"],
-    ["10", "Assura SA"],
-    ["11", "Avenir Assurance Maladie SA"],
-    ["12", "Aquilana Versicherungen AG"],
-    ["14", "Atupri Gesundheitsversicherung AG"],
-    ["24", "Concordia Schweiz"],
-    ["28", "CSS Kranken-Versicherung AG"],
-    ["52", "Groupe Mutuel"],
-    ["56", "Helsana Versicherungen AG"],
-    ["84", "KPT Krankenkasse AG"],
-    ["116", "ÖKK Kranken- und Unfallversicherungen AG"],
-    ["144", "Sanitas Grundversicherungen AG"],
-    ["164", "SWICA Krankenversicherung AG"],
-    ["168", "Sympany Versicherungen AG"],
-    ["172", "Visana AG"],
+    ["509", "Sanitas"],
+    ["881", "Arcosana"],
+    ["966", "Sanagate"],
+    ["1384", "Avenir"],
+    ["1386", "Assura"],
+    ["1401", "Mutuel Assurance"],
+    ["1479", "Easy Sana"],
+    ["1509", "Concordia"],
+    ["1535", "Progrès"],
+    ["1542", "SWICA"],
+    ["1555", "Compact"],
+    ["1560", "Visana"],
+    ["1562", "Sana24"],
+    ["1568", "Atupri"],
+    ["1587", "KPT"],
+    ["1593", "ÖKK"],
+    ["1601", "Sympany"],
+    ["1613", "Aquilana"],
+    ["1630", "Agrisano"],
+    ["1668", "Avenir"],
+    ["1672", "Mutuel Assurance"],
+    ["1699", "Sanagate"],
+    ["1705", "Compact"],
+    ["1717", "Easy Sana"],
+    ["1723", "Sana24"],
+    ["1729", "Arcosana"],
+    ["1747", "Progrès"],
+    ["1753", "Sumiswalder"],
+    ["1759", "Steffisburg"],
+    ["1765", "Kolping"],
+    ["1771", "Rhenusana"],
+    ["1777", "Sanavals"],
+    ["1783", "SLKK"],
+    ["1789", "Vivao Sympany"],
+    ["1795", "Intras"],
+    ["1807", "Moove Sympany"],
+    ["1819", "AMB Assurances"],
   ]);
   
   return insurers;
@@ -326,10 +320,10 @@ async function findPremiums(request: PremiumRequest): Promise<PremiumResult[]> {
     if (seenInsurers.has(uniqueKey)) continue;
     seenInsurers.add(uniqueKey);
     
-    // Get insurer name from cache or use default
-    let insurerName = insurers.get(insurerId);
+    // Get insurer name - prefer default (clean French names) over CSV (German legal names)
+    let insurerName = getDefaultInsurers().get(insurerId);
     if (!insurerName) {
-      insurerName = getDefaultInsurers().get(insurerId) || `Assureur #${insurerId}`;
+      insurerName = insurers.get(insurerId) || `Assureur #${insurerId}`;
     }
     
     results.push({
