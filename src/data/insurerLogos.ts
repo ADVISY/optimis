@@ -217,12 +217,29 @@ export const insurerLogos: Record<string, InsurerInfo> = {
   },
 };
 
-// Get insurer info with fallback
+// Get insurer info with fallback - supports fuzzy matching for official legal names
 export const getInsurerInfo = (name: string): InsurerInfo => {
-  return insurerLogos[name] || {
+  // Direct match first
+  if (insurerLogos[name]) return insurerLogos[name];
+  
+  // Fuzzy match: check if the input name starts with or contains a known insurer name
+  const nameLower = name.toLowerCase();
+  for (const [key, info] of Object.entries(insurerLogos)) {
+    const keyLower = key.toLowerCase();
+    // "Helsana Versicherungen AG" starts with "helsana"
+    if (nameLower.startsWith(keyLower) || nameLower.includes(keyLower)) {
+      return { ...info, name }; // Keep the full official name
+    }
+    // "CSS Versicherung" contains "css"
+    if (keyLower.startsWith(nameLower)) {
+      return { ...info, name };
+    }
+  }
+
+  return {
     name,
     logo: "",
-    color: "#2D5A3D", // Default to primary brand color
+    color: "#2D5A3D",
   };
 };
 
