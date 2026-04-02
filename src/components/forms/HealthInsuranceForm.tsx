@@ -198,25 +198,37 @@ const HealthInsuranceForm = () => {
     };
   };
 
+  // On mount: check if returning from /merci to show results
+  useEffect(() => {
+    if ((location.state as any)?.showResults) {
+      const stored = sessionStorage.getItem("health_form_params");
+      if (stored) {
+        const params = JSON.parse(stored);
+        setIsLoading(true);
+        setLoadingStep("analyzing");
+        
+        // Fetch premiums
+        fetchPremiums(params).then((premiums) => {
+          const offers = premiums.map((premium, index) => premiumToInsuranceOffer(premium, index));
+          setRealOffers(offers);
+          setLoadingStep("comparing");
+          setTimeout(() => setLoadingStep("preparing"), 800);
+          setTimeout(() => { setIsLoading(false); setShowResults(true); }, 1600);
+        });
+        sessionStorage.removeItem("health_form_params");
+      }
+      window.history.replaceState({}, '');
+    }
+  }, []);
+
   const handleSubmit = async () => {
-    // Submit lead with translated labels
+    // Submit lead
     const leadData = prepareLeadData();
     await submitLead(leadData);
 
-    // Show thank you screen (pixels fire here)
-    setShowThankYou(true);
-
-    // Fetch premiums in background while user sees thank you
-    const birthYear = formData.birthDate 
-      ? formData.birthDate.getFullYear() 
-      : 1990;
-
-    if (!formData.canton) {
-      console.error("Canton is required");
-      return;
-    }
-
-    const premiums = await fetchPremiums({
+    // Store params for fetching after redirect
+    const birthYear = formData.birthDate ? formData.birthDate.getFullYear() : 1990;
+    sessionStorage.setItem("health_form_params", JSON.stringify({
       canton: formData.canton,
       postalCode: formData.postalCode,
       birthYear,
@@ -224,26 +236,9 @@ const HealthInsuranceForm = () => {
       model: formData.lamalModel,
       withAccident: formData.accidentCoverage,
       language: i18n.language,
-    });
+    }));
 
-    const offers = premiums.map((premium, index) => 
-      premiumToInsuranceOffer(premium, index)
-    );
-    
-    setRealOffers(offers);
-    setPremiumsFetched(true);
-  };
-
-  const handleDiscoverResults = () => {
-    setShowThankYou(false);
-    setIsLoading(true);
-    setLoadingStep("analyzing");
-    setTimeout(() => setLoadingStep("comparing"), 800);
-    setTimeout(() => setLoadingStep("preparing"), 1600);
-    setTimeout(() => {
-      setIsLoading(false);
-      setShowResults(true);
-    }, 2400);
+    navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
   };
 
   // Validation function for each step
