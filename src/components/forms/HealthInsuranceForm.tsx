@@ -362,10 +362,6 @@ const HealthInsuranceForm = () => {
     }
   };
 
-  if (showThankYou) {
-    return <FormThankYouScreen onDiscoverResults={handleDiscoverResults} resultsReady={premiumsFetched} />;
-  }
-
   if (isLoading) {
     return (
       <div className="max-w-2xl mx-auto">
