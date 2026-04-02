@@ -140,6 +140,10 @@ export function parseWordPressContent(content: string): React.ReactNode[] {
       case 'img':
         const src = element.getAttribute('src') || '';
         const alt = element.getAttribute('alt') || '';
+        // Skip images from the old WordPress site (they return 421/404)
+        if (src.includes('le-comparateur-optimis.ch/wp-content/uploads')) {
+          return null;
+        }
         return (
           <img
             key={index}
@@ -147,6 +151,9 @@ export function parseWordPressContent(content: string): React.ReactNode[] {
             alt={alt}
             className="w-full rounded-lg shadow-md"
             loading="lazy"
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = 'none';
+            }}
           />
         );
       case 'table':
