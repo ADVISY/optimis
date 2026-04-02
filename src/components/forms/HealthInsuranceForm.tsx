@@ -196,31 +196,23 @@ const HealthInsuranceForm = () => {
   };
 
   const handleSubmit = async () => {
-    setIsLoading(true);
-    setLoadingStep("analyzing");
+    // Submit lead with translated labels
+    const leadData = prepareLeadData();
+    await submitLead(leadData);
 
-    // Calculate birth year from birth date
+    // Show thank you screen (pixels fire here)
+    setShowThankYou(true);
+
+    // Fetch premiums in background while user sees thank you
     const birthYear = formData.birthDate 
       ? formData.birthDate.getFullYear() 
-      : 1990; // Fallback for testing
+      : 1990;
 
-    // Validate canton
     if (!formData.canton) {
       console.error("Canton is required");
-      setIsLoading(false);
       return;
     }
 
-    console.log("Fetching premiums with:", {
-      canton: formData.canton,
-      birthYear,
-      franchise: formData.franchise,
-      model: formData.lamalModel,
-    });
-
-    setTimeout(() => setLoadingStep("comparing"), 1000);
-
-    // Fetch real premiums from OFSP API
     const premiums = await fetchPremiums({
       canton: formData.canton,
       postalCode: formData.postalCode,
@@ -231,25 +223,24 @@ const HealthInsuranceForm = () => {
       language: i18n.language,
     });
 
-    console.log("Received premiums:", premiums.length);
-
-    setLoadingStep("preparing");
-
-    // Convert premiums to InsuranceOffer format
     const offers = premiums.map((premium, index) => 
       premiumToInsuranceOffer(premium, index)
     );
     
     setRealOffers(offers);
+    setPremiumsFetched(true);
+  };
 
-    // Submit lead with translated labels
-    const leadData = prepareLeadData();
-    await submitLead(leadData);
-
+  const handleDiscoverResults = () => {
+    setShowThankYou(false);
+    setIsLoading(true);
+    setLoadingStep("analyzing");
+    setTimeout(() => setLoadingStep("comparing"), 800);
+    setTimeout(() => setLoadingStep("preparing"), 1600);
     setTimeout(() => {
       setIsLoading(false);
       setShowResults(true);
-    }, 500);
+    }, 2400);
   };
 
   // Validation function for each step
