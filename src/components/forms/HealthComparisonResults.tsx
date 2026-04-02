@@ -127,11 +127,11 @@ const HealthComparisonResults = ({
   const getBadgeStyles = (badge: string) => {
     switch (badge) {
       case "bestPrice":
-        return "bg-emerald-100 text-emerald-800 border-emerald-300 shadow-sm";
+        return "bg-primary/10 text-primary border-primary/30 shadow-sm";
       case "recommended":
         return "bg-primary/15 text-primary border-primary/30 shadow-sm";
       case "bestValue":
-        return "bg-amber-100 text-amber-800 border-amber-300 shadow-sm";
+        return "bg-secondary/80 text-secondary-foreground border-secondary shadow-sm";
       default:
         return "";
     }
