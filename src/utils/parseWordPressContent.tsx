@@ -142,14 +142,18 @@ export function parseWordPressContent(content: string): React.ReactNode[] {
       case 'img':
         const src = element.getAttribute('src') || '';
         const alt = element.getAttribute('alt') || '';
-        // Skip images from the old WordPress site (they return 421/404)
-        if (src.includes('le-comparateur-optimis.ch/wp-content/uploads') || src.includes('${WP_IMAGE_BASE}') || src.includes('WP_IMAGE_BASE')) {
-          return null;
+        // Try to resolve WordPress images to local assets
+        const isWpImage = src.includes('le-comparateur-optimis.ch/wp-content/uploads') || src.includes('${WP_IMAGE_BASE}') || src.includes('WP_IMAGE_BASE');
+        const resolvedSrc = isWpImage ? resolveContentImage(src) : src;
+        
+        if (isWpImage && !resolvedSrc) {
+          return null; // No local replacement found, hide it
         }
+        
         return (
           <img
             key={index}
-            src={src}
+            src={resolvedSrc || src}
             alt={alt}
             className="w-full rounded-lg shadow-md"
             loading="lazy"
