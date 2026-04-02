@@ -1,25 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import LocalizedLink from "@/components/LocalizedLink";
-import mascotExplaining from "@/assets/mascot-explaining.png";
+import { resolveLegacyImageUrl } from "@/data/legacyImageResolver";
 
 const InsuranceDetails = () => {
   const { t } = useTranslation();
-
-  const insuranceTypes = [
-    {
-      titleKey: "home.carInsuranceDetailTitle",
-      descriptionKey: "home.carInsuranceDetailDesc",
-      href: "/assurance-voiture",
-      image: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/05/car-sales.jpg",
-    },
-    {
-      titleKey: "home.healthInsuranceDetailTitle",
-      descriptionKey: "home.healthInsuranceDetailDesc",
-      href: "/assurance-sante",
-      image: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/05/health-consultation.jpg",
-    },
-  ];
 
   return (
     <section className="py-16 md:py-20 bg-background">
@@ -51,9 +36,10 @@ const InsuranceDetails = () => {
             </div>
             <div className="order-1 lg:order-2">
               <img 
-                src="https://le-comparateur-optimis.ch/wp-content/uploads/2024/05/car-sales.jpg"
+                src={resolveLegacyImageUrl("car-sales.jpg")}
                 alt="Assurance voiture"
                 className="rounded-2xl shadow-lg w-full h-auto object-cover aspect-[4/3]"
+                loading="lazy"
               />
             </div>
           </div>
@@ -62,12 +48,10 @@ const InsuranceDetails = () => {
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>
               <img 
-                src="https://le-comparateur-optimis.ch/wp-content/uploads/2024/05/health-consultation.jpg"
+                src={resolveLegacyImageUrl("health-consultation.jpg")}
                 alt="Assurance santé"
                 className="rounded-2xl shadow-lg w-full h-auto object-cover aspect-[4/3]"
-                onError={(e) => {
-                  e.currentTarget.src = "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80";
-                }}
+                loading="lazy"
               />
             </div>
             <div>

@@ -8,12 +8,13 @@ import { useNavigate } from "react-router-dom";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import CategoryHero from "@/components/home/CategoryHero";
 import StatsBar from "@/components/home/StatsBar";
+import { resolveLegacyImageUrl } from "@/data/legacyImageResolver";
 
 const partners = [
-  { name: "Generali", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/general-1.svg" },
-  { name: "Allianz", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/allianz-logo.svg" },
-  { name: "AXA", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/0001_0003782804_2-640.jpg" },
-  { name: "DAS", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/das-logo.svg" },
+  { name: "Generali", logo: resolveLegacyImageUrl("general-1.svg") },
+  { name: "Allianz", logo: resolveLegacyImageUrl("allianz-logo.svg") },
+  { name: "AXA", logo: resolveLegacyImageUrl("0001_0003782804_2-640.jpg") },
+  { name: "DAS", logo: resolveLegacyImageUrl("das-logo.svg") },
 ];
 
 const ProtectionJuridique = () => {

@@ -8,13 +8,14 @@ import { useNavigate } from "react-router-dom";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import CategoryHero from "@/components/home/CategoryHero";
 import StatsBar from "@/components/home/StatsBar";
+import { resolveLegacyImageUrl } from "@/data/legacyImageResolver";
 
 const partners = [
-  { name: "Generali", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/general-1.svg" },
-  { name: "Helsana", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/helsana-logo.svg" },
-  { name: "Groupe Mutuel", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/logo-groupe-mutuel.svg" },
-  { name: "SWICA", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/SWICA_Logo_Mobile.svg" },
-  { name: "Allianz", logo: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/allianz-logo.svg" },
+  { name: "Generali", logo: resolveLegacyImageUrl("general-1.svg") },
+  { name: "Helsana", logo: resolveLegacyImageUrl("helsana-logo.svg") },
+  { name: "Groupe Mutuel", logo: resolveLegacyImageUrl("logo-groupe-mutuel.svg") },
+  { name: "SWICA", logo: resolveLegacyImageUrl("SWICA_Logo_Mobile.svg") },
+  { name: "Allianz", logo: resolveLegacyImageUrl("allianz-logo.svg") },
 ];
 
 const AssuranceSante = () => {
@@ -39,7 +40,6 @@ const AssuranceSante = () => {
 
   return (
     <Layout>
-      {/* Hero Section */}
       <CategoryHero
         pageTitle={t("healthInsurance.title")}
         subtitle={t("healthInsurance.heroSubtitle")}
@@ -48,10 +48,8 @@ const AssuranceSante = () => {
         onButtonClick={handleCompareClick}
       />
 
-      {/* Stats Bar */}
       <StatsBar />
 
-      {/* Video Section */}
       <section className="py-12">
         <div className="container">
           <div className="max-w-3xl mx-auto">
@@ -70,11 +68,9 @@ const AssuranceSante = () => {
         </div>
       </section>
 
-      {/* Table of Contents & Content */}
       <section className="py-16">
         <div className="container">
           <div className="grid gap-12 lg:grid-cols-3">
-            {/* Sidebar - Table of Contents */}
             <div className="lg:col-span-1">
               <Card className="sticky top-24">
                 <CardContent className="p-6">
@@ -98,7 +94,6 @@ const AssuranceSante = () => {
               </Card>
             </div>
 
-            {/* Main Content */}
             <div className="lg:col-span-2 prose prose-lg max-w-none">
               <section id="section-0" className="mb-12">
                 <h3 className="text-2xl font-bold text-foreground">{t('healthInsurance.allAboutHealthInsurance')}</h3>
@@ -106,9 +101,10 @@ const AssuranceSante = () => {
                   {t('healthInsurance.allAboutHealthInsuranceContent')}
                 </p>
                 <img 
-                  src="https://le-comparateur-optimis.ch/wp-content/uploads/2024/05/theluckycharm_delete_the_extra_things_3580fd9b-5c4e-45bd-88b3-fb7463e2f924-min.png" 
+                  src={resolveLegacyImageUrl("theluckycharm_delete_the_extra_things")}
                   alt="Illustration assurance maladie"
                   className="rounded-lg my-6 w-full max-w-md"
+                  loading="lazy"
                 />
               </section>
 
@@ -259,7 +255,6 @@ const AssuranceSante = () => {
         </div>
       </section>
 
-      {/* Partners Section */}
       <section className="py-16 bg-muted/30">
         <div className="container">
           <div className="text-center mb-10">
@@ -275,13 +270,13 @@ const AssuranceSante = () => {
                 src={partner.logo}
                 alt={partner.name}
                 className="h-10 md:h-12 object-contain opacity-70 hover:opacity-100 transition-opacity"
+                loading="lazy"
               />
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-8 md:py-16">
         <div className="container px-4">
           <Card className="bg-primary/5 border-primary/20">

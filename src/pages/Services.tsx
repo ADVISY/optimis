@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import LocalizedLink from "@/components/LocalizedLink";
 import llamaMascot from "@/assets/llama-mascot.png";
+import { resolveLegacyImageUrl } from "@/data/legacyImageResolver";
 
 const Services = () => {
   const { t } = useTranslation();
@@ -42,7 +43,6 @@ const Services = () => {
 
   return (
     <Layout>
-      {/* Hero Section */}
       <section className="gradient-optimis py-16 md:py-24">
         <div className="container">
           <div className="grid items-center gap-8 md:grid-cols-2">
@@ -68,7 +68,6 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Quick Links */}
       <section className="py-8 bg-background border-b">
         <div className="container">
           <div className="flex flex-wrap justify-center gap-4">
@@ -86,7 +85,6 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Services Grid */}
       <section className="py-16">
         <div className="container">
           <h2 className="text-3xl font-bold text-center text-foreground mb-12">
@@ -120,10 +118,8 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Detailed Sections */}
       <section className="py-16 bg-muted/30">
         <div className="container">
-          {/* Mobile Package Section */}
           <div className="mb-16">
             <div className="grid gap-8 md:grid-cols-2 items-center">
               <div>
@@ -147,22 +143,23 @@ const Services = () => {
               </div>
               <div className="flex justify-center">
                 <img 
-                  src="https://le-comparateur-optimis.ch/wp-content/uploads/2024/05/mobile-phone.png" 
+                  src={resolveLegacyImageUrl("mobile-phone.png")}
                   alt="Forfait Mobile"
                   className="max-w-xs"
+                  loading="lazy"
                 />
               </div>
             </div>
           </div>
 
-          {/* Subsidy Section */}
           <div className="mb-16">
             <div className="grid gap-8 md:grid-cols-2 items-center">
               <div className="order-2 md:order-1 flex justify-center">
                 <img 
-                  src="https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/coins-5946827.jpg" 
+                  src={resolveLegacyImageUrl("coins-5946827.jpg")}
                   alt="Subside"
                   className="max-w-xs rounded-lg shadow-lg"
+                  loading="lazy"
                 />
               </div>
               <div className="order-1 md:order-2">
@@ -187,7 +184,6 @@ const Services = () => {
             </div>
           </div>
 
-          {/* Termination Section */}
           <div>
             <div className="grid gap-8 md:grid-cols-2 items-center">
               <div>
@@ -211,9 +207,10 @@ const Services = () => {
               </div>
               <div className="flex justify-center">
                 <img 
-                  src="https://le-comparateur-optimis.ch/wp-content/uploads/2024/05/contract-cancel.png" 
+                  src={resolveLegacyImageUrl("contract-cancel.png")}
                   alt="Résiliation"
                   className="max-w-xs"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -221,7 +218,6 @@ const Services = () => {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-16">
         <div className="container">
           <Card className="bg-primary/5 border-primary/20">
