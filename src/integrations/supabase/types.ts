@@ -14,7 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      health_premiums: {
+        Row: {
+          accident_code: string
+          age_category: string
+          canton: string
+          created_at: string
+          franchise_amount: number
+          franchise_code: string
+          id: number
+          insurer_id: string
+          insurer_name: string | null
+          premium: number
+          region: string | null
+          tarif_id: string | null
+          tarif_name: string | null
+          tarif_type: string
+          year: number
+        }
+        Insert: {
+          accident_code: string
+          age_category: string
+          canton: string
+          created_at?: string
+          franchise_amount: number
+          franchise_code: string
+          id?: never
+          insurer_id: string
+          insurer_name?: string | null
+          premium: number
+          region?: string | null
+          tarif_id?: string | null
+          tarif_name?: string | null
+          tarif_type: string
+          year?: number
+        }
+        Update: {
+          accident_code?: string
+          age_category?: string
+          canton?: string
+          created_at?: string
+          franchise_amount?: number
+          franchise_code?: string
+          id?: never
+          insurer_id?: string
+          insurer_name?: string | null
+          premium?: number
+          region?: string | null
+          tarif_id?: string | null
+          tarif_name?: string | null
+          tarif_type?: string
+          year?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
