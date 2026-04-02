@@ -161,39 +161,45 @@ const Pillar3Form = () => {
     };
   };
 
-  const [showThankYou, setShowThankYou] = useState(false);
-  const [pendingProjections, setPendingProjections] = useState<Pillar3aProjection[]>([]);
+  // On mount: check if returning from /merci to show results
+  useEffect(() => {
+    if ((location.state as any)?.showResults) {
+      const stored = sessionStorage.getItem("pillar3_form_data");
+      if (stored) {
+        const storedData = JSON.parse(stored);
+        const matchingProducts = getMatchingProducts(storedData.riskProfile, storedData.objective);
+        const calculatedProjections = calculateAllProjections(matchingProducts, {
+          age: storedData.age,
+          riskProfile: storedData.riskProfile,
+          savingsAmount: storedData.savingsAmount,
+          incomeRange: storedData.incomeRange,
+          objective: storedData.objective,
+          canton: storedData.canton,
+        });
+        setIsLoading(true);
+        setLoadingStep("analyzing");
+        setTimeout(() => setLoadingStep("comparing"), 800);
+        setTimeout(() => { setLoadingStep("preparing"); setProjections(calculatedProjections); }, 1600);
+        setTimeout(() => { setIsLoading(false); setShowResults(true); }, 2400);
+        sessionStorage.removeItem("pillar3_form_data");
+      }
+      window.history.replaceState({}, '');
+    }
+  }, []);
 
   const handleSubmit = async () => {
-    // Calculate projections
-    const matchingProducts = getMatchingProducts(formData.riskProfile, formData.objective);
-    const calculatedProjections = calculateAllProjections(matchingProducts, {
-      age: formData.age,
+    // Store form data for recalculation after redirect
+    sessionStorage.setItem("pillar3_form_data", JSON.stringify({
       riskProfile: formData.riskProfile,
+      objective: formData.objective,
+      age: formData.age,
       savingsAmount: formData.savingsAmount,
       incomeRange: formData.incomeRange,
-      objective: formData.objective,
       canton: formData.canton,
-    });
-    setPendingProjections(calculatedProjections);
+    }));
 
     await submitLead(getTranslatedFormData() as unknown as Record<string, unknown>);
-    setShowThankYou(true);
-  };
-
-  const handleDiscoverResults = () => {
-    setShowThankYou(false);
-    setIsLoading(true);
-    setLoadingStep("analyzing");
-    setTimeout(() => setLoadingStep("comparing"), 800);
-    setTimeout(() => {
-      setLoadingStep("preparing");
-      setProjections(pendingProjections);
-    }, 1600);
-    setTimeout(() => {
-      setIsLoading(false);
-      setShowResults(true);
-    }, 2400);
+    navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
   };
 
   const validateStep = (step: number): boolean => {
