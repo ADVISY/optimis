@@ -41,19 +41,18 @@
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1639523097079849');
-      fbq('track', 'PageView');
-    </script>
-    <!-- End Meta Pixel Code -->
-    
-    <!-- Second Meta Pixel Code - all pages except "merci" -->
-    <script>
-      if (window.location.href.indexOf('merci') === -1) {
+      // DE pixel - only on /de/ pages
+      if (window.location.pathname.startsWith('/de')) {
+        fbq('init', '1639523097079849');
+        fbq('track', 'PageView');
+      }
+      // FR pixel - only on /fr/ pages
+      if (window.location.pathname.startsWith('/fr')) {
         fbq('init', '1569978013669693');
         fbq('track', 'PageView');
       }
     </script>
-    <!-- End Second Meta Pixel Code -->
+    <!-- End Meta Pixel Code -->
     
     <!-- TikTok Pixel Code -->
     <script>
