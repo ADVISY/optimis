@@ -48,6 +48,9 @@ const TOTAL_STEPS = 6;
 
 const Pillar3Form = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { localizedPath } = useLocalizedPath();
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
