@@ -157,15 +157,12 @@ const Pillar3Form = () => {
     };
   };
 
+  const [showThankYou, setShowThankYou] = useState(false);
+  const [pendingProjections, setPendingProjections] = useState<Pillar3aProjection[]>([]);
+
   const handleSubmit = async () => {
-    setIsLoading(true);
-    setLoadingStep("analyzing");
-    
-    // Calculate projections based on form data
+    // Calculate projections
     const matchingProducts = getMatchingProducts(formData.riskProfile, formData.objective);
-    
-    setTimeout(() => setLoadingStep("comparing"), 1000);
-    
     const calculatedProjections = calculateAllProjections(matchingProducts, {
       age: formData.age,
       riskProfile: formData.riskProfile,
@@ -174,17 +171,25 @@ const Pillar3Form = () => {
       objective: formData.objective,
       canton: formData.canton,
     });
-    
-    setTimeout(() => setLoadingStep("preparing"), 2000);
-    
-    // Submit with translated labels for better readability in sheets
+    setPendingProjections(calculatedProjections);
+
     await submitLead(getTranslatedFormData() as unknown as Record<string, unknown>);
-    
+    setShowThankYou(true);
+  };
+
+  const handleDiscoverResults = () => {
+    setShowThankYou(false);
+    setIsLoading(true);
+    setLoadingStep("analyzing");
+    setTimeout(() => setLoadingStep("comparing"), 800);
     setTimeout(() => {
-      setProjections(calculatedProjections);
+      setLoadingStep("preparing");
+      setProjections(pendingProjections);
+    }, 1600);
+    setTimeout(() => {
       setIsLoading(false);
       setShowResults(true);
-    }, 3000);
+    }, 2400);
   };
 
   const validateStep = (step: number): boolean => {

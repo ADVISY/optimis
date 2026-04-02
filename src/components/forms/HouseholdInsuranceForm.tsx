@@ -82,16 +82,23 @@ const HouseholdInsuranceForm = () => {
     },
   });
 
+  const [showThankYou, setShowThankYou] = useState(false);
+
   const handleSubmit = async () => {
+    await submitLead(formData as unknown as Record<string, unknown>);
+    setShowThankYou(true);
+  };
+
+  const handleDiscoverResults = () => {
+    setShowThankYou(false);
     setIsLoading(true);
     setLoadingStep("analyzing");
-    setTimeout(() => setLoadingStep("comparing"), 1000);
-    setTimeout(() => setLoadingStep("preparing"), 2000);
-    await submitLead(formData as unknown as Record<string, unknown>);
+    setTimeout(() => setLoadingStep("comparing"), 800);
+    setTimeout(() => setLoadingStep("preparing"), 1600);
     setTimeout(() => {
       setIsLoading(false);
       setShowResults(true);
-    }, 3000);
+    }, 2400);
   };
 
   const validateStep = (step: number): boolean => {
