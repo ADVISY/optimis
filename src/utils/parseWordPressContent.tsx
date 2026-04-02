@@ -132,6 +132,7 @@ export function parseWordPressContent(content: string): React.ReactNode[] {
           </em>
         );
       case 'figure':
+        if (children.length === 0) return null;
         return (
           <figure key={index} className="my-6">
             {children}
