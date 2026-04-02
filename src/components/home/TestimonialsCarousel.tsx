@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Card, CardContent } from "@/components/ui/card";
+import { resolveLegacyImageUrl } from "@/data/legacyImageResolver";
 
 const TestimonialsCarousel = () => {
   const { t } = useTranslation();
@@ -8,22 +9,22 @@ const TestimonialsCarousel = () => {
     {
       name: "Laurent Weber",
       textKey: "testimonials.laurent",
-      image: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/telechargement-1.jpeg",
+      image: resolveLegacyImageUrl("telechargement-1.jpeg"),
     },
     {
       name: "Claire Muller",
       textKey: "testimonials.claire",
-      image: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/telechargement-4.jpeg",
+      image: resolveLegacyImageUrl("telechargement-4.jpeg"),
     },
     {
       name: "Philippe Dupont",
       textKey: "testimonials.philippe",
-      image: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/telechargement-3.jpeg",
+      image: resolveLegacyImageUrl("telechargement-3.jpeg"),
     },
     {
       name: "Sophie Girard",
       textKey: "testimonials.sophie",
-      image: "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/telechargement-2.jpeg",
+      image: resolveLegacyImageUrl("telechargement-2.jpeg"),
     },
   ];
 
@@ -51,6 +52,7 @@ const TestimonialsCarousel = () => {
                     src={testimonial.image} 
                     alt={testimonial.name}
                     className="w-12 h-12 rounded-full object-cover"
+                    loading="lazy"
                   />
                   <div>
                     <p className="font-bold text-foreground">{testimonial.name}</p>
