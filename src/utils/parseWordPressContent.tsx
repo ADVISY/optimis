@@ -1,4 +1,5 @@
 import React from 'react';
+import { resolveContentImage } from '@/data/contentImageMapping';
 
 /**
  * Parse WordPress Gutenberg content to React components
