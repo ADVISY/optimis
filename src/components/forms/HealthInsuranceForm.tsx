@@ -58,15 +58,6 @@ interface HealthInsuranceFormData {
 
 const TOTAL_STEPS = 7;
 
-// Fires Meta & TikTok conversion pixels on mount
-const PixelFire = () => {
-  useEffect(() => {
-    if ((window as any).fbq) (window as any).fbq('track', 'Lead');
-    if ((window as any).ttq) (window as any).ttq.track('SubmitForm');
-  }, []);
-  return null;
-};
-
 const HealthInsuranceForm = () => {
   const { t, i18n } = useTranslation();
   const { toast } = useToast();
