@@ -235,6 +235,10 @@ const Pillar3Form = () => {
     console.log("Contact request:", projection.product.companyName, type);
   };
 
+  if (showThankYou) {
+    return <FormThankYouScreen onDiscoverResults={handleDiscoverResults} />;
+  }
+
   if (isLoading) {
     return (
       <div className="max-w-2xl mx-auto">
