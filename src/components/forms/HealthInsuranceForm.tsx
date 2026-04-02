@@ -375,37 +375,7 @@ const HealthInsuranceForm = () => {
   };
 
   if (showThankYou) {
-    return (
-      <div className="max-w-2xl mx-auto py-12">
-        <div className="text-center space-y-6">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mx-auto">
-            <CheckCircle className="h-10 w-10 text-primary" />
-          </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-            {t("thankYou.title", "Merci pour votre demande !")}
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-md mx-auto">
-            {t("thankYou.message", "Nous avons bien reçu vos informations. Un conseiller vous contactera dans les plus brefs délais.")}
-          </p>
-          <p className="text-muted-foreground">
-            {t("thankYou.nextSteps", "En attendant, découvrez les offres qui correspondent à votre profil.")}
-          </p>
-          <Button
-            size="lg"
-            onClick={handleDiscoverResults}
-            disabled={!premiumsFetched}
-            className="mt-4 text-lg px-8 py-6"
-          >
-            {premiumsFetched 
-              ? t("forms.healthInsurance.discoverResults", "Découvrir les résultats")
-              : t("forms.healthInsurance.loadingResults", "Chargement des offres...")}
-            {premiumsFetched && <ArrowRight className="ml-2 h-5 w-5" />}
-          </Button>
-        </div>
-        {/* Fire conversion pixels */}
-        <PixelFire />
-      </div>
-    );
+    return <FormThankYouScreen onDiscoverResults={handleDiscoverResults} resultsReady={premiumsFetched} />;
   }
 
   if (isLoading) {
