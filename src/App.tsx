@@ -157,9 +157,8 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          {/* Root redirect to French */}
-          {/* Root redirect to German */}
-          <Route path="/" element={<Navigate to="/de" replace />} />
+          {/* Root redirect to French (domain: le-comparateur-optimis.ch) */}
+          <Route path="/" element={<Navigate to="/fr" replace />} />
           
           {/* Language-prefixed routes */}
           <Route path="/:lang/*" element={<LanguageRoutes />} />
