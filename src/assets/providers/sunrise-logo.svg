@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60">
+  <rect width="220" height="60" rx="14" fill="white"/>
+  <circle cx="30" cy="30" r="16" fill="#ff6b2c"/>
+  <circle cx="36" cy="24" r="5" fill="white" opacity="0.9"/>
+  <text x="58" y="38" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#ff6b2c">Sunrise</text>
+</svg>
