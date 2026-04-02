@@ -61,9 +61,11 @@ const HealthInsuranceForm = () => {
   const { t, i18n } = useTranslation();
   const { toast } = useToast();
   const [showResults, setShowResults] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
   const [realOffers, setRealOffers] = useState<InsuranceOffer[]>([]);
+  const [premiumsFetched, setPremiumsFetched] = useState(false);
   
   const { fetchPremiums, error: premiumsError } = useHealthPremiums();
 
