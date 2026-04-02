@@ -8,7 +8,6 @@ const corsHeaders = {
 
 const PREMIUMS_CSV_URL = "https://opendata.bagnet.ch/?r=/download&path=L1ByYWVtaWVuL1Byw6RtaWVuX0NILmNzdg==";
 
-// Default insurer names (French-friendly)
 const DEFAULT_INSURERS: Record<string, string> = {
   "8": "Agrisano", "32": "EGK", "290": "Helsana", "312": "CSS",
   "343": "Vivao Sympany", "376": "Philos", "455": "Groupe Mutuel",
@@ -30,21 +29,15 @@ const DEFAULT_INSURERS: Record<string, string> = {
 function parseCSV(csvText: string): Record<string, string>[] {
   const lines = csvText.split('\n').filter(line => line.trim());
   if (lines.length === 0) return [];
-  
   const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
   const records: Record<string, string>[] = [];
-  
   for (let i = 1; i < lines.length; i++) {
     const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
     if (values.length < headers.length) continue;
-    
     const record: Record<string, string> = {};
-    headers.forEach((header, index) => {
-      record[header] = values[index] || '';
-    });
+    headers.forEach((header, index) => { record[header] = values[index] || ''; });
     records.push(record);
   }
-  
   return records;
 }
 
@@ -59,43 +52,44 @@ serve(async (req) => {
   }
 
   try {
+    const body = req.method === 'POST' ? await req.json() : {};
+    const offset = body.offset || 0;
+    const chunkSize = body.chunkSize || 50000;
+    const clearFirst = body.clearFirst || false;
+
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
     const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const supabase = createClient(supabaseUrl, serviceRoleKey);
 
-    console.log('Fetching CSV from OFSP...');
+    console.log(`Fetching CSV from OFSP (offset=${offset}, chunk=${chunkSize})...`);
     const response = await fetch(PREMIUMS_CSV_URL, {
       headers: { 'Accept': 'text/csv,*/*', 'User-Agent': 'LovableHealthInsurance/1.0' }
     });
-    
     if (!response.ok) throw new Error(`CSV fetch failed: ${response.status}`);
     
     const csvText = await response.text();
-    console.log(`CSV: ${csvText.length} bytes`);
-    
     const records = parseCSV(csvText);
-    console.log(`Parsed ${records.length} records`);
+    console.log(`Total records: ${records.length}, processing ${offset}-${offset + chunkSize}`);
 
-    // Clear existing data
-    const { error: deleteError } = await supabase.from('health_premiums').delete().gte('id', 0);
-    if (deleteError) console.error('Delete error:', deleteError);
+    if (clearFirst) {
+      await supabase.from('health_premiums').delete().gte('id', 0);
+      console.log('Cleared existing data');
+    }
 
-    // Insert in batches of 1000
-    const BATCH_SIZE = 1000;
+    const chunk = records.slice(offset, offset + chunkSize);
     let inserted = 0;
-    let skipped = 0;
+    const BATCH = 2000;
 
-    for (let i = 0; i < records.length; i += BATCH_SIZE) {
-      const batch = records.slice(i, i + BATCH_SIZE);
-      const rows = batch.map(record => {
+    for (let i = 0; i < chunk.length; i += BATCH) {
+      const batch = chunk.slice(i, i + BATCH);
+      const rows = [];
+      for (const record of batch) {
         const premiumValue = record['Prämie'] || record['Praemie'] || '';
         const premium = parseFloat(premiumValue.replace(',', '.'));
-        if (isNaN(premium) || premium <= 0) return null;
-
+        if (isNaN(premium) || premium <= 0) continue;
         const insurerId = record['Versicherer'] || '';
         const franchiseCode = record['Franchise'] || '';
-
-        return {
+        rows.push({
           canton: record['Kanton'] || '',
           region: record['Region'] || '',
           age_category: record['Altersklasse'] || '',
@@ -109,28 +103,22 @@ serve(async (req) => {
           tarif_name: record['Tarifbezeichnung'] || '',
           premium,
           year: 2026,
-        };
-      }).filter(Boolean);
-
+        });
+      }
       if (rows.length > 0) {
         const { error } = await supabase.from('health_premiums').insert(rows);
-        if (error) {
-          console.error(`Batch ${i / BATCH_SIZE} error:`, error.message);
-          skipped += rows.length;
-        } else {
-          inserted += rows.length;
-        }
-      }
-
-      if (i % 10000 === 0) {
-        console.log(`Progress: ${i}/${records.length}`);
+        if (error) { console.error(`Batch error:`, error.message); }
+        else { inserted += rows.length; }
       }
     }
 
-    console.log(`Done: ${inserted} inserted, ${skipped} skipped`);
+    const hasMore = offset + chunkSize < records.length;
+    const nextOffset = offset + chunkSize;
+
+    console.log(`Chunk done: ${inserted} inserted. hasMore=${hasMore}, nextOffset=${nextOffset}`);
 
     return new Response(
-      JSON.stringify({ success: true, inserted, skipped, total: records.length }),
+      JSON.stringify({ success: true, inserted, total: records.length, hasMore, nextOffset }),
       { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error: unknown) {
