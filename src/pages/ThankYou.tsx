@@ -1,23 +1,27 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, ArrowRight } from "lucide-react";
 import LocalizedLink from "@/components/LocalizedLink";
 
 const ThankYou = () => {
   const { t } = useTranslation();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const returnUrl = (location.state as any)?.returnUrl as string | undefined;
 
   useEffect(() => {
-    // Meta Pixel conversion
-    if ((window as any).fbq) {
-      (window as any).fbq('track', 'Lead');
-    }
-    // TikTok Pixel conversion
-    if ((window as any).ttq) {
-      (window as any).ttq.track('SubmitForm');
-    }
+    if ((window as any).fbq) (window as any).fbq('track', 'Lead');
+    if ((window as any).ttq) (window as any).ttq.track('SubmitForm');
   }, []);
+
+  const handleDiscoverResults = () => {
+    if (returnUrl) {
+      navigate(returnUrl, { state: { showResults: true } });
+    }
+  };
 
   return (
     <Layout>
@@ -27,9 +31,17 @@ const ThankYou = () => {
           <h1 className="text-3xl font-bold mb-4">{t('thankYou.title')}</h1>
           <p className="text-xl text-muted-foreground mb-8">{t('thankYou.message')}</p>
           <p className="text-muted-foreground mb-8">{t('thankYou.nextSteps')}</p>
-          <LocalizedLink to="/">
-            <Button size="lg">{t('thankYou.backHome')}</Button>
-          </LocalizedLink>
+          
+          {returnUrl ? (
+            <Button size="lg" onClick={handleDiscoverResults} className="text-lg px-8 py-6">
+              {t('forms.discoverResults', 'Découvrir les résultats')}
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          ) : (
+            <LocalizedLink to="/">
+              <Button size="lg">{t('thankYou.backHome')}</Button>
+            </LocalizedLink>
+          )}
         </div>
       </div>
     </Layout>
