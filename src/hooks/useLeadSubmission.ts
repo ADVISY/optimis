@@ -438,6 +438,32 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
         companyName: "Entreprise",
         salesForce: "Force de vente",
       },
+      "contact-call": {
+        offerDetails_companyName: "Assureur choisi",
+        offerDetails_coverageType: "Type de couverture",
+        offerDetails_monthlyPrice: "Prime mensuelle (CHF)",
+        offerDetails_id: "ID de l'offre",
+        preferredTime: "Horaire de rappel",
+        message: "Message",
+        requestType: "Type de demande",
+      },
+      "contact-email": {
+        offerDetails_companyName: "Assureur choisi",
+        offerDetails_coverageType: "Type de couverture",
+        offerDetails_monthlyPrice: "Prime mensuelle (CHF)",
+        offerDetails_id: "ID de l'offre",
+        message: "Message",
+        requestType: "Type de demande",
+      },
+      "contact-offer": {
+        offerDetails_companyName: "Assureur choisi",
+        offerDetails_coverageType: "Type de couverture",
+        offerDetails_monthlyPrice: "Prime mensuelle (CHF)",
+        offerDetails_id: "ID de l'offre",
+        preferredTime: "Horaire de rappel",
+        message: "Message",
+        requestType: "Type de demande",
+      },
     };
 
     // Apply field renaming
