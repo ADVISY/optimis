@@ -12,10 +12,6 @@ const ThankYou = () => {
   const navigate = useNavigate();
   const returnUrl = (location.state as any)?.returnUrl as string | undefined;
 
-  useEffect(() => {
-    if ((window as any).fbq) (window as any).fbq('track', 'Lead');
-    if ((window as any).ttq) (window as any).ttq.track('SubmitForm');
-  }, []);
 
   const handleDiscoverResults = () => {
     if (returnUrl) {
