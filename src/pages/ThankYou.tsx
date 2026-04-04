@@ -1,4 +1,4 @@
-
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
@@ -12,7 +12,14 @@ const ThankYou = () => {
   const navigate = useNavigate();
   const returnUrl = (location.state as any)?.returnUrl as string | undefined;
 
-
+  useEffect(() => {
+    // Google Ads conversion tracking
+    if (typeof (window as any).gtag === "function") {
+      (window as any).gtag('event', 'conversion', {
+        'send_to': 'AW-16586911321/1MwiCK30gpAcENncoOU9'
+      });
+    }
+  }, []);
   const handleDiscoverResults = () => {
     if (returnUrl) {
       navigate(returnUrl, { state: { showResults: true } });
