@@ -15,14 +15,6 @@ const MerciHypotheque = () => {
         'send_to': 'AW-16586911321/1MwiCK30gpAcENncoOU9'
       });
     }
-    // Meta Pixel conversion
-    if ((window as any).fbq) {
-      (window as any).fbq('track', 'Lead');
-    }
-    // TikTok Pixel conversion
-    if ((window as any).ttq) {
-      (window as any).ttq.track('SubmitForm');
-    }
   }, []);
 
   return (
