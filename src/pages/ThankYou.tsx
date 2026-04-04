@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
