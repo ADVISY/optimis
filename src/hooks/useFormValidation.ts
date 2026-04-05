@@ -67,11 +67,15 @@ export function useFormValidation() {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
   }, []);
 
-  /** Validate Swiss phone: must have exactly 10 digits (0XX) or +41 + 9 digits */
+  /** Validate phone: +41 (11 digits), +33 (11 digits), or 0XX (10 digits) */
   const isValidPhone = useCallback((phone: string): boolean => {
     const digitsOnly = phone.replace(/[^\d]/g, '');
     // +41 format: 41 + 9 digits = 11 digits total
     if (phone.trim().startsWith('+41')) {
+      return digitsOnly.length === 11;
+    }
+    // +33 format: 33 + 9 digits = 11 digits total
+    if (phone.trim().startsWith('+33')) {
       return digitsOnly.length === 11;
     }
     // 0XX format: exactly 10 digits
