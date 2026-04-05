@@ -14,14 +14,20 @@ export function useFormValidation() {
   const resetAttempted = useCallback(() => setAttemptedNext(false), []);
   const markAttempted = useCallback(() => setAttemptedNext(true), []);
 
-  /** Format Swiss phone: +41 XX XXX XX XX or 0XX XXX XX XX */
+  /** Format phone: +41/+33 XX XXX XX XX, 0XX XXX XX XX, or detect bare 41.../33... */
   const formatSwissPhone = useCallback((value: string): string => {
     let cleaned = value.replace(/[^\d+]/g, '');
 
-    if (cleaned.length > 0 && !cleaned.startsWith('+') && !cleaned.startsWith('0')) {
-      cleaned = '0' + cleaned;
+    // Detect bare "41..." or "33..." without "+" and auto-prefix
+    if (!cleaned.startsWith('+') && !cleaned.startsWith('0')) {
+      if (cleaned.startsWith('41') && cleaned.length > 2) {
+        cleaned = '+' + cleaned;
+      } else if (cleaned.startsWith('33') && cleaned.length > 2) {
+        cleaned = '+' + cleaned;
+      }
     }
 
+    // +41 format: +41 XX XXX XX XX (9 digits after code)
     if (cleaned.startsWith('+41')) {
       const digits = cleaned.slice(3).slice(0, 9);
       let formatted = '+41';
@@ -32,6 +38,19 @@ export function useFormValidation() {
       return formatted;
     }
 
+    // +33 format: +33 X XX XX XX XX (9 digits after code)
+    if (cleaned.startsWith('+33')) {
+      const digits = cleaned.slice(3).slice(0, 9);
+      let formatted = '+33';
+      if (digits.length > 0) formatted += ' ' + digits.slice(0, 1);
+      if (digits.length > 1) formatted += ' ' + digits.slice(1, 3);
+      if (digits.length > 3) formatted += ' ' + digits.slice(3, 5);
+      if (digits.length > 5) formatted += ' ' + digits.slice(5, 7);
+      if (digits.length > 7) formatted += ' ' + digits.slice(7, 9);
+      return formatted;
+    }
+
+    // Local 0XX format (Swiss or French)
     if (cleaned.startsWith('0')) {
       const digits = cleaned.slice(0, 10);
       let formatted = digits.slice(0, 3);
@@ -48,11 +67,15 @@ export function useFormValidation() {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
   }, []);
 
-  /** Validate Swiss phone: must have exactly 10 digits (0XX) or +41 + 9 digits */
+  /** Validate phone: +41 (11 digits), +33 (11 digits), or 0XX (10 digits) */
   const isValidPhone = useCallback((phone: string): boolean => {
     const digitsOnly = phone.replace(/[^\d]/g, '');
     // +41 format: 41 + 9 digits = 11 digits total
     if (phone.trim().startsWith('+41')) {
+      return digitsOnly.length === 11;
+    }
+    // +33 format: 33 + 9 digits = 11 digits total
+    if (phone.trim().startsWith('+33')) {
       return digitsOnly.length === 11;
     }
     // 0XX format: exactly 10 digits
