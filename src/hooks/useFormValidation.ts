@@ -94,8 +94,20 @@ export function useFormValidation() {
     if (!email.trim() || !isValidEmail(email)) {
       errs.email = t("forms.validation.invalidEmail", "Adresse email non valide");
     }
-    if (!phone.trim() || !isValidPhone(phone)) {
-      errs.phone = t("forms.validation.invalidPhone", "Numéro de téléphone non valide (min. 10 chiffres)");
+    if (!phone.trim()) {
+      errs.phone = t("forms.validation.phoneRequired", "Veuillez saisir votre numéro de téléphone");
+    } else if (!isValidPhone(phone)) {
+      const digitsOnly = phone.replace(/[^\d]/g, '').length;
+      const isInternational = phone.trim().startsWith('+41') || phone.trim().startsWith('+33') || /^\d/.test(phone.trim()) && (phone.trim().startsWith('41') || phone.trim().startsWith('33'));
+      if (isInternational && digitsOnly < 11) {
+        const missing = 11 - digitsOnly;
+        errs.phone = t("forms.validation.phoneTooShort", "Il manque {{count}} chiffre(s) à votre numéro", { count: missing });
+      } else if (!isInternational && digitsOnly < 10) {
+        const missing = 10 - digitsOnly;
+        errs.phone = t("forms.validation.phoneTooShort", "Il manque {{count}} chiffre(s) à votre numéro", { count: missing });
+      } else {
+        errs.phone = t("forms.validation.invalidPhone", "Numéro de téléphone non valide");
+      }
     }
     return errs;
   }, [t, isValidEmail, isValidPhone]);
