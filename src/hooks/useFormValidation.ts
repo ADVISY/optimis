@@ -14,16 +14,24 @@ export function useFormValidation() {
   const resetAttempted = useCallback(() => setAttemptedNext(false), []);
   const markAttempted = useCallback(() => setAttemptedNext(true), []);
 
-  /** Format phone: +41/+33 XX XXX XX XX, 0XX XXX XX XX, or detect bare 41.../33... */
+  /** Format phone: supports +41, +33, 0XX, and bare 41.../33... (auto-detected only when complete) */
   const formatSwissPhone = useCallback((value: string): string => {
     let cleaned = value.replace(/[^\d+]/g, '');
 
-    // Detect bare "41..." or "33..." without "+" and auto-prefix
+    // Auto-detect bare "41..." or "33..." without "+"
+    // Only auto-prefix when we have 11+ digits (a complete international number)
+    // so we don't eat digits while user is still typing
     if (!cleaned.startsWith('+') && !cleaned.startsWith('0')) {
-      if (cleaned.startsWith('41') && cleaned.length > 2) {
+      if (cleaned.startsWith('41') && cleaned.length >= 11) {
         cleaned = '+' + cleaned;
-      } else if (cleaned.startsWith('33') && cleaned.length > 2) {
+      } else if (cleaned.startsWith('33') && cleaned.length >= 11) {
         cleaned = '+' + cleaned;
+      } else if (cleaned.startsWith('41') || cleaned.startsWith('33')) {
+        // User is still typing an international number — don't format yet
+        return cleaned;
+      } else {
+        // Unknown prefix, assume local format
+        cleaned = '0' + cleaned;
       }
     }
 
@@ -70,11 +78,9 @@ export function useFormValidation() {
   /** Validate phone: +41 (11 digits), +33 (11 digits), or 0XX (10 digits) */
   const isValidPhone = useCallback((phone: string): boolean => {
     const digitsOnly = phone.replace(/[^\d]/g, '');
-    // +41 format: 41 + 9 digits = 11 digits total
     if (phone.trim().startsWith('+41')) {
       return digitsOnly.length === 11;
     }
-    // +33 format: 33 + 9 digits = 11 digits total
     if (phone.trim().startsWith('+33')) {
       return digitsOnly.length === 11;
     }
