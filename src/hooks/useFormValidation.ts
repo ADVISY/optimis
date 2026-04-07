@@ -18,19 +18,19 @@ export function useFormValidation() {
   const formatSwissPhone = useCallback((value: string): string => {
     let cleaned = value.replace(/[^\d+]/g, '');
 
-    // Auto-detect bare "41..." or "33..." without "+"
-    // Only auto-prefix when we have 11+ digits (a complete international number)
-    // so we don't eat digits while user is still typing
     if (!cleaned.startsWith('+') && !cleaned.startsWith('0')) {
       if (cleaned.startsWith('41') && cleaned.length >= 11) {
         cleaned = '+' + cleaned;
       } else if (cleaned.startsWith('33') && cleaned.length >= 11) {
         cleaned = '+' + cleaned;
       } else if (cleaned.startsWith('41') || cleaned.startsWith('33')) {
-        // User is still typing an international number — don't format yet
+        // User is typing an international number — don't format yet
+        return cleaned;
+      } else if (cleaned.startsWith('4') || cleaned.startsWith('3')) {
+        // Could be the start of 41/33 — don't add "0" prefix yet
         return cleaned;
       } else {
-        // Unknown prefix, assume local format
+        // Clearly local (starts with 0, 1, 2, 5, 6, 7, 8, 9)
         cleaned = '0' + cleaned;
       }
     }
