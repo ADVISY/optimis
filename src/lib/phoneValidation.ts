@@ -16,7 +16,7 @@ export interface PhoneValidationResult {
   kind: "ch-international" | "fr-international" | "ch-local" | "fr-local" | null;
 }
 
-const SWISS_MOBILE_PREFIXES = new Set(["75", "76", "77", "78", "79"]);
+const SWISS_MOBILE_PREFIXES = new Set(["76", "77", "78", "79"]);
 
 const onlyDigits = (value: string) => value.replace(/\D/g, "");
 
