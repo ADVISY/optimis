@@ -17,6 +17,141 @@ const FORM_WEBHOOKS: Record<string, string> = {
   "partner": "https://hooks.zapier.com/hooks/catch/21326682/un8k5nv/",
 };
 
+const SWISS_MOBILE_PREFIXES = new Set(["75", "76", "77", "78", "79"]);
+
+const digitsOnly = (value: string) => value.replace(/\D/g, "");
+
+const groupDigits = (digits: string, groups: number[]) => {
+  const parts: string[] = [];
+  let cursor = 0;
+
+  for (const groupSize of groups) {
+    if (cursor >= digits.length) break;
+    parts.push(digits.slice(cursor, cursor + groupSize));
+    cursor += groupSize;
+  }
+
+  if (cursor < digits.length) {
+    parts.push(digits.slice(cursor));
+  }
+
+  return parts.join(" ").trim();
+};
+
+const formatPhone = (value: string) => {
+  const digits = digitsOnly(value);
+
+  if (!digits) return "";
+
+  if (digits.startsWith("41")) {
+    const grouped = groupDigits(digits.slice(2, 11), [2, 3, 2, 2]);
+    return grouped ? `+41 ${grouped}` : "+41";
+  }
+
+  if (digits.startsWith("33")) {
+    const grouped = groupDigits(digits.slice(2, 11), [1, 2, 2, 2, 2]);
+    return grouped ? `+33 ${grouped}` : "+33";
+  }
+
+  if (digits.startsWith("0")) {
+    const nationalDigits = digits.slice(1);
+
+    if (nationalDigits.startsWith("6")) {
+      return groupDigits(digits.slice(0, 10), [2, 2, 2, 2, 2]);
+    }
+
+    if (nationalDigits.length >= 2 && SWISS_MOBILE_PREFIXES.has(nationalDigits.slice(0, 2))) {
+      return groupDigits(digits.slice(0, 10), [3, 3, 2, 2]);
+    }
+
+    if (nationalDigits.startsWith("7")) {
+      return groupDigits(digits.slice(0, 10), [2, 2, 2, 2, 2]);
+    }
+
+    return groupDigits(digits.slice(0, 10), [3, 3, 2, 2]);
+  }
+
+  return digits;
+};
+
+const getPhoneValidationResult = (phone: string) => {
+  const digits = digitsOnly(phone);
+
+  if (!digits) {
+    return { isValid: false, reason: "empty", missingDigits: 0, formatted: "" };
+  }
+
+  if (digits.startsWith("41")) {
+    const nationalDigits = digits.slice(2);
+
+    if (digits.length < 11) {
+      return { isValid: false, reason: "too_short", missingDigits: 11 - digits.length, formatted: formatPhone(phone) };
+    }
+
+    if (digits.length > 11) {
+      return { isValid: false, reason: "too_long", missingDigits: 0, formatted: formatPhone(phone) };
+    }
+
+    if (!SWISS_MOBILE_PREFIXES.has(nationalDigits.slice(0, 2))) {
+      return { isValid: false, reason: "invalid_mobile_prefix", missingDigits: 0, formatted: formatPhone(phone) };
+    }
+
+    return { isValid: true, reason: null, missingDigits: 0, formatted: formatPhone(phone) };
+  }
+
+  if (digits.startsWith("33")) {
+    const nationalDigits = digits.slice(2);
+
+    if (digits.length < 11) {
+      return { isValid: false, reason: "too_short", missingDigits: 11 - digits.length, formatted: formatPhone(phone) };
+    }
+
+    if (digits.length > 11) {
+      return { isValid: false, reason: "too_long", missingDigits: 0, formatted: formatPhone(phone) };
+    }
+
+    if (!["6", "7"].includes(nationalDigits.slice(0, 1))) {
+      return { isValid: false, reason: "invalid_mobile_prefix", missingDigits: 0, formatted: formatPhone(phone) };
+    }
+
+    return { isValid: true, reason: null, missingDigits: 0, formatted: formatPhone(phone) };
+  }
+
+  if (digits.startsWith("0")) {
+    const nationalDigits = digits.slice(1);
+    const isSwissLocal = nationalDigits.length >= 2 && SWISS_MOBILE_PREFIXES.has(nationalDigits.slice(0, 2));
+    const isFrenchLocal = nationalDigits.startsWith("6") || nationalDigits.startsWith("7");
+
+    if (digits.length < 10) {
+      return { isValid: false, reason: "too_short", missingDigits: 10 - digits.length, formatted: formatPhone(phone) };
+    }
+
+    if (digits.length > 10) {
+      return { isValid: false, reason: "too_long", missingDigits: 0, formatted: formatPhone(phone) };
+    }
+
+    if (!isSwissLocal && !isFrenchLocal) {
+      return { isValid: false, reason: "invalid_mobile_prefix", missingDigits: 0, formatted: formatPhone(phone) };
+    }
+
+    return { isValid: true, reason: null, missingDigits: 0, formatted: formatPhone(phone) };
+  }
+
+  return { isValid: false, reason: "invalid_prefix", missingDigits: 0, formatted: formatPhone(phone) };
+};
+
+const getLeadPhone = (leadData: Record<string, unknown>) => {
+  if (typeof leadData["Téléphone"] === "string") {
+    return { key: "Téléphone", value: leadData["Téléphone"] };
+  }
+
+  if (typeof leadData.phone === "string") {
+    return { key: "phone", value: leadData.phone };
+  }
+
+  return null;
+};
+
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -24,19 +159,55 @@ serve(async (req) => {
   }
 
   try {
-    const leadData = await req.json();
+    const leadData = await req.json() as Record<string, unknown>;
+    const formType = typeof leadData.formType === "string" ? leadData.formType : "";
+    const leadId = typeof leadData.leadId === "string" ? leadData.leadId : "unknown";
+    const timestamp = typeof leadData.timestamp === "string" ? leadData.timestamp : new Date().toISOString();
+    const phoneEntry = getLeadPhone(leadData);
+
+    if (phoneEntry) {
+      const phoneValidation = getPhoneValidationResult(phoneEntry.value);
+
+      if (!phoneValidation.isValid) {
+        console.error("Lead rejected due to invalid phone number", {
+          formType,
+          leadId,
+          reason: phoneValidation.reason,
+          missingDigits: phoneValidation.missingDigits,
+        });
+
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: "Invalid phone number",
+            reason: phoneValidation.reason,
+            missingDigits: phoneValidation.missingDigits,
+          }),
+          {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+
+      leadData[phoneEntry.key] = phoneValidation.formatted;
+    }
     
     console.log("=== LEAD SUBMISSION ===");
-    console.log("FormType:", leadData.formType);
-    console.log("LeadId:", leadData.leadId);
-    console.log("Timestamp:", leadData.timestamp);
-    console.log("Full lead data:", JSON.stringify(leadData, null, 2));
+    console.log("FormType:", formType);
+    console.log("LeadId:", leadId);
+    console.log("Timestamp:", timestamp);
 
     // Use form-specific webhook, then custom webhook, then default
-    const webhookUrl = leadData.webhookUrl || FORM_WEBHOOKS[leadData.formType] || DEFAULT_WEBHOOK_URL;
+    const webhookUrl =
+      (typeof leadData.webhookUrl === "string" && leadData.webhookUrl) ||
+      FORM_WEBHOOKS[formType] ||
+      DEFAULT_WEBHOOK_URL;
     
     // Remove technical/internal fields before sending to Zapier
-    const { webhookUrl: _, userAgent: _ua, ...dataToSend } = leadData;
+    const dataToSend = { ...leadData };
+    delete dataToSend.webhookUrl;
+    delete dataToSend.userAgent;
 
     console.log("Sending to Zapier webhook:", webhookUrl);
 
@@ -72,7 +243,7 @@ serve(async (req) => {
     return new Response(
       JSON.stringify({
         success: true,
-        leadId: dataToSend.leadId,
+        leadId,
         message: "Lead sent to Zapier successfully",
       }),
       {
