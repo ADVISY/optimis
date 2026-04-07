@@ -4,7 +4,7 @@ import { useToast } from "@/hooks/use-toast";
 
 /**
  * Shared form validation utilities for all insurance forms.
- * Provides phone auto-formatting, email validation, and step-level error handling.
+ * Only mobile numbers accepted: +41 7X, +33 6/7, 07X, 06X.
  */
 export function useFormValidation() {
   const { t } = useTranslation();
@@ -14,28 +14,23 @@ export function useFormValidation() {
   const resetAttempted = useCallback(() => setAttemptedNext(false), []);
   const markAttempted = useCallback(() => setAttemptedNext(true), []);
 
-  /** Format phone: supports +41, +33, 0XX, and bare 41.../33... (auto-detected only when complete) */
+  /** Format phone: only mobile numbers (+41 7X, +33 6/7, 07X, 06X) */
   const formatSwissPhone = useCallback((value: string): string => {
     let cleaned = value.replace(/[^\d+]/g, '');
 
     if (!cleaned.startsWith('+') && !cleaned.startsWith('0')) {
-      if (cleaned.startsWith('41') && cleaned.length >= 11) {
+      if ((cleaned.startsWith('41') || cleaned.startsWith('33')) && cleaned.length >= 11) {
         cleaned = '+' + cleaned;
-      } else if (cleaned.startsWith('33') && cleaned.length >= 11) {
-        cleaned = '+' + cleaned;
-      } else if (cleaned.startsWith('41') || cleaned.startsWith('33')) {
-        // User is typing an international number — don't format yet
-        return cleaned;
-      } else if (cleaned.startsWith('4') || cleaned.startsWith('3')) {
-        // Could be the start of 41/33 — don't add "0" prefix yet
-        return cleaned;
+      } else if (cleaned.startsWith('41') || cleaned.startsWith('33') || cleaned.startsWith('4') || cleaned.startsWith('3')) {
+        return cleaned; // Still typing international
+      } else if (cleaned.startsWith('6') || cleaned.startsWith('7')) {
+        cleaned = '0' + cleaned; // Mobile without prefix
       } else {
-        // Clearly local (starts with 0, 1, 2, 5, 6, 7, 8, 9)
-        cleaned = '0' + cleaned;
+        return cleaned; // Unknown, don't format
       }
     }
 
-    // +41 format: +41 XX XXX XX XX (9 digits after code)
+    // +41 format: +41 7X XXX XX XX
     if (cleaned.startsWith('+41')) {
       const digits = cleaned.slice(3).slice(0, 9);
       let formatted = '+41';
@@ -46,7 +41,7 @@ export function useFormValidation() {
       return formatted;
     }
 
-    // +33 format: +33 X XX XX XX XX (9 digits after code)
+    // +33 format: +33 6/7 XX XX XX XX
     if (cleaned.startsWith('+33')) {
       const digits = cleaned.slice(3).slice(0, 9);
       let formatted = '+33';
@@ -58,7 +53,7 @@ export function useFormValidation() {
       return formatted;
     }
 
-    // Local 0XX format (Swiss or French)
+    // Local 0XX format
     if (cleaned.startsWith('0')) {
       const digits = cleaned.slice(0, 10);
       let formatted = digits.slice(0, 3);
@@ -75,17 +70,30 @@ export function useFormValidation() {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
   }, []);
 
-  /** Validate phone: +41 (11 digits), +33 (11 digits), or 0XX (10 digits) */
+  /** Validate phone: only mobile numbers */
   const isValidPhone = useCallback((phone: string): boolean => {
     const digitsOnly = phone.replace(/[^\d]/g, '');
-    if (phone.trim().startsWith('+41')) {
-      return digitsOnly.length === 11;
+    const trimmed = phone.trim();
+
+    if (trimmed.startsWith('+41')) {
+      if (digitsOnly.length !== 11) return false;
+      return digitsOnly.slice(2).startsWith('7');
     }
-    if (phone.trim().startsWith('+33')) {
-      return digitsOnly.length === 11;
+    if (trimmed.startsWith('+33')) {
+      if (digitsOnly.length !== 11) return false;
+      const after = digitsOnly.slice(2);
+      return after.startsWith('6') || after.startsWith('7');
     }
-    // 0XX format: exactly 10 digits
-    return digitsOnly.length === 10;
+    // Bare 41.../33...
+    if (/^\d/.test(trimmed) && (trimmed.startsWith('41') || trimmed.startsWith('33'))) {
+      if (digitsOnly.length !== 11) return false;
+      const after = digitsOnly.slice(2);
+      if (trimmed.startsWith('41')) return after.startsWith('7');
+      return after.startsWith('6') || after.startsWith('7');
+    }
+    // Local: must be 06 or 07
+    if (digitsOnly.length !== 10) return false;
+    return digitsOnly.startsWith('07') || digitsOnly.startsWith('06');
   }, []);
 
   /** Get contact step errors (email + phone) */
@@ -97,16 +105,16 @@ export function useFormValidation() {
     if (!phone.trim()) {
       errs.phone = t("forms.validation.phoneRequired", "Veuillez saisir votre numéro de téléphone");
     } else if (!isValidPhone(phone)) {
-      const digitsOnly = phone.replace(/[^\d]/g, '').length;
-      const isInternational = phone.trim().startsWith('+41') || phone.trim().startsWith('+33') || /^\d/.test(phone.trim()) && (phone.trim().startsWith('41') || phone.trim().startsWith('33'));
-      if (isInternational && digitsOnly < 11) {
-        const missing = 11 - digitsOnly;
-        errs.phone = t("forms.validation.phoneTooShort", "Il manque {{count}} chiffre(s) à votre numéro", { count: missing });
-      } else if (!isInternational && digitsOnly < 10) {
-        const missing = 10 - digitsOnly;
+      const digitsOnly = phone.replace(/[^\d]/g, '');
+      const trimmed = phone.trim();
+      const isInternational = trimmed.startsWith('+41') || trimmed.startsWith('+33') || (/^\d/.test(trimmed) && (trimmed.startsWith('41') || trimmed.startsWith('33')));
+      const requiredDigits = isInternational ? 11 : 10;
+
+      if (digitsOnly.length < requiredDigits) {
+        const missing = requiredDigits - digitsOnly.length;
         errs.phone = t("forms.validation.phoneTooShort", "Il manque {{count}} chiffre(s) à votre numéro", { count: missing });
       } else {
-        errs.phone = t("forms.validation.invalidPhone", "Numéro de téléphone non valide");
+        errs.phone = t("forms.validation.mobileOnly", "Seuls les numéros mobiles sont acceptés (06, 07, +41 7X, +33 6/7)");
       }
     }
     return errs;
