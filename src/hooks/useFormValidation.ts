@@ -41,7 +41,7 @@ export function useFormValidation() {
       const phoneValidation = getPhoneValidationResult(phone);
 
       if (!phoneValidation.isValid && phoneValidation.reason === "too_short" && phoneValidation.missingDigits > 0) {
-        errs.phone = t("forms.validation.phoneTooShort", "Il manque {{count}} chiffre(s) à votre numéro", { count: missing });
+        errs.phone = t("forms.validation.phoneTooShort", "Il manque {{count}} chiffre(s) à votre numéro", { count: phoneValidation.missingDigits });
       } else if (!phoneValidation.isValid) {
         errs.phone = t("forms.validation.mobileOnly", "Seuls les numéros mobiles sont acceptés (06, 07, +41 7X, +33 6/7)");
       }

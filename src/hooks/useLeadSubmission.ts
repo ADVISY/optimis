@@ -528,6 +528,8 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
         title: t("forms.successTitle"),
         description: t("forms.successDescription"),
       });
+      setIsSubmitted(true);
+      return leadData;
     } catch (error) {
       console.error("Error submitting lead:", error);
       toast({
@@ -535,12 +537,11 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
         description: t("forms.errorDescription"),
         variant: "destructive",
       });
+      setIsSubmitted(false);
+      return null;
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-
-    return leadData;
   };
 
   return {
