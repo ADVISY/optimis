@@ -17,7 +17,7 @@ const FORM_WEBHOOKS: Record<string, string> = {
   "partner": "https://hooks.zapier.com/hooks/catch/21326682/un8k5nv/",
 };
 
-const SWISS_MOBILE_PREFIXES = new Set(["75", "76", "77", "78", "79"]);
+const SWISS_MOBILE_PREFIXES = new Set(["76", "77", "78", "79"]);
 
 const digitsOnly = (value: string) => value.replace(/\D/g, "");
 
