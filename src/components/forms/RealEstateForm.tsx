@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
@@ -8,6 +8,8 @@ import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
+import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
+import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -67,9 +69,18 @@ const RealEstateForm = () => {
     },
   });
 
-  const handleSubmit = async () => {
+  const performSubmit = useCallback(async () => {
     await submitLead(formData as unknown as Record<string, unknown>);
     setShowThankYou(true);
+  }, [formData, submitLead]);
+
+  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
+    onOtpVerified: performSubmit,
+    getPhone: () => formData.phone,
+  });
+
+  const handleSubmit = async () => {
+    await startOtpFlow();
   };
 
   const validateStep = (step: number): boolean => {
@@ -384,6 +395,7 @@ const RealEstateForm = () => {
         isLastStep={isLastStep}
         canProceed={canProceed}
       />
+      <SmsVerificationModal {...otpModalProps} />
     </FormContainer>
   );
 };
