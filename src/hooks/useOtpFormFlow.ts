@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { useOtpVerification } from "@/hooks/useOtpVerification";
 
 interface OtpFormFlowOptions {
@@ -16,29 +16,34 @@ export function useOtpFormFlow({ onOtpVerified, getPhone }: OtpFormFlowOptions) 
   const [pendingPhone, setPendingPhone] = useState("");
   const otp = useOtpVerification();
 
+  // Use refs to always call latest callbacks
+  const onOtpVerifiedRef = useRef(onOtpVerified);
+  const getPhoneRef = useRef(getPhone);
+  useEffect(() => { onOtpVerifiedRef.current = onOtpVerified; }, [onOtpVerified]);
+  useEffect(() => { getPhoneRef.current = getPhone; }, [getPhone]);
+
   const startOtpFlow = useCallback(async () => {
-    const phone = getPhone();
+    const phone = getPhoneRef.current();
     setPendingPhone(phone);
     setShowOtpModal(true);
+    otp.resetOtp();
     await otp.sendOtp(phone);
-  }, [getPhone, otp]);
+  }, [otp]);
 
   const handleVerify = useCallback(async (code: string) => {
     const success = await otp.verifyOtp(code);
     if (success) {
       setShowOtpModal(false);
-      // Store verification in sessionStorage for ThankYou page
       sessionStorage.setItem("phone_verified", "true");
-      await onOtpVerified();
+      await onOtpVerifiedRef.current();
     }
-  }, [otp, onOtpVerified]);
+  }, [otp]);
 
   const handleResend = useCallback(async () => {
     await otp.sendOtp(pendingPhone);
   }, [otp, pendingPhone]);
 
   const handleModifyPhone = useCallback(() => {
-    // Close modal and reset OTP state so user can edit phone
     setShowOtpModal(false);
     otp.resetOtp();
   }, [otp]);
