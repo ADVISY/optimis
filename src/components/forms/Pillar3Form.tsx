@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
@@ -25,6 +25,8 @@ import { calculateAllProjections, Pillar3aProjection } from "@/utils/pillar3aCal
 import { Lock, User, Phone } from "lucide-react";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
+import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
+import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
 import { cn } from "@/lib/utils";
 
 interface Pillar3FormData {
@@ -187,8 +189,7 @@ const Pillar3Form = () => {
     }
   }, []);
 
-  const handleSubmit = async () => {
-    // Store form data for recalculation after redirect
+  const performSubmit = useCallback(async () => {
     sessionStorage.setItem("pillar3_form_data", JSON.stringify({
       riskProfile: formData.riskProfile,
       objective: formData.objective,
@@ -200,6 +201,15 @@ const Pillar3Form = () => {
 
     await submitLead(getTranslatedFormData() as unknown as Record<string, unknown>);
     navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
+  }, [formData, submitLead, navigate, localizedPath, location.pathname, getTranslatedFormData]);
+
+  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
+    onOtpVerified: performSubmit,
+    getPhone: () => formData.phone,
+  });
+
+  const handleSubmit = async () => {
+    await startOtpFlow();
   };
 
   const validateStep = (step: number): boolean => {
@@ -546,6 +556,7 @@ const Pillar3Form = () => {
         isLastStep={isLastStep}
         canProceed={canProceed}
       />
+      <SmsVerificationModal {...otpModalProps} />
     </FormContainer>
   );
 };
