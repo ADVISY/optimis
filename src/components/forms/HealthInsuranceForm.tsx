@@ -30,6 +30,8 @@ import { Button } from "@/components/ui/button";
 import DateInput from "@/components/ui/date-input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
+import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
+import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
 import { User, Phone } from "lucide-react";
 
 interface HealthInsuranceFormData {
@@ -221,12 +223,10 @@ const HealthInsuranceForm = () => {
     }
   }, []);
 
-  const handleSubmit = async () => {
-    // Submit lead
+  const performSubmit = useCallback(async () => {
     const leadData = prepareLeadData();
     await submitLead(leadData);
 
-    // Store params for fetching after redirect
     const birthYear = formData.birthDate ? formData.birthDate.getFullYear() : 1990;
     sessionStorage.setItem("health_form_params", JSON.stringify({
       canton: formData.canton,
@@ -239,6 +239,15 @@ const HealthInsuranceForm = () => {
     }));
 
     navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
+  }, [formData, submitLead, navigate, localizedPath, location.pathname, i18n.language, prepareLeadData]);
+
+  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
+    onOtpVerified: performSubmit,
+    getPhone: () => formData.phone,
+  });
+
+  const handleSubmit = async () => {
+    await startOtpFlow();
   };
 
   // Validation function for each step
@@ -925,6 +934,7 @@ const HealthInsuranceForm = () => {
         isLastStep={isLastStep}
         canProceed={canProceed}
       />
+      <SmsVerificationModal {...otpModalProps} />
     </FormContainer>
   );
 };

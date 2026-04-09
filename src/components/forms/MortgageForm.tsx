@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import FormContainer from "@/components/forms/FormContainer";
@@ -25,6 +25,8 @@ import { simulateMortgage, MortgageSimulationResult } from "@/utils/mortgageCalc
 import { Lock, User, Phone } from "lucide-react";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
+import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
+import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
 import { cn } from "@/lib/utils";
 
 interface MortgageFormData {
@@ -90,29 +92,23 @@ const MortgageForm = () => {
     },
   });
 
-  const handleSubmit = async () => {
+  const performSubmit = useCallback(async () => {
     setIsLoading(true);
     setLoadingStep("analyzing");
     
-    // Parse form data for calculations
     const propertyValue = parseFloat(formData.propertyValue.replace(/[^0-9]/g, "")) || 800000;
-    const loanAmount = propertyValue * 0.8; // Default 80% LTV
-    const duration = 15; // Default duration
+    const loanAmount = propertyValue * 0.8;
+    const duration = 15;
     const annualIncome = parseFloat(formData.incomeRange.split("-")[0]) || 150000;
     
     setTimeout(() => setLoadingStep("comparing"), 1000);
     
-    // Run simulations for all products
     const results = mortgageProducts.map(product => 
       simulateMortgage(product, {
-        loanAmount,
-        propertyValue,
-        duration,
-        annualIncome,
+        loanAmount, propertyValue, duration, annualIncome,
         mortgageType: product.mortgageType,
       })
     );
-    
     setSimulationResults(results);
     
     setTimeout(() => setLoadingStep("preparing"), 2000);
@@ -126,6 +122,15 @@ const MortgageForm = () => {
       setIsLoading(false);
       navigate(`/${i18n.language}/merci-hypotheque`);
     }, 3000);
+  }, [formData, submitLead, navigate, i18n.language, mortgageProducts, simulateMortgage]);
+
+  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
+    onOtpVerified: performSubmit,
+    getPhone: () => formData.phone,
+  });
+
+  const handleSubmit = async () => {
+    await startOtpFlow();
   };
 
   const validateStep = (step: number): boolean => {
@@ -445,6 +450,7 @@ const MortgageForm = () => {
         isLastStep={isLastStep}
         canProceed={canProceed}
       />
+      <SmsVerificationModal {...otpModalProps} />
     </FormContainer>
   );
 };

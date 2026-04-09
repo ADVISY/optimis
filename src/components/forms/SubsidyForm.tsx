@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
@@ -21,6 +21,8 @@ import { CheckCircle, Download, FileText, Lock, User, Phone } from "lucide-react
 import { Button } from "@/components/ui/button";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
+import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
+import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
 import { cn } from "@/lib/utils";
 
 interface SubsidyFormData {
@@ -81,15 +83,13 @@ const SubsidyForm = () => {
     },
   });
 
-  const handleSubmit = async () => {
-    // Translate values for Google Sheets
+  const performSubmit = useCallback(async () => {
     const householdMap: Record<string, string> = {
       single: t("forms.subsidy.household.single"),
       couple: t("forms.subsidy.household.couple"),
       coupleChildren: t("forms.subsidy.household.coupleChildren"),
       singleChildren: t("forms.subsidy.household.singleChildren"),
     };
-
     const situationMap: Record<string, string> = {
       none: t("forms.subsidy.situations.none"),
       avs: t("forms.subsidy.situations.avs"),
@@ -97,27 +97,12 @@ const SubsidyForm = () => {
       student: t("forms.subsidy.situations.student"),
       unemployed: t("forms.subsidy.situations.unemployed"),
     };
-
-    const hasInsuranceMap: Record<string, string> = {
-      yes: t("common.yes"),
-      no: t("common.no"),
-    };
-
+    const hasInsuranceMap: Record<string, string> = { yes: t("common.yes"), no: t("common.no") };
     const insurerMap: Record<string, string> = {
-      assura: "Assura",
-      css: "CSS",
-      "groupe-mutuel": "Groupe Mutuel",
-      helsana: "Helsana",
-      sanitas: "Sanitas",
-      swica: "Swica",
-      visana: "Visana",
-      concordia: "Concordia",
-      kpt: "KPT",
-      atupri: "Atupri",
-      sympany: "Sympany",
-      other: t("forms.subsidy.otherInsurer"),
+      assura: "Assura", css: "CSS", "groupe-mutuel": "Groupe Mutuel", helsana: "Helsana",
+      sanitas: "Sanitas", swica: "Swica", visana: "Visana", concordia: "Concordia",
+      kpt: "KPT", atupri: "Atupri", sympany: "Sympany", other: t("forms.subsidy.otherInsurer"),
     };
-
     const translatedData = {
       ...formData,
       householdSize: householdMap[formData.householdSize] ?? formData.householdSize,
@@ -127,11 +112,19 @@ const SubsidyForm = () => {
       currentInsurer: (insurerMap[formData.currentInsurer] ?? formData.currentInsurer) || "-",
       incomeRange: formData.incomeRange ? `CHF ${formData.incomeRange}` : "-",
     };
-
     await submitLead(translatedData as unknown as Record<string, unknown>);
     const incomeValue = parseInt(formData.incomeRange) || 0;
     setIsEligible(incomeValue > 0 && incomeValue <= 70000);
     setShowResults(true);
+  }, [formData, submitLead, t]);
+
+  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
+    onOtpVerified: performSubmit,
+    getPhone: () => formData.phone,
+  });
+
+  const handleSubmit = async () => {
+    await startOtpFlow();
   };
 
   const validateStep = (step: number): boolean => {
@@ -471,6 +464,7 @@ const SubsidyForm = () => {
         isLastStep={isLastStep}
         canProceed={canProceed}
       />
+      <SmsVerificationModal {...otpModalProps} />
     </FormContainer>
   );
 };

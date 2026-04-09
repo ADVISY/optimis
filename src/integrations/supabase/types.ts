@@ -68,6 +68,45 @@ export type Database = {
         }
         Relationships: []
       }
+      otp_verifications: {
+        Row: {
+          attempts: number | null
+          code: string
+          created_at: string | null
+          expires_at: string
+          id: string
+          lead_id: string | null
+          max_attempts: number | null
+          phone_e164: string
+          verified: boolean | null
+          verified_at: string | null
+        }
+        Insert: {
+          attempts?: number | null
+          code: string
+          created_at?: string | null
+          expires_at: string
+          id?: string
+          lead_id?: string | null
+          max_attempts?: number | null
+          phone_e164: string
+          verified?: boolean | null
+          verified_at?: string | null
+        }
+        Update: {
+          attempts?: number | null
+          code?: string
+          created_at?: string | null
+          expires_at?: string
+          id?: string
+          lead_id?: string | null
+          max_attempts?: number | null
+          phone_e164?: string
+          verified?: boolean | null
+          verified_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
