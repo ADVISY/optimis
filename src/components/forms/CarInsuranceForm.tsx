@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
@@ -31,6 +31,8 @@ import { Lock, User, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
+import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
+import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
 
 interface CarInsuranceFormData {
   // Vehicle info
@@ -131,9 +133,18 @@ const CarInsuranceForm = () => {
     }
   }, []);
 
-  const handleSubmit = async () => {
+  const performSubmit = useCallback(async () => {
     await submitLead(formData as unknown as Record<string, unknown>);
     navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
+  }, [formData, submitLead, navigate, localizedPath, location.pathname]);
+
+  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
+    onOtpVerified: performSubmit,
+    getPhone: () => formData.phone,
+  });
+
+  const handleSubmit = async () => {
+    await startOtpFlow();
   };
 
   const validateStep = (step: number): boolean => {
@@ -514,6 +525,7 @@ const CarInsuranceForm = () => {
         isLastStep={isLastStep}
         canProceed={canProceed}
       />
+      <SmsVerificationModal {...otpModalProps} />
     </FormContainer>
   );
 };
