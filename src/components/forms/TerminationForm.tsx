@@ -19,6 +19,8 @@ import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
+import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
+import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
 
 interface TerminationFormData {
   contractType: string;
@@ -82,9 +84,18 @@ const TerminationForm = () => {
     },
   });
 
-  const handleSubmit = async () => {
+  const performSubmit = useCallback(async () => {
     await submitLead(formData as unknown as Record<string, unknown>);
     setShowResults(true);
+  }, [formData, submitLead]);
+
+  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
+    onOtpVerified: performSubmit,
+    getPhone: () => formData.phone,
+  });
+
+  const handleSubmit = async () => {
+    await startOtpFlow();
   };
 
   const validateStep = (step: number): boolean => {
@@ -385,6 +396,7 @@ const TerminationForm = () => {
         isLastStep={isLastStep}
         canProceed={canProceed}
       />
+      <SmsVerificationModal {...otpModalProps} />
     </FormContainer>
   );
 };
