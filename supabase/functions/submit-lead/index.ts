@@ -11,6 +11,14 @@ const DEFAULT_WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/21326682/un2n4
 
 // Form-specific webhook URLs
 const FORM_WEBHOOKS: Record<string, string> = {
+  "health-insurance": "https://hooks.zapier.com/hooks/catch/21326682/unuyrh7/",
+  "car-insurance": "https://hooks.zapier.com/hooks/catch/21326682/un2n4oc/",
+  "pillar-3a": "https://hooks.zapier.com/hooks/catch/21326682/unuyz9t/",
+  "subsidy": "https://hooks.zapier.com/hooks/catch/21326682/unuyk5n/",
+  "mortgage": "https://hooks.zapier.com/hooks/catch/21326682/un2n4oc/",
+  "household-insurance": "https://hooks.zapier.com/hooks/catch/21326682/un2n4oc/",
+  "legal-protection": "https://hooks.zapier.com/hooks/catch/21326682/un2n4oc/",
+  "termination": "https://hooks.zapier.com/hooks/catch/21326682/un2n4oc/",
   "lpp-libre-passage": "https://hooks.zapier.com/hooks/catch/21326682/un855tt/",
   "professional-insurance": "https://hooks.zapier.com/hooks/catch/21326682/un8i19a/",
   "estimation-immobiliere": "https://hooks.zapier.com/hooks/catch/21326682/un8s2j4/",
