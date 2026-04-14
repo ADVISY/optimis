@@ -8,8 +8,7 @@ import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
-import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
-import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
+// OTP disabled for testing — kept on Car and Pillar3 only
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";

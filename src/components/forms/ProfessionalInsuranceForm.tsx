@@ -24,8 +24,7 @@ import { mockLegalProtectionOffers, InsuranceOffer } from "@/data/mockInsuranceD
 import { Lock, User, Phone } from "lucide-react";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
-import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
-import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
+// OTP disabled for testing — kept on Car and Pillar3 only
 import { cn } from "@/lib/utils";
 
 interface ProfessionalInsuranceFormData {

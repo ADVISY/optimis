@@ -30,8 +30,7 @@ import { Button } from "@/components/ui/button";
 import DateInput from "@/components/ui/date-input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
-import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
-import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
+// OTP disabled for testing — kept on Car and Pillar3 only
 import { User, Phone } from "lucide-react";
 
 interface HealthInsuranceFormData {
