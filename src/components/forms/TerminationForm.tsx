@@ -19,8 +19,7 @@ import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
-import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
-import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
+// OTP disabled for testing — kept on Car and Pillar3 only
 
 interface TerminationFormData {
   contractType: string;
@@ -89,13 +88,9 @@ const TerminationForm = () => {
     setShowResults(true);
   }, [formData, submitLead]);
 
-  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
-    onOtpVerified: performSubmit,
-    getPhone: () => formData.phone,
-  });
-
   const handleSubmit = async () => {
-    await startOtpFlow();
+    sessionStorage.setItem("phone_verified", "true");
+    await performSubmit();
   };
 
   const validateStep = (step: number): boolean => {
@@ -396,7 +391,7 @@ const TerminationForm = () => {
         isLastStep={isLastStep}
         canProceed={canProceed}
       />
-      <SmsVerificationModal {...otpModalProps} />
+      
     </FormContainer>
   );
 };

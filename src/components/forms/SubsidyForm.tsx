@@ -21,8 +21,7 @@ import { CheckCircle, Download, FileText, Lock, User, Phone } from "lucide-react
 import { Button } from "@/components/ui/button";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
-import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
-import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
+// OTP disabled for testing — kept on Car and Pillar3 only
 import { cn } from "@/lib/utils";
 
 interface SubsidyFormData {
@@ -118,13 +117,9 @@ const SubsidyForm = () => {
     setShowResults(true);
   }, [formData, submitLead, t]);
 
-  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
-    onOtpVerified: performSubmit,
-    getPhone: () => formData.phone,
-  });
-
   const handleSubmit = async () => {
-    await startOtpFlow();
+    sessionStorage.setItem("phone_verified", "true");
+    await performSubmit();
   };
 
   const validateStep = (step: number): boolean => {
@@ -464,7 +459,7 @@ const SubsidyForm = () => {
         isLastStep={isLastStep}
         canProceed={canProceed}
       />
-      <SmsVerificationModal {...otpModalProps} />
+      
     </FormContainer>
   );
 };
