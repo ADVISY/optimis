@@ -8,7 +8,7 @@ const corsHeaders = {
 };
 
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/twilio";
-const TWILIO_FROM_NUMBER = "+41755730875";
+const TWILIO_FROM = "OPTIMIS";
 const OTP_EXPIRY_MINUTES = 10;
 
 function generateOtpCode(): string {
