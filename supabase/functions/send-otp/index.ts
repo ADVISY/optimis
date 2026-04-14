@@ -6,7 +6,6 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const GATEWAY_URL = "https://connector-gateway.lovable.dev/twilio";
 const VERIFY_SERVICE_SID = "VA2b4327548063070224159545d3d7a1dd";
 
 function normalizeToE164(phone: string): string | null {
@@ -47,20 +46,20 @@ serve(async (req) => {
       );
     }
 
-    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
-    if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
+    const accountSid = Deno.env.get("TWILIO_ACCOUNT_SID");
+    if (!accountSid) throw new Error("TWILIO_ACCOUNT_SID is not configured");
 
-    const TWILIO_API_KEY = Deno.env.get("TWILIO_API_KEY");
-    if (!TWILIO_API_KEY) throw new Error("TWILIO_API_KEY is not configured");
+    const authToken = Deno.env.get("TWILIO_AUTH_TOKEN");
+    if (!authToken) throw new Error("TWILIO_AUTH_TOKEN is not configured");
 
-    // Send verification via Twilio Verify API
+    const basicAuth = btoa(`${accountSid}:${authToken}`);
+
     const verifyResponse = await fetch(
-      `${GATEWAY_URL}/Services/${VERIFY_SERVICE_SID}/Verifications`,
+      `https://verify.twilio.com/v2/Services/${VERIFY_SERVICE_SID}/Verifications`,
       {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${LOVABLE_API_KEY}`,
-          "X-Connection-Api-Key": TWILIO_API_KEY,
+          "Authorization": `Basic ${basicAuth}`,
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({
