@@ -240,13 +240,9 @@ const HealthInsuranceForm = () => {
     navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
   }, [formData, submitLead, navigate, localizedPath, location.pathname, i18n.language, prepareLeadData]);
 
-  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
-    onOtpVerified: performSubmit,
-    getPhone: () => formData.phone,
-  });
-
   const handleSubmit = async () => {
-    await startOtpFlow();
+    sessionStorage.setItem("phone_verified", "true");
+    await performSubmit();
   };
 
   // Validation function for each step
@@ -933,7 +929,7 @@ const HealthInsuranceForm = () => {
         isLastStep={isLastStep}
         canProceed={canProceed}
       />
-      <SmsVerificationModal {...otpModalProps} />
+      
     </FormContainer>
   );
 };
