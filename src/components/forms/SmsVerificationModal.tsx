@@ -25,7 +25,7 @@ interface SmsVerificationModalProps {
   onClose: () => void;
 }
 
-const CODE_LENGTH = 6;
+const CODE_LENGTH = 4;
 
 const SmsVerificationModal = ({
   open,

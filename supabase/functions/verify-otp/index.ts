@@ -45,7 +45,7 @@ serve(async (req) => {
     }
 
     const codeStr = String(code).trim();
-    if (!/^\d{4,8}$/.test(codeStr)) {
+    if (!/^\d{4}$/.test(codeStr)) {
       return new Response(
         JSON.stringify({ success: false, error: "invalid_code", message: "Le code doit contenir des chiffres" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
