@@ -88,13 +88,9 @@ const TerminationForm = () => {
     setShowResults(true);
   }, [formData, submitLead]);
 
-  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
-    onOtpVerified: performSubmit,
-    getPhone: () => formData.phone,
-  });
-
   const handleSubmit = async () => {
-    await startOtpFlow();
+    sessionStorage.setItem("phone_verified", "true");
+    await performSubmit();
   };
 
   const validateStep = (step: number): boolean => {
@@ -395,7 +391,7 @@ const TerminationForm = () => {
         isLastStep={isLastStep}
         canProceed={canProceed}
       />
-      <SmsVerificationModal {...otpModalProps} />
+      
     </FormContainer>
   );
 };

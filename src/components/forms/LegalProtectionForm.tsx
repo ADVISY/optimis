@@ -110,13 +110,9 @@ const LegalProtectionForm = () => {
     navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
   }, [formData, submitLead, navigate, localizedPath, location.pathname]);
 
-  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
-    onOtpVerified: performSubmit,
-    getPhone: () => formData.phone,
-  });
-
   const handleSubmit = async () => {
-    await startOtpFlow();
+    sessionStorage.setItem("phone_verified", "true");
+    await performSubmit();
   };
 
   const validateStep = (step: number): boolean => {
@@ -373,7 +369,7 @@ const LegalProtectionForm = () => {
         isLastStep={isLastStep}
         canProceed={canProceed}
       />
-      <SmsVerificationModal {...otpModalProps} />
+      
     </FormContainer>
   );
 };

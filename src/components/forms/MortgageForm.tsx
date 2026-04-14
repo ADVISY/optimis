@@ -123,13 +123,9 @@ const MortgageForm = () => {
     }, 3000);
   }, [formData, submitLead, navigate, i18n.language, mortgageProducts, simulateMortgage]);
 
-  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
-    onOtpVerified: performSubmit,
-    getPhone: () => formData.phone,
-  });
-
   const handleSubmit = async () => {
-    await startOtpFlow();
+    sessionStorage.setItem("phone_verified", "true");
+    await performSubmit();
   };
 
   const validateStep = (step: number): boolean => {
@@ -449,7 +445,7 @@ const MortgageForm = () => {
         isLastStep={isLastStep}
         canProceed={canProceed}
       />
-      <SmsVerificationModal {...otpModalProps} />
+      
     </FormContainer>
   );
 };

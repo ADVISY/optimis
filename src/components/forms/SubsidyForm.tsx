@@ -117,13 +117,9 @@ const SubsidyForm = () => {
     setShowResults(true);
   }, [formData, submitLead, t]);
 
-  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
-    onOtpVerified: performSubmit,
-    getPhone: () => formData.phone,
-  });
-
   const handleSubmit = async () => {
-    await startOtpFlow();
+    sessionStorage.setItem("phone_verified", "true");
+    await performSubmit();
   };
 
   const validateStep = (step: number): boolean => {
@@ -463,7 +459,7 @@ const SubsidyForm = () => {
         isLastStep={isLastStep}
         canProceed={canProceed}
       />
-      <SmsVerificationModal {...otpModalProps} />
+      
     </FormContainer>
   );
 };
