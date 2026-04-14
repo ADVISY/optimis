@@ -8,7 +8,6 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Shield, Phone, Loader2, RefreshCw, Pencil, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -26,6 +25,8 @@ interface SmsVerificationModalProps {
   onClose: () => void;
 }
 
+const CODE_LENGTH = 6;
+
 const SmsVerificationModal = ({
   open,
   phone,
@@ -40,19 +41,17 @@ const SmsVerificationModal = ({
   onClose,
 }: SmsVerificationModalProps) => {
   const { t } = useTranslation();
-  const [digits, setDigits] = useState<string[]>(["", "", "", ""]);
+  const [digits, setDigits] = useState<string[]>(Array(CODE_LENGTH).fill(""));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [resendCooldown, setResendCooldown] = useState(0);
 
-  // Reset digits when modal opens or error changes
   useEffect(() => {
     if (open) {
-      setDigits(["", "", "", ""]);
+      setDigits(Array(CODE_LENGTH).fill(""));
       setTimeout(() => inputRefs.current[0]?.focus(), 100);
     }
   }, [open]);
 
-  // Resend cooldown timer
   useEffect(() => {
     if (resendCooldown <= 0) return;
     const timer = setInterval(() => setResendCooldown((c) => c - 1), 1000);
@@ -60,18 +59,15 @@ const SmsVerificationModal = ({
   }, [resendCooldown]);
 
   const handleDigitChange = useCallback((index: number, value: string) => {
-    // Handle paste
     if (value.length > 1) {
-      const pastedDigits = value.replace(/\D/g, "").slice(0, 4).split("");
+      const pastedDigits = value.replace(/\D/g, "").slice(0, CODE_LENGTH).split("");
       const newDigits = [...digits];
       pastedDigits.forEach((d, i) => {
-        if (index + i < 4) newDigits[index + i] = d;
+        if (index + i < CODE_LENGTH) newDigits[index + i] = d;
       });
       setDigits(newDigits);
-      const nextIndex = Math.min(index + pastedDigits.length, 3);
+      const nextIndex = Math.min(index + pastedDigits.length, CODE_LENGTH - 1);
       inputRefs.current[nextIndex]?.focus();
-
-      // Auto-submit if 4 digits pasted
       if (newDigits.every((d) => d !== "")) {
         onVerify(newDigits.join(""));
       }
@@ -83,11 +79,10 @@ const SmsVerificationModal = ({
     newDigits[index] = digit;
     setDigits(newDigits);
 
-    if (digit && index < 3) {
+    if (digit && index < CODE_LENGTH - 1) {
       inputRefs.current[index + 1]?.focus();
     }
 
-    // Auto-submit when all 4 digits are filled
     if (digit && newDigits.every((d) => d !== "")) {
       onVerify(newDigits.join(""));
     }
@@ -103,7 +98,7 @@ const SmsVerificationModal = ({
   }, [digits]);
 
   const handleResend = () => {
-    setDigits(["", "", "", ""]);
+    setDigits(Array(CODE_LENGTH).fill(""));
     setResendCooldown(30);
     onResend();
     setTimeout(() => inputRefs.current[0]?.focus(), 100);
@@ -122,7 +117,7 @@ const SmsVerificationModal = ({
             {t("otp.title", "Vérifiez votre numéro pour continuer")}
           </DialogTitle>
           <DialogDescription className="text-center mt-2">
-            {t("otp.description", "Nous vous avons envoyé un code de sécurité par SMS. Entrez ce code à 4 chiffres pour confirmer votre numéro et poursuivre.")}
+            {t("otp.description", "Nous vous avons envoyé un code de sécurité par SMS. Entrez ce code pour confirmer votre numéro et poursuivre.")}
           </DialogDescription>
           {phoneLastDigits && (
             <p className="text-sm text-muted-foreground mt-1 flex items-center justify-center gap-1">
@@ -133,36 +128,42 @@ const SmsVerificationModal = ({
         </DialogHeader>
 
         <div className="space-y-6 py-4">
-          {/* 4 digit inputs */}
-          <div className="flex justify-center gap-3">
+          {/* Code inputs */}
+          <div className="flex justify-center gap-2 sm:gap-3">
             {digits.map((digit, i) => (
-              <Input
+              <input
                 key={i}
                 ref={(el) => { inputRefs.current[i] = el; }}
                 type="text"
                 inputMode="numeric"
-                maxLength={4}
+                maxLength={1}
                 value={digit}
                 onChange={(e) => handleDigitChange(i, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(i, e)}
+                onFocus={(e) => e.target.select()}
                 onPaste={(e) => {
                   e.preventDefault();
-                  const pasted = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 4);
+                  const pasted = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, CODE_LENGTH);
                   if (pasted) handleDigitChange(i, pasted);
                 }}
                 className={cn(
-                  "w-14 h-14 text-center text-2xl font-bold",
-                  error && "border-red-400 ring-red-200"
+                  "w-11 h-13 sm:w-12 sm:h-14 rounded-lg border-2 text-center text-xl sm:text-2xl font-semibold",
+                  "bg-background text-foreground outline-none transition-all duration-150",
+                  "focus:border-primary focus:ring-2 focus:ring-primary/20",
+                  digit ? "border-primary/50" : "border-border",
+                  error && "border-destructive/60 focus:border-destructive focus:ring-destructive/20",
+                  (isVerifying || isSending) && "opacity-50 cursor-not-allowed"
                 )}
                 disabled={isVerifying || isSending}
-                autoComplete="one-time-code"
+                autoComplete={i === 0 ? "one-time-code" : "off"}
+                aria-label={`Digit ${i + 1}`}
               />
             ))}
           </div>
 
           {/* Error message */}
           {error && (
-            <p className="text-sm text-red-500 text-center font-medium">{error}</p>
+            <p className="text-sm text-destructive text-center font-medium">{error}</p>
           )}
 
           {/* Verify button */}

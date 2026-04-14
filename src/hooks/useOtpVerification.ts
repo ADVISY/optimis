@@ -2,7 +2,6 @@ import { useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface OtpState {
-  otpId: string | null;
   phone: string;
   phoneLastDigits: string;
   expiresAt: string | null;
@@ -15,7 +14,6 @@ interface OtpState {
 
 export function useOtpVerification() {
   const [state, setState] = useState<OtpState>({
-    otpId: null,
     phone: "",
     phoneLastDigits: "",
     expiresAt: null,
@@ -26,12 +24,12 @@ export function useOtpVerification() {
     remainingAttempts: null,
   });
 
-  const sendOtp = useCallback(async (phone: string, leadId?: string) => {
+  const sendOtp = useCallback(async (phone: string) => {
     setState((prev) => ({ ...prev, isSending: true, error: null, phone }));
 
     try {
       const { data, error } = await supabase.functions.invoke("send-otp", {
-        body: { phone, leadId },
+        body: { phone },
       });
 
       if (error) throw new Error(error.message || "Erreur lors de l'envoi du SMS");
@@ -47,7 +45,6 @@ export function useOtpVerification() {
       setState((prev) => ({
         ...prev,
         isSending: false,
-        otpId: data.otpId,
         phoneLastDigits: data.phoneLastDigits,
         expiresAt: data.expiresAt,
         isVerified: false,
@@ -63,13 +60,11 @@ export function useOtpVerification() {
   }, []);
 
   const verifyOtp = useCallback(async (code: string) => {
-    if (!state.otpId) return false;
-
     setState((prev) => ({ ...prev, isVerifying: true, error: null }));
 
     try {
       const { data, error } = await supabase.functions.invoke("verify-otp", {
-        body: { otpId: state.otpId, code },
+        body: { phone: state.phone, code },
       });
 
       if (error) throw new Error(error.message || "Erreur de vérification");
@@ -100,11 +95,10 @@ export function useOtpVerification() {
       setState((prev) => ({ ...prev, isVerifying: false, error: message }));
       return false;
     }
-  }, [state.otpId]);
+  }, [state.phone]);
 
   const resetOtp = useCallback(() => {
     setState({
-      otpId: null,
       phone: "",
       phoneLastDigits: "",
       expiresAt: null,
