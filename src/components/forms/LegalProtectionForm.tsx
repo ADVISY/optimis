@@ -111,9 +111,13 @@ const LegalProtectionForm = () => {
     navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
   }, [formData, submitLead, navigate, localizedPath, location.pathname]);
 
+  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
+    onOtpVerified: performSubmit,
+    getPhone: () => formData.phone,
+  });
+
   const handleSubmit = async () => {
-    sessionStorage.setItem("phone_verified", "true");
-    await performSubmit();
+    await startOtpFlow();
   };
 
   const validateStep = (step: number): boolean => {

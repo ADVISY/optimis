@@ -74,9 +74,13 @@ const RealEstateForm = () => {
     setShowThankYou(true);
   }, [formData, submitLead]);
 
+  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
+    onOtpVerified: performSubmit,
+    getPhone: () => formData.phone,
+  });
+
   const handleSubmit = async () => {
-    sessionStorage.setItem("phone_verified", "true");
-    await performSubmit();
+    await startOtpFlow();
   };
 
   const validateStep = (step: number): boolean => {
