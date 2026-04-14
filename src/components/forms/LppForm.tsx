@@ -351,6 +351,8 @@ const LppForm = () => {
       />
       
     </FormContainer>
+    <SmsVerificationModal {...otpModalProps} />
+    </>
   );
 };
 

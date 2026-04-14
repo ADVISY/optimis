@@ -397,6 +397,8 @@ const RealEstateForm = () => {
       />
       
     </FormContainer>
+    <SmsVerificationModal {...otpModalProps} />
+    </>
   );
 };
 

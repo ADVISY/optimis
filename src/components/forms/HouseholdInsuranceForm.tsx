@@ -395,6 +395,8 @@ const HouseholdInsuranceForm = () => {
       />
       
     </FormContainer>
+    <SmsVerificationModal {...otpModalProps} />
+    </>
   );
 };
 

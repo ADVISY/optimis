@@ -376,6 +376,8 @@ const LegalProtectionForm = () => {
       />
       
     </FormContainer>
+    <SmsVerificationModal {...otpModalProps} />
+    </>
   );
 };
 

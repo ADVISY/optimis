@@ -466,6 +466,8 @@ const SubsidyForm = () => {
       />
       
     </FormContainer>
+    <SmsVerificationModal {...otpModalProps} />
+    </>
   );
 };
 
