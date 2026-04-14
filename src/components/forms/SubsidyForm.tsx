@@ -213,6 +213,7 @@ const SubsidyForm = () => {
   }
 
   return (
+    <>
     <FormContainer
       title={t("forms.subsidy.title")}
       description={t("forms.subsidy.description")}

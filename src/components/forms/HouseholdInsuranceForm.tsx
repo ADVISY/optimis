@@ -175,6 +175,7 @@ const HouseholdInsuranceForm = () => {
   }
 
   return (
+    <>
     <FormContainer
       title={t("forms.householdInsurance.title")}
       description={t("forms.householdInsurance.description")}

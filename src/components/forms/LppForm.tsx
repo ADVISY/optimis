@@ -148,6 +148,7 @@ const LppForm = () => {
   ];
 
   return (
+    <>
     <FormContainer
       title={t("forms.lpp.title")}
       description={t("forms.lpp.description")}

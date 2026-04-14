@@ -182,6 +182,7 @@ const LegalProtectionForm = () => {
   }
 
   return (
+    <>
     <FormContainer
       title={t("forms.legalProtection.title")}
       description={t("forms.legalProtection.description")}

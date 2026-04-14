@@ -161,6 +161,7 @@ const RealEstateForm = () => {
   ];
 
   return (
+    <>
     <FormContainer
       title={t("forms.realEstate.title")}
       description={t("forms.realEstate.description")}
