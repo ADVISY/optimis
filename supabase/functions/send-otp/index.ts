@@ -134,7 +134,7 @@ serve(async (req) => {
       },
       body: new URLSearchParams({
         To: phoneE164,
-        From: TWILIO_FROM_NUMBER,
+        From: TWILIO_FROM,
         Body: smsBody,
       }),
     });
