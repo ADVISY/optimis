@@ -65,6 +65,7 @@ serve(async (req) => {
         body: new URLSearchParams({
           To: phoneE164,
           Channel: "sms",
+          Locale: "fr",
         }),
       }
     );
