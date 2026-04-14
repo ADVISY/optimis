@@ -78,7 +78,6 @@ const Pillar3Form = () => {
 
   const { submitLead, isSubmitting } = useLeadSubmission({
     formType: "pillar-3a",
-    webhookUrl: "https://hooks.zapier.com/hooks/catch/21326682/unuyz9t/",
   });
 
   const {
