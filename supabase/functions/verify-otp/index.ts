@@ -1,5 +1,4 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -7,100 +6,111 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
+const VERIFY_SERVICE_SID = "VA2b4327548063070224159545d3d7a1dd";
+
+function normalizeToE164(phone: string): string | null {
+  const digits = phone.replace(/\D/g, "");
+  if (digits.startsWith("41") && digits.length === 11) return `+${digits}`;
+  if (digits.startsWith("33") && digits.length === 11) return `+${digits}`;
+  if (digits.startsWith("07") && digits.length === 10) return `+41${digits.slice(1)}`;
+  if ((digits.startsWith("06") || digits.startsWith("07")) && digits.length === 10) {
+    const prefix2 = digits.slice(1, 3);
+    if (["76", "77", "78", "79"].includes(prefix2)) return `+41${digits.slice(1)}`;
+    return `+33${digits.slice(1)}`;
+  }
+  return null;
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
 
   try {
-    const { otpId, code } = await req.json();
+    const { phone, code } = await req.json();
 
-    if (!otpId || !code) {
+    if (!phone || !code) {
       return new Response(
-        JSON.stringify({ success: false, error: "OTP ID and code are required" }),
+        JSON.stringify({ success: false, error: "Phone and code are required" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    if (typeof code !== "string" || !/^\d{4}$/.test(code)) {
+    const phoneE164 = normalizeToE164(phone);
+    if (!phoneE164) {
       return new Response(
-        JSON.stringify({ success: false, error: "invalid_code", message: "Le code doit contenir 4 chiffres" }),
+        JSON.stringify({ success: false, error: "invalid_phone", message: "Numéro de téléphone invalide" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-    const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
-    // Fetch the OTP record
-    const { data: otp, error: fetchError } = await supabase
-      .from("otp_verifications")
-      .select("*")
-      .eq("id", otpId)
-      .single();
-
-    if (fetchError || !otp) {
+    const codeStr = String(code).trim();
+    if (!/^\d{4,8}$/.test(codeStr)) {
       return new Response(
-        JSON.stringify({ success: false, error: "otp_not_found", message: "Code de vérification non trouvé" }),
-        { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        JSON.stringify({ success: false, error: "invalid_code", message: "Le code doit contenir des chiffres" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    // Check if already verified
-    if (otp.verified) {
+    const accountSid = Deno.env.get("TWILIO_ACCOUNT_SID");
+    if (!accountSid) throw new Error("TWILIO_ACCOUNT_SID is not configured");
+    const authToken = Deno.env.get("TWILIO_AUTH_TOKEN");
+    if (!authToken) throw new Error("TWILIO_AUTH_TOKEN is not configured");
+
+    const basicAuth = btoa(`${accountSid}:${authToken}`);
+
+    const checkResponse = await fetch(
+      `https://verify.twilio.com/v2/Services/${VERIFY_SERVICE_SID}/VerificationCheck`,
+      {
+        method: "POST",
+        headers: {
+          "Authorization": `Basic ${basicAuth}`,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          To: phoneE164,
+          Code: codeStr,
+        }),
+      }
+    );
+
+    const checkData = await checkResponse.json();
+
+    if (!checkResponse.ok) {
+      console.error("Twilio VerificationCheck failed:", checkResponse.status, JSON.stringify(checkData));
+
+      // Code not found or expired
+      if (checkData?.code === 20404) {
+        return new Response(
+          JSON.stringify({ success: false, error: "expired", message: "Le code a expiré. Veuillez en demander un nouveau." }),
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      if (checkData?.code === 60202) {
+        return new Response(
+          JSON.stringify({ success: false, error: "max_attempts", message: "Trop de tentatives. Veuillez demander un nouveau code." }),
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
       return new Response(
-        JSON.stringify({ success: true, verified: true, message: "Déjà vérifié" }),
+        JSON.stringify({ success: false, error: "verification_failed", message: "Erreur lors de la vérification" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    if (checkData.status === "approved") {
+      console.log("OTP verified successfully for", phoneE164);
+      return new Response(
+        JSON.stringify({ success: true, verified: true, phoneE164 }),
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    // Check expiration
-    if (new Date(otp.expires_at) < new Date()) {
-      return new Response(
-        JSON.stringify({ success: false, error: "expired", message: "Le code a expiré. Veuillez en demander un nouveau." }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    // Check max attempts
-    if (otp.attempts >= otp.max_attempts) {
-      return new Response(
-        JSON.stringify({ success: false, error: "max_attempts", message: "Trop de tentatives. Veuillez demander un nouveau code." }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    // Increment attempts
-    await supabase
-      .from("otp_verifications")
-      .update({ attempts: otp.attempts + 1 })
-      .eq("id", otpId);
-
-    // Verify code
-    if (otp.code !== code) {
-      const remaining = otp.max_attempts - (otp.attempts + 1);
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: "wrong_code",
-          message: `Code incorrect. ${remaining} tentative(s) restante(s).`,
-          remainingAttempts: remaining,
-        }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    // Mark as verified
-    await supabase
-      .from("otp_verifications")
-      .update({ verified: true, verified_at: new Date().toISOString() })
-      .eq("id", otpId);
-
-    console.log("OTP verified successfully:", otpId, "phone:", otp.phone_e164);
-
+    // Status is "pending" = wrong code
     return new Response(
-      JSON.stringify({ success: true, verified: true, phoneE164: otp.phone_e164 }),
+      JSON.stringify({ success: false, error: "wrong_code", message: "Code incorrect. Veuillez réessayer." }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
