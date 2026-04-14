@@ -25,7 +25,8 @@ import { mockHouseholdInsuranceOffers, InsuranceOffer } from "@/data/mockInsuran
 import { Lock, User, Phone } from "lucide-react";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
-// OTP disabled for testing — kept on Car and Pillar3 only
+import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
+import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
 import { cn } from "@/lib/utils";
 
 interface HouseholdInsuranceFormData {
@@ -103,9 +104,13 @@ const HouseholdInsuranceForm = () => {
     navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
   }, [formData, submitLead, navigate, localizedPath, location.pathname]);
 
+  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
+    onOtpVerified: performSubmit,
+    getPhone: () => formData.phone,
+  });
+
   const handleSubmit = async () => {
-    sessionStorage.setItem("phone_verified", "true");
-    await performSubmit();
+    await startOtpFlow();
   };
 
   const validateStep = (step: number): boolean => {
@@ -170,6 +175,7 @@ const HouseholdInsuranceForm = () => {
   }
 
   return (
+    <>
     <FormContainer
       title={t("forms.householdInsurance.title")}
       description={t("forms.householdInsurance.description")}
@@ -390,6 +396,8 @@ const HouseholdInsuranceForm = () => {
       />
       
     </FormContainer>
+    <SmsVerificationModal {...otpModalProps} />
+    </>
   );
 };
 

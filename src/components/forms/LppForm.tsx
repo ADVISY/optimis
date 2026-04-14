@@ -8,7 +8,8 @@ import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
-// OTP disabled for testing — kept on Car and Pillar3 only
+import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
+import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -68,9 +69,13 @@ const LppForm = () => {
     setShowThankYou(true);
   }, [formData, submitLead]);
 
+  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
+    onOtpVerified: performSubmit,
+    getPhone: () => formData.phone,
+  });
+
   const handleSubmit = async () => {
-    sessionStorage.setItem("phone_verified", "true");
-    await performSubmit();
+    await startOtpFlow();
   };
 
   const isValidDate = (d: string) => /^\d{2}\/\d{2}\/\d{4}$/.test(d);
@@ -143,6 +148,7 @@ const LppForm = () => {
   ];
 
   return (
+    <>
     <FormContainer
       title={t("forms.lpp.title")}
       description={t("forms.lpp.description")}
@@ -346,6 +352,8 @@ const LppForm = () => {
       />
       
     </FormContainer>
+    <SmsVerificationModal {...otpModalProps} />
+    </>
   );
 };
 

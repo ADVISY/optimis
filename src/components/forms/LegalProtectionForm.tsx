@@ -26,7 +26,8 @@ import { mockLegalProtectionOffers, InsuranceOffer } from "@/data/mockInsuranceD
 import { Lock, User, Phone } from "lucide-react";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
-// OTP disabled for testing — kept on Car and Pillar3 only
+import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
+import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
 import { cn } from "@/lib/utils";
 
 interface LegalProtectionFormData {
@@ -110,9 +111,13 @@ const LegalProtectionForm = () => {
     navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
   }, [formData, submitLead, navigate, localizedPath, location.pathname]);
 
+  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
+    onOtpVerified: performSubmit,
+    getPhone: () => formData.phone,
+  });
+
   const handleSubmit = async () => {
-    sessionStorage.setItem("phone_verified", "true");
-    await performSubmit();
+    await startOtpFlow();
   };
 
   const validateStep = (step: number): boolean => {
@@ -177,6 +182,7 @@ const LegalProtectionForm = () => {
   }
 
   return (
+    <>
     <FormContainer
       title={t("forms.legalProtection.title")}
       description={t("forms.legalProtection.description")}
@@ -371,6 +377,8 @@ const LegalProtectionForm = () => {
       />
       
     </FormContainer>
+    <SmsVerificationModal {...otpModalProps} />
+    </>
   );
 };
 
