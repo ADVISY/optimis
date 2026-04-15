@@ -65,7 +65,7 @@ export function useAutoAdvance(
     longTimerRef.current = setTimeout(() => {
       setDelayMs(300);
       setTrigger((prev) => prev + 1);
-    }, 3000);
+    }, 5000);
   }, []);
 
   // Cleanup on unmount
