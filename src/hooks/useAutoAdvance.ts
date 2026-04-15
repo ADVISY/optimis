@@ -53,12 +53,19 @@ export function useAutoAdvance(
   }, []);
 
   const notifyDelayed = useCallback(() => {
-    // Debounce: restart the 1.5s timer on every keystroke
     if (textTimerRef.current) clearTimeout(textTimerRef.current);
     textTimerRef.current = setTimeout(() => {
       setDelayMs(300);
       setTrigger((prev) => prev + 1);
     }, 1500);
+  }, []);
+
+  const notifyDelayedLong = useCallback(() => {
+    if (longTimerRef.current) clearTimeout(longTimerRef.current);
+    longTimerRef.current = setTimeout(() => {
+      setDelayMs(300);
+      setTrigger((prev) => prev + 1);
+    }, 3000);
   }, []);
 
   // Cleanup on unmount
