@@ -276,7 +276,7 @@ const HealthInsuranceForm = () => {
   };
 
   const canProceed = validateStep(currentStep);
-  const { notify, notifyDelayed } = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep, handleSubmit);
+  const { notify, notifyDelayed, notifyDelayedLong } = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep, handleSubmit);
 
   const [attemptedNext, setAttemptedNext] = useState(false);
 
