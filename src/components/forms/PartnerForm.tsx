@@ -285,7 +285,7 @@ const PartnerForm = () => {
               <Input
                 id="firstName"
                 value={formData.firstName}
-                onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayed(); }}
+                onChange={(e) => { updateFormData({ firstName: e.target.value }); }}
                 className="h-11 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
@@ -293,7 +293,7 @@ const PartnerForm = () => {
               <Input
                 id="lastName"
                 value={formData.lastName}
-                onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayed(); }}
+                onChange={(e) => { updateFormData({ lastName: e.target.value }); }}
                 className="h-11 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
