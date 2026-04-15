@@ -326,7 +326,7 @@ const HouseholdInsuranceForm = () => {
               <Input
                 id="firstName"
                 value={formData.firstName}
-                onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayed(); }}
+                onChange={(e) => { updateFormData({ firstName: e.target.value }); }}
                 className="h-14 text-lg"
               />
             </FormFieldWrapper>
@@ -334,7 +334,7 @@ const HouseholdInsuranceForm = () => {
               <Input
                 id="lastName"
                 value={formData.lastName}
-                onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayed(); }}
+                onChange={(e) => { updateFormData({ lastName: e.target.value }); }}
                 className="h-14 text-lg"
               />
             </FormFieldWrapper>

@@ -439,7 +439,7 @@ const CarInsuranceForm = () => {
               <Input
                 id="firstName"
                 value={formData.firstName}
-                onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayed(); }}
+                onChange={(e) => { updateFormData({ firstName: e.target.value }); }}
                 className="h-12 md:h-14 text-base md:text-lg"
               />
             </FormFieldWrapper>
@@ -447,7 +447,7 @@ const CarInsuranceForm = () => {
               <Input
                 id="lastName"
                 value={formData.lastName}
-                onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayed(); }}
+                onChange={(e) => { updateFormData({ lastName: e.target.value }); }}
                 className="h-12 md:h-14 text-base md:text-lg"
               />
             </FormFieldWrapper>
