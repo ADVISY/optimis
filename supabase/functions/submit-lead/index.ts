@@ -16,7 +16,7 @@ const FORM_WEBHOOKS: Record<string, string> = {
   "pillar-3a": "https://hooks.zapier.com/hooks/catch/21326682/unuyz9t/",
   "subsidy": "https://hooks.zapier.com/hooks/catch/21326682/unuyk5n/",
   "mortgage": "https://hooks.zapier.com/hooks/catch/21326682/un2n4oc/",
-  "household-insurance": "https://hooks.zapier.com/hooks/catch/21326682/un2n4oc/",
+  "household-insurance": "https://hooks.zapier.com/hooks/catch/21326682/ujoz6jo/",
   "legal-protection": "https://hooks.zapier.com/hooks/catch/21326682/ujosv7s/",
   "termination": "https://hooks.zapier.com/hooks/catch/21326682/un2n4oc/",
   "lpp-libre-passage": "https://hooks.zapier.com/hooks/catch/21326682/un855tt/",
