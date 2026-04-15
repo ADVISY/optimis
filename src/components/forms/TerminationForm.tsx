@@ -396,7 +396,7 @@ const TerminationForm = () => {
         isLastStep={isLastStep}
         canProceed={canProceed}
       />
-      
+      <SmsVerificationModal {...otpModalProps} />
     </FormContainer>
   );
 };
