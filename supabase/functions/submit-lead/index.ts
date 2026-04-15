@@ -18,7 +18,7 @@ const FORM_WEBHOOKS: Record<string, string> = {
   "mortgage": "https://hooks.zapier.com/hooks/catch/21326682/un2n4oc/",
   "household-insurance": "https://hooks.zapier.com/hooks/catch/21326682/ujoz6jo/",
   "legal-protection": "https://hooks.zapier.com/hooks/catch/21326682/ujosv7s/",
-  "termination": "https://hooks.zapier.com/hooks/catch/21326682/un2n4oc/",
+  "termination": "https://hooks.zapier.com/hooks/catch/21326682/ujoz785/",
   "lpp-libre-passage": "https://hooks.zapier.com/hooks/catch/21326682/un855tt/",
   "professional-insurance": "https://hooks.zapier.com/hooks/catch/21326682/un8i19a/",
   "estimation-immobiliere": "https://hooks.zapier.com/hooks/catch/21326682/un8s2j4/",
