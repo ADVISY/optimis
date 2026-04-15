@@ -19,6 +19,7 @@ export function useAutoAdvance(
   const [trigger, setTrigger] = useState(0);
   const [delayMs, setDelayMs] = useState(200);
   const textTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const longTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastStepFiredRef = useRef(false);
 
   // Reset trigger when step changes (prevents auto-advance when going back)
@@ -52,7 +53,6 @@ export function useAutoAdvance(
   }, []);
 
   const notifyDelayed = useCallback(() => {
-    // Debounce: restart the 1.5s timer on every keystroke
     if (textTimerRef.current) clearTimeout(textTimerRef.current);
     textTimerRef.current = setTimeout(() => {
       setDelayMs(300);
@@ -60,12 +60,21 @@ export function useAutoAdvance(
     }, 1500);
   }, []);
 
+  const notifyDelayedLong = useCallback(() => {
+    if (longTimerRef.current) clearTimeout(longTimerRef.current);
+    longTimerRef.current = setTimeout(() => {
+      setDelayMs(300);
+      setTrigger((prev) => prev + 1);
+    }, 3000);
+  }, []);
+
   // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (textTimerRef.current) clearTimeout(textTimerRef.current);
+      if (longTimerRef.current) clearTimeout(longTimerRef.current);
     };
   }, []);
 
-  return { notify, notifyDelayed };
+  return { notify, notifyDelayed, notifyDelayedLong };
 }

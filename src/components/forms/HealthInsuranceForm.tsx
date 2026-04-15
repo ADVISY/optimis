@@ -276,7 +276,7 @@ const HealthInsuranceForm = () => {
   };
 
   const canProceed = validateStep(currentStep);
-  const { notify, notifyDelayed } = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep, handleSubmit);
+  const { notify, notifyDelayed, notifyDelayedLong } = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep, handleSubmit);
 
   const [attemptedNext, setAttemptedNext] = useState(false);
 
@@ -837,7 +837,7 @@ const HealthInsuranceForm = () => {
               <Input
                 id="firstName"
                 value={formData.firstName}
-                onChange={(e) => { updateFormData({ firstName: e.target.value }); }}
+                onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayedLong(); }}
                 placeholder={t("forms.contact.firstNamePlaceholder", "Votre prénom")}
                 className="h-11 md:h-14 text-sm md:text-lg"
               />
@@ -851,7 +851,7 @@ const HealthInsuranceForm = () => {
               <Input
                 id="lastName"
                 value={formData.lastName}
-                onChange={(e) => { updateFormData({ lastName: e.target.value }); }}
+                onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayedLong(); }}
                 placeholder={t("forms.contact.lastNamePlaceholder", "Votre nom")}
                 className="h-11 md:h-14 text-sm md:text-lg"
               />

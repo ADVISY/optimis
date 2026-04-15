@@ -229,7 +229,7 @@ const Pillar3Form = () => {
   };
 
   const canProceed = validateStep(currentStep);
-  const { notify, notifyDelayed } = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep, handleSubmit);
+  const { notify, notifyDelayed, notifyDelayedLong } = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep, handleSubmit);
   const stepErrors = attemptedNext ? getStepErrors(currentStep) : {};
 
   const handleNext = () => {
@@ -487,7 +487,7 @@ const Pillar3Form = () => {
               <Input
                 id="firstName"
                 value={formData.firstName}
-                onChange={(e) => { updateFormData({ firstName: e.target.value }); }}
+                onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayedLong(); }}
                 className="h-11 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
@@ -495,7 +495,7 @@ const Pillar3Form = () => {
               <Input
                 id="lastName"
                 value={formData.lastName}
-                onChange={(e) => { updateFormData({ lastName: e.target.value }); }}
+                onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayedLong(); }}
                 className="h-11 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>

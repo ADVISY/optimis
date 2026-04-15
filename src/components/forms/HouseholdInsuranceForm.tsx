@@ -129,7 +129,7 @@ const HouseholdInsuranceForm = () => {
   };
 
   const canProceed = validateStep(currentStep);
-  const { notify, notifyDelayed } = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep, handleSubmit);
+  const { notify, notifyDelayed, notifyDelayedLong } = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep, handleSubmit);
   const stepErrors = attemptedNext ? getStepErrors(currentStep) : {};
 
   const handleNext = () => {
@@ -326,7 +326,7 @@ const HouseholdInsuranceForm = () => {
               <Input
                 id="firstName"
                 value={formData.firstName}
-                onChange={(e) => { updateFormData({ firstName: e.target.value }); }}
+                onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayedLong(); }}
                 className="h-14 text-lg"
               />
             </FormFieldWrapper>
@@ -334,7 +334,7 @@ const HouseholdInsuranceForm = () => {
               <Input
                 id="lastName"
                 value={formData.lastName}
-                onChange={(e) => { updateFormData({ lastName: e.target.value }); }}
+                onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayedLong(); }}
                 className="h-14 text-lg"
               />
             </FormFieldWrapper>
