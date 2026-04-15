@@ -851,7 +851,7 @@ const HealthInsuranceForm = () => {
               <Input
                 id="lastName"
                 value={formData.lastName}
-                onChange={(e) => { updateFormData({ lastName: e.target.value }); }}
+                onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayedLong(); }}
                 placeholder={t("forms.contact.lastNamePlaceholder", "Votre nom")}
                 className="h-11 md:h-14 text-sm md:text-lg"
               />
