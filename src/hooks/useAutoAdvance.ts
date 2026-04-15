@@ -72,8 +72,9 @@ export function useAutoAdvance(
   useEffect(() => {
     return () => {
       if (textTimerRef.current) clearTimeout(textTimerRef.current);
+      if (longTimerRef.current) clearTimeout(longTimerRef.current);
     };
   }, []);
 
-  return { notify, notifyDelayed };
+  return { notify, notifyDelayed, notifyDelayedLong };
 }
