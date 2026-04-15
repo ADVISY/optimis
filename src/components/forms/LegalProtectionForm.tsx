@@ -307,7 +307,7 @@ const LegalProtectionForm = () => {
               <Input
                 id="firstName"
                 value={formData.firstName}
-                onChange={(e) => { updateFormData({ firstName: e.target.value }); }}
+                onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayedLong(); }}
                 className="h-12 md:h-14 text-base md:text-lg"
               />
             </FormFieldWrapper>

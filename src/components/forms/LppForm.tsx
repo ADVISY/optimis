@@ -281,7 +281,7 @@ const LppForm = () => {
               <Input
                 id="firstName"
                 value={formData.firstName}
-                onChange={(e) => { updateFormData({ firstName: e.target.value }); }}
+                onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayedLong(); }}
                 className="h-11 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
