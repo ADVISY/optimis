@@ -13,8 +13,10 @@ import {
   FileX,
   Banknote,
   Briefcase,
-  Landmark
+  Landmark,
+  Lock
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -329,9 +331,17 @@ const Header = () => {
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* CTA Button + Language Switcher - pushed to right */}
-        <div className="hidden lg:flex items-center gap-4 ml-auto">
+        {/* CTA Button + Language Switcher + Admin lock - pushed to right */}
+        <div className="hidden lg:flex items-center gap-3 ml-auto">
           <LanguageSwitcher />
+          <Link
+            to="/admin/login"
+            aria-label="Espace admin"
+            title="Espace admin"
+            className="inline-flex items-center justify-center h-9 w-9 rounded-md text-foreground/40 hover:text-primary hover:bg-secondary transition-colors"
+          >
+            <Lock className="h-4 w-4" />
+          </Link>
           <Button asChild size="lg" className="gap-2.5">
             <a
               href="https://calendly.com/lesiteoptimis/30min"
