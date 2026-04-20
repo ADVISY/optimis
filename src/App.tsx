@@ -50,6 +50,7 @@ import ComparateurEstimation from "./pages/comparateurs/ComparateurEstimation";
 import Partenaires from "./pages/Partenaires";
 
 import { localizedRoutes } from "./utils/localizedRoutes";
+import AdminRouter from "./admin/AdminRouter";
 
 const queryClient = new QueryClient();
 
@@ -157,6 +158,9 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
+          {/* Admin back-office (hors i18n) */}
+          <Route path="/admin/*" element={<AdminRouter />} />
+
           {/* Root redirect to French (domain: le-comparateur-optimis.ch) */}
           <Route path="/" element={<Navigate to="/fr" replace />} />
           

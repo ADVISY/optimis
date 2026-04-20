@@ -8,3 +8,9 @@ verify_jwt = false
 
 [functions.lookup-vehicle]
 verify_jwt = false
+
+[functions.admin-send-otp]
+verify_jwt = true
+
+[functions.admin-verify-otp]
+verify_jwt = true
