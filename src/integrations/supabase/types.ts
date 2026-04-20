@@ -53,6 +53,66 @@ export type Database = {
         }
         Relationships: []
       }
+      admin_company_settings: {
+        Row: {
+          address_line1: string
+          address_line2: string | null
+          city: string
+          company_name: string
+          contact_email: string | null
+          contact_phone: string | null
+          country: string
+          created_at: string
+          default_vat_rate: number
+          iban_qr: string
+          id: string
+          invoice_footer: string | null
+          logo_url: string | null
+          payment_terms_days: number
+          postal_code: string
+          updated_at: string
+          vat_number: string | null
+        }
+        Insert: {
+          address_line1?: string
+          address_line2?: string | null
+          city?: string
+          company_name?: string
+          contact_email?: string | null
+          contact_phone?: string | null
+          country?: string
+          created_at?: string
+          default_vat_rate?: number
+          iban_qr?: string
+          id?: string
+          invoice_footer?: string | null
+          logo_url?: string | null
+          payment_terms_days?: number
+          postal_code?: string
+          updated_at?: string
+          vat_number?: string | null
+        }
+        Update: {
+          address_line1?: string
+          address_line2?: string | null
+          city?: string
+          company_name?: string
+          contact_email?: string | null
+          contact_phone?: string | null
+          country?: string
+          created_at?: string
+          default_vat_rate?: number
+          iban_qr?: string
+          id?: string
+          invoice_footer?: string | null
+          logo_url?: string | null
+          payment_terms_days?: number
+          postal_code?: string
+          updated_at?: string
+          vat_number?: string | null
+        }
+        Relationships: []
+      }
       admin_invoice_lines: {
         Row: {
           created_at: string

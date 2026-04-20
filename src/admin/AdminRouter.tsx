@@ -7,6 +7,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminClients from "./pages/AdminClients";
 import AdminOrders from "./pages/AdminOrders";
 import AdminInvoices from "./pages/AdminInvoices";
+import AdminSettings from "./pages/AdminSettings";
 
 export default function AdminRouter() {
   return (
@@ -18,6 +19,7 @@ export default function AdminRouter() {
         <Route path="clients" element={<ProtectedAdminRoute><AdminClients /></ProtectedAdminRoute>} />
         <Route path="commandes" element={<ProtectedAdminRoute><AdminOrders /></ProtectedAdminRoute>} />
         <Route path="factures" element={<ProtectedAdminRoute><AdminInvoices /></ProtectedAdminRoute>} />
+        <Route path="parametres" element={<ProtectedAdminRoute><AdminSettings /></ProtectedAdminRoute>} />
       </Routes>
     </AdminAuthProvider>
   );
