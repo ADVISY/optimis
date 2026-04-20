@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Save } from "lucide-react";
+import { Loader2, Save, Upload, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useRef } from "react";
 
 interface CompanySettings {
   id: string;
@@ -32,6 +33,58 @@ export default function AdminSettings() {
   const qc = useQueryClient();
   const { toast } = useToast();
   const [form, setForm] = useState<Partial<CompanySettings>>({});
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const handleLogoUpload = async (file: File) => {
+    if (!data?.id) return;
+    if (!file.type.startsWith("image/")) {
+      toast({ title: "Format invalide", description: "Image uniquement (PNG/JPG/SVG).", variant: "destructive" });
+      return;
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      toast({ title: "Fichier trop lourd", description: "Max 2 Mo.", variant: "destructive" });
+      return;
+    }
+    setUploading(true);
+    try {
+      const ext = file.name.split(".").pop()?.toLowerCase() || "png";
+      const path = `logo/company-${Date.now()}.${ext}`;
+      const { error: upErr } = await supabase.storage
+        .from("company-assets")
+        .upload(path, file, { upsert: true, contentType: file.type });
+      if (upErr) throw upErr;
+      const { data: pub } = supabase.storage.from("company-assets").getPublicUrl(path);
+      const url = pub.publicUrl;
+      const { error: updErr } = await supabase
+        .from("admin_company_settings")
+        .update({ logo_url: url })
+        .eq("id", data.id);
+      if (updErr) throw updErr;
+      setForm((f) => ({ ...f, logo_url: url }));
+      qc.invalidateQueries({ queryKey: ["admin-company-settings"] });
+      toast({ title: "Logo mis à jour" });
+    } catch (e: any) {
+      toast({ title: "Erreur upload", description: e.message, variant: "destructive" });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleLogoRemove = async () => {
+    if (!data?.id) return;
+    const { error } = await supabase
+      .from("admin_company_settings")
+      .update({ logo_url: null })
+      .eq("id", data.id);
+    if (error) {
+      toast({ title: "Erreur", description: error.message, variant: "destructive" });
+      return;
+    }
+    setForm((f) => ({ ...f, logo_url: null }));
+    qc.invalidateQueries({ queryKey: ["admin-company-settings"] });
+    toast({ title: "Logo supprimé" });
+  };
 
   const { data, isLoading } = useQuery({
     queryKey: ["admin-company-settings"],
@@ -114,6 +167,68 @@ export default function AdminSettings() {
       }
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl">
+        {/* Logo */}
+        <Card className="lg:col-span-2">
+          <CardContent className="p-6">
+            <h3 className="text-base font-bold text-[hsl(var(--optimis-green))] mb-4">
+              Logo entreprise
+            </h3>
+            <div className="flex items-center gap-6">
+              <div className="h-24 w-48 rounded-lg border-2 border-dashed border-muted-foreground/20 bg-muted/30 flex items-center justify-center overflow-hidden">
+                {form.logo_url ? (
+                  <img
+                    src={form.logo_url}
+                    alt="Logo"
+                    className="max-h-full max-w-full object-contain"
+                  />
+                ) : (
+                  <span className="text-xs text-muted-foreground">Aucun logo</span>
+                )}
+              </div>
+              <div className="flex flex-col gap-2">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/png,image/jpeg,image/svg+xml"
+                  className="hidden"
+                  onChange={(e) => {
+                    const f = e.target.files?.[0];
+                    if (f) handleLogoUpload(f);
+                    e.target.value = "";
+                  }}
+                />
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploading}
+                >
+                  {uploading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Upload className="h-4 w-4" />
+                  )}
+                  {form.logo_url ? "Remplacer" : "Téléverser un logo"}
+                </Button>
+                {form.logo_url && (
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={handleLogoRemove}
+                    className="text-destructive hover:text-destructive"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                    Supprimer
+                  </Button>
+                )}
+                <p className="text-xs text-muted-foreground">
+                  PNG, JPG ou SVG · max 2 Mo · s'affiche en en-tête des factures PDF
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Identité */}
         <Card>
           <CardContent className="p-6 space-y-4">

@@ -147,16 +147,50 @@ Deno.serve(async (req) => {
     const GREEN = "#2D5A3D";
     const GREY = "#666666";
 
-    // En-tête entreprise
-    doc.fontSize(20).fillColor(GREEN).text(settings.company_name, 50, 50);
-    doc
-      .fontSize(9)
-      .fillColor(GREY)
-      .text(settings.address_line1, 50, 78)
-      .text(`${settings.postal_code} ${settings.city}`, 50, 92);
-    if (settings.contact_email)
-      doc.text(settings.contact_email, 50, 106);
-    if (settings.vat_number) doc.text(`TVA : ${settings.vat_number}`, 50, 120);
+    // En-tête entreprise — logo si présent, sinon nom de l'entreprise
+    let headerTextX = 50;
+    if (settings.logo_url) {
+      try {
+        const imgRes = await fetch(settings.logo_url);
+        if (imgRes.ok) {
+          const ct = imgRes.headers.get("content-type") || "";
+          // PDFKit ne supporte pas SVG nativement → fallback texte
+          if (!ct.includes("svg")) {
+            const imgBuf = new Uint8Array(await imgRes.arrayBuffer());
+            // Hauteur max 60px, largeur auto (max 160px)
+            doc.image(imgBuf, 50, 45, { fit: [160, 60] });
+            headerTextX = 220;
+          }
+        }
+      } catch (e) {
+        console.warn("[pdf] logo fetch failed", e);
+      }
+    }
+
+    if (headerTextX === 50) {
+      // Pas de logo → afficher le nom en grand
+      doc.fontSize(20).fillColor(GREEN).text(settings.company_name, 50, 50);
+      doc
+        .fontSize(9)
+        .fillColor(GREY)
+        .text(settings.address_line1, 50, 78)
+        .text(`${settings.postal_code} ${settings.city}`, 50, 92);
+      if (settings.contact_email) doc.text(settings.contact_email, 50, 106);
+      if (settings.vat_number) doc.text(`TVA : ${settings.vat_number}`, 50, 120);
+    } else {
+      // Logo présent → coordonnées à côté en plus petit
+      doc
+        .fontSize(11)
+        .fillColor(GREEN)
+        .text(settings.company_name, headerTextX, 50);
+      doc
+        .fontSize(9)
+        .fillColor(GREY)
+        .text(settings.address_line1, headerTextX, 68)
+        .text(`${settings.postal_code} ${settings.city}`, headerTextX, 82);
+      if (settings.contact_email) doc.text(settings.contact_email, headerTextX, 96);
+      if (settings.vat_number) doc.text(`TVA : ${settings.vat_number}`, headerTextX, 110);
+    }
 
     // Bloc facture (droite)
     doc
