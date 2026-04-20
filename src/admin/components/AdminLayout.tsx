@@ -10,9 +10,12 @@ interface AdminLayoutProps {
 
 export function AdminLayout({ title, subtitle, actions, children }: AdminLayoutProps) {
   return (
-    <div className="min-h-screen flex bg-[hsl(var(--optimis-green-light))]">
+    <div className="h-screen flex bg-[hsl(var(--optimis-green-light))] overflow-hidden">
+      {/* Sidebar fixe */}
       <AdminSidebar />
-      <main className="flex-1 overflow-auto">
+
+      {/* Zone principale scrollable */}
+      <main className="flex-1 overflow-y-auto">
         <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-md border-b border-border px-6 md:px-10 py-5">
           <div className="flex items-center justify-between gap-4">
             <div>
