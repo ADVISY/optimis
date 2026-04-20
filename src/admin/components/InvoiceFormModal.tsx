@@ -65,27 +65,6 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
   const [notes, setNotes] = useState("");
   const [lines, setLines] = useState<InvoiceLine[]>([newLine()]);
 
-  // Pré-remplissage depuis une commande
-  useState(() => {
-    if (prefillFromOrder) {
-      setClientId(prefillFromOrder.client_id);
-      setLines(
-        prefillFromOrder.lines.map((l) => ({
-          id: crypto.randomUUID(),
-          category:
-            PRODUCT_CATEGORIES.find((c) => c.subDomains.some((s) => s.value === l.domain))
-              ?.key ?? "assurance_finances",
-          domain: l.domain as OrderDomain,
-          description:
-            (DOMAIN_LABELS_FULL[l.domain] ?? l.domain) +
-            (l.comment ? ` — ${l.comment}` : ""),
-          quantity: l.quantity,
-          unit_price: l.unit_price,
-        }))
-      );
-    }
-  });
-
   const { data: clients } = useQuery({
     queryKey: ["admin-clients-min"],
     queryFn: async () =>
@@ -105,10 +84,32 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
     },
   });
 
-  // Initialise vatRate avec la valeur par défaut
-  useState(() => {
+  // Initialise vatRate avec la valeur par défaut quand settings arrive
+  useEffect(() => {
     if (settings?.default_vat_rate) setVatRate(Number(settings.default_vat_rate));
-  });
+  }, [settings?.default_vat_rate]);
+
+  // Pré-remplissage depuis une commande à chaque ouverture
+  useEffect(() => {
+    if (open && prefillFromOrder) {
+      setClientId(prefillFromOrder.client_id);
+      setLines(
+        prefillFromOrder.lines.map((l) => ({
+          id: crypto.randomUUID(),
+          category:
+            PRODUCT_CATEGORIES.find((c) => c.subDomains.some((s) => s.value === l.domain))
+              ?.key ?? "assurance_finances",
+          domain: l.domain as OrderDomain,
+          description:
+            (DOMAIN_LABELS_FULL[l.domain] ?? l.domain) +
+            (l.comment ? ` — ${l.comment}` : ""),
+          quantity: l.quantity,
+          unit_price: l.unit_price,
+        }))
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, prefillFromOrder]);
 
   const updateLine = (id: string, patch: Partial<InvoiceLine>) =>
     setLines((ls) => ls.map((l) => (l.id === id ? { ...l, ...patch } : l)));
