@@ -9,9 +9,10 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Loader2, Trash2 } from "lucide-react";
+import { Plus, Loader2, Trash2, FileText } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatCHF, formatDate } from "@/admin/lib/format";
+import { InvoiceFormModal } from "@/admin/components/InvoiceFormModal";
 import {
   PRODUCT_CATEGORIES,
   DOMAIN_LABELS_FULL,
@@ -42,9 +43,32 @@ export default function AdminOrders() {
   const qc = useQueryClient();
   const { toast } = useToast();
   const [openModal, setOpenModal] = useState(false);
+  const [invoiceModalOpen, setInvoiceModalOpen] = useState(false);
+  const [invoicePrefill, setInvoicePrefill] = useState<
+    | {
+        client_id: string;
+        lines: { domain: string; quantity: number; unit_price: number; comment?: string }[];
+      }
+    | undefined
+  >(undefined);
   const [filterClient, setFilterClient] = useState<string>("all");
   const [filterDomain, setFilterDomain] = useState<string>("all");
   const [filterMonth, setFilterMonth] = useState<string>("all");
+
+  const handleInvoice = (order: any) => {
+    setInvoicePrefill({
+      client_id: order.client_id,
+      lines: [
+        {
+          domain: order.domain,
+          quantity: order.quantity,
+          unit_price: Number(order.unit_price),
+          comment: order.comment || undefined,
+        },
+      ],
+    });
+    setInvoiceModalOpen(true);
+  };
 
   const [clientId, setClientId] = useState("");
   const [orderDate, setOrderDate] = useState(new Date().toISOString().slice(0, 10));
@@ -186,6 +210,7 @@ export default function AdminOrders() {
                     <th className="px-6 py-3 font-semibold text-right">Prix unit.</th>
                     <th className="px-6 py-3 font-semibold text-right">Total</th>
                     <th className="px-6 py-3 font-semibold">Commentaire</th>
+                    <th className="px-6 py-3 font-semibold text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -199,10 +224,21 @@ export default function AdminOrders() {
                       <td className="px-6 py-4 text-right text-muted-foreground">{formatCHF(Number(o.unit_price))}</td>
                       <td className="px-6 py-4 text-right font-semibold">{formatCHF(Number(o.total))}</td>
                       <td className="px-6 py-4 text-muted-foreground text-xs">{o.comment}</td>
+                      <td className="px-6 py-4 text-right">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleInvoice(o)}
+                          title="Créer une facture pré-remplie depuis cette commande"
+                        >
+                          <FileText className="h-3.5 w-3.5" />
+                          Facturer
+                        </Button>
+                      </td>
                     </tr>
                   ))}
                   {filtered.length === 0 && (
-                    <tr><td colSpan={8} className="px-6 py-12 text-center text-muted-foreground">Aucune commande</td></tr>
+                    <tr><td colSpan={9} className="px-6 py-12 text-center text-muted-foreground">Aucune commande</td></tr>
                   )}
                 </tbody>
               </table>
@@ -378,6 +414,16 @@ export default function AdminOrders() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Modal facture pré-remplie depuis une commande */}
+      <InvoiceFormModal
+        open={invoiceModalOpen}
+        onOpenChange={(o) => {
+          setInvoiceModalOpen(o);
+          if (!o) setInvoicePrefill(undefined);
+        }}
+        prefillFromOrder={invoicePrefill}
+      />
     </AdminLayout>
   );
 }
