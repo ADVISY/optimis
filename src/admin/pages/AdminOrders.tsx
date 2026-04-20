@@ -43,9 +43,32 @@ export default function AdminOrders() {
   const qc = useQueryClient();
   const { toast } = useToast();
   const [openModal, setOpenModal] = useState(false);
+  const [invoiceModalOpen, setInvoiceModalOpen] = useState(false);
+  const [invoicePrefill, setInvoicePrefill] = useState<
+    | {
+        client_id: string;
+        lines: { domain: string; quantity: number; unit_price: number; comment?: string }[];
+      }
+    | undefined
+  >(undefined);
   const [filterClient, setFilterClient] = useState<string>("all");
   const [filterDomain, setFilterDomain] = useState<string>("all");
   const [filterMonth, setFilterMonth] = useState<string>("all");
+
+  const handleInvoice = (order: any) => {
+    setInvoicePrefill({
+      client_id: order.client_id,
+      lines: [
+        {
+          domain: order.domain,
+          quantity: order.quantity,
+          unit_price: Number(order.unit_price),
+          comment: order.comment || undefined,
+        },
+      ],
+    });
+    setInvoiceModalOpen(true);
+  };
 
   const [clientId, setClientId] = useState("");
   const [orderDate, setOrderDate] = useState(new Date().toISOString().slice(0, 10));
