@@ -414,6 +414,16 @@ export default function AdminOrders() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Modal facture pré-remplie depuis une commande */}
+      <InvoiceFormModal
+        open={invoiceModalOpen}
+        onOpenChange={(o) => {
+          setInvoiceModalOpen(o);
+          if (!o) setInvoicePrefill(undefined);
+        }}
+        prefillFromOrder={invoicePrefill}
+      />
     </AdminLayout>
   );
 }
