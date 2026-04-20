@@ -88,7 +88,7 @@ export default function AdminVerifyOtp() {
   };
 
   useEffect(() => {
-    if (code.length === 6 && !verifying) handleVerify(code);
+    if (code.length === 4 && !verifying) handleVerify(code);
   }, [code]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -107,14 +107,14 @@ export default function AdminVerifyOtp() {
             </div>
             <p className="text-sm text-muted-foreground mb-6">
               {phoneLastDigits
-                ? <>Un code à 6 chiffres a été envoyé au numéro se terminant par <strong>••{phoneLastDigits}</strong>.</>
+                ? <>Un code à 4 chiffres a été envoyé au numéro se terminant par <strong>••{phoneLastDigits}</strong>.</>
                 : "Envoi du code en cours..."}
             </p>
 
             <div className="flex justify-center mb-4">
-              <InputOTP maxLength={6} value={code} onChange={setCode} disabled={verifying || sending}>
+              <InputOTP maxLength={4} value={code} onChange={setCode} disabled={verifying || sending}>
                 <InputOTPGroup>
-                  {[0,1,2,3,4,5].map((i) => (
+                  {[0,1,2,3].map((i) => (
                     <InputOTPSlot key={i} index={i} className="h-12 w-12 text-lg" />
                   ))}
                 </InputOTPGroup>
