@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Users, ShoppingBag, FileText, LogOut, User } from "lucide-react";
+import { LayoutDashboard, Users, ShoppingBag, FileText, LogOut, User, Settings } from "lucide-react";
 import { useAdminAuth } from "@/admin/hooks/useAdminAuth";
 import logoOptimis from "@/assets/logo.svg";
 import { cn } from "@/lib/utils";
@@ -9,6 +9,7 @@ const navItems = [
   { to: "/admin/clients", label: "Clients", icon: Users, end: false },
   { to: "/admin/commandes", label: "Commandes", icon: ShoppingBag, end: false },
   { to: "/admin/factures", label: "Factures", icon: FileText, end: false },
+  { to: "/admin/parametres", label: "Paramètres", icon: Settings, end: false },
 ];
 
 export function AdminSidebar() {

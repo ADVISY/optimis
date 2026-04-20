@@ -1,16 +1,37 @@
+import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AdminLayout } from "@/admin/components/AdminLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, CheckCircle2, FileText } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Loader2,
+  CheckCircle2,
+  FileText,
+  Plus,
+  Download,
+  Send,
+  Trash2,
+} from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatCHF, formatDate, STATUS_LABELS } from "@/admin/lib/format";
+import { InvoiceFormModal } from "@/admin/components/InvoiceFormModal";
+
+const STATUSES = ["brouillon", "envoyee", "en_attente", "payee"] as const;
 
 export default function AdminInvoices() {
   const qc = useQueryClient();
   const { toast } = useToast();
+  const [openModal, setOpenModal] = useState(false);
+  const [generating, setGenerating] = useState<string | null>(null);
 
   const { data: invoices, isLoading } = useQuery({
     queryKey: ["admin-invoices"],
@@ -23,19 +44,60 @@ export default function AdminInvoices() {
     },
   });
 
-  const markPaid = useMutation({
-    mutationFn: async (id: string) => {
-      const { error } = await supabase.from("admin_invoices")
-        .update({ status: "payee", paid_at: new Date().toISOString() })
+  const updateStatus = useMutation({
+    mutationFn: async ({ id, status }: { id: string; status: string }) => {
+      const patch: any = { status };
+      if (status === "payee") patch.paid_at = new Date().toISOString();
+      else patch.paid_at = null;
+      const { error } = await supabase
+        .from("admin_invoices")
+        .update(patch)
         .eq("id", id);
       if (error) throw error;
     },
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["admin-invoices"] });
       qc.invalidateQueries({ queryKey: ["admin-stats"] });
-      toast({ title: "Facture marquée comme payée" });
+      toast({ title: "Statut mis à jour" });
+    },
+    onError: (e: any) =>
+      toast({ title: "Erreur", description: e.message, variant: "destructive" }),
+  });
+
+  const deleteInvoice = useMutation({
+    mutationFn: async (id: string) => {
+      // Lignes supprimées en cascade ? Sinon on les supprime d'abord
+      await supabase.from("admin_invoice_lines").delete().eq("invoice_id", id);
+      const { error } = await supabase.from("admin_invoices").delete().eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["admin-invoices"] });
+      toast({ title: "Facture supprimée" });
     },
   });
+
+  const generatePdf = async (id: string) => {
+    setGenerating(id);
+    try {
+      const { data, error } = await supabase.functions.invoke(
+        "generate-invoice-pdf",
+        { body: { invoice_id: id } }
+      );
+      if (error) throw error;
+      if (!data?.success) throw new Error(data?.error || "Erreur génération");
+      window.open(data.url, "_blank");
+      toast({ title: "PDF généré", description: "Ouverture dans un nouvel onglet" });
+    } catch (e: any) {
+      toast({
+        title: "Erreur PDF",
+        description: e.message,
+        variant: "destructive",
+      });
+    } finally {
+      setGenerating(null);
+    }
+  };
 
   const statusVariant = (s: string) => {
     if (s === "payee") return "default";
@@ -46,26 +108,21 @@ export default function AdminInvoices() {
   return (
     <AdminLayout
       title="Factures"
-      subtitle={`${invoices?.length ?? 0} facture${(invoices?.length ?? 0) > 1 ? "s" : ""}`}
+      subtitle={`${invoices?.length ?? 0} facture${
+        (invoices?.length ?? 0) > 1 ? "s" : ""
+      }`}
       actions={
-        <Button size="sm" disabled>
-          <FileText className="h-4 w-4" /> Créer une facture (Phase 2)
+        <Button size="sm" onClick={() => setOpenModal(true)}>
+          <Plus className="h-4 w-4" /> Nouvelle facture
         </Button>
       }
     >
-      <Card className="mb-6 bg-gradient-to-r from-[hsl(var(--optimis-green-light))] to-[hsl(var(--optimis-green-pastel))] border-0">
-        <CardContent className="p-5">
-          <p className="text-sm text-[hsl(var(--optimis-green))]">
-            <strong>Phase 2 à venir :</strong> création de factures, génération PDF avec QR-bill suisse, envoi par email.
-            Pour l'instant, vous pouvez consulter les factures et les marquer comme payées.
-          </p>
-        </CardContent>
-      </Card>
-
       <Card>
         <CardContent className="p-0">
           {isLoading ? (
-            <div className="p-12 text-center"><Loader2 className="h-6 w-6 animate-spin mx-auto" /></div>
+            <div className="p-12 text-center">
+              <Loader2 className="h-6 w-6 animate-spin mx-auto" />
+            </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
@@ -77,34 +134,116 @@ export default function AdminInvoices() {
                     <th className="px-6 py-3 font-semibold">Échéance</th>
                     <th className="px-6 py-3 font-semibold text-right">Total</th>
                     <th className="px-6 py-3 font-semibold">Statut</th>
-                    <th className="px-6 py-3 font-semibold text-right">Action</th>
+                    <th className="px-6 py-3 font-semibold text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {invoices?.map((inv: any) => (
-                    <tr key={inv.id} className="border-t border-border hover:bg-muted/30">
-                      <td className="px-6 py-4 font-medium">{inv.invoice_number}</td>
-                      <td className="px-6 py-4">{inv.admin_clients?.company_name}</td>
-                      <td className="px-6 py-4 text-muted-foreground">{formatDate(inv.invoice_date)}</td>
-                      <td className="px-6 py-4 text-muted-foreground">{formatDate(inv.due_date)}</td>
-                      <td className="px-6 py-4 text-right font-semibold">{formatCHF(Number(inv.total))}</td>
-                      <td className="px-6 py-4"><Badge variant={statusVariant(inv.status)}>{STATUS_LABELS[inv.status]}</Badge></td>
+                    <tr
+                      key={inv.id}
+                      className="border-t border-border hover:bg-muted/30"
+                    >
+                      <td className="px-6 py-4 font-medium">
+                        {inv.invoice_number}
+                      </td>
+                      <td className="px-6 py-4">
+                        {inv.admin_clients?.company_name}
+                      </td>
+                      <td className="px-6 py-4 text-muted-foreground">
+                        {formatDate(inv.invoice_date)}
+                      </td>
+                      <td className="px-6 py-4 text-muted-foreground">
+                        {formatDate(inv.due_date)}
+                      </td>
+                      <td className="px-6 py-4 text-right font-semibold">
+                        {formatCHF(Number(inv.total))}
+                      </td>
+                      <td className="px-6 py-4">
+                        <Select
+                          value={inv.status}
+                          onValueChange={(v) =>
+                            updateStatus.mutate({ id: inv.id, status: v })
+                          }
+                        >
+                          <SelectTrigger className="h-8 w-36 bg-transparent border-0 p-0 hover:bg-muted">
+                            <Badge
+                              variant={statusVariant(inv.status)}
+                              className="cursor-pointer"
+                            >
+                              {STATUS_LABELS[inv.status]}
+                            </Badge>
+                          </SelectTrigger>
+                          <SelectContent>
+                            {STATUSES.map((s) => (
+                              <SelectItem key={s} value={s}>
+                                {STATUS_LABELS[s]}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </td>
                       <td className="px-6 py-4 text-right">
-                        {inv.status !== "payee" && (
+                        <div className="flex items-center justify-end gap-1">
                           <Button
                             size="sm"
                             variant="outline"
-                            onClick={() => markPaid.mutate(inv.id)}
-                            disabled={markPaid.isPending}
+                            onClick={() => generatePdf(inv.id)}
+                            disabled={generating === inv.id}
+                            title="Générer PDF + QR-bill"
                           >
-                            <CheckCircle2 className="h-3.5 w-3.5" /> Marquer payée
+                            {generating === inv.id ? (
+                              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                            ) : (
+                              <Download className="h-3.5 w-3.5" />
+                            )}
+                            PDF
                           </Button>
-                        )}
+                          {inv.status !== "payee" && (
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              onClick={() =>
+                                updateStatus.mutate({
+                                  id: inv.id,
+                                  status: "payee",
+                                })
+                              }
+                              disabled={updateStatus.isPending}
+                              className="text-[hsl(var(--optimis-green))]"
+                              title="Marquer comme payée"
+                            >
+                              <CheckCircle2 className="h-3.5 w-3.5" />
+                            </Button>
+                          )}
+                          {inv.status === "brouillon" && (
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              onClick={() => {
+                                if (confirm("Supprimer cette facture ?"))
+                                  deleteInvoice.mutate(inv.id);
+                              }}
+                              className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                              title="Supprimer"
+                            >
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </Button>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   ))}
                   {invoices?.length === 0 && (
-                    <tr><td colSpan={7} className="px-6 py-12 text-center text-muted-foreground">Aucune facture</td></tr>
+                    <tr>
+                      <td
+                        colSpan={7}
+                        className="px-6 py-12 text-center text-muted-foreground"
+                      >
+                        <FileText className="h-8 w-8 mx-auto mb-2 opacity-30" />
+                        Aucune facture. Cliquez sur "Nouvelle facture" pour
+                        commencer.
+                      </td>
+                    </tr>
                   )}
                 </tbody>
               </table>
@@ -112,6 +251,8 @@ export default function AdminInvoices() {
           )}
         </CardContent>
       </Card>
+
+      <InvoiceFormModal open={openModal} onOpenChange={setOpenModal} />
     </AdminLayout>
   );
 }
