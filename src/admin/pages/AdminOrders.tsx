@@ -210,6 +210,7 @@ export default function AdminOrders() {
                     <th className="px-6 py-3 font-semibold text-right">Prix unit.</th>
                     <th className="px-6 py-3 font-semibold text-right">Total</th>
                     <th className="px-6 py-3 font-semibold">Commentaire</th>
+                    <th className="px-6 py-3 font-semibold text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -223,10 +224,21 @@ export default function AdminOrders() {
                       <td className="px-6 py-4 text-right text-muted-foreground">{formatCHF(Number(o.unit_price))}</td>
                       <td className="px-6 py-4 text-right font-semibold">{formatCHF(Number(o.total))}</td>
                       <td className="px-6 py-4 text-muted-foreground text-xs">{o.comment}</td>
+                      <td className="px-6 py-4 text-right">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleInvoice(o)}
+                          title="Créer une facture pré-remplie depuis cette commande"
+                        >
+                          <FileText className="h-3.5 w-3.5" />
+                          Facturer
+                        </Button>
+                      </td>
                     </tr>
                   ))}
                   {filtered.length === 0 && (
-                    <tr><td colSpan={8} className="px-6 py-12 text-center text-muted-foreground">Aucune commande</td></tr>
+                    <tr><td colSpan={9} className="px-6 py-12 text-center text-muted-foreground">Aucune commande</td></tr>
                   )}
                 </tbody>
               </table>
