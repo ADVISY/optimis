@@ -9,11 +9,15 @@ const MerciHypotheque = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    // Google Ads conversion tracking
+    // Dédup : ne déclencher la conversion qu'une fois par session pour éviter
+    // les doublons sur F5 / retour arrière vers /merci-hypotheque.
+    const FLAG = "ga_conversion_merci_hypotheque_sent";
+    if (sessionStorage.getItem(FLAG) === "1") return;
     if (typeof (window as any).gtag === "function") {
       (window as any).gtag('event', 'conversion', {
         'send_to': 'AW-16586911321/1MwiCK30gpAcENncoOU9'
       });
+      sessionStorage.setItem(FLAG, "1");
     }
   }, []);
 
