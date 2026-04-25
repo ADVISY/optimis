@@ -143,6 +143,7 @@ export default function AdminClients() {
                     <th className="px-6 py-3 font-semibold">Téléphone</th>
                     <th className="px-6 py-3 font-semibold">Statut</th>
                     <th className="px-6 py-3 font-semibold">Créé le</th>
+                    <th className="px-6 py-3 font-semibold text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -154,10 +155,22 @@ export default function AdminClients() {
                       <td className="px-6 py-4 text-muted-foreground">{c.phone}</td>
                       <td className="px-6 py-4"><Badge variant={c.status === "actif" ? "default" : "outline"}>{STATUS_LABELS[c.status]}</Badge></td>
                       <td className="px-6 py-4 text-muted-foreground">{formatDate(c.created_at)}</td>
+                      <td className="px-6 py-4 text-right" onClick={(e) => e.stopPropagation()}>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => handleDelete(c)}
+                          disabled={deleteMutation.isPending}
+                          className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                          title="Supprimer"
+                        >
+                          <Trash2 className="h-3.5 w-3.5" />
+                        </Button>
+                      </td>
                     </tr>
                   ))}
                   {clients?.length === 0 && (
-                    <tr><td colSpan={6} className="px-6 py-12 text-center text-muted-foreground">Aucun client</td></tr>
+                    <tr><td colSpan={7} className="px-6 py-12 text-center text-muted-foreground">Aucun client</td></tr>
                   )}
                 </tbody>
               </table>
