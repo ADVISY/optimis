@@ -1,6 +1,8 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { LayoutDashboard, Users, ShoppingBag, FileText, LogOut, User, Settings, Package } from "lucide-react";
 import { useAdminAuth } from "@/admin/hooks/useAdminAuth";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import logoOptimis from "@/assets/logo.svg";
 import { cn } from "@/lib/utils";
 
@@ -17,12 +19,27 @@ export function AdminSidebar() {
   const { signOut, user } = useAdminAuth();
   const navigate = useNavigate();
 
+  const { data: profile } = useQuery({
+    queryKey: ["admin-profile-sidebar", user?.id],
+    enabled: !!user?.id,
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("admin_profiles")
+        .select("full_name")
+        .eq("user_id", user!.id)
+        .maybeSingle();
+      return data;
+    },
+  });
+
   const handleLogout = async () => {
     await signOut();
     navigate("/admin/login", { replace: true });
   };
 
-  const initials = (user?.email ?? "A").slice(0, 1).toUpperCase();
+  const fullName = (profile?.full_name ?? "").trim();
+  const displayName = fullName || user?.email || "Admin";
+  const initials = (fullName || user?.email || "A").slice(0, 1).toUpperCase();
 
   return (
     // Sidebar 100vh, ne défile jamais avec le contenu
@@ -63,7 +80,7 @@ export function AdminSidebar() {
           </div>
           <div className="min-w-0 flex-1">
             <p className="text-xs text-white/60 truncate">Connecté</p>
-            <p className="text-sm font-medium truncate">{user?.email}</p>
+            <p className="text-sm font-medium truncate">{displayName}</p>
           </div>
         </div>
         <NavLink
