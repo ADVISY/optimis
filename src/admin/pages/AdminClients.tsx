@@ -243,11 +243,23 @@ export default function AdminClients() {
             </div>
           )}
 
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setOpenModal(false)}>Annuler</Button>
-            <Button onClick={() => saveMutation.mutate({ ...form, id: selected?.id })} disabled={saveMutation.isPending || !form.company_name}>
-              {saveMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Enregistrer"}
-            </Button>
+          <DialogFooter className="gap-2 sm:justify-between">
+            {selected && (
+              <Button
+                variant="outline"
+                onClick={() => handleDelete(selected)}
+                disabled={deleteMutation.isPending}
+                className="text-destructive border-destructive/40 hover:bg-destructive/10 hover:text-destructive"
+              >
+                <Trash2 className="h-4 w-4" /> Supprimer
+              </Button>
+            )}
+            <div className="flex gap-2 sm:ml-auto">
+              <Button variant="outline" onClick={() => setOpenModal(false)}>Annuler</Button>
+              <Button onClick={() => saveMutation.mutate({ ...form, id: selected?.id })} disabled={saveMutation.isPending || !form.company_name}>
+                {saveMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Enregistrer"}
+              </Button>
+            </div>
           </DialogFooter>
         </DialogContent>
       </Dialog>
