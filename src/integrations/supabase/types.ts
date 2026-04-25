@@ -287,6 +287,42 @@ export type Database = {
         }
         Relationships: []
       }
+      admin_products: {
+        Row: {
+          avg_cpl: number
+          created_at: string
+          domain: Database["public"]["Enums"]["order_domain"]
+          id: string
+          image_url: string | null
+          is_active: boolean
+          name: string
+          unit_price: number
+          updated_at: string
+        }
+        Insert: {
+          avg_cpl?: number
+          created_at?: string
+          domain: Database["public"]["Enums"]["order_domain"]
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          name: string
+          unit_price?: number
+          updated_at?: string
+        }
+        Update: {
+          avg_cpl?: number
+          created_at?: string
+          domain?: Database["public"]["Enums"]["order_domain"]
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          name?: string
+          unit_price?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       admin_profiles: {
         Row: {
           created_at: string
