@@ -21,6 +21,9 @@ interface UseLeadSubmissionOptions {
 export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOptions) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  // Garde anti double-clic indépendante de setState (qui est asynchrone).
+  // Bloque toute 2e soumission tant que la 1ère n'a pas terminé.
+  const inFlightRef = useRef(false);
   const { toast } = useToast();
   const { i18n, t } = useTranslation();
 
@@ -29,6 +32,12 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
   };
 
   const submitLead = async (formData: Record<string, unknown>) => {
+    // Anti double-soumission : si une requête est déjà en cours, ignore.
+    if (inFlightRef.current) {
+      console.warn("submitLead: already in flight, ignoring duplicate call");
+      return null;
+    }
+    inFlightRef.current = true;
     setIsSubmitting(true);
 
     // Flatten nested objects for Zapier compatibility
