@@ -18,21 +18,13 @@ const MONTH_LABELS = [
 ];
 const MONTH_SHORT = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Déc"];
 
-// Données fictives réalistes par mois (CHF / leads / factures)
-const MOCK_MONTHLY = [
-  { revenue: 18500, leads: 42, invoices_issued: 8, invoices_pending: 3 },
-  { revenue: 22300, leads: 51, invoices_issued: 9, invoices_pending: 2 },
-  { revenue: 27800, leads: 63, invoices_issued: 11, invoices_pending: 4 },
-  { revenue: 31200, leads: 71, invoices_issued: 12, invoices_pending: 3 },
-  { revenue: 29400, leads: 67, invoices_issued: 11, invoices_pending: 5 },
-  { revenue: 34800, leads: 82, invoices_issued: 14, invoices_pending: 4 },
-  { revenue: 28600, leads: 65, invoices_issued: 10, invoices_pending: 6 },
-  { revenue: 24900, leads: 58, invoices_issued: 9, invoices_pending: 3 },
-  { revenue: 33500, leads: 78, invoices_issued: 13, invoices_pending: 4 },
-  { revenue: 38200, leads: 89, invoices_issued: 15, invoices_pending: 5 },
-  { revenue: 41700, leads: 96, invoices_issued: 16, invoices_pending: 4 },
-  { revenue: 45300, leads: 104, invoices_issued: 18, invoices_pending: 6 },
-];
+// Données mensuelles : tout à zéro tant qu'il n'y a pas d'activité réelle
+const EMPTY_MONTHLY = Array.from({ length: 12 }, () => ({
+  revenue: 0,
+  leads: 0,
+  invoices_issued: 0,
+  invoices_pending: 0,
+}));
 
 export default function AdminDashboard() {
   // "all" = année / 0..11 = mois
@@ -51,7 +43,7 @@ export default function AdminDashboard() {
   });
 
   const monthly = useMemo(
-    () => MOCK_MONTHLY.map((m, i) => ({ ...m, month: MONTH_SHORT[i], monthIndex: i })),
+    () => EMPTY_MONTHLY.map((m, i) => ({ ...m, month: MONTH_SHORT[i], monthIndex: i })),
     []
   );
 
