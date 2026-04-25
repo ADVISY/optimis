@@ -14,10 +14,15 @@ const ThankYou = () => {
   const phoneVerified = sessionStorage.getItem("phone_verified") === "true";
 
   useEffect(() => {
+    // Dédup : ne déclencher la conversion Google Ads qu'une seule fois par session,
+    // pour éviter le re-comptage en cas de F5 ou retour navigateur sur /merci.
+    const FLAG = "ga_conversion_thankyou_sent";
+    if (sessionStorage.getItem(FLAG) === "1") return;
     if (typeof (window as any).gtag === "function") {
       (window as any).gtag('event', 'conversion', {
         'send_to': 'AW-16586911321/1MwiCK30gpAcENncoOU9'
       });
+      sessionStorage.setItem(FLAG, "1");
     }
   }, []);
 

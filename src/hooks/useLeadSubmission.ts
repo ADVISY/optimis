@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
+import { getAttributionForLead } from "@/lib/attribution";
 
 interface LeadData {
   formType: string;
@@ -20,6 +21,9 @@ interface UseLeadSubmissionOptions {
 export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOptions) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  // Garde anti double-clic indépendante de setState (qui est asynchrone).
+  // Bloque toute 2e soumission tant que la 1ère n'a pas terminé.
+  const inFlightRef = useRef(false);
   const { toast } = useToast();
   const { i18n, t } = useTranslation();
 
@@ -28,6 +32,12 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
   };
 
   const submitLead = async (formData: Record<string, unknown>) => {
+    // Anti double-soumission : si une requête est déjà en cours, ignore.
+    if (inFlightRef.current) {
+      console.warn("submitLead: already in flight, ignoring duplicate call");
+      return null;
+    }
+    inFlightRef.current = true;
     setIsSubmitting(true);
 
     // Flatten nested objects for Zapier compatibility
@@ -474,8 +484,14 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
       renamedData[label] = value;
     }
 
+    // UN SEUL leadId par soumission, partagé avec Meta/TikTok comme eventID
+    // pour permettre la déduplication browser <-> serveur (CAPI future).
+    const leadId = generateLeadId();
+    const attribution = getAttributionForLead();
+
     const leadData: LeadData = {
       ...renamedData as Record<string, unknown>,
+      ...attribution,
       "Type de formulaire": formType,
       "Langue": i18n.language,
       "Source": document.referrer || "direct",
@@ -489,10 +505,10 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
         const minutes = now.getMinutes().toString().padStart(2, '0');
         return `${year}-${month}-${day} ${hours}:${minutes}`;
       })(),
-      "ID du lead": generateLeadId(),
+      "ID du lead": leadId,
       formType, // Keep for edge function routing
       language: i18n.language,
-      leadId: generateLeadId(),
+      leadId,
       timestamp: new Date().toISOString(),
       webhookUrl: webhookUrl,
     } as unknown as LeadData;
@@ -511,19 +527,21 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
       }
 
       console.log("Lead submitted successfully:", data);
-      
-      // Track Lead event for Meta Pixel (language-specific)
+
+      // Track Lead event for Meta Pixel — eventID = leadId pour dédup CAPI future.
       if ((window as any).fbq) {
-        (window as any).fbq('track', 'Lead');
-        console.log("Meta Pixel: Lead event tracked");
+        (window as any).fbq('track', 'Lead', {}, { eventID: leadId });
+        console.log("Meta Pixel: Lead event tracked", { eventID: leadId });
       }
-      
-      // Track Lead event for TikTok Pixel
+
+      // Track Lead event for TikTok Pixel — événement standard "Lead"
+      // (au lieu de "SubmitForm" qui n'était pas reconnu comme conversion par les campagnes).
+      // event_id = leadId pour dédup Events API future.
       if ((window as any).ttq) {
-        (window as any).ttq.track('SubmitForm');
-        console.log("TikTok Pixel: SubmitForm event tracked");
+        (window as any).ttq.track('Lead', { event_id: leadId });
+        console.log("TikTok Pixel: Lead event tracked", { event_id: leadId });
       }
-      
+
       toast({
         title: t("forms.successTitle"),
         description: t("forms.successDescription"),
@@ -540,6 +558,7 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
       setIsSubmitted(false);
       return null;
     } finally {
+      inFlightRef.current = false;
       setIsSubmitting(false);
     }
   };
