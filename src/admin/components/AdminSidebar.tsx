@@ -19,12 +19,27 @@ export function AdminSidebar() {
   const { signOut, user } = useAdminAuth();
   const navigate = useNavigate();
 
+  const { data: profile } = useQuery({
+    queryKey: ["admin-profile-sidebar", user?.id],
+    enabled: !!user?.id,
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("admin_profiles")
+        .select("full_name")
+        .eq("user_id", user!.id)
+        .maybeSingle();
+      return data;
+    },
+  });
+
   const handleLogout = async () => {
     await signOut();
     navigate("/admin/login", { replace: true });
   };
 
-  const initials = (user?.email ?? "A").slice(0, 1).toUpperCase();
+  const fullName = (profile?.full_name ?? "").trim();
+  const displayName = fullName || user?.email || "Admin";
+  const initials = (fullName || user?.email || "A").slice(0, 1).toUpperCase();
 
   return (
     // Sidebar 100vh, ne défile jamais avec le contenu
