@@ -80,6 +80,34 @@ export default function AdminClients() {
     onError: (e: any) => toast({ title: "Erreur", description: e.message, variant: "destructive" }),
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from("admin_clients").delete().eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["admin-clients"] });
+      qc.invalidateQueries({ queryKey: ["admin-stats"] });
+      setOpenModal(false);
+      setSelected(null);
+      toast({ title: "Client supprimé" });
+    },
+    onError: (e: any) =>
+      toast({
+        title: "Erreur de suppression",
+        description: e.message?.includes("foreign")
+          ? "Ce client a des commandes ou factures liées. Supprimez-les d'abord."
+          : e.message,
+        variant: "destructive",
+      }),
+  });
+
+  const handleDelete = (c: any) => {
+    if (confirm(`Supprimer définitivement le client "${c.company_name}" ?`)) {
+      deleteMutation.mutate(c.id);
+    }
+  };
+
   const openCreate = () => { setForm(emptyForm); setSelected(null); setOpenModal(true); };
   const openEdit = (c: any) => {
     setForm({
