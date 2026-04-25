@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Search, Loader2 } from "lucide-react";
+import { Plus, Search, Loader2, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatCHF, formatDate, STATUS_LABELS } from "@/admin/lib/format";
 
@@ -80,6 +80,34 @@ export default function AdminClients() {
     onError: (e: any) => toast({ title: "Erreur", description: e.message, variant: "destructive" }),
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from("admin_clients").delete().eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["admin-clients"] });
+      qc.invalidateQueries({ queryKey: ["admin-stats"] });
+      setOpenModal(false);
+      setSelected(null);
+      toast({ title: "Client supprimé" });
+    },
+    onError: (e: any) =>
+      toast({
+        title: "Erreur de suppression",
+        description: e.message?.includes("foreign")
+          ? "Ce client a des commandes ou factures liées. Supprimez-les d'abord."
+          : e.message,
+        variant: "destructive",
+      }),
+  });
+
+  const handleDelete = (c: any) => {
+    if (confirm(`Supprimer définitivement le client "${c.company_name}" ?`)) {
+      deleteMutation.mutate(c.id);
+    }
+  };
+
   const openCreate = () => { setForm(emptyForm); setSelected(null); setOpenModal(true); };
   const openEdit = (c: any) => {
     setForm({
@@ -115,6 +143,7 @@ export default function AdminClients() {
                     <th className="px-6 py-3 font-semibold">Téléphone</th>
                     <th className="px-6 py-3 font-semibold">Statut</th>
                     <th className="px-6 py-3 font-semibold">Créé le</th>
+                    <th className="px-6 py-3 font-semibold text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -126,10 +155,22 @@ export default function AdminClients() {
                       <td className="px-6 py-4 text-muted-foreground">{c.phone}</td>
                       <td className="px-6 py-4"><Badge variant={c.status === "actif" ? "default" : "outline"}>{STATUS_LABELS[c.status]}</Badge></td>
                       <td className="px-6 py-4 text-muted-foreground">{formatDate(c.created_at)}</td>
+                      <td className="px-6 py-4 text-right" onClick={(e) => e.stopPropagation()}>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => handleDelete(c)}
+                          disabled={deleteMutation.isPending}
+                          className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                          title="Supprimer"
+                        >
+                          <Trash2 className="h-3.5 w-3.5" />
+                        </Button>
+                      </td>
                     </tr>
                   ))}
                   {clients?.length === 0 && (
-                    <tr><td colSpan={6} className="px-6 py-12 text-center text-muted-foreground">Aucun client</td></tr>
+                    <tr><td colSpan={7} className="px-6 py-12 text-center text-muted-foreground">Aucun client</td></tr>
                   )}
                 </tbody>
               </table>
@@ -202,11 +243,23 @@ export default function AdminClients() {
             </div>
           )}
 
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setOpenModal(false)}>Annuler</Button>
-            <Button onClick={() => saveMutation.mutate({ ...form, id: selected?.id })} disabled={saveMutation.isPending || !form.company_name}>
-              {saveMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Enregistrer"}
-            </Button>
+          <DialogFooter className="gap-2 sm:justify-between">
+            {selected && (
+              <Button
+                variant="outline"
+                onClick={() => handleDelete(selected)}
+                disabled={deleteMutation.isPending}
+                className="text-destructive border-destructive/40 hover:bg-destructive/10 hover:text-destructive"
+              >
+                <Trash2 className="h-4 w-4" /> Supprimer
+              </Button>
+            )}
+            <div className="flex gap-2 sm:ml-auto">
+              <Button variant="outline" onClick={() => setOpenModal(false)}>Annuler</Button>
+              <Button onClick={() => saveMutation.mutate({ ...form, id: selected?.id })} disabled={saveMutation.isPending || !form.company_name}>
+                {saveMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Enregistrer"}
+              </Button>
+            </div>
           </DialogFooter>
         </DialogContent>
       </Dialog>

@@ -215,20 +215,18 @@ export default function AdminInvoices() {
                               <CheckCircle2 className="h-3.5 w-3.5" />
                             </Button>
                           )}
-                          {inv.status === "brouillon" && (
-                            <Button
-                              size="sm"
-                              variant="ghost"
-                              onClick={() => {
-                                if (confirm("Supprimer cette facture ?"))
-                                  deleteInvoice.mutate(inv.id);
-                              }}
-                              className="text-destructive hover:text-destructive hover:bg-destructive/10"
-                              title="Supprimer"
-                            >
-                              <Trash2 className="h-3.5 w-3.5" />
-                            </Button>
-                          )}
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => {
+                              if (confirm(`Supprimer la facture ${inv.invoice_number} ? Cette action est irréversible.`))
+                                deleteInvoice.mutate(inv.id);
+                            }}
+                            className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                            title="Supprimer"
+                          >
+                            <Trash2 className="h-3.5 w-3.5" />
+                          </Button>
                         </div>
                       </td>
                     </tr>

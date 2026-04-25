@@ -151,6 +151,25 @@ export default function AdminOrders() {
     onError: (e: any) => toast({ title: "Erreur", description: e.message, variant: "destructive" }),
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from("admin_orders").delete().eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["admin-orders"] });
+      qc.invalidateQueries({ queryKey: ["admin-stats"] });
+      toast({ title: "Commande supprimée" });
+    },
+    onError: (e: any) => toast({ title: "Erreur", description: e.message, variant: "destructive" }),
+  });
+
+  const handleDeleteOrder = (o: any) => {
+    if (confirm(`Supprimer cette commande du ${formatDate(o.order_date)} ?`)) {
+      deleteMutation.mutate(o.id);
+    }
+  };
+
   // Liste des sous-domaines pour le filtre (toutes catégories)
   const allSubDomains = useMemo(
     () => PRODUCT_CATEGORIES.flatMap((c) => c.subDomains),
@@ -225,15 +244,27 @@ export default function AdminOrders() {
                       <td className="px-6 py-4 text-right font-semibold">{formatCHF(Number(o.total))}</td>
                       <td className="px-6 py-4 text-muted-foreground text-xs">{o.comment}</td>
                       <td className="px-6 py-4 text-right">
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => handleInvoice(o)}
-                          title="Créer une facture pré-remplie depuis cette commande"
-                        >
-                          <FileText className="h-3.5 w-3.5" />
-                          Facturer
-                        </Button>
+                        <div className="flex items-center justify-end gap-1">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => handleInvoice(o)}
+                            title="Créer une facture pré-remplie depuis cette commande"
+                          >
+                            <FileText className="h-3.5 w-3.5" />
+                            Facturer
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => handleDeleteOrder(o)}
+                            disabled={deleteMutation.isPending}
+                            className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                            title="Supprimer la commande"
+                          >
+                            <Trash2 className="h-3.5 w-3.5" />
+                          </Button>
+                        </div>
                       </td>
                     </tr>
                   ))}
