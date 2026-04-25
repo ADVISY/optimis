@@ -19,6 +19,7 @@ import { Loader2, Plus, Pencil, Trash2, Package, TrendingUp } from "lucide-react
 import { useToast } from "@/hooks/use-toast";
 import { formatCHF } from "@/admin/lib/format";
 import { DOMAIN_LABELS_FULL } from "@/admin/lib/productCategories";
+import { getProductIcon } from "@/admin/lib/productIcons";
 import ProductFormModal, { ProductRow } from "@/admin/components/ProductFormModal";
 
 export default function AdminProducts() {
@@ -187,17 +188,18 @@ export default function AdminProducts() {
                   !p.is_active ? "opacity-60" : ""
                 }`}
               >
-                {/* Image bandeau */}
-                <div className="h-32 bg-gradient-to-br from-[hsl(var(--optimis-green))]/10 to-[hsl(var(--optimis-green))]/5 flex items-center justify-center overflow-hidden">
-                  {p.image_url ? (
-                    <img
-                      src={p.image_url}
-                      alt={p.name}
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <Package className="h-12 w-12 text-[hsl(var(--optimis-green))]/40" />
-                  )}
+                {/* Image bandeau — icône glass 3D par défaut, image custom si uploadée */}
+                <div className="h-36 bg-gradient-to-br from-[hsl(var(--optimis-green))]/10 to-[hsl(var(--optimis-green))]/5 flex items-center justify-center overflow-hidden p-3">
+                  <img
+                    src={getProductIcon(p.domain, p.image_url)}
+                    alt={p.name}
+                    loading="lazy"
+                    className={
+                      p.image_url
+                        ? "h-full w-full object-cover"
+                        : "h-full w-auto object-contain drop-shadow-lg"
+                    }
+                  />
                 </div>
 
                 <CardContent className="p-5 space-y-4">
