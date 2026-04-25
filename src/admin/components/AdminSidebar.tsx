@@ -80,7 +80,7 @@ export function AdminSidebar() {
           </div>
           <div className="min-w-0 flex-1">
             <p className="text-xs text-white/60 truncate">Connecté</p>
-            <p className="text-sm font-medium truncate">{user?.email}</p>
+            <p className="text-sm font-medium truncate">{displayName}</p>
           </div>
         </div>
         <NavLink
