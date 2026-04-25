@@ -19,9 +19,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import { Loader2, Save, Upload, Trash2, Package } from "lucide-react";
+import { Loader2, Save, Upload, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { DOMAIN_LABELS_FULL, OrderDomain } from "@/admin/lib/productCategories";
+import { getProductIcon } from "@/admin/lib/productIcons";
 
 export interface ProductRow {
   id: string;
