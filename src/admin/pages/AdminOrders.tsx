@@ -244,15 +244,27 @@ export default function AdminOrders() {
                       <td className="px-6 py-4 text-right font-semibold">{formatCHF(Number(o.total))}</td>
                       <td className="px-6 py-4 text-muted-foreground text-xs">{o.comment}</td>
                       <td className="px-6 py-4 text-right">
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => handleInvoice(o)}
-                          title="Créer une facture pré-remplie depuis cette commande"
-                        >
-                          <FileText className="h-3.5 w-3.5" />
-                          Facturer
-                        </Button>
+                        <div className="flex items-center justify-end gap-1">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => handleInvoice(o)}
+                            title="Créer une facture pré-remplie depuis cette commande"
+                          >
+                            <FileText className="h-3.5 w-3.5" />
+                            Facturer
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => handleDeleteOrder(o)}
+                            disabled={deleteMutation.isPending}
+                            className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                            title="Supprimer la commande"
+                          >
+                            <Trash2 className="h-3.5 w-3.5" />
+                          </Button>
+                        </div>
                       </td>
                     </tr>
                   ))}
