@@ -9,6 +9,7 @@ import AdminOrders from "./pages/AdminOrders";
 import AdminInvoices from "./pages/AdminInvoices";
 import AdminSettings from "./pages/AdminSettings";
 import AdminProfile from "./pages/AdminProfile";
+import AdminProducts from "./pages/AdminProducts";
 
 export default function AdminRouter() {
   return (
@@ -20,6 +21,7 @@ export default function AdminRouter() {
         <Route path="clients" element={<ProtectedAdminRoute><AdminClients /></ProtectedAdminRoute>} />
         <Route path="commandes" element={<ProtectedAdminRoute><AdminOrders /></ProtectedAdminRoute>} />
         <Route path="factures" element={<ProtectedAdminRoute><AdminInvoices /></ProtectedAdminRoute>} />
+        <Route path="produits" element={<ProtectedAdminRoute><AdminProducts /></ProtectedAdminRoute>} />
         <Route path="parametres" element={<ProtectedAdminRoute><AdminSettings /></ProtectedAdminRoute>} />
         <Route path="profil" element={<ProtectedAdminRoute><AdminProfile /></ProtectedAdminRoute>} />
       </Routes>
