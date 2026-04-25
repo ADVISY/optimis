@@ -1,6 +1,8 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { LayoutDashboard, Users, ShoppingBag, FileText, LogOut, User, Settings, Package } from "lucide-react";
 import { useAdminAuth } from "@/admin/hooks/useAdminAuth";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import logoOptimis from "@/assets/logo.svg";
 import { cn } from "@/lib/utils";
 
