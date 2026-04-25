@@ -65,13 +65,20 @@ export function AdminSidebar() {
             <p className="text-sm font-medium truncate">{user?.email}</p>
           </div>
         </div>
-        <button
-          type="button"
-          className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-all"
+        <NavLink
+          to="/admin/profil"
+          className={({ isActive }) =>
+            cn(
+              "w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all",
+              isActive
+                ? "bg-white text-[hsl(var(--optimis-green))] shadow-md"
+                : "text-white/80 hover:bg-white/10 hover:text-white"
+            )
+          }
         >
           <User className="h-4 w-4" />
           Mon profil
-        </button>
+        </NavLink>
         <button
           onClick={handleLogout}
           className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white transition-all"
