@@ -145,12 +145,16 @@ export default function ProductFormModal({ open, onOpenChange, product }: Props)
           <div className="space-y-2">
             <Label>Image / icône</Label>
             <div className="flex items-center gap-4">
-              <div className="h-20 w-20 rounded-lg border-2 border-dashed border-muted-foreground/20 bg-muted/30 flex items-center justify-center overflow-hidden flex-shrink-0">
-                {imageUrl ? (
-                  <img src={imageUrl} alt="" className="h-full w-full object-cover" />
-                ) : (
-                  <Package className="h-7 w-7 text-muted-foreground" />
-                )}
+              <div className="h-20 w-20 rounded-lg border-2 border-dashed border-muted-foreground/20 bg-gradient-to-br from-[hsl(var(--optimis-green))]/10 to-[hsl(var(--optimis-green))]/5 flex items-center justify-center overflow-hidden flex-shrink-0 p-1.5">
+                <img
+                  src={getProductIcon(domain, imageUrl)}
+                  alt=""
+                  className={
+                    imageUrl
+                      ? "h-full w-full object-cover rounded"
+                      : "h-full w-auto object-contain drop-shadow-md"
+                  }
+                />
               </div>
               <div className="flex flex-col gap-2">
                 <input
