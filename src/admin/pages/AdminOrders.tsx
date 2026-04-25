@@ -151,6 +151,25 @@ export default function AdminOrders() {
     onError: (e: any) => toast({ title: "Erreur", description: e.message, variant: "destructive" }),
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from("admin_orders").delete().eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["admin-orders"] });
+      qc.invalidateQueries({ queryKey: ["admin-stats"] });
+      toast({ title: "Commande supprimée" });
+    },
+    onError: (e: any) => toast({ title: "Erreur", description: e.message, variant: "destructive" }),
+  });
+
+  const handleDeleteOrder = (o: any) => {
+    if (confirm(`Supprimer cette commande du ${formatDate(o.order_date)} ?`)) {
+      deleteMutation.mutate(o.id);
+    }
+  };
+
   // Liste des sous-domaines pour le filtre (toutes catégories)
   const allSubDomains = useMemo(
     () => PRODUCT_CATEGORIES.flatMap((c) => c.subDomains),
