@@ -161,9 +161,33 @@ Deno.serve(async (req) => {
 
     // --- Préparation Swiss QR Bill ---
     const ibanClean = settings.iban_qr.replace(/\s/g, "");
+
+    // QR-bill suisse: devise CHF ou EUR uniquement.
+    // Si la facture est dans une autre devise (ex: CAD), on convertit en CHF
+    // via le taux figé (fx_rate_to_chf) pour que le QR reste valide.
+    const invoiceCurrency = (invoice.currency || "CHF").toUpperCase();
+    const isQrCurrency = invoiceCurrency === "CHF" || invoiceCurrency === "EUR";
+    const qrCurrency: "CHF" | "EUR" = isQrCurrency ? (invoiceCurrency as "CHF" | "EUR") : "CHF";
+    const qrAmount = isQrCurrency
+      ? Number(invoice.total)
+      : Number((Number(invoice.total) * Number(invoice.fx_rate_to_chf || 1)).toFixed(2));
+
+    // Adresse débiteur: parser l'adresse client en NPA + ville si possible.
+    // Format attendu: "Rue X 12, 1003 Lausanne" ou "Rue X 12\n1003 Lausanne".
+    const rawAddr = (invoice.admin_clients?.address || "").trim();
+    let debtorStreet = rawAddr || "Adresse non renseignée";
+    let debtorZip = "1000";
+    let debtorCity = "Suisse";
+    const m = rawAddr.match(/^(.*?)[,\n\s]+(\d{4,5})\s+(.+)$/);
+    if (m) {
+      debtorStreet = m[1].trim();
+      debtorZip = m[2].trim();
+      debtorCity = m[3].trim();
+    }
+
     const qrData: any = {
-      currency: "CHF" as const,
-      amount: Number(invoice.total),
+      currency: qrCurrency,
+      amount: qrAmount,
       additionalInformation: invoice.invoice_number,
       creditor: {
         name: settings.company_name,
@@ -175,14 +199,15 @@ Deno.serve(async (req) => {
       },
       debtor: {
         name: invoice.admin_clients?.company_name || "Client",
-        address: invoice.admin_clients?.address || "—",
-        zip: "0000",
-        city: "—",
+        address: debtorStreet,
+        zip: debtorZip,
+        city: debtorCity,
         country: "CH",
       },
     };
 
-    // QR-IBAN exige une référence QRR (27 chiffres)
+    // QR-IBAN exige une référence QRR (27 chiffres).
+    // IBAN classique (UBS, etc.): AUCUNE référence (sinon QR rejeté par Six).
     if (isQRIban(ibanClean)) {
       qrData.reference = buildQRR(invoice.invoice_number);
     }
