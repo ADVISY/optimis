@@ -18,13 +18,18 @@ import {
   PRODUCT_CATEGORIES,
   DOMAIN_LABELS_FULL,
   OrderDomain,
+  buildHierarchyLabel,
+  getCategoryLabel,
+  getCategoryForDomain,
 } from "@/admin/lib/productCategories";
 import { Badge } from "@/components/ui/badge";
 
 interface OrderLine {
   id: string;
+  product_id: string | null;
+  product_name: string;
   category: string;
-  domain: OrderDomain | "";
+  subcategory: OrderDomain | "";
   quantity: number;
   unit_price: number;
   currency: Currency;
@@ -34,8 +39,10 @@ interface OrderLine {
 
 const newLine = (): OrderLine => ({
   id: crypto.randomUUID(),
+  product_id: null,
+  product_name: "",
   category: "assurance_finances",
-  domain: "",
+  subcategory: "",
   quantity: 1,
   unit_price: 0,
   currency: "CHF",
