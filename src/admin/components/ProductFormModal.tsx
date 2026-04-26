@@ -118,6 +118,8 @@ export default function ProductFormModal({ open, onOpenChange, product }: Props)
         avg_cpl: parseFloat(avgCpl) || 0,
         image_url: imageUrl,
         is_active: isActive,
+        currency,
+        fx_rate_to_chf: currency === "CHF" ? 1 : parseFloat(fxRate) || 1,
       };
       if (product?.id) {
         const { error } = await supabase
