@@ -66,6 +66,8 @@ export default function ProductFormModal({ open, onOpenChange, product }: Props)
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [isActive, setIsActive] = useState(true);
   const [uploading, setUploading] = useState(false);
+  const [currency, setCurrency] = useState<"CHF" | "CAD">("CHF");
+  const [fxRate, setFxRate] = useState<string>("1");
 
   useEffect(() => {
     if (open) {
@@ -75,6 +77,8 @@ export default function ProductFormModal({ open, onOpenChange, product }: Props)
       setAvgCpl(String(product?.avg_cpl ?? 0));
       setImageUrl(product?.image_url ?? null);
       setIsActive(product?.is_active ?? true);
+      setCurrency((product?.currency as "CHF" | "CAD") ?? "CHF");
+      setFxRate(String(product?.fx_rate_to_chf ?? 1));
     }
   }, [open, product]);
 
