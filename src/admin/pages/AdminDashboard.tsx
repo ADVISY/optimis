@@ -3,14 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AdminLayout } from "@/admin/components/AdminLayout";
 import { Card, CardContent } from "@/components/ui/card";
-import { Users, ShoppingBag, FileText, Clock, TrendingUp } from "lucide-react";
+import { Users, ShoppingBag, FileText, Clock, TrendingUp, TrendingDown, Percent } from "lucide-react";
+import { RevenueCostChart, RevenueCostPoint } from "@/admin/components/RevenueCostChart";
 import { formatCHF, formatCAD, formatMoney, toCHF, type Currency, formatDate, STATUS_LABELS } from "@/admin/lib/format";
 import { DOMAIN_LABELS_FULL } from "@/admin/lib/productCategories";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { DashboardChart, ChartMetric, METRIC_CONFIG } from "@/admin/components/DashboardChart";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const MONTH_LABELS = [
@@ -30,7 +29,6 @@ const EMPTY_MONTHLY = Array.from({ length: 12 }, () => ({
 export default function AdminDashboard() {
   // "all" = année / 0..11 = mois
   const [period, setPeriod] = useState<"all" | number>("all");
-  const [metric, setMetric] = useState<ChartMetric>("revenue");
 
   const { data: activeClientsCount } = useQuery({
     queryKey: ["admin-active-clients-count"],
@@ -43,26 +41,51 @@ export default function AdminDashboard() {
     },
   });
 
-  // Agrégation revenus par devise (depuis admin_order_lines)
-  const { data: revenueByCurrency } = useQuery({
-    queryKey: ["admin-revenue-by-currency"],
+  // Agrégation CA + Coûts depuis admin_order_lines (joint sur admin_products pour récupérer avg_cpl)
+  const { data: financials } = useQuery({
+    queryKey: ["admin-financials"],
     queryFn: async () => {
       const { data } = await (supabase.from("admin_order_lines" as any) as any)
-        .select("quantity, unit_price, currency, fx_rate_to_chf");
+        .select("quantity, unit_price, currency, fx_rate_to_chf, product_id, admin_orders(order_date), admin_products(avg_cpl, currency, fx_rate_to_chf)");
       const totals: Record<Currency, { native: number; chf: number }> = {
         CHF: { native: 0, chf: 0 },
         CAD: { native: 0, chf: 0 },
       };
+      let totalRevenueChf = 0;
+      let totalCostChf = 0;
+      const monthlyAgg: { revenue: number; cost: number }[] = Array.from({ length: 12 }, () => ({ revenue: 0, cost: 0 }));
+
       (data ?? []).forEach((l: any) => {
         const cur: Currency = (l.currency as Currency) ?? "CHF";
-        const amt = (Number(l.quantity) || 0) * (Number(l.unit_price) || 0);
+        const qty = Number(l.quantity) || 0;
+        const amt = qty * (Number(l.unit_price) || 0);
         const fx = Number(l.fx_rate_to_chf) || 1;
+        const revChf = toCHF(amt, cur, fx);
         totals[cur].native += amt;
-        totals[cur].chf += toCHF(amt, cur, fx);
+        totals[cur].chf += revChf;
+        totalRevenueChf += revChf;
+
+        // Coût = avg_cpl du produit × quantité (converti en CHF)
+        const prod = l.admin_products;
+        const cplCur: Currency = (prod?.currency as Currency) ?? "CHF";
+        const cplFx = Number(prod?.fx_rate_to_chf) || 1;
+        const costNative = qty * (Number(prod?.avg_cpl) || 0);
+        const costChf = toCHF(costNative, cplCur, cplFx);
+        totalCostChf += costChf;
+
+        // Bucket mensuel
+        const date = l.admin_orders?.order_date ? new Date(l.admin_orders.order_date) : null;
+        if (date && !isNaN(date.getTime())) {
+          const m = date.getMonth();
+          monthlyAgg[m].revenue += revChf;
+          monthlyAgg[m].cost += costChf;
+        }
       });
-      return totals;
+
+      return { totals, totalRevenueChf, totalCostChf, monthlyAgg };
     },
   });
+
 
   const monthly = useMemo(
     () => EMPTY_MONTHLY.map((m, i) => ({ ...m, month: MONTH_SHORT[i], monthIndex: i })),
@@ -120,12 +143,39 @@ export default function AdminDashboard() {
     },
   });
 
-  const totalChf =
-    (revenueByCurrency?.CHF.chf ?? 0) + (revenueByCurrency?.CAD.chf ?? 0) + periodStats.revenue;
-  const cadNative = revenueByCurrency?.CAD.native ?? 0;
-  const chfNative = revenueByCurrency?.CHF.native ?? 0;
+  // Sélection des données financières selon période
+  const monthlyAgg = financials?.monthlyAgg ?? Array.from({ length: 12 }, () => ({ revenue: 0, cost: 0 }));
+  const periodFinancials = useMemo(() => {
+    if (period === "all") {
+      return {
+        revenue: financials?.totalRevenueChf ?? 0,
+        cost: financials?.totalCostChf ?? 0,
+      };
+    }
+    const m = monthlyAgg[period] ?? { revenue: 0, cost: 0 };
+    return { revenue: m.revenue, cost: m.cost };
+  }, [financials, monthlyAgg, period]);
 
-  const cards = [
+  const totalRevenue = periodFinancials.revenue;
+  const totalCost = periodFinancials.cost;
+  const totalMargin = totalRevenue - totalCost;
+  const marginPct = totalRevenue > 0 ? (totalMargin / totalRevenue) * 100 : 0;
+
+  const cadNative = financials?.totals.CAD.native ?? 0;
+  const chfNative = financials?.totals.CHF.native ?? 0;
+
+  const chartData: RevenueCostPoint[] = useMemo(
+    () =>
+      monthlyAgg.map((m, i) => ({
+        name: MONTH_SHORT[i],
+        revenue: Math.round(m.revenue),
+        cost: Math.round(m.cost),
+        margin: Math.round(m.revenue - m.cost),
+      })),
+    [monthlyAgg]
+  );
+
+  const secondaryCards = [
     { label: "Clients actifs", value: activeClientsCount ?? "—", icon: Users, color: "from-emerald-500/10 to-emerald-500/5" },
     { label: "Leads livrés", value: periodStats.leads, icon: ShoppingBag, color: "from-blue-500/10 to-blue-500/5" },
     { label: "Factures émises", value: periodStats.invoices_issued, icon: FileText, color: "from-violet-500/10 to-violet-500/5" },
@@ -161,45 +211,63 @@ export default function AdminDashboard() {
         </Select>
       </div>
 
-      {/* Cartes statistiques */}
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
-        {/* Carte CA avec tooltip multi-devises */}
+      {/* KPI principaux : CA / Coûts / Marge */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Card className="bg-gradient-to-br from-amber-500/10 to-amber-500/5 border-0 transition-all cursor-help">
+              <Card className="bg-gradient-to-br from-emerald-500/15 to-emerald-500/5 border-0 cursor-help">
                 <CardContent className="p-5">
                   <div className="flex items-start justify-between mb-3">
                     <TrendingUp className="h-5 w-5 text-[hsl(var(--optimis-green))]" />
-                    {cadNative > 0 && (
-                      <span className="text-[10px] font-semibold text-muted-foreground">CHF + CAD</span>
-                    )}
+                    {cadNative > 0 && <span className="text-[10px] font-semibold text-muted-foreground">CHF + CAD</span>}
                   </div>
-                  <p className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">
-                    CA total (équiv. CHF)
-                  </p>
-                  <p className="text-2xl font-bold text-[hsl(var(--optimis-green))] mt-1">
-                    {formatCHF(totalChf)}
-                  </p>
-                  {cadNative > 0 && (
-                    <p className="text-[11px] text-muted-foreground mt-1">
-                      dont {formatCAD(cadNative)}
-                    </p>
-                  )}
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">Chiffre d'affaires</p>
+                  <p className="text-3xl font-bold text-[hsl(var(--optimis-green))] mt-1">{formatCHF(totalRevenue)}</p>
+                  <p className="text-[11px] text-muted-foreground mt-1">Prix de vente des leads livrés</p>
                 </CardContent>
               </Card>
             </TooltipTrigger>
             <TooltipContent side="bottom" className="space-y-1">
-              <p className="font-semibold text-xs">Détail par devise</p>
+              <p className="font-semibold text-xs">Détail par devise (total)</p>
               <p className="text-xs">🇨🇭 CHF natif : <strong>{formatCHF(chfNative)}</strong></p>
               <p className="text-xs">🇨🇦 CAD natif : <strong>{formatCAD(cadNative)}</strong></p>
-              <p className="text-xs border-t pt-1">≈ <strong>{formatCHF(totalChf)}</strong> au total</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
 
-        {cards.map(({ label, value, icon: Icon, color }) => (
-          <Card key={label} className={`bg-gradient-to-br ${color} border-0 transition-all`}>
+        <Card className="bg-gradient-to-br from-rose-500/15 to-rose-500/5 border-0">
+          <CardContent className="p-5">
+            <div className="flex items-start justify-between mb-3">
+              <TrendingDown className="h-5 w-5 text-rose-600" />
+            </div>
+            <p className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">Coût total</p>
+            <p className="text-3xl font-bold text-rose-700 mt-1">{formatCHF(totalCost)}</p>
+            <p className="text-[11px] text-muted-foreground mt-1">Σ (avg_cpl × quantité)</p>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gradient-to-br from-amber-500/15 to-amber-500/5 border-0">
+          <CardContent className="p-5">
+            <div className="flex items-start justify-between mb-3">
+              <Percent className="h-5 w-5 text-amber-600" />
+              <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${marginPct >= 0 ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700"}`}>
+                {marginPct.toFixed(1)}%
+              </span>
+            </div>
+            <p className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">Marge nette</p>
+            <p className={`text-3xl font-bold mt-1 ${totalMargin >= 0 ? "text-[hsl(var(--optimis-green))]" : "text-rose-700"}`}>
+              {formatCHF(totalMargin)}
+            </p>
+            <p className="text-[11px] text-muted-foreground mt-1">CA − Coût</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Cartes secondaires */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {secondaryCards.map(({ label, value, icon: Icon, color }) => (
+          <Card key={label} className={`bg-gradient-to-br ${color} border-0`}>
             <CardContent className="p-5">
               <div className="flex items-start justify-between mb-3">
                 <Icon className="h-5 w-5 text-[hsl(var(--optimis-green))]" />
@@ -211,28 +279,12 @@ export default function AdminDashboard() {
         ))}
       </div>
 
-      {/* Graphique principal + sélecteur métrique */}
+      {/* Graphique combiné CA / Coûts / Marge */}
       <div className="mb-8">
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
-          <h2 className="text-base font-semibold text-[hsl(var(--optimis-green))]">Statistiques</h2>
-          <ToggleGroup
-            type="single"
-            value={metric}
-            onValueChange={(v) => v && setMetric(v as ChartMetric)}
-            className="bg-white rounded-xl p-1 shadow-sm border border-border"
-          >
-            {(Object.keys(METRIC_CONFIG) as ChartMetric[]).map((k) => (
-              <ToggleGroupItem
-                key={k}
-                value={k}
-                className="text-xs px-3 py-1.5 data-[state=on]:bg-[hsl(var(--optimis-green))] data-[state=on]:text-white rounded-lg"
-              >
-                {METRIC_CONFIG[k].label}
-              </ToggleGroupItem>
-            ))}
-          </ToggleGroup>
-        </div>
-        <DashboardChart data={monthly} metric={metric} selectedMonth={period} />
+        <RevenueCostChart
+          data={chartData}
+          subtitle={period === "all" ? "Vue annuelle par mois (données réelles)" : `Mois sélectionné : ${periodLabel}`}
+        />
       </div>
 
       {/* Listes récentes */}
