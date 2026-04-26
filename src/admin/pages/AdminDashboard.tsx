@@ -44,26 +44,51 @@ export default function AdminDashboard() {
     },
   });
 
-  // Agrégation revenus par devise (depuis admin_order_lines)
-  const { data: revenueByCurrency } = useQuery({
-    queryKey: ["admin-revenue-by-currency"],
+  // Agrégation CA + Coûts depuis admin_order_lines (joint sur admin_products pour récupérer avg_cpl)
+  const { data: financials } = useQuery({
+    queryKey: ["admin-financials"],
     queryFn: async () => {
       const { data } = await (supabase.from("admin_order_lines" as any) as any)
-        .select("quantity, unit_price, currency, fx_rate_to_chf");
+        .select("quantity, unit_price, currency, fx_rate_to_chf, product_id, admin_orders(order_date), admin_products(avg_cpl, currency, fx_rate_to_chf)");
       const totals: Record<Currency, { native: number; chf: number }> = {
         CHF: { native: 0, chf: 0 },
         CAD: { native: 0, chf: 0 },
       };
+      let totalRevenueChf = 0;
+      let totalCostChf = 0;
+      const monthlyAgg: { revenue: number; cost: number }[] = Array.from({ length: 12 }, () => ({ revenue: 0, cost: 0 }));
+
       (data ?? []).forEach((l: any) => {
         const cur: Currency = (l.currency as Currency) ?? "CHF";
-        const amt = (Number(l.quantity) || 0) * (Number(l.unit_price) || 0);
+        const qty = Number(l.quantity) || 0;
+        const amt = qty * (Number(l.unit_price) || 0);
         const fx = Number(l.fx_rate_to_chf) || 1;
+        const revChf = toCHF(amt, cur, fx);
         totals[cur].native += amt;
-        totals[cur].chf += toCHF(amt, cur, fx);
+        totals[cur].chf += revChf;
+        totalRevenueChf += revChf;
+
+        // Coût = avg_cpl du produit × quantité (converti en CHF)
+        const prod = l.admin_products;
+        const cplCur: Currency = (prod?.currency as Currency) ?? "CHF";
+        const cplFx = Number(prod?.fx_rate_to_chf) || 1;
+        const costNative = qty * (Number(prod?.avg_cpl) || 0);
+        const costChf = toCHF(costNative, cplCur, cplFx);
+        totalCostChf += costChf;
+
+        // Bucket mensuel
+        const date = l.admin_orders?.order_date ? new Date(l.admin_orders.order_date) : null;
+        if (date && !isNaN(date.getTime())) {
+          const m = date.getMonth();
+          monthlyAgg[m].revenue += revChf;
+          monthlyAgg[m].cost += costChf;
+        }
       });
-      return totals;
+
+      return { totals, totalRevenueChf, totalCostChf, monthlyAgg };
     },
   });
+
 
   const monthly = useMemo(
     () => EMPTY_MONTHLY.map((m, i) => ({ ...m, month: MONTH_SHORT[i], monthIndex: i })),
