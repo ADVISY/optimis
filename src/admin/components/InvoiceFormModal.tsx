@@ -16,12 +16,17 @@ import {
   PRODUCT_CATEGORIES,
   DOMAIN_LABELS_FULL,
   OrderDomain,
+  buildHierarchyLabel,
+  getCategoryForDomain,
+  getCategoryLabel,
 } from "@/admin/lib/productCategories";
 
 interface InvoiceLine {
   id: string;
+  product_id: string | null;
+  product_name: string;
   category: string;
-  domain: OrderDomain | "";
+  subcategory: OrderDomain | "";
   description: string;
   quantity: number;
   unit_price: number;
@@ -31,8 +36,10 @@ interface InvoiceLine {
 
 const newLine = (): InvoiceLine => ({
   id: crypto.randomUUID(),
+  product_id: null,
+  product_name: "",
   category: "assurance_finances",
-  domain: "",
+  subcategory: "",
   description: "",
   quantity: 1,
   unit_price: 0,
@@ -46,7 +53,18 @@ interface Props {
   prefillFromOrder?: {
     client_id: string;
     order_ids?: string[];
-    lines: { domain: string; quantity: number; unit_price: number; currency?: Currency; fx_rate_to_chf?: number; comment?: string }[];
+    lines: {
+      product_id?: string | null;
+      product_name?: string | null;
+      category?: string | null;
+      subcategory?: string | null;
+      domain: string;
+      quantity: number;
+      unit_price: number;
+      currency?: Currency;
+      fx_rate_to_chf?: number;
+      comment?: string;
+    }[];
   };
 }
 
@@ -65,6 +83,18 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
     queryKey: ["admin-clients-min"],
     queryFn: async () =>
       (await supabase.from("admin_clients").select("id, company_name").order("company_name")).data ?? [],
+  });
+
+  const { data: products } = useQuery({
+    queryKey: ["admin-invoice-products"],
+    queryFn: async () =>
+      (
+        await supabase
+          .from("admin_products")
+          .select("id, name, domain, unit_price, currency, fx_rate_to_chf, is_active")
+          .eq("is_active", true)
+          .order("name")
+      ).data ?? [],
   });
 
   const { data: settings } = useQuery({
@@ -88,17 +118,24 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
       setClientId(prefillFromOrder.client_id);
       setLinkedOrderIds(prefillFromOrder.order_ids ?? []);
       setLines(
-        prefillFromOrder.lines.map((l) => ({
-          id: crypto.randomUUID(),
-          category:
-            PRODUCT_CATEGORIES.find((c) => c.subDomains.some((s) => s.value === l.domain))?.key ?? "assurance_finances",
-          domain: l.domain as OrderDomain,
-          description: (DOMAIN_LABELS_FULL[l.domain] ?? l.domain) + (l.comment ? ` — ${l.comment}` : ""),
-          quantity: l.quantity,
-          unit_price: l.unit_price,
-          currency: (l.currency as Currency) ?? "CHF",
-          fx_rate_to_chf: Number(l.fx_rate_to_chf) || 1,
-        }))
+        prefillFromOrder.lines.map((l) => {
+          const sub = (l.subcategory ?? l.domain) as OrderDomain;
+          const cat = l.category ?? getCategoryForDomain(sub);
+          const productName = l.product_name ?? "";
+          const breadcrumb = buildHierarchyLabel({ category: cat, subcategory: sub, productName });
+          return {
+            id: crypto.randomUUID(),
+            product_id: l.product_id ?? null,
+            product_name: productName,
+            category: cat,
+            subcategory: sub,
+            description: breadcrumb + (l.comment ? ` — ${l.comment}` : ""),
+            quantity: l.quantity,
+            unit_price: l.unit_price,
+            currency: (l.currency as Currency) ?? "CHF",
+            fx_rate_to_chf: Number(l.fx_rate_to_chf) || 1,
+          };
+        })
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -109,18 +146,33 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
   const removeLine = (id: string) =>
     setLines((ls) => (ls.length === 1 ? ls : ls.filter((l) => l.id !== id)));
 
+  const handlePickProduct = (lineId: string, productId: string) => {
+    const p = (products ?? []).find((x: any) => x.id === productId);
+    if (!p) return;
+    const sub = p.domain as OrderDomain;
+    const cat = getCategoryForDomain(sub);
+    const breadcrumb = buildHierarchyLabel({ category: cat, subcategory: sub, productName: p.name });
+    updateLine(lineId, {
+      product_id: p.id,
+      product_name: p.name,
+      subcategory: sub,
+      category: cat,
+      description: breadcrumb,
+      unit_price: Number(p.unit_price) || 0,
+      currency: ((p.currency as Currency) ?? "CHF"),
+      fx_rate_to_chf: Number(p.fx_rate_to_chf) || 1,
+    });
+  };
+
   // Devise principale = première ligne (factures mono-devise)
   const invoiceCurrency: Currency = lines[0]?.currency ?? "CHF";
   const allSameCurrency = lines.every((l) => l.currency === invoiceCurrency);
 
-  // Sous-total dans la devise de la facture (conversion auto si mixte)
   const subtotal = lines.reduce((s, l) => {
     const lineTotal = l.quantity * l.unit_price;
     if (l.currency === invoiceCurrency) return s + lineTotal;
-    // Convertir via CHF
     const chf = toCHF(lineTotal, l.currency, l.fx_rate_to_chf);
     if (invoiceCurrency === "CHF") return s + chf;
-    // CHF → CAD (utilise taux fx_rate_to_chf des autres lignes)
     const fxBack = lines.find((x) => x.currency === invoiceCurrency)?.fx_rate_to_chf || 1;
     return s + chf / fxBack;
   }, 0);
@@ -172,11 +224,14 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
         description: l.description,
         quantity: l.quantity,
         unit_price: l.unit_price,
+        product_id: l.product_id,
+        product_name: l.product_name || null,
+        category: l.category || null,
+        subcategory: l.subcategory || null,
       }));
-      const { error: lnErr } = await supabase.from("admin_invoice_lines").insert(lineRows);
+      const { error: lnErr } = await (supabase.from("admin_invoice_lines") as any).insert(lineRows);
       if (lnErr) throw lnErr;
 
-      // Lier les commandes à cette facture
       if (linkedOrderIds.length > 0) {
         const { error: linkErr } = await (supabase
           .from("admin_orders") as any)
@@ -245,12 +300,21 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
           )}
 
           {lines.map((line, idx) => {
-            const cat = PRODUCT_CATEGORIES.find((c) => c.key === line.category);
             const lineTotal = line.quantity * line.unit_price;
+            const breadcrumb = buildHierarchyLabel({
+              category: line.category,
+              subcategory: line.subcategory || null,
+              productName: line.product_name || null,
+            });
             return (
               <div key={line.id} className="rounded-xl border border-border bg-muted/30 p-4 space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-muted-foreground uppercase">Ligne {idx + 1}</span>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-semibold text-muted-foreground uppercase">Ligne {idx + 1}</span>
+                    {breadcrumb && (
+                      <span className="text-xs text-[hsl(var(--optimis-green))] font-medium mt-0.5">{breadcrumb}</span>
+                    )}
+                  </div>
                   {lines.length > 1 && (
                     <Button type="button" variant="ghost" size="sm" onClick={() => removeLine(line.id)}
                       className="h-8 w-8 p-0 text-destructive hover:text-destructive hover:bg-destructive/10">
@@ -259,35 +323,49 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
                   )}
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div className="space-y-1.5">
-                    <Label className="text-xs">Catégorie</Label>
-                    <Select value={line.category} onValueChange={(v) => updateLine(line.id, { category: v, domain: "" })}>
-                      <SelectTrigger className="bg-white"><SelectValue /></SelectTrigger>
-                      <SelectContent>
-                        {PRODUCT_CATEGORIES.map((c) => <SelectItem key={c.key} value={c.key}>{c.label}</SelectItem>)}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label className="text-xs">Sous-domaine</Label>
-                    <Select value={line.domain} onValueChange={(v) => {
-                      const lbl = DOMAIN_LABELS_FULL[v] ?? "";
-                      updateLine(line.id, { domain: v as OrderDomain, description: line.description || lbl });
-                    }}>
-                      <SelectTrigger className="bg-white"><SelectValue placeholder="Sélectionner..." /></SelectTrigger>
-                      <SelectContent>
-                        {cat?.subDomains.map((s) => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}
-                      </SelectContent>
-                    </Select>
-                  </div>
+                <div className="space-y-1.5">
+                  <Label className="text-xs">Produit</Label>
+                  <Select
+                    value={line.product_id ?? ""}
+                    onValueChange={(v) => handlePickProduct(line.id, v)}
+                  >
+                    <SelectTrigger className="bg-white">
+                      <SelectValue placeholder="Choisir un produit du catalogue..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {PRODUCT_CATEGORIES.map((cat) => {
+                        const items = (products ?? []).filter((p: any) =>
+                          cat.subDomains.some((s) => s.value === p.domain)
+                        );
+                        if (items.length === 0) return null;
+                        return (
+                          <div key={cat.key}>
+                            <div className="px-2 py-1 text-[10px] font-bold uppercase text-muted-foreground bg-muted/50">
+                              {cat.label}
+                            </div>
+                            {items.map((p: any) => (
+                              <SelectItem key={p.id} value={p.id}>
+                                <span className="text-muted-foreground text-xs">
+                                  {DOMAIN_LABELS_FULL[p.domain]} ›{" "}
+                                </span>
+                                <span className="font-medium">{p.name}</span>
+                              </SelectItem>
+                            ))}
+                          </div>
+                        );
+                      })}
+                    </SelectContent>
+                  </Select>
+                  <p className="text-[11px] text-muted-foreground">
+                    Choisir un produit remplit automatiquement la description, le prix et la devise.
+                  </p>
                 </div>
 
                 <div className="space-y-1.5">
-                  <Label className="text-xs">Description *</Label>
+                  <Label className="text-xs">Description (visible client) *</Label>
                   <Input value={line.description}
                     onChange={(e) => updateLine(line.id, { description: e.target.value })}
-                    className="bg-white" placeholder="Ex: Leads assurance maladie - Novembre 2025" />
+                    className="bg-white" placeholder="Ex: Assurance / Finances › Assurance maladie › Leads premium novembre" />
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
