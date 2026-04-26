@@ -177,7 +177,11 @@ export default function AdminOrders() {
     if (!canBillSelection) return;
     const allLines = selectedOrders.flatMap((o: any) =>
       (o.admin_order_lines ?? []).map((l: any) => ({
-        domain: l.domain,
+        product_id: l.product_id ?? null,
+        product_name: l.product_name ?? null,
+        category: l.category ?? null,
+        subcategory: l.subcategory ?? l.domain ?? null,
+        domain: l.domain ?? l.subcategory,
         quantity: Number(l.quantity),
         unit_price: Number(l.unit_price),
         currency: (l.currency as Currency) ?? "CHF",
@@ -199,7 +203,11 @@ export default function AdminOrders() {
       return;
     }
     const ls = (o.admin_order_lines ?? []).map((l: any) => ({
-      domain: l.domain,
+      product_id: l.product_id ?? null,
+      product_name: l.product_name ?? null,
+      category: l.category ?? null,
+      subcategory: l.subcategory ?? l.domain ?? null,
+      domain: l.domain ?? l.subcategory,
       quantity: Number(l.quantity),
       unit_price: Number(l.unit_price),
       currency: (l.currency as Currency) ?? "CHF",
