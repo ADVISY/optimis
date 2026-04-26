@@ -32,6 +32,8 @@ export interface ProductRow {
   avg_cpl: number;
   image_url: string | null;
   is_active: boolean;
+  currency?: "CHF" | "CAD";
+  fx_rate_to_chf?: number;
 }
 
 interface Props {
