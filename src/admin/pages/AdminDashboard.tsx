@@ -43,6 +43,28 @@ export default function AdminDashboard() {
     },
   });
 
+  // Agrégation revenus par devise (commandes réelles)
+  const { data: revenueByCurrency } = useQuery({
+    queryKey: ["admin-revenue-by-currency"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("admin_orders")
+        .select("total, currency, fx_rate_to_chf");
+      const totals: Record<Currency, { native: number; chf: number }> = {
+        CHF: { native: 0, chf: 0 },
+        CAD: { native: 0, chf: 0 },
+      };
+      (data ?? []).forEach((o: any) => {
+        const cur: Currency = (o.currency as Currency) ?? "CHF";
+        const amt = Number(o.total) || 0;
+        const fx = Number(o.fx_rate_to_chf) || 1;
+        totals[cur].native += amt;
+        totals[cur].chf += toCHF(amt, cur, fx);
+      });
+      return totals;
+    },
+  });
+
   const monthly = useMemo(
     () => EMPTY_MONTHLY.map((m, i) => ({ ...m, month: MONTH_SHORT[i], monthIndex: i })),
     []
