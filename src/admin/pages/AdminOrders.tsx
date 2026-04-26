@@ -426,7 +426,9 @@ export default function AdminOrders() {
                               <table className="w-full text-xs">
                                 <thead className="text-muted-foreground">
                                   <tr>
-                                    <th className="text-left py-1">Sous-domaine</th>
+                                    <th className="text-left py-1">Catégorie</th>
+                                    <th className="text-left py-1">Sous-catégorie</th>
+                                    <th className="text-left py-1">Produit</th>
                                     <th className="text-right py-1">Qté</th>
                                     <th className="text-right py-1">Prix unit.</th>
                                     <th className="text-right py-1">Total ligne</th>
@@ -438,9 +440,13 @@ export default function AdminOrders() {
                                     const cur: Currency = (l.currency as Currency) ?? "CHF";
                                     const fx = Number(l.fx_rate_to_chf) || 1;
                                     const lt = Number(l.line_total ?? l.quantity * l.unit_price);
+                                    const subKey = l.subcategory ?? l.domain;
+                                    const catKey = l.category ?? getCategoryForDomain(subKey);
                                     return (
                                       <tr key={l.id}>
-                                        <td className="py-1">{DOMAIN_LABELS_FULL[l.domain] ?? l.domain}</td>
+                                        <td className="py-1 text-muted-foreground">{getCategoryLabel(catKey)}</td>
+                                        <td className="py-1">{DOMAIN_LABELS_FULL[subKey] ?? subKey}</td>
+                                        <td className="py-1 font-medium">{l.product_name ?? "—"}</td>
                                         <td className="py-1 text-right">{l.quantity}</td>
                                         <td className="py-1 text-right">{formatMoney(Number(l.unit_price), cur)}</td>
                                         <td className="py-1 text-right font-medium">
