@@ -44,13 +44,22 @@ export default function AdminProducts() {
   const stats = useMemo(() => {
     const list = products ?? [];
     const active = list.filter((p) => p.is_active);
+    // Tous les calculs globaux convertis en CHF
     const avgPrice =
       active.length > 0
-        ? active.reduce((s, p) => s + Number(p.unit_price), 0) / active.length
+        ? active.reduce(
+            (s, p) =>
+              s + toCHF(Number(p.unit_price), (p.currency as Currency) ?? "CHF", Number(p.fx_rate_to_chf) || 1),
+            0
+          ) / active.length
         : 0;
     const avgCpl =
       active.length > 0
-        ? active.reduce((s, p) => s + Number(p.avg_cpl), 0) / active.length
+        ? active.reduce(
+            (s, p) =>
+              s + toCHF(Number(p.avg_cpl), (p.currency as Currency) ?? "CHF", Number(p.fx_rate_to_chf) || 1),
+            0
+          ) / active.length
         : 0;
     const avgMargin = avgPrice - avgCpl;
     return { count: active.length, avgPrice, avgCpl, avgMargin };
