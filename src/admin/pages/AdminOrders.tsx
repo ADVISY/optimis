@@ -212,7 +212,7 @@ export default function AdminOrders() {
   const canSubmit =
     !!clientId &&
     lines.length > 0 &&
-    lines.every((l) => l.domain && l.quantity > 0 && l.unit_price >= 0);
+    lines.every((l) => l.subcategory && l.product_name.trim() && l.quantity > 0 && l.unit_price >= 0);
 
   const createMutation = useMutation({
     mutationFn: async () => {
@@ -225,7 +225,11 @@ export default function AdminOrders() {
       const lineRows = lines.map((l, i) => ({
         order_id: order.id,
         position: i,
-        domain: l.domain as any,
+        product_id: l.product_id,
+        product_name: l.product_name,
+        category: l.category,
+        subcategory: l.subcategory,
+        domain: l.subcategory as any, // compat
         quantity: l.quantity,
         unit_price: l.unit_price,
         currency: l.currency,
