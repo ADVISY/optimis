@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Loader2, Plus, Pencil, Trash2, Package, TrendingUp } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { formatCHF } from "@/admin/lib/format";
+import { formatCHF, formatMoney, toCHF, type Currency } from "@/admin/lib/format";
 import { DOMAIN_LABELS_FULL } from "@/admin/lib/productCategories";
 import { getProductIcon } from "@/admin/lib/productIcons";
 import ProductFormModal, { ProductRow } from "@/admin/components/ProductFormModal";
