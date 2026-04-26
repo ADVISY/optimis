@@ -164,6 +164,41 @@ export default function AdminDashboard() {
 
       {/* Cartes statistiques */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+        {/* Carte CA avec tooltip multi-devises */}
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Card className="bg-gradient-to-br from-amber-500/10 to-amber-500/5 border-0 transition-all cursor-help">
+                <CardContent className="p-5">
+                  <div className="flex items-start justify-between mb-3">
+                    <TrendingUp className="h-5 w-5 text-[hsl(var(--optimis-green))]" />
+                    {cadNative > 0 && (
+                      <span className="text-[10px] font-semibold text-muted-foreground">CHF + CAD</span>
+                    )}
+                  </div>
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">
+                    CA total (équiv. CHF)
+                  </p>
+                  <p className="text-2xl font-bold text-[hsl(var(--optimis-green))] mt-1">
+                    {formatCHF(totalChf)}
+                  </p>
+                  {cadNative > 0 && (
+                    <p className="text-[11px] text-muted-foreground mt-1">
+                      dont {formatCAD(cadNative)}
+                    </p>
+                  )}
+                </CardContent>
+              </Card>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" className="space-y-1">
+              <p className="font-semibold text-xs">Détail par devise</p>
+              <p className="text-xs">🇨🇭 CHF natif : <strong>{formatCHF(chfNative)}</strong></p>
+              <p className="text-xs">🇨🇦 CAD natif : <strong>{formatCAD(cadNative)}</strong></p>
+              <p className="text-xs border-t pt-1">≈ <strong>{formatCHF(totalChf)}</strong> au total</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
         {cards.map(({ label, value, icon: Icon, color }) => (
           <Card key={label} className={`bg-gradient-to-br ${color} border-0 transition-all`}>
             <CardContent className="p-5">
