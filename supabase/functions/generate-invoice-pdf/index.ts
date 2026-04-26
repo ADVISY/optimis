@@ -146,7 +146,8 @@ Deno.serve(async (req) => {
     if (!settings) throw new Error("settings_missing");
 
     // --- Préparation Swiss QR Bill ---
-    const qrData = {
+    const ibanClean = settings.iban_qr.replace(/\s/g, "");
+    const qrData: any = {
       currency: "CHF" as const,
       amount: Number(invoice.total),
       additionalInformation: invoice.invoice_number,
@@ -156,7 +157,7 @@ Deno.serve(async (req) => {
         zip: settings.postal_code,
         city: settings.city,
         country: settings.country || "CH",
-        account: settings.iban_qr.replace(/\s/g, ""),
+        account: ibanClean,
       },
       debtor: {
         name: invoice.admin_clients?.company_name || "Client",
@@ -166,6 +167,11 @@ Deno.serve(async (req) => {
         country: "CH",
       },
     };
+
+    // QR-IBAN exige une référence QRR (27 chiffres)
+    if (isQRIban(ibanClean)) {
+      qrData.reference = buildQRR(invoice.invoice_number);
+    }
 
     // --- PDF ---
     const doc = new PDFDocument({ size: "A4", margin: 50 });
