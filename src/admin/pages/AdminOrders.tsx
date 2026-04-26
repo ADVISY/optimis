@@ -18,13 +18,18 @@ import {
   PRODUCT_CATEGORIES,
   DOMAIN_LABELS_FULL,
   OrderDomain,
+  buildHierarchyLabel,
+  getCategoryLabel,
+  getCategoryForDomain,
 } from "@/admin/lib/productCategories";
 import { Badge } from "@/components/ui/badge";
 
 interface OrderLine {
   id: string;
+  product_id: string | null;
+  product_name: string;
   category: string;
-  domain: OrderDomain | "";
+  subcategory: OrderDomain | "";
   quantity: number;
   unit_price: number;
   currency: Currency;
@@ -34,8 +39,10 @@ interface OrderLine {
 
 const newLine = (): OrderLine => ({
   id: crypto.randomUUID(),
+  product_id: null,
+  product_name: "",
   category: "assurance_finances",
-  domain: "",
+  subcategory: "",
   quantity: 1,
   unit_price: 0,
   currency: "CHF",
@@ -52,7 +59,18 @@ export default function AdminOrders() {
     | {
         client_id: string;
         order_ids: string[];
-        lines: { domain: string; quantity: number; unit_price: number; currency: Currency; fx_rate_to_chf: number; comment?: string }[];
+        lines: {
+          product_id?: string | null;
+          product_name?: string | null;
+          category?: string | null;
+          subcategory?: string | null;
+          domain: string;
+          quantity: number;
+          unit_price: number;
+          currency: Currency;
+          fx_rate_to_chf: number;
+          comment?: string;
+        }[];
       }
     | undefined
   >(undefined);
@@ -79,6 +97,18 @@ export default function AdminOrders() {
     queryKey: ["admin-orders-clients"],
     queryFn: async () =>
       (await supabase.from("admin_clients").select("id, company_name").order("company_name")).data ?? [],
+  });
+
+  const { data: products } = useQuery({
+    queryKey: ["admin-orders-products"],
+    queryFn: async () =>
+      (
+        await supabase
+          .from("admin_products")
+          .select("id, name, domain, unit_price, currency, fx_rate_to_chf, is_active")
+          .eq("is_active", true)
+          .order("name")
+      ).data ?? [],
   });
 
   const { data: orders, isLoading } = useQuery({
@@ -147,7 +177,11 @@ export default function AdminOrders() {
     if (!canBillSelection) return;
     const allLines = selectedOrders.flatMap((o: any) =>
       (o.admin_order_lines ?? []).map((l: any) => ({
-        domain: l.domain,
+        product_id: l.product_id ?? null,
+        product_name: l.product_name ?? null,
+        category: l.category ?? null,
+        subcategory: l.subcategory ?? l.domain ?? null,
+        domain: l.domain ?? l.subcategory,
         quantity: Number(l.quantity),
         unit_price: Number(l.unit_price),
         currency: (l.currency as Currency) ?? "CHF",
@@ -169,7 +203,11 @@ export default function AdminOrders() {
       return;
     }
     const ls = (o.admin_order_lines ?? []).map((l: any) => ({
-      domain: l.domain,
+      product_id: l.product_id ?? null,
+      product_name: l.product_name ?? null,
+      category: l.category ?? null,
+      subcategory: l.subcategory ?? l.domain ?? null,
+      domain: l.domain ?? l.subcategory,
       quantity: Number(l.quantity),
       unit_price: Number(l.unit_price),
       currency: (l.currency as Currency) ?? "CHF",
@@ -193,7 +231,7 @@ export default function AdminOrders() {
   const canSubmit =
     !!clientId &&
     lines.length > 0 &&
-    lines.every((l) => l.domain && l.quantity > 0 && l.unit_price >= 0);
+    lines.every((l) => l.subcategory && l.product_name.trim() && l.quantity > 0 && l.unit_price >= 0);
 
   const createMutation = useMutation({
     mutationFn: async () => {
@@ -206,7 +244,11 @@ export default function AdminOrders() {
       const lineRows = lines.map((l, i) => ({
         order_id: order.id,
         position: i,
-        domain: l.domain as any,
+        product_id: l.product_id,
+        product_name: l.product_name,
+        category: l.category,
+        subcategory: l.subcategory,
+        domain: l.subcategory as any, // compat
         quantity: l.quantity,
         unit_price: l.unit_price,
         currency: l.currency,
@@ -384,7 +426,9 @@ export default function AdminOrders() {
                               <table className="w-full text-xs">
                                 <thead className="text-muted-foreground">
                                   <tr>
-                                    <th className="text-left py-1">Sous-domaine</th>
+                                    <th className="text-left py-1">Catégorie</th>
+                                    <th className="text-left py-1">Sous-catégorie</th>
+                                    <th className="text-left py-1">Produit</th>
                                     <th className="text-right py-1">Qté</th>
                                     <th className="text-right py-1">Prix unit.</th>
                                     <th className="text-right py-1">Total ligne</th>
@@ -396,9 +440,13 @@ export default function AdminOrders() {
                                     const cur: Currency = (l.currency as Currency) ?? "CHF";
                                     const fx = Number(l.fx_rate_to_chf) || 1;
                                     const lt = Number(l.line_total ?? l.quantity * l.unit_price);
+                                    const subKey = l.subcategory ?? l.domain;
+                                    const catKey = l.category ?? getCategoryForDomain(subKey);
                                     return (
                                       <tr key={l.id}>
-                                        <td className="py-1">{DOMAIN_LABELS_FULL[l.domain] ?? l.domain}</td>
+                                        <td className="py-1 text-muted-foreground">{getCategoryLabel(catKey)}</td>
+                                        <td className="py-1">{DOMAIN_LABELS_FULL[subKey] ?? subKey}</td>
+                                        <td className="py-1 font-medium">{l.product_name ?? "—"}</td>
                                         <td className="py-1 text-right">{l.quantity}</td>
                                         <td className="py-1 text-right">{formatMoney(Number(l.unit_price), cur)}</td>
                                         <td className="py-1 text-right font-medium">
@@ -465,13 +513,22 @@ export default function AdminOrders() {
             </div>
 
             {lines.map((line, idx) => {
-              const cat = PRODUCT_CATEGORIES.find((c) => c.key === line.category);
               const lineTotal = line.quantity * line.unit_price;
               const lineCHF = toCHF(lineTotal, line.currency, line.fx_rate_to_chf);
+              const breadcrumb = buildHierarchyLabel({
+                category: line.category,
+                subcategory: line.subcategory || null,
+                productName: line.product_name || null,
+              });
               return (
                 <div key={line.id} className="rounded-xl border border-border bg-muted/30 p-4 space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-muted-foreground uppercase">Ligne {idx + 1}</span>
+                    <div className="flex flex-col">
+                      <span className="text-xs font-semibold text-muted-foreground uppercase">Ligne {idx + 1}</span>
+                      {breadcrumb && (
+                        <span className="text-xs text-[hsl(var(--optimis-green))] font-medium mt-0.5">{breadcrumb}</span>
+                      )}
+                    </div>
                     {lines.length > 1 && (
                       <Button type="button" variant="ghost" size="sm" onClick={() => removeLine(line.id)}
                         className="h-8 w-8 p-0 text-destructive hover:text-destructive hover:bg-destructive/10">
@@ -480,25 +537,54 @@ export default function AdminOrders() {
                     )}
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div className="space-y-1.5">
-                      <Label className="text-xs">Catégorie</Label>
-                      <Select value={line.category} onValueChange={(v) => updateLine(line.id, { category: v, domain: "" })}>
-                        <SelectTrigger className="bg-white"><SelectValue /></SelectTrigger>
-                        <SelectContent>
-                          {PRODUCT_CATEGORIES.map((c) => <SelectItem key={c.key} value={c.key}>{c.label}</SelectItem>)}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-1.5">
-                      <Label className="text-xs">Sous-domaine *</Label>
-                      <Select value={line.domain} onValueChange={(v) => updateLine(line.id, { domain: v as OrderDomain })}>
-                        <SelectTrigger className="bg-white"><SelectValue placeholder="Sélectionner..." /></SelectTrigger>
-                        <SelectContent>
-                          {cat?.subDomains.map((s) => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}
-                        </SelectContent>
-                      </Select>
-                    </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">Produit *</Label>
+                    <Select
+                      value={line.product_id ?? ""}
+                      onValueChange={(productId) => {
+                        const p = (products ?? []).find((x: any) => x.id === productId);
+                        if (!p) return;
+                        updateLine(line.id, {
+                          product_id: p.id,
+                          product_name: p.name,
+                          subcategory: p.domain as OrderDomain,
+                          category: getCategoryForDomain(p.domain),
+                          unit_price: Number(p.unit_price) || 0,
+                          currency: ((p.currency as Currency) ?? "CHF"),
+                          fx_rate_to_chf: Number(p.fx_rate_to_chf) || 1,
+                        });
+                      }}
+                    >
+                      <SelectTrigger className="bg-white">
+                        <SelectValue placeholder="Choisir un produit du catalogue..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {PRODUCT_CATEGORIES.map((cat) => {
+                          const items = (products ?? []).filter((p: any) =>
+                            cat.subDomains.some((s) => s.value === p.domain)
+                          );
+                          if (items.length === 0) return null;
+                          return (
+                            <div key={cat.key}>
+                              <div className="px-2 py-1 text-[10px] font-bold uppercase text-muted-foreground bg-muted/50">
+                                {cat.label}
+                              </div>
+                              {items.map((p: any) => (
+                                <SelectItem key={p.id} value={p.id}>
+                                  <span className="text-muted-foreground text-xs">
+                                    {DOMAIN_LABELS_FULL[p.domain]} ›{" "}
+                                  </span>
+                                  <span className="font-medium">{p.name}</span>
+                                </SelectItem>
+                              ))}
+                            </div>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
+                    <p className="text-[11px] text-muted-foreground">
+                      Catégorie et sous-catégorie sont déduites automatiquement du produit.
+                    </p>
                   </div>
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">

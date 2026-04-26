@@ -115,33 +115,45 @@ export type Database = {
       }
       admin_invoice_lines: {
         Row: {
+          category: string | null
           created_at: string
           description: string
           id: string
           invoice_id: string
           line_total: number | null
           position: number
+          product_id: string | null
+          product_name: string | null
           quantity: number
+          subcategory: string | null
           unit_price: number
         }
         Insert: {
+          category?: string | null
           created_at?: string
           description: string
           id?: string
           invoice_id: string
           line_total?: number | null
           position?: number
+          product_id?: string | null
+          product_name?: string | null
           quantity?: number
+          subcategory?: string | null
           unit_price?: number
         }
         Update: {
+          category?: string | null
           created_at?: string
           description?: string
           id?: string
           invoice_id?: string
           line_total?: number | null
           position?: number
+          product_id?: string | null
+          product_name?: string | null
           quantity?: number
+          subcategory?: string | null
           unit_price?: number
         }
         Relationships: [
@@ -150,6 +162,13 @@ export type Database = {
             columns: ["invoice_id"]
             isOneToOne: false
             referencedRelation: "admin_invoices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "admin_invoice_lines_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "admin_products"
             referencedColumns: ["id"]
           },
         ]
@@ -219,26 +238,101 @@ export type Database = {
           },
         ]
       }
+      admin_order_lines: {
+        Row: {
+          category: string | null
+          comment: string | null
+          created_at: string
+          currency: string
+          domain: Database["public"]["Enums"]["order_domain"] | null
+          fx_rate_to_chf: number
+          id: string
+          line_total: number | null
+          order_id: string
+          position: number
+          product_id: string | null
+          product_name: string | null
+          quantity: number
+          subcategory: string | null
+          unit_price: number
+        }
+        Insert: {
+          category?: string | null
+          comment?: string | null
+          created_at?: string
+          currency?: string
+          domain?: Database["public"]["Enums"]["order_domain"] | null
+          fx_rate_to_chf?: number
+          id?: string
+          line_total?: number | null
+          order_id: string
+          position?: number
+          product_id?: string | null
+          product_name?: string | null
+          quantity?: number
+          subcategory?: string | null
+          unit_price?: number
+        }
+        Update: {
+          category?: string | null
+          comment?: string | null
+          created_at?: string
+          currency?: string
+          domain?: Database["public"]["Enums"]["order_domain"] | null
+          fx_rate_to_chf?: number
+          id?: string
+          line_total?: number | null
+          order_id?: string
+          position?: number
+          product_id?: string | null
+          product_name?: string | null
+          quantity?: number
+          subcategory?: string | null
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "admin_order_lines_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "admin_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "admin_order_lines_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "admin_products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       admin_orders: {
         Row: {
           client_id: string
           created_at: string
           id: string
+          invoice_id: string | null
           order_date: string
+          order_number: string | null
           updated_at: string
         }
         Insert: {
           client_id: string
           created_at?: string
           id?: string
+          invoice_id?: string | null
           order_date?: string
+          order_number?: string | null
           updated_at?: string
         }
         Update: {
           client_id?: string
           created_at?: string
           id?: string
+          invoice_id?: string | null
           order_date?: string
+          order_number?: string | null
           updated_at?: string
         }
         Relationships: [
@@ -247,6 +341,13 @@ export type Database = {
             columns: ["client_id"]
             isOneToOne: false
             referencedRelation: "admin_clients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "admin_orders_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "admin_invoices"
             referencedColumns: ["id"]
           },
         ]
