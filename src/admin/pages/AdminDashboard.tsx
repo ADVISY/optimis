@@ -43,21 +43,20 @@ export default function AdminDashboard() {
     },
   });
 
-  // Agrégation revenus par devise (commandes réelles)
+  // Agrégation revenus par devise (depuis admin_order_lines)
   const { data: revenueByCurrency } = useQuery({
     queryKey: ["admin-revenue-by-currency"],
     queryFn: async () => {
-      const { data } = await supabase
-        .from("admin_orders")
-        .select("total, currency, fx_rate_to_chf");
+      const { data } = await (supabase.from("admin_order_lines" as any) as any)
+        .select("quantity, unit_price, currency, fx_rate_to_chf");
       const totals: Record<Currency, { native: number; chf: number }> = {
         CHF: { native: 0, chf: 0 },
         CAD: { native: 0, chf: 0 },
       };
-      (data ?? []).forEach((o: any) => {
-        const cur: Currency = (o.currency as Currency) ?? "CHF";
-        const amt = Number(o.total) || 0;
-        const fx = Number(o.fx_rate_to_chf) || 1;
+      (data ?? []).forEach((l: any) => {
+        const cur: Currency = (l.currency as Currency) ?? "CHF";
+        const amt = (Number(l.quantity) || 0) * (Number(l.unit_price) || 0);
+        const fx = Number(l.fx_rate_to_chf) || 1;
         totals[cur].native += amt;
         totals[cur].chf += toCHF(amt, cur, fx);
       });
@@ -112,12 +111,12 @@ export default function AdminDashboard() {
   const { data: recentOrders } = useQuery({
     queryKey: ["admin-recent-orders"],
     queryFn: async () => {
-      const { data } = await supabase
-        .from("admin_orders")
-        .select("id, order_date, domain, quantity, total, currency, fx_rate_to_chf, admin_clients(company_name)")
+      const { data } = await (supabase
+        .from("admin_orders") as any)
+        .select("id, order_date, order_number, admin_clients(company_name), admin_order_lines(quantity, unit_price, currency, fx_rate_to_chf, domain)")
         .order("order_date", { ascending: false })
         .limit(5);
-      return data ?? [];
+      return (data ?? []) as any[];
     },
   });
 
