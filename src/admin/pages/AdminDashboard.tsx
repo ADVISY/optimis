@@ -4,13 +4,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { AdminLayout } from "@/admin/components/AdminLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, ShoppingBag, FileText, Clock, TrendingUp } from "lucide-react";
-import { formatCHF, formatDate, STATUS_LABELS } from "@/admin/lib/format";
+import { formatCHF, formatCAD, formatMoney, toCHF, type Currency, formatDate, STATUS_LABELS } from "@/admin/lib/format";
 import { DOMAIN_LABELS_FULL } from "@/admin/lib/productCategories";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { DashboardChart, ChartMetric, METRIC_CONFIG } from "@/admin/components/DashboardChart";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const MONTH_LABELS = [
   "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
