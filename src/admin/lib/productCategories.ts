@@ -73,3 +73,24 @@ export function getCategoryForDomain(domain: string): string {
 export function getCategoryLabel(key: string): string {
   return PRODUCT_CATEGORIES.find((c) => c.key === key)?.label ?? key;
 }
+
+export function getSubcategoryLabel(value: string): string {
+  return DOMAIN_LABELS_FULL[value] ?? value;
+}
+
+/**
+ * Construit un libellé hiérarchique lisible pour une ligne :
+ * "Catégorie › Sous-catégorie › Produit"
+ * Si une partie est manquante, elle est omise sans casser le rendu.
+ */
+export function buildHierarchyLabel(opts: {
+  category?: string | null;
+  subcategory?: string | null;
+  productName?: string | null;
+}): string {
+  const parts: string[] = [];
+  if (opts.category) parts.push(getCategoryLabel(opts.category));
+  if (opts.subcategory) parts.push(getSubcategoryLabel(opts.subcategory));
+  if (opts.productName) parts.push(opts.productName);
+  return parts.join(" › ");
+}
