@@ -488,13 +488,22 @@ export default function AdminOrders() {
             </div>
 
             {lines.map((line, idx) => {
-              const cat = PRODUCT_CATEGORIES.find((c) => c.key === line.category);
               const lineTotal = line.quantity * line.unit_price;
               const lineCHF = toCHF(lineTotal, line.currency, line.fx_rate_to_chf);
+              const breadcrumb = buildHierarchyLabel({
+                category: line.category,
+                subcategory: line.subcategory || null,
+                productName: line.product_name || null,
+              });
               return (
                 <div key={line.id} className="rounded-xl border border-border bg-muted/30 p-4 space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-muted-foreground uppercase">Ligne {idx + 1}</span>
+                    <div className="flex flex-col">
+                      <span className="text-xs font-semibold text-muted-foreground uppercase">Ligne {idx + 1}</span>
+                      {breadcrumb && (
+                        <span className="text-xs text-[hsl(var(--optimis-green))] font-medium mt-0.5">{breadcrumb}</span>
+                      )}
+                    </div>
                     {lines.length > 1 && (
                       <Button type="button" variant="ghost" size="sm" onClick={() => removeLine(line.id)}
                         className="h-8 w-8 p-0 text-destructive hover:text-destructive hover:bg-destructive/10">
@@ -503,25 +512,54 @@ export default function AdminOrders() {
                     )}
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div className="space-y-1.5">
-                      <Label className="text-xs">Catégorie</Label>
-                      <Select value={line.category} onValueChange={(v) => updateLine(line.id, { category: v, domain: "" })}>
-                        <SelectTrigger className="bg-white"><SelectValue /></SelectTrigger>
-                        <SelectContent>
-                          {PRODUCT_CATEGORIES.map((c) => <SelectItem key={c.key} value={c.key}>{c.label}</SelectItem>)}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-1.5">
-                      <Label className="text-xs">Sous-domaine *</Label>
-                      <Select value={line.domain} onValueChange={(v) => updateLine(line.id, { domain: v as OrderDomain })}>
-                        <SelectTrigger className="bg-white"><SelectValue placeholder="Sélectionner..." /></SelectTrigger>
-                        <SelectContent>
-                          {cat?.subDomains.map((s) => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}
-                        </SelectContent>
-                      </Select>
-                    </div>
+                  <div className="space-y-1.5">
+                    <Label className="text-xs">Produit *</Label>
+                    <Select
+                      value={line.product_id ?? ""}
+                      onValueChange={(productId) => {
+                        const p = (products ?? []).find((x: any) => x.id === productId);
+                        if (!p) return;
+                        updateLine(line.id, {
+                          product_id: p.id,
+                          product_name: p.name,
+                          subcategory: p.domain as OrderDomain,
+                          category: getCategoryForDomain(p.domain),
+                          unit_price: Number(p.unit_price) || 0,
+                          currency: ((p.currency as Currency) ?? "CHF"),
+                          fx_rate_to_chf: Number(p.fx_rate_to_chf) || 1,
+                        });
+                      }}
+                    >
+                      <SelectTrigger className="bg-white">
+                        <SelectValue placeholder="Choisir un produit du catalogue..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {PRODUCT_CATEGORIES.map((cat) => {
+                          const items = (products ?? []).filter((p: any) =>
+                            cat.subDomains.some((s) => s.value === p.domain)
+                          );
+                          if (items.length === 0) return null;
+                          return (
+                            <div key={cat.key}>
+                              <div className="px-2 py-1 text-[10px] font-bold uppercase text-muted-foreground bg-muted/50">
+                                {cat.label}
+                              </div>
+                              {items.map((p: any) => (
+                                <SelectItem key={p.id} value={p.id}>
+                                  <span className="text-muted-foreground text-xs">
+                                    {DOMAIN_LABELS_FULL[p.domain]} ›{" "}
+                                  </span>
+                                  <span className="font-medium">{p.name}</span>
+                                </SelectItem>
+                              ))}
+                            </div>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
+                    <p className="text-[11px] text-muted-foreground">
+                      Catégorie et sous-catégorie sont déduites automatiquement du produit.
+                    </p>
                   </div>
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
