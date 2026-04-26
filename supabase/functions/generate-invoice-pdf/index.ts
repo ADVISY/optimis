@@ -60,12 +60,17 @@ function buildBreadcrumb(category?: string | null, subcategory?: string | null, 
   return parts.join(" › ");
 }
 
+// Format manuel : Helvetica ne contient pas l'apostrophe étroite (U+2019)
+// ni l'espace insécable étroit (U+202F) que Intl utilise pour fr-CH,
+// ce qui provoque l'affichage de "/" comme glyphe de remplacement.
 function fmtCHF(n: number) {
-  return new Intl.NumberFormat("fr-CH", {
-    style: "currency",
-    currency: "CHF",
-    minimumFractionDigits: 2,
-  }).format(n);
+  const fixed = (Math.round(Number(n) * 100) / 100).toFixed(2);
+  const [intPart, dec] = fixed.split(".");
+  const sign = intPart.startsWith("-") ? "-" : "";
+  const abs = sign ? intPart.slice(1) : intPart;
+  // Séparateur milliers : apostrophe ASCII (standard suisse, supportée Helvetica)
+  const withSep = abs.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+  return `${sign}${withSep}.${dec} CHF`;
 }
 function fmtDate(d: string) {
   return new Intl.DateTimeFormat("fr-CH", {
@@ -376,12 +381,19 @@ Deno.serve(async (req) => {
 
     for (const ln of lines) {
       const breadcrumb = buildBreadcrumb(ln.category, ln.subcategory, ln.product_name);
-      // Estimation hauteur ligne
-      const descHeight = doc
-        .font("Helvetica")
-        .fontSize(9.5)
+
+      // Hauteurs réelles de chaque bloc (le breadcrumb peut wrap sur 2 lignes)
+      const breadcrumbH = breadcrumb
+        ? doc.font("Helvetica-Bold").fontSize(7.5)
+            .heightOfString(breadcrumb.toUpperCase(), { width: 290, characterSpacing: 0.8 })
+        : 0;
+      const descH = doc.font("Helvetica").fontSize(9.5)
         .heightOfString(ln.description, { width: 290 });
-      const rowH = Math.max(28, descHeight + (breadcrumb ? 14 : 8) + 6);
+
+      const PAD_TOP = 8;
+      const PAD_BOT = 8;
+      const GAP = breadcrumb ? 4 : 0;
+      const rowH = Math.max(28, PAD_TOP + breadcrumbH + GAP + descH + PAD_BOT);
 
       // Stop si ça déborde (sécurité single-page)
       if (y + rowH > maxY) {
@@ -397,14 +409,14 @@ Deno.serve(async (req) => {
       }
       zebra = !zebra;
 
-      let textY = y + 7;
+      let textY = y + PAD_TOP;
       if (breadcrumb) {
         doc
           .font("Helvetica-Bold")
           .fontSize(7.5)
           .fillColor(COLOR_ACCENT)
           .text(breadcrumb.toUpperCase(), colDescX, textY, { width: 290, characterSpacing: 0.8 });
-        textY += 11;
+        textY += breadcrumbH + GAP;
       }
 
       doc
@@ -413,7 +425,7 @@ Deno.serve(async (req) => {
         .fillColor(COLOR_TEXT)
         .text(ln.description, colDescX, textY, { width: 290 });
 
-      // Valeurs alignées verticalement au centre
+      // Valeurs alignées verticalement au centre de la ligne
       const valY = y + (rowH - 11) / 2;
       doc.font("Helvetica").fontSize(9.5).fillColor(COLOR_TEXT);
       doc.text(String(ln.quantity), colQtyX, valY, { width: 35, align: "right" });
