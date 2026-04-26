@@ -4,13 +4,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { AdminLayout } from "@/admin/components/AdminLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Users, ShoppingBag, FileText, Clock, TrendingUp } from "lucide-react";
-import { formatCHF, formatDate, STATUS_LABELS } from "@/admin/lib/format";
+import { formatCHF, formatCAD, formatMoney, toCHF, type Currency, formatDate, STATUS_LABELS } from "@/admin/lib/format";
 import { DOMAIN_LABELS_FULL } from "@/admin/lib/productCategories";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { DashboardChart, ChartMetric, METRIC_CONFIG } from "@/admin/components/DashboardChart";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const MONTH_LABELS = [
   "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
@@ -39,6 +40,28 @@ export default function AdminDashboard() {
         .select("id", { count: "exact", head: true })
         .eq("status", "actif");
       return count ?? 0;
+    },
+  });
+
+  // Agrégation revenus par devise (commandes réelles)
+  const { data: revenueByCurrency } = useQuery({
+    queryKey: ["admin-revenue-by-currency"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("admin_orders")
+        .select("total, currency, fx_rate_to_chf");
+      const totals: Record<Currency, { native: number; chf: number }> = {
+        CHF: { native: 0, chf: 0 },
+        CAD: { native: 0, chf: 0 },
+      };
+      (data ?? []).forEach((o: any) => {
+        const cur: Currency = (o.currency as Currency) ?? "CHF";
+        const amt = Number(o.total) || 0;
+        const fx = Number(o.fx_rate_to_chf) || 1;
+        totals[cur].native += amt;
+        totals[cur].chf += toCHF(amt, cur, fx);
+      });
+      return totals;
     },
   });
 
@@ -79,7 +102,7 @@ export default function AdminDashboard() {
     queryFn: async () => {
       const { data } = await supabase
         .from("admin_invoices")
-        .select("id, invoice_number, total, status, invoice_date, admin_clients(company_name)")
+        .select("id, invoice_number, total, status, invoice_date, currency, fx_rate_to_chf, admin_clients(company_name)")
         .order("invoice_date", { ascending: false })
         .limit(5);
       return data ?? [];
@@ -91,16 +114,20 @@ export default function AdminDashboard() {
     queryFn: async () => {
       const { data } = await supabase
         .from("admin_orders")
-        .select("id, order_date, domain, quantity, total, admin_clients(company_name)")
+        .select("id, order_date, domain, quantity, total, currency, fx_rate_to_chf, admin_clients(company_name)")
         .order("order_date", { ascending: false })
         .limit(5);
       return data ?? [];
     },
   });
 
+  const totalChf =
+    (revenueByCurrency?.CHF.chf ?? 0) + (revenueByCurrency?.CAD.chf ?? 0) + periodStats.revenue;
+  const cadNative = revenueByCurrency?.CAD.native ?? 0;
+  const chfNative = revenueByCurrency?.CHF.native ?? 0;
+
   const cards = [
     { label: "Clients actifs", value: activeClientsCount ?? "—", icon: Users, color: "from-emerald-500/10 to-emerald-500/5" },
-    { label: "CA", value: formatCHF(periodStats.revenue), icon: TrendingUp, color: "from-amber-500/10 to-amber-500/5" },
     { label: "Leads livrés", value: periodStats.leads, icon: ShoppingBag, color: "from-blue-500/10 to-blue-500/5" },
     { label: "Factures émises", value: periodStats.invoices_issued, icon: FileText, color: "from-violet-500/10 to-violet-500/5" },
     { label: "Factures en attente", value: periodStats.invoices_pending, icon: Clock, color: "from-orange-500/10 to-orange-500/5" },
@@ -137,6 +164,41 @@ export default function AdminDashboard() {
 
       {/* Cartes statistiques */}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+        {/* Carte CA avec tooltip multi-devises */}
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Card className="bg-gradient-to-br from-amber-500/10 to-amber-500/5 border-0 transition-all cursor-help">
+                <CardContent className="p-5">
+                  <div className="flex items-start justify-between mb-3">
+                    <TrendingUp className="h-5 w-5 text-[hsl(var(--optimis-green))]" />
+                    {cadNative > 0 && (
+                      <span className="text-[10px] font-semibold text-muted-foreground">CHF + CAD</span>
+                    )}
+                  </div>
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">
+                    CA total (équiv. CHF)
+                  </p>
+                  <p className="text-2xl font-bold text-[hsl(var(--optimis-green))] mt-1">
+                    {formatCHF(totalChf)}
+                  </p>
+                  {cadNative > 0 && (
+                    <p className="text-[11px] text-muted-foreground mt-1">
+                      dont {formatCAD(cadNative)}
+                    </p>
+                  )}
+                </CardContent>
+              </Card>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" className="space-y-1">
+              <p className="font-semibold text-xs">Détail par devise</p>
+              <p className="text-xs">🇨🇭 CHF natif : <strong>{formatCHF(chfNative)}</strong></p>
+              <p className="text-xs">🇨🇦 CAD natif : <strong>{formatCAD(cadNative)}</strong></p>
+              <p className="text-xs border-t pt-1">≈ <strong>{formatCHF(totalChf)}</strong> au total</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
         {cards.map(({ label, value, icon: Icon, color }) => (
           <Card key={label} className={`bg-gradient-to-br ${color} border-0 transition-all`}>
             <CardContent className="p-5">
@@ -204,18 +266,29 @@ export default function AdminDashboard() {
               <Link to="/admin/factures" className="text-sm text-[hsl(var(--optimis-green))] hover:underline">Voir tout</Link>
             </div>
             <div className="space-y-3">
-              {recentInvoices?.map((i: any) => (
-                <div key={i.id} className="flex items-center justify-between py-2 border-b border-border last:border-0">
-                  <div>
-                    <p className="font-medium text-sm">{i.invoice_number}</p>
-                    <p className="text-xs text-muted-foreground">{i.admin_clients?.company_name} · {formatDate(i.invoice_date)}</p>
+              {recentInvoices?.map((i: any) => {
+                const cur: Currency = (i.currency as Currency) ?? "CHF";
+                const fx = Number(i.fx_rate_to_chf) || 1;
+                return (
+                  <div key={i.id} className="flex items-center justify-between py-2 border-b border-border last:border-0">
+                    <div>
+                      <p className="font-medium text-sm">{i.invoice_number}</p>
+                      <p className="text-xs text-muted-foreground">{i.admin_clients?.company_name} · {formatDate(i.invoice_date)}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-sm">
+                        {formatMoney(Number(i.total), cur)}
+                        {cur === "CAD" && (
+                          <span className="text-[10px] text-muted-foreground ml-1">
+                            (≈ {formatCHF(toCHF(Number(i.total), cur, fx))})
+                          </span>
+                        )}
+                      </p>
+                      <Badge variant={statusVariant(i.status)} className="text-xs">{STATUS_LABELS[i.status]}</Badge>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <p className="font-semibold text-sm">{formatCHF(Number(i.total))}</p>
-                    <Badge variant={statusVariant(i.status)} className="text-xs">{STATUS_LABELS[i.status]}</Badge>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
               {recentInvoices?.length === 0 && <p className="text-sm text-muted-foreground">Aucune facture</p>}
             </div>
           </CardContent>
@@ -228,18 +301,29 @@ export default function AdminDashboard() {
               <Link to="/admin/commandes" className="text-sm text-[hsl(var(--optimis-green))] hover:underline">Voir tout</Link>
             </div>
             <div className="space-y-3">
-              {recentOrders?.map((o: any) => (
-                <div key={o.id} className="flex items-center justify-between py-2 border-b border-border last:border-0">
-                  <div>
-                    <p className="font-medium text-sm">{o.admin_clients?.company_name}</p>
-                    <p className="text-xs text-muted-foreground">{DOMAIN_LABELS_FULL[o.domain] ?? o.domain} · {formatDate(o.order_date)}</p>
+              {recentOrders?.map((o: any) => {
+                const cur: Currency = (o.currency as Currency) ?? "CHF";
+                const fx = Number(o.fx_rate_to_chf) || 1;
+                return (
+                  <div key={o.id} className="flex items-center justify-between py-2 border-b border-border last:border-0">
+                    <div>
+                      <p className="font-medium text-sm">{o.admin_clients?.company_name}</p>
+                      <p className="text-xs text-muted-foreground">{DOMAIN_LABELS_FULL[o.domain] ?? o.domain} · {formatDate(o.order_date)}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-sm">
+                        {formatMoney(Number(o.total), cur)}
+                        {cur === "CAD" && (
+                          <span className="text-[10px] text-muted-foreground ml-1">
+                            (≈ {formatCHF(toCHF(Number(o.total), cur, fx))})
+                          </span>
+                        )}
+                      </p>
+                      <p className="text-xs text-muted-foreground">{o.quantity} leads</p>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <p className="font-semibold text-sm">{formatCHF(Number(o.total))}</p>
-                    <p className="text-xs text-muted-foreground">{o.quantity} leads</p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
               {recentOrders?.length === 0 && <p className="text-sm text-muted-foreground">Aucune commande</p>}
             </div>
           </CardContent>

@@ -158,7 +158,9 @@ export type Database = {
         Row: {
           client_id: string
           created_at: string
+          currency: string
           due_date: string
+          fx_rate_to_chf: number
           id: string
           invoice_date: string
           invoice_number: string
@@ -174,7 +176,9 @@ export type Database = {
         Insert: {
           client_id: string
           created_at?: string
+          currency?: string
           due_date?: string
+          fx_rate_to_chf?: number
           id?: string
           invoice_date?: string
           invoice_number?: string
@@ -190,7 +194,9 @@ export type Database = {
         Update: {
           client_id?: string
           created_at?: string
+          currency?: string
           due_date?: string
+          fx_rate_to_chf?: number
           id?: string
           invoice_date?: string
           invoice_number?: string
@@ -218,7 +224,9 @@ export type Database = {
           client_id: string
           comment: string | null
           created_at: string
+          currency: string
           domain: Database["public"]["Enums"]["order_domain"]
+          fx_rate_to_chf: number
           id: string
           order_date: string
           quantity: number
@@ -230,7 +238,9 @@ export type Database = {
           client_id: string
           comment?: string | null
           created_at?: string
+          currency?: string
           domain: Database["public"]["Enums"]["order_domain"]
+          fx_rate_to_chf?: number
           id?: string
           order_date?: string
           quantity: number
@@ -242,7 +252,9 @@ export type Database = {
           client_id?: string
           comment?: string | null
           created_at?: string
+          currency?: string
           domain?: Database["public"]["Enums"]["order_domain"]
+          fx_rate_to_chf?: number
           id?: string
           order_date?: string
           quantity?: number
@@ -291,7 +303,9 @@ export type Database = {
         Row: {
           avg_cpl: number
           created_at: string
+          currency: string
           domain: Database["public"]["Enums"]["order_domain"]
+          fx_rate_to_chf: number
           id: string
           image_url: string | null
           is_active: boolean
@@ -302,7 +316,9 @@ export type Database = {
         Insert: {
           avg_cpl?: number
           created_at?: string
+          currency?: string
           domain: Database["public"]["Enums"]["order_domain"]
+          fx_rate_to_chf?: number
           id?: string
           image_url?: string | null
           is_active?: boolean
@@ -313,7 +329,9 @@ export type Database = {
         Update: {
           avg_cpl?: number
           created_at?: string
+          currency?: string
           domain?: Database["public"]["Enums"]["order_domain"]
+          fx_rate_to_chf?: number
           id?: string
           image_url?: string | null
           is_active?: boolean

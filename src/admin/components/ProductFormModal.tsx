@@ -32,6 +32,8 @@ export interface ProductRow {
   avg_cpl: number;
   image_url: string | null;
   is_active: boolean;
+  currency?: "CHF" | "CAD";
+  fx_rate_to_chf?: number;
 }
 
 interface Props {
@@ -64,6 +66,8 @@ export default function ProductFormModal({ open, onOpenChange, product }: Props)
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [isActive, setIsActive] = useState(true);
   const [uploading, setUploading] = useState(false);
+  const [currency, setCurrency] = useState<"CHF" | "CAD">("CHF");
+  const [fxRate, setFxRate] = useState<string>("1");
 
   useEffect(() => {
     if (open) {
@@ -73,6 +77,8 @@ export default function ProductFormModal({ open, onOpenChange, product }: Props)
       setAvgCpl(String(product?.avg_cpl ?? 0));
       setImageUrl(product?.image_url ?? null);
       setIsActive(product?.is_active ?? true);
+      setCurrency((product?.currency as "CHF" | "CAD") ?? "CHF");
+      setFxRate(String(product?.fx_rate_to_chf ?? 1));
     }
   }, [open, product]);
 
@@ -112,6 +118,8 @@ export default function ProductFormModal({ open, onOpenChange, product }: Props)
         avg_cpl: parseFloat(avgCpl) || 0,
         image_url: imageUrl,
         is_active: isActive,
+        currency,
+        fx_rate_to_chf: currency === "CHF" ? 1 : parseFloat(fxRate) || 1,
       };
       if (product?.id) {
         const { error } = await supabase
@@ -225,7 +233,35 @@ export default function ProductFormModal({ open, onOpenChange, product }: Props)
 
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
-              <Label>Prix de vente (CHF) *</Label>
+              <Label>Devise *</Label>
+              <Select value={currency} onValueChange={(v) => setCurrency(v as "CHF" | "CAD")}>
+                <SelectTrigger className="bg-white">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="CHF">🇨🇭 Franc suisse (CHF)</SelectItem>
+                  <SelectItem value="CAD">🇨🇦 Dollar canadien (CAD)</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            {currency === "CAD" && (
+              <div className="space-y-2">
+                <Label>Taux 1 CAD = ? CHF *</Label>
+                <Input
+                  type="number"
+                  step="0.0001"
+                  min="0"
+                  value={fxRate}
+                  onChange={(e) => setFxRate(e.target.value)}
+                  placeholder="0.65"
+                />
+              </div>
+            )}
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-2">
+              <Label>Prix de vente ({currency}) *</Label>
               <Input
                 type="number"
                 step="0.01"
@@ -233,9 +269,14 @@ export default function ProductFormModal({ open, onOpenChange, product }: Props)
                 value={unitPrice}
                 onChange={(e) => setUnitPrice(e.target.value)}
               />
+              {currency === "CAD" && parseFloat(unitPrice) > 0 && parseFloat(fxRate) > 0 && (
+                <p className="text-xs text-muted-foreground">
+                  ≈ {(parseFloat(unitPrice) * parseFloat(fxRate)).toFixed(2)} CHF
+                </p>
+              )}
             </div>
             <div className="space-y-2">
-              <Label>CPL moyen (CHF)</Label>
+              <Label>CPL moyen ({currency})</Label>
               <Input
                 type="number"
                 step="0.01"
@@ -243,6 +284,11 @@ export default function ProductFormModal({ open, onOpenChange, product }: Props)
                 value={avgCpl}
                 onChange={(e) => setAvgCpl(e.target.value)}
               />
+              {currency === "CAD" && parseFloat(avgCpl) > 0 && parseFloat(fxRate) > 0 && (
+                <p className="text-xs text-muted-foreground">
+                  ≈ {(parseFloat(avgCpl) * parseFloat(fxRate)).toFixed(2)} CHF
+                </p>
+              )}
             </div>
           </div>
 
