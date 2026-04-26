@@ -296,18 +296,34 @@ Deno.serve(async (req) => {
     );
 
     for (const ln of lines) {
+      const breadcrumb = buildBreadcrumb(ln.category, ln.subcategory, ln.product_name);
+      const startY = y;
+
+      // Breadcrumb hiérarchique en petit au-dessus, si présent
+      if (breadcrumb) {
+        doc
+          .fillColor(GREEN)
+          .fontSize(8)
+          .text(breadcrumb, 60, y, { width: 270 });
+        y += 11;
+      }
+
+      // Description (libellé visible client)
       doc.fillColor("#000").fontSize(9.5);
       doc.text(ln.description, 60, y, { width: 270 });
-      doc.text(String(ln.quantity), 340, y, { width: 40, align: "right" });
-      doc.text(fmtCHF(Number(ln.unit_price)), 385, y, {
+
+      // Qté / Prix / Total alignés sur le startY
+      doc.text(String(ln.quantity), 340, startY + (breadcrumb ? 6 : 0), { width: 40, align: "right" });
+      doc.text(fmtCHF(Number(ln.unit_price)), 385, startY + (breadcrumb ? 6 : 0), {
         width: 70,
         align: "right",
       });
-      doc.text(fmtCHF(Number(ln.line_total)), 460, y, {
+      doc.text(fmtCHF(Number(ln.line_total)), 460, startY + (breadcrumb ? 6 : 0), {
         width: 80,
         align: "right",
       });
-      y += 22;
+
+      y = Math.max(y + 14, startY + 26);
       doc
         .strokeColor("#eaeaea")
         .lineWidth(0.5)
