@@ -102,7 +102,7 @@ export default function AdminDashboard() {
     queryFn: async () => {
       const { data } = await supabase
         .from("admin_invoices")
-        .select("id, invoice_number, total, status, invoice_date, admin_clients(company_name)")
+        .select("id, invoice_number, total, status, invoice_date, currency, fx_rate_to_chf, admin_clients(company_name)")
         .order("invoice_date", { ascending: false })
         .limit(5);
       return data ?? [];
@@ -114,7 +114,7 @@ export default function AdminDashboard() {
     queryFn: async () => {
       const { data } = await supabase
         .from("admin_orders")
-        .select("id, order_date, domain, quantity, total, admin_clients(company_name)")
+        .select("id, order_date, domain, quantity, total, currency, fx_rate_to_chf, admin_clients(company_name)")
         .order("order_date", { ascending: false })
         .limit(5);
       return data ?? [];
