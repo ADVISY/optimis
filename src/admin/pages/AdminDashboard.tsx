@@ -266,18 +266,29 @@ export default function AdminDashboard() {
               <Link to="/admin/factures" className="text-sm text-[hsl(var(--optimis-green))] hover:underline">Voir tout</Link>
             </div>
             <div className="space-y-3">
-              {recentInvoices?.map((i: any) => (
-                <div key={i.id} className="flex items-center justify-between py-2 border-b border-border last:border-0">
-                  <div>
-                    <p className="font-medium text-sm">{i.invoice_number}</p>
-                    <p className="text-xs text-muted-foreground">{i.admin_clients?.company_name} · {formatDate(i.invoice_date)}</p>
+              {recentInvoices?.map((i: any) => {
+                const cur: Currency = (i.currency as Currency) ?? "CHF";
+                const fx = Number(i.fx_rate_to_chf) || 1;
+                return (
+                  <div key={i.id} className="flex items-center justify-between py-2 border-b border-border last:border-0">
+                    <div>
+                      <p className="font-medium text-sm">{i.invoice_number}</p>
+                      <p className="text-xs text-muted-foreground">{i.admin_clients?.company_name} · {formatDate(i.invoice_date)}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-sm">
+                        {formatMoney(Number(i.total), cur)}
+                        {cur === "CAD" && (
+                          <span className="text-[10px] text-muted-foreground ml-1">
+                            (≈ {formatCHF(toCHF(Number(i.total), cur, fx))})
+                          </span>
+                        )}
+                      </p>
+                      <Badge variant={statusVariant(i.status)} className="text-xs">{STATUS_LABELS[i.status]}</Badge>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <p className="font-semibold text-sm">{formatCHF(Number(i.total))}</p>
-                    <Badge variant={statusVariant(i.status)} className="text-xs">{STATUS_LABELS[i.status]}</Badge>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
               {recentInvoices?.length === 0 && <p className="text-sm text-muted-foreground">Aucune facture</p>}
             </div>
           </CardContent>
