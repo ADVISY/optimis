@@ -43,21 +43,20 @@ export default function AdminDashboard() {
     },
   });
 
-  // Agrégation revenus par devise (commandes réelles)
+  // Agrégation revenus par devise (depuis admin_order_lines)
   const { data: revenueByCurrency } = useQuery({
     queryKey: ["admin-revenue-by-currency"],
     queryFn: async () => {
-      const { data } = await supabase
-        .from("admin_orders")
-        .select("total, currency, fx_rate_to_chf");
+      const { data } = await (supabase.from("admin_order_lines" as any) as any)
+        .select("quantity, unit_price, currency, fx_rate_to_chf");
       const totals: Record<Currency, { native: number; chf: number }> = {
         CHF: { native: 0, chf: 0 },
         CAD: { native: 0, chf: 0 },
       };
-      (data ?? []).forEach((o: any) => {
-        const cur: Currency = (o.currency as Currency) ?? "CHF";
-        const amt = Number(o.total) || 0;
-        const fx = Number(o.fx_rate_to_chf) || 1;
+      (data ?? []).forEach((l: any) => {
+        const cur: Currency = (l.currency as Currency) ?? "CHF";
+        const amt = (Number(l.quantity) || 0) * (Number(l.unit_price) || 0);
+        const fx = Number(l.fx_rate_to_chf) || 1;
         totals[cur].native += amt;
         totals[cur].chf += toCHF(amt, cur, fx);
       });
@@ -112,12 +111,12 @@ export default function AdminDashboard() {
   const { data: recentOrders } = useQuery({
     queryKey: ["admin-recent-orders"],
     queryFn: async () => {
-      const { data } = await supabase
-        .from("admin_orders")
-        .select("id, order_date, domain, quantity, total, currency, fx_rate_to_chf, admin_clients(company_name)")
+      const { data } = await (supabase
+        .from("admin_orders") as any)
+        .select("id, order_date, order_number, admin_clients(company_name), admin_order_lines(quantity, unit_price, currency, fx_rate_to_chf, domain)")
         .order("order_date", { ascending: false })
         .limit(5);
-      return data ?? [];
+      return (data ?? []) as any[];
     },
   });
 
@@ -302,24 +301,26 @@ export default function AdminDashboard() {
             </div>
             <div className="space-y-3">
               {recentOrders?.map((o: any) => {
-                const cur: Currency = (o.currency as Currency) ?? "CHF";
-                const fx = Number(o.fx_rate_to_chf) || 1;
+                const lns = o.admin_order_lines ?? [];
+                const totalChf = lns.reduce(
+                  (s: number, l: any) =>
+                    s + toCHF((Number(l.quantity) || 0) * (Number(l.unit_price) || 0), (l.currency as Currency) ?? "CHF", Number(l.fx_rate_to_chf) || 1),
+                  0
+                );
+                const totalQty = lns.reduce((s: number, l: any) => s + (Number(l.quantity) || 0), 0);
+                const firstDomain = lns[0]?.domain;
+                const more = lns.length > 1 ? ` + ${lns.length - 1}` : "";
                 return (
                   <div key={o.id} className="flex items-center justify-between py-2 border-b border-border last:border-0">
                     <div>
                       <p className="font-medium text-sm">{o.admin_clients?.company_name}</p>
-                      <p className="text-xs text-muted-foreground">{DOMAIN_LABELS_FULL[o.domain] ?? o.domain} · {formatDate(o.order_date)}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {firstDomain ? (DOMAIN_LABELS_FULL[firstDomain] ?? firstDomain) : "—"}{more} · {formatDate(o.order_date)}
+                      </p>
                     </div>
                     <div className="text-right">
-                      <p className="font-semibold text-sm">
-                        {formatMoney(Number(o.total), cur)}
-                        {cur === "CAD" && (
-                          <span className="text-[10px] text-muted-foreground ml-1">
-                            (≈ {formatCHF(toCHF(Number(o.total), cur, fx))})
-                          </span>
-                        )}
-                      </p>
-                      <p className="text-xs text-muted-foreground">{o.quantity} leads</p>
+                      <p className="font-semibold text-sm">{formatCHF(totalChf)}</p>
+                      <p className="text-xs text-muted-foreground">{totalQty} leads · {lns.length} ligne{lns.length > 1 ? "s" : ""}</p>
                     </div>
                   </div>
                 );

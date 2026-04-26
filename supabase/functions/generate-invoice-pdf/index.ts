@@ -67,6 +67,33 @@ async function streamToBuffer(stream: any): Promise<Uint8Array> {
   });
 }
 
+// Calcule la clé de contrôle QRR (Modulo 10 récursif - SIX)
+function qrrCheckDigit(ref: string): string {
+  const table = [0, 9, 4, 6, 8, 2, 7, 1, 3, 5];
+  let carry = 0;
+  for (const c of ref) {
+    const d = parseInt(c, 10);
+    if (isNaN(d)) continue;
+    carry = table[(carry + d) % 10];
+  }
+  return String((10 - carry) % 10);
+}
+
+// Génère une référence QRR de 27 chiffres à partir du numéro de facture
+function buildQRR(invoiceNumber: string): string {
+  const digits = invoiceNumber.replace(/\D/g, "");
+  const padded = digits.padStart(26, "0").slice(-26);
+  return padded + qrrCheckDigit(padded);
+}
+
+// Détecte si un IBAN est un QR-IBAN (IID entre 30000 et 31999, positions 5-9)
+function isQRIban(iban: string): boolean {
+  const clean = iban.replace(/\s/g, "");
+  if (clean.length < 9) return false;
+  const iid = parseInt(clean.slice(4, 9), 10);
+  return iid >= 30000 && iid <= 31999;
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS")
     return new Response(null, { headers: corsHeaders });
@@ -119,7 +146,8 @@ Deno.serve(async (req) => {
     if (!settings) throw new Error("settings_missing");
 
     // --- Préparation Swiss QR Bill ---
-    const qrData = {
+    const ibanClean = settings.iban_qr.replace(/\s/g, "");
+    const qrData: any = {
       currency: "CHF" as const,
       amount: Number(invoice.total),
       additionalInformation: invoice.invoice_number,
@@ -129,7 +157,7 @@ Deno.serve(async (req) => {
         zip: settings.postal_code,
         city: settings.city,
         country: settings.country || "CH",
-        account: settings.iban_qr.replace(/\s/g, ""),
+        account: ibanClean,
       },
       debtor: {
         name: invoice.admin_clients?.company_name || "Client",
@@ -139,6 +167,11 @@ Deno.serve(async (req) => {
         country: "CH",
       },
     };
+
+    // QR-IBAN exige une référence QRR (27 chiffres)
+    if (isQRIban(ibanClean)) {
+      qrData.reference = buildQRR(invoice.invoice_number);
+    }
 
     // --- PDF ---
     const doc = new PDFDocument({ size: "A4", margin: 50 });
