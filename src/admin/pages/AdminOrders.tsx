@@ -88,6 +88,18 @@ export default function AdminOrders() {
       (await supabase.from("admin_clients").select("id, company_name").order("company_name")).data ?? [],
   });
 
+  const { data: products } = useQuery({
+    queryKey: ["admin-orders-products"],
+    queryFn: async () =>
+      (
+        await supabase
+          .from("admin_products")
+          .select("id, name, domain, unit_price, currency, fx_rate_to_chf, is_active")
+          .eq("is_active", true)
+          .order("name")
+      ).data ?? [],
+  });
+
   const { data: orders, isLoading } = useQuery({
     queryKey: ["admin-orders"],
     queryFn: async () => {
