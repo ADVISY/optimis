@@ -301,18 +301,29 @@ export default function AdminDashboard() {
               <Link to="/admin/commandes" className="text-sm text-[hsl(var(--optimis-green))] hover:underline">Voir tout</Link>
             </div>
             <div className="space-y-3">
-              {recentOrders?.map((o: any) => (
-                <div key={o.id} className="flex items-center justify-between py-2 border-b border-border last:border-0">
-                  <div>
-                    <p className="font-medium text-sm">{o.admin_clients?.company_name}</p>
-                    <p className="text-xs text-muted-foreground">{DOMAIN_LABELS_FULL[o.domain] ?? o.domain} · {formatDate(o.order_date)}</p>
+              {recentOrders?.map((o: any) => {
+                const cur: Currency = (o.currency as Currency) ?? "CHF";
+                const fx = Number(o.fx_rate_to_chf) || 1;
+                return (
+                  <div key={o.id} className="flex items-center justify-between py-2 border-b border-border last:border-0">
+                    <div>
+                      <p className="font-medium text-sm">{o.admin_clients?.company_name}</p>
+                      <p className="text-xs text-muted-foreground">{DOMAIN_LABELS_FULL[o.domain] ?? o.domain} · {formatDate(o.order_date)}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-sm">
+                        {formatMoney(Number(o.total), cur)}
+                        {cur === "CAD" && (
+                          <span className="text-[10px] text-muted-foreground ml-1">
+                            (≈ {formatCHF(toCHF(Number(o.total), cur, fx))})
+                          </span>
+                        )}
+                      </p>
+                      <p className="text-xs text-muted-foreground">{o.quantity} leads</p>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <p className="font-semibold text-sm">{formatCHF(Number(o.total))}</p>
-                    <p className="text-xs text-muted-foreground">{o.quantity} leads</p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
               {recentOrders?.length === 0 && <p className="text-sm text-muted-foreground">Aucune commande</p>}
             </div>
           </CardContent>
