@@ -222,44 +222,23 @@ export type Database = {
       admin_orders: {
         Row: {
           client_id: string
-          comment: string | null
           created_at: string
-          currency: string
-          domain: Database["public"]["Enums"]["order_domain"]
-          fx_rate_to_chf: number
           id: string
           order_date: string
-          quantity: number
-          total: number | null
-          unit_price: number
           updated_at: string
         }
         Insert: {
           client_id: string
-          comment?: string | null
           created_at?: string
-          currency?: string
-          domain: Database["public"]["Enums"]["order_domain"]
-          fx_rate_to_chf?: number
           id?: string
           order_date?: string
-          quantity: number
-          total?: number | null
-          unit_price: number
           updated_at?: string
         }
         Update: {
           client_id?: string
-          comment?: string | null
           created_at?: string
-          currency?: string
-          domain?: Database["public"]["Enums"]["order_domain"]
-          fx_rate_to_chf?: number
           id?: string
           order_date?: string
-          quantity?: number
-          total?: number | null
-          unit_price?: number
           updated_at?: string
         }
         Relationships: [
