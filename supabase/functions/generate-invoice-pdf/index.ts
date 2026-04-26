@@ -60,12 +60,17 @@ function buildBreadcrumb(category?: string | null, subcategory?: string | null, 
   return parts.join(" › ");
 }
 
+// Format manuel : Helvetica ne contient pas l'apostrophe étroite (U+2019)
+// ni l'espace insécable étroit (U+202F) que Intl utilise pour fr-CH,
+// ce qui provoque l'affichage de "/" comme glyphe de remplacement.
 function fmtCHF(n: number) {
-  return new Intl.NumberFormat("fr-CH", {
-    style: "currency",
-    currency: "CHF",
-    minimumFractionDigits: 2,
-  }).format(n);
+  const fixed = (Math.round(Number(n) * 100) / 100).toFixed(2);
+  const [intPart, dec] = fixed.split(".");
+  const sign = intPart.startsWith("-") ? "-" : "";
+  const abs = sign ? intPart.slice(1) : intPart;
+  // Séparateur milliers : apostrophe ASCII (standard suisse, supportée Helvetica)
+  const withSep = abs.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+  return `${sign}${withSep}.${dec} CHF`;
 }
 function fmtDate(d: string) {
   return new Intl.DateTimeFormat("fr-CH", {
