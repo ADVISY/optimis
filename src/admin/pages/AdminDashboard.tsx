@@ -146,12 +146,39 @@ export default function AdminDashboard() {
     },
   });
 
-  const totalChf =
-    (revenueByCurrency?.CHF.chf ?? 0) + (revenueByCurrency?.CAD.chf ?? 0) + periodStats.revenue;
-  const cadNative = revenueByCurrency?.CAD.native ?? 0;
-  const chfNative = revenueByCurrency?.CHF.native ?? 0;
+  // Sélection des données financières selon période
+  const monthlyAgg = financials?.monthlyAgg ?? Array.from({ length: 12 }, () => ({ revenue: 0, cost: 0 }));
+  const periodFinancials = useMemo(() => {
+    if (period === "all") {
+      return {
+        revenue: financials?.totalRevenueChf ?? 0,
+        cost: financials?.totalCostChf ?? 0,
+      };
+    }
+    const m = monthlyAgg[period] ?? { revenue: 0, cost: 0 };
+    return { revenue: m.revenue, cost: m.cost };
+  }, [financials, monthlyAgg, period]);
 
-  const cards = [
+  const totalRevenue = periodFinancials.revenue;
+  const totalCost = periodFinancials.cost;
+  const totalMargin = totalRevenue - totalCost;
+  const marginPct = totalRevenue > 0 ? (totalMargin / totalRevenue) * 100 : 0;
+
+  const cadNative = financials?.totals.CAD.native ?? 0;
+  const chfNative = financials?.totals.CHF.native ?? 0;
+
+  const chartData: RevenueCostPoint[] = useMemo(
+    () =>
+      monthlyAgg.map((m, i) => ({
+        name: MONTH_SHORT[i],
+        revenue: Math.round(m.revenue),
+        cost: Math.round(m.cost),
+        margin: Math.round(m.revenue - m.cost),
+      })),
+    [monthlyAgg]
+  );
+
+  const secondaryCards = [
     { label: "Clients actifs", value: activeClientsCount ?? "—", icon: Users, color: "from-emerald-500/10 to-emerald-500/5" },
     { label: "Leads livrés", value: periodStats.leads, icon: ShoppingBag, color: "from-blue-500/10 to-blue-500/5" },
     { label: "Factures émises", value: periodStats.invoices_issued, icon: FileText, color: "from-violet-500/10 to-violet-500/5" },
@@ -187,45 +214,63 @@ export default function AdminDashboard() {
         </Select>
       </div>
 
-      {/* Cartes statistiques */}
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
-        {/* Carte CA avec tooltip multi-devises */}
+      {/* KPI principaux : CA / Coûts / Marge */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Card className="bg-gradient-to-br from-amber-500/10 to-amber-500/5 border-0 transition-all cursor-help">
+              <Card className="bg-gradient-to-br from-emerald-500/15 to-emerald-500/5 border-0 cursor-help">
                 <CardContent className="p-5">
                   <div className="flex items-start justify-between mb-3">
                     <TrendingUp className="h-5 w-5 text-[hsl(var(--optimis-green))]" />
-                    {cadNative > 0 && (
-                      <span className="text-[10px] font-semibold text-muted-foreground">CHF + CAD</span>
-                    )}
+                    {cadNative > 0 && <span className="text-[10px] font-semibold text-muted-foreground">CHF + CAD</span>}
                   </div>
-                  <p className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">
-                    CA total (équiv. CHF)
-                  </p>
-                  <p className="text-2xl font-bold text-[hsl(var(--optimis-green))] mt-1">
-                    {formatCHF(totalChf)}
-                  </p>
-                  {cadNative > 0 && (
-                    <p className="text-[11px] text-muted-foreground mt-1">
-                      dont {formatCAD(cadNative)}
-                    </p>
-                  )}
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">Chiffre d'affaires</p>
+                  <p className="text-3xl font-bold text-[hsl(var(--optimis-green))] mt-1">{formatCHF(totalRevenue)}</p>
+                  <p className="text-[11px] text-muted-foreground mt-1">Prix de vente des leads livrés</p>
                 </CardContent>
               </Card>
             </TooltipTrigger>
             <TooltipContent side="bottom" className="space-y-1">
-              <p className="font-semibold text-xs">Détail par devise</p>
+              <p className="font-semibold text-xs">Détail par devise (total)</p>
               <p className="text-xs">🇨🇭 CHF natif : <strong>{formatCHF(chfNative)}</strong></p>
               <p className="text-xs">🇨🇦 CAD natif : <strong>{formatCAD(cadNative)}</strong></p>
-              <p className="text-xs border-t pt-1">≈ <strong>{formatCHF(totalChf)}</strong> au total</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
 
-        {cards.map(({ label, value, icon: Icon, color }) => (
-          <Card key={label} className={`bg-gradient-to-br ${color} border-0 transition-all`}>
+        <Card className="bg-gradient-to-br from-rose-500/15 to-rose-500/5 border-0">
+          <CardContent className="p-5">
+            <div className="flex items-start justify-between mb-3">
+              <TrendingDown className="h-5 w-5 text-rose-600" />
+            </div>
+            <p className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">Coût total</p>
+            <p className="text-3xl font-bold text-rose-700 mt-1">{formatCHF(totalCost)}</p>
+            <p className="text-[11px] text-muted-foreground mt-1">Σ (avg_cpl × quantité)</p>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gradient-to-br from-amber-500/15 to-amber-500/5 border-0">
+          <CardContent className="p-5">
+            <div className="flex items-start justify-between mb-3">
+              <Percent className="h-5 w-5 text-amber-600" />
+              <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${marginPct >= 0 ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700"}`}>
+                {marginPct.toFixed(1)}%
+              </span>
+            </div>
+            <p className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">Marge nette</p>
+            <p className={`text-3xl font-bold mt-1 ${totalMargin >= 0 ? "text-[hsl(var(--optimis-green))]" : "text-rose-700"}`}>
+              {formatCHF(totalMargin)}
+            </p>
+            <p className="text-[11px] text-muted-foreground mt-1">CA − Coût</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Cartes secondaires */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {secondaryCards.map(({ label, value, icon: Icon, color }) => (
+          <Card key={label} className={`bg-gradient-to-br ${color} border-0`}>
             <CardContent className="p-5">
               <div className="flex items-start justify-between mb-3">
                 <Icon className="h-5 w-5 text-[hsl(var(--optimis-green))]" />
@@ -237,28 +282,12 @@ export default function AdminDashboard() {
         ))}
       </div>
 
-      {/* Graphique principal + sélecteur métrique */}
+      {/* Graphique combiné CA / Coûts / Marge */}
       <div className="mb-8">
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
-          <h2 className="text-base font-semibold text-[hsl(var(--optimis-green))]">Statistiques</h2>
-          <ToggleGroup
-            type="single"
-            value={metric}
-            onValueChange={(v) => v && setMetric(v as ChartMetric)}
-            className="bg-white rounded-xl p-1 shadow-sm border border-border"
-          >
-            {(Object.keys(METRIC_CONFIG) as ChartMetric[]).map((k) => (
-              <ToggleGroupItem
-                key={k}
-                value={k}
-                className="text-xs px-3 py-1.5 data-[state=on]:bg-[hsl(var(--optimis-green))] data-[state=on]:text-white rounded-lg"
-              >
-                {METRIC_CONFIG[k].label}
-              </ToggleGroupItem>
-            ))}
-          </ToggleGroup>
-        </div>
-        <DashboardChart data={monthly} metric={metric} selectedMonth={period} />
+        <RevenueCostChart
+          data={chartData}
+          subtitle={period === "all" ? "Vue annuelle par mois (données réelles)" : `Mois sélectionné : ${periodLabel}`}
+        />
       </div>
 
       {/* Listes récentes */}
