@@ -301,24 +301,26 @@ export default function AdminDashboard() {
             </div>
             <div className="space-y-3">
               {recentOrders?.map((o: any) => {
-                const cur: Currency = (o.currency as Currency) ?? "CHF";
-                const fx = Number(o.fx_rate_to_chf) || 1;
+                const lns = o.admin_order_lines ?? [];
+                const totalChf = lns.reduce(
+                  (s: number, l: any) =>
+                    s + toCHF((Number(l.quantity) || 0) * (Number(l.unit_price) || 0), (l.currency as Currency) ?? "CHF", Number(l.fx_rate_to_chf) || 1),
+                  0
+                );
+                const totalQty = lns.reduce((s: number, l: any) => s + (Number(l.quantity) || 0), 0);
+                const firstDomain = lns[0]?.domain;
+                const more = lns.length > 1 ? ` + ${lns.length - 1}` : "";
                 return (
                   <div key={o.id} className="flex items-center justify-between py-2 border-b border-border last:border-0">
                     <div>
                       <p className="font-medium text-sm">{o.admin_clients?.company_name}</p>
-                      <p className="text-xs text-muted-foreground">{DOMAIN_LABELS_FULL[o.domain] ?? o.domain} · {formatDate(o.order_date)}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {firstDomain ? (DOMAIN_LABELS_FULL[firstDomain] ?? firstDomain) : "—"}{more} · {formatDate(o.order_date)}
+                      </p>
                     </div>
                     <div className="text-right">
-                      <p className="font-semibold text-sm">
-                        {formatMoney(Number(o.total), cur)}
-                        {cur === "CAD" && (
-                          <span className="text-[10px] text-muted-foreground ml-1">
-                            (≈ {formatCHF(toCHF(Number(o.total), cur, fx))})
-                          </span>
-                        )}
-                      </p>
-                      <p className="text-xs text-muted-foreground">{o.quantity} leads</p>
+                      <p className="font-semibold text-sm">{formatCHF(totalChf)}</p>
+                      <p className="text-xs text-muted-foreground">{totalQty} leads · {lns.length} ligne{lns.length > 1 ? "s" : ""}</p>
                     </div>
                   </div>
                 );
