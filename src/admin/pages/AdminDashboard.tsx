@@ -29,7 +29,6 @@ const EMPTY_MONTHLY = Array.from({ length: 12 }, () => ({
 export default function AdminDashboard() {
   // "all" = année / 0..11 = mois
   const [period, setPeriod] = useState<"all" | number>("all");
-  const [metric, setMetric] = useState<ChartMetric>("revenue");
 
   const { data: activeClientsCount } = useQuery({
     queryKey: ["admin-active-clients-count"],
