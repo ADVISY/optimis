@@ -178,8 +178,8 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
 
       // Lier les commandes à cette facture
       if (linkedOrderIds.length > 0) {
-        const { error: linkErr } = await supabase
-          .from("admin_orders")
+        const { error: linkErr } = await (supabase
+          .from("admin_orders") as any)
           .update({ invoice_id: inv.id })
           .in("id", linkedOrderIds);
         if (linkErr) throw linkErr;

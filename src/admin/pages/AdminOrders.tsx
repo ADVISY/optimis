@@ -213,7 +213,7 @@ export default function AdminOrders() {
         fx_rate_to_chf: l.fx_rate_to_chf,
         comment: l.comment || null,
       }));
-      const { error: lErr } = await supabase.from("admin_order_lines").insert(lineRows);
+      const { error: lErr } = await (supabase.from("admin_order_lines" as any) as any).insert(lineRows);
       if (lErr) throw lErr;
       return order;
     },
@@ -223,7 +223,7 @@ export default function AdminOrders() {
       qc.invalidateQueries({ queryKey: ["admin-revenue-by-currency"] });
       setOpenModal(false);
       resetForm();
-      toast({ title: "Commande enregistrée", description: `${order.order_number} · ${lines.length} ligne(s)` });
+      toast({ title: "Commande enregistrée", description: `${(order as any).order_number} · ${lines.length} ligne(s)` });
     },
     onError: (e: any) => toast({ title: "Erreur", description: e.message, variant: "destructive" }),
   });
