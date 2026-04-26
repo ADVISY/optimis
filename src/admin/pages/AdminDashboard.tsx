@@ -121,9 +121,13 @@ export default function AdminDashboard() {
     },
   });
 
+  const totalChf =
+    (revenueByCurrency?.CHF.chf ?? 0) + (revenueByCurrency?.CAD.chf ?? 0) + periodStats.revenue;
+  const cadNative = revenueByCurrency?.CAD.native ?? 0;
+  const chfNative = revenueByCurrency?.CHF.native ?? 0;
+
   const cards = [
     { label: "Clients actifs", value: activeClientsCount ?? "—", icon: Users, color: "from-emerald-500/10 to-emerald-500/5" },
-    { label: "CA", value: formatCHF(periodStats.revenue), icon: TrendingUp, color: "from-amber-500/10 to-amber-500/5" },
     { label: "Leads livrés", value: periodStats.leads, icon: ShoppingBag, color: "from-blue-500/10 to-blue-500/5" },
     { label: "Factures émises", value: periodStats.invoices_issued, icon: FileText, color: "from-violet-500/10 to-violet-500/5" },
     { label: "Factures en attente", value: periodStats.invoices_pending, icon: Clock, color: "from-orange-500/10 to-orange-500/5" },
