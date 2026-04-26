@@ -32,6 +32,20 @@ const DOMAIN_LABELS: Record<string, string> = {
   autre: "Autre",
 };
 
+const CATEGORY_LABELS: Record<string, string> = {
+  assurance_finances: "Assurance / Finances",
+  telecom: "Télécom",
+  immobilier: "Immobilier",
+};
+
+function buildBreadcrumb(category?: string | null, subcategory?: string | null, productName?: string | null): string {
+  const parts: string[] = [];
+  if (category && CATEGORY_LABELS[category]) parts.push(CATEGORY_LABELS[category]);
+  if (subcategory && DOMAIN_LABELS[subcategory]) parts.push(DOMAIN_LABELS[subcategory]);
+  if (productName) parts.push(productName);
+  return parts.join(" › ");
+}
+
 function fmtCHF(n: number) {
   return new Intl.NumberFormat("fr-CH", {
     style: "currency",
