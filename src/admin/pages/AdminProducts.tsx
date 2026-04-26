@@ -187,9 +187,14 @@ export default function AdminProducts() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {products!.map((p) => {
+            const cur: Currency = (p.currency as Currency) ?? "CHF";
+            const fx = Number(p.fx_rate_to_chf) || 1;
             const margin = Number(p.unit_price) - Number(p.avg_cpl);
             const marginPct =
               Number(p.unit_price) > 0 ? (margin / Number(p.unit_price)) * 100 : 0;
+            const priceCHF = toCHF(Number(p.unit_price), cur, fx);
+            const cplCHF = toCHF(Number(p.avg_cpl), cur, fx);
+            const marginCHF = priceCHF - cplCHF;
             return (
               <Card
                 key={p.id}
@@ -198,7 +203,7 @@ export default function AdminProducts() {
                 }`}
               >
                 {/* Image bandeau — icône glass 3D par défaut, image custom si uploadée */}
-                <div className="h-36 bg-gradient-to-br from-[hsl(var(--optimis-green))]/10 to-[hsl(var(--optimis-green))]/5 flex items-center justify-center overflow-hidden p-3">
+                <div className="h-36 bg-gradient-to-br from-[hsl(var(--optimis-green))]/10 to-[hsl(var(--optimis-green))]/5 flex items-center justify-center overflow-hidden p-3 relative">
                   <img
                     src={getProductIcon(p.domain, p.image_url)}
                     alt={p.name}
@@ -209,6 +214,11 @@ export default function AdminProducts() {
                         : "h-full w-auto object-contain drop-shadow-lg"
                     }
                   />
+                  {cur === "CAD" && (
+                    <Badge className="absolute top-2 right-2 bg-white/90 text-[hsl(var(--optimis-green))] hover:bg-white">
+                      🇨🇦 CAD
+                    </Badge>
+                  )}
                 </div>
 
                 <CardContent className="p-5 space-y-4">
@@ -236,16 +246,22 @@ export default function AdminProducts() {
                         Prix
                       </p>
                       <p className="text-sm font-bold text-[hsl(var(--optimis-green))]">
-                        {formatCHF(Number(p.unit_price))}
+                        {formatMoney(Number(p.unit_price), cur)}
                       </p>
+                      {cur === "CAD" && (
+                        <p className="text-[10px] text-muted-foreground">≈ {formatCHF(priceCHF)}</p>
+                      )}
                     </div>
                     <div>
                       <p className="text-[10px] uppercase tracking-wide text-muted-foreground font-semibold">
                         CPL
                       </p>
                       <p className="text-sm font-bold text-orange-600">
-                        {formatCHF(Number(p.avg_cpl))}
+                        {formatMoney(Number(p.avg_cpl), cur)}
                       </p>
+                      {cur === "CAD" && (
+                        <p className="text-[10px] text-muted-foreground">≈ {formatCHF(cplCHF)}</p>
+                      )}
                     </div>
                     <div>
                       <p className="text-[10px] uppercase tracking-wide text-muted-foreground font-semibold">
@@ -256,11 +272,14 @@ export default function AdminProducts() {
                           margin >= 0 ? "text-[hsl(var(--optimis-green))]" : "text-destructive"
                         }`}
                       >
-                        {formatCHF(margin)}
+                        {formatMoney(margin, cur)}
                         <span className="text-[10px] font-normal ml-1">
                           ({marginPct.toFixed(0)}%)
                         </span>
                       </p>
+                      {cur === "CAD" && (
+                        <p className="text-[10px] text-muted-foreground">≈ {formatCHF(marginCHF)}</p>
+                      )}
                     </div>
                   </div>
 
