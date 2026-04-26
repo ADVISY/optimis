@@ -59,7 +59,18 @@ export default function AdminOrders() {
     | {
         client_id: string;
         order_ids: string[];
-        lines: { domain: string; quantity: number; unit_price: number; currency: Currency; fx_rate_to_chf: number; comment?: string }[];
+        lines: {
+          product_id?: string | null;
+          product_name?: string | null;
+          category?: string | null;
+          subcategory?: string | null;
+          domain: string;
+          quantity: number;
+          unit_price: number;
+          currency: Currency;
+          fx_rate_to_chf: number;
+          comment?: string;
+        }[];
       }
     | undefined
   >(undefined);
