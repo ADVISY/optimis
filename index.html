@@ -31,7 +31,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ruda:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code (idempotent : protégé contre une double init) -->
     <script>
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -41,34 +41,43 @@
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
+      window.__optimisMetaInit = window.__optimisMetaInit || {};
       // DE pixel - only on /de/ pages
-      if (window.location.pathname.startsWith('/de')) {
+      if (window.location.pathname.startsWith('/de') && !window.__optimisMetaInit.de) {
         fbq('init', '1639523097079849');
         fbq('track', 'PageView');
+        window.__optimisMetaInit.de = true;
       }
       // FR pixel - only on /fr/ pages
-      if (window.location.pathname.startsWith('/fr')) {
+      if (window.location.pathname.startsWith('/fr') && !window.__optimisMetaInit.fr) {
         fbq('init', '1569978013669693');
         fbq('track', 'PageView');
+        window.__optimisMetaInit.fr = true;
       }
     </script>
     <!-- End Meta Pixel Code -->
     
-    <!-- TikTok Pixel Code -->
+    <!-- TikTok Pixel Code (idempotent + auto-tracking des clics désactivé) -->
     <script>
       !function (w, d, t) {
         w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
         var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
         ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+        window.__optimisTtqInit = window.__optimisTtqInit || {};
+        // Désactive l'auto-tracking des "Button Click" qui pollue Events Manager
+        // et fausse les conversions (sera respecté dès load).
+        var ttqOpts = { disableAutoEvent: true };
         // DE pixel - only on /de/ pages
-        if (window.location.pathname.startsWith('/de')) {
-          ttq.load('D64R0M3C77UBD797DIVG');
+        if (window.location.pathname.startsWith('/de') && !window.__optimisTtqInit.de) {
+          ttq.load('D64R0M3C77UBD797DIVG', ttqOpts);
           ttq.page();
+          window.__optimisTtqInit.de = true;
         }
         // FR pixel - only on /fr/ pages
-        if (window.location.pathname.startsWith('/fr')) {
-          ttq.load('D1VKVABC77U1VILI8A5G');
+        if (window.location.pathname.startsWith('/fr') && !window.__optimisTtqInit.fr) {
+          ttq.load('D1VKVABC77U1VILI8A5G', ttqOpts);
           ttq.page();
+          window.__optimisTtqInit.fr = true;
         }
       }(window, document, 'ttq');
     </script>
