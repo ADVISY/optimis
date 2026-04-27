@@ -528,18 +528,28 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
 
       console.log("Lead submitted successfully:", data);
 
-      // Track Lead event for Meta Pixel — eventID = leadId pour dédup CAPI future.
-      if ((window as any).fbq) {
-        (window as any).fbq('track', 'Lead', {}, { eventID: leadId });
-        console.log("Meta Pixel: Lead event tracked", { eventID: leadId });
-      }
+      // Dédup global : un même leadId ne doit JAMAIS générer plus d'un Lead
+      // sur Meta + TikTok + Google, même si l'utilisateur double-clique,
+      // resoumet le formulaire ou recharge la page (sessionStorage).
+      const dedupKey = `lead_tracked_${leadId}`;
+      const alreadyTracked = sessionStorage.getItem(dedupKey) === "1";
 
-      // Track Lead event for TikTok Pixel — événement standard "Lead"
-      // (au lieu de "SubmitForm" qui n'était pas reconnu comme conversion par les campagnes).
-      // event_id = leadId pour dédup Events API future.
-      if ((window as any).ttq) {
-        (window as any).ttq.track('Lead', { event_id: leadId });
-        console.log("TikTok Pixel: Lead event tracked", { event_id: leadId });
+      if (!alreadyTracked) {
+        // Meta Pixel — eventID = leadId pour dédup CAPI future.
+        if ((window as any).fbq) {
+          (window as any).fbq('track', 'Lead', {}, { eventID: leadId });
+          console.log("Meta Pixel: Lead event tracked", { eventID: leadId });
+        }
+
+        // TikTok Pixel — event_id = leadId pour dédup Events API future.
+        if ((window as any).ttq) {
+          (window as any).ttq.track('Lead', { event_id: leadId });
+          console.log("TikTok Pixel: Lead event tracked", { event_id: leadId });
+        }
+
+        sessionStorage.setItem(dedupKey, "1");
+      } else {
+        console.log("Lead tracking skipped (already tracked this session)", { leadId });
       }
 
       toast({
