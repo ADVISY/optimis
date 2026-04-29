@@ -40,7 +40,7 @@ interface SubsidyFormData {
   phone: string;
 }
 
-const TOTAL_STEPS = 4;
+const TOTAL_STEPS = 5;
 
 const SubsidyForm = () => {
   const { t, i18n } = useTranslation();
@@ -128,17 +128,18 @@ const SubsidyForm = () => {
 
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 1: return formData.postalCode.replace(/\D/g, '').length >= 4 && formData.birthDate !== null && formData.householdSize !== "" && formData.hasCurrentInsurance !== "";
-      case 2: return formData.incomeRange !== "";
-      case 3: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
-      case 4: return isValidEmail(formData.email) && isValidPhone(formData.phone);
+      case 1: return formData.postalCode.replace(/\D/g, '').length >= 4 && formData.birthDate !== null;
+      case 2: return formData.householdSize !== "" && formData.hasCurrentInsurance !== "";
+      case 3: return formData.incomeRange !== "";
+      case 4: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
+      case 5: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
     }
   };
 
   const getStepErrors = (step: number): Record<string, string> => {
-    if (step === 3) return getIdentityErrors(formData.firstName, formData.lastName);
-    if (step === 4) return getContactErrors(formData.email, formData.phone);
+    if (step === 4) return getIdentityErrors(formData.firstName, formData.lastName);
+    if (step === 5) return getContactErrors(formData.email, formData.phone);
     return {};
   };
 
@@ -219,7 +220,7 @@ const SubsidyForm = () => {
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
     >
-      {/* Step 1: Profile & Insurance */}
+      {/* Step 1: Postal code & birth date */}
       <FormStep isActive={currentStep === 1}>
         <div className="space-y-3">
           <FormFieldWrapper label={t("forms.subsidy.postalCode")} htmlFor="postalCode" required>
@@ -245,7 +246,12 @@ const SubsidyForm = () => {
               className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
+        </div>
+      </FormStep>
 
+      {/* Step 2: Household & current insurance */}
+      <FormStep isActive={currentStep === 2}>
+        <div className="space-y-3">
           <FormFieldWrapper label={t("forms.subsidy.householdComposition")} required>
             <RadioGroup
               value={formData.householdSize}
@@ -340,8 +346,8 @@ const SubsidyForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 2: Income & Situation */}
-      <FormStep isActive={currentStep === 2}>
+      {/* Step 3: Income & Situation */}
+      <FormStep isActive={currentStep === 3}>
         <div className="space-y-3">
           <FormFieldWrapper label={t("forms.subsidy.incomeRange")} htmlFor="incomeRange" required>
             <Input
@@ -380,8 +386,8 @@ const SubsidyForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 3: Identity */}
-      <FormStep isActive={currentStep === 3}>
+      {/* Step 4: Identity */}
+      <FormStep isActive={currentStep === 4}>
         <div className="space-y-4 md:space-y-6">
           <div className="text-center mb-3 md:mb-6">
             <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
@@ -412,8 +418,8 @@ const SubsidyForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 4: Contact */}
-      <FormStep isActive={currentStep === 4}>
+      {/* Step 5: Contact */}
+      <FormStep isActive={currentStep === 5}>
         <div className="space-y-4 md:space-y-6">
           <div className="text-center mb-3 md:mb-6">
             <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
