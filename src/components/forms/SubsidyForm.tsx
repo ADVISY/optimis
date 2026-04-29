@@ -232,6 +232,7 @@ const SubsidyForm = () => {
               onChange={(e) => {
                 const val = e.target.value.replace(/\D/g, '').slice(0, 4);
                 updateFormData({ postalCode: val });
+                if (val.length === 4) notifyDelayed();
               }}
               placeholder="1000"
               className="h-11 md:h-14 text-sm md:text-lg"
@@ -242,7 +243,7 @@ const SubsidyForm = () => {
           <FormFieldWrapper label={t("forms.subsidy.birthDate")} htmlFor="birthDate" required>
             <DateInput
               value={formData.birthDate}
-              onChange={(date) => updateFormData({ birthDate: date })}
+              onChange={(date) => { updateFormData({ birthDate: date }); if (date) notify(); }}
               className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
