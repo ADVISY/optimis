@@ -19,7 +19,7 @@ const ComparateurSubside = () => {
                 ))}
               </div>
               <h1 className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black leading-tight text-foreground tracking-tight uppercase mb-2">
-                {t("comparators.subsidy.heroTitle", "SIMULATION SUBSIDE 2026 : VÉRIFIEZ VOTRE DROIT AUX AIDES")}
+                {t("comparators.subsidy.heroTitle", "DEMANDE EN LIGNE SUBSIDE 2026 : VÉRIFIEZ VOTRE DROIT AUX AIDES")}
               </h1>
               <p className="text-sm md:text-base text-muted-foreground mb-3 max-w-xl mx-auto">
                 {t("comparators.subsidy.heroSubtitle", "Découvrez en 2 minutes le montant du subside auquel vous avez droit pour réduire votre prime d'assurance maladie.")}
