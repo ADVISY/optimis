@@ -220,7 +220,7 @@ const SubsidyForm = () => {
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
     >
-      {/* Step 1: Profile & Insurance */}
+      {/* Step 1: Postal code & birth date */}
       <FormStep isActive={currentStep === 1}>
         <div className="space-y-3">
           <FormFieldWrapper label={t("forms.subsidy.postalCode")} htmlFor="postalCode" required>
