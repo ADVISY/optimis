@@ -40,7 +40,7 @@ interface SubsidyFormData {
   phone: string;
 }
 
-const TOTAL_STEPS = 4;
+const TOTAL_STEPS = 5;
 
 const SubsidyForm = () => {
   const { t, i18n } = useTranslation();
@@ -128,17 +128,18 @@ const SubsidyForm = () => {
 
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 1: return formData.postalCode.replace(/\D/g, '').length >= 4 && formData.birthDate !== null && formData.householdSize !== "" && formData.hasCurrentInsurance !== "";
-      case 2: return formData.incomeRange !== "";
-      case 3: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
-      case 4: return isValidEmail(formData.email) && isValidPhone(formData.phone);
+      case 1: return formData.postalCode.replace(/\D/g, '').length >= 4 && formData.birthDate !== null;
+      case 2: return formData.householdSize !== "" && formData.hasCurrentInsurance !== "";
+      case 3: return formData.incomeRange !== "";
+      case 4: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
+      case 5: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
     }
   };
 
   const getStepErrors = (step: number): Record<string, string> => {
-    if (step === 3) return getIdentityErrors(formData.firstName, formData.lastName);
-    if (step === 4) return getContactErrors(formData.email, formData.phone);
+    if (step === 4) return getIdentityErrors(formData.firstName, formData.lastName);
+    if (step === 5) return getContactErrors(formData.email, formData.phone);
     return {};
   };
 
