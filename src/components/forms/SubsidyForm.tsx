@@ -246,7 +246,12 @@ const SubsidyForm = () => {
               className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
+        </div>
+      </FormStep>
 
+      {/* Step 2: Household & current insurance */}
+      <FormStep isActive={currentStep === 2}>
+        <div className="space-y-3">
           <FormFieldWrapper label={t("forms.subsidy.householdComposition")} required>
             <RadioGroup
               value={formData.householdSize}
@@ -341,8 +346,8 @@ const SubsidyForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 2: Income & Situation */}
-      <FormStep isActive={currentStep === 2}>
+      {/* Step 3: Income & Situation */}
+      <FormStep isActive={currentStep === 3}>
         <div className="space-y-3">
           <FormFieldWrapper label={t("forms.subsidy.incomeRange")} htmlFor="incomeRange" required>
             <Input
