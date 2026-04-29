@@ -386,8 +386,8 @@ const SubsidyForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 3: Identity */}
-      <FormStep isActive={currentStep === 3}>
+      {/* Step 4: Identity */}
+      <FormStep isActive={currentStep === 4}>
         <div className="space-y-4 md:space-y-6">
           <div className="text-center mb-3 md:mb-6">
             <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
@@ -418,8 +418,8 @@ const SubsidyForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 4: Contact */}
-      <FormStep isActive={currentStep === 4}>
+      {/* Step 5: Contact */}
+      <FormStep isActive={currentStep === 5}>
         <div className="space-y-4 md:space-y-6">
           <div className="text-center mb-3 md:mb-6">
             <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
