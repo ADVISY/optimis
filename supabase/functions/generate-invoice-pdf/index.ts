@@ -438,8 +438,8 @@ Deno.serve(async (req) => {
       const valY = y + (rowH - 11) / 2;
       doc.font("Helvetica").fontSize(9.5).fillColor(COLOR_TEXT);
       doc.text(String(ln.quantity), colQtyX, valY, { width: 35, align: "right" });
-      doc.text(fmtCHF(Number(ln.unit_price)), colPriceX, valY, { width: 60, align: "right" });
-      doc.font("Helvetica-Bold").text(fmtCHF(Number(ln.line_total)), colTotalX, valY, { width: 60, align: "right" });
+      doc.text(fmtMoney(Number(ln.unit_price), invoiceCurrency), colPriceX, valY, { width: 60, align: "right" });
+      doc.font("Helvetica-Bold").text(fmtMoney(Number(ln.line_total), invoiceCurrency), colTotalX, valY, { width: 60, align: "right" });
 
       // Séparateur fin
       doc
