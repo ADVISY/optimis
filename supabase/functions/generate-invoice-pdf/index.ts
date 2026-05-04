@@ -65,14 +65,18 @@ function buildBreadcrumb(category?: string | null, subcategory?: string | null, 
 // Format manuel : Helvetica ne contient pas l'apostrophe étroite (U+2019)
 // ni l'espace insécable étroit (U+202F) que Intl utilise pour fr-CH,
 // ce qui provoque l'affichage de "/" comme glyphe de remplacement.
-function fmtCHF(n: number) {
+function fmtMoney(n: number, currency: string = "CHF") {
   const fixed = (Math.round(Number(n) * 100) / 100).toFixed(2);
   const [intPart, dec] = fixed.split(".");
   const sign = intPart.startsWith("-") ? "-" : "";
   const abs = sign ? intPart.slice(1) : intPart;
-  // Séparateur milliers : apostrophe ASCII (standard suisse, supportée Helvetica)
+  // Séparateur milliers : apostrophe ASCII (lisible Helvetica, OK pour CHF/CAD/EUR)
   const withSep = abs.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
-  return `${sign}${withSep}.${dec} CHF`;
+  return `${sign}${withSep}.${dec} ${currency.toUpperCase()}`;
+}
+// Backwards-compat alias (utilisé pour les montants strictement CHF, ex: QR-bill)
+function fmtCHF(n: number) {
+  return fmtMoney(n, "CHF");
 }
 function fmtDate(d: string) {
   return new Intl.DateTimeFormat("fr-CH", {
@@ -434,8 +438,8 @@ Deno.serve(async (req) => {
       const valY = y + (rowH - 11) / 2;
       doc.font("Helvetica").fontSize(9.5).fillColor(COLOR_TEXT);
       doc.text(String(ln.quantity), colQtyX, valY, { width: 35, align: "right" });
-      doc.text(fmtCHF(Number(ln.unit_price)), colPriceX, valY, { width: 60, align: "right" });
-      doc.font("Helvetica-Bold").text(fmtCHF(Number(ln.line_total)), colTotalX, valY, { width: 60, align: "right" });
+      doc.text(fmtMoney(Number(ln.unit_price), invoiceCurrency), colPriceX, valY, { width: 60, align: "right" });
+      doc.font("Helvetica-Bold").text(fmtMoney(Number(ln.line_total), invoiceCurrency), colTotalX, valY, { width: 60, align: "right" });
 
       // Séparateur fin
       doc
@@ -458,13 +462,13 @@ Deno.serve(async (req) => {
     doc.font("Helvetica").fontSize(9.5).fillColor(COLOR_MUTED)
       .text("Sous-total", labelX, y, { width: 120 });
     doc.fillColor(COLOR_TEXT)
-      .text(fmtCHF(Number(invoice.subtotal)), valX, y, { width: 100, align: "right" });
+      .text(fmtMoney(Number(invoice.subtotal), invoiceCurrency), valX, y, { width: 100, align: "right" });
 
     y += 16;
     doc.fillColor(COLOR_MUTED)
       .text(`TVA (${Number(invoice.vat_rate)}%)`, labelX, y, { width: 120 });
     doc.fillColor(COLOR_TEXT)
-      .text(fmtCHF(Number(invoice.vat_amount)), valX, y, { width: 100, align: "right" });
+      .text(fmtMoney(Number(invoice.vat_amount), invoiceCurrency), valX, y, { width: 100, align: "right" });
 
     y += 22;
     // Bloc Total premium
@@ -472,7 +476,7 @@ Deno.serve(async (req) => {
     doc.font("Helvetica-Bold").fontSize(11).fillColor("#fff")
       .text(`TOTAL ${invoiceCurrency}`, labelX, y + 4, { width: 120 });
     doc.fontSize(14)
-      .text(fmtCHF(Number(invoice.total)), valX - 10, y + 2, { width: 110, align: "right" });
+      .text(fmtMoney(Number(invoice.total), invoiceCurrency), valX - 10, y + 2, { width: 110, align: "right" });
 
     // Notes (si place)
     if (invoice.notes && y + 60 < FACTURE_BOTTOM - 30) {
