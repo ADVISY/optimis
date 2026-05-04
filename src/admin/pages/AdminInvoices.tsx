@@ -217,7 +217,7 @@ export default function AdminInvoices() {
                           <Button
                             size="sm"
                             variant="outline"
-                            onClick={() => generatePdf(inv.id, inv.invoice_number)}
+                            onClick={() => generatePdf(inv.id, inv.invoice_number, inv.admin_clients?.company_name ?? "Client", inv.invoice_date)}
                             disabled={generating === inv.id}
                             title="Générer PDF + QR-bill"
                           >
