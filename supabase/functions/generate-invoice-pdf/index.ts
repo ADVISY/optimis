@@ -7,6 +7,8 @@
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 // @ts-ignore deno
+import { Buffer } from "node:buffer";
+// @ts-ignore deno
 import PDFDocument from "npm:pdfkit@0.15.0";
 // @ts-ignore deno
 import { SwissQRBill } from "npm:swissqrbill@4.2.0/pdf";
