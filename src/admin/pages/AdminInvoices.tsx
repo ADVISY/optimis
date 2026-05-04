@@ -20,6 +20,7 @@ import {
   Download,
   Send,
   Trash2,
+  RefreshCw,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatCHF, formatDate, STATUS_LABELS } from "@/admin/lib/format";
