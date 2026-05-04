@@ -462,13 +462,13 @@ Deno.serve(async (req) => {
     doc.font("Helvetica").fontSize(9.5).fillColor(COLOR_MUTED)
       .text("Sous-total", labelX, y, { width: 120 });
     doc.fillColor(COLOR_TEXT)
-      .text(fmtCHF(Number(invoice.subtotal)), valX, y, { width: 100, align: "right" });
+      .text(fmtMoney(Number(invoice.subtotal), invoiceCurrency), valX, y, { width: 100, align: "right" });
 
     y += 16;
     doc.fillColor(COLOR_MUTED)
       .text(`TVA (${Number(invoice.vat_rate)}%)`, labelX, y, { width: 120 });
     doc.fillColor(COLOR_TEXT)
-      .text(fmtCHF(Number(invoice.vat_amount)), valX, y, { width: 100, align: "right" });
+      .text(fmtMoney(Number(invoice.vat_amount), invoiceCurrency), valX, y, { width: 100, align: "right" });
 
     y += 22;
     // Bloc Total premium
@@ -476,7 +476,7 @@ Deno.serve(async (req) => {
     doc.font("Helvetica-Bold").fontSize(11).fillColor("#fff")
       .text(`TOTAL ${invoiceCurrency}`, labelX, y + 4, { width: 120 });
     doc.fontSize(14)
-      .text(fmtCHF(Number(invoice.total)), valX - 10, y + 2, { width: 110, align: "right" });
+      .text(fmtMoney(Number(invoice.total), invoiceCurrency), valX - 10, y + 2, { width: 110, align: "right" });
 
     // Notes (si place)
     if (invoice.notes && y + 60 < FACTURE_BOTTOM - 30) {
