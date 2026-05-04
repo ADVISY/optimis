@@ -181,9 +181,28 @@ export default function AdminInvoices() {
         (invoices?.length ?? 0) > 1 ? "s" : ""
       }`}
       actions={
-        <Button size="sm" onClick={() => setOpenModal(true)}>
-          <Plus className="h-4 w-4" /> Nouvelle facture
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={regenerateAll}
+            disabled={!!bulkProgress || !invoices?.length}
+          >
+            {bulkProgress ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                {bulkProgress.done}/{bulkProgress.total}
+              </>
+            ) : (
+              <>
+                <RefreshCw className="h-4 w-4" /> Régénérer tous les PDF
+              </>
+            )}
+          </Button>
+          <Button size="sm" onClick={() => setOpenModal(true)}>
+            <Plus className="h-4 w-4" /> Nouvelle facture
+          </Button>
+        </div>
       }
     >
       <Card>
