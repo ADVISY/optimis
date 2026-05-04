@@ -131,6 +131,43 @@ export default function AdminInvoices() {
     }
   };
 
+  const regenerateAll = async () => {
+    if (!invoices || invoices.length === 0) return;
+    if (
+      !confirm(
+        `Régénérer le PDF de ${invoices.length} facture${
+          invoices.length > 1 ? "s" : ""
+        } ? Les anciens fichiers seront remplacés.`,
+      )
+    )
+      return;
+
+    setBulkProgress({ done: 0, total: invoices.length });
+    let ok = 0;
+    let ko = 0;
+    for (let i = 0; i < invoices.length; i++) {
+      const inv: any = invoices[i];
+      try {
+        const { data, error } = await supabase.functions.invoke(
+          "generate-invoice-pdf",
+          { body: { invoice_id: inv.id } },
+        );
+        if (error || !data?.success) throw new Error(data?.error || error?.message || "Erreur");
+        ok++;
+      } catch (e) {
+        console.error("[regen]", inv.invoice_number, e);
+        ko++;
+      }
+      setBulkProgress({ done: i + 1, total: invoices.length });
+    }
+    setBulkProgress(null);
+    toast({
+      title: "Régénération terminée",
+      description: `${ok} OK, ${ko} en erreur`,
+      variant: ko > 0 ? "destructive" : "default",
+    });
+  };
+
   const statusVariant = (s: string) => {
     if (s === "payee") return "default";
     if (s === "envoyee" || s === "en_attente") return "secondary";
