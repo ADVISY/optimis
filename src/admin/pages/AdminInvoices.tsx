@@ -77,7 +77,12 @@ export default function AdminInvoices() {
     },
   });
 
-  const generatePdf = async (id: string, invoiceNumber: string) => {
+  const generatePdf = async (
+    id: string,
+    invoiceNumber: string,
+    clientName: string,
+    invoiceDate: string,
+  ) => {
     setGenerating(id);
     try {
       const { data, error } = await supabase.functions.invoke(
@@ -87,6 +92,18 @@ export default function AdminInvoices() {
       if (error) throw error;
       if (!data?.success) throw new Error(data?.error || "Erreur génération");
 
+      // Construit le nom de fichier : Client_MM-YYYY_NumeroFacture.pdf
+      const slug = (s: string) =>
+        (s || "")
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^a-zA-Z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "")
+          .slice(0, 60);
+      const d = new Date(invoiceDate);
+      const monthYear = `${String(d.getMonth() + 1).padStart(2, "0")}-${d.getFullYear()}`;
+      const fileName = `${slug(clientName) || "Client"}_${monthYear}_${invoiceNumber}.pdf`;
+
       // Télécharge le PDF côté client (force download au lieu d'ouvrir une page Supabase)
       const res = await fetch(data.url);
       if (!res.ok) throw new Error("Impossible de récupérer le PDF");
@@ -94,13 +111,13 @@ export default function AdminInvoices() {
       const blobUrl = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = blobUrl;
-      a.download = `${invoiceNumber}.pdf`;
+      a.download = fileName;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
 
-      toast({ title: "PDF téléchargé", description: `${invoiceNumber}.pdf` });
+      toast({ title: "PDF téléchargé", description: fileName });
     } catch (e: any) {
       toast({
         title: "Erreur PDF",
@@ -200,7 +217,7 @@ export default function AdminInvoices() {
                           <Button
                             size="sm"
                             variant="outline"
-                            onClick={() => generatePdf(inv.id, inv.invoice_number)}
+                            onClick={() => generatePdf(inv.id, inv.invoice_number, inv.admin_clients?.company_name ?? "Client", inv.invoice_date)}
                             disabled={generating === inv.id}
                             title="Générer PDF + QR-bill"
                           >
