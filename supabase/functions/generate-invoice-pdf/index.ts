@@ -65,14 +65,18 @@ function buildBreadcrumb(category?: string | null, subcategory?: string | null, 
 // Format manuel : Helvetica ne contient pas l'apostrophe étroite (U+2019)
 // ni l'espace insécable étroit (U+202F) que Intl utilise pour fr-CH,
 // ce qui provoque l'affichage de "/" comme glyphe de remplacement.
-function fmtCHF(n: number) {
+function fmtMoney(n: number, currency: string = "CHF") {
   const fixed = (Math.round(Number(n) * 100) / 100).toFixed(2);
   const [intPart, dec] = fixed.split(".");
   const sign = intPart.startsWith("-") ? "-" : "";
   const abs = sign ? intPart.slice(1) : intPart;
-  // Séparateur milliers : apostrophe ASCII (standard suisse, supportée Helvetica)
+  // Séparateur milliers : apostrophe ASCII (lisible Helvetica, OK pour CHF/CAD/EUR)
   const withSep = abs.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
-  return `${sign}${withSep}.${dec} CHF`;
+  return `${sign}${withSep}.${dec} ${currency.toUpperCase()}`;
+}
+// Backwards-compat alias (utilisé pour les montants strictement CHF, ex: QR-bill)
+function fmtCHF(n: number) {
+  return fmtMoney(n, "CHF");
 }
 function fmtDate(d: string) {
   return new Intl.DateTimeFormat("fr-CH", {
