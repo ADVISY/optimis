@@ -77,7 +77,7 @@ export default function AdminInvoices() {
     },
   });
 
-  const generatePdf = async (id: string) => {
+  const generatePdf = async (id: string, invoiceNumber: string) => {
     setGenerating(id);
     try {
       const { data, error } = await supabase.functions.invoke(
@@ -86,8 +86,21 @@ export default function AdminInvoices() {
       );
       if (error) throw error;
       if (!data?.success) throw new Error(data?.error || "Erreur génération");
-      window.open(data.url, "_blank");
-      toast({ title: "PDF généré", description: "Ouverture dans un nouvel onglet" });
+
+      // Télécharge le PDF côté client (force download au lieu d'ouvrir une page Supabase)
+      const res = await fetch(data.url);
+      if (!res.ok) throw new Error("Impossible de récupérer le PDF");
+      const blob = await res.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = `${invoiceNumber}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+
+      toast({ title: "PDF téléchargé", description: `${invoiceNumber}.pdf` });
     } catch (e: any) {
       toast({
         title: "Erreur PDF",
@@ -187,7 +200,7 @@ export default function AdminInvoices() {
                           <Button
                             size="sm"
                             variant="outline"
-                            onClick={() => generatePdf(inv.id)}
+                            onClick={() => generatePdf(inv.id, inv.invoice_number)}
                             disabled={generating === inv.id}
                             title="Générer PDF + QR-bill"
                           >
