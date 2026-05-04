@@ -130,7 +130,11 @@ async function fetchImageBuffer(url: string): Promise<{ buf: Uint8Array; isSvg: 
     const r = await fetch(url);
     if (!r.ok) return null;
     const ct = r.headers.get("content-type") || "";
-    return { buf: new Uint8Array(await r.arrayBuffer()), isSvg: ct.includes("svg") || url.toLowerCase().endsWith(".svg") };
+    const ab = await r.arrayBuffer();
+    // PDFKit (sous Deno) attend un Buffer Node, pas un Uint8Array brut.
+    // @ts-ignore - Buffer fourni par le shim Node de Deno via npm:
+    const buf = (globalThis as any).Buffer ? (globalThis as any).Buffer.from(ab) : new Uint8Array(ab);
+    return { buf, isSvg: ct.includes("svg") || url.toLowerCase().endsWith(".svg") };
   } catch {
     return null;
   }
