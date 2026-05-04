@@ -20,6 +20,7 @@ import {
   Download,
   Send,
   Trash2,
+  RefreshCw,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatCHF, formatDate, STATUS_LABELS } from "@/admin/lib/format";
@@ -32,6 +33,7 @@ export default function AdminInvoices() {
   const { toast } = useToast();
   const [openModal, setOpenModal] = useState(false);
   const [generating, setGenerating] = useState<string | null>(null);
+  const [bulkProgress, setBulkProgress] = useState<{ done: number; total: number } | null>(null);
 
   const { data: invoices, isLoading } = useQuery({
     queryKey: ["admin-invoices"],
@@ -129,6 +131,43 @@ export default function AdminInvoices() {
     }
   };
 
+  const regenerateAll = async () => {
+    if (!invoices || invoices.length === 0) return;
+    if (
+      !confirm(
+        `Régénérer le PDF de ${invoices.length} facture${
+          invoices.length > 1 ? "s" : ""
+        } ? Les anciens fichiers seront remplacés.`,
+      )
+    )
+      return;
+
+    setBulkProgress({ done: 0, total: invoices.length });
+    let ok = 0;
+    let ko = 0;
+    for (let i = 0; i < invoices.length; i++) {
+      const inv: any = invoices[i];
+      try {
+        const { data, error } = await supabase.functions.invoke(
+          "generate-invoice-pdf",
+          { body: { invoice_id: inv.id } },
+        );
+        if (error || !data?.success) throw new Error(data?.error || error?.message || "Erreur");
+        ok++;
+      } catch (e) {
+        console.error("[regen]", inv.invoice_number, e);
+        ko++;
+      }
+      setBulkProgress({ done: i + 1, total: invoices.length });
+    }
+    setBulkProgress(null);
+    toast({
+      title: "Régénération terminée",
+      description: `${ok} OK, ${ko} en erreur`,
+      variant: ko > 0 ? "destructive" : "default",
+    });
+  };
+
   const statusVariant = (s: string) => {
     if (s === "payee") return "default";
     if (s === "envoyee" || s === "en_attente") return "secondary";
@@ -142,9 +181,28 @@ export default function AdminInvoices() {
         (invoices?.length ?? 0) > 1 ? "s" : ""
       }`}
       actions={
-        <Button size="sm" onClick={() => setOpenModal(true)}>
-          <Plus className="h-4 w-4" /> Nouvelle facture
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={regenerateAll}
+            disabled={!!bulkProgress || !invoices?.length}
+          >
+            {bulkProgress ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                {bulkProgress.done}/{bulkProgress.total}
+              </>
+            ) : (
+              <>
+                <RefreshCw className="h-4 w-4" /> Régénérer tous les PDF
+              </>
+            )}
+          </Button>
+          <Button size="sm" onClick={() => setOpenModal(true)}>
+            <Plus className="h-4 w-4" /> Nouvelle facture
+          </Button>
+        </div>
       }
     >
       <Card>
