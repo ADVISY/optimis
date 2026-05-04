@@ -33,6 +33,7 @@ export default function AdminInvoices() {
   const { toast } = useToast();
   const [openModal, setOpenModal] = useState(false);
   const [generating, setGenerating] = useState<string | null>(null);
+  const [bulkProgress, setBulkProgress] = useState<{ done: number; total: number } | null>(null);
 
   const { data: invoices, isLoading } = useQuery({
     queryKey: ["admin-invoices"],
