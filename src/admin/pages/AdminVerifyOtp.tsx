@@ -137,10 +137,12 @@ export default function AdminVerifyOtp() {
   }, [getInvokeErrorPayload, restoreStoredOtpState, session?.user.id]);
 
   useEffect(() => {
+    // Restore previously sent OTP state (if user refreshed during a valid request)
+    // but DO NOT auto-send a new code — admin must click "Envoyer le code".
     if (loading || !session || isOtpVerified || sentRef.current) return;
     sentRef.current = true;
-    void sendOtp({ auto: true });
-  }, [loading, session, isOtpVerified, sendOtp]);
+    restoreStoredOtpState();
+  }, [loading, session, isOtpVerified, restoreStoredOtpState]);
 
   useEffect(() => {
     if (resendCooldown <= 0) return;
