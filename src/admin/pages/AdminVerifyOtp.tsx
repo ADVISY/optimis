@@ -199,7 +199,7 @@ export default function AdminVerifyOtp() {
             <p className="text-sm text-muted-foreground mb-6">
               {phoneLastDigits
                 ? <>Un code à 4 chiffres a été envoyé au numéro se terminant par <strong>••{phoneLastDigits}</strong>.</>
-                : "Envoi du code en cours..."}
+                : "Cliquez sur \"Envoyer le code\" pour recevoir un SMS sur votre numéro autorisé."}
             </p>
 
             <div className="flex justify-center mb-4">
