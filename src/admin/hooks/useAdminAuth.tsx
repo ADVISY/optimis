@@ -67,13 +67,24 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, newSession) => {
       setSession(newSession);
       setUser(newSession?.user ?? null);
-      if (!newSession) {
+      if (newSession) {
+        sessionStorage.setItem("admin_session_active", "1");
+      } else {
         setIsAdmin(false);
         setIsOtpVerified(false);
+        sessionStorage.removeItem("admin_session_active");
       }
     });
 
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      // Force re-login on every new browser session (tab/window opened fresh)
+      if (session && !sessionStorage.getItem("admin_session_active")) {
+        await supabase.auth.signOut();
+        setSession(null);
+        setUser(null);
+        setLoading(false);
+        return;
+      }
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
