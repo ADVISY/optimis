@@ -137,10 +137,12 @@ export default function AdminVerifyOtp() {
   }, [getInvokeErrorPayload, restoreStoredOtpState, session?.user.id]);
 
   useEffect(() => {
+    // Restore previously sent OTP state (if user refreshed during a valid request)
+    // but DO NOT auto-send a new code — admin must click "Envoyer le code".
     if (loading || !session || isOtpVerified || sentRef.current) return;
     sentRef.current = true;
-    void sendOtp({ auto: true });
-  }, [loading, session, isOtpVerified, sendOtp]);
+    restoreStoredOtpState();
+  }, [loading, session, isOtpVerified, restoreStoredOtpState]);
 
   useEffect(() => {
     if (resendCooldown <= 0) return;
@@ -197,7 +199,7 @@ export default function AdminVerifyOtp() {
             <p className="text-sm text-muted-foreground mb-6">
               {phoneLastDigits
                 ? <>Un code à 4 chiffres a été envoyé au numéro se terminant par <strong>••{phoneLastDigits}</strong>.</>
-                : "Envoi du code en cours..."}
+                : "Cliquez sur \"Envoyer le code\" pour recevoir un SMS sur votre numéro autorisé."}
             </p>
 
             <div className="flex justify-center mb-4">
