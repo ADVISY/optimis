@@ -68,8 +68,8 @@ const LppForm = () => {
 
   const performSubmit = useCallback(async () => {
     await submitLead(formData as unknown as Record<string, unknown>);
-    setShowThankYou(true);
-  }, [formData, submitLead]);
+    navigate(localizedPath("/merci-lpp"));
+  }, [formData, submitLead, navigate, localizedPath]);
 
   const { startOtpFlow, otpModalProps } = useOtpFormFlow({
     onOtpVerified: performSubmit,
@@ -118,17 +118,6 @@ const LppForm = () => {
     }
   };
 
-  if (showThankYou) {
-    return (
-      <div className="max-w-2xl mx-auto text-center py-12">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-6">
-          <span className="text-3xl">🎉</span>
-        </div>
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">{t("forms.lpp.thankYouTitle")}</h2>
-        <p className="text-lg text-muted-foreground">{t("forms.lpp.thankYouDescription")}</p>
-      </div>
-    );
-  }
 
   const objectiveOptions = [
     { value: "find", label: t("forms.lpp.objectives.find") },
