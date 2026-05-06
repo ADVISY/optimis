@@ -116,6 +116,11 @@ const SubsidyForm = () => {
     const incomeValue = parseInt(formData.incomeRange) || 0;
     setIsEligible(incomeValue > 0 && incomeValue <= 70000);
     setShowResults(true);
+    fireLeadConversion({
+      pageKey: "merci-subside",
+      leadId: getLastLeadId(),
+      googleAdsSendTo: "AW-16586911321/1MwiCK30gpAcENncoOU9",
+    });
   }, [formData, submitLead, t]);
 
   const { startOtpFlow, otpModalProps } = useOtpFormFlow({

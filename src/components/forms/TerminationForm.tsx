@@ -87,6 +87,11 @@ const TerminationForm = () => {
   const performSubmit = useCallback(async () => {
     await submitLead(formData as unknown as Record<string, unknown>);
     setShowResults(true);
+    fireLeadConversion({
+      pageKey: "merci-resiliation",
+      leadId: getLastLeadId(),
+      googleAdsSendTo: "AW-16586911321/1MwiCK30gpAcENncoOU9",
+    });
   }, [formData, submitLead]);
 
   const { startOtpFlow, otpModalProps } = useOtpFormFlow({
