@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Phone, Mail, FileText, CheckCircle, Loader2 } from "lucide-react";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
+import { fireLeadConversion, getLastLeadId } from "@/lib/leadTracking";
 import { InsuranceOffer } from "@/data/mockInsuranceData";
 
 interface ContactOfferModalProps {
@@ -53,6 +54,13 @@ const ContactOfferModal = ({
       } : null,
       originalFormData: formData,
       requestType: contactType,
+    });
+
+    fireLeadConversion({
+      pageKey: `contact-${contactType}`,
+      leadId: getLastLeadId(),
+      formType: `contact-${contactType}`,
+      googleAdsSendTo: "AW-16586911321/1MwiCK30gpAcENncoOU9",
     });
 
     setStep("success");
