@@ -33,7 +33,8 @@ const TOTAL_STEPS = 6;
 
 const LppForm = () => {
   const { t } = useTranslation();
-  const [showThankYou, setShowThankYou] = useState(false);
+  const navigate = useNavigate();
+  const { localizedPath } = useLocalizedPath();
   const { attemptedNext, markAttempted, resetAttempted, formatSwissPhone, isValidEmail, isValidPhone, getContactErrors, getIdentityErrors, showValidationToast } = useFormValidation();
 
   const initialData: LppFormData = {
