@@ -528,28 +528,16 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
 
       console.log("Lead submitted successfully:", data);
 
-      // Dédup global : un même leadId ne doit JAMAIS générer plus d'un Lead
-      // sur Meta + TikTok + Google, même si l'utilisateur double-clique,
-      // resoumet le formulaire ou recharge la page (sessionStorage).
-      const dedupKey = `lead_tracked_${leadId}`;
-      const alreadyTracked = sessionStorage.getItem(dedupKey) === "1";
-
-      if (!alreadyTracked) {
-        // Meta Pixel — eventID = leadId pour dédup CAPI future.
-        if ((window as any).fbq) {
-          (window as any).fbq('track', 'Lead', {}, { eventID: leadId });
-          console.log("Meta Pixel: Lead event tracked", { eventID: leadId });
-        }
-
-        // TikTok Pixel — event_id = leadId pour dédup Events API future.
-        if ((window as any).ttq) {
-          (window as any).ttq.track('Lead', { event_id: leadId });
-          console.log("TikTok Pixel: Lead event tracked", { event_id: leadId });
-        }
-
-        sessionStorage.setItem(dedupKey, "1");
-      } else {
-        console.log("Lead tracking skipped (already tracked this session)", { leadId });
+      // On mémorise le dernier leadId pour que la page de remerciement
+      // (ThankYou / MerciHypotheque / MerciLpp / etc.) puisse déclencher
+      // les pixels Meta `Lead` et TikTok `CompleteRegistration` au chargement
+      // de la page d'atterrissage post-soumission, avec un eventID stable
+      // pour dédup future via CAPI / Events API.
+      try {
+        sessionStorage.setItem("last_lead_id", leadId);
+        sessionStorage.setItem("last_lead_form_type", formType);
+      } catch (err) {
+        console.warn("Unable to persist lead id for tracking", err);
       }
 
       toast({

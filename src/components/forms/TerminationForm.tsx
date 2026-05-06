@@ -6,6 +6,7 @@ import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
+import { fireLeadConversion, getLastLeadId } from "@/lib/leadTracking";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -87,6 +88,11 @@ const TerminationForm = () => {
   const performSubmit = useCallback(async () => {
     await submitLead(formData as unknown as Record<string, unknown>);
     setShowResults(true);
+    fireLeadConversion({
+      pageKey: "merci-resiliation",
+      leadId: getLastLeadId(),
+      googleAdsSendTo: "AW-16586911321/1MwiCK30gpAcENncoOU9",
+    });
   }, [formData, submitLead]);
 
   const { startOtpFlow, otpModalProps } = useOtpFormFlow({

@@ -36,6 +36,11 @@ export const localizedRoutes: LocalizedRoutes = {
   insurances: { fr: "assurances", de: "versicherungen", it: "assicurazioni" },
   thankYou: { fr: "merci", de: "danke", it: "grazie" },
   thankYouMortgage: { fr: "merci-hypotheque", de: "danke-hypothek", it: "grazie-ipoteca" },
+  thankYouLpp: { fr: "merci-lpp", de: "danke-bvg", it: "grazie-lpp" },
+  thankYouRealEstate: { fr: "merci-estimation", de: "danke-immobilienbewertung", it: "grazie-valutazione" },
+  thankYouPartner: { fr: "merci-partenaire", de: "danke-partner", it: "grazie-partner" },
+  thankYouSubsidy: { fr: "merci-subside", de: "danke-praemienverbilligung", it: "grazie-riduzione-premi" },
+  thankYouTermination: { fr: "merci-resiliation", de: "danke-kuendigung", it: "grazie-disdetta" },
   
   // Landing/Comparator pages
   healthLanding: { fr: "assurance-maladie-landing", de: "krankenversicherung-vergleich", it: "confronto-assicurazione-malattia" },
