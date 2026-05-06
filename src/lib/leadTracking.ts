@@ -11,9 +11,11 @@ type FireOptions = {
   pageKey: string;
   /** Conversion Google Ads à déclencher (ex: "AW-16586911321/1MwiCK30gpAcENncoOU9"). */
   googleAdsSendTo?: string;
+  /** Nom du formulaire pour distinguer les sources (ex: "mortgage", "subsidy"). */
+  formType?: string;
 };
 
-export function fireLeadConversion({ leadId, pageKey, googleAdsSendTo }: FireOptions) {
+export function fireLeadConversion({ leadId, pageKey, googleAdsSendTo, formType }: FireOptions) {
   if (typeof window === "undefined") return;
 
   const dedupKey = `lead_pixels_${pageKey}_${leadId ?? "anon"}`;
@@ -22,13 +24,20 @@ export function fireLeadConversion({ leadId, pageKey, googleAdsSendTo }: FireOpt
   }
 
   const w = window as any;
+  const fbParams: Record<string, unknown> = {};
+  const ttParams: Record<string, unknown> = {};
+  if (formType) {
+    fbParams.content_name = formType;
+    fbParams.content_category = formType;
+    ttParams.content_name = formType;
+  }
 
   try {
     if (typeof w.fbq === "function") {
       if (leadId) {
-        w.fbq("track", "Lead", {}, { eventID: leadId });
+        w.fbq("track", "Lead", fbParams, { eventID: leadId });
       } else {
-        w.fbq("track", "Lead");
+        w.fbq("track", "Lead", fbParams);
       }
     }
   } catch (err) {
@@ -38,9 +47,9 @@ export function fireLeadConversion({ leadId, pageKey, googleAdsSendTo }: FireOpt
   try {
     if (w.ttq && typeof w.ttq.track === "function") {
       if (leadId) {
-        w.ttq.track("CompleteRegistration", { event_id: leadId });
+        w.ttq.track("CompleteRegistration", { ...ttParams, event_id: leadId });
       } else {
-        w.ttq.track("CompleteRegistration");
+        w.ttq.track("CompleteRegistration", ttParams);
       }
     }
   } catch (err) {
@@ -64,4 +73,10 @@ export function fireLeadConversion({ leadId, pageKey, googleAdsSendTo }: FireOpt
 export function getLastLeadId(): string | undefined {
   if (typeof window === "undefined") return undefined;
   return sessionStorage.getItem("last_lead_id") ?? undefined;
+}
+
+/** Récupère le dernier formType stocké par useLeadSubmission, si présent. */
+export function getLastFormType(): string | undefined {
+  if (typeof window === "undefined") return undefined;
+  return sessionStorage.getItem("last_lead_form_type") ?? undefined;
 }
