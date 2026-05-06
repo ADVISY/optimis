@@ -69,6 +69,16 @@ const LppForm = () => {
 
   const performSubmit = useCallback(async () => {
     await submitLead(formData as unknown as Record<string, unknown>);
+    try {
+      sessionStorage.setItem(
+        "lpp_estimate_input",
+        JSON.stringify({
+          yearsWorked: formData.yearsWorked,
+          situation: formData.situation,
+          objective: formData.objective,
+        })
+      );
+    } catch {}
     navigate(localizedPath("/merci-lpp"));
   }, [formData, submitLead, navigate, localizedPath]);
 

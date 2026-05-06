@@ -1,13 +1,29 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Phone, Mail, Clock, Shield } from "lucide-react";
+import { CheckCircle, Phone, Mail, Clock, Shield, Banknote } from "lucide-react";
 import LocalizedLink from "@/components/LocalizedLink";
 import { fireLeadConversion, getLastLeadId } from "@/lib/leadTracking";
 
+const ANNUAL_AVG = 3500;
+
+const yearsFromKey = (key: string): number => {
+  switch (key) {
+    case "30-plus": return 30;
+    case "20-plus": return 20;
+    case "10-plus": return 10;
+    case "less-10": return 5;
+    default: return 0;
+  }
+};
+
+const formatCHF = (n: number) =>
+  new Intl.NumberFormat("fr-CH", { maximumFractionDigits: 0 }).format(n);
+
 const MerciLpp = () => {
   const { t } = useTranslation();
+  const [estimate, setEstimate] = useState<{ years: number; amount: number } | null>(null);
 
   useEffect(() => {
     fireLeadConversion({
@@ -15,6 +31,14 @@ const MerciLpp = () => {
       leadId: getLastLeadId(),
       googleAdsSendTo: "AW-16586911321/1MwiCK30gpAcENncoOU9",
     });
+    try {
+      const raw = sessionStorage.getItem("lpp_estimate_input");
+      if (raw) {
+        const data = JSON.parse(raw) as { yearsWorked?: string };
+        const years = yearsFromKey(data.yearsWorked ?? "");
+        if (years > 0) setEstimate({ years, amount: years * ANNUAL_AVG });
+      }
+    } catch {}
   }, []);
 
   return (
@@ -35,6 +59,23 @@ const MerciLpp = () => {
                 "Votre demande concernant vos avoirs LPP / libre passage a bien été enregistrée. Un conseiller vous contactera très prochainement."
               )}
             </p>
+
+            {estimate && (
+              <div className="bg-primary/10 border-2 border-primary/30 rounded-2xl p-6 md:p-8 mb-8">
+                <div className="flex items-center justify-center gap-2 mb-2 text-primary">
+                  <Banknote className="h-6 w-6" />
+                  <span className="font-semibold uppercase text-sm tracking-wide">
+                    {t("thankYouLpp.estimateLabel", "Estimation indicative de vos avoirs LPP")}
+                  </span>
+                </div>
+                <p className="text-4xl md:text-5xl font-black text-primary mb-2">
+                  CHF {formatCHF(estimate.amount)}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {t("thankYouLpp.estimateDetail", "Basé sur {{years}} ans de cotisations × CHF 3'500 / an en moyenne. Un conseiller vous donnera le montant exact.", { years: estimate.years })}
+                </p>
+              </div>
+            )}
 
             <div className="bg-card rounded-2xl border p-6 md:p-8 mb-8 text-left">
               <h2 className="text-xl font-semibold mb-4 text-foreground">
