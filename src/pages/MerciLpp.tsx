@@ -65,14 +65,17 @@ const MerciLpp = () => {
                 <div className="flex items-center justify-center gap-2 mb-2 text-primary">
                   <Banknote className="h-6 w-6" />
                   <span className="font-semibold uppercase text-sm tracking-wide">
-                    {t("thankYouLpp.estimateLabel", "Estimation indicative de vos avoirs LPP")}
+                    {t("thankYouLpp.estimateLabel", "Vos avoirs LPP estimés")}
                   </span>
                 </div>
+                <p className="text-base md:text-lg text-foreground mb-3">
+                  {t("thankYouLpp.estimateIntro", "Un conseiller va vous contacter et nous allons réussir à retrouver plus de :")}
+                </p>
                 <p className="text-4xl md:text-5xl font-black text-primary mb-2">
                   CHF {formatCHF(estimate.amount)}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  {t("thankYouLpp.estimateDetail", "Basé sur {{years}} ans de cotisations × CHF 3'500 / an en moyenne. Un conseiller vous donnera le montant exact.", { years: estimate.years })}
+                  {t("thankYouLpp.estimateDetail", "Basé sur {{years}} ans de travail en Suisse × CHF 3'500 / an en moyenne. Le montant exact vous sera communiqué par votre conseiller.", { years: estimate.years })}
                 </p>
               </div>
             )}
