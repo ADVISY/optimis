@@ -20,6 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { swissCantons, getCantonName } from "@/data/swissCantons";
+import { getLocalizedPath } from "@/utils/localizedRoutes";
 import { mortgageProducts } from "@/data/mortgageProducts";
 import { simulateMortgage, MortgageSimulationResult } from "@/utils/mortgageCalculations";
 import { Lock, User, Phone } from "lucide-react";
@@ -118,7 +119,8 @@ const MortgageForm = () => {
 
     setTimeout(() => {
       setIsLoading(false);
-      navigate(`/${i18n.language}/merci-hypotheque`);
+      const slug = getLocalizedPath("thankYouMortgage", i18n.language);
+      navigate(`/${i18n.language}/${slug}`);
     }, 3000);
   }, [formData, submitLead, navigate, i18n.language, mortgageProducts, simulateMortgage]);
 
