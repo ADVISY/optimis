@@ -1,4 +1,6 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import { useTranslation } from "react-i18next";
 import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
@@ -33,7 +35,8 @@ const TOTAL_STEPS = 8;
 
 const RealEstateForm = () => {
   const { t } = useTranslation();
-  const [showThankYou, setShowThankYou] = useState(false);
+  const navigate = useNavigate();
+  const { localizedPath } = useLocalizedPath();
   const { attemptedNext, markAttempted, resetAttempted, formatSwissPhone, isValidEmail, isValidPhone, getContactErrors, getIdentityErrors, showValidationToast } = useFormValidation();
 
   const initialData: RealEstateFormData = {
@@ -71,8 +74,8 @@ const RealEstateForm = () => {
 
   const performSubmit = useCallback(async () => {
     await submitLead(formData as unknown as Record<string, unknown>);
-    setShowThankYou(true);
-  }, [formData, submitLead]);
+    navigate(localizedPath("/merci-estimation"));
+  }, [formData, submitLead, navigate, localizedPath]);
 
   const { startOtpFlow, otpModalProps } = useOtpFormFlow({
     onOtpVerified: performSubmit,
@@ -121,17 +124,6 @@ const RealEstateForm = () => {
     }
   };
 
-  if (showThankYou) {
-    return (
-      <div className="max-w-2xl mx-auto text-center py-12">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-6">
-          <span className="text-3xl">🎉</span>
-        </div>
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">{t("forms.realEstate.thankYouTitle")}</h2>
-        <p className="text-lg text-muted-foreground">{t("forms.realEstate.thankYouDescription")}</p>
-      </div>
-    );
-  }
 
   const propertyOptions = [
     { value: "apartment", label: t("forms.realEstate.propertyTypes.apartment") },

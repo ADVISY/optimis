@@ -1,4 +1,6 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import { useTranslation } from "react-i18next";
 import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
@@ -30,7 +32,8 @@ const TOTAL_STEPS = 6;
 
 const PartnerForm = () => {
   const { t } = useTranslation();
-  const [showThankYou, setShowThankYou] = useState(false);
+  const navigate = useNavigate();
+  const { localizedPath } = useLocalizedPath();
   const { attemptedNext, markAttempted, resetAttempted, formatSwissPhone, isValidEmail, isValidPhone, getContactErrors, getIdentityErrors, showValidationToast } = useFormValidation();
 
   const initialData: PartnerFormData = {
@@ -65,8 +68,8 @@ const PartnerForm = () => {
 
   const performSubmit = useCallback(async () => {
     await submitLead(formData as unknown as Record<string, unknown>);
-    setShowThankYou(true);
-  }, [formData, submitLead]);
+    navigate(localizedPath("/merci-partenaire"));
+  }, [formData, submitLead, navigate, localizedPath]);
 
   const handleSubmit = async () => {
     sessionStorage.setItem("phone_verified", "true");
@@ -109,21 +112,6 @@ const PartnerForm = () => {
     }
   };
 
-  if (showThankYou) {
-    return (
-      <div className="max-w-2xl mx-auto text-center py-12">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">
-          <CheckCircle className="h-8 w-8 text-primary" />
-        </div>
-        <h2 className="text-2xl md:text-3xl font-bold mb-4">
-          {t("partner.thankYouTitle", "Merci pour votre demande")}
-        </h2>
-        <p className="text-lg text-muted-foreground">
-          {t("partner.thankYouDescription", "Un membre de notre équipe vous contactera dans les 24 heures pour discuter de votre partenariat.")}
-        </p>
-      </div>
-    );
-  }
 
   const budgetOptions = [
     { value: "less-3000", label: t("partner.budgets.less3000", "Moins de CHF 3'000") },
