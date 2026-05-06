@@ -69,13 +69,13 @@ const MerciLpp = () => {
                   </span>
                 </div>
                 <p className="text-base md:text-lg text-foreground mb-3">
-                  {t("thankYouLpp.estimateIntro", "Un conseiller va vous contacter et nous allons réussir à retrouver plus de :")}
+                  {t("thankYouLpp.estimateIntro", "Un conseiller va vous contacter et nous allons réussir à retrouver en moyenne plus de :")}
                 </p>
                 <p className="text-4xl md:text-5xl font-black text-primary mb-2">
                   CHF {formatCHF(estimate.amount)}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  {t("thankYouLpp.estimateDetail", "Basé sur {{years}} ans de travail en Suisse × CHF 3'500 / an en moyenne. Le montant exact vous sera communiqué par votre conseiller.", { years: estimate.years })}
+                  {t("thankYouLpp.estimateDetail", "Basé sur {{years}} ans de travail en Suisse × CHF 3'500 / an en moyenne (certains ont beaucoup plus). Le montant exact vous sera communiqué par votre conseiller.", { years: estimate.years })}
                 </p>
               </div>
             )}
