@@ -6,6 +6,7 @@ import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
+import { fireLeadConversion, getLastLeadId } from "@/lib/leadTracking";
 import { Input } from "@/components/ui/input";
 import DateInput from "@/components/ui/date-input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
