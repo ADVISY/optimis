@@ -29,6 +29,8 @@ import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import ThankYou from "./pages/ThankYou";
 import MerciHypotheque from "./pages/MerciHypotheque";
+import MerciLpp from "./pages/MerciLpp";
+import { MerciEstimation, MerciPartenaire, MerciSubside, MerciResiliation } from "./pages/MerciGeneric";
 import Insurances from "./pages/Insurances";
 import NotFound from "./pages/NotFound";
 import { languages } from "./i18n";
@@ -113,6 +115,11 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("insurances", <Insurances />)}
         {createLocalizedRoutes("thankYou", <ThankYou />)}
         {createLocalizedRoutes("thankYouMortgage", <MerciHypotheque />)}
+        {createLocalizedRoutes("thankYouLpp", <MerciLpp />)}
+        {createLocalizedRoutes("thankYouRealEstate", <MerciEstimation />)}
+        {createLocalizedRoutes("thankYouPartner", <MerciPartenaire />)}
+        {createLocalizedRoutes("thankYouSubsidy", <MerciSubside />)}
+        {createLocalizedRoutes("thankYouTermination", <MerciResiliation />)}
         
         {/* Landing/Comparator pages - all language variants */}
         {createLocalizedRoutes("healthLanding", <ComparateurSante />)}
