@@ -74,3 +74,9 @@ export function getLastLeadId(): string | undefined {
   if (typeof window === "undefined") return undefined;
   return sessionStorage.getItem("last_lead_id") ?? undefined;
 }
+
+/** Récupère le dernier formType stocké par useLeadSubmission, si présent. */
+export function getLastFormType(): string | undefined {
+  if (typeof window === "undefined") return undefined;
+  return sessionStorage.getItem("last_lead_form_type") ?? undefined;
+}
