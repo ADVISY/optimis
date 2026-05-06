@@ -5,7 +5,7 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight, ShieldCheck } from "lucide-react";
 import LocalizedLink from "@/components/LocalizedLink";
-import { fireLeadConversion, getLastLeadId } from "@/lib/leadTracking";
+import { fireLeadConversion, getLastLeadId, getLastFormType } from "@/lib/leadTracking";
 
 const ThankYou = () => {
   const { t } = useTranslation();
@@ -18,6 +18,7 @@ const ThankYou = () => {
     fireLeadConversion({
       pageKey: "merci",
       leadId: getLastLeadId(),
+      formType: getLastFormType(),
       googleAdsSendTo: "AW-16586911321/1MwiCK30gpAcENncoOU9",
     });
   }, []);
