@@ -4,21 +4,17 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Phone, Mail, Clock, Shield } from "lucide-react";
 import LocalizedLink from "@/components/LocalizedLink";
+import { fireLeadConversion, getLastLeadId } from "@/lib/leadTracking";
 
 const MerciHypotheque = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    // Dédup : ne déclencher la conversion qu'une fois par session pour éviter
-    // les doublons sur F5 / retour arrière vers /merci-hypotheque.
-    const FLAG = "ga_conversion_merci_hypotheque_sent";
-    if (sessionStorage.getItem(FLAG) === "1") return;
-    if (typeof (window as any).gtag === "function") {
-      (window as any).gtag('event', 'conversion', {
-        'send_to': 'AW-16586911321/1MwiCK30gpAcENncoOU9'
-      });
-      sessionStorage.setItem(FLAG, "1");
-    }
+    fireLeadConversion({
+      pageKey: "merci-hypotheque",
+      leadId: getLastLeadId(),
+      googleAdsSendTo: "AW-16586911321/1MwiCK30gpAcENncoOU9",
+    });
   }, []);
 
   return (
