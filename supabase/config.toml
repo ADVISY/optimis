@@ -14,3 +14,6 @@ verify_jwt = false
 
 [functions.admin-verify-otp]
 verify_jwt = false
+
+[functions.check-otp-status]
+verify_jwt = false
