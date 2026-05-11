@@ -37,8 +37,13 @@ const ContactOfferModal = ({
     message: "",
   });
 
+  // Réutilise l'ID du lead initial pour que Zapier puisse retrouver et
+  // mettre à jour la fiche existante (Lookup row + Update row par "ID du lead").
+  const initialLeadId = getLastLeadId();
+
   const { submitLead, isSubmitting } = useLeadSubmission({
     formType: `contact-${contactType}`,
+    linkToLeadId: initialLeadId,
   });
 
   const handleSubmit = async (e: React.FormEvent) => {

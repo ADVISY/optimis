@@ -16,9 +16,21 @@ interface LeadData {
 interface UseLeadSubmissionOptions {
   webhookUrl?: string;
   formType: string;
+  /**
+   * Si fourni, réutilise cet ID au lieu d'en générer un nouveau.
+   * Permet à Zapier de retrouver la fiche initiale (Lookup row + Update row)
+   * lors d'une 2e soumission (choix d'offre, demande de rappel, etc.).
+   */
+  linkToLeadId?: string;
 }
 
-export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOptions) {
+const EVENT_TYPE_BY_FORM_TYPE: Record<string, string> = {
+  "contact-offer": "Offre choisie",
+  "contact-call": "Demande de rappel",
+  "contact-email": "Demande par email",
+};
+
+export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLeadSubmissionOptions) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   // Garde anti double-clic indépendante de setState (qui est asynchrone).
@@ -486,12 +498,16 @@ export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOpt
 
     // UN SEUL leadId par soumission, partagé avec Meta/TikTok comme eventID
     // pour permettre la déduplication browser <-> serveur (CAPI future).
-    const leadId = generateLeadId();
+    // Si linkToLeadId est fourni (2e soumission depuis la modale d'offre), on
+    // réutilise l'ID initial pour que Zapier puisse mettre à jour la fiche.
+    const leadId = linkToLeadId || generateLeadId();
+    const eventType = EVENT_TYPE_BY_FORM_TYPE[formType] || "Lead initial";
     const attribution = getAttributionForLead();
 
     const leadData: LeadData = {
       ...renamedData as Record<string, unknown>,
       ...attribution,
+      "Type d'événement": eventType,
       "Type de formulaire": formType,
       "Langue": i18n.language,
       "Source": document.referrer || "direct",
