@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { parsePhoneNumberFromString } from "npm:libphonenumber-js@1.13.1";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -9,31 +10,15 @@ const corsHeaders = {
 const VERIFY_SERVICE_SID = "VA2b4327548063070224159545d3d7a1dd";
 
 function normalizeToE164(phone: string): string | null {
-  let digits = phone.replace(/\D/g, "");
-  if (!digits) return null;
-
-  // Cas: l'utilisateur a tapé 0 après +41/+33 (ex: +41 078...) -> on retire le 0 parasite
-  if (digits.startsWith("410") && digits.length === 12) digits = "41" + digits.slice(3);
-  if (digits.startsWith("330") && digits.length === 12) digits = "33" + digits.slice(3);
-
-  // Déjà avec indicatif pays
-  if (digits.startsWith("41") && digits.length === 11) return `+${digits}`;
-  if (digits.startsWith("33") && digits.length === 11) return `+${digits}`;
-
-  // Format national 0XXXXXXXXX (10 chiffres)
-  if (digits.length === 10 && digits.startsWith("0")) {
-    const prefix2 = digits.slice(1, 3);
-    // Mobiles suisses: 074-079
-    if (["74", "75", "76", "77", "78", "79"].includes(prefix2)) return `+41${digits.slice(1)}`;
-    // Mobiles français: 06, 07
-    if (["06", "07"].includes(digits.slice(0, 2))) return `+33${digits.slice(1)}`;
+  const trimmed = phone.trim();
+  // Essai 1: tel quel (déjà E.164 si commence par +)
+  let parsed = parsePhoneNumberFromString(trimmed);
+  if (parsed?.isValid()) return parsed.number;
+  // Essai 2: par défaut Suisse, puis France
+  for (const country of ["CH", "FR", "DE", "IT", "ES", "PT", "BE", "AT", "LU"] as const) {
+    parsed = parsePhoneNumberFromString(trimmed, country);
+    if (parsed?.isValid()) return parsed.number;
   }
-
-  // Format sans 0 ni indicatif (9 chiffres) -> assume Suisse
-  if (digits.length === 9 && ["74", "75", "76", "77", "78", "79"].includes(digits.slice(0, 2))) {
-    return `+41${digits}`;
-  }
-
   return null;
 }
 
