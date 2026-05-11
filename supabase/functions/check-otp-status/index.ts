@@ -21,7 +21,14 @@ serve(async (req) => {
 
     const results: Record<string, unknown> = {};
 
-    // 1. Account info (trial status, balance)
+    // Verify Service config
+    const svcRes = await fetch(
+      `https://verify.twilio.com/v2/Services/${VERIFY_SERVICE_SID}`,
+      { headers: { Authorization: `Basic ${basicAuth}` } }
+    );
+    results.service = await svcRes.json();
+
+    // Account
     const accRes = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${accountSid}.json`, {
       headers: { Authorization: `Basic ${basicAuth}` },
     });
