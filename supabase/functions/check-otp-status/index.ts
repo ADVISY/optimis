@@ -40,7 +40,18 @@ serve(async (req) => {
         `https://verify.twilio.com/v2/Services/${VERIFY_SERVICE_SID}/Verifications/${sid}`,
         { headers: { Authorization: `Basic ${basicAuth}` } }
       );
-      results.verification = await vRes.json();
+      const verification = await vRes.json();
+      results.verification = verification;
+
+      const attempts = verification.send_code_attempts || [];
+      results.attempts = [];
+      for (const a of attempts) {
+        const aRes = await fetch(
+          `https://verify.twilio.com/v2/Attempts/${a.attempt_sid}`,
+          { headers: { Authorization: `Basic ${basicAuth}` } }
+        );
+        (results.attempts as any[]).push(await aRes.json());
+      }
     }
 
     // 4. Recent messages to that phone (delivery status)
