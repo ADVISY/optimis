@@ -52,7 +52,9 @@ serve(async (req) => {
       );
     }
 
+    console.log("send-otp received raw phone:", JSON.stringify(phone));
     const phoneE164 = normalizeToE164(phone);
+    console.log("send-otp normalized E164:", phoneE164);
     if (!phoneE164) {
       return new Response(
         JSON.stringify({ success: false, error: "Invalid phone number format" }),
