@@ -94,6 +94,9 @@ serve(async (req) => {
     console.log(`Query: canton=${params.canton}, age=${ageCategory}, franchise=${franchiseCode}, model=${modelCode || 'all'}, accident=${accidentCode}`);
 
     // Query the database instead of CSV
+    // Exclude small regional insurers that aren't actively promoted
+    const EXCLUDED_INSURER_IDS = ['134', '194', '246', '360', '780', '820', '923', '941', '1040', '1113', '1318', '1322', '1507'];
+
     let query = supabase
       .from('health_premiums')
       .select('*')
@@ -102,6 +105,7 @@ serve(async (req) => {
       .eq('accident_code', accidentCode)
       .eq('franchise_code', franchiseCode)
       .gt('premium', 0)
+      .not('insurer_id', 'in', `(${EXCLUDED_INSURER_IDS.join(',')})`)
       .order('premium', { ascending: true })
       .limit(100);
 
