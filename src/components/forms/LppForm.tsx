@@ -13,6 +13,7 @@ import { useAutoAdvance } from "@/hooks/useAutoAdvance";
 import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
 import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
 import { Input } from "@/components/ui/input";
+import { PhoneInputCH } from "@/components/forms/PhoneInputCH";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Lock, User, Phone } from "lucide-react";
@@ -323,15 +324,11 @@ const LppForm = () => {
           </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.contact.phone")} htmlFor="phone" required error={stepErrors.phone}>
-            <Input
+            <PhoneInputCH
               id="phone"
-              type="tel"
-              inputMode="tel"
-              autoComplete="tel"
               value={formData.phone}
               onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); notifyDelayed(); }}
-              placeholder="+41 79 123 45 67"
-              className={cn("h-11 md:h-14 text-sm md:text-lg", stepErrors.phone && "border-destructive")}
+              placeholder="79 123 45 67" hasError={!!stepErrors.phone}
             />
           </FormFieldWrapper>
 

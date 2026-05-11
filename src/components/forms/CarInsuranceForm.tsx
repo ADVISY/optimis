@@ -13,6 +13,7 @@ import PlateSearch from "@/components/forms/PlateSearch";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { Input } from "@/components/ui/input";
+import { PhoneInputCH } from "@/components/forms/PhoneInputCH";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -497,15 +498,11 @@ const CarInsuranceForm = () => {
           </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.contact.phone")} htmlFor="phone" required error={stepErrors.phone}>
-            <Input
+            <PhoneInputCH
               id="phone"
-              type="tel"
-              inputMode="tel"
-              autoComplete="tel"
               value={formData.phone}
               onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); notifyDelayed(); }}
-              placeholder="+41 79 123 45 67"
-              className={cn("h-12 md:h-14 text-base md:text-lg", stepErrors.phone && "border-red-400")}
+              placeholder="79 123 45 67" hasError={!!stepErrors.phone}
             />
           </FormFieldWrapper>
 
