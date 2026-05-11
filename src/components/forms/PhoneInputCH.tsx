@@ -64,26 +64,30 @@ export const PhoneInputCH = forwardRef<HTMLInputElement, PhoneInputCHProps>(
 
     const callingCode = useMemo(() => getCountryCallingCode(country), [country]);
 
-    // On affiche le numéro formaté nationalement SANS le 0 de tête (l'indicatif est déjà visible à gauche)
+    // Affiche le numéro formaté nationalement SANS le 0 de tête (l'indicatif est déjà à gauche)
     const displayValue = useMemo(() => {
       if (!value) return "";
-      let national = "";
-      if (value.startsWith("+")) {
-        const parsed = parsePhoneNumberFromString(value);
-        national = parsed?.nationalNumber?.toString() ?? value.replace(/\D/g, "");
-      } else {
-        national = value.replace(/\D/g, "").replace(/^0+/, "");
+      const parsed = parsePhoneNumberFromString(value);
+      if (parsed) {
+        return parsed.formatNational().replace(/^0\s?/, "");
       }
-      // Formate les chiffres nationaux sans réintroduire le 0
-      const formatter = new AsYouType(country);
-      const formatted = formatter.input(`+${callingCode}${national}`);
-      // Retire le préfixe "+XX " du rendu international
-      return formatted.replace(new RegExp(`^\\+${callingCode}\\s?`), "");
+      const national = value.replace(/\D/g, "").replace(/^0+/, "");
+      return new AsYouType(country).input(`+${callingCode}${national}`).replace(
+        new RegExp(`^\\+${callingCode}\\s?`),
+        ""
+      );
     }, [value, country, callingCode]);
 
     const emit = (raw: string, cc: CountryCode) => {
-      const digits = raw.replace(/\D/g, "").replace(/^0+/, "");
-      const e164 = `+${getCountryCallingCode(cc)}${digits}`;
+      const ccDigits = getCountryCallingCode(cc);
+      let digits = raw.replace(/\D/g, "");
+      // Si l'utilisateur a tapé l'indicatif lui-même, on le retire
+      if (digits.startsWith(ccDigits)) {
+        digits = digits.slice(ccDigits.length);
+      }
+      // Retire le 0 national de tête
+      digits = digits.replace(/^0+/, "");
+      const e164 = `+${ccDigits}${digits}`;
       onChange?.({ target: { name, value: e164 } });
     };
 
