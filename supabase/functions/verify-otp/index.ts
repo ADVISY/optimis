@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { parsePhoneNumberFromString } from "npm:libphonenumber-js@1.13.1";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -9,14 +10,12 @@ const corsHeaders = {
 const VERIFY_SERVICE_SID = "VA2b4327548063070224159545d3d7a1dd";
 
 function normalizeToE164(phone: string): string | null {
-  const digits = phone.replace(/\D/g, "");
-  if (digits.startsWith("41") && digits.length === 11) return `+${digits}`;
-  if (digits.startsWith("33") && digits.length === 11) return `+${digits}`;
-  if (digits.startsWith("07") && digits.length === 10) return `+41${digits.slice(1)}`;
-  if ((digits.startsWith("06") || digits.startsWith("07")) && digits.length === 10) {
-    const prefix2 = digits.slice(1, 3);
-    if (["76", "77", "78", "79"].includes(prefix2)) return `+41${digits.slice(1)}`;
-    return `+33${digits.slice(1)}`;
+  const trimmed = phone.trim();
+  let parsed = parsePhoneNumberFromString(trimmed);
+  if (parsed?.isValid()) return parsed.number;
+  for (const country of ["CH", "FR", "DE", "IT", "ES", "PT", "BE", "AT", "LU"] as const) {
+    parsed = parsePhoneNumberFromString(trimmed, country);
+    if (parsed?.isValid()) return parsed.number;
   }
   return null;
 }
