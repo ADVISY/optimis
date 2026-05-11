@@ -26,7 +26,8 @@ import { simulateMortgage, MortgageSimulationResult } from "@/utils/mortgageCalc
 import { Lock, User, Phone } from "lucide-react";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
-// OTP disabled for testing — kept on Car and Pillar3 only
+import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
+import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
 import { cn } from "@/lib/utils";
 
 interface MortgageFormData {
@@ -124,9 +125,13 @@ const MortgageForm = () => {
     }, 3000);
   }, [formData, submitLead, navigate, i18n.language, mortgageProducts, simulateMortgage]);
 
+  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
+    onOtpVerified: performSubmit,
+    getPhone: () => formData.phone,
+  });
+
   const handleSubmit = async () => {
-    sessionStorage.setItem("phone_verified", "true");
-    await performSubmit();
+    await startOtpFlow();
   };
 
   const validateStep = (step: number): boolean => {
@@ -446,7 +451,7 @@ const MortgageForm = () => {
         isLastStep={isLastStep}
         canProceed={canProceed}
       />
-      
+      <SmsVerificationModal {...otpModalProps} />
     </FormContainer>
   );
 };

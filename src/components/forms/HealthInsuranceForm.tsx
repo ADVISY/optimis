@@ -30,7 +30,8 @@ import { Button } from "@/components/ui/button";
 import DateInput from "@/components/ui/date-input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
-// OTP disabled for testing — kept on Car and Pillar3 only
+import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
+import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
 import { User, Phone } from "lucide-react";
 
 interface HealthInsuranceFormData {
@@ -239,9 +240,13 @@ const HealthInsuranceForm = () => {
     navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
   }, [formData, submitLead, navigate, localizedPath, location.pathname, i18n.language, prepareLeadData]);
 
+  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
+    onOtpVerified: performSubmit,
+    getPhone: () => formData.phone,
+  });
+
   const handleSubmit = async () => {
-    sessionStorage.setItem("phone_verified", "true");
-    await performSubmit();
+    await startOtpFlow();
   };
 
   // Validation function for each step
@@ -928,7 +933,7 @@ const HealthInsuranceForm = () => {
         isLastStep={isLastStep}
         canProceed={canProceed}
       />
-      
+      <SmsVerificationModal {...otpModalProps} />
     </FormContainer>
   );
 };
