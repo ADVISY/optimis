@@ -498,12 +498,16 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
 
     // UN SEUL leadId par soumission, partagé avec Meta/TikTok comme eventID
     // pour permettre la déduplication browser <-> serveur (CAPI future).
-    const leadId = generateLeadId();
+    // Si linkToLeadId est fourni (2e soumission depuis la modale d'offre), on
+    // réutilise l'ID initial pour que Zapier puisse mettre à jour la fiche.
+    const leadId = linkToLeadId || generateLeadId();
+    const eventType = EVENT_TYPE_BY_FORM_TYPE[formType] || "Lead initial";
     const attribution = getAttributionForLead();
 
     const leadData: LeadData = {
       ...renamedData as Record<string, unknown>,
       ...attribution,
+      "Type d'événement": eventType,
       "Type de formulaire": formType,
       "Langue": i18n.language,
       "Source": document.referrer || "direct",
