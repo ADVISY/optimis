@@ -23,12 +23,11 @@ export function useOtpFormFlow({ onOtpVerified, getPhone }: OtpFormFlowOptions) 
   useEffect(() => { getPhoneRef.current = getPhone; }, [getPhone]);
 
   const startOtpFlow = useCallback(async () => {
-    const phone = getPhoneRef.current();
-    setPendingPhone(phone);
-    setShowOtpModal(true);
-    otp.resetOtp();
-    await otp.sendOtp(phone);
-  }, [otp]);
+    // SMS verification temporarily disabled (Twilio -> Salt CH delivery failures).
+    // Bypass OTP and submit directly. Re-enable by restoring the modal flow.
+    sessionStorage.setItem("phone_verified", "true");
+    await onOtpVerifiedRef.current();
+  }, []);
 
   const handleVerify = useCallback(async (code: string) => {
     const success = await otp.verifyOtp(code);
