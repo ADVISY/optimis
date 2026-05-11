@@ -9,15 +9,29 @@ const corsHeaders = {
 const VERIFY_SERVICE_SID = "VA2b4327548063070224159545d3d7a1dd";
 
 function normalizeToE164(phone: string): string | null {
-  const digits = phone.replace(/\D/g, "");
+  let digits = phone.replace(/\D/g, "");
+  if (!digits) return null;
 
+  // Cas: l'utilisateur a tapé 0 après +41/+33 (ex: +41 078...) -> on retire le 0 parasite
+  if (digits.startsWith("410") && digits.length === 12) digits = "41" + digits.slice(3);
+  if (digits.startsWith("330") && digits.length === 12) digits = "33" + digits.slice(3);
+
+  // Déjà avec indicatif pays
   if (digits.startsWith("41") && digits.length === 11) return `+${digits}`;
   if (digits.startsWith("33") && digits.length === 11) return `+${digits}`;
-  if (digits.startsWith("07") && digits.length === 10) return `+41${digits.slice(1)}`;
-  if ((digits.startsWith("06") || digits.startsWith("07")) && digits.length === 10) {
+
+  // Format national 0XXXXXXXXX (10 chiffres)
+  if (digits.length === 10 && digits.startsWith("0")) {
     const prefix2 = digits.slice(1, 3);
-    if (["76", "77", "78", "79"].includes(prefix2)) return `+41${digits.slice(1)}`;
-    return `+33${digits.slice(1)}`;
+    // Mobiles suisses: 074-079
+    if (["74", "75", "76", "77", "78", "79"].includes(prefix2)) return `+41${digits.slice(1)}`;
+    // Mobiles français: 06, 07
+    if (["06", "07"].includes(digits.slice(0, 2))) return `+33${digits.slice(1)}`;
+  }
+
+  // Format sans 0 ni indicatif (9 chiffres) -> assume Suisse
+  if (digits.length === 9 && ["74", "75", "76", "77", "78", "79"].includes(digits.slice(0, 2))) {
+    return `+41${digits}`;
   }
 
   return null;
@@ -38,7 +52,9 @@ serve(async (req) => {
       );
     }
 
+    console.log("send-otp received raw phone:", JSON.stringify(phone));
     const phoneE164 = normalizeToE164(phone);
+    console.log("send-otp normalized E164:", phoneE164);
     if (!phoneE164) {
       return new Response(
         JSON.stringify({ success: false, error: "Invalid phone number format" }),

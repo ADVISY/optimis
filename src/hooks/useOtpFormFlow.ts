@@ -7,15 +7,13 @@ interface OtpFormFlowOptions {
 }
 
 /**
- * Manages the lead form continuation point.
- * Public lead forms currently bypass SMS OTP; admin OTP remains handled separately.
+ * Manages the lead form continuation point with SMS OTP verification.
  */
 export function useOtpFormFlow({ onOtpVerified, getPhone }: OtpFormFlowOptions) {
   const [showOtpModal, setShowOtpModal] = useState(false);
   const [pendingPhone, setPendingPhone] = useState("");
   const otp = useOtpVerification();
 
-  // Use refs to always call latest callbacks
   const onOtpVerifiedRef = useRef(onOtpVerified);
   const getPhoneRef = useRef(getPhone);
   useEffect(() => { onOtpVerifiedRef.current = onOtpVerified; }, [onOtpVerified]);
@@ -24,8 +22,10 @@ export function useOtpFormFlow({ onOtpVerified, getPhone }: OtpFormFlowOptions) 
   const startOtpFlow = useCallback(async () => {
     const phone = getPhoneRef.current().trim();
     setPendingPhone(phone);
-    sessionStorage.setItem("phone_verified", "true");
-    await onOtpVerifiedRef.current();
+    const sent = await otp.sendOtp(phone);
+    if (sent) {
+      setShowOtpModal(true);
+    }
   }, [otp]);
 
   const handleVerify = useCallback(async (code: string) => {
