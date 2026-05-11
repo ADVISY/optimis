@@ -24,6 +24,20 @@ const DEFAULT_INSURERS: Record<string, string> = {
   "1771": "Rhenusana", "1777": "Sanavals", "1783": "SLKK",
   "1789": "Vivao Sympany", "1795": "Intras", "1807": "Moove Sympany",
   "1819": "AMB Assurances",
+  // Petites caisses régionales (mapping BAG officiel)
+  "134": "Einsiedler Krankenkasse",
+  "194": "Sumiswalder Krankenkasse",
+  "246": "Krankenkasse Steffisburg",
+  "360": "Krankenkasse Luzerner Hinterland",
+  "780": "Glarner Krankenversicherung",
+  "820": "Cassa da malsauns Lumneziana",
+  "923": "SLKK",
+  "941": "Sodalis",
+  "1040": "Krankenkasse Visperterminen",
+  "1113": "Caisse maladie Vallée d'Entremont",
+  "1318": "Krankenkasse Wädenswil",
+  "1322": "Krankenkasse Birchmeier",
+  "1507": "AMB",
 };
 
 function parseCSV(csvText: string): Record<string, string>[] {
