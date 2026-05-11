@@ -8,6 +8,7 @@ import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { fireLeadConversion, getLastLeadId } from "@/lib/leadTracking";
 import { Input } from "@/components/ui/input";
+import { PhoneInputCH } from "@/components/forms/PhoneInputCH";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Calendar } from "@/components/ui/calendar";
@@ -363,15 +364,11 @@ const TerminationForm = () => {
           </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.contact.phone")} htmlFor="phone" required error={stepErrors.phone}>
-            <Input
+            <PhoneInputCH
               id="phone"
-              type="tel"
-              inputMode="tel"
-              autoComplete="tel"
               value={formData.phone}
               onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); notifyDelayed(); }}
-              placeholder="+41 79 123 45 67"
-              className={cn("h-14 text-lg", stepErrors.phone && "border-red-400")}
+              placeholder="79 123 45 67" hasError={!!stepErrors.phone}
             />
           </FormFieldWrapper>
 

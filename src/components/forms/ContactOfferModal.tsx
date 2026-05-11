@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PhoneInputCH } from "@/components/forms/PhoneInputCH";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -206,13 +207,12 @@ const ContactOfferModal = ({
             <>
               <div className="space-y-2">
                 <Label htmlFor="phone">{t("forms.contact.phone", "Téléphone")} *</Label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  required
-                  value={contactData.phone}
-                  onChange={(e) => setContactData({ ...contactData, phone: e.target.value })}
-                />
+                <PhoneInputCH
+              id="phone"
+              value={contactData.phone}
+              onChange={(e) => setContactData({ ...contactData, phone: e.target.value })}
+              placeholder="79 123 45 67"
+            />
               </div>
 
               <div className="space-y-2">

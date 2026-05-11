@@ -12,6 +12,7 @@ import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
 // OTP disabled for testing — kept on Car and Pillar3 only
 import { Input } from "@/components/ui/input";
+import { PhoneInputCH } from "@/components/forms/PhoneInputCH";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Lock, User, Phone, Building2, CheckCircle } from "lucide-react";
@@ -315,15 +316,11 @@ const PartnerForm = () => {
           </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.contact.phone")} htmlFor="phone" required error={stepErrors.phone}>
-            <Input
+            <PhoneInputCH
               id="phone"
-              type="tel"
-              inputMode="tel"
-              autoComplete="tel"
               value={formData.phone}
               onChange={(e) => { updateFormData({ phone: formatSwissPhone(e.target.value) }); notifyDelayed(); }}
-              placeholder="+41 79 123 45 67"
-              className={cn("h-11 md:h-14 text-sm md:text-lg", stepErrors.phone && "border-destructive")}
+              placeholder="79 123 45 67" hasError={!!stepErrors.phone}
             />
           </FormFieldWrapper>
 
