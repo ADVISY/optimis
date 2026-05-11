@@ -64,22 +64,26 @@ export const PhoneInputCH = forwardRef<HTMLInputElement, PhoneInputCHProps>(
 
     const callingCode = useMemo(() => getCountryCallingCode(country), [country]);
 
-    // On affiche le numéro formaté nationalement (sans le +XX)
+    // On affiche le numéro formaté nationalement SANS le 0 de tête (l'indicatif est déjà visible à gauche)
     const displayValue = useMemo(() => {
       if (!value) return "";
-      const formatter = new AsYouType(country);
-      // Si valeur avec +, formate international, sinon national
+      let national = "";
       if (value.startsWith("+")) {
         const parsed = parsePhoneNumberFromString(value);
-        return parsed?.formatNational() ?? value;
+        national = parsed?.nationalNumber?.toString() ?? value.replace(/\D/g, "");
+      } else {
+        national = value.replace(/\D/g, "").replace(/^0+/, "");
       }
-      return formatter.input(value);
-    }, [value, country]);
+      // Formate les chiffres nationaux sans réintroduire le 0
+      const formatter = new AsYouType(country);
+      const formatted = formatter.input(`+${callingCode}${national}`);
+      // Retire le préfixe "+XX " du rendu international
+      return formatted.replace(new RegExp(`^\\+${callingCode}\\s?`), "");
+    }, [value, country, callingCode]);
 
     const emit = (raw: string, cc: CountryCode) => {
-      // Construit l'E.164 à partir du pays sélectionné + chiffres saisis
-      const parsed = parsePhoneNumberFromString(raw, cc);
-      const e164 = parsed?.isValid() ? parsed.number : `+${getCountryCallingCode(cc)}${raw.replace(/\D/g, "").replace(/^0+/, "")}`;
+      const digits = raw.replace(/\D/g, "").replace(/^0+/, "");
+      const e164 = `+${getCountryCallingCode(cc)}${digits}`;
       onChange?.({ target: { name, value: e164 } });
     };
 
