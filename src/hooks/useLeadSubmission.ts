@@ -16,9 +16,21 @@ interface LeadData {
 interface UseLeadSubmissionOptions {
   webhookUrl?: string;
   formType: string;
+  /**
+   * Si fourni, réutilise cet ID au lieu d'en générer un nouveau.
+   * Permet à Zapier de retrouver la fiche initiale (Lookup row + Update row)
+   * lors d'une 2e soumission (choix d'offre, demande de rappel, etc.).
+   */
+  linkToLeadId?: string;
 }
 
-export function useLeadSubmission({ webhookUrl, formType }: UseLeadSubmissionOptions) {
+const EVENT_TYPE_BY_FORM_TYPE: Record<string, string> = {
+  "contact-offer": "Offre choisie",
+  "contact-call": "Demande de rappel",
+  "contact-email": "Demande par email",
+};
+
+export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLeadSubmissionOptions) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   // Garde anti double-clic indépendante de setState (qui est asynchrone).
