@@ -50,6 +50,7 @@ export const localizedRoutes: LocalizedRoutes = {
   homeLanding: { fr: "assurance-menage-landing", de: "hausratversicherung-vergleich", it: "confronto-assicurazione-mobilia" },
   legalLanding: { fr: "protection-juridique-landing", de: "rechtsschutz-vergleich", it: "confronto-protezione-giuridica" },
   subsidyLanding: { fr: "subside-assurance-maladie-demande", de: "praemienverbilligung-antrag", it: "richiesta-riduzione-premi" },
+  prenatalLanding: { fr: "assurance-prenatale-offres", de: "praenatale-versicherung-vergleich", it: "confronto-assicurazione-prenatale" },
   terminationLanding: { fr: "resiliation-assurance", de: "versicherung-kuendigung", it: "disdetta-assicurazione" },
   pillar3Landing: { fr: "3eme-pilier-offres", de: "saeule-3a-vergleich", it: "confronto-pilastro-3a" },
   mortgageLanding: { fr: "hypotheque-offres", de: "hypotheken-vergleich", it: "confronto-ipoteche" },
