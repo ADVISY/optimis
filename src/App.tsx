@@ -30,7 +30,7 @@ import FAQ from "./pages/FAQ";
 import ThankYou from "./pages/ThankYou";
 import MerciHypotheque from "./pages/MerciHypotheque";
 import MerciLpp from "./pages/MerciLpp";
-import { MerciEstimation, MerciPartenaire, MerciSubside, MerciResiliation } from "./pages/MerciGeneric";
+import { MerciEstimation, MerciPartenaire, MerciSubside, MerciResiliation, MerciPrenatal } from "./pages/MerciGeneric";
 import Insurances from "./pages/Insurances";
 import NotFound from "./pages/NotFound";
 import { languages } from "./i18n";
@@ -46,6 +46,7 @@ import ComparateurPilier3 from "./pages/comparateurs/ComparateurPilier3";
 import ComparateurHypotheque from "./pages/comparateurs/ComparateurHypotheque";
 import ComparateurProfessionnel from "./pages/comparateurs/ComparateurProfessionnel";
 import ComparateurLpp from "./pages/comparateurs/ComparateurLpp";
+import ComparateurPrenatal from "./pages/comparateurs/ComparateurPrenatal";
 import AvoirsLpp from "./pages/AvoirsLpp";
 import EstimationImmobiliere from "./pages/EstimationImmobiliere";
 import ComparateurEstimation from "./pages/comparateurs/ComparateurEstimation";
@@ -99,6 +100,7 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("healthSubsidy", <SubsideAssuranceMaladie />)}
         {createLocalizedRoutes("termination", <Resiliation />)}
         {createLocalizedRoutes("lpp", <AvoirsLpp />)}
+        {createLocalizedRoutes("prenatalInsurance", <ComparateurPrenatal />)}
         
         {/* Blog */}
         <Route path="/blog" element={<Blog />} />
@@ -120,6 +122,7 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("thankYouPartner", <MerciPartenaire />)}
         {createLocalizedRoutes("thankYouSubsidy", <MerciSubside />)}
         {createLocalizedRoutes("thankYouTermination", <MerciResiliation />)}
+        {createLocalizedRoutes("thankYouPrenatal", <MerciPrenatal />)}
         
         {/* Landing/Comparator pages - all language variants */}
         {createLocalizedRoutes("healthLanding", <ComparateurSante />)}
@@ -127,6 +130,7 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("homeLanding", <ComparateurMenage />)}
         {createLocalizedRoutes("legalLanding", <ComparateurProtectionJuridique />)}
         {createLocalizedRoutes("subsidyLanding", <ComparateurSubside />)}
+        {createLocalizedRoutes("prenatalLanding", <ComparateurPrenatal />)}
         {createLocalizedRoutes("terminationLanding", <ComparateurResiliation />)}
         {createLocalizedRoutes("pillar3Landing", <ComparateurPilier3 />)}
         {createLocalizedRoutes("mortgageLanding", <ComparateurHypotheque />)}
