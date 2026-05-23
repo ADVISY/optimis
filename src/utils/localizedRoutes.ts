@@ -22,6 +22,7 @@ export const localizedRoutes: LocalizedRoutes = {
   services: { fr: "services", de: "dienstleistungen", it: "servizi" },
   mobilePackage: { fr: "forfait-mobile", de: "handy-abo", it: "abbonamento-mobile" },
   healthSubsidy: { fr: "subside-assurance-maladie", de: "praemienverbilligung", it: "riduzione-premi" },
+  prenatalInsurance: { fr: "assurance-prenatale", de: "praenatale-versicherung", it: "assicurazione-prenatale" },
   termination: { fr: "resiliation", de: "kuendigung", it: "disdetta" },
   blog: { fr: "blog", de: "blog", it: "blog" },
   
@@ -41,6 +42,7 @@ export const localizedRoutes: LocalizedRoutes = {
   thankYouPartner: { fr: "merci-partenaire", de: "danke-partner", it: "grazie-partner" },
   thankYouSubsidy: { fr: "merci-subside", de: "danke-praemienverbilligung", it: "grazie-riduzione-premi" },
   thankYouTermination: { fr: "merci-resiliation", de: "danke-kuendigung", it: "grazie-disdetta" },
+  thankYouPrenatal: { fr: "merci-prenatale", de: "danke-praenatale", it: "grazie-prenatale" },
   
   // Landing/Comparator pages
   healthLanding: { fr: "assurance-maladie-landing", de: "krankenversicherung-vergleich", it: "confronto-assicurazione-malattia" },
@@ -48,6 +50,7 @@ export const localizedRoutes: LocalizedRoutes = {
   homeLanding: { fr: "assurance-menage-landing", de: "hausratversicherung-vergleich", it: "confronto-assicurazione-mobilia" },
   legalLanding: { fr: "protection-juridique-landing", de: "rechtsschutz-vergleich", it: "confronto-protezione-giuridica" },
   subsidyLanding: { fr: "subside-assurance-maladie-demande", de: "praemienverbilligung-antrag", it: "richiesta-riduzione-premi" },
+  prenatalLanding: { fr: "assurance-prenatale-offres", de: "praenatale-versicherung-vergleich", it: "confronto-assicurazione-prenatale" },
   terminationLanding: { fr: "resiliation-assurance", de: "versicherung-kuendigung", it: "disdetta-assicurazione" },
   pillar3Landing: { fr: "3eme-pilier-offres", de: "saeule-3a-vergleich", it: "confronto-pilastro-3a" },
   mortgageLanding: { fr: "hypotheque-offres", de: "hypotheken-vergleich", it: "confronto-ipoteche" },

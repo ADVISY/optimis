@@ -446,6 +446,16 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
         incomeRange: "Revenu annuel",
         specialSituation: "Situation particulière",
       },
+      "prenatal-insurance": {
+        dueDate: "Date prévue d'accouchement",
+        canton: "Canton",
+        coverageLevel: "Niveau de couverture",
+        hospitalization: "Hospitalisation privée/semi-privée",
+        alternativeMedicine: "Médecine alternative",
+        childDental: "Soins dentaires enfant",
+        motherHasInsurance: "Maman a déjà une assurance",
+        motherInsurer: "Assureur actuel de la maman",
+      },
       termination: {
         contractType: "Type de contrat",
         currentInsurer: "Assureur actuel",
