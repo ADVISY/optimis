@@ -22,6 +22,7 @@ export const localizedRoutes: LocalizedRoutes = {
   services: { fr: "services", de: "dienstleistungen", it: "servizi" },
   mobilePackage: { fr: "forfait-mobile", de: "handy-abo", it: "abbonamento-mobile" },
   healthSubsidy: { fr: "subside-assurance-maladie", de: "praemienverbilligung", it: "riduzione-premi" },
+  prenatalInsurance: { fr: "assurance-prenatale", de: "praenatale-versicherung", it: "assicurazione-prenatale" },
   termination: { fr: "resiliation", de: "kuendigung", it: "disdetta" },
   blog: { fr: "blog", de: "blog", it: "blog" },
   
