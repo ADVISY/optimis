@@ -29,6 +29,7 @@
     "sending": "Envoi..."
   },
   "megaMenu": {
+    "prenatalInsurance": "Assurance prénatale (bébé à naître)",
     "healthModel": "Quel modèle d'assurance maladie choisir ?",
     "dentalInsurance": "Assurance dentaire complémentaire",
     "healthChange2024": "Changement d'assurance maladie 2024",
@@ -1256,6 +1257,30 @@
       "startApplication": "Commencer ma demande",
       "downloadGuide": "Télécharger le guide",
       "contactNote": "Un conseiller vous contactera pour finaliser votre demande."
+    },
+    "prenatal": {
+      "title": "Assurance prénatale",
+      "description": "Protégez votre futur bébé avant la naissance, sans questions médicales",
+      "babyOnTheWay": "Un bébé arrive bientôt 👶",
+      "babyOnTheWayDesc": "Indiquez la date prévue d'accouchement pour recevoir les meilleures offres",
+      "dueDate": "Date prévue d'accouchement",
+      "canton": "Canton de résidence",
+      "selectCanton": "Sélectionnez votre canton",
+      "postalCode": "Code postal",
+      "coverageLevel": "Quel niveau de couverture souhaitez-vous pour bébé ?",
+      "coverage": {
+        "basic": "Essentielle",
+        "basicDesc": "Soins de base + complémentaire light",
+        "premium": "Premium",
+        "premiumDesc": "Hospitalisation semi-privée + médecine alternative",
+        "diamond": "Diamond",
+        "diamondDesc": "Hospitalisation privée + couverture monde entier"
+      },
+      "hospitalization": "Hospitalisation privée ou semi-privée pour bébé ?",
+      "alternativeMedicine": "Médecine alternative",
+      "childDental": "Soins dentaires enfant",
+      "motherHasInsurance": "La maman a-t-elle déjà une assurance maladie ?",
+      "motherInsurer": "Quel est son assureur actuel ?"
     },
     "termination": {
       "title": "Résiliation d'assurance",

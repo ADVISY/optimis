@@ -1207,6 +1207,30 @@
       "downloadGuide": "Scarica la guida",
       "contactNote": "Un consulente ti contatterà per finalizzare la tua richiesta."
     },
+    "prenatal": {
+      "title": "Assicurazione prenatale",
+      "description": "Proteggi il tuo futuro bambino prima della nascita, senza domande mediche",
+      "babyOnTheWay": "Sta arrivando un bambino 👶",
+      "babyOnTheWayDesc": "Indica la data prevista del parto per ricevere le migliori offerte",
+      "dueDate": "Data prevista del parto",
+      "canton": "Cantone di residenza",
+      "selectCanton": "Seleziona il tuo cantone",
+      "postalCode": "Codice postale",
+      "coverageLevel": "Quale livello di copertura desideri per il bambino?",
+      "coverage": {
+        "basic": "Essenziale",
+        "basicDesc": "Cure di base + complementare leggera",
+        "premium": "Premium",
+        "premiumDesc": "Ricovero semi-privato + medicina alternativa",
+        "diamond": "Diamond",
+        "diamondDesc": "Ricovero privato + copertura mondiale"
+      },
+      "hospitalization": "Ricovero privato o semi-privato per il bambino?",
+      "alternativeMedicine": "Medicina alternativa",
+      "childDental": "Cure dentistiche bambino",
+      "motherHasInsurance": "La mamma ha già un'assicurazione malattia?",
+      "motherInsurer": "Qual è il suo assicuratore attuale?"
+    },
     "termination": {
       "title": "Disdetta assicurazione",
       "description": "Disdici il tuo contratto in modo semplice e veloce",

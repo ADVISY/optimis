@@ -1207,6 +1207,30 @@
       "downloadGuide": "Leitfaden herunterladen",
       "contactNote": "Ein Berater wird Sie kontaktieren, um Ihren Antrag abzuschliessen."
     },
+    "prenatal": {
+      "title": "Pränatale Versicherung",
+      "description": "Schützen Sie Ihr ungeborenes Baby vor der Geburt – ohne medizinische Fragen",
+      "babyOnTheWay": "Ein Baby ist unterwegs 👶",
+      "babyOnTheWayDesc": "Geben Sie den voraussichtlichen Geburtstermin an, um die besten Angebote zu erhalten",
+      "dueDate": "Voraussichtlicher Geburtstermin",
+      "canton": "Wohnkanton",
+      "selectCanton": "Wählen Sie Ihren Kanton",
+      "postalCode": "Postleitzahl",
+      "coverageLevel": "Welches Deckungsniveau wünschen Sie für Ihr Baby?",
+      "coverage": {
+        "basic": "Essential",
+        "basicDesc": "Grundversorgung + leichte Zusatzversicherung",
+        "premium": "Premium",
+        "premiumDesc": "Halbprivate Hospitalisierung + Alternativmedizin",
+        "diamond": "Diamond",
+        "diamondDesc": "Private Hospitalisierung + weltweite Deckung"
+      },
+      "hospitalization": "Private oder halbprivate Hospitalisierung für Baby?",
+      "alternativeMedicine": "Alternativmedizin",
+      "childDental": "Zahnbehandlung Kind",
+      "motherHasInsurance": "Hat die Mutter bereits eine Krankenversicherung?",
+      "motherInsurer": "Welcher ist ihr aktueller Versicherer?"
+    },
     "termination": {
       "title": "Versicherung kündigen",
       "description": "Kündigen Sie Ihren Vertrag einfach und schnell",
