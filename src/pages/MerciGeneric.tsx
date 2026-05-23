@@ -108,4 +108,15 @@ export const MerciResiliation = () => (
   />
 );
 
+export const MerciPrenatal = () => (
+  <MerciGeneric
+    pageKey="merci-prenatale"
+    titleKey="thankYouPrenatal.title"
+    titleDefault="Félicitations pour votre futur bébé !"
+    messageKey="thankYouPrenatal.message"
+    messageDefault="Votre demande d'assurance prénatale a bien été reçue. Un conseiller spécialisé vous contactera rapidement avec les meilleures offres pour protéger votre bébé dès sa naissance."
+  />
+);
+
+
 export default MerciGeneric;
