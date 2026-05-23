@@ -496,11 +496,12 @@ const PrenatalInsuranceForm = () => {
               <PhoneInputCH
                 id="phone"
                 value={formData.phone}
-                onChange={(value) => {
-                  updateFormData({ phone: value });
+                onChange={(e) => {
+                  updateFormData({ phone: e.target.value });
                   notifyDelayedLong();
                 }}
               />
+
             </FormFieldWrapper>
           </div>
         </FormStep>
