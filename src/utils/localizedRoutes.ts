@@ -42,6 +42,7 @@ export const localizedRoutes: LocalizedRoutes = {
   thankYouPartner: { fr: "merci-partenaire", de: "danke-partner", it: "grazie-partner" },
   thankYouSubsidy: { fr: "merci-subside", de: "danke-praemienverbilligung", it: "grazie-riduzione-premi" },
   thankYouTermination: { fr: "merci-resiliation", de: "danke-kuendigung", it: "grazie-disdetta" },
+  thankYouPrenatal: { fr: "merci-prenatale", de: "danke-praenatale", it: "grazie-prenatale" },
   
   // Landing/Comparator pages
   healthLanding: { fr: "assurance-maladie-landing", de: "krankenversicherung-vergleich", it: "confronto-assicurazione-malattia" },
