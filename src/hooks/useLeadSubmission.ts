@@ -449,9 +449,8 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
       "prenatal-insurance": {
         dueDate: "Date prévue d'accouchement",
         canton: "Canton",
+        postalCode: "Code postal",
         coverageLevel: "Niveau de couverture",
-        hospitalization: "Hospitalisation privée/semi-privée",
-        alternativeMedicine: "Médecine alternative",
         childDental: "Soins dentaires enfant",
         motherHasInsurance: "Maman a déjà une assurance",
         motherInsurer: "Assureur actuel de la maman",
