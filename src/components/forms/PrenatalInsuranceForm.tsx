@@ -31,6 +31,8 @@ interface PrenatalFormData {
   canton: string;
   postalCode: string;
   coverageLevel: string;
+  lamalModel: string;
+  childDeductible: string;
   childDental: string;
   motherHasInsurance: string;
   motherInsurer: string;
