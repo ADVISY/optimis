@@ -1277,6 +1277,9 @@
         "diamondDesc": "Hospitalisation privée + couverture monde entier"
       },
       "childDental": "Soins dentaires enfant",
+      "lamalModel": "Modèle LAMal souhaité",
+      "childDeductible": "Franchise enfant (CHF)",
+      "childDeductibleDefault": "recommandé pour bébé",
       "motherHasInsurance": "La maman a-t-elle déjà une assurance maladie ?",
       "motherInsurer": "Quel est son assureur actuel ?"
     },
