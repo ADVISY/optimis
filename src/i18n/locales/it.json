@@ -1219,15 +1219,13 @@
       "postalCode": "Codice postale",
       "coverageLevel": "Quale livello di copertura desideri per il bambino?",
       "coverage": {
-        "basic": "Essenziale",
+        "basic": "Basic",
         "basicDesc": "Cure di base + complementare leggera",
         "premium": "Premium",
         "premiumDesc": "Ricovero semi-privato + medicina alternativa",
         "diamond": "Diamond",
         "diamondDesc": "Ricovero privato + copertura mondiale"
       },
-      "hospitalization": "Ricovero privato o semi-privato per il bambino?",
-      "alternativeMedicine": "Medicina alternativa",
       "childDental": "Cure dentistiche bambino",
       "motherHasInsurance": "La mamma ha già un'assicurazione malattia?",
       "motherInsurer": "Qual è il suo assicuratore attuale?"
