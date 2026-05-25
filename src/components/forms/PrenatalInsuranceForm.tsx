@@ -99,10 +99,10 @@ const PrenatalInsuranceForm = () => {
       diamond: t("forms.prenatal.coverage.diamond"),
     };
     const modelMap: Record<string, string> = {
-      standard: t("forms.healthInsurance.models.standard"),
       "family-doctor": t("forms.healthInsurance.models.familyDoctor"),
-      hmo: t("forms.healthInsurance.models.hmo"),
+      hmo: t("forms.prenatal.models.careNetwork", "Réseau de soins"),
       telmed: t("forms.healthInsurance.models.telemedicine"),
+      standard: t("forms.healthInsurance.models.standard"),
     };
     const yesNoMap: Record<string, string> = { yes: t("common.yes"), no: t("common.no") };
     const insurerMap: Record<string, string> = {
@@ -300,10 +300,10 @@ const PrenatalInsuranceForm = () => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="standard">{t("forms.healthInsurance.models.standard")}</SelectItem>
                     <SelectItem value="family-doctor">{t("forms.healthInsurance.models.familyDoctor")}</SelectItem>
-                    <SelectItem value="hmo">{t("forms.healthInsurance.models.hmo")}</SelectItem>
+                    <SelectItem value="hmo">{t("forms.prenatal.models.careNetwork", "Réseau de soins")}</SelectItem>
                     <SelectItem value="telmed">{t("forms.healthInsurance.models.telemedicine")}</SelectItem>
+                    <SelectItem value="standard">{t("forms.healthInsurance.models.standard")}</SelectItem>
                   </SelectContent>
                 </Select>
               </FormFieldWrapper>
