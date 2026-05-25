@@ -1,0 +1,83 @@
+{
+  "description": "Mapping des articles WordPress vers leurs images à la une extraites du XML",
+  "posts": [
+    {
+      "id": "2887",
+      "slug": "subside-dassurance-maladie-comment-ca-marche-et-comment-faire-sa-demande",
+      "thumbnailId": "2889",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/Subside-dassurance-maladie-Comment-ca-marche-Et-comment-faire-sa-demande-.jpg",
+      "localImage": "subside-assurance-maladie.jpg"
+    },
+    {
+      "id": "2917",
+      "slug": "quel-modele-dassurance-maladie-choisir",
+      "thumbnailId": "2929",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/quel-modele-d-assurance-choisir-img.jpg",
+      "localImage": "modele-assurance-maladie.jpg"
+    },
+    {
+      "id": "2932",
+      "slug": "le-meilleur-de-la-protection-juridique-en-suisse",
+      "thumbnailId": "2934",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/Le-meilleur-de-la-protection-juridique-en-Suisse.png",
+      "localImage": "protection-juridique.jpg"
+    },
+    {
+      "id": "2957",
+      "slug": "changement-dassurance-maladie-delais-et-demarches-en-2024",
+      "thumbnailId": "2958",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/Vous-ne-savezpas-si-votre-assurance-copie-2-1.jpg",
+      "localImage": "changement-assurance-delais.jpg"
+    },
+    {
+      "id": "2963",
+      "slug": "assurance-dentaire-complementaire-en-suisse-reponses-aux-questions-essentielles",
+      "thumbnailId": "2965",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/assurance-dentaire-complementaire-suisse.jpg",
+      "localImage": "assurance-dentaire.jpg"
+    },
+    {
+      "id": "3339",
+      "slug": "lassurance-rc-menage-les-7-infos-que-vous-devez-connaitre",
+      "thumbnailId": "3341",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/RC-menage.jpg",
+      "localImage": "assurance-menage.jpg"
+    },
+    {
+      "id": "3344",
+      "slug": "lassurance-menage-en-suisse-les-7-choses-a-savoir",
+      "thumbnailId": "3347",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/assurance-menage-suisse.jpg",
+      "localImage": "assurance-menage.jpg"
+    },
+    {
+      "id": "3359",
+      "slug": "lassurance-maladie-pour-bebe",
+      "thumbnailId": "3362",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/assurance-maladie-bebe.jpg",
+      "localImage": "comparer-assurances.jpg"
+    },
+    {
+      "id": "3652",
+      "slug": "comment-reduire-primes-assurance-maladie-suisse",
+      "thumbnailId": "3654",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/comment-reduire-primes-assurance-maladie-suisse.jpg",
+      "localImage": "reduire-primes.jpg"
+    },
+    {
+      "id": "3644",
+      "slug": "hospitalisation-suisse-comparateur-assurance",
+      "thumbnailId": "3643",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/comparer-assurances-suisse-optimis-1.jpg",
+      "localImage": "comparer-assurances.jpg"
+    },
+    {
+      "id": "3621",
+      "slug": "resiliation-caisse-maladie-suisse",
+      "thumbnailId": "3623",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/resiliation-caisse-maladie.jpg",
+      "localImage": "resiliation-assurance.jpg"
+    }
+  ],
+  "note": "Ce fichier contient le mapping extrait du XML WordPress. Les URLs des images correspondent aux images à la une (_thumbnail_id) de chaque article. Pour les articles sans image locale, l'image doit être téléchargée depuis l'URL WordPress."
+}

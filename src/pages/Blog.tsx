@@ -1,0 +1,265 @@
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import Layout from "@/components/layout/Layout";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight, ChevronDown, Filter, Info } from "lucide-react";
+import LocalizedLink from "@/components/LocalizedLink";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { categories, getPaginatedPostsByCategory } from "@/data/blogPosts";
+
+const POSTS_PER_PAGE = 9;
+
+const Blog = () => {
+  const { t, i18n } = useTranslation();
+  const currentLanguage = i18n.language;
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { posts: filteredPosts, totalPages } = getPaginatedPostsByCategory(
+    activeCategory,
+    currentPage,
+    POSTS_PER_PAGE
+  );
+
+  const handleCategoryChange = (categorySlug: string) => {
+    setActiveCategory(categorySlug);
+    setCurrentPage(1); // Reset to page 1 when changing category
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Generate page numbers to display
+  const getPageNumbers = () => {
+    const pages: (number | string)[] = [];
+    const maxVisiblePages = 5;
+
+    if (totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      if (currentPage <= 3) {
+        for (let i = 1; i <= 4; i++) {
+          pages.push(i);
+        }
+        pages.push("...");
+        pages.push(totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        pages.push(1);
+        pages.push("...");
+        for (let i = totalPages - 3; i <= totalPages; i++) {
+          pages.push(i);
+        }
+      } else {
+        pages.push(1);
+        pages.push("...");
+        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+          pages.push(i);
+        }
+        pages.push("...");
+        pages.push(totalPages);
+      }
+    }
+
+    return pages;
+  };
+
+  return (
+    <Layout>
+      {/* Header */}
+      <section className="gradient-optimis py-12 md:py-16">
+        <div className="container text-center">
+          <h1 className="mb-4 text-3xl font-bold text-foreground md:text-4xl lg:text-5xl">
+            Blog Optimis
+          </h1>
+          <p className="mx-auto max-w-2xl text-muted-foreground">
+            Conseils, guides et actualités sur les assurances en Suisse pour
+            vous aider à faire les meilleurs choix.
+          </p>
+        </div>
+      </section>
+
+      {/* Language notice for non-French visitors */}
+      {currentLanguage !== 'fr' && t('common.blogFrenchOnly') && (
+        <section className="bg-secondary/30 border-b">
+          <div className="container py-3">
+            <Alert className="border-primary/20 bg-transparent">
+              <Info className="h-4 w-4 text-primary" />
+              <AlertDescription className="text-foreground">
+                {t('common.blogFrenchOnly')}
+              </AlertDescription>
+            </Alert>
+          </div>
+        </section>
+      )}
+
+      {/* Category Filter Dropdown */}
+      <section className="border-b bg-background py-4">
+        <div className="container">
+          <div className="flex justify-center">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="gap-2 rounded-full">
+                  <Filter className="h-4 w-4" />
+                  {categories.find(c => c.slug === activeCategory)?.name || "Tous"}
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56 max-h-80 overflow-y-auto">
+                {categories.map((category) => (
+                  <DropdownMenuItem
+                    key={category.slug}
+                    onClick={() => handleCategoryChange(category.slug)}
+                    className={activeCategory === category.slug ? "bg-primary/10 font-medium" : ""}
+                  >
+                    {category.name}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog Grid */}
+      <section className="py-12 md:py-16">
+        <div className="container">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {filteredPosts.map((post) => (
+              <LocalizedLink key={post.id} to={`/blog/${post.slug}`}>
+                <Card className="group h-full overflow-hidden border-0 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                  {/* Image with floating category badge */}
+                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
+                    {post.image && (
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    )}
+                    {/* Floating category badge */}
+                    <Badge 
+                      className="absolute right-3 top-3 rounded-full bg-primary/10 px-4 py-1 text-xs font-medium text-primary shadow-sm"
+                    >
+                      {post.category}
+                    </Badge>
+                  </div>
+                  
+                  <CardContent className="flex flex-col px-2 py-4">
+                    {/* Date */}
+                    <div className="mb-2 flex items-center gap-2 text-sm text-muted-foreground">
+                      <time>
+                        {new Date(post.date).toLocaleDateString("fr-CH", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        })}
+                      </time>
+                      <span className="h-1 w-1 rounded-full bg-muted-foreground"></span>
+                    </div>
+                    
+                    {/* Title */}
+                    <h2 className="mb-3 line-clamp-3 text-base font-bold uppercase leading-tight text-foreground">
+                      {post.title}
+                    </h2>
+                    
+                    {/* Author */}
+                    <p className="text-sm text-muted-foreground">
+                      Optimis
+                    </p>
+                  </CardContent>
+                </Card>
+              </LocalizedLink>
+            ))}
+          </div>
+
+          {filteredPosts.length === 0 && (
+            <div className="py-12 text-center">
+              <p className="text-muted-foreground">
+                Aucun article dans cette catégorie pour le moment.
+              </p>
+            </div>
+          )}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="mt-12 flex items-center justify-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="gap-1"
+              >
+                <ChevronLeft className="h-4 w-4" />
+                Précédent
+              </Button>
+
+              <div className="flex items-center gap-1">
+                {getPageNumbers().map((page, index) =>
+                  page === "..." ? (
+                    <span
+                      key={`ellipsis-${index}`}
+                      className="flex h-9 w-9 items-center justify-center text-muted-foreground"
+                    >
+                      ...
+                    </span>
+                  ) : (
+                    <Button
+                      key={page}
+                      variant={currentPage === page ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => handlePageChange(page as number)}
+                      className="h-9 w-9 p-0"
+                    >
+                      {page}
+                    </Button>
+                  )
+                )}
+              </div>
+
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="gap-1"
+              >
+                Suivant
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Newsletter CTA */}
+      <section className="bg-secondary/30 py-12 md:py-16">
+        <div className="container text-center">
+          <h2 className="mb-4 text-2xl font-bold text-foreground md:text-3xl">
+            Restez informé
+          </h2>
+          <p className="mx-auto mb-6 max-w-xl text-muted-foreground">
+            Recevez nos derniers articles et conseils pour économiser sur vos
+            assurances directement dans votre boîte mail.
+          </p>
+          <Button size="lg">S'abonner à la newsletter</Button>
+        </div>
+      </section>
+    </Layout>
+  );
+};
+
+export default Blog;

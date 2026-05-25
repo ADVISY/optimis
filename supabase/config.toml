@@ -1,0 +1,19 @@
+project_id = "phshmvklhwpihayanhpf"
+
+[functions.get-health-premiums]
+verify_jwt = false
+
+[functions.submit-lead]
+verify_jwt = false
+
+[functions.lookup-vehicle]
+verify_jwt = false
+
+[functions.admin-send-otp]
+verify_jwt = false
+
+[functions.admin-verify-otp]
+verify_jwt = false
+
+[functions.check-otp-status]
+verify_jwt = false

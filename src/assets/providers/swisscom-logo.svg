@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60">
+  <rect width="220" height="60" rx="14" fill="white"/>
+  <circle cx="26" cy="18" r="8" fill="#1f6fff"/>
+  <circle cx="38" cy="30" r="8" fill="#1f6fff" opacity="0.8"/>
+  <circle cx="26" cy="42" r="8" fill="#1f6fff" opacity="0.6"/>
+  <text x="58" y="38" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#1f6fff">Swisscom</text>
+</svg>
