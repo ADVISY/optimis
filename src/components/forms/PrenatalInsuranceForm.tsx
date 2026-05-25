@@ -49,7 +49,7 @@ interface PrenatalFormData {
 const TOTAL_STEPS = 5;
 
 const PrenatalInsuranceForm = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { localizedPath } = useLocalizedPath();
   const {
@@ -62,6 +62,12 @@ const PrenatalInsuranceForm = () => {
     getIdentityErrors,
     showValidationToast,
   } = useFormValidation();
+
+  const [showResults, setShowResults] = useState(false);
+  const [isLoadingResults, setIsLoadingResults] = useState(false);
+  const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
+  const [realOffers, setRealOffers] = useState<InsuranceOffer[]>([]);
+  const { fetchPremiums, error: premiumsError } = useHealthPremiums();
 
   const initialData: PrenatalFormData = {
     dueDate: null,
