@@ -300,10 +300,10 @@ const PrenatalInsuranceForm = () => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="standard">{t("forms.healthInsurance.models.standard")}</SelectItem>
                     <SelectItem value="family-doctor">{t("forms.healthInsurance.models.familyDoctor")}</SelectItem>
-                    <SelectItem value="hmo">{t("forms.healthInsurance.models.hmo")}</SelectItem>
+                    <SelectItem value="hmo">{t("forms.prenatal.models.careNetwork", "Réseau de soins")}</SelectItem>
                     <SelectItem value="telmed">{t("forms.healthInsurance.models.telemedicine")}</SelectItem>
+                    <SelectItem value="standard">{t("forms.healthInsurance.models.standard")}</SelectItem>
                   </SelectContent>
                 </Select>
               </FormFieldWrapper>
