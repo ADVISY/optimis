@@ -136,8 +136,27 @@ const PrenatalInsuranceForm = () => {
       motherInsurer: (insurerMap[formData.motherInsurer] ?? formData.motherInsurer) || "-",
     };
     await submitLead(translated as unknown as Record<string, unknown>);
-    navigate(localizedPath("/merci-prenatale"));
-  }, [formData, submitLead, t, navigate, localizedPath]);
+
+    // Fetch newborn LAMal prices (age bracket 0-18, accident coverage by default)
+    setIsLoadingResults(true);
+    setLoadingStep("analyzing");
+    const birthYear = formData.dueDate ? formData.dueDate.getFullYear() : new Date().getFullYear() + 1;
+    setTimeout(() => setLoadingStep("comparing"), 800);
+    setTimeout(() => setLoadingStep("preparing"), 1600);
+    const premiums = await fetchPremiums({
+      canton: formData.canton,
+      postalCode: formData.postalCode,
+      birthYear,
+      franchise: Number(formData.childDeductible) || 0,
+      model: formData.lamalModel,
+      withAccident: true,
+      language: i18n.language,
+    });
+    const offers = premiums.map((p, i) => premiumToInsuranceOffer(p, i));
+    setRealOffers(offers);
+    setIsLoadingResults(false);
+    setShowResults(true);
+  }, [formData, submitLead, t, fetchPremiums, i18n.language]);
 
   const { startOtpFlow, otpModalProps } = useOtpFormFlow({
     onOtpVerified: performSubmit,
