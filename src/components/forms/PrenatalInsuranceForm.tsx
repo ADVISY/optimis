@@ -290,6 +290,47 @@ const PrenatalInsuranceForm = () => {
               </RadioGroup>
             </FormFieldWrapper>
 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <FormFieldWrapper label={t("forms.prenatal.lamalModel", "Modèle LAMal souhaité")} required>
+                <Select
+                  value={formData.lamalModel}
+                  onValueChange={(value) => updateFormData({ lamalModel: value })}
+                >
+                  <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="standard">{t("forms.healthInsurance.models.standard")}</SelectItem>
+                    <SelectItem value="family-doctor">{t("forms.healthInsurance.models.familyDoctor")}</SelectItem>
+                    <SelectItem value="hmo">{t("forms.healthInsurance.models.hmo")}</SelectItem>
+                    <SelectItem value="telmed">{t("forms.healthInsurance.models.telemedicine")}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormFieldWrapper>
+
+              <FormFieldWrapper
+                label={t("forms.prenatal.childDeductible", "Franchise enfant (CHF)")}
+                required
+              >
+                <Select
+                  value={formData.childDeductible}
+                  onValueChange={(value) => updateFormData({ childDeductible: value })}
+                >
+                  <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {["0", "100", "200", "300", "400", "500", "600"].map((v) => (
+                      <SelectItem key={v} value={v}>
+                        CHF {v}
+                        {v === "0" && ` — ${t("forms.prenatal.childDeductibleDefault", "recommandé pour bébé")}`}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormFieldWrapper>
+            </div>
+
             <FormFieldWrapper label={t("forms.prenatal.childDental")}>
               <RadioGroup
                 value={formData.childDental}
