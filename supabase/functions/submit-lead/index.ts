@@ -220,6 +220,13 @@ serve(async (req) => {
     console.log("=== LEAD SUBMISSION ===");
     console.log("FormType:", formType, "| externalLeadId:", externalLeadId);
 
+    // Préparer le payload propre (= exactement ce qui sera envoyé à Zapier)
+    // donnees_produit = strictement identique au payload Zapier, pour faciliter
+    // les comparaisons "BD vs Zapier" et copier-coller éventuel.
+    const dataForZapier = { ...leadData };
+    delete dataForZapier.webhookUrl;
+    delete dataForZapier.userAgent;
+
     // ===== NEW: Stockage BD + routage (fallback safe) =====
     let bdResult: {
       stored: boolean;
@@ -252,7 +259,7 @@ serve(async (req) => {
           langue: fields.langue ?? null,
           date_naissance: normalizeDate(fields.date_naissance) ?? null,
           age: fields.age ?? null,
-          donnees_produit: leadData,
+          donnees_produit: dataForZapier, // payload identique à Zapier
           url_page: fields.url_page ?? null,
           source_trafic: fields.source_trafic ?? null,
           cree_le: timestamp,
@@ -293,20 +300,17 @@ serve(async (req) => {
     }
 
     // ===== Envoi Zapier (filet de sécurité pendant la transition) =====
+    // On utilise dataForZapier — strictement identique à ce qui est stocké en BD
     const webhookUrl =
       (typeof leadData.webhookUrl === "string" && leadData.webhookUrl) ||
       FORM_WEBHOOKS[formType] ||
       DEFAULT_WEBHOOK_URL;
 
-    const dataToSend = { ...leadData };
-    delete dataToSend.webhookUrl;
-    delete dataToSend.userAgent;
-
     console.log("Sending to Zapier:", webhookUrl);
     const response = await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(dataToSend),
+      body: JSON.stringify(dataForZapier),
     });
 
     const responseText = await response.text();

@@ -355,14 +355,40 @@ export default function AdminLeads() {
                   )}
                 </div>
 
-                {selected.donnees_produit && (
+                {selected.donnees_produit && Object.keys(selected.donnees_produit).length > 0 && (
                   <div>
-                    <div className="text-xs font-medium text-muted-foreground mb-1">
-                      Données spécifiques au formulaire
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="text-xs font-medium text-muted-foreground">
+                        Toutes les données reçues (identique au payload Zapier)
+                      </div>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        onClick={() => {
+                          const text = Object.entries(selected.donnees_produit)
+                            .map(([k, v]) => `${k}\t${formatValue(v)}`)
+                            .join("\n");
+                          navigator.clipboard.writeText(text);
+                          toast({ title: "Copié", description: "Données copiées (TSV, collable dans Excel/Sheets)" });
+                        }}
+                      >
+                        Copier
+                      </Button>
                     </div>
-                    <pre className="text-xs bg-muted p-3 rounded-lg overflow-x-auto">
-                      {JSON.stringify(selected.donnees_produit, null, 2)}
-                    </pre>
+                    <div className="border rounded-lg overflow-hidden">
+                      <table className="w-full text-xs">
+                        <tbody>
+                          {Object.entries(selected.donnees_produit).map(([key, value], i) => (
+                            <tr key={key} className={i % 2 === 0 ? "bg-muted/30" : ""}>
+                              <td className="px-3 py-2 font-medium text-muted-foreground border-r w-1/3 align-top">
+                                {key}
+                              </td>
+                              <td className="px-3 py-2 break-all align-top">{formatValue(value)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 )}
               </div>
@@ -442,4 +468,11 @@ function Field({ label, value, className = "" }: { label: string; value?: any; c
       <div className="font-medium">{value ?? "—"}</div>
     </div>
   );
+}
+
+function formatValue(value: any): string {
+  if (value === null || value === undefined) return "—";
+  if (typeof value === "boolean") return value ? "Oui" : "Non";
+  if (typeof value === "object") return JSON.stringify(value);
+  return String(value);
 }
