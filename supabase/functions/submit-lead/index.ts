@@ -23,7 +23,7 @@ const FORM_WEBHOOKS: Record<string, string> = {
   "professional-insurance": "https://hooks.zapier.com/hooks/catch/21326682/un8i19a/",
   "estimation-immobiliere": "https://hooks.zapier.com/hooks/catch/21326682/un8s2j4/",
   "partner": "https://hooks.zapier.com/hooks/catch/21326682/u79h7km/",
-  "prenatal-insurance": "https://hooks.zapier.com/hooks/catch/21326682/PRENATAL_PLACEHOLDER/",
+  "prenatal-insurance": "https://hooks.zapier.com/hooks/catch/21326682/4oeel8v/",
 };
 
 const SWISS_MOBILE_PREFIXES = new Set(["76", "77", "78", "79"]);
