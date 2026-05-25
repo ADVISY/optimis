@@ -31,8 +31,6 @@ interface PrenatalFormData {
   canton: string;
   postalCode: string;
   coverageLevel: string;
-  hospitalization: string;
-  alternativeMedicine: string;
   childDental: string;
   motherHasInsurance: string;
   motherInsurer: string;
@@ -64,8 +62,6 @@ const PrenatalInsuranceForm = () => {
     canton: "",
     postalCode: "",
     coverageLevel: "",
-    hospitalization: "",
-    alternativeMedicine: "",
     childDental: "",
     motherHasInsurance: "",
     motherInsurer: "",
@@ -107,8 +103,6 @@ const PrenatalInsuranceForm = () => {
     const translated = {
       ...formData,
       coverageLevel: coverageMap[formData.coverageLevel] ?? formData.coverageLevel,
-      hospitalization: yesNoMap[formData.hospitalization] ?? formData.hospitalization,
-      alternativeMedicine: yesNoMap[formData.alternativeMedicine] ?? formData.alternativeMedicine,
       childDental: yesNoMap[formData.childDental] ?? formData.childDental,
       motherHasInsurance: yesNoMap[formData.motherHasInsurance] ?? formData.motherHasInsurance,
       motherInsurer: (insurerMap[formData.motherInsurer] ?? formData.motherInsurer) || "-",
@@ -284,10 +278,10 @@ const PrenatalInsuranceForm = () => {
               </RadioGroup>
             </FormFieldWrapper>
 
-            <FormFieldWrapper label={t("forms.prenatal.hospitalization")}>
+            <FormFieldWrapper label={t("forms.prenatal.childDental")}>
               <RadioGroup
-                value={formData.hospitalization}
-                onValueChange={(value) => updateFormData({ hospitalization: value })}
+                value={formData.childDental}
+                onValueChange={(value) => updateFormData({ childDental: value })}
                 className="grid grid-cols-2 gap-3"
               >
                 {[
@@ -296,70 +290,18 @@ const PrenatalInsuranceForm = () => {
                 ].map((option) => (
                   <label
                     key={option.value}
-                    htmlFor={`hospi-${option.value}`}
+                    htmlFor={`dent-${option.value}`}
                     className={cn(
                       "flex items-center space-x-2 p-3 md:p-4 border-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-all",
-                      formData.hospitalization === option.value && "border-primary bg-primary/5",
+                      formData.childDental === option.value && "border-primary bg-primary/5",
                     )}
                   >
-                    <RadioGroupItem value={option.value} id={`hospi-${option.value}`} />
+                    <RadioGroupItem value={option.value} id={`dent-${option.value}`} />
                     <span className="flex-1 text-sm md:text-lg">{option.label}</span>
                   </label>
                 ))}
               </RadioGroup>
             </FormFieldWrapper>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <FormFieldWrapper label={t("forms.prenatal.alternativeMedicine")}>
-                <RadioGroup
-                  value={formData.alternativeMedicine}
-                  onValueChange={(value) => updateFormData({ alternativeMedicine: value })}
-                  className="grid grid-cols-2 gap-2"
-                >
-                  {[
-                    { value: "yes", label: t("common.yes") },
-                    { value: "no", label: t("common.no") },
-                  ].map((option) => (
-                    <label
-                      key={option.value}
-                      htmlFor={`alt-${option.value}`}
-                      className={cn(
-                        "flex items-center space-x-2 p-2 md:p-3 border-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-all",
-                        formData.alternativeMedicine === option.value && "border-primary bg-primary/5",
-                      )}
-                    >
-                      <RadioGroupItem value={option.value} id={`alt-${option.value}`} />
-                      <span className="flex-1 text-sm">{option.label}</span>
-                    </label>
-                  ))}
-                </RadioGroup>
-              </FormFieldWrapper>
-
-              <FormFieldWrapper label={t("forms.prenatal.childDental")}>
-                <RadioGroup
-                  value={formData.childDental}
-                  onValueChange={(value) => updateFormData({ childDental: value })}
-                  className="grid grid-cols-2 gap-2"
-                >
-                  {[
-                    { value: "yes", label: t("common.yes") },
-                    { value: "no", label: t("common.no") },
-                  ].map((option) => (
-                    <label
-                      key={option.value}
-                      htmlFor={`dent-${option.value}`}
-                      className={cn(
-                        "flex items-center space-x-2 p-2 md:p-3 border-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-all",
-                        formData.childDental === option.value && "border-primary bg-primary/5",
-                      )}
-                    >
-                      <RadioGroupItem value={option.value} id={`dent-${option.value}`} />
-                      <span className="flex-1 text-sm">{option.label}</span>
-                    </label>
-                  ))}
-                </RadioGroup>
-              </FormFieldWrapper>
-            </div>
           </div>
         </FormStep>
 
