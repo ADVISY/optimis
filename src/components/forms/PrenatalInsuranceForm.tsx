@@ -50,8 +50,6 @@ const TOTAL_STEPS = 5;
 
 const PrenatalInsuranceForm = () => {
   const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
-  const { localizedPath } = useLocalizedPath();
   const {
     attemptedNext,
     markAttempted,
