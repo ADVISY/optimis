@@ -103,8 +103,6 @@ const PrenatalInsuranceForm = () => {
     const translated = {
       ...formData,
       coverageLevel: coverageMap[formData.coverageLevel] ?? formData.coverageLevel,
-      hospitalization: yesNoMap[formData.hospitalization] ?? formData.hospitalization,
-      alternativeMedicine: yesNoMap[formData.alternativeMedicine] ?? formData.alternativeMedicine,
       childDental: yesNoMap[formData.childDental] ?? formData.childDental,
       motherHasInsurance: yesNoMap[formData.motherHasInsurance] ?? formData.motherHasInsurance,
       motherInsurer: (insurerMap[formData.motherInsurer] ?? formData.motherInsurer) || "-",
