@@ -64,6 +64,8 @@ const PrenatalInsuranceForm = () => {
     canton: "",
     postalCode: "",
     coverageLevel: "",
+    lamalModel: "standard",
+    childDeductible: "0",
     childDental: "",
     motherHasInsurance: "",
     motherInsurer: "",
