@@ -10,6 +10,7 @@ import AdminInvoices from "./pages/AdminInvoices";
 import AdminSettings from "./pages/AdminSettings";
 import AdminProfile from "./pages/AdminProfile";
 import AdminProducts from "./pages/AdminProducts";
+import AdminLeads from "./pages/AdminLeads";
 
 export default function AdminRouter() {
   return (
@@ -18,6 +19,7 @@ export default function AdminRouter() {
         <Route path="login" element={<AdminLogin />} />
         <Route path="verify" element={<AdminVerifyOtp />} />
         <Route index element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>} />
+        <Route path="leads" element={<ProtectedAdminRoute><AdminLeads /></ProtectedAdminRoute>} />
         <Route path="clients" element={<ProtectedAdminRoute><AdminClients /></ProtectedAdminRoute>} />
         <Route path="commandes" element={<ProtectedAdminRoute><AdminOrders /></ProtectedAdminRoute>} />
         <Route path="factures" element={<ProtectedAdminRoute><AdminInvoices /></ProtectedAdminRoute>} />

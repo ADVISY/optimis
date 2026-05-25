@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Users, ShoppingBag, FileText, LogOut, User, Settings, Package } from "lucide-react";
+import { LayoutDashboard, Users, ShoppingBag, FileText, LogOut, User, Settings, Package, Inbox } from "lucide-react";
 import { useAdminAuth } from "@/admin/hooks/useAdminAuth";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 
 const navItems = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
+  { to: "/admin/leads", label: "Leads", icon: Inbox, end: false },
   { to: "/admin/clients", label: "Clients", icon: Users, end: false },
   { to: "/admin/commandes", label: "Commandes", icon: ShoppingBag, end: false },
   { to: "/admin/factures", label: "Factures", icon: FileText, end: false },

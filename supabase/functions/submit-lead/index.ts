@@ -271,18 +271,17 @@ serve(async (req) => {
           bdResult.stored = true;
           bdResult.lead_id = lead.id;
 
-          // Appel du moteur de routage
-          const { data: distId, error: routeError } = await supabase
-            .rpc("route_lead", { p_lead_id: lead.id });
-
-          if (routeError) {
-            console.error("Erreur route_lead:", routeError);
-            bdResult.error = routeError.message;
-            bdResult.distribution_id = null;
-          } else {
-            bdResult.distribution_id = distId;
-            console.log("Lead routé:", { lead_id: lead.id, distribution_id: distId });
-          }
+          // ========================================================================
+          // AUTO-ROUTAGE DÉSACTIVÉ (décision 2026-05-25)
+          // Le lead reste en statut 'nouveau' et attend une action manuelle
+          // depuis le dashboard admin (sélection courtier ou bouton "auto-route").
+          //
+          // Pour réactiver l'auto-routage :
+          //   const { data: distId } = await supabase.rpc("route_lead", { p_lead_id: lead.id });
+          //   bdResult.distribution_id = distId;
+          // ========================================================================
+          bdResult.distribution_id = null;
+          console.log("Lead stocké en statut 'nouveau' (auto-routage désactivé):", { lead_id: lead.id });
         }
       } else {
         console.warn("SUPABASE_URL ou SERVICE_ROLE_KEY manquant — skip BD storage");
