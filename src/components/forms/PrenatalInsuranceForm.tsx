@@ -25,6 +25,10 @@ import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
 import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import { cn } from "@/lib/utils";
+import HealthComparisonResults from "@/components/forms/HealthComparisonResults";
+import LoadingComparison from "@/components/forms/LoadingComparison";
+import { useHealthPremiums, premiumToInsuranceOffer } from "@/hooks/useHealthPremiums";
+import type { InsuranceOffer } from "@/data/mockInsuranceData";
 
 interface PrenatalFormData {
   dueDate: Date | null;
@@ -45,9 +49,7 @@ interface PrenatalFormData {
 const TOTAL_STEPS = 5;
 
 const PrenatalInsuranceForm = () => {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-  const { localizedPath } = useLocalizedPath();
+  const { t, i18n } = useTranslation();
   const {
     attemptedNext,
     markAttempted,
@@ -58,6 +60,12 @@ const PrenatalInsuranceForm = () => {
     getIdentityErrors,
     showValidationToast,
   } = useFormValidation();
+
+  const [showResults, setShowResults] = useState(false);
+  const [isLoadingResults, setIsLoadingResults] = useState(false);
+  const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
+  const [realOffers, setRealOffers] = useState<InsuranceOffer[]>([]);
+  const { fetchPremiums, error: premiumsError } = useHealthPremiums();
 
   const initialData: PrenatalFormData = {
     dueDate: null,
@@ -126,8 +134,27 @@ const PrenatalInsuranceForm = () => {
       motherInsurer: (insurerMap[formData.motherInsurer] ?? formData.motherInsurer) || "-",
     };
     await submitLead(translated as unknown as Record<string, unknown>);
-    navigate(localizedPath("/merci-prenatale"));
-  }, [formData, submitLead, t, navigate, localizedPath]);
+
+    // Fetch newborn LAMal prices (age bracket 0-18, accident coverage by default)
+    setIsLoadingResults(true);
+    setLoadingStep("analyzing");
+    const birthYear = formData.dueDate ? formData.dueDate.getFullYear() : new Date().getFullYear() + 1;
+    setTimeout(() => setLoadingStep("comparing"), 800);
+    setTimeout(() => setLoadingStep("preparing"), 1600);
+    const premiums = await fetchPremiums({
+      canton: formData.canton,
+      postalCode: formData.postalCode,
+      birthYear,
+      franchise: Number(formData.childDeductible) || 0,
+      model: formData.lamalModel,
+      withAccident: true,
+      language: i18n.language,
+    });
+    const offers = premiums.map((p, i) => premiumToInsuranceOffer(p, i));
+    setRealOffers(offers);
+    setIsLoadingResults(false);
+    setShowResults(true);
+  }, [formData, submitLead, t, fetchPremiums, i18n.language]);
 
   const { startOtpFlow, otpModalProps } = useOtpFormFlow({
     onOtpVerified: performSubmit,
@@ -191,6 +218,56 @@ const PrenatalInsuranceForm = () => {
     "JU", "LU", "NE", "NW", "OW", "SG", "SH", "SO", "SZ", "TG",
     "TI", "UR", "VD", "VS", "ZG", "ZH",
   ];
+
+  if (isLoadingResults) {
+    return (
+      <div className="max-w-2xl mx-auto">
+        <LoadingComparison step={loadingStep} />
+      </div>
+    );
+  }
+
+  if (showResults) {
+    return (
+      <div className="max-w-4xl mx-auto">
+        <div className="mb-4 p-4 bg-primary/5 border border-primary/20 rounded-lg text-center">
+          <p className="text-sm md:text-base text-foreground">
+            <Baby className="inline h-4 w-4 mr-1 text-primary" />
+            {t(
+              "forms.prenatal.resultsIntro",
+              "Voici les primes LAMal pour bébé (tranche 0–18 ans, couverture accident incluse) selon votre canton et le modèle choisi."
+            )}
+          </p>
+        </div>
+        {premiumsError && (
+          <div className="mb-4 p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm">
+            {t("forms.healthInsurance.errorLoadingPremiums")}
+          </div>
+        )}
+        {realOffers.length === 0 && !premiumsError && (
+          <div className="mb-4 p-4 bg-muted border border-border rounded-lg text-center">
+            <p className="text-muted-foreground">
+              {t("comparison.noOffersFound", "Aucune offre trouvée pour ces critères.")}
+            </p>
+          </div>
+        )}
+        <HealthComparisonResults
+          offers={realOffers}
+          formData={{
+            canton: formData.canton,
+            postalCode: formData.postalCode,
+            lamalModel: formData.lamalModel,
+            franchise: Number(formData.childDeductible) || 0,
+            accidentCoverage: true,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+          }}
+        />
+      </div>
+    );
+  }
 
   return (
     <>
