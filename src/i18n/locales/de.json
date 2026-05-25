@@ -1219,15 +1219,13 @@
       "postalCode": "Postleitzahl",
       "coverageLevel": "Welches Deckungsniveau wünschen Sie für Ihr Baby?",
       "coverage": {
-        "basic": "Essential",
+        "basic": "Basic",
         "basicDesc": "Grundversorgung + leichte Zusatzversicherung",
         "premium": "Premium",
         "premiumDesc": "Halbprivate Hospitalisierung + Alternativmedizin",
         "diamond": "Diamond",
         "diamondDesc": "Private Hospitalisierung + weltweite Deckung"
       },
-      "hospitalization": "Private oder halbprivate Hospitalisierung für Baby?",
-      "alternativeMedicine": "Alternativmedizin",
       "childDental": "Zahnbehandlung Kind",
       "motherHasInsurance": "Hat die Mutter bereits eine Krankenversicherung?",
       "motherInsurer": "Welcher ist ihr aktueller Versicherer?"
