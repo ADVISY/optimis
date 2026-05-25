@@ -221,6 +221,56 @@ const PrenatalInsuranceForm = () => {
     "TI", "UR", "VD", "VS", "ZG", "ZH",
   ];
 
+  if (isLoadingResults) {
+    return (
+      <div className="max-w-2xl mx-auto">
+        <LoadingComparison step={loadingStep} />
+      </div>
+    );
+  }
+
+  if (showResults) {
+    return (
+      <div className="max-w-4xl mx-auto">
+        <div className="mb-4 p-4 bg-primary/5 border border-primary/20 rounded-lg text-center">
+          <p className="text-sm md:text-base text-foreground">
+            <Baby className="inline h-4 w-4 mr-1 text-primary" />
+            {t(
+              "forms.prenatal.resultsIntro",
+              "Voici les primes LAMal pour bébé (tranche 0–18 ans, couverture accident incluse) selon votre canton et le modèle choisi."
+            )}
+          </p>
+        </div>
+        {premiumsError && (
+          <div className="mb-4 p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm">
+            {t("forms.healthInsurance.errorLoadingPremiums")}
+          </div>
+        )}
+        {realOffers.length === 0 && !premiumsError && (
+          <div className="mb-4 p-4 bg-muted border border-border rounded-lg text-center">
+            <p className="text-muted-foreground">
+              {t("comparison.noOffersFound", "Aucune offre trouvée pour ces critères.")}
+            </p>
+          </div>
+        )}
+        <HealthComparisonResults
+          offers={realOffers}
+          formData={{
+            canton: formData.canton,
+            postalCode: formData.postalCode,
+            lamalModel: formData.lamalModel,
+            franchise: Number(formData.childDeductible) || 0,
+            accidentCoverage: true,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+          }}
+        />
+      </div>
+    );
+  }
+
   return (
     <>
       <FormContainer
