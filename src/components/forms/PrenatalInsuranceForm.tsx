@@ -98,6 +98,12 @@ const PrenatalInsuranceForm = () => {
       premium: t("forms.prenatal.coverage.premium"),
       diamond: t("forms.prenatal.coverage.diamond"),
     };
+    const modelMap: Record<string, string> = {
+      standard: t("forms.healthInsurance.models.standard"),
+      "family-doctor": t("forms.healthInsurance.models.familyDoctor"),
+      hmo: t("forms.healthInsurance.models.hmo"),
+      telmed: t("forms.healthInsurance.models.telemedicine"),
+    };
     const yesNoMap: Record<string, string> = { yes: t("common.yes"), no: t("common.no") };
     const insurerMap: Record<string, string> = {
       assura: "Assura", css: "CSS", "groupe-mutuel": "Groupe Mutuel", helsana: "Helsana",
@@ -107,6 +113,8 @@ const PrenatalInsuranceForm = () => {
     const translated = {
       ...formData,
       coverageLevel: coverageMap[formData.coverageLevel] ?? formData.coverageLevel,
+      lamalModel: modelMap[formData.lamalModel] ?? formData.lamalModel,
+      childDeductible: `CHF ${formData.childDeductible}`,
       childDental: yesNoMap[formData.childDental] ?? formData.childDental,
       motherHasInsurance: yesNoMap[formData.motherHasInsurance] ?? formData.motherHasInsurance,
       motherInsurer: (insurerMap[formData.motherInsurer] ?? formData.motherInsurer) || "-",
