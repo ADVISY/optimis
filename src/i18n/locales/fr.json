@@ -1269,15 +1269,13 @@
       "postalCode": "Code postal",
       "coverageLevel": "Quel niveau de couverture souhaitez-vous pour bébé ?",
       "coverage": {
-        "basic": "Essentielle",
+        "basic": "Basic",
         "basicDesc": "Soins de base + complémentaire light",
         "premium": "Premium",
         "premiumDesc": "Hospitalisation semi-privée + médecine alternative",
         "diamond": "Diamond",
         "diamondDesc": "Hospitalisation privée + couverture monde entier"
       },
-      "hospitalization": "Hospitalisation privée ou semi-privée pour bébé ?",
-      "alternativeMedicine": "Médecine alternative",
       "childDental": "Soins dentaires enfant",
       "motherHasInsurance": "La maman a-t-elle déjà une assurance maladie ?",
       "motherInsurer": "Quel est son assureur actuel ?"
