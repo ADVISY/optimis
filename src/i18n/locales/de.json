@@ -1227,6 +1227,9 @@
         "diamondDesc": "Private Hospitalisierung + weltweite Deckung"
       },
       "childDental": "Zahnbehandlung Kind",
+      "lamalModel": "Gewünschtes KVG-Modell",
+      "childDeductible": "Franchise Kind (CHF)",
+      "childDeductibleDefault": "für Baby empfohlen",
       "motherHasInsurance": "Hat die Mutter bereits eine Krankenversicherung?",
       "motherInsurer": "Welcher ist ihr aktueller Versicherer?"
     },
