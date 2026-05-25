@@ -31,6 +31,8 @@ interface PrenatalFormData {
   canton: string;
   postalCode: string;
   coverageLevel: string;
+  lamalModel: string;
+  childDeductible: string;
   childDental: string;
   motherHasInsurance: string;
   motherInsurer: string;
@@ -62,6 +64,8 @@ const PrenatalInsuranceForm = () => {
     canton: "",
     postalCode: "",
     coverageLevel: "",
+    lamalModel: "standard",
+    childDeductible: "0",
     childDental: "",
     motherHasInsurance: "",
     motherInsurer: "",
@@ -94,6 +98,12 @@ const PrenatalInsuranceForm = () => {
       premium: t("forms.prenatal.coverage.premium"),
       diamond: t("forms.prenatal.coverage.diamond"),
     };
+    const modelMap: Record<string, string> = {
+      standard: t("forms.healthInsurance.models.standard"),
+      "family-doctor": t("forms.healthInsurance.models.familyDoctor"),
+      hmo: t("forms.healthInsurance.models.hmo"),
+      telmed: t("forms.healthInsurance.models.telemedicine"),
+    };
     const yesNoMap: Record<string, string> = { yes: t("common.yes"), no: t("common.no") };
     const insurerMap: Record<string, string> = {
       assura: "Assura", css: "CSS", "groupe-mutuel": "Groupe Mutuel", helsana: "Helsana",
@@ -103,6 +113,8 @@ const PrenatalInsuranceForm = () => {
     const translated = {
       ...formData,
       coverageLevel: coverageMap[formData.coverageLevel] ?? formData.coverageLevel,
+      lamalModel: modelMap[formData.lamalModel] ?? formData.lamalModel,
+      childDeductible: `CHF ${formData.childDeductible}`,
       childDental: yesNoMap[formData.childDental] ?? formData.childDental,
       motherHasInsurance: yesNoMap[formData.motherHasInsurance] ?? formData.motherHasInsurance,
       motherInsurer: (insurerMap[formData.motherInsurer] ?? formData.motherInsurer) || "-",
@@ -277,6 +289,47 @@ const PrenatalInsuranceForm = () => {
                 ))}
               </RadioGroup>
             </FormFieldWrapper>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <FormFieldWrapper label={t("forms.prenatal.lamalModel", "Modèle LAMal souhaité")} required>
+                <Select
+                  value={formData.lamalModel}
+                  onValueChange={(value) => updateFormData({ lamalModel: value })}
+                >
+                  <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="standard">{t("forms.healthInsurance.models.standard")}</SelectItem>
+                    <SelectItem value="family-doctor">{t("forms.healthInsurance.models.familyDoctor")}</SelectItem>
+                    <SelectItem value="hmo">{t("forms.healthInsurance.models.hmo")}</SelectItem>
+                    <SelectItem value="telmed">{t("forms.healthInsurance.models.telemedicine")}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormFieldWrapper>
+
+              <FormFieldWrapper
+                label={t("forms.prenatal.childDeductible", "Franchise enfant (CHF)")}
+                required
+              >
+                <Select
+                  value={formData.childDeductible}
+                  onValueChange={(value) => updateFormData({ childDeductible: value })}
+                >
+                  <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {["0", "100", "200", "300", "400", "500", "600"].map((v) => (
+                      <SelectItem key={v} value={v}>
+                        CHF {v}
+                        {v === "0" && ` — ${t("forms.prenatal.childDeductibleDefault", "recommandé pour bébé")}`}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormFieldWrapper>
+            </div>
 
             <FormFieldWrapper label={t("forms.prenatal.childDental")}>
               <RadioGroup
