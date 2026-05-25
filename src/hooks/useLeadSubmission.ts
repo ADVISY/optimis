@@ -451,6 +451,7 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
         canton: "Canton",
         postalCode: "Code postal",
         coverageLevel: "Niveau de couverture",
+        coverageDetails: "Détail couverture",
         lamalModel: "Modèle LAMal",
         childDeductible: "Franchise enfant",
         childDental: "Soins dentaires enfant",

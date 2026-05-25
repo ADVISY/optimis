@@ -110,9 +110,15 @@ const PrenatalInsuranceForm = () => {
       sanitas: "Sanitas", swica: "Swica", visana: "Visana", concordia: "Concordia",
       kpt: "KPT", atupri: "Atupri", sympany: "Sympany", other: t("forms.subsidy.otherInsurer"),
     };
+    const coverageDescMap: Record<string, string> = {
+      basic: t("forms.prenatal.coverage.basicDesc"),
+      premium: t("forms.prenatal.coverage.premiumDesc"),
+      diamond: t("forms.prenatal.coverage.diamondDesc"),
+    };
     const translated = {
       ...formData,
       coverageLevel: coverageMap[formData.coverageLevel] ?? formData.coverageLevel,
+      coverageDetails: coverageDescMap[formData.coverageLevel] ?? "-",
       lamalModel: modelMap[formData.lamalModel] ?? formData.lamalModel,
       childDeductible: `CHF ${formData.childDeductible}`,
       childDental: yesNoMap[formData.childDental] ?? formData.childDental,
