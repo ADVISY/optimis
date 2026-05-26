@@ -19,7 +19,8 @@ export default function AdminLogin() {
 
   useEffect(() => {
     if (!loading && session && isAdmin) {
-      navigate(isOtpVerified ? "/admin" : "/admin/verify", { replace: true });
+      // ⚠️ TEMP : OTP désactivé → redirect direct dashboard (cf BYPASS_OTP dans useAdminAuth)
+      navigate("/admin", { replace: true });
     }
   }, [session, isAdmin, isOtpVerified, loading, navigate]);
 
@@ -88,7 +89,7 @@ export default function AdminLogin() {
               </Button>
 
               <p className="text-xs text-muted-foreground text-center pt-2">
-                Étape suivante : validation par SMS
+                Accès direct au dashboard
               </p>
             </form>
           </CardContent>
