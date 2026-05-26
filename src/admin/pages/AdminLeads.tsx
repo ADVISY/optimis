@@ -89,7 +89,7 @@ export default function AdminLeads() {
   // ----------------------------------------------------------------------------
   // Fetch leads
   // ----------------------------------------------------------------------------
-  const { data: leads, isLoading } = useQuery({
+  const { data: leads, isLoading, error: leadsError } = useQuery({
     queryKey: ["admin-leads", filterStatut, filterFormType, search],
     queryFn: async () => {
       let q = supabase.from("leads").select("*").order("cree_le", { ascending: false }).limit(200);
@@ -101,9 +101,13 @@ export default function AdminLeads() {
         );
       }
       const { data, error } = await q;
-      if (error) throw error;
+      if (error) {
+        console.error("[AdminLeads] Erreur requête leads:", error);
+        throw error;
+      }
       return data ?? [];
     },
+    retry: false,
   });
 
   // Compteurs par type de formulaire (combinés avec le filterStatut courant)
@@ -368,7 +372,18 @@ export default function AdminLeads() {
         {/* Tableau Sheet-like */}
         <Card>
           <CardContent className="p-0">
-            {isLoading ? (
+            {leadsError ? (
+              <div className="p-12 text-center text-destructive">
+                <AlertCircle className="h-12 w-12 mx-auto mb-3" />
+                <p className="font-semibold mb-2">Erreur de chargement des leads</p>
+                <p className="text-sm font-mono bg-destructive/10 px-3 py-2 rounded inline-block max-w-2xl">
+                  {(leadsError as any).message ?? String(leadsError)}
+                </p>
+                <p className="text-xs text-muted-foreground mt-3">
+                  Code : {(leadsError as any).code ?? "—"} · Détail : {(leadsError as any).details ?? "—"}
+                </p>
+              </div>
+            ) : isLoading ? (
               <div className="p-12 text-center">
                 <Loader2 className="h-6 w-6 animate-spin mx-auto text-muted-foreground" />
               </div>
