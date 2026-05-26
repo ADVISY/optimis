@@ -387,19 +387,10 @@ export default function AdminLeads() {
               <div className="p-12 text-center">
                 <Loader2 className="h-6 w-6 animate-spin mx-auto text-muted-foreground" />
               </div>
-            ) : (leadsFiltered?.length ?? 0) === 0 ? (
-              <div className="p-12 text-center text-muted-foreground">
-                <Inbox className="h-12 w-12 mx-auto mb-3 opacity-50" />
-                <p>Aucun lead pour ce filtre.</p>
-                {activeFiltersCount > 0 && (
-                  <Button variant="link" size="sm" onClick={clearAllFilters} className="mt-2">
-                    Effacer les filtres
-                  </Button>
-                )}
-              </div>
             ) : (
               <div className="relative overflow-auto max-h-[calc(100vh-340px)]">
                 <table className="w-full text-xs font-mono" style={{ borderCollapse: "separate", borderSpacing: 0 }}>
+                  {/* Header toujours visible — même quand 0 lead, on voit la structure */}
                   <thead className="sticky top-0 z-20 bg-slate-50 border-b shadow-sm">
                     <tr>
                       {columns.map((col) => (
@@ -424,7 +415,22 @@ export default function AdminLeads() {
                     </tr>
                   </thead>
                   <tbody>
-                    {sortLeads(leadsFiltered, sortKey, sortDir, columns).map((lead: any, idx: number) => (
+                    {(leadsFiltered?.length ?? 0) === 0 ? (
+                      <tr>
+                        <td colSpan={columns.length + 1} className="p-12 text-center text-muted-foreground bg-white">
+                          <Inbox className="h-10 w-10 mx-auto mb-2 opacity-40" />
+                          <p className="text-sm">Aucun lead pour ce filtre.</p>
+                          <p className="text-xs mt-1 opacity-70">
+                            Quand un lead {filterFormType === "all" ? "" : `de type "${FORM_TYPES.find(f => f.value === filterFormType)?.label ?? filterFormType}"`} arrivera, il apparaîtra ici avec les {columns.length} colonnes visibles ci-dessus.
+                          </p>
+                          {activeFiltersCount > 0 && (
+                            <Button variant="link" size="sm" onClick={clearAllFilters} className="mt-2">
+                              Effacer les filtres
+                            </Button>
+                          )}
+                        </td>
+                      </tr>
+                    ) : sortLeads(leadsFiltered, sortKey, sortDir, columns).map((lead: any, idx: number) => (
                       <tr
                         key={lead.id}
                         className={`border-b hover:bg-blue-50/40 ${idx % 2 === 0 ? "bg-white" : "bg-slate-50/40"}`}
