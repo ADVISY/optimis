@@ -69,6 +69,46 @@ export default function AdminLeads() {
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
   const columns = getColumnsFor(filterFormType);
 
+  // Largeurs personnalisées des colonnes (resize par drag) + persist localStorage
+  const [columnWidths, setColumnWidths] = useState<Record<string, number>>({});
+
+  // Charge les largeurs sauvegardées au changement de formType
+  useEffect(() => {
+    const stored = localStorage.getItem(`optimis.leadColumnWidths.${filterFormType}`);
+    setColumnWidths(stored ? JSON.parse(stored) : {});
+  }, [filterFormType]);
+
+  // Sauve les largeurs à chaque modification
+  useEffect(() => {
+    if (Object.keys(columnWidths).length > 0) {
+      localStorage.setItem(`optimis.leadColumnWidths.${filterFormType}`, JSON.stringify(columnWidths));
+    }
+  }, [columnWidths, filterFormType]);
+
+  // Handler du resize drag (au mousedown sur le handle de droite d'un header)
+  const startColumnResize = (key: string, startX: number, startWidth: number) => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const newWidth = Math.max(50, Math.min(800, startWidth + (e.clientX - startX)));
+      setColumnWidths((prev) => ({ ...prev, [key]: newWidth }));
+    };
+    const handleMouseUp = () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+    };
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+  };
+
+  // Reset des widths personnalisés
+  const resetColumnWidths = () => {
+    setColumnWidths({});
+    localStorage.removeItem(`optimis.leadColumnWidths.${filterFormType}`);
+  };
+
   // Filtres avancés par type
   const advancedFilters = getFiltersFor(filterFormType);
   const [filterValues, setFilterValues] = useState<Record<string, string>>({});
@@ -369,6 +409,20 @@ export default function AdminLeads() {
           </CardContent>
         </Card>
 
+        {/* Barre d'outils tableau */}
+        {Object.keys(columnWidths).length > 0 && (
+          <div className="flex items-center justify-end -mb-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={resetColumnWidths}
+              className="h-7 text-xs text-muted-foreground hover:text-foreground"
+            >
+              <X className="h-3 w-3 mr-1" /> Réinitialiser largeurs colonnes
+            </Button>
+          </div>
+        )}
+
         {/* Tableau Sheet-like */}
         <Card>
           <CardContent className="p-0">
@@ -397,6 +451,8 @@ export default function AdminLeads() {
                         <SheetHeader
                           key={col.key}
                           col={col}
+                          customWidth={columnWidths[col.key]}
+                          onResizeStart={startColumnResize}
                           sortKey={sortKey}
                           sortDir={sortDir}
                           onSort={(k) => {
@@ -436,7 +492,7 @@ export default function AdminLeads() {
                         className={`border-b hover:bg-blue-50/40 ${idx % 2 === 0 ? "bg-white" : "bg-slate-50/40"}`}
                       >
                         {columns.map((col) => (
-                          <SheetCell key={col.key} lead={lead} col={col} />
+                          <SheetCell key={col.key} lead={lead} col={col} customWidth={columnWidths[col.key]} />
                         ))}
                         <td className={`sticky right-0 border-l px-2 py-1 text-right w-32 ${idx % 2 === 0 ? "bg-white" : "bg-slate-50/40"}`}>
                           <div className="inline-flex items-center gap-0.5">
@@ -765,40 +821,59 @@ function SheetHeader({
   sortKey,
   sortDir,
   onSort,
+  customWidth,
+  onResizeStart,
 }: {
   col: LeadColumn;
   sortKey: string;
   sortDir: "asc" | "desc";
   onSort: (key: string) => void;
+  customWidth?: number;
+  onResizeStart: (key: string, startX: number, startWidth: number) => void;
 }) {
   const active = sortKey === col.key;
   const stickyClass = col.sticky ? "sticky left-0 z-30 bg-slate-50" : "";
   const alignClass = col.align === "right" ? "text-right" : col.align === "center" ? "text-center" : "text-left";
+  const widthStyle = customWidth ? { width: `${customWidth}px`, minWidth: `${customWidth}px`, maxWidth: `${customWidth}px` } : undefined;
   return (
     <th
-      className={`px-2 py-2 text-xs font-semibold uppercase tracking-wide text-slate-600 border-r ${col.width ?? ""} ${stickyClass} ${alignClass}`}
+      style={widthStyle}
+      className={`relative px-1.5 py-1.5 text-[10px] font-semibold uppercase tracking-wide text-slate-600 border-r ${customWidth ? "" : (col.width ?? "")} ${stickyClass} ${alignClass}`}
     >
       <button
         onClick={() => onSort(col.key)}
-        className="inline-flex items-center gap-1 hover:text-slate-900 transition-colors"
+        className="inline-flex items-center gap-1 hover:text-slate-900 transition-colors w-full"
       >
         <span className="truncate">{col.label}</span>
-        <ArrowUpDown className={`h-3 w-3 transition-opacity ${active ? "opacity-100 text-blue-600" : "opacity-30"}`} />
-        {active && <span className="text-blue-600 text-[10px]">{sortDir === "asc" ? "↑" : "↓"}</span>}
+        <ArrowUpDown className={`h-2.5 w-2.5 transition-opacity flex-shrink-0 ${active ? "opacity-100 text-blue-600" : "opacity-30"}`} />
+        {active && <span className="text-blue-600 text-[9px]">{sortDir === "asc" ? "↑" : "↓"}</span>}
       </button>
+      {/* Handle de resize — drag horizontal */}
+      <div
+        onMouseDown={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const startWidth = (e.currentTarget.parentElement as HTMLElement).offsetWidth;
+          onResizeStart(col.key, e.clientX, startWidth);
+        }}
+        className="absolute top-0 right-0 h-full w-1 cursor-col-resize hover:bg-blue-400/60 active:bg-blue-500 transition-colors z-30"
+        title="Glisser pour redimensionner"
+      />
     </th>
   );
 }
 
-function SheetCell({ lead, col }: { lead: any; col: LeadColumn }) {
+function SheetCell({ lead, col, customWidth }: { lead: any; col: LeadColumn; customWidth?: number }) {
   const raw = col.source === "bd" ? lead[col.key] : lead.donnees_produit?.[col.key];
   const stickyClass = col.sticky ? "sticky left-0 z-10 bg-inherit" : "";
   const alignClass = col.align === "right" ? "text-right" : col.align === "center" ? "text-center" : "text-left";
+  const widthStyle = customWidth ? { width: `${customWidth}px`, minWidth: `${customWidth}px`, maxWidth: `${customWidth}px` } : undefined;
+  const widthClass = customWidth ? "" : (col.width ?? "");
 
   // Rendu spécial pour certains champs
   if (col.key === "statut" && col.source === "bd") {
     return (
-      <td className={`px-2 py-1 border-r ${col.width ?? ""} ${stickyClass}`}>
+      <td style={widthStyle} className={`px-1.5 py-0.5 border-r ${widthClass} ${stickyClass}`}>
         <Badge variant={STATUT_BADGE[raw]?.variant ?? "outline"} className="text-[10px] px-1.5 py-0">
           {STATUT_BADGE[raw]?.label ?? raw}
         </Badge>
@@ -808,7 +883,7 @@ function SheetCell({ lead, col }: { lead: any; col: LeadColumn }) {
 
   if (col.key === "source_formulaire" && col.source === "bd") {
     return (
-      <td className={`px-2 py-1 border-r ${col.width ?? ""} ${stickyClass}`}>
+      <td style={widthStyle} className={`px-1.5 py-0.5 border-r ${widthClass} ${stickyClass}`}>
         <Badge variant="outline" className="text-[10px] px-1.5 py-0">{raw ?? "—"}</Badge>
       </td>
     );
@@ -835,7 +910,10 @@ function SheetCell({ lead, col }: { lead: any; col: LeadColumn }) {
   const isMuted = display === "—";
 
   return (
-    <td className={`px-2 py-1 border-r truncate ${col.width ?? ""} ${stickyClass} ${alignClass} ${isMuted ? "text-slate-300" : "text-slate-700"}`}>
+    <td
+      style={widthStyle}
+      className={`px-1.5 py-0.5 border-r truncate ${widthClass} ${stickyClass} ${alignClass} ${isMuted ? "text-slate-300" : "text-slate-700"}`}
+    >
       <span className="truncate block" title={display}>{display}</span>
     </td>
   );

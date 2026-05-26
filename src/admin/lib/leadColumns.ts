@@ -13,7 +13,7 @@ export interface LeadColumn {
   key: string;
   label: string;
   source: LeadColumnSource;
-  width?: string; // classe Tailwind (ex: "w-24")
+  width?: string; // classe Tailwind par défaut (ex: "w-24") — override possible via columnWidths state
   align?: "left" | "right" | "center";
   format?: "date" | "datetime" | "bool" | "default";
   sticky?: boolean; // sticky à gauche
