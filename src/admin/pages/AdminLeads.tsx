@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AdminLayout } from "@/admin/components/AdminLayout";
@@ -13,6 +13,9 @@ import {
   Building2, FileX, Baby, Handshake, LayoutGrid, ArrowUpDown,
 } from "lucide-react";
 import { getColumnsFor, type LeadColumn } from "@/admin/lib/leadColumns";
+import { getFiltersFor, applyFilters, type LeadFilter } from "@/admin/lib/leadFilters";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 type LeadStatut = "all" | "nouveau" | "distribue" | "non_distribuable";
@@ -65,6 +68,23 @@ export default function AdminLeads() {
   const [sortKey, setSortKey] = useState<string>("cree_le");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
   const columns = getColumnsFor(filterFormType);
+
+  // Filtres avancés par type
+  const advancedFilters = getFiltersFor(filterFormType);
+  const [filterValues, setFilterValues] = useState<Record<string, string>>({});
+  // Reset des filtres avancés quand on change de type
+  useEffect(() => {
+    setFilterValues({});
+  }, [filterFormType]);
+
+  const activeFiltersCount = Object.values(filterValues).filter((v) => v && v !== "all").length;
+  const clearAllFilters = () => setFilterValues({});
+
+  // Application des filtres avancés côté client (sur les leads déjà fetchés)
+  const leadsFiltered = useMemo(() => {
+    if (!leads || activeFiltersCount === 0) return leads ?? [];
+    return applyFilters(leads, advancedFilters, filterValues);
+  }, [leads, advancedFilters, filterValues, activeFiltersCount]);
 
   // ----------------------------------------------------------------------------
   // Fetch leads
@@ -302,9 +322,9 @@ export default function AdminLeads() {
           </div>
         </div>
 
-        {/* Recherche */}
+        {/* Recherche + Filtres avancés */}
         <Card>
-          <CardContent className="pt-6">
+          <CardContent className="pt-6 space-y-3">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
@@ -314,6 +334,34 @@ export default function AdminLeads() {
                 className="pl-10"
               />
             </div>
+
+            {/* Filtres avancés (adaptés au type) */}
+            {advancedFilters.length > 0 && (
+              <div className="flex items-center gap-2 flex-wrap pt-1 border-t">
+                <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider mr-1">
+                  Filtres
+                </span>
+                {advancedFilters.map((f) => (
+                  <FilterControl
+                    key={f.key}
+                    filter={f}
+                    value={filterValues[f.key] ?? ""}
+                    onChange={(v) => setFilterValues({ ...filterValues, [f.key]: v })}
+                  />
+                ))}
+                {activeFiltersCount > 0 && (
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={clearAllFilters}
+                    className="h-8 text-xs text-muted-foreground hover:text-foreground ml-auto"
+                  >
+                    <X className="h-3 w-3 mr-1" />
+                    Effacer {activeFiltersCount} filtre{activeFiltersCount > 1 ? "s" : ""}
+                  </Button>
+                )}
+              </div>
+            )}
           </CardContent>
         </Card>
 
@@ -324,10 +372,15 @@ export default function AdminLeads() {
               <div className="p-12 text-center">
                 <Loader2 className="h-6 w-6 animate-spin mx-auto text-muted-foreground" />
               </div>
-            ) : (leads?.length ?? 0) === 0 ? (
+            ) : (leadsFiltered?.length ?? 0) === 0 ? (
               <div className="p-12 text-center text-muted-foreground">
                 <Inbox className="h-12 w-12 mx-auto mb-3 opacity-50" />
                 <p>Aucun lead pour ce filtre.</p>
+                {activeFiltersCount > 0 && (
+                  <Button variant="link" size="sm" onClick={clearAllFilters} className="mt-2">
+                    Effacer les filtres
+                  </Button>
+                )}
               </div>
             ) : (
               <div className="relative overflow-auto max-h-[calc(100vh-340px)]">
@@ -356,7 +409,7 @@ export default function AdminLeads() {
                     </tr>
                   </thead>
                   <tbody>
-                    {sortLeads(leads!, sortKey, sortDir, columns).map((lead: any, idx: number) => (
+                    {sortLeads(leadsFiltered, sortKey, sortDir, columns).map((lead: any, idx: number) => (
                       <tr
                         key={lead.id}
                         className={`border-b hover:bg-blue-50/40 ${idx % 2 === 0 ? "bg-white" : "bg-slate-50/40"}`}
@@ -764,6 +817,59 @@ function SheetCell({ lead, col }: { lead: any; col: LeadColumn }) {
     <td className={`px-2 py-1 border-r truncate ${col.width ?? ""} ${stickyClass} ${alignClass} ${isMuted ? "text-slate-300" : "text-slate-700"}`}>
       <span className="truncate block" title={display}>{display}</span>
     </td>
+  );
+}
+
+function FilterControl({
+  filter,
+  value,
+  onChange,
+}: {
+  filter: LeadFilter;
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  if (filter.type === "select" && filter.options) {
+    return (
+      <div className="inline-flex items-center gap-1">
+        <Select value={value || "all"} onValueChange={(v) => onChange(v === "all" ? "" : v)}>
+          <SelectTrigger className={`h-8 text-xs ${filter.width ?? "w-32"}`}>
+            <SelectValue placeholder={filter.label} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">
+              <span className="text-muted-foreground">{filter.label} : tous</span>
+            </SelectItem>
+            {filter.options.map((opt) => (
+              <SelectItem key={opt} value={opt}>
+                {opt}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        {value && value !== "all" && (
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() => onChange("")}
+            className="h-6 w-6 p-0 text-muted-foreground hover:text-foreground"
+            title="Effacer"
+          >
+            <X className="h-3 w-3" />
+          </Button>
+        )}
+      </div>
+    );
+  }
+
+  // type text
+  return (
+    <Input
+      placeholder={filter.placeholder ?? filter.label}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className={`h-8 text-xs ${filter.width ?? "w-32"}`}
+    />
   );
 }
 
