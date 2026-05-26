@@ -10,8 +10,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import {
   Search, Loader2, Eye, Send, XCircle, Inbox, UserCog, AlertCircle, CheckCircle2,
   Heart, PiggyBank, HelpingHand, Home, Briefcase, Car, House, Scale, Building,
-  Building2, FileX, Baby, Handshake, LayoutGrid,
+  Building2, FileX, Baby, Handshake, LayoutGrid, ArrowUpDown,
 } from "lucide-react";
+import { getColumnsFor, type LeadColumn } from "@/admin/lib/leadColumns";
 import { useToast } from "@/hooks/use-toast";
 
 type LeadStatut = "all" | "nouveau" | "distribue" | "non_distribuable";
@@ -59,6 +60,11 @@ export default function AdminLeads() {
   const [detailOpen, setDetailOpen] = useState(false);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [pickerLead, setPickerLead] = useState<any | null>(null);
+
+  // Tri Sheet-like
+  const [sortKey, setSortKey] = useState<string>("cree_le");
+  const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
+  const columns = getColumnsFor(filterFormType);
 
   // ----------------------------------------------------------------------------
   // Fetch leads
@@ -311,7 +317,7 @@ export default function AdminLeads() {
           </CardContent>
         </Card>
 
-        {/* Liste */}
+        {/* Tableau Sheet-like */}
         <Card>
           <CardContent className="p-0">
             {isLoading ? (
@@ -324,91 +330,75 @@ export default function AdminLeads() {
                 <p>Aucun lead pour ce filtre.</p>
               </div>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead className="bg-muted/50 border-b">
+              <div className="relative overflow-auto max-h-[calc(100vh-340px)]">
+                <table className="w-full text-xs font-mono" style={{ borderCollapse: "separate", borderSpacing: 0 }}>
+                  <thead className="sticky top-0 z-20 bg-slate-50 border-b shadow-sm">
                     <tr>
-                      <th className="text-left p-3 font-medium">Reçu</th>
-                      <th className="text-left p-3 font-medium">Identité</th>
-                      <th className="text-left p-3 font-medium">Contact</th>
-                      <th className="text-left p-3 font-medium">Canton</th>
-                      <th className="text-left p-3 font-medium">Produit</th>
-                      <th className="text-left p-3 font-medium">Âge</th>
-                      <th className="text-left p-3 font-medium">Statut</th>
-                      <th className="text-right p-3 font-medium">Actions</th>
+                      {columns.map((col) => (
+                        <SheetHeader
+                          key={col.key}
+                          col={col}
+                          sortKey={sortKey}
+                          sortDir={sortDir}
+                          onSort={(k) => {
+                            if (sortKey === k) {
+                              setSortDir(sortDir === "asc" ? "desc" : "asc");
+                            } else {
+                              setSortKey(k);
+                              setSortDir("desc");
+                            }
+                          }}
+                        />
+                      ))}
+                      <th className="sticky right-0 z-30 bg-slate-50 border-l text-right px-3 py-2 text-xs font-semibold uppercase tracking-wide text-slate-600 w-32">
+                        Actions
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
-                    {leads!.map((lead: any) => (
-                      <tr key={lead.id} className="border-b hover:bg-muted/30">
-                        <td className="p-3 text-xs text-muted-foreground">
-                          {new Date(lead.cree_le).toLocaleString("fr-CH", {
-                            day: "2-digit",
-                            month: "2-digit",
-                            year: "2-digit",
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
-                        </td>
-                        <td className="p-3">
-                          <div className="font-medium">
-                            {lead.prenom ?? "—"} {lead.nom ?? ""}
-                          </div>
-                        </td>
-                        <td className="p-3 text-xs">
-                          <div>{lead.email ?? "—"}</div>
-                          <div className="text-muted-foreground">{lead.telephone ?? ""}</div>
-                        </td>
-                        <td className="p-3">{lead.canton ?? "—"}</td>
-                        <td className="p-3">
-                          <Badge variant="outline" className="text-xs">
-                            {lead.produit}
-                          </Badge>
-                        </td>
-                        <td className="p-3">{lead.age ?? "—"}</td>
-                        <td className="p-3">
-                          <Badge variant={STATUT_BADGE[lead.statut]?.variant ?? "outline"}>
-                            {STATUT_BADGE[lead.statut]?.label ?? lead.statut}
-                          </Badge>
-                          {lead.motif_non_distribution && (
-                            <div className="text-xs text-muted-foreground mt-1">
-                              {MOTIF_LABEL[lead.motif_non_distribution] ?? lead.motif_non_distribution}
-                            </div>
-                          )}
-                        </td>
-                        <td className="p-3 text-right">
-                          <div className="inline-flex items-center gap-1">
-                            <Button size="sm" variant="ghost" onClick={() => openDetail(lead)}>
-                              <Eye className="h-4 w-4" />
+                    {sortLeads(leads!, sortKey, sortDir, columns).map((lead: any, idx: number) => (
+                      <tr
+                        key={lead.id}
+                        className={`border-b hover:bg-blue-50/40 ${idx % 2 === 0 ? "bg-white" : "bg-slate-50/40"}`}
+                      >
+                        {columns.map((col) => (
+                          <SheetCell key={col.key} lead={lead} col={col} />
+                        ))}
+                        <td className={`sticky right-0 border-l px-2 py-1 text-right w-32 ${idx % 2 === 0 ? "bg-white" : "bg-slate-50/40"}`}>
+                          <div className="inline-flex items-center gap-0.5">
+                            <Button size="sm" variant="ghost" className="h-7 w-7 p-0" onClick={() => openDetail(lead)} title="Voir détails">
+                              <Eye className="h-3.5 w-3.5" />
                             </Button>
                             {lead.statut === "nouveau" && (
                               <>
                                 <Button
                                   size="sm"
-                                  variant="outline"
+                                  variant="ghost"
+                                  className="h-7 w-7 p-0 text-blue-600"
                                   onClick={() => openPicker(lead)}
                                   title="Choisir un courtier"
                                 >
-                                  <UserCog className="h-4 w-4 mr-1" /> Choisir
-                                </Button>
-                                <Button
-                                  size="sm"
-                                  variant="default"
-                                  onClick={() => handleDistribute(lead)}
-                                  disabled={routeMutation.isPending}
-                                  title="Distribution automatique (meilleur match)"
-                                >
-                                  <Send className="h-4 w-4 mr-1" /> Auto
+                                  <UserCog className="h-3.5 w-3.5" />
                                 </Button>
                                 <Button
                                   size="sm"
                                   variant="ghost"
+                                  className="h-7 w-7 p-0 text-green-600"
+                                  onClick={() => handleDistribute(lead)}
+                                  disabled={routeMutation.isPending}
+                                  title="Auto-distribuer"
+                                >
+                                  <Send className="h-3.5 w-3.5" />
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  variant="ghost"
+                                  className="h-7 w-7 p-0 text-red-600"
                                   onClick={() => handleReject(lead)}
                                   disabled={rejectMutation.isPending}
-                                  className="text-destructive hover:text-destructive"
-                                  title="Rejeter (non distribuable)"
+                                  title="Rejeter"
                                 >
-                                  <XCircle className="h-4 w-4" />
+                                  <XCircle className="h-3.5 w-3.5" />
                                 </Button>
                               </>
                             )}
@@ -690,4 +680,108 @@ function formatValue(value: any): string {
   if (typeof value === "boolean") return value ? "Oui" : "Non";
   if (typeof value === "object") return JSON.stringify(value);
   return String(value);
+}
+
+// ============================================================================
+// Composants Sheet-like (header, cellule, tri)
+// ============================================================================
+
+function SheetHeader({
+  col,
+  sortKey,
+  sortDir,
+  onSort,
+}: {
+  col: LeadColumn;
+  sortKey: string;
+  sortDir: "asc" | "desc";
+  onSort: (key: string) => void;
+}) {
+  const active = sortKey === col.key;
+  const stickyClass = col.sticky ? "sticky left-0 z-30 bg-slate-50" : "";
+  const alignClass = col.align === "right" ? "text-right" : col.align === "center" ? "text-center" : "text-left";
+  return (
+    <th
+      className={`px-2 py-2 text-xs font-semibold uppercase tracking-wide text-slate-600 border-r ${col.width ?? ""} ${stickyClass} ${alignClass}`}
+    >
+      <button
+        onClick={() => onSort(col.key)}
+        className="inline-flex items-center gap-1 hover:text-slate-900 transition-colors"
+      >
+        <span className="truncate">{col.label}</span>
+        <ArrowUpDown className={`h-3 w-3 transition-opacity ${active ? "opacity-100 text-blue-600" : "opacity-30"}`} />
+        {active && <span className="text-blue-600 text-[10px]">{sortDir === "asc" ? "↑" : "↓"}</span>}
+      </button>
+    </th>
+  );
+}
+
+function SheetCell({ lead, col }: { lead: any; col: LeadColumn }) {
+  const raw = col.source === "bd" ? lead[col.key] : lead.donnees_produit?.[col.key];
+  const stickyClass = col.sticky ? "sticky left-0 z-10 bg-inherit" : "";
+  const alignClass = col.align === "right" ? "text-right" : col.align === "center" ? "text-center" : "text-left";
+
+  // Rendu spécial pour certains champs
+  if (col.key === "statut" && col.source === "bd") {
+    return (
+      <td className={`px-2 py-1 border-r ${col.width ?? ""} ${stickyClass}`}>
+        <Badge variant={STATUT_BADGE[raw]?.variant ?? "outline"} className="text-[10px] px-1.5 py-0">
+          {STATUT_BADGE[raw]?.label ?? raw}
+        </Badge>
+      </td>
+    );
+  }
+
+  if (col.key === "source_formulaire" && col.source === "bd") {
+    return (
+      <td className={`px-2 py-1 border-r ${col.width ?? ""} ${stickyClass}`}>
+        <Badge variant="outline" className="text-[10px] px-1.5 py-0">{raw ?? "—"}</Badge>
+      </td>
+    );
+  }
+
+  // Formatage par défaut
+  let display: string;
+  if (raw === null || raw === undefined || raw === "") {
+    display = "—";
+  } else if (col.format === "datetime") {
+    display = new Date(raw).toLocaleString("fr-CH", {
+      day: "2-digit", month: "2-digit", year: "2-digit", hour: "2-digit", minute: "2-digit",
+    });
+  } else if (col.format === "date") {
+    display = new Date(raw).toLocaleDateString("fr-CH");
+  } else if (typeof raw === "boolean") {
+    display = raw ? "Oui" : "Non";
+  } else if (typeof raw === "object") {
+    display = JSON.stringify(raw);
+  } else {
+    display = String(raw);
+  }
+
+  const isMuted = display === "—";
+
+  return (
+    <td className={`px-2 py-1 border-r truncate ${col.width ?? ""} ${stickyClass} ${alignClass} ${isMuted ? "text-slate-300" : "text-slate-700"}`}>
+      <span className="truncate block" title={display}>{display}</span>
+    </td>
+  );
+}
+
+// Tri local côté front (les listes sont limitées à 200 → pas besoin de tri server-side)
+function sortLeads(leads: any[], key: string, dir: "asc" | "desc", columns: LeadColumn[]) {
+  const col = columns.find((c) => c.key === key);
+  const sorted = [...leads].sort((a, b) => {
+    const valA = col?.source === "json" ? a.donnees_produit?.[key] : a[key];
+    const valB = col?.source === "json" ? b.donnees_produit?.[key] : b[key];
+
+    if (valA === valB) return 0;
+    if (valA === null || valA === undefined) return 1;
+    if (valB === null || valB === undefined) return -1;
+
+    if (typeof valA === "number" && typeof valB === "number") {
+      return valA - valB;
+    }
+    return String(valA).localeCompare(String(valB), "fr");
+  });
+  return dir === "desc" ? sorted.reverse() : sorted;
 }
