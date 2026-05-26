@@ -7,8 +7,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search, Loader2, Eye, Send, XCircle, Inbox, UserCog, AlertCircle, CheckCircle2 } from "lucide-react";
+import {
+  Search, Loader2, Eye, Send, XCircle, Inbox, UserCog, AlertCircle, CheckCircle2,
+  Heart, PiggyBank, HelpingHand, Home, Briefcase, Car, House, Scale, Building,
+  Building2, FileX, Baby, Handshake, LayoutGrid,
+} from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 type LeadStatut = "all" | "nouveau" | "distribue" | "non_distribuable";
@@ -26,15 +29,22 @@ const MOTIF_LABEL: Record<string, string> = {
   autre: "Autre",
 };
 
-const PRODUITS = [
-  { value: "all", label: "Tous les produits" },
-  { value: "assurance_maladie", label: "Assurance maladie" },
-  { value: "assurance_vie", label: "Assurance vie / 3e pilier" },
-  { value: "assurance_non_vie", label: "Assurance non-vie (auto, ménage, etc.)" },
-  { value: "hypotheque", label: "Hypothèque" },
-  { value: "lpp", label: "LPP" },
-  { value: "telecom", label: "Télécom" },
-  { value: "autre", label: "Autre" },
+// Sous-onglets par type de formulaire (granularité fine, plus précise que le domain)
+const FORM_TYPES: { value: string; label: string; short: string; icon: any }[] = [
+  { value: "all",                     label: "Tous les types",          short: "Tous",        icon: LayoutGrid },
+  { value: "health-insurance",        label: "Santé (LAMal)",            short: "Santé",       icon: Heart },
+  { value: "subsidy",                 label: "Subside",                  short: "Subside",     icon: HelpingHand },
+  { value: "pillar-3a",               label: "3e Pilier",                short: "3e Pilier",   icon: PiggyBank },
+  { value: "lpp-libre-passage",       label: "LPP / Libre passage",      short: "LPP",         icon: Briefcase },
+  { value: "mortgage",                label: "Hypothèque",               short: "Hypothèque",  icon: Home },
+  { value: "car-insurance",           label: "Voiture",                  short: "Voiture",     icon: Car },
+  { value: "household-insurance",     label: "Ménage",                   short: "Ménage",      icon: House },
+  { value: "legal-protection",        label: "Protection juridique",     short: "Juridique",   icon: Scale },
+  { value: "professional-insurance",  label: "Pro / Entreprise",         short: "Pro",         icon: Building },
+  { value: "estimation-immobiliere",  label: "Estimation immobilière",   short: "Estimation",  icon: Building2 },
+  { value: "termination",             label: "Résiliation",              short: "Résiliation", icon: FileX },
+  { value: "prenatal-insurance",      label: "Prénatale",                short: "Prénatale",   icon: Baby },
+  { value: "partner",                 label: "Partenaire",               short: "Partenaire",  icon: Handshake },
 ];
 
 export default function AdminLeads() {
@@ -43,7 +53,7 @@ export default function AdminLeads() {
 
   const [search, setSearch] = useState("");
   const [filterStatut, setFilterStatut] = useState<LeadStatut>("nouveau");
-  const [filterProduit, setFilterProduit] = useState<string>("all");
+  const [filterFormType, setFilterFormType] = useState<string>("all");
 
   const [selected, setSelected] = useState<any | null>(null);
   const [detailOpen, setDetailOpen] = useState(false);
@@ -54,11 +64,11 @@ export default function AdminLeads() {
   // Fetch leads
   // ----------------------------------------------------------------------------
   const { data: leads, isLoading } = useQuery({
-    queryKey: ["admin-leads", filterStatut, filterProduit, search],
+    queryKey: ["admin-leads", filterStatut, filterFormType, search],
     queryFn: async () => {
       let q = supabase.from("leads").select("*").order("cree_le", { ascending: false }).limit(200);
       if (filterStatut !== "all") q = q.eq("statut", filterStatut);
-      if (filterProduit !== "all") q = q.eq("produit", filterProduit);
+      if (filterFormType !== "all") q = q.eq("source_formulaire", filterFormType);
       if (search) {
         q = q.or(
           `prenom.ilike.%${search}%,nom.ilike.%${search}%,email.ilike.%${search}%,telephone.ilike.%${search}%`
@@ -68,6 +78,25 @@ export default function AdminLeads() {
       if (error) throw error;
       return data ?? [];
     },
+  });
+
+  // Compteurs par type de formulaire (combinés avec le filterStatut courant)
+  const { data: formCounts } = useQuery({
+    queryKey: ["admin-leads-form-counts", filterStatut],
+    queryFn: async () => {
+      let q = supabase.from("leads").select("source_formulaire");
+      if (filterStatut !== "all") q = q.eq("statut", filterStatut);
+      const { data, error } = await q;
+      if (error) throw error;
+      const counts: Record<string, number> = { all: 0 };
+      (data ?? []).forEach((row: any) => {
+        counts.all++;
+        const ft = row.source_formulaire ?? "unknown";
+        counts[ft] = (counts[ft] ?? 0) + 1;
+      });
+      return counts;
+    },
+    refetchInterval: 30000,
   });
 
   // ----------------------------------------------------------------------------
@@ -234,10 +263,43 @@ export default function AdminLeads() {
           />
         </div>
 
-        {/* Filtres */}
+        {/* Sous-onglets par type d'assurance */}
+        <div className="overflow-x-auto -mx-2 px-2">
+          <div className="flex items-center gap-1 min-w-max pb-2">
+            {FORM_TYPES.map((ft) => {
+              const Icon = ft.icon;
+              const count = formCounts?.[ft.value] ?? 0;
+              const active = filterFormType === ft.value;
+              return (
+                <button
+                  key={ft.value}
+                  onClick={() => setFilterFormType(ft.value)}
+                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap border ${
+                    active
+                      ? "bg-[hsl(var(--optimis-green))] text-white border-[hsl(var(--optimis-green))] shadow-sm"
+                      : "bg-card text-muted-foreground border-border hover:bg-muted hover:text-foreground"
+                  }`}
+                >
+                  <Icon className="h-4 w-4" />
+                  <span>{ft.short}</span>
+                  {count > 0 && (
+                    <Badge
+                      variant={active ? "secondary" : "outline"}
+                      className={active ? "bg-white/20 text-white border-transparent" : ""}
+                    >
+                      {count}
+                    </Badge>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Recherche */}
         <Card>
-          <CardContent className="pt-6 flex items-center gap-3">
-            <div className="relative flex-1">
+          <CardContent className="pt-6">
+            <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Recherche par nom, email ou téléphone…"
@@ -246,18 +308,6 @@ export default function AdminLeads() {
                 className="pl-10"
               />
             </div>
-            <Select value={filterProduit} onValueChange={setFilterProduit}>
-              <SelectTrigger className="w-[260px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {PRODUITS.map((p) => (
-                  <SelectItem key={p.value} value={p.value}>
-                    {p.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
           </CardContent>
         </Card>
 

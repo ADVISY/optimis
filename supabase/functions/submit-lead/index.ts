@@ -251,6 +251,7 @@ serve(async (req) => {
           source_systeme: "optimis_comparateur",
           source_externe_id: externalLeadId,
           produit,
+          source_formulaire: formType || null, // formType brut pour sous-onglets fins
           prenom: fields.prenom ?? null,
           nom: fields.nom ?? null,
           email: fields.email ?? null,
