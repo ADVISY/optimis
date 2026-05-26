@@ -80,12 +80,6 @@ export default function AdminLeads() {
   const activeFiltersCount = Object.values(filterValues).filter((v) => v && v !== "all").length;
   const clearAllFilters = () => setFilterValues({});
 
-  // Application des filtres avancés côté client (sur les leads déjà fetchés)
-  const leadsFiltered = useMemo(() => {
-    if (!leads || activeFiltersCount === 0) return leads ?? [];
-    return applyFilters(leads, advancedFilters, filterValues);
-  }, [leads, advancedFilters, filterValues, activeFiltersCount]);
-
   // ----------------------------------------------------------------------------
   // Fetch leads
   // ----------------------------------------------------------------------------
@@ -109,6 +103,12 @@ export default function AdminLeads() {
     },
     retry: false,
   });
+
+  // Application des filtres avancés côté client (sur les leads déjà fetchés)
+  const leadsFiltered = useMemo(() => {
+    if (!leads || activeFiltersCount === 0) return leads ?? [];
+    return applyFilters(leads, advancedFilters, filterValues);
+  }, [leads, advancedFilters, filterValues, activeFiltersCount]);
 
   // Compteurs par type de formulaire (combinés avec le filterStatut courant)
   const { data: formCounts } = useQuery({
