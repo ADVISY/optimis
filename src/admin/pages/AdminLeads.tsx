@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search, Loader2, Eye, Send, XCircle, Inbox } from "lucide-react";
+import { Search, Loader2, Eye, Send, XCircle, Inbox, UserCog, AlertCircle, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 type LeadStatut = "all" | "nouveau" | "distribue" | "non_distribuable";
@@ -47,6 +47,8 @@ export default function AdminLeads() {
 
   const [selected, setSelected] = useState<any | null>(null);
   const [detailOpen, setDetailOpen] = useState(false);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [pickerLead, setPickerLead] = useState<any | null>(null);
 
   // ----------------------------------------------------------------------------
   // Fetch leads
@@ -113,6 +115,39 @@ export default function AdminLeads() {
     onError: (e: any) => toast({ title: "Erreur de distribution", description: e.message, variant: "destructive" }),
   });
 
+  // Liste des commandes éligibles pour le lead sélectionné dans le picker
+  const { data: eligibles, isLoading: loadingEligibles } = useQuery({
+    queryKey: ["lead-eligible-orders", pickerLead?.id],
+    enabled: !!pickerLead?.id && pickerOpen,
+    queryFn: async () => {
+      const { data, error } = await supabase.rpc("get_eligible_orders_for_lead", {
+        p_lead_id: pickerLead!.id,
+      });
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+
+  const distributeManualMutation = useMutation({
+    mutationFn: async ({ leadId, orderLineId }: { leadId: string; orderLineId: string }) => {
+      const { data, error } = await supabase.rpc("distribute_lead_manual", {
+        p_lead_id: leadId,
+        p_order_line_id: orderLineId,
+      });
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["admin-leads"] });
+      qc.invalidateQueries({ queryKey: ["admin-leads-counts"] });
+      qc.invalidateQueries({ queryKey: ["lead-eligible-orders"] });
+      toast({ title: "Lead distribué", description: "Le courtier sélectionné a reçu le lead." });
+      setPickerOpen(false);
+      setPickerLead(null);
+    },
+    onError: (e: any) => toast({ title: "Erreur de distribution", description: e.message, variant: "destructive" }),
+  });
+
   const rejectMutation = useMutation({
     mutationFn: async (leadId: string) => {
       const { error } = await supabase
@@ -147,6 +182,11 @@ export default function AdminLeads() {
   const openDetail = (lead: any) => {
     setSelected(lead);
     setDetailOpen(true);
+  };
+
+  const openPicker = (lead: any) => {
+    setPickerLead(lead);
+    setPickerOpen(true);
   };
 
   return (
@@ -295,11 +335,20 @@ export default function AdminLeads() {
                               <>
                                 <Button
                                   size="sm"
+                                  variant="outline"
+                                  onClick={() => openPicker(lead)}
+                                  title="Choisir un courtier"
+                                >
+                                  <UserCog className="h-4 w-4 mr-1" /> Choisir
+                                </Button>
+                                <Button
+                                  size="sm"
                                   variant="default"
                                   onClick={() => handleDistribute(lead)}
                                   disabled={routeMutation.isPending}
+                                  title="Distribution automatique (meilleur match)"
                                 >
-                                  <Send className="h-4 w-4 mr-1" /> Distribuer
+                                  <Send className="h-4 w-4 mr-1" /> Auto
                                 </Button>
                                 <Button
                                   size="sm"
@@ -307,6 +356,7 @@ export default function AdminLeads() {
                                   onClick={() => handleReject(lead)}
                                   disabled={rejectMutation.isPending}
                                   className="text-destructive hover:text-destructive"
+                                  title="Rejeter (non distribuable)"
                                 >
                                   <XCircle className="h-4 w-4" />
                                 </Button>
@@ -322,6 +372,112 @@ export default function AdminLeads() {
             )}
           </CardContent>
         </Card>
+
+        {/* Modal Sélection courtier (distribution manuelle) */}
+        <Dialog open={pickerOpen} onOpenChange={setPickerOpen}>
+          <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>
+                Choisir le courtier pour ce lead
+              </DialogTitle>
+            </DialogHeader>
+            {pickerLead && (
+              <div className="space-y-4">
+                <div className="bg-muted/50 p-3 rounded-lg text-sm">
+                  <div className="font-medium">
+                    {pickerLead.prenom ?? ""} {pickerLead.nom ?? ""}
+                  </div>
+                  <div className="text-muted-foreground text-xs">
+                    {pickerLead.produit} · {pickerLead.canton ?? "—"} · {pickerLead.email ?? "—"}
+                  </div>
+                </div>
+
+                {loadingEligibles ? (
+                  <div className="p-8 text-center">
+                    <Loader2 className="h-6 w-6 animate-spin mx-auto text-muted-foreground" />
+                  </div>
+                ) : (eligibles?.length ?? 0) === 0 ? (
+                  <div className="p-8 text-center text-sm text-muted-foreground border rounded-lg">
+                    <AlertCircle className="h-8 w-8 mx-auto mb-2 text-amber-500" />
+                    Aucune commande active ne correspond à ce lead.
+                    <div className="text-xs mt-2">
+                      Vérifie : produit du lead = "{pickerLead.produit}", solde restant &gt; 0,
+                      statut actif, fenêtre de dates ouverte, canton/langue compatible.
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <div className="text-xs text-muted-foreground">
+                      {eligibles!.length} commande{eligibles!.length > 1 ? "s" : ""} éligible
+                      {eligibles!.length > 1 ? "s" : ""} — triées par score (plus haut = meilleur match selon l'équilibrage pondéré)
+                    </div>
+                    {eligibles!.map((eo: any) => (
+                      <Card
+                        key={eo.order_line_id}
+                        className={`transition-all ${
+                          eo.has_active_canal
+                            ? "hover:shadow-md cursor-pointer"
+                            : "opacity-60"
+                        }`}
+                      >
+                        <CardContent className="p-4 flex items-center justify-between gap-3">
+                          <div className="flex-1 min-w-0">
+                            <div className="font-semibold truncate">
+                              {eo.company_name}
+                              <span className="text-xs font-normal text-muted-foreground ml-2">
+                                · {eo.contact_name ?? ""}
+                              </span>
+                            </div>
+                            <div className="text-xs text-muted-foreground mt-1">
+                              {eo.order_number} · {eo.product_name}
+                            </div>
+                            <div className="flex items-center gap-3 mt-2 text-xs">
+                              <Badge variant="outline">
+                                Solde : <strong className="ml-1">{eo.solde_restant}</strong>/{eo.quantity}
+                              </Badge>
+                              <Badge variant="outline">
+                                Reçus : {eo.leads_recus}
+                              </Badge>
+                              <Badge variant="secondary">
+                                Score : <strong className="ml-1">{Number(eo.score).toFixed(2)}</strong>
+                              </Badge>
+                              {eo.has_active_canal ? (
+                                <span className="inline-flex items-center text-green-600 gap-1">
+                                  <CheckCircle2 className="h-3 w-3" /> Canal actif
+                                </span>
+                              ) : (
+                                <span className="inline-flex items-center text-amber-600 gap-1">
+                                  <AlertCircle className="h-3 w-3" /> Pas de canal
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                          <Button
+                            size="sm"
+                            disabled={!eo.has_active_canal || distributeManualMutation.isPending}
+                            onClick={() =>
+                              distributeManualMutation.mutate({
+                                leadId: pickerLead.id,
+                                orderLineId: eo.order_line_id,
+                              })
+                            }
+                          >
+                            <Send className="h-4 w-4 mr-1" /> Distribuer ici
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+            <DialogFooter>
+              <Button variant="ghost" onClick={() => setPickerOpen(false)}>
+                Fermer
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
 
         {/* Modal Détail */}
         <Dialog open={detailOpen} onOpenChange={setDetailOpen}>
@@ -397,13 +553,22 @@ export default function AdminLeads() {
               {selected?.statut === "nouveau" && (
                 <>
                   <Button
+                    variant="outline"
+                    onClick={() => {
+                      setDetailOpen(false);
+                      openPicker(selected);
+                    }}
+                  >
+                    <UserCog className="h-4 w-4 mr-2" /> Choisir courtier
+                  </Button>
+                  <Button
                     variant="default"
                     onClick={() => {
                       setDetailOpen(false);
                       handleDistribute(selected);
                     }}
                   >
-                    <Send className="h-4 w-4 mr-2" /> Distribuer
+                    <Send className="h-4 w-4 mr-2" /> Auto-distribuer
                   </Button>
                   <Button
                     variant="outline"
