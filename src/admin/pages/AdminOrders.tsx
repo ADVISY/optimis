@@ -355,6 +355,7 @@ export default function AdminOrders() {
                     <th className="px-4 py-3 font-semibold text-right">Lignes</th>
                     <th className="px-4 py-3 font-semibold text-right">Total (CHF)</th>
                     <th className="px-4 py-3 font-semibold">Statut</th>
+                    <th className="px-4 py-3 font-semibold w-48">Distribution</th>
                     <th className="px-4 py-3 font-semibold text-right">Actions</th>
                   </tr>
                 </thead>
@@ -394,6 +395,9 @@ export default function AdminOrders() {
                               <Badge variant="outline">À facturer</Badge>
                             )}
                           </td>
+                          <td className="px-4 py-4">
+                            <DistributionProgress order={o} />
+                          </td>
                           <td className="px-4 py-4 text-right">
                             <div className="flex items-center justify-end gap-1">
                               <Button
@@ -422,7 +426,7 @@ export default function AdminOrders() {
                         </tr>
                         {isExpanded && (
                           <tr className="bg-muted/20">
-                            <td colSpan={9} className="px-12 py-3">
+                            <td colSpan={10} className="px-12 py-3">
                               <table className="w-full text-xs">
                                 <thead className="text-muted-foreground">
                                   <tr>
@@ -675,5 +679,43 @@ export default function AdminOrders() {
         prefillFromOrder={invoicePrefill}
       />
     </AdminLayout>
+  );
+}
+
+// ============================================================================
+// Composant : barre de progression de distribution pour une commande
+// ============================================================================
+const STATUT_DIST_LABELS: Record<string, { label: string; color: string; barColor: string }> = {
+  attente_paiement: { label: "En attente paiement", color: "text-slate-500", barColor: "bg-slate-300" },
+  active: { label: "Distribution en cours", color: "text-blue-700", barColor: "bg-blue-500" },
+  epuisee: { label: "Livrée ✓", color: "text-green-700", barColor: "bg-green-500" },
+  expiree: { label: "Expirée", color: "text-orange-600", barColor: "bg-orange-400" },
+  en_pause: { label: "En pause", color: "text-yellow-700", barColor: "bg-yellow-400" },
+  annulee: { label: "Annulée", color: "text-red-600", barColor: "bg-red-400" },
+};
+
+function DistributionProgress({ order }: { order: any }) {
+  const lines = order.admin_order_lines ?? [];
+  const totalQty = lines.reduce((s: number, l: any) => s + (Number(l.quantity) || 0), 0);
+  const totalRemaining = lines.reduce((s: number, l: any) => s + (Number(l.solde_restant ?? l.quantity) || 0), 0);
+  const distribues = Math.max(0, totalQty - totalRemaining);
+  const pct = totalQty > 0 ? Math.min(100, (distribues / totalQty) * 100) : 0;
+
+  const statut = order.statut_distribution ?? "attente_paiement";
+  const cfg = STATUT_DIST_LABELS[statut] ?? STATUT_DIST_LABELS.attente_paiement;
+
+  return (
+    <div className="space-y-1 min-w-[140px]" title={`${distribues} sur ${totalQty} leads distribués · ${cfg.label}`}>
+      <div className="flex items-baseline justify-between text-xs">
+        <span className={`font-semibold ${cfg.color}`}>
+          {distribues}/{totalQty}
+        </span>
+        <span className="text-[10px] text-muted-foreground">{Math.round(pct)}%</span>
+      </div>
+      <div className="h-1.5 bg-slate-200 rounded-full overflow-hidden">
+        <div className={`h-full transition-all ${cfg.barColor}`} style={{ width: `${pct}%` }} />
+      </div>
+      <div className={`text-[10px] ${cfg.color}`}>{cfg.label}</div>
+    </div>
   );
 }
