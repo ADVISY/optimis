@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Loader2, Trash2, FileText, ChevronDown, ChevronRight, CheckCircle2 } from "lucide-react";
+import { Plus, Loader2, Trash2, FileText, ChevronDown, ChevronRight, CheckCircle2, Pause, Play, Ban } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatMoney, toCHF, formatCHF, formatDate, type Currency } from "@/admin/lib/format";
 import { InvoiceFormModal } from "@/admin/components/InvoiceFormModal";
@@ -283,6 +283,20 @@ export default function AdminOrders() {
     onError: (e: any) => toast({ title: "Erreur", description: e.message, variant: "destructive" }),
   });
 
+  // Pause / Reprendre / Annuler — modifie statut_distribution
+  const statutMutation = useMutation({
+    mutationFn: async ({ id, statut }: { id: string; statut: "active" | "en_pause" | "annulee" }) => {
+      const { error } = await supabase.from("admin_orders").update({ statut_distribution: statut }).eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: (_, vars) => {
+      qc.invalidateQueries({ queryKey: ["admin-orders"] });
+      const labels: Record<string, string> = { active: "reprise", en_pause: "mise en pause", annulee: "annulée" };
+      toast({ title: `Distribution ${labels[vars.statut]}` });
+    },
+    onError: (e: any) => toast({ title: "Erreur", description: e.message, variant: "destructive" }),
+  });
+
   return (
     <AdminLayout
       title="Commandes"
@@ -400,6 +414,51 @@ export default function AdminOrders() {
                           </td>
                           <td className="px-4 py-4 text-right">
                             <div className="flex items-center justify-end gap-1">
+                              {/* Boutons Pause / Reprendre / Annuler (selon statut_distribution) */}
+                              {o.statut_distribution === "active" && (
+                                <Button
+                                  size="sm"
+                                  variant="ghost"
+                                  onClick={() => {
+                                    if (confirm(`Mettre en pause la distribution de la commande ${o.order_number} ?\nAucun lead ne sera distribué à ce client tant qu'elle reste en pause.`)) {
+                                      statutMutation.mutate({ id: o.id, statut: "en_pause" });
+                                    }
+                                  }}
+                                  disabled={statutMutation.isPending}
+                                  title="Pause"
+                                  className="text-yellow-700 hover:text-yellow-800 hover:bg-yellow-50"
+                                >
+                                  <Pause className="h-3.5 w-3.5" />
+                                </Button>
+                              )}
+                              {o.statut_distribution === "en_pause" && (
+                                <Button
+                                  size="sm"
+                                  variant="ghost"
+                                  onClick={() => statutMutation.mutate({ id: o.id, statut: "active" })}
+                                  disabled={statutMutation.isPending}
+                                  title="Reprendre"
+                                  className="text-green-700 hover:text-green-800 hover:bg-green-50"
+                                >
+                                  <Play className="h-3.5 w-3.5" />
+                                </Button>
+                              )}
+                              {(o.statut_distribution === "active" || o.statut_distribution === "en_pause") && (
+                                <Button
+                                  size="sm"
+                                  variant="ghost"
+                                  onClick={() => {
+                                    if (confirm(`Annuler la distribution de la commande ${o.order_number} ?\nCette action est définitive.`)) {
+                                      statutMutation.mutate({ id: o.id, statut: "annulee" });
+                                    }
+                                  }}
+                                  disabled={statutMutation.isPending}
+                                  title="Annuler"
+                                  className="text-orange-700 hover:text-orange-800 hover:bg-orange-50"
+                                >
+                                  <Ban className="h-3.5 w-3.5" />
+                                </Button>
+                              )}
                               <Button
                                 size="sm"
                                 variant="outline"

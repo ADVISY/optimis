@@ -12,6 +12,7 @@ import AdminProfile from "./pages/AdminProfile";
 import AdminProducts from "./pages/AdminProducts";
 import AdminLeads from "./pages/AdminLeads";
 import AdminCanaux from "./pages/AdminCanaux";
+import AdminDistributions from "./pages/AdminDistributions";
 
 export default function AdminRouter() {
   return (
@@ -22,6 +23,7 @@ export default function AdminRouter() {
         <Route index element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>} />
         <Route path="leads" element={<ProtectedAdminRoute><AdminLeads /></ProtectedAdminRoute>} />
         <Route path="canaux" element={<ProtectedAdminRoute><AdminCanaux /></ProtectedAdminRoute>} />
+        <Route path="distributions" element={<ProtectedAdminRoute><AdminDistributions /></ProtectedAdminRoute>} />
         <Route path="clients" element={<ProtectedAdminRoute><AdminClients /></ProtectedAdminRoute>} />
         <Route path="commandes" element={<ProtectedAdminRoute><AdminOrders /></ProtectedAdminRoute>} />
         <Route path="factures" element={<ProtectedAdminRoute><AdminInvoices /></ProtectedAdminRoute>} />
