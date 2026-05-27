@@ -220,9 +220,13 @@ export default function AdminLeads() {
   // ----------------------------------------------------------------------------
   const routeMutation = useMutation({
     mutationFn: async (leadId: string) => {
-      const { data, error } = await supabase.rpc("route_lead", { p_lead_id: leadId });
+      const { data: distId, error } = await supabase.rpc("route_lead", { p_lead_id: leadId });
       if (error) throw error;
-      return data;
+      // Si une distribution a été créée → déclenche la livraison
+      if (distId) {
+        await supabase.functions.invoke("deliver-distribution", { body: { distribution_id: distId } });
+      }
+      return distId;
     },
     onSuccess: (distributionId, leadId) => {
       qc.invalidateQueries({ queryKey: ["admin-leads"] });
@@ -276,13 +280,26 @@ export default function AdminLeads() {
   // Auto-distribution batch : route_lead pour chaque lead sélectionné
   const batchAutoMutation = useMutation({
     mutationFn: async (leadIds: string[]) => {
-      const results = { distribues: 0, non_distribuables: 0, erreurs: 0 };
+      const results = { distribues: 0, non_distribuables: 0, erreurs: 0, livraisons_ok: 0, livraisons_ko: 0 };
       for (const leadId of leadIds) {
         try {
           const { data: distId, error } = await supabase.rpc("route_lead", { p_lead_id: leadId });
           if (error) { results.erreurs++; continue; }
-          if (distId) results.distribues++;
-          else results.non_distribuables++;
+          if (distId) {
+            results.distribues++;
+            // Déclenche la livraison via le canal du courtier (async)
+            try {
+              const { error: deliverErr } = await supabase.functions.invoke("deliver-distribution", {
+                body: { distribution_id: distId },
+              });
+              if (deliverErr) results.livraisons_ko++;
+              else results.livraisons_ok++;
+            } catch {
+              results.livraisons_ko++;
+            }
+          } else {
+            results.non_distribuables++;
+          }
         } catch {
           results.erreurs++;
         }
@@ -293,10 +310,11 @@ export default function AdminLeads() {
       qc.invalidateQueries({ queryKey: ["admin-leads"] });
       qc.invalidateQueries({ queryKey: ["admin-leads-counts"] });
       qc.invalidateQueries({ queryKey: ["admin-leads-form-counts"] });
+      qc.invalidateQueries({ queryKey: ["admin-orders"] });
       clearSelection();
       toast({
         title: `Distribution batch terminée`,
-        description: `${results.distribues} distribués · ${results.non_distribuables} non distribuables · ${results.erreurs} erreurs`,
+        description: `${results.distribues} distribués (livraison: ${results.livraisons_ok} ok · ${results.livraisons_ko} KO) · ${results.non_distribuables} non distribuables · ${results.erreurs} erreurs`,
       });
     },
     onError: (e: any) => toast({ title: "Erreur batch", description: e.message, variant: "destructive" }),
@@ -305,10 +323,10 @@ export default function AdminLeads() {
   // Distribution manuelle batch : distribute_lead_manual à un même courtier pour tous
   const batchManualMutation = useMutation({
     mutationFn: async ({ leadIds, orderLineId, canalId }: { leadIds: string[]; orderLineId: string; canalId: string }) => {
-      const results = { ok: 0, erreurs: 0, messages: [] as string[] };
+      const results = { ok: 0, erreurs: 0, livraisons_ok: 0, livraisons_ko: 0, messages: [] as string[] };
       for (const leadId of leadIds) {
         try {
-          const { data, error } = await supabase.rpc("distribute_lead_manual", {
+          const { data: distId, error } = await supabase.rpc("distribute_lead_manual", {
             p_lead_id: leadId,
             p_order_line_id: orderLineId,
             p_canal_id: canalId,
@@ -318,8 +336,22 @@ export default function AdminLeads() {
             results.messages.push(error.message);
             continue;
           }
-          if (data) results.ok++;
-          else results.erreurs++;
+          if (distId) {
+            results.ok++;
+            // Déclenche la livraison
+            try {
+              const { error: dErr } = await supabase.functions.invoke("deliver-distribution", {
+                body: { distribution_id: distId },
+              });
+              if (dErr) { results.livraisons_ko++; results.messages.push(dErr.message); }
+              else results.livraisons_ok++;
+            } catch (e: any) {
+              results.livraisons_ko++;
+              results.messages.push(e.message);
+            }
+          } else {
+            results.erreurs++;
+          }
         } catch (e: any) {
           results.erreurs++;
           results.messages.push(e.message);

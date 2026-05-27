@@ -306,27 +306,17 @@ export default function AdminCanaux() {
                 {form.type === "google_sheets" && (
                   <>
                     <div className="space-y-1">
-                      <Label className="text-xs">ID de la Google Sheet *</Label>
+                      <Label className="text-xs">URL du webhook Zapier (ou Make/N8n) *</Label>
                       <Input
-                        placeholder="ex: 1abc...xyz (extrait de l'URL de la Sheet)"
-                        value={form.config.sheet_id ?? ""}
-                        onChange={(e) => setForm({ ...form, config: { ...form.config, sheet_id: e.target.value } })}
-                      />
-                      <p className="text-[10px] text-muted-foreground">
-                        Dans l'URL Sheets : /spreadsheets/d/<strong>ID</strong>/edit
-                      </p>
-                    </div>
-                    <div className="space-y-1">
-                      <Label className="text-xs">Nom de l'onglet *</Label>
-                      <Input
-                        placeholder="ex: Leads Santé"
-                        value={form.config.tab ?? ""}
-                        onChange={(e) => setForm({ ...form, config: { ...form.config, tab: e.target.value } })}
+                        placeholder="https://hooks.zapier.com/hooks/catch/xxxxx/yyyyy/"
+                        value={form.config.webhook_url ?? ""}
+                        onChange={(e) => setForm({ ...form, config: { ...form.config, webhook_url: e.target.value } })}
                       />
                     </div>
-                    <div className="p-2 bg-amber-50 border border-amber-200 rounded text-xs text-amber-900">
-                      ⚠️ La Sheet doit être <strong>partagée en édition</strong> avec l'email du compte de service Google
-                      (à configurer dans les Edge Functions Optimis — secret <code>GOOGLE_SERVICE_ACCOUNT_EMAIL</code>).
+                    <div className="p-2 bg-blue-50 border border-blue-200 rounded text-xs text-blue-900 space-y-1">
+                      <p className="font-medium">💡 Comment ça marche</p>
+                      <p>Optimis envoie le payload du lead (en JSON, format identique à Zapier actuel) à cette URL. Le Zapier du courtier append ensuite la ligne dans sa Google Sheet.</p>
+                      <p className="text-[10px]">→ Tu peux récupérer une URL existante depuis ton compte Zapier (My Zaps → Catch Hook → URL).</p>
                     </div>
                   </>
                 )}

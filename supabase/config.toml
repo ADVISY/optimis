@@ -17,3 +17,7 @@ verify_jwt = false
 
 [functions.check-otp-status]
 verify_jwt = false
+
+
+[functions.deliver-distribution]
+verify_jwt = true
