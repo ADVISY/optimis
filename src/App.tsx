@@ -55,6 +55,7 @@ import Partenaires from "./pages/Partenaires";
 import { localizedRoutes } from "./utils/localizedRoutes";
 import AdminRouter from "./admin/AdminRouter";
 import PartnerRouter from "./partner/PartnerRouter";
+import PortalLogin from "./pages/PortalLogin";
 
 const queryClient = new QueryClient();
 
@@ -170,6 +171,10 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
+          {/* Page d'accueil de connexion (choix admin vs courtier) */}
+          <Route path="/connexion" element={<PortalLogin />} />
+          <Route path="/portail" element={<PortalLogin />} />
+
           {/* Admin back-office (hors i18n) */}
           <Route path="/admin/*" element={<AdminRouter />} />
 

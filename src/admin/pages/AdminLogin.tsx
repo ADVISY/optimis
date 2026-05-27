@@ -91,6 +91,11 @@ export default function AdminLogin() {
               <p className="text-xs text-muted-foreground text-center pt-2">
                 Accès direct au dashboard
               </p>
+              <p className="text-xs text-muted-foreground text-center pt-1">
+                <a href="/connexion" className="hover:text-foreground underline">
+                  ← Retour au choix d'espace
+                </a>
+              </p>
             </form>
           </CardContent>
         </Card>

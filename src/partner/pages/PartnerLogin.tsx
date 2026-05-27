@@ -84,7 +84,9 @@ export default function PartnerLogin() {
               </Button>
 
               <p className="text-xs text-muted-foreground text-center pt-2">
-                Vous êtes admin Optimis ? <a href="/admin/login" className="underline">Espace admin</a>
+                <a href="/connexion" className="hover:text-foreground underline">
+                  ← Retour au choix d'espace
+                </a>
               </p>
             </form>
           </CardContent>
