@@ -15,7 +15,8 @@ import {
 import { getColumnsFor, type LeadColumn } from "@/admin/lib/leadColumns";
 import { getFiltersFor, applyFilters, type LeadFilter } from "@/admin/lib/leadFilters";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { X } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { X, CheckSquare, Square } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 type LeadStatut = "all" | "nouveau" | "distribue" | "non_distribuable";
@@ -63,6 +64,19 @@ export default function AdminLeads() {
   const [detailOpen, setDetailOpen] = useState(false);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [pickerLead, setPickerLead] = useState<any | null>(null);
+
+  // Multi-sélection (batch distribution)
+  const [selectedLeadIds, setSelectedLeadIds] = useState<Set<string>>(new Set());
+  const [batchPickerOpen, setBatchPickerOpen] = useState(false);
+  const toggleLeadSelection = (leadId: string) => {
+    setSelectedLeadIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(leadId)) next.delete(leadId);
+      else next.add(leadId);
+      return next;
+    });
+  };
+  const clearSelection = () => setSelectedLeadIds(new Set());
 
   // Tri Sheet-like
   const [sortKey, setSortKey] = useState<string>("cree_le");
@@ -257,6 +271,76 @@ export default function AdminLeads() {
       setPickerLead(null);
     },
     onError: (e: any) => toast({ title: "Erreur de distribution", description: e.message, variant: "destructive" }),
+  });
+
+  // Auto-distribution batch : route_lead pour chaque lead sélectionné
+  const batchAutoMutation = useMutation({
+    mutationFn: async (leadIds: string[]) => {
+      const results = { distribues: 0, non_distribuables: 0, erreurs: 0 };
+      for (const leadId of leadIds) {
+        try {
+          const { data: distId, error } = await supabase.rpc("route_lead", { p_lead_id: leadId });
+          if (error) { results.erreurs++; continue; }
+          if (distId) results.distribues++;
+          else results.non_distribuables++;
+        } catch {
+          results.erreurs++;
+        }
+      }
+      return results;
+    },
+    onSuccess: (results) => {
+      qc.invalidateQueries({ queryKey: ["admin-leads"] });
+      qc.invalidateQueries({ queryKey: ["admin-leads-counts"] });
+      qc.invalidateQueries({ queryKey: ["admin-leads-form-counts"] });
+      clearSelection();
+      toast({
+        title: `Distribution batch terminée`,
+        description: `${results.distribues} distribués · ${results.non_distribuables} non distribuables · ${results.erreurs} erreurs`,
+      });
+    },
+    onError: (e: any) => toast({ title: "Erreur batch", description: e.message, variant: "destructive" }),
+  });
+
+  // Distribution manuelle batch : distribute_lead_manual à un même courtier pour tous
+  const batchManualMutation = useMutation({
+    mutationFn: async ({ leadIds, orderLineId, canalId }: { leadIds: string[]; orderLineId: string; canalId: string }) => {
+      const results = { ok: 0, erreurs: 0, messages: [] as string[] };
+      for (const leadId of leadIds) {
+        try {
+          const { data, error } = await supabase.rpc("distribute_lead_manual", {
+            p_lead_id: leadId,
+            p_order_line_id: orderLineId,
+            p_canal_id: canalId,
+          });
+          if (error) {
+            results.erreurs++;
+            results.messages.push(error.message);
+            continue;
+          }
+          if (data) results.ok++;
+          else results.erreurs++;
+        } catch (e: any) {
+          results.erreurs++;
+          results.messages.push(e.message);
+        }
+      }
+      return results;
+    },
+    onSuccess: (results) => {
+      qc.invalidateQueries({ queryKey: ["admin-leads"] });
+      qc.invalidateQueries({ queryKey: ["admin-leads-counts"] });
+      qc.invalidateQueries({ queryKey: ["admin-leads-form-counts"] });
+      qc.invalidateQueries({ queryKey: ["admin-orders"] });
+      clearSelection();
+      setBatchPickerOpen(false);
+      toast({
+        title: `${results.ok} leads distribués`,
+        description: results.erreurs > 0 ? `${results.erreurs} échecs : ${results.messages[0] ?? ""}` : "Tous OK",
+        variant: results.erreurs > 0 ? "destructive" : "default",
+      });
+    },
+    onError: (e: any) => toast({ title: "Erreur batch", description: e.message, variant: "destructive" }),
   });
 
   const rejectMutation = useMutation({
@@ -459,6 +543,23 @@ export default function AdminLeads() {
                   {/* Header toujours visible — même quand 0 lead, on voit la structure */}
                   <thead className="sticky top-0 z-20 bg-slate-50 border-b shadow-sm">
                     <tr>
+                      {/* Colonne checkbox (multi-select) */}
+                      <th className="sticky left-0 z-30 bg-slate-50 px-2 py-1.5 border-r w-10">
+                        <Checkbox
+                          checked={
+                            leadsFiltered.length > 0 &&
+                            leadsFiltered.every((l: any) => selectedLeadIds.has(l.id))
+                          }
+                          onCheckedChange={(checked) => {
+                            if (checked) {
+                              setSelectedLeadIds(new Set(leadsFiltered.map((l: any) => l.id)));
+                            } else {
+                              clearSelection();
+                            }
+                          }}
+                          title="Tout sélectionner / désélectionner"
+                        />
+                      </th>
                       {columns.map((col) => (
                         <SheetHeader
                           key={col.key}
@@ -485,7 +586,7 @@ export default function AdminLeads() {
                   <tbody>
                     {(leadsFiltered?.length ?? 0) === 0 ? (
                       <tr>
-                        <td colSpan={columns.length + 1} className="p-12 text-center text-muted-foreground bg-white">
+                        <td colSpan={columns.length + 2} className="p-12 text-center text-muted-foreground bg-white">
                           <Inbox className="h-10 w-10 mx-auto mb-2 opacity-40" />
                           <p className="text-sm">Aucun lead pour ce filtre.</p>
                           <p className="text-xs mt-1 opacity-70">
@@ -501,8 +602,23 @@ export default function AdminLeads() {
                     ) : sortLeads(leadsFiltered, sortKey, sortDir, columns).map((lead: any, idx: number) => (
                       <tr
                         key={lead.id}
-                        className={`border-b hover:bg-blue-50/40 ${idx % 2 === 0 ? "bg-white" : "bg-slate-50/40"}`}
+                        className={`border-b hover:bg-blue-50/40 ${
+                          selectedLeadIds.has(lead.id)
+                            ? "bg-blue-50"
+                            : idx % 2 === 0 ? "bg-white" : "bg-slate-50/40"
+                        }`}
                       >
+                        {/* Checkbox de sélection */}
+                        <td className={`sticky left-0 z-10 px-2 py-0.5 border-r w-10 ${
+                          selectedLeadIds.has(lead.id)
+                            ? "bg-blue-50"
+                            : idx % 2 === 0 ? "bg-white" : "bg-slate-50/40"
+                        }`}>
+                          <Checkbox
+                            checked={selectedLeadIds.has(lead.id)}
+                            onCheckedChange={() => toggleLeadSelection(lead.id)}
+                          />
+                        </td>
                         {columns.map((col) => (
                           <SheetCell key={col.key} lead={lead} col={col} customWidth={columnWidths[col.key]} />
                         ))}
@@ -817,6 +933,59 @@ export default function AdminLeads() {
             </DialogFooter>
           </DialogContent>
         </Dialog>
+
+        {/* Barre d'action flottante (multi-sélection) */}
+        {selectedLeadIds.size > 0 && (
+          <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white rounded-full shadow-2xl flex items-center gap-2 pl-5 pr-2 py-2 border border-slate-700">
+            <CheckSquare className="h-4 w-4 text-blue-400" />
+            <span className="text-sm font-medium whitespace-nowrap">
+              {selectedLeadIds.size} lead{selectedLeadIds.size > 1 ? "s" : ""} sélectionné{selectedLeadIds.size > 1 ? "s" : ""}
+            </span>
+            <div className="h-5 w-px bg-slate-700 mx-1" />
+            <Button
+              size="sm"
+              variant="default"
+              className="bg-green-600 hover:bg-green-700 text-white rounded-full h-8"
+              onClick={() => {
+                if (confirm(`Auto-distribuer ${selectedLeadIds.size} leads ?\nChaque lead sera routé vers le meilleur courtier éligible (équilibrage pondéré).`)) {
+                  batchAutoMutation.mutate(Array.from(selectedLeadIds));
+                }
+              }}
+              disabled={batchAutoMutation.isPending}
+            >
+              {batchAutoMutation.isPending ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Send className="h-3.5 w-3.5" />}
+              Auto-distribuer
+            </Button>
+            <Button
+              size="sm"
+              variant="default"
+              className="bg-blue-600 hover:bg-blue-700 text-white rounded-full h-8"
+              onClick={() => setBatchPickerOpen(true)}
+              disabled={batchManualMutation.isPending}
+            >
+              <UserCog className="h-3.5 w-3.5" />
+              Tous au même courtier
+            </Button>
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={clearSelection}
+              className="text-slate-300 hover:text-white hover:bg-slate-800 rounded-full h-8"
+              title="Désélectionner tout"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
+        )}
+
+        {/* Modal picker batch (choisir 1 courtier pour les N leads sélectionnés) */}
+        <BatchPickerModal
+          open={batchPickerOpen}
+          onClose={() => setBatchPickerOpen(false)}
+          leadIds={Array.from(selectedLeadIds)}
+          onConfirm={(orderLineId, canalId) => batchManualMutation.mutate({ leadIds: Array.from(selectedLeadIds), orderLineId, canalId })}
+          isPending={batchManualMutation.isPending}
+        />
       </div>
     </AdminLayout>
   );
@@ -996,6 +1165,164 @@ function SheetCell({ lead, col, customWidth }: { lead: any; col: LeadColumn; cus
     >
       <span className="truncate block" title={display}>{display}</span>
     </td>
+  );
+}
+
+// ============================================================================
+// Modal de distribution batch — choisir 1 courtier pour N leads
+// ============================================================================
+function BatchPickerModal({
+  open,
+  onClose,
+  leadIds,
+  onConfirm,
+  isPending,
+}: {
+  open: boolean;
+  onClose: () => void;
+  leadIds: string[];
+  onConfirm: (orderLineId: string, canalId: string) => void;
+  isPending: boolean;
+}) {
+  // Récupère tous les clients qui ont une commande active + un canal
+  const { data: clientsOptions } = useQuery({
+    queryKey: ["batch-clients-eligible", open],
+    enabled: open,
+    queryFn: async () => {
+      const { data: orders, error } = await supabase
+        .from("admin_orders")
+        .select(`
+          id, order_number, statut_distribution, client_id,
+          admin_clients(id, company_name),
+          admin_order_lines(id, product_name, quantity, solde_restant, domain, subcategory)
+        `)
+        .eq("statut_distribution", "active");
+      if (error) throw error;
+
+      // Liste les courtiers (clients) avec leurs lignes de commande dispo
+      const map = new Map<string, { client_id: string; company_name: string; lines: any[] }>();
+      (orders ?? []).forEach((o: any) => {
+        if (!o.admin_clients) return;
+        const entry = map.get(o.client_id) ?? {
+          client_id: o.client_id,
+          company_name: o.admin_clients.company_name,
+          lines: [],
+        };
+        (o.admin_order_lines ?? [])
+          .filter((l: any) => (l.solde_restant ?? 0) > 0)
+          .forEach((l: any) => {
+            entry.lines.push({ ...l, order_number: o.order_number });
+          });
+        if (entry.lines.length > 0) map.set(o.client_id, entry);
+      });
+      return Array.from(map.values());
+    },
+  });
+
+  // Pour chaque client, récupère son canal actif
+  const { data: canauxMap } = useQuery({
+    queryKey: ["batch-canaux", open],
+    enabled: open,
+    queryFn: async () => {
+      const { data } = await supabase.from("canaux_livraison").select("*").eq("actif", true);
+      const m = new Map<string, string>();
+      (data ?? []).forEach((c: any) => {
+        if (!m.has(c.client_id)) m.set(c.client_id, c.id);
+      });
+      return m;
+    },
+  });
+
+  const [selectedOrderLineId, setSelectedOrderLineId] = useState<string>("");
+
+  // Trouve la ligne sélectionnée + son client + son canal
+  const selectedLineInfo = (() => {
+    if (!selectedOrderLineId || !clientsOptions) return null;
+    for (const c of clientsOptions) {
+      const line = c.lines.find((l: any) => l.id === selectedOrderLineId);
+      if (line) {
+        const canalId = canauxMap?.get(c.client_id);
+        return { client: c, line, canalId };
+      }
+    }
+    return null;
+  })();
+
+  return (
+    <Dialog open={open} onOpenChange={(o) => { if (!o) onClose(); }}>
+      <DialogContent className="max-w-2xl">
+        <DialogHeader>
+          <DialogTitle>Distribuer {leadIds.length} leads à un même courtier</DialogTitle>
+        </DialogHeader>
+        <div className="space-y-3">
+          <p className="text-sm text-muted-foreground">
+            Choisis une ligne de commande active. Les {leadIds.length} leads sélectionnés seront tous envoyés à ce courtier
+            (décrément du solde restant à chaque envoi).
+          </p>
+          {!clientsOptions ? (
+            <Loader2 className="h-5 w-5 animate-spin" />
+          ) : clientsOptions.length === 0 ? (
+            <div className="text-sm text-muted-foreground p-4 bg-muted rounded-lg">
+              Aucun courtier avec une commande active disponible.
+            </div>
+          ) : (
+            <div className="border rounded-lg overflow-hidden max-h-[400px] overflow-y-auto">
+              {clientsOptions.map((c) => (
+                <div key={c.client_id} className="border-b last:border-0">
+                  <div className="px-3 py-2 bg-muted/50 text-xs font-semibold uppercase tracking-wider">
+                    {c.company_name}
+                    {!canauxMap?.get(c.client_id) && (
+                      <span className="ml-2 text-destructive text-[10px] normal-case">⚠ Aucun canal configuré</span>
+                    )}
+                  </div>
+                  {c.lines.map((l: any) => (
+                    <label
+                      key={l.id}
+                      className={`flex items-center gap-3 px-3 py-2 hover:bg-blue-50 cursor-pointer ${
+                        selectedOrderLineId === l.id ? "bg-blue-100" : ""
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="orderline"
+                        checked={selectedOrderLineId === l.id}
+                        onChange={() => setSelectedOrderLineId(l.id)}
+                        disabled={!canauxMap?.get(c.client_id)}
+                      />
+                      <div className="flex-1 text-sm">
+                        <div className="font-medium">{l.product_name}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {l.order_number} · {l.subcategory ?? l.domain ?? "—"} · {l.solde_restant}/{l.quantity} restants
+                        </div>
+                      </div>
+                      {l.solde_restant < leadIds.length && (
+                        <Badge variant="destructive" className="text-[10px]">
+                          Solde insuffisant ({l.solde_restant} dispo)
+                        </Badge>
+                      )}
+                    </label>
+                  ))}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        <DialogFooter>
+          <Button variant="ghost" onClick={onClose}>Annuler</Button>
+          <Button
+            disabled={!selectedLineInfo || !selectedLineInfo.canalId || isPending}
+            onClick={() => {
+              if (selectedLineInfo && selectedLineInfo.canalId) {
+                onConfirm(selectedLineInfo.line.id, selectedLineInfo.canalId);
+              }
+            }}
+          >
+            {isPending ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Send className="h-4 w-4 mr-2" />}
+            Distribuer les {leadIds.length} leads
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
 
