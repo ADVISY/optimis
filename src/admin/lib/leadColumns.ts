@@ -30,10 +30,11 @@ const COMMON_START: LeadColumn[] = [
   { key: "langue", label: "Langue", source: "bd", width: "w-16" },
 ];
 
-// Colonnes de fin (statut, actions)
+// Colonnes de fin (statut, courtier destinataire, actions)
 const COMMON_END: LeadColumn[] = [
   { key: "age", label: "Âge", source: "bd", width: "w-14", align: "center" },
   { key: "statut", label: "Statut", source: "bd", width: "w-32" },
+  { key: "courtier_destinataire", label: "Courtier", source: "bd", width: "w-40" },
 ];
 
 // Helper pour étendre les communes avec les champs spécifiques
@@ -57,6 +58,7 @@ export const LEAD_COLUMNS: Record<string, LeadColumn[]> = {
     { key: "canton", label: "Canton", source: "bd", width: "w-16" },
     { key: "age", label: "Âge", source: "bd", width: "w-14", align: "center" },
     { key: "statut", label: "Statut", source: "bd", width: "w-32" },
+    { key: "courtier_destinataire", label: "Courtier", source: "bd", width: "w-40" },
   ],
 
   "health-insurance": withCommons([

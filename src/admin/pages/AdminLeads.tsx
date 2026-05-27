@@ -126,7 +126,19 @@ export default function AdminLeads() {
   const { data: leads, isLoading, error: leadsError } = useQuery({
     queryKey: ["admin-leads", filterStatut, filterFormType, search],
     queryFn: async () => {
-      let q = supabase.from("leads").select("*").order("cree_le", { ascending: false }).limit(200);
+      let q = supabase
+        .from("leads")
+        .select(`
+          *,
+          distributions:distributions(
+            id, client_id, order_id, canal_id, statut, cree_le, envoye_le,
+            admin_clients:admin_clients(company_name, contact_name, email, phone),
+            admin_orders:admin_orders(order_number),
+            canaux_livraison:canaux_livraison(type)
+          )
+        `)
+        .order("cree_le", { ascending: false })
+        .limit(200);
       if (filterStatut !== "all") q = q.eq("statut", filterStatut);
       if (filterFormType !== "all") q = q.eq("source_formulaire", filterFormType);
       if (search) {
@@ -681,6 +693,54 @@ export default function AdminLeads() {
                   )}
                 </div>
 
+                {/* Section Distribution (si le lead a été distribué) */}
+                {selected.distributions && selected.distributions.length > 0 && (
+                  <div className="border rounded-lg p-3 bg-green-50/50 border-green-200">
+                    <div className="text-xs font-medium text-green-800 mb-2 uppercase tracking-wider">
+                      🚀 Distribution
+                    </div>
+                    {selected.distributions.map((d: any) => (
+                      <div key={d.id} className="text-sm space-y-1">
+                        <div>
+                          <span className="text-muted-foreground">Courtier :</span>{" "}
+                          <strong>{d.admin_clients?.company_name ?? "—"}</strong>
+                          {d.admin_clients?.contact_name && (
+                            <span className="text-xs text-muted-foreground ml-2">
+                              ({d.admin_clients.contact_name})
+                            </span>
+                          )}
+                        </div>
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                          <div>
+                            <span className="text-muted-foreground">Commande :</span>{" "}
+                            <strong>{d.admin_orders?.order_number ?? "—"}</strong>
+                          </div>
+                          <div>
+                            <span className="text-muted-foreground">Canal :</span>{" "}
+                            <Badge variant="outline" className="text-[10px] ml-1">{d.canaux_livraison?.type ?? "—"}</Badge>
+                          </div>
+                          <div>
+                            <span className="text-muted-foreground">Statut envoi :</span>{" "}
+                            <Badge variant={d.statut === "envoye" ? "secondary" : d.statut === "echec" ? "destructive" : "outline"} className="text-[10px] ml-1">
+                              {d.statut}
+                            </Badge>
+                          </div>
+                          <div>
+                            <span className="text-muted-foreground">Distribué le :</span>{" "}
+                            <strong>{new Date(d.cree_le).toLocaleString("fr-CH")}</strong>
+                          </div>
+                          {d.admin_clients?.email && (
+                            <div className="col-span-2">
+                              <span className="text-muted-foreground">Contact :</span>{" "}
+                              {d.admin_clients.email} {d.admin_clients?.phone && `· ${d.admin_clients.phone}`}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 {selected.donnees_produit && Object.keys(selected.donnees_produit).length > 0 && (
                   <div>
                     <div className="flex items-center justify-between mb-2">
@@ -885,6 +945,26 @@ function SheetCell({ lead, col, customWidth }: { lead: any; col: LeadColumn; cus
     return (
       <td style={widthStyle} className={`px-1.5 py-0.5 border-r ${widthClass} ${stickyClass}`}>
         <Badge variant="outline" className="text-[10px] px-1.5 py-0">{raw ?? "—"}</Badge>
+      </td>
+    );
+  }
+
+  // Cas spécial : courtier destinataire (lit dans distributions[0].admin_clients.company_name)
+  if (col.key === "courtier_destinataire") {
+    const dist = lead.distributions?.[0];
+    const courtier = dist?.admin_clients?.company_name;
+    const canalType = dist?.canaux_livraison?.type;
+    const orderNumber = dist?.admin_orders?.order_number;
+    return (
+      <td style={widthStyle} className={`px-1.5 py-0.5 border-r truncate ${widthClass} ${stickyClass}`}>
+        {courtier ? (
+          <div className="leading-tight" title={`Distribué via ${canalType ?? "?"} · ${orderNumber ?? ""}`}>
+            <div className="font-medium text-slate-800 truncate">{courtier}</div>
+            <div className="text-[9px] text-slate-500 truncate">{orderNumber ?? ""} · {canalType ?? ""}</div>
+          </div>
+        ) : (
+          <span className="text-slate-300">—</span>
+        )}
       </td>
     );
   }
