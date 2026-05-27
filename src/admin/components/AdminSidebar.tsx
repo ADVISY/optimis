@@ -34,6 +34,23 @@ export function AdminSidebar() {
     },
   });
 
+  // Badge "Leads à traiter" sur l'onglet Leads
+  const { data: leadsCount } = useQuery({
+    queryKey: ["sidebar-leads-count"],
+    queryFn: async () => {
+      const { count } = await supabase
+        .from("leads")
+        .select("*", { count: "exact", head: true })
+        .eq("statut", "nouveau");
+      return count ?? 0;
+    },
+    refetchInterval: 30000,
+  });
+
+  const badges: Record<string, number> = {
+    "/admin/leads": leadsCount ?? 0,
+  };
+
   const handleLogout = async () => {
     await signOut();
     navigate("/admin/login", { replace: true });
@@ -54,24 +71,32 @@ export function AdminSidebar() {
 
       {/* Navigation - scrollable uniquement si trop d'items */}
       <nav className="flex-1 px-3 py-6 space-y-1 overflow-y-auto">
-        {navItems.map(({ to, label, icon: Icon, end }) => (
-          <NavLink
-            key={to}
-            to={to}
-            end={end}
-            className={({ isActive }) =>
-              cn(
-                "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all",
-                isActive
-                  ? "bg-white text-[hsl(var(--optimis-green))] shadow-md"
-                  : "text-white/80 hover:bg-white/10 hover:text-white"
-              )
-            }
-          >
-            <Icon className="h-5 w-5" />
-            {label}
-          </NavLink>
-        ))}
+        {navItems.map(({ to, label, icon: Icon, end }) => {
+          const badge = badges[to] ?? 0;
+          return (
+            <NavLink
+              key={to}
+              to={to}
+              end={end}
+              className={({ isActive }) =>
+                cn(
+                  "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all",
+                  isActive
+                    ? "bg-white text-[hsl(var(--optimis-green))] shadow-md"
+                    : "text-white/80 hover:bg-white/10 hover:text-white"
+                )
+              }
+            >
+              <Icon className="h-5 w-5" />
+              <span className="flex-1">{label}</span>
+              {badge > 0 && (
+                <span className="ml-auto bg-red-500 text-white text-[10px] font-bold rounded-full px-2 py-0.5 min-w-[20px] text-center">
+                  {badge > 99 ? "99+" : badge}
+                </span>
+              )}
+            </NavLink>
+          );
+        })}
       </nav>
 
       {/* Widget profil - toujours visible en bas */}

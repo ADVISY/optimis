@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { AdminSidebar } from "./AdminSidebar";
+import { NotificationsBell } from "./NotificationsBell";
 
 interface AdminLayoutProps {
   title: string;
@@ -22,7 +23,10 @@ export function AdminLayout({ title, subtitle, actions, children }: AdminLayoutP
               <h1 className="text-2xl md:text-3xl font-bold text-[hsl(var(--optimis-green))]">{title}</h1>
               {subtitle && <p className="text-sm text-muted-foreground mt-1">{subtitle}</p>}
             </div>
-            {actions && <div className="flex items-center gap-2">{actions}</div>}
+            <div className="flex items-center gap-2">
+              {actions}
+              <NotificationsBell />
+            </div>
           </div>
         </header>
         <div className="px-6 md:px-10 py-8">{children}</div>
