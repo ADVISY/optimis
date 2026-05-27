@@ -54,6 +54,7 @@ import Partenaires from "./pages/Partenaires";
 
 import { localizedRoutes } from "./utils/localizedRoutes";
 import AdminRouter from "./admin/AdminRouter";
+import PartnerRouter from "./partner/PartnerRouter";
 
 const queryClient = new QueryClient();
 
@@ -171,6 +172,9 @@ const App = () => (
         <Routes>
           {/* Admin back-office (hors i18n) */}
           <Route path="/admin/*" element={<AdminRouter />} />
+
+          {/* Espace courtier (hors i18n) */}
+          <Route path="/partner/*" element={<PartnerRouter />} />
 
           {/* Root redirect to French (domain: le-comparateur-optimis.ch) */}
           <Route path="/" element={<Navigate to="/fr" replace />} />
