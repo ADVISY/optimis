@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Users, ShoppingBag, FileText, LogOut, User, Settings, Package, Inbox } from "lucide-react";
+import { LayoutDashboard, Users, ShoppingBag, FileText, LogOut, User, Settings, Package, Inbox, Send } from "lucide-react";
 import { useAdminAuth } from "@/admin/hooks/useAdminAuth";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -13,6 +13,7 @@ const navItems = [
   { to: "/admin/commandes", label: "Commandes", icon: ShoppingBag, end: false },
   { to: "/admin/factures", label: "Factures", icon: FileText, end: false },
   { to: "/admin/produits", label: "Produits", icon: Package, end: false },
+  { to: "/admin/canaux", label: "Canaux", icon: Send, end: false },
   { to: "/admin/parametres", label: "Paramètres", icon: Settings, end: false },
 ];
 
