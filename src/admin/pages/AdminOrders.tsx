@@ -472,6 +472,15 @@ export default function AdminOrders() {
                               <Button
                                 size="sm"
                                 variant="ghost"
+                                onClick={() => handleEditOrder(o)}
+                                disabled={!!o.invoice_id}
+                                title={o.invoice_id ? "Commande facturée — non modifiable" : "Modifier la commande"}
+                              >
+                                <Pencil className="h-3.5 w-3.5" />
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="ghost"
                                 onClick={() => {
                                   if (confirm(`Supprimer la commande ${o.order_number} ?`)) deleteMutation.mutate(o.id);
                                 }}
