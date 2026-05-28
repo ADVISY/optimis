@@ -97,8 +97,7 @@ export default function AdminOrders() {
 
   const handleEditOrder = (o: any) => {
     if (o.invoice_id) {
-      toast({ title: "Modification impossible", description: "Cette commande est déjà facturée.", variant: "destructive" });
-      return;
+      toast({ title: "Commande déjà facturée", description: "Modification autorisée — pensez à mettre à jour la facture si besoin." });
     }
     setEditingOrderId(o.id);
     setClientId(o.client_id);
@@ -473,8 +472,7 @@ export default function AdminOrders() {
                                 size="sm"
                                 variant="ghost"
                                 onClick={() => handleEditOrder(o)}
-                                disabled={!!o.invoice_id}
-                                title={o.invoice_id ? "Commande facturée — non modifiable" : "Modifier la commande"}
+                                title="Modifier la commande"
                               >
                                 <Pencil className="h-3.5 w-3.5" />
                               </Button>
