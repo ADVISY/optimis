@@ -472,8 +472,7 @@ export default function AdminOrders() {
                                 size="sm"
                                 variant="ghost"
                                 onClick={() => handleEditOrder(o)}
-                                disabled={!!o.invoice_id}
-                                title={o.invoice_id ? "Commande facturée — non modifiable" : "Modifier la commande"}
+                                title="Modifier la commande"
                               >
                                 <Pencil className="h-3.5 w-3.5" />
                               </Button>
