@@ -264,6 +264,14 @@ export default function AdminOrders() {
   const createMutation = useMutation({
     mutationFn: async () => {
       if (editingOrderId) {
+        // Detect linked invoice (if any) before updating
+        const { data: existingOrder } = await supabase
+          .from("admin_orders")
+          .select("invoice_id")
+          .eq("id", editingOrderId)
+          .single();
+        const linkedInvoiceId = existingOrder?.invoice_id ?? null;
+
         // Update existing order
         const { error: uErr } = await supabase
           .from("admin_orders")
@@ -291,7 +299,13 @@ export default function AdminOrders() {
         }));
         const { error: lErr } = await (supabase.from("admin_order_lines" as any) as any).insert(lineRows);
         if (lErr) throw lErr;
-        return { id: editingOrderId, order_number: "" } as any;
+
+        // If the order was linked to an invoice, rebuild it from all linked orders
+        if (linkedInvoiceId) {
+          await rebuildInvoiceFromOrders(linkedInvoiceId);
+        }
+
+        return { id: editingOrderId, order_number: "", invoice_id: linkedInvoiceId } as any;
       }
       const { data: order, error: oErr } = await supabase
         .from("admin_orders")
