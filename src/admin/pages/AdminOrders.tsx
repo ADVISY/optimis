@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Loader2, Trash2, FileText, ChevronDown, ChevronRight, CheckCircle2 } from "lucide-react";
+import { Plus, Loader2, Trash2, FileText, ChevronDown, ChevronRight, CheckCircle2, Pencil } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatMoney, toCHF, formatCHF, formatDate, type Currency } from "@/admin/lib/format";
 import { InvoiceFormModal } from "@/admin/components/InvoiceFormModal";
