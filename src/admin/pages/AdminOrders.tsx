@@ -729,7 +729,7 @@ export default function AdminOrders() {
           <DialogFooter className="mt-4">
             <Button variant="outline" onClick={() => { setOpenModal(false); resetForm(); }}>Annuler</Button>
             <Button onClick={() => createMutation.mutate()} disabled={createMutation.isPending || !canSubmit}>
-              {createMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Enregistrer la commande"}
+              {createMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : editingOrderId ? "Mettre à jour la commande" : "Enregistrer la commande"}
             </Button>
           </DialogFooter>
         </DialogContent>
