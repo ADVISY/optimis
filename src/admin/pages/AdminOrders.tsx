@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Loader2, Trash2, FileText, ChevronDown, ChevronRight, CheckCircle2 } from "lucide-react";
+import { Plus, Loader2, Trash2, FileText, ChevronDown, ChevronRight, CheckCircle2, Pencil } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatMoney, toCHF, formatCHF, formatDate, type Currency } from "@/admin/lib/format";
 import { InvoiceFormModal } from "@/admin/components/InvoiceFormModal";
@@ -83,14 +83,43 @@ export default function AdminOrders() {
   const [selectedOrderIds, setSelectedOrderIds] = useState<Set<string>>(new Set());
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
 
+  const [editingOrderId, setEditingOrderId] = useState<string | null>(null);
   const [clientId, setClientId] = useState("");
   const [orderDate, setOrderDate] = useState(new Date().toISOString().slice(0, 10));
   const [lines, setLines] = useState<OrderLine[]>([newLine()]);
 
   const resetForm = () => {
+    setEditingOrderId(null);
     setClientId("");
     setOrderDate(new Date().toISOString().slice(0, 10));
     setLines([newLine()]);
+  };
+
+  const handleEditOrder = (o: any) => {
+    if (o.invoice_id) {
+      toast({ title: "Modification impossible", description: "Cette commande est déjà facturée.", variant: "destructive" });
+      return;
+    }
+    setEditingOrderId(o.id);
+    setClientId(o.client_id);
+    setOrderDate(o.order_date);
+    const ls: OrderLine[] = (o.admin_order_lines ?? [])
+      .slice()
+      .sort((a: any, b: any) => a.position - b.position)
+      .map((l: any) => ({
+        id: crypto.randomUUID(),
+        product_id: l.product_id ?? null,
+        product_name: l.product_name ?? "",
+        category: l.category ?? getCategoryForDomain(l.subcategory ?? l.domain),
+        subcategory: (l.subcategory ?? l.domain ?? "") as OrderDomain | "",
+        quantity: Number(l.quantity) || 1,
+        unit_price: Number(l.unit_price) || 0,
+        currency: (l.currency as Currency) ?? "CHF",
+        fx_rate_to_chf: Number(l.fx_rate_to_chf) || 1,
+        comment: l.comment ?? "",
+      }));
+    setLines(ls.length ? ls : [newLine()]);
+    setOpenModal(true);
   };
 
   const { data: clients } = useQuery({
@@ -235,6 +264,36 @@ export default function AdminOrders() {
 
   const createMutation = useMutation({
     mutationFn: async () => {
+      if (editingOrderId) {
+        // Update existing order
+        const { error: uErr } = await supabase
+          .from("admin_orders")
+          .update({ client_id: clientId, order_date: orderDate })
+          .eq("id", editingOrderId);
+        if (uErr) throw uErr;
+        // Replace lines: delete then insert
+        const { error: dErr } = await (supabase.from("admin_order_lines" as any) as any)
+          .delete()
+          .eq("order_id", editingOrderId);
+        if (dErr) throw dErr;
+        const lineRows = lines.map((l, i) => ({
+          order_id: editingOrderId,
+          position: i,
+          product_id: l.product_id,
+          product_name: l.product_name,
+          category: l.category,
+          subcategory: l.subcategory,
+          domain: l.subcategory as any,
+          quantity: l.quantity,
+          unit_price: l.unit_price,
+          currency: l.currency,
+          fx_rate_to_chf: l.fx_rate_to_chf,
+          comment: l.comment || null,
+        }));
+        const { error: lErr } = await (supabase.from("admin_order_lines" as any) as any).insert(lineRows);
+        if (lErr) throw lErr;
+        return { id: editingOrderId, order_number: "" } as any;
+      }
       const { data: order, error: oErr } = await supabase
         .from("admin_orders")
         .insert({ client_id: clientId, order_date: orderDate })
@@ -263,9 +322,13 @@ export default function AdminOrders() {
       qc.invalidateQueries({ queryKey: ["admin-orders"] });
       qc.invalidateQueries({ queryKey: ["admin-stats"] });
       qc.invalidateQueries({ queryKey: ["admin-revenue-by-currency"] });
+      const wasEditing = !!editingOrderId;
       setOpenModal(false);
       resetForm();
-      toast({ title: "Commande enregistrée", description: `${(order as any).order_number} · ${lines.length} ligne(s)` });
+      toast({
+        title: wasEditing ? "Commande mise à jour" : "Commande enregistrée",
+        description: wasEditing ? `${lines.length} ligne(s)` : `${(order as any).order_number} · ${lines.length} ligne(s)`,
+      });
     },
     onError: (e: any) => toast({ title: "Erreur", description: e.message, variant: "destructive" }),
   });
@@ -409,6 +472,15 @@ export default function AdminOrders() {
                               <Button
                                 size="sm"
                                 variant="ghost"
+                                onClick={() => handleEditOrder(o)}
+                                disabled={!!o.invoice_id}
+                                title={o.invoice_id ? "Commande facturée — non modifiable" : "Modifier la commande"}
+                              >
+                                <Pencil className="h-3.5 w-3.5" />
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="ghost"
                                 onClick={() => {
                                   if (confirm(`Supprimer la commande ${o.order_number} ?`)) deleteMutation.mutate(o.id);
                                 }}
@@ -483,7 +555,7 @@ export default function AdminOrders() {
       <Dialog open={openModal} onOpenChange={(o) => { setOpenModal(o); if (!o) resetForm(); }}>
         <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-[hsl(var(--optimis-green))]">Nouvelle commande</DialogTitle>
+            <DialogTitle className="text-[hsl(var(--optimis-green))]">{editingOrderId ? "Modifier la commande" : "Nouvelle commande"}</DialogTitle>
           </DialogHeader>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4 border-b border-border">
@@ -657,7 +729,7 @@ export default function AdminOrders() {
           <DialogFooter className="mt-4">
             <Button variant="outline" onClick={() => { setOpenModal(false); resetForm(); }}>Annuler</Button>
             <Button onClick={() => createMutation.mutate()} disabled={createMutation.isPending || !canSubmit}>
-              {createMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Enregistrer la commande"}
+              {createMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : editingOrderId ? "Mettre à jour la commande" : "Enregistrer la commande"}
             </Button>
           </DialogFooter>
         </DialogContent>
