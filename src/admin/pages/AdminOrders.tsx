@@ -97,8 +97,7 @@ export default function AdminOrders() {
 
   const handleEditOrder = (o: any) => {
     if (o.invoice_id) {
-      toast({ title: "Modification impossible", description: "Cette commande est déjà facturée.", variant: "destructive" });
-      return;
+      toast({ title: "Commande déjà facturée", description: "Modification autorisée — pensez à mettre à jour la facture si besoin." });
     }
     setEditingOrderId(o.id);
     setClientId(o.client_id);
