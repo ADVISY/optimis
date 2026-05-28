@@ -264,6 +264,36 @@ export default function AdminOrders() {
 
   const createMutation = useMutation({
     mutationFn: async () => {
+      if (editingOrderId) {
+        // Update existing order
+        const { error: uErr } = await supabase
+          .from("admin_orders")
+          .update({ client_id: clientId, order_date: orderDate })
+          .eq("id", editingOrderId);
+        if (uErr) throw uErr;
+        // Replace lines: delete then insert
+        const { error: dErr } = await (supabase.from("admin_order_lines" as any) as any)
+          .delete()
+          .eq("order_id", editingOrderId);
+        if (dErr) throw dErr;
+        const lineRows = lines.map((l, i) => ({
+          order_id: editingOrderId,
+          position: i,
+          product_id: l.product_id,
+          product_name: l.product_name,
+          category: l.category,
+          subcategory: l.subcategory,
+          domain: l.subcategory as any,
+          quantity: l.quantity,
+          unit_price: l.unit_price,
+          currency: l.currency,
+          fx_rate_to_chf: l.fx_rate_to_chf,
+          comment: l.comment || null,
+        }));
+        const { error: lErr } = await (supabase.from("admin_order_lines" as any) as any).insert(lineRows);
+        if (lErr) throw lErr;
+        return { id: editingOrderId, order_number: "" } as any;
+      }
       const { data: order, error: oErr } = await supabase
         .from("admin_orders")
         .insert({ client_id: clientId, order_date: orderDate })
@@ -292,10 +322,16 @@ export default function AdminOrders() {
       qc.invalidateQueries({ queryKey: ["admin-orders"] });
       qc.invalidateQueries({ queryKey: ["admin-stats"] });
       qc.invalidateQueries({ queryKey: ["admin-revenue-by-currency"] });
+      const wasEditing = !!editingOrderId;
       setOpenModal(false);
       resetForm();
-      toast({ title: "Commande enregistrée", description: `${(order as any).order_number} · ${lines.length} ligne(s)` });
+      toast({
+        title: wasEditing ? "Commande mise à jour" : "Commande enregistrée",
+        description: wasEditing ? `${lines.length} ligne(s)` : `${(order as any).order_number} · ${lines.length} ligne(s)`,
+      });
     },
+    onError: (e: any) => toast({ title: "Erreur", description: e.message, variant: "destructive" }),
+  });
     onError: (e: any) => toast({ title: "Erreur", description: e.message, variant: "destructive" }),
   });
 
