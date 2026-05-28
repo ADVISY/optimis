@@ -332,8 +332,6 @@ export default function AdminOrders() {
     },
     onError: (e: any) => toast({ title: "Erreur", description: e.message, variant: "destructive" }),
   });
-    onError: (e: any) => toast({ title: "Erreur", description: e.message, variant: "destructive" }),
-  });
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
