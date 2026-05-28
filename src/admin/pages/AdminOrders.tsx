@@ -555,7 +555,7 @@ export default function AdminOrders() {
       <Dialog open={openModal} onOpenChange={(o) => { setOpenModal(o); if (!o) resetForm(); }}>
         <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-[hsl(var(--optimis-green))]">Nouvelle commande</DialogTitle>
+            <DialogTitle className="text-[hsl(var(--optimis-green))]">{editingOrderId ? "Modifier la commande" : "Nouvelle commande"}</DialogTitle>
           </DialogHeader>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4 border-b border-border">
