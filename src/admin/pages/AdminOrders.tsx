@@ -83,14 +83,43 @@ export default function AdminOrders() {
   const [selectedOrderIds, setSelectedOrderIds] = useState<Set<string>>(new Set());
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
 
+  const [editingOrderId, setEditingOrderId] = useState<string | null>(null);
   const [clientId, setClientId] = useState("");
   const [orderDate, setOrderDate] = useState(new Date().toISOString().slice(0, 10));
   const [lines, setLines] = useState<OrderLine[]>([newLine()]);
 
   const resetForm = () => {
+    setEditingOrderId(null);
     setClientId("");
     setOrderDate(new Date().toISOString().slice(0, 10));
     setLines([newLine()]);
+  };
+
+  const handleEditOrder = (o: any) => {
+    if (o.invoice_id) {
+      toast({ title: "Modification impossible", description: "Cette commande est déjà facturée.", variant: "destructive" });
+      return;
+    }
+    setEditingOrderId(o.id);
+    setClientId(o.client_id);
+    setOrderDate(o.order_date);
+    const ls: OrderLine[] = (o.admin_order_lines ?? [])
+      .slice()
+      .sort((a: any, b: any) => a.position - b.position)
+      .map((l: any) => ({
+        id: crypto.randomUUID(),
+        product_id: l.product_id ?? null,
+        product_name: l.product_name ?? "",
+        category: l.category ?? getCategoryForDomain(l.subcategory ?? l.domain),
+        subcategory: (l.subcategory ?? l.domain ?? "") as OrderDomain | "",
+        quantity: Number(l.quantity) || 1,
+        unit_price: Number(l.unit_price) || 0,
+        currency: (l.currency as Currency) ?? "CHF",
+        fx_rate_to_chf: Number(l.fx_rate_to_chf) || 1,
+        comment: l.comment ?? "",
+      }));
+    setLines(ls.length ? ls : [newLine()]);
+    setOpenModal(true);
   };
 
   const { data: clients } = useQuery({
