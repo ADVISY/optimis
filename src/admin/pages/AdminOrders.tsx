@@ -261,9 +261,107 @@ export default function AdminOrders() {
     lines.length > 0 &&
     lines.every((l) => l.subcategory && l.product_name.trim() && l.quantity > 0 && l.unit_price >= 0);
 
+  const rebuildInvoiceFromOrders = async (invoiceId: string) => {
+    // Fetch invoice + current vat_rate
+    const { data: inv, error: invErr } = await supabase
+      .from("admin_invoices")
+      .select("id, vat_rate")
+      .eq("id", invoiceId)
+      .single();
+    if (invErr) throw invErr;
+
+    // Fetch all orders linked to this invoice with their lines
+    const { data: linkedOrders, error: loErr } = await supabase
+      .from("admin_orders")
+      .select("id, admin_order_lines(*)")
+      .eq("invoice_id", invoiceId);
+    if (loErr) throw loErr;
+
+    const allLines = (linkedOrders ?? []).flatMap((o: any) =>
+      (o.admin_order_lines ?? [])
+        .slice()
+        .sort((a: any, b: any) => a.position - b.position)
+        .map((l: any) => ({
+          product_id: l.product_id ?? null,
+          product_name: l.product_name ?? null,
+          category: l.category ?? null,
+          subcategory: l.subcategory ?? l.domain ?? null,
+          quantity: Number(l.quantity) || 0,
+          unit_price: Number(l.unit_price) || 0,
+          currency: ((l.currency as Currency) ?? "CHF") as Currency,
+          fx_rate_to_chf: Number(l.fx_rate_to_chf) || 1,
+          comment: l.comment || "",
+        }))
+    );
+
+    const invoiceCurrency: Currency = allLines[0]?.currency ?? "CHF";
+    const fxToChf = allLines[0]?.fx_rate_to_chf ?? 1;
+    const subtotal = allLines.reduce((s, l) => {
+      const lt = l.quantity * l.unit_price;
+      if (l.currency === invoiceCurrency) return s + lt;
+      const chf = toCHF(lt, l.currency, l.fx_rate_to_chf);
+      if (invoiceCurrency === "CHF") return s + chf;
+      const fxBack = allLines.find((x) => x.currency === invoiceCurrency)?.fx_rate_to_chf || 1;
+      return s + chf / fxBack;
+    }, 0);
+    const vatRate = Number(inv.vat_rate) || 0;
+    const vatAmount = +(subtotal * (vatRate / 100)).toFixed(2);
+    const total = +(subtotal + vatAmount).toFixed(2);
+
+    // Replace invoice lines
+    const { error: dErr } = await (supabase.from("admin_invoice_lines" as any) as any)
+      .delete()
+      .eq("invoice_id", invoiceId);
+    if (dErr) throw dErr;
+
+    const invLineRows = allLines.map((l, i) => {
+      const breadcrumb = buildHierarchyLabel({
+        category: l.category ?? undefined,
+        subcategory: (l.subcategory as OrderDomain) ?? undefined,
+        productName: l.product_name ?? undefined,
+      });
+      return {
+        invoice_id: invoiceId,
+        position: i,
+        description: breadcrumb + (l.comment ? ` — ${l.comment}` : ""),
+        quantity: l.quantity,
+        unit_price: l.unit_price,
+        product_id: l.product_id,
+        product_name: l.product_name,
+        category: l.category,
+        subcategory: l.subcategory,
+      };
+    });
+    if (invLineRows.length > 0) {
+      const { error: ilErr } = await (supabase.from("admin_invoice_lines" as any) as any).insert(invLineRows);
+      if (ilErr) throw ilErr;
+    }
+
+    // Update invoice totals
+    const { error: uErr } = await supabase
+      .from("admin_invoices")
+      .update({
+        subtotal,
+        vat_amount: vatAmount,
+        total,
+        currency: invoiceCurrency,
+        fx_rate_to_chf: fxToChf,
+      })
+      .eq("id", invoiceId);
+    if (uErr) throw uErr;
+  };
+
   const createMutation = useMutation({
     mutationFn: async () => {
       if (editingOrderId) {
+        // Detect linked invoice (if any) before updating
+        const { data: existingOrder } = await supabase
+          .from("admin_orders")
+          .select("invoice_id")
+          .eq("id", editingOrderId)
+          .single();
+        const linkedInvoiceId = existingOrder?.invoice_id ?? null;
+
         // Update existing order
         const { error: uErr } = await supabase
           .from("admin_orders")
@@ -291,7 +389,13 @@ export default function AdminOrders() {
         }));
         const { error: lErr } = await (supabase.from("admin_order_lines" as any) as any).insert(lineRows);
         if (lErr) throw lErr;
-        return { id: editingOrderId, order_number: "" } as any;
+
+        // If the order was linked to an invoice, rebuild it from all linked orders
+        if (linkedInvoiceId) {
+          await rebuildInvoiceFromOrders(linkedInvoiceId);
+        }
+
+        return { id: editingOrderId, order_number: "", invoice_id: linkedInvoiceId } as any;
       }
       const { data: order, error: oErr } = await supabase
         .from("admin_orders")
