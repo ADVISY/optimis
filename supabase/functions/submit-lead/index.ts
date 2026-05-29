@@ -119,6 +119,9 @@ function detectDevice(ua: string): { device: string; os: string; browser: string
   else if (/Chrome\//i.test(ua)) browser = "Chrome";
   else if (/Safari\//i.test(ua) && !/Chrome/i.test(ua)) browser = "Safari";
   else if (/Firefox\//i.test(ua)) browser = "Firefox";
+  return { device, os, browser };
+}
+
 // Génère le PDF de la fiche lead — design premium Optimis
 function generateLeadPdf(leadData: Record<string, unknown>, deviceInfo: { device: string; os: string; browser: string }): Uint8Array {
   const doc = new jsPDF({ unit: "mm", format: "a4" });
