@@ -539,6 +539,7 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
       leadId,
       timestamp: new Date().toISOString(),
       webhookUrl: webhookUrl,
+      userAgent: typeof navigator !== "undefined" ? navigator.userAgent : "",
     } as unknown as LeadData;
 
     console.log("Lead data to submit:", leadData);
