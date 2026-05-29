@@ -111,6 +111,7 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
         .limit(1)
         .single();
       return data;
+    },
   });
 
   useEffect(() => {
