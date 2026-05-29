@@ -204,9 +204,10 @@ export default function AdminInvoices() {
               </>
             )}
           </Button>
-          <Button size="sm" onClick={() => setOpenModal(true)}>
+          <Button size="sm" onClick={() => { setEditingInvoiceId(null); setOpenModal(true); }}>
             <Plus className="h-4 w-4" /> Nouvelle facture
           </Button>
+
         </div>
       }
     >
