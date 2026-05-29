@@ -111,10 +111,12 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
         .limit(1)
         .single();
       return data;
-    },
+  });
+
   useEffect(() => {
     if (settings?.default_vat_rate) setVatRate(Number(settings.default_vat_rate));
   }, [settings?.default_vat_rate]);
+
 
   // Charge la facture à modifier
   useEffect(() => {
