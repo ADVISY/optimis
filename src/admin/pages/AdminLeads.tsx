@@ -416,30 +416,57 @@ export default function AdminLeads() {
     setPickerOpen(true);
   };
 
+  const [advFiltersOpen, setAdvFiltersOpen] = useState(false);
+
   return (
     <AdminLayout>
-      <div className="space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold">Leads</h1>
-            <p className="text-sm text-muted-foreground mt-1">
-              Boîte de réception des leads capturés par le comparateur
-            </p>
-          </div>
-        </div>
-
-        {/* Filtre statut — chips compacts inline */}
-        <div className="flex items-center gap-1 -mt-2">
+      <div className="space-y-2">
+        {/* Ligne 1 : statut chips + recherche + bouton filtres avancés */}
+        <div className="flex items-center gap-2 flex-wrap">
           <StatutChip label="À traiter" count={counts?.nouveau ?? 0} active={filterStatut === "nouveau"} onClick={() => setFilterStatut("nouveau")} dot="bg-blue-500" />
           <StatutChip label="Distribués" count={counts?.distribue ?? 0} active={filterStatut === "distribue"} onClick={() => setFilterStatut("distribue")} dot="bg-green-500" />
           <StatutChip label="Non distribuables" count={counts?.non_distribuable ?? 0} active={filterStatut === "non_distribuable"} onClick={() => setFilterStatut("non_distribuable")} dot="bg-red-500" />
           <StatutChip label="Tous" count={counts?.all ?? 0} active={filterStatut === "all"} onClick={() => setFilterStatut("all")} dot="bg-slate-500" />
+
+          <div className="flex-1" />
+
+          <div className="relative w-72">
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
+            <Input
+              placeholder="Recherche nom, email, tel…"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="pl-8 h-8 text-xs"
+            />
+          </div>
+
+          {advancedFilters.length > 0 && (
+            <Button
+              size="sm"
+              variant={activeFiltersCount > 0 ? "default" : "outline"}
+              onClick={() => setAdvFiltersOpen(!advFiltersOpen)}
+              className="h-8 text-xs"
+            >
+              Filtres{activeFiltersCount > 0 && ` (${activeFiltersCount})`}
+            </Button>
+          )}
+
+          {Object.keys(columnWidths).length > 0 && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={resetColumnWidths}
+              className="h-8 text-xs text-muted-foreground"
+              title="Réinitialiser les largeurs de colonnes"
+            >
+              <X className="h-3 w-3" />
+            </Button>
+          )}
         </div>
 
-        {/* Sous-onglets par type d'assurance */}
-        <div className="overflow-x-auto -mx-2 px-2">
-          <div className="flex items-center gap-1 min-w-max pb-2">
+        {/* Ligne 2 : sous-onglets produits (toujours visible, compacts) */}
+        <div className="overflow-x-auto -mx-1 px-1">
+          <div className="flex items-center gap-1 min-w-max">
             {FORM_TYPES.map((ft) => {
               const Icon = ft.icon;
               const count = formCounts?.[ft.value] ?? 0;
@@ -448,21 +475,18 @@ export default function AdminLeads() {
                 <button
                   key={ft.value}
                   onClick={() => setFilterFormType(ft.value)}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap border ${
+                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-all whitespace-nowrap border ${
                     active
                       ? "bg-[hsl(var(--optimis-green))] text-white border-[hsl(var(--optimis-green))] shadow-sm"
                       : "bg-card text-muted-foreground border-border hover:bg-muted hover:text-foreground"
                   }`}
                 >
-                  <Icon className="h-4 w-4" />
+                  <Icon className="h-3.5 w-3.5" />
                   <span>{ft.short}</span>
                   {count > 0 && (
-                    <Badge
-                      variant={active ? "secondary" : "outline"}
-                      className={active ? "bg-white/20 text-white border-transparent" : ""}
-                    >
+                    <span className={`text-[10px] font-bold ${active ? "text-white/90" : "text-foreground"}`}>
                       {count}
-                    </Badge>
+                    </span>
                   )}
                 </button>
               );
@@ -470,60 +494,27 @@ export default function AdminLeads() {
           </div>
         </div>
 
-        {/* Recherche + Filtres avancés */}
-        <Card>
-          <CardContent className="pt-6 space-y-3">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Recherche par nom, email ou téléphone…"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="pl-10"
+        {/* Ligne 3 (collapsable) : filtres avancés */}
+        {advFiltersOpen && advancedFilters.length > 0 && (
+          <div className="flex items-center gap-2 flex-wrap p-2 border rounded-lg bg-muted/30">
+            {advancedFilters.map((f) => (
+              <FilterControl
+                key={f.key}
+                filter={f}
+                value={filterValues[f.key] ?? ""}
+                onChange={(v) => setFilterValues({ ...filterValues, [f.key]: v })}
               />
-            </div>
-
-            {/* Filtres avancés (adaptés au type) */}
-            {advancedFilters.length > 0 && (
-              <div className="flex items-center gap-2 flex-wrap pt-1 border-t">
-                <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider mr-1">
-                  Filtres
-                </span>
-                {advancedFilters.map((f) => (
-                  <FilterControl
-                    key={f.key}
-                    filter={f}
-                    value={filterValues[f.key] ?? ""}
-                    onChange={(v) => setFilterValues({ ...filterValues, [f.key]: v })}
-                  />
-                ))}
-                {activeFiltersCount > 0 && (
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    onClick={clearAllFilters}
-                    className="h-8 text-xs text-muted-foreground hover:text-foreground ml-auto"
-                  >
-                    <X className="h-3 w-3 mr-1" />
-                    Effacer {activeFiltersCount} filtre{activeFiltersCount > 1 ? "s" : ""}
-                  </Button>
-                )}
-              </div>
+            ))}
+            {activeFiltersCount > 0 && (
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={clearAllFilters}
+                className="h-7 text-xs text-muted-foreground ml-auto"
+              >
+                <X className="h-3 w-3 mr-1" /> Effacer
+              </Button>
             )}
-          </CardContent>
-        </Card>
-
-        {/* Barre d'outils tableau */}
-        {Object.keys(columnWidths).length > 0 && (
-          <div className="flex items-center justify-end -mb-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={resetColumnWidths}
-              className="h-7 text-xs text-muted-foreground hover:text-foreground"
-            >
-              <X className="h-3 w-3 mr-1" /> Réinitialiser largeurs colonnes
-            </Button>
           </div>
         )}
 
@@ -546,7 +537,7 @@ export default function AdminLeads() {
                 <Loader2 className="h-6 w-6 animate-spin mx-auto text-muted-foreground" />
               </div>
             ) : (
-              <div className="relative overflow-auto max-h-[calc(100vh-340px)]">
+              <div className="relative overflow-auto max-h-[calc(100vh-160px)]">
                 <table className="w-full text-xs font-mono" style={{ borderCollapse: "separate", borderSpacing: 0 }}>
                   {/* Header toujours visible — même quand 0 lead, on voit la structure */}
                   <thead className="sticky top-0 z-20 bg-slate-50 border-b shadow-sm">
