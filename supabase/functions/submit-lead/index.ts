@@ -122,54 +122,147 @@ function detectDevice(ua: string): { device: string; os: string; browser: string
   return { device, os, browser };
 }
 
-// Génère le PDF de la fiche lead
+// Génère le PDF de la fiche lead — design premium Optimis
 function generateLeadPdf(leadData: Record<string, unknown>, deviceInfo: { device: string; os: string; browser: string }): Uint8Array {
   const doc = new jsPDF({ unit: "mm", format: "a4" });
   const pageW = doc.internal.pageSize.getWidth();
   const pageH = doc.internal.pageSize.getHeight();
-  const marginX = 15;
-  let y = 18;
+  const marginX = 18;
 
-  // En-tête
-  doc.setFillColor(45, 90, 61); // emerald
-  doc.rect(0, 0, pageW, 28, "F");
-  doc.setTextColor(255, 255, 255);
-  doc.setFontSize(18);
-  doc.setFont("helvetica", "bold");
-  doc.text("Fiche Lead - Optimis", marginX, 13);
-  doc.setFontSize(10);
-  doc.setFont("helvetica", "normal");
+  // Palette Optimis
+  const EMERALD: [number, number, number] = [45, 90, 61];
+  const EMERALD_DARK: [number, number, number] = [30, 60, 41];
+  const GOLD: [number, number, number] = [201, 168, 76];
+  const INK: [number, number, number] = [28, 32, 30];
+  const MUTED: [number, number, number] = [110, 118, 114];
+  const RULE: [number, number, number] = [225, 230, 227];
+  const TINT: [number, number, number] = [246, 249, 247];
+
   const leadId = String(leadData["ID du lead"] ?? leadData.leadId ?? "");
   const formType = String(leadData["Type de formulaire"] ?? leadData.formType ?? "");
-  doc.text(`${formType} | ${leadId}`, marginX, 21);
 
-  y = 38;
-  doc.setTextColor(0, 0, 0);
+  // ====== EN-TÊTE (logo + bandeau) ======
+  const headerH = 42;
+  doc.setFillColor(...EMERALD);
+  doc.rect(0, 0, pageW, headerH, "F");
+  // bande or fine en bas du header
+  doc.setFillColor(...GOLD);
+  doc.rect(0, headerH, pageW, 1.2, "F");
+  // accent décoratif (cercle estompé)
+  doc.setFillColor(...EMERALD_DARK);
+  doc.circle(pageW - 18, headerH / 2, 22, "F");
+
+  // --- Logo Optimis (mark + wordmark vectoriels) ---
+  // Mark : losange émeraude entouré d'un anneau or
+  const markX = marginX + 7;
+  const markY = headerH / 2;
+  doc.setFillColor(...GOLD);
+  doc.circle(markX, markY, 6.5, "F");
+  doc.setFillColor(...EMERALD);
+  doc.circle(markX, markY, 5.3, "F");
+  doc.setTextColor(...GOLD);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(10);
+  doc.text("O", markX, markY + 1.2, { align: "center" });
+
+  // Wordmark
+  doc.setTextColor(255, 255, 255);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(20);
+  doc.text("OPTIMIS", markX + 11, markY - 1.2);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  doc.setTextColor(...GOLD);
+  doc.text("LE  COMPARATEUR  SUISSE", markX + 11.4, markY + 4);
+
+  // Titre fiche à droite
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8.5);
+  doc.setTextColor(220, 230, 224);
+  doc.text("FICHE LEAD", pageW - marginX, markY - 4, { align: "right" });
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(13);
+  doc.setTextColor(255, 255, 255);
+  doc.text(formType || "Lead", pageW - marginX, markY + 1.8, { align: "right" });
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(7.5);
+  doc.setTextColor(...GOLD);
+  doc.text(leadId, pageW - marginX, markY + 6.5, { align: "right" });
+
+  let y = headerH + 14;
+
+  // ====== Bandeau résumé (date + canaux) ======
+  const dateStr = String(leadData["Date et heure"] ?? "");
+  const langStr = String(leadData["Langue"] ?? leadData.language ?? "");
+  doc.setFillColor(...TINT);
+  doc.rect(marginX, y - 6, pageW - marginX * 2, 14, "F");
+  doc.setDrawColor(...RULE);
+  doc.setLineWidth(0.2);
+  doc.line(marginX, y + 8, pageW - marginX, y + 8);
+
+  const stampCols = [
+    { label: "Date", value: dateStr || "—" },
+    { label: "Langue", value: (langStr || "—").toUpperCase() },
+    { label: "Appareil", value: deviceInfo.device },
+    { label: "Navigateur", value: deviceInfo.browser },
+  ];
+  const colW = (pageW - marginX * 2) / stampCols.length;
+  stampCols.forEach((c, i) => {
+    const cx = marginX + colW * i + 4;
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(6.8);
+    doc.setTextColor(...MUTED);
+    doc.text(c.label.toUpperCase(), cx, y - 1);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9);
+    doc.setTextColor(...INK);
+    doc.text(c.value, cx, y + 4.5);
+  });
+
+  y += 18;
+
+  // ====== Helpers de section / lignes ======
+  const ensureSpace = (needed: number) => {
+    if (y + needed > pageH - 22) { doc.addPage(); y = 22; }
+  };
 
   const addSection = (title: string) => {
-    if (y > pageH - 25) { doc.addPage(); y = 20; }
-    doc.setFillColor(240, 245, 242);
-    doc.rect(marginX - 2, y - 4, pageW - marginX * 2 + 4, 7, "F");
+    ensureSpace(14);
+    // barre or verticale
+    doc.setFillColor(...GOLD);
+    doc.rect(marginX, y - 4.5, 1.2, 6.5, "F");
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(11);
-    doc.setTextColor(45, 90, 61);
-    doc.text(title, marginX, y + 1);
+    doc.setFontSize(10.5);
+    doc.setTextColor(...EMERALD);
+    doc.text(title.toUpperCase(), marginX + 4, y);
+    // filet horizontal
+    doc.setDrawColor(...RULE);
+    doc.setLineWidth(0.2);
+    doc.line(marginX, y + 3.5, pageW - marginX, y + 3.5);
     y += 9;
-    doc.setTextColor(0, 0, 0);
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(9.5);
   };
 
   const addRow = (label: string, value: unknown) => {
     if (value === undefined || value === null || value === "") return;
-    if (y > pageH - 15) { doc.addPage(); y = 20; }
-    const strVal = String(value);
-    doc.setFont("helvetica", "bold");
-    doc.text(`${label} :`, marginX, y);
+    const labelW = 55;
+    const valW = pageW - marginX * 2 - labelW - 4;
     doc.setFont("helvetica", "normal");
-    const wrapped = doc.splitTextToSize(strVal, pageW - marginX * 2 - 55);
-    doc.text(wrapped, marginX + 55, y);
-    y += Math.max(5, wrapped.length * 4.5);
+    doc.setFontSize(9);
+    const wrapped = doc.splitTextToSize(String(value), valW);
+    const rowH = Math.max(6, wrapped.length * 4.3 + 2);
+    ensureSpace(rowH);
+    // label
+    doc.setTextColor(...MUTED);
+    doc.text(label, marginX + 2, y + 1);
+    // value
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(...INK);
+    doc.text(wrapped, marginX + labelW + 4, y + 1);
+    // dotted separator
+    doc.setDrawColor(...RULE);
+    doc.setLineWidth(0.15);
+    doc.line(marginX, y + rowH - 1, pageW - marginX, y + rowH - 1);
+    y += rowH;
   };
 
   // Champs techniques à exclure des sections principales
@@ -189,7 +282,7 @@ function generateLeadPdf(leadData: Record<string, unknown>, deviceInfo: { device
     if (k in leadData) { addRow(k, leadData[k]); technical.add(k); }
   });
 
-  // Section détails du formulaire (tout le reste)
+  // Section détails du formulaire
   addSection("Détails du formulaire");
   for (const [k, v] of Object.entries(leadData)) {
     if (technical.has(k)) continue;
@@ -198,7 +291,7 @@ function generateLeadPdf(leadData: Record<string, unknown>, deviceInfo: { device
   }
 
   // Section traçabilité
-  addSection("Traçabilité");
+  addSection("Traçabilité & attribution");
   addRow("ID du lead", leadId);
   addRow("Date et heure", leadData["Date et heure"]);
   addRow("Type d'événement", leadData["Type d'événement"]);
@@ -225,14 +318,25 @@ function generateLeadPdf(leadData: Record<string, unknown>, deviceInfo: { device
   addRow("Navigateur", deviceInfo.browser);
   addRow("User-Agent", leadData.userAgent);
 
-  // Pied de page
+  // ====== Pied de page sur toutes les pages ======
   const pageCount = (doc as any).internal.getNumberOfPages();
   for (let i = 1; i <= pageCount; i++) {
     doc.setPage(i);
-    doc.setFontSize(8);
-    doc.setTextColor(120, 120, 120);
-    doc.text(`Optimis - Fiche Lead générée le ${new Date().toLocaleString("fr-CH")}`, marginX, pageH - 8);
-    doc.text(`Page ${i}/${pageCount}`, pageW - marginX - 15, pageH - 8);
+    // filet or
+    doc.setDrawColor(...GOLD);
+    doc.setLineWidth(0.4);
+    doc.line(marginX, pageH - 14, pageW - marginX, pageH - 14);
+    // texte
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(7.5);
+    doc.setTextColor(...MUTED);
+    doc.text("OptimisLink Sàrl  ·  Le Comparateur Suisse  ·  le-comparateur-optimis.ch", marginX, pageH - 9);
+    doc.setTextColor(...EMERALD);
+    doc.setFont("helvetica", "bold");
+    doc.text(`${i} / ${pageCount}`, pageW - marginX, pageH - 9, { align: "right" });
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(...MUTED);
+    doc.text(`Document confidentiel · ${new Date().toLocaleDateString("fr-CH")}`, pageW / 2, pageH - 9, { align: "center" });
   }
 
   const arrayBuffer = doc.output("arraybuffer");
