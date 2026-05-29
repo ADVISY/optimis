@@ -357,7 +357,6 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder, editing
           </div>
         </div>
 
-        </div>
 
         <div className="space-y-3 py-4">
           <div className="flex items-center justify-between">
