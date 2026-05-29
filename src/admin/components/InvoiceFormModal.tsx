@@ -337,8 +337,7 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder, editing
             Cette facture sera liée à <strong>{linkedOrderIds.length}</strong> commande{linkedOrderIds.length > 1 ? "s" : ""}.
           </div>
         )}
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4 border-b border-border">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 py-4 border-b border-border">
           <div className="md:col-span-2 space-y-2">
             <Label>Client *</Label>
             <Select value={clientId} onValueChange={setClientId}>
@@ -352,6 +351,12 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder, editing
             <Label>Date *</Label>
             <Input type="date" value={invoiceDate} onChange={(e) => setInvoiceDate(e.target.value)} />
           </div>
+          <div className="space-y-2">
+            <Label>Échéance</Label>
+            <Input type="date" value={computedDueDate()} onChange={(e) => setDueDate(e.target.value)} />
+          </div>
+        </div>
+
         </div>
 
         <div className="space-y-3 py-4">
