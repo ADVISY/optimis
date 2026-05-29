@@ -229,38 +229,64 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder, editing
   const reset = () => {
     setClientId("");
     setInvoiceDate(new Date().toISOString().slice(0, 10));
+    setDueDate("");
     setNotes("");
     setLines([newLine()]);
     setLinkedOrderIds([]);
   };
 
-  const create = useMutation({
-    mutationFn: async () => {
-      const dueDays = settings?.payment_terms_days ?? 30;
-      const due = new Date(invoiceDate);
-      due.setDate(due.getDate() + dueDays);
+  const computedDueDate = () => {
+    if (dueDate) return dueDate;
+    const dueDays = settings?.payment_terms_days ?? 30;
+    const due = new Date(invoiceDate);
+    due.setDate(due.getDate() + dueDays);
+    return due.toISOString().slice(0, 10);
+  };
 
-      const { data: inv, error: invErr } = await supabase
-        .from("admin_invoices")
-        .insert({
-          client_id: clientId,
-          invoice_date: invoiceDate,
-          due_date: due.toISOString().slice(0, 10),
-          subtotal,
-          vat_rate: vatRate,
-          vat_amount: vatAmount,
-          total,
-          currency: invoiceCurrency,
-          fx_rate_to_chf: fxToChf,
-          notes: notes || null,
-          status: "brouillon",
-        })
-        .select()
-        .single();
-      if (invErr) throw invErr;
+  const save = useMutation({
+    mutationFn: async () => {
+      const due = computedDueDate();
+      const payload = {
+        client_id: clientId,
+        invoice_date: invoiceDate,
+        due_date: due,
+        subtotal,
+        vat_rate: vatRate,
+        vat_amount: vatAmount,
+        total,
+        currency: invoiceCurrency,
+        fx_rate_to_chf: fxToChf,
+        notes: notes || null,
+      };
+
+      let invId = editingInvoiceId ?? "";
+      let invNumber = "";
+
+      if (editingInvoiceId) {
+        const { data: inv, error: invErr } = await (supabase
+          .from("admin_invoices") as any)
+          .update(payload)
+          .eq("id", editingInvoiceId)
+          .select()
+          .single();
+        if (invErr) throw invErr;
+        invId = inv.id;
+        invNumber = inv.invoice_number;
+        // Remplace les lignes
+        await supabase.from("admin_invoice_lines").delete().eq("invoice_id", invId);
+      } else {
+        const { data: inv, error: invErr } = await supabase
+          .from("admin_invoices")
+          .insert({ ...payload, status: "brouillon" })
+          .select()
+          .single();
+        if (invErr) throw invErr;
+        invId = inv.id;
+        invNumber = inv.invoice_number;
+      }
 
       const lineRows = lines.map((l, i) => ({
-        invoice_id: inv.id,
+        invoice_id: invId,
         position: i,
         description: l.description,
         quantity: l.quantity,
@@ -273,15 +299,15 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder, editing
       const { error: lnErr } = await (supabase.from("admin_invoice_lines") as any).insert(lineRows);
       if (lnErr) throw lnErr;
 
-      if (linkedOrderIds.length > 0) {
+      if (!editingInvoiceId && linkedOrderIds.length > 0) {
         const { error: linkErr } = await (supabase
           .from("admin_orders") as any)
-          .update({ invoice_id: inv.id })
+          .update({ invoice_id: invId })
           .in("id", linkedOrderIds);
         if (linkErr) throw linkErr;
       }
 
-      return inv;
+      return { id: invId, invoice_number: invNumber };
     },
     onSuccess: (inv) => {
       qc.invalidateQueries({ queryKey: ["admin-invoices"] });
@@ -290,12 +316,13 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder, editing
       onOpenChange(false);
       reset();
       toast({
-        title: "Facture créée",
-        description: `${inv.invoice_number} · ${formatMoney(Number(inv.total), invoiceCurrency)}`,
+        title: editingInvoiceId ? "Facture mise à jour" : "Facture créée",
+        description: `${inv.invoice_number} · ${formatMoney(total, invoiceCurrency)}`,
       });
     },
     onError: (e: any) => toast({ title: "Erreur", description: e.message, variant: "destructive" }),
   });
+
 
   return (
     <Dialog open={open} onOpenChange={(o) => { onOpenChange(o); if (!o) reset(); }}>
