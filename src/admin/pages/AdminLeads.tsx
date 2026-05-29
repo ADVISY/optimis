@@ -429,36 +429,12 @@ export default function AdminLeads() {
           </div>
         </div>
 
-        {/* Tabs / Compteurs */}
-        <div className="grid grid-cols-4 gap-4">
-          <CounterCard
-            label="À traiter"
-            count={counts?.nouveau ?? 0}
-            active={filterStatut === "nouveau"}
-            onClick={() => setFilterStatut("nouveau")}
-            color="bg-blue-500"
-          />
-          <CounterCard
-            label="Distribués"
-            count={counts?.distribue ?? 0}
-            active={filterStatut === "distribue"}
-            onClick={() => setFilterStatut("distribue")}
-            color="bg-green-500"
-          />
-          <CounterCard
-            label="Non distribuables"
-            count={counts?.non_distribuable ?? 0}
-            active={filterStatut === "non_distribuable"}
-            onClick={() => setFilterStatut("non_distribuable")}
-            color="bg-red-500"
-          />
-          <CounterCard
-            label="Tous"
-            count={counts?.all ?? 0}
-            active={filterStatut === "all"}
-            onClick={() => setFilterStatut("all")}
-            color="bg-slate-500"
-          />
+        {/* Filtre statut — chips compacts inline */}
+        <div className="flex items-center gap-1 -mt-2">
+          <StatutChip label="À traiter" count={counts?.nouveau ?? 0} active={filterStatut === "nouveau"} onClick={() => setFilterStatut("nouveau")} dot="bg-blue-500" />
+          <StatutChip label="Distribués" count={counts?.distribue ?? 0} active={filterStatut === "distribue"} onClick={() => setFilterStatut("distribue")} dot="bg-green-500" />
+          <StatutChip label="Non distribuables" count={counts?.non_distribuable ?? 0} active={filterStatut === "non_distribuable"} onClick={() => setFilterStatut("non_distribuable")} dot="bg-red-500" />
+          <StatutChip label="Tous" count={counts?.all ?? 0} active={filterStatut === "all"} onClick={() => setFilterStatut("all")} dot="bg-slate-500" />
         </div>
 
         {/* Sous-onglets par type d'assurance */}
@@ -1026,33 +1002,31 @@ export default function AdminLeads() {
 // ----------------------------------------------------------------------------
 // Sub-components
 // ----------------------------------------------------------------------------
-function CounterCard({
+function StatutChip({
   label,
   count,
   active,
   onClick,
-  color,
+  dot,
 }: {
   label: string;
   count: number;
   active: boolean;
   onClick: () => void;
-  color: string;
+  dot: string;
 }) {
   return (
     <button
       onClick={onClick}
-      className={`text-left rounded-xl border bg-card p-4 transition-all ${
-        active ? "ring-2 ring-primary shadow-md" : "hover:shadow-sm"
+      className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all border ${
+        active
+          ? "bg-[hsl(var(--optimis-green))] text-white border-[hsl(var(--optimis-green))] shadow-sm"
+          : "bg-card text-muted-foreground border-border hover:bg-muted hover:text-foreground"
       }`}
     >
-      <div className="flex items-start justify-between">
-        <div>
-          <div className="text-xs uppercase text-muted-foreground tracking-wider">{label}</div>
-          <div className="text-3xl font-bold mt-2">{count}</div>
-        </div>
-        <span className={`h-2 w-2 rounded-full ${color} mt-2`} />
-      </div>
+      <span className={`h-2 w-2 rounded-full ${dot} ${active ? "opacity-100" : "opacity-70"}`} />
+      <span>{label}</span>
+      <span className={`text-[10px] font-bold ${active ? "text-white/90" : "text-foreground"}`}>{count}</span>
     </button>
   );
 }
