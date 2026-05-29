@@ -414,7 +414,7 @@ serve(async (req) => {
 
     leadData["ID Lead"] = leadId;
     leadData["Date soumission"] = timestamp;
-    if (pdfUrl) leadData["Fiche PDF"] = pdfUrl;
+    leadData["Fiche PDF"] = pdfUrl || "";
 
     // Sélection webhook
     const webhookUrl =
