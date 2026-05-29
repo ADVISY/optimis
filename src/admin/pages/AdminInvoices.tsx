@@ -22,6 +22,7 @@ import {
   Trash2,
   RefreshCw,
   Pencil,
+} from "lucide-react";
 
 import { useToast } from "@/hooks/use-toast";
 import { formatCHF, formatDate, STATUS_LABELS } from "@/admin/lib/format";
