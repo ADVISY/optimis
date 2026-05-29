@@ -312,6 +312,15 @@ export default function AdminInvoices() {
                           <Button
                             size="sm"
                             variant="ghost"
+                            onClick={() => { setEditingInvoiceId(inv.id); setOpenModal(true); }}
+                            title="Modifier la facture"
+                          >
+                            <Pencil className="h-3.5 w-3.5" />
+                          </Button>
+
+                          <Button
+                            size="sm"
+                            variant="ghost"
                             onClick={() => {
                               if (confirm(`Supprimer la facture ${inv.invoice_number} ? Cette action est irréversible.`))
                                 deleteInvoice.mutate(inv.id);
