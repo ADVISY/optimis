@@ -414,10 +414,6 @@ serve(async (req) => {
 
     if (pdfUrl) leadData["Fiche PDF"] = pdfUrl;
 
-    // Toujours inclure leadId + timestamp dans le payload Zapier (labels FR)
-    leadData["ID Lead"] = leadId;
-    leadData["Date soumission"] = timestamp;
-
     // Sélection webhook
     const webhookUrl =
       (typeof leadData.webhookUrl === "string" && leadData.webhookUrl) ||
@@ -426,6 +422,7 @@ serve(async (req) => {
 
     const dataToSend = { ...leadData };
     delete dataToSend.webhookUrl;
+
 
 
     console.log("Sending to Zapier:", webhookUrl);
