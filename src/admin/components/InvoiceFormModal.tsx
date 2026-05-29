@@ -328,7 +328,8 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder, editing
     <Dialog open={open} onOpenChange={(o) => { onOpenChange(o); if (!o) reset(); }}>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-[hsl(var(--optimis-green))]">Nouvelle facture</DialogTitle>
+          <DialogTitle className="text-[hsl(var(--optimis-green))]">{editingInvoiceId ? "Modifier la facture" : "Nouvelle facture"}</DialogTitle>
+
         </DialogHeader>
 
         {linkedOrderIds.length > 0 && (
