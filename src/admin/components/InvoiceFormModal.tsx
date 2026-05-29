@@ -50,6 +50,7 @@ const newLine = (): InvoiceLine => ({
 interface Props {
   open: boolean;
   onOpenChange: (o: boolean) => void;
+  editingInvoiceId?: string | null;
   prefillFromOrder?: {
     client_id: string;
     order_ids?: string[];
@@ -67,13 +68,13 @@ interface Props {
     }[];
   };
 }
-
-export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props) {
+export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder, editingInvoiceId }: Props) {
   const qc = useQueryClient();
   const { toast } = useToast();
 
   const [clientId, setClientId] = useState("");
   const [invoiceDate, setInvoiceDate] = useState(new Date().toISOString().slice(0, 10));
+  const [dueDate, setDueDate] = useState("");
   const [vatRate, setVatRate] = useState(8.1);
   const [notes, setNotes] = useState("");
   const [lines, setLines] = useState<InvoiceLine[]>([newLine()]);
@@ -113,6 +114,45 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
     if (settings?.default_vat_rate) setVatRate(Number(settings.default_vat_rate));
   }, [settings?.default_vat_rate]);
 
+
+  // Charge la facture à modifier
+  useEffect(() => {
+    if (!open || !editingInvoiceId) return;
+    (async () => {
+      const { data: inv } = await supabase
+        .from("admin_invoices")
+        .select("*")
+        .eq("id", editingInvoiceId)
+        .single();
+      const { data: lns } = await supabase
+        .from("admin_invoice_lines")
+        .select("*")
+        .eq("invoice_id", editingInvoiceId)
+        .order("position");
+      if (!inv) return;
+      setClientId(inv.client_id);
+      setInvoiceDate(inv.invoice_date);
+      setDueDate(inv.due_date);
+      setVatRate(Number(inv.vat_rate));
+      setNotes(inv.notes ?? "");
+      setLines(
+        (lns ?? []).map((l: any) => ({
+          id: crypto.randomUUID(),
+          product_id: l.product_id ?? null,
+          product_name: l.product_name ?? "",
+          category: l.category ?? "assurance_finances",
+          subcategory: (l.subcategory as OrderDomain) ?? "",
+          description: l.description,
+          quantity: Number(l.quantity),
+          unit_price: Number(l.unit_price),
+          currency: (inv.currency as Currency) ?? "CHF",
+          fx_rate_to_chf: Number(inv.fx_rate_to_chf) || 1,
+        }))
+      );
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, editingInvoiceId]);
+
   useEffect(() => {
     if (open && prefillFromOrder) {
       setClientId(prefillFromOrder.client_id);
@@ -140,6 +180,7 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, prefillFromOrder]);
+
 
   const updateLine = (id: string, patch: Partial<InvoiceLine>) =>
     setLines((ls) => ls.map((l) => (l.id === id ? { ...l, ...patch } : l)));
@@ -188,38 +229,64 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
   const reset = () => {
     setClientId("");
     setInvoiceDate(new Date().toISOString().slice(0, 10));
+    setDueDate("");
     setNotes("");
     setLines([newLine()]);
     setLinkedOrderIds([]);
   };
 
-  const create = useMutation({
-    mutationFn: async () => {
-      const dueDays = settings?.payment_terms_days ?? 30;
-      const due = new Date(invoiceDate);
-      due.setDate(due.getDate() + dueDays);
+  const computedDueDate = () => {
+    if (dueDate) return dueDate;
+    const dueDays = settings?.payment_terms_days ?? 30;
+    const due = new Date(invoiceDate);
+    due.setDate(due.getDate() + dueDays);
+    return due.toISOString().slice(0, 10);
+  };
 
-      const { data: inv, error: invErr } = await supabase
-        .from("admin_invoices")
-        .insert({
-          client_id: clientId,
-          invoice_date: invoiceDate,
-          due_date: due.toISOString().slice(0, 10),
-          subtotal,
-          vat_rate: vatRate,
-          vat_amount: vatAmount,
-          total,
-          currency: invoiceCurrency,
-          fx_rate_to_chf: fxToChf,
-          notes: notes || null,
-          status: "brouillon",
-        })
-        .select()
-        .single();
-      if (invErr) throw invErr;
+  const save = useMutation({
+    mutationFn: async () => {
+      const due = computedDueDate();
+      const payload = {
+        client_id: clientId,
+        invoice_date: invoiceDate,
+        due_date: due,
+        subtotal,
+        vat_rate: vatRate,
+        vat_amount: vatAmount,
+        total,
+        currency: invoiceCurrency,
+        fx_rate_to_chf: fxToChf,
+        notes: notes || null,
+      };
+
+      let invId = editingInvoiceId ?? "";
+      let invNumber = "";
+
+      if (editingInvoiceId) {
+        const { data: inv, error: invErr } = await (supabase
+          .from("admin_invoices") as any)
+          .update(payload)
+          .eq("id", editingInvoiceId)
+          .select()
+          .single();
+        if (invErr) throw invErr;
+        invId = inv.id;
+        invNumber = inv.invoice_number;
+        // Remplace les lignes
+        await supabase.from("admin_invoice_lines").delete().eq("invoice_id", invId);
+      } else {
+        const { data: inv, error: invErr } = await supabase
+          .from("admin_invoices")
+          .insert({ ...payload, status: "brouillon" })
+          .select()
+          .single();
+        if (invErr) throw invErr;
+        invId = inv.id;
+        invNumber = inv.invoice_number;
+      }
 
       const lineRows = lines.map((l, i) => ({
-        invoice_id: inv.id,
+        invoice_id: invId,
         position: i,
         description: l.description,
         quantity: l.quantity,
@@ -232,15 +299,15 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
       const { error: lnErr } = await (supabase.from("admin_invoice_lines") as any).insert(lineRows);
       if (lnErr) throw lnErr;
 
-      if (linkedOrderIds.length > 0) {
+      if (!editingInvoiceId && linkedOrderIds.length > 0) {
         const { error: linkErr } = await (supabase
           .from("admin_orders") as any)
-          .update({ invoice_id: inv.id })
+          .update({ invoice_id: invId })
           .in("id", linkedOrderIds);
         if (linkErr) throw linkErr;
       }
 
-      return inv;
+      return { id: invId, invoice_number: invNumber };
     },
     onSuccess: (inv) => {
       qc.invalidateQueries({ queryKey: ["admin-invoices"] });
@@ -249,18 +316,20 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
       onOpenChange(false);
       reset();
       toast({
-        title: "Facture créée",
-        description: `${inv.invoice_number} · ${formatMoney(Number(inv.total), invoiceCurrency)}`,
+        title: editingInvoiceId ? "Facture mise à jour" : "Facture créée",
+        description: `${inv.invoice_number} · ${formatMoney(total, invoiceCurrency)}`,
       });
     },
     onError: (e: any) => toast({ title: "Erreur", description: e.message, variant: "destructive" }),
   });
 
+
   return (
     <Dialog open={open} onOpenChange={(o) => { onOpenChange(o); if (!o) reset(); }}>
       <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-[hsl(var(--optimis-green))]">Nouvelle facture</DialogTitle>
+          <DialogTitle className="text-[hsl(var(--optimis-green))]">{editingInvoiceId ? "Modifier la facture" : "Nouvelle facture"}</DialogTitle>
+
         </DialogHeader>
 
         {linkedOrderIds.length > 0 && (
@@ -268,8 +337,7 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
             Cette facture sera liée à <strong>{linkedOrderIds.length}</strong> commande{linkedOrderIds.length > 1 ? "s" : ""}.
           </div>
         )}
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4 border-b border-border">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 py-4 border-b border-border">
           <div className="md:col-span-2 space-y-2">
             <Label>Client *</Label>
             <Select value={clientId} onValueChange={setClientId}>
@@ -283,7 +351,12 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
             <Label>Date *</Label>
             <Input type="date" value={invoiceDate} onChange={(e) => setInvoiceDate(e.target.value)} />
           </div>
+          <div className="space-y-2">
+            <Label>Échéance</Label>
+            <Input type="date" value={computedDueDate()} onChange={(e) => setDueDate(e.target.value)} />
+          </div>
         </div>
+
 
         <div className="space-y-3 py-4">
           <div className="flex items-center justify-between">
@@ -444,8 +517,9 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
 
         <DialogFooter className="mt-4">
           <Button variant="outline" onClick={() => { onOpenChange(false); reset(); }}>Annuler</Button>
-          <Button onClick={() => create.mutate()} disabled={create.isPending || !canSubmit}>
-            {create.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Créer la facture"}
+          <Button onClick={() => save.mutate()} disabled={save.isPending || !canSubmit}>
+            {save.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : (editingInvoiceId ? "Mettre à jour la facture" : "Créer la facture")}
+
           </Button>
         </DialogFooter>
       </DialogContent>
