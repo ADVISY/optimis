@@ -336,6 +336,10 @@ function generateLeadPdf(leadData: Record<string, unknown>, deviceInfo: { device
     doc.text(`Document confidentiel · ${new Date().toLocaleDateString("fr-CH")}`, pageW / 2, pageH - 9, { align: "center" });
   }
 
+  const arrayBuffer = doc.output("arraybuffer");
+  return new Uint8Array(arrayBuffer);
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
