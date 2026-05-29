@@ -412,6 +412,8 @@ serve(async (req) => {
       console.error("Erreur génération PDF:", pdfErr);
     }
 
+    leadData["ID Lead"] = leadId;
+    leadData["Date soumission"] = timestamp;
     if (pdfUrl) leadData["Fiche PDF"] = pdfUrl;
 
     // Sélection webhook
