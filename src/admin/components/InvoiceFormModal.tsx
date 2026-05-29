@@ -112,11 +112,47 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
         .single();
       return data;
     },
-  });
-
   useEffect(() => {
     if (settings?.default_vat_rate) setVatRate(Number(settings.default_vat_rate));
   }, [settings?.default_vat_rate]);
+
+  // Charge la facture à modifier
+  useEffect(() => {
+    if (!open || !editingInvoiceId) return;
+    (async () => {
+      const { data: inv } = await supabase
+        .from("admin_invoices")
+        .select("*")
+        .eq("id", editingInvoiceId)
+        .single();
+      const { data: lns } = await supabase
+        .from("admin_invoice_lines")
+        .select("*")
+        .eq("invoice_id", editingInvoiceId)
+        .order("position");
+      if (!inv) return;
+      setClientId(inv.client_id);
+      setInvoiceDate(inv.invoice_date);
+      setDueDate(inv.due_date);
+      setVatRate(Number(inv.vat_rate));
+      setNotes(inv.notes ?? "");
+      setLines(
+        (lns ?? []).map((l: any) => ({
+          id: crypto.randomUUID(),
+          product_id: l.product_id ?? null,
+          product_name: l.product_name ?? "",
+          category: l.category ?? "assurance_finances",
+          subcategory: (l.subcategory as OrderDomain) ?? "",
+          description: l.description,
+          quantity: Number(l.quantity),
+          unit_price: Number(l.unit_price),
+          currency: (inv.currency as Currency) ?? "CHF",
+          fx_rate_to_chf: Number(inv.fx_rate_to_chf) || 1,
+        }))
+      );
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, editingInvoiceId]);
 
   useEffect(() => {
     if (open && prefillFromOrder) {
@@ -144,6 +180,8 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, prefillFromOrder]);
+
   }, [open, prefillFromOrder]);
 
   const updateLine = (id: string, patch: Partial<InvoiceLine>) =>
