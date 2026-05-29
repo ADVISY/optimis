@@ -352,6 +352,7 @@ export default function AdminInvoices() {
           )}
         </CardContent>
       </Card>
+      <InvoiceFormModal open={openModal} onOpenChange={(o) => { setOpenModal(o); if (!o) setEditingInvoiceId(null); }} editingInvoiceId={editingInvoiceId} />
 
       <InvoiceFormModal open={openModal} onOpenChange={setOpenModal} />
     </AdminLayout>
