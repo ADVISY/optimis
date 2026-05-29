@@ -69,17 +69,13 @@ interface Props {
   };
 }
 export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder, editingInvoiceId }: Props) {
+  const qc = useQueryClient();
+  const { toast } = useToast();
 
-
-export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props) {
   const [clientId, setClientId] = useState("");
   const [invoiceDate, setInvoiceDate] = useState(new Date().toISOString().slice(0, 10));
   const [dueDate, setDueDate] = useState("");
   const [vatRate, setVatRate] = useState(8.1);
-  const [notes, setNotes] = useState("");
-  const [lines, setLines] = useState<InvoiceLine[]>([newLine()]);
-  const [linkedOrderIds, setLinkedOrderIds] = useState<string[]>([]);
-
   const [notes, setNotes] = useState("");
   const [lines, setLines] = useState<InvoiceLine[]>([newLine()]);
   const [linkedOrderIds, setLinkedOrderIds] = useState<string[]>([]);
