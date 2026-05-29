@@ -50,6 +50,7 @@ const newLine = (): InvoiceLine => ({
 interface Props {
   open: boolean;
   onOpenChange: (o: boolean) => void;
+  editingInvoiceId?: string | null;
   prefillFromOrder?: {
     client_id: string;
     order_ids?: string[];
@@ -67,6 +68,7 @@ interface Props {
     }[];
   };
 }
+
 
 export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props) {
   const qc = useQueryClient();
