@@ -423,8 +423,10 @@ export default function AdminOrders() {
     },
     onSuccess: (order) => {
       qc.invalidateQueries({ queryKey: ["admin-orders"] });
+      qc.invalidateQueries({ queryKey: ["admin-invoices"] });
       qc.invalidateQueries({ queryKey: ["admin-stats"] });
       qc.invalidateQueries({ queryKey: ["admin-revenue-by-currency"] });
+
       const wasEditing = !!editingOrderId;
       setOpenModal(false);
       resetForm();
