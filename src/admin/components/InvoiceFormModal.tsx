@@ -517,8 +517,9 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder, editing
 
         <DialogFooter className="mt-4">
           <Button variant="outline" onClick={() => { onOpenChange(false); reset(); }}>Annuler</Button>
-          <Button onClick={() => create.mutate()} disabled={create.isPending || !canSubmit}>
-            {create.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Créer la facture"}
+          <Button onClick={() => save.mutate()} disabled={save.isPending || !canSubmit}>
+            {save.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : (editingInvoiceId ? "Mettre à jour la facture" : "Créer la facture")}
+
           </Button>
         </DialogFooter>
       </DialogContent>
