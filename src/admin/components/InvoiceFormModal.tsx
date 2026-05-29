@@ -68,6 +68,7 @@ interface Props {
     }[];
   };
 }
+export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder, editingInvoiceId }: Props) {
 
 
 export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props) {
