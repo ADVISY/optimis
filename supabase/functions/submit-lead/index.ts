@@ -297,7 +297,9 @@ serve(async (req) => {
         // Lien signé valable 10 ans
         const { data: signed, error: signError } = await admin.storage
           .from("lead-files")
-          .createSignedUrl(path, 60 * 60 * 24 * 365 * 10);
+          .createSignedUrl(path, 60 * 60 * 24 * 365 * 10, {
+            download: `fiche-lead-${safeLeadId}.pdf`,
+          });
         if (signError) console.error("Signed URL failed:", signError);
         else pdfUrl = signed?.signedUrl ?? "";
         console.log("PDF stocké :", path);
