@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Search, Loader2, Trash2 } from "lucide-react";
+import { Plus, Search, Loader2, Trash2, Mail, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatCHF, formatDate, STATUS_LABELS } from "@/admin/lib/format";
 
@@ -39,11 +39,47 @@ export default function AdminClients() {
   const { data: clients, isLoading } = useQuery({
     queryKey: ["admin-clients", search],
     queryFn: async () => {
-      let q = supabase.from("admin_clients").select("*").order("created_at", { ascending: false });
+      let q = supabase
+        .from("admin_clients")
+        .select("*, partner_user_clients(user_id)")
+        .order("created_at", { ascending: false });
       if (search) q = q.or(`company_name.ilike.%${search}%,contact_name.ilike.%${search}%,email.ilike.%${search}%`);
       const { data } = await q;
       return data ?? [];
     },
+  });
+
+  // ─── Invitation partner ───
+  const [inviteOpen, setInviteOpen] = useState(false);
+  const [inviteClient, setInviteClient] = useState<any | null>(null);
+  const [inviteEmail, setInviteEmail] = useState("");
+
+  const openInvite = (c: any) => {
+    setInviteClient(c);
+    setInviteEmail(c.email ?? "");
+    setInviteOpen(true);
+  };
+
+  const inviteMutation = useMutation({
+    mutationFn: async ({ client_id, email, full_name }: { client_id: string; email: string; full_name?: string }) => {
+      const { data, error } = await supabase.functions.invoke("invite-partner", {
+        body: { client_id, email, full_name },
+      });
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+      return data;
+    },
+    onSuccess: (data: any) => {
+      qc.invalidateQueries({ queryKey: ["admin-clients"] });
+      setInviteOpen(false);
+      setInviteClient(null);
+      setInviteEmail("");
+      toast({
+        title: data?.already_existed ? "Accès partner ajouté" : "Invitation envoyée",
+        description: data?.message ?? "OK",
+      });
+    },
+    onError: (e: any) => toast({ title: "Erreur d'invitation", description: e.message, variant: "destructive" }),
   });
 
   const { data: detail } = useQuery({
@@ -142,35 +178,60 @@ export default function AdminClients() {
                     <th className="px-6 py-3 font-semibold">Email</th>
                     <th className="px-6 py-3 font-semibold">Téléphone</th>
                     <th className="px-6 py-3 font-semibold">Statut</th>
+                    <th className="px-6 py-3 font-semibold">Accès partner</th>
                     <th className="px-6 py-3 font-semibold">Créé le</th>
                     <th className="px-6 py-3 font-semibold text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {clients?.map((c: any) => (
+                  {clients?.map((c: any) => {
+                    const hasPartnerAccess = (c.partner_user_clients?.length ?? 0) > 0;
+                    return (
                     <tr key={c.id} onClick={() => openEdit(c)} className="border-t border-border hover:bg-muted/30 cursor-pointer">
                       <td className="px-6 py-4 font-medium">{c.company_name}</td>
                       <td className="px-6 py-4 text-muted-foreground">{c.contact_name}</td>
                       <td className="px-6 py-4 text-muted-foreground">{c.email}</td>
                       <td className="px-6 py-4 text-muted-foreground">{c.phone}</td>
                       <td className="px-6 py-4"><Badge variant={c.status === "actif" ? "default" : "outline"}>{STATUS_LABELS[c.status]}</Badge></td>
+                      <td className="px-6 py-4">
+                        {hasPartnerAccess ? (
+                          <Badge variant="secondary" className="gap-1 text-xs">
+                            <CheckCircle2 className="h-3 w-3" /> Actif ({c.partner_user_clients.length})
+                          </Badge>
+                        ) : (
+                          <span className="text-xs text-muted-foreground italic">non invité</span>
+                        )}
+                      </td>
                       <td className="px-6 py-4 text-muted-foreground">{formatDate(c.created_at)}</td>
                       <td className="px-6 py-4 text-right" onClick={(e) => e.stopPropagation()}>
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          onClick={() => handleDelete(c)}
-                          disabled={deleteMutation.isPending}
-                          className="text-destructive hover:text-destructive hover:bg-destructive/10"
-                          title="Supprimer"
-                        >
-                          <Trash2 className="h-3.5 w-3.5" />
-                        </Button>
+                        <div className="inline-flex items-center gap-1">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => openInvite(c)}
+                            disabled={inviteMutation.isPending}
+                            title={hasPartnerAccess ? "Inviter un compte supplémentaire" : "Envoyer un accès partner par email"}
+                          >
+                            <Mail className="h-3.5 w-3.5 mr-1" />
+                            {hasPartnerAccess ? "+ accès" : "Inviter"}
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => handleDelete(c)}
+                            disabled={deleteMutation.isPending}
+                            className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                            title="Supprimer"
+                          >
+                            <Trash2 className="h-3.5 w-3.5" />
+                          </Button>
+                        </div>
                       </td>
                     </tr>
-                  ))}
+                    );
+                  })}
                   {clients?.length === 0 && (
-                    <tr><td colSpan={7} className="px-6 py-12 text-center text-muted-foreground">Aucun client</td></tr>
+                    <tr><td colSpan={8} className="px-6 py-12 text-center text-muted-foreground">Aucun client</td></tr>
                   )}
                 </tbody>
               </table>
@@ -260,6 +321,59 @@ export default function AdminClients() {
                 {saveMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Enregistrer"}
               </Button>
             </div>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Modal d'invitation partner */}
+      <Dialog open={inviteOpen} onOpenChange={setInviteOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Inviter un accès partner</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="p-3 bg-muted/50 rounded-lg text-sm">
+              <div className="text-xs text-muted-foreground">Cabinet</div>
+              <div className="font-semibold">{inviteClient?.company_name}</div>
+              {inviteClient?.contact_name && (
+                <div className="text-xs text-muted-foreground">Contact : {inviteClient.contact_name}</div>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="invite-email">Email du courtier</Label>
+              <Input
+                id="invite-email"
+                type="email"
+                value={inviteEmail}
+                onChange={(e) => setInviteEmail(e.target.value)}
+                placeholder="contact@cabinet.ch"
+                autoFocus
+              />
+            </div>
+
+            <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg text-xs text-blue-900 space-y-1">
+              <p>📧 Un email d'invitation sera envoyé à cette adresse avec :</p>
+              <ul className="list-disc list-inside ml-2">
+                <li>Lien sécurisé pour définir le mot de passe</li>
+                <li>Accès à l'espace courtier <code>/partner/login</code></li>
+                <li>Visibilité uniquement sur les leads de <strong>{inviteClient?.company_name}</strong></li>
+              </ul>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="ghost" onClick={() => setInviteOpen(false)}>Annuler</Button>
+            <Button
+              onClick={() => inviteMutation.mutate({
+                client_id: inviteClient.id,
+                email: inviteEmail.trim(),
+                full_name: inviteClient.contact_name ?? inviteClient.company_name,
+              })}
+              disabled={!inviteEmail.trim() || inviteMutation.isPending}
+            >
+              {inviteMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Mail className="h-4 w-4 mr-2" />}
+              Envoyer l'invitation
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
