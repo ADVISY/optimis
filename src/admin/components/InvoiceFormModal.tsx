@@ -183,7 +183,7 @@ export function InvoiceFormModal({ open, onOpenChange, prefillFromOrder }: Props
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-
+  }, [open, prefillFromOrder]);
 
 
   const updateLine = (id: string, patch: Partial<InvoiceLine>) =>
