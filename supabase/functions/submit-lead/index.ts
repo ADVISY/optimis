@@ -189,43 +189,49 @@ const PRODUIT_LABELS: Record<string, string> = {
 };
 
 function buildProspectEmail(prenom: string, produitLabel: string): string {
-  const greeting = prenom ? `Merci ${prenom} !` : "Merci !";
+  const greeting = prenom ? `Merci ${prenom}` : "Merci";
   return `<!DOCTYPE html>
 <html lang="fr">
 <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head>
-<body style="margin:0; padding:0; background-color:#EBF3EE; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color:#1a1a1a;">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#EBF3EE; padding:48px 16px;">
+<body style="margin:0; padding:0; background-color:#F5F7FA; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color:#1a1a1a;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#F5F7FA; padding:48px 16px;">
     <tr><td align="center">
-      <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px; background-color:#ffffff; border-radius:20px; overflow:hidden; box-shadow:0 6px 32px rgba(52,102,75,0.10);">
-        <tr><td align="center" style="padding:48px 40px 32px; background:linear-gradient(135deg,#34664B 0%,#3A8155 100%);">
-          <img src="https://iuuefrxcmrcdbbuyzhqf.supabase.co/storage/v1/object/public/brand/logo-optimis.png" alt="Optimis" width="140" style="display:block; height:auto; max-width:140px; filter:brightness(0) invert(1);" />
+      <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px; background-color:#ffffff; border-radius:20px; overflow:hidden; box-shadow:0 4px 24px rgba(15,23,42,0.06);">
+        <!-- HEADER : fond blanc, logo coloré (au lieu de inversé) -->
+        <tr><td align="center" style="padding:48px 40px 24px; background-color:#ffffff; border-bottom:1px solid #F1F5F9;">
+          <img src="https://iuuefrxcmrcdbbuyzhqf.supabase.co/storage/v1/object/public/brand/logo-optimis.png" alt="Optimis" width="140" style="display:block; height:auto; max-width:140px;" />
         </td></tr>
-        <tr><td style="padding:48px 48px 40px;">
-          <h1 style="margin:0 0 16px; font-size:30px; line-height:1.2; color:#34664B; font-weight:700; letter-spacing:-0.5px;">${greeting}</h1>
-          <p style="margin:0 0 16px; font-size:17px; line-height:1.6; color:#333333;">Nous avons bien reçu votre demande de <strong style="color:#34664B;">${produitLabel}</strong>.</p>
-          <p style="margin:0 0 32px; font-size:17px; line-height:1.6; color:#333333;">Un de nos conseillers vous contactera sous <strong>24 heures</strong> pour vous présenter les meilleures offres adaptées à votre situation.</p>
-          <div style="background-color:#EBF3EE; border-radius:12px; padding:24px; margin-bottom:32px;">
-            <h3 style="margin:0 0 16px; font-size:13px; font-weight:700; color:#34664B; text-transform:uppercase; letter-spacing:0.5px;">Que va-t-il se passer ?</h3>
+        <!-- CORPS -->
+        <tr><td style="padding:40px 48px 40px;">
+          <h1 style="margin:0 0 8px; font-size:32px; line-height:1.2; color:#34664B; font-weight:700; letter-spacing:-0.5px;">${greeting}.</h1>
+          <p style="margin:0 0 24px; font-size:17px; line-height:1.6; color:#475569;">Votre demande de <strong style="color:#0f172a;">${produitLabel}</strong> a bien été reçue.</p>
+          <p style="margin:0 0 36px; font-size:16px; line-height:1.6; color:#475569;">Un conseiller vous contactera sous <strong style="color:#0f172a;">24 heures</strong> pour vous présenter les meilleures offres adaptées à votre situation.</p>
+
+          <!-- ENCART ÉTAPES : fond gris clair neutre, plus aéré -->
+          <div style="background-color:#F8FAFC; border:1px solid #E2E8F0; border-radius:14px; padding:28px 28px 24px; margin-bottom:32px;">
+            <h3 style="margin:0 0 20px; font-size:12px; font-weight:700; color:#64748B; text-transform:uppercase; letter-spacing:1.2px;">Prochaines étapes</h3>
             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
-              <tr><td style="padding:0 0 12px;"><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
-                <td valign="top" style="width:32px;"><div style="width:24px; height:24px; border-radius:50%; background-color:#34664B; color:#ffffff; text-align:center; font-size:13px; line-height:24px; font-weight:600;">1</div></td>
-                <td style="padding-left:12px; font-size:15px; line-height:1.5; color:#333333;">Notre équipe analyse votre demande et compare les meilleures offres.</td>
+              <tr><td style="padding:0 0 16px;"><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
+                <td valign="top" style="width:36px;"><div style="width:28px; height:28px; border-radius:50%; background-color:#ffffff; border:1.5px solid #34664B; color:#34664B; text-align:center; font-size:13px; line-height:25px; font-weight:700;">1</div></td>
+                <td style="padding-left:14px; font-size:15px; line-height:1.5; color:#334155;">Notre équipe analyse votre demande et compare les meilleures offres.</td>
               </tr></table></td></tr>
-              <tr><td style="padding:0 0 12px;"><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
-                <td valign="top" style="width:32px;"><div style="width:24px; height:24px; border-radius:50%; background-color:#34664B; color:#ffffff; text-align:center; font-size:13px; line-height:24px; font-weight:600;">2</div></td>
-                <td style="padding-left:12px; font-size:15px; line-height:1.5; color:#333333;">Un conseiller spécialisé vous appelle pour discuter de vos besoins.</td>
+              <tr><td style="padding:0 0 16px;"><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
+                <td valign="top" style="width:36px;"><div style="width:28px; height:28px; border-radius:50%; background-color:#ffffff; border:1.5px solid #34664B; color:#34664B; text-align:center; font-size:13px; line-height:25px; font-weight:700;">2</div></td>
+                <td style="padding-left:14px; font-size:15px; line-height:1.5; color:#334155;">Un conseiller spécialisé vous appelle pour discuter de vos besoins.</td>
               </tr></table></td></tr>
               <tr><td><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
-                <td valign="top" style="width:32px;"><div style="width:24px; height:24px; border-radius:50%; background-color:#34664B; color:#ffffff; text-align:center; font-size:13px; line-height:24px; font-weight:600;">3</div></td>
-                <td style="padding-left:12px; font-size:15px; line-height:1.5; color:#333333;">Vous recevez une proposition personnalisée et 100% gratuite.</td>
+                <td valign="top" style="width:36px;"><div style="width:28px; height:28px; border-radius:50%; background-color:#34664B; color:#ffffff; text-align:center; font-size:13px; line-height:28px; font-weight:700;">3</div></td>
+                <td style="padding-left:14px; font-size:15px; line-height:1.5; color:#334155;">Vous recevez une proposition personnalisée et 100% gratuite.</td>
               </tr></table></td></tr>
             </table>
           </div>
-          <p style="margin:0; font-size:14px; line-height:1.5; color:#666666; text-align:center; font-style:italic;">À très bientôt,<br><strong style="color:#34664B;">L'équipe Optimis</strong></p>
+
+          <p style="margin:0; font-size:14px; line-height:1.5; color:#64748B; text-align:center;">À très bientôt,<br><strong style="color:#34664B; font-weight:600;">L'équipe Optimis</strong></p>
         </td></tr>
-        <tr><td style="padding:24px 48px; background-color:#FAFCFA; border-top:1px solid #EBF3EE; text-align:center;">
-          <p style="margin:0 0 6px; font-size:12px; color:#888888;">Optimislink Sàrl · Place de la Fontaine 9 · 1868 Collombey</p>
-          <p style="margin:0; font-size:12px; color:#888888;">Question ? <a href="mailto:lesiteoptimis@gmail.com" style="color:#34664B; text-decoration:none; font-weight:600;">lesiteoptimis@gmail.com</a></p>
+        <!-- FOOTER : fond gris très clair -->
+        <tr><td style="padding:24px 48px; background-color:#F8FAFC; border-top:1px solid #E2E8F0; text-align:center;">
+          <p style="margin:0 0 6px; font-size:12px; color:#94A3B8;">Optimislink Sàrl · Place de la Fontaine 9 · 1868 Collombey</p>
+          <p style="margin:0; font-size:12px; color:#94A3B8;">Question ? <a href="mailto:lesiteoptimis@gmail.com" style="color:#34664B; text-decoration:none; font-weight:600;">lesiteoptimis@gmail.com</a></p>
         </td></tr>
       </table>
     </td></tr>
