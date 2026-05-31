@@ -169,6 +169,100 @@ function extractLeadFields(leadData: Record<string, unknown>): ExtractedLead {
   };
 }
 
+// ----------------------------------------------------------------------------
+// EMAIL DE CONFIRMATION AU PROSPECT (via Resend)
+// ----------------------------------------------------------------------------
+const PRODUIT_LABELS: Record<string, string> = {
+  "health-insurance": "assurance santé",
+  "subsidy": "subside d'assurance maladie",
+  "pillar-3a": "3e pilier",
+  "lpp-libre-passage": "libre passage LPP",
+  "mortgage": "hypothèque",
+  "car-insurance": "assurance véhicule",
+  "household-insurance": "assurance ménage",
+  "legal-protection": "protection juridique",
+  "professional-insurance": "assurance professionnelle",
+  "estimation-immobiliere": "estimation immobilière",
+  "termination": "résiliation",
+  "prenatal-insurance": "assurance prénatale",
+  "partner": "partenariat Optimis",
+};
+
+function buildProspectEmail(prenom: string, produitLabel: string): string {
+  const greeting = prenom ? `Merci ${prenom} !` : "Merci !";
+  return `<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head>
+<body style="margin:0; padding:0; background-color:#EBF3EE; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color:#1a1a1a;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#EBF3EE; padding:48px 16px;">
+    <tr><td align="center">
+      <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px; background-color:#ffffff; border-radius:20px; overflow:hidden; box-shadow:0 6px 32px rgba(52,102,75,0.10);">
+        <tr><td align="center" style="padding:48px 40px 32px; background:linear-gradient(135deg,#34664B 0%,#3A8155 100%);">
+          <img src="https://iuuefrxcmrcdbbuyzhqf.supabase.co/storage/v1/object/public/brand/logo-optimis.png" alt="Optimis" width="140" style="display:block; height:auto; max-width:140px; filter:brightness(0) invert(1);" />
+        </td></tr>
+        <tr><td style="padding:48px 48px 40px;">
+          <h1 style="margin:0 0 16px; font-size:30px; line-height:1.2; color:#34664B; font-weight:700; letter-spacing:-0.5px;">${greeting}</h1>
+          <p style="margin:0 0 16px; font-size:17px; line-height:1.6; color:#333333;">Nous avons bien reçu votre demande de <strong style="color:#34664B;">${produitLabel}</strong>.</p>
+          <p style="margin:0 0 32px; font-size:17px; line-height:1.6; color:#333333;">Un de nos conseillers vous contactera sous <strong>24 heures</strong> pour vous présenter les meilleures offres adaptées à votre situation.</p>
+          <div style="background-color:#EBF3EE; border-radius:12px; padding:24px; margin-bottom:32px;">
+            <h3 style="margin:0 0 16px; font-size:13px; font-weight:700; color:#34664B; text-transform:uppercase; letter-spacing:0.5px;">Que va-t-il se passer ?</h3>
+            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+              <tr><td style="padding:0 0 12px;"><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
+                <td valign="top" style="width:32px;"><div style="width:24px; height:24px; border-radius:50%; background-color:#34664B; color:#ffffff; text-align:center; font-size:13px; line-height:24px; font-weight:600;">1</div></td>
+                <td style="padding-left:12px; font-size:15px; line-height:1.5; color:#333333;">Notre équipe analyse votre demande et compare les meilleures offres.</td>
+              </tr></table></td></tr>
+              <tr><td style="padding:0 0 12px;"><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
+                <td valign="top" style="width:32px;"><div style="width:24px; height:24px; border-radius:50%; background-color:#34664B; color:#ffffff; text-align:center; font-size:13px; line-height:24px; font-weight:600;">2</div></td>
+                <td style="padding-left:12px; font-size:15px; line-height:1.5; color:#333333;">Un conseiller spécialisé vous appelle pour discuter de vos besoins.</td>
+              </tr></table></td></tr>
+              <tr><td><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
+                <td valign="top" style="width:32px;"><div style="width:24px; height:24px; border-radius:50%; background-color:#34664B; color:#ffffff; text-align:center; font-size:13px; line-height:24px; font-weight:600;">3</div></td>
+                <td style="padding-left:12px; font-size:15px; line-height:1.5; color:#333333;">Vous recevez une proposition personnalisée et 100% gratuite.</td>
+              </tr></table></td></tr>
+            </table>
+          </div>
+          <p style="margin:0; font-size:14px; line-height:1.5; color:#666666; text-align:center; font-style:italic;">À très bientôt,<br><strong style="color:#34664B;">L'équipe Optimis</strong></p>
+        </td></tr>
+        <tr><td style="padding:24px 48px; background-color:#FAFCFA; border-top:1px solid #EBF3EE; text-align:center;">
+          <p style="margin:0 0 6px; font-size:12px; color:#888888;">Optimislink Sàrl · Place de la Fontaine 9 · 1868 Collombey</p>
+          <p style="margin:0; font-size:12px; color:#888888;">Question ? <a href="mailto:lesiteoptimis@gmail.com" style="color:#34664B; text-decoration:none; font-weight:600;">lesiteoptimis@gmail.com</a></p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+}
+
+async function sendProspectConfirmation(email: string, prenom: string, formType: string): Promise<{ ok: boolean; error?: string }> {
+  const resendKey = Deno.env.get("RESEND_API_KEY");
+  if (!resendKey) return { ok: false, error: "RESEND_API_KEY manquante" };
+  if (!email) return { ok: false, error: "email vide" };
+
+  const produitLabel = PRODUIT_LABELS[formType] ?? "demande";
+  const html = buildProspectEmail(prenom, produitLabel);
+
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: "Optimis <no-reply@le-comparateur-optimis.ch>",
+        to: email,
+        subject: `Votre demande de ${produitLabel} — Optimis`,
+        html,
+      }),
+    });
+    if (!res.ok) {
+      const errText = await res.text().catch(() => "");
+      return { ok: false, error: `Resend ${res.status}: ${errText.slice(0, 200)}` };
+    }
+    return { ok: true };
+  } catch (e: any) {
+    return { ok: false, error: e?.message ?? String(e) };
+  }
+}
+
 // Convertit "DD.MM.YYYY", "DD/MM/YYYY", "YYYY-MM-DD" en "YYYY-MM-DD" pour Postgres DATE
 function normalizeDate(raw?: string): string | undefined {
   if (!raw) return undefined;
@@ -283,13 +377,24 @@ serve(async (req) => {
           // AUTO-ROUTAGE DÉSACTIVÉ (décision 2026-05-25)
           // Le lead reste en statut 'nouveau' et attend une action manuelle
           // depuis le dashboard admin (sélection courtier ou bouton "auto-route").
-          //
-          // Pour réactiver l'auto-routage :
-          //   const { data: distId } = await supabase.rpc("route_lead", { p_lead_id: lead.id });
-          //   bdResult.distribution_id = distId;
           // ========================================================================
           bdResult.distribution_id = null;
           console.log("Lead stocké en statut 'nouveau' (auto-routage désactivé):", { lead_id: lead.id });
+
+          // ========================================================================
+          // EMAIL CONFIRMATION AU PROSPECT (async, fire-and-forget si échec)
+          // ========================================================================
+          if (fields.email) {
+            const emailRes = await sendProspectConfirmation(fields.email, fields.prenom ?? "", formType);
+            if (emailRes.ok) {
+              console.log(`[prospect-email] envoyé à ${fields.email}`);
+              (bdResult as any).email_sent = true;
+            } else {
+              console.error(`[prospect-email] échec : ${emailRes.error}`);
+              (bdResult as any).email_sent = false;
+              (bdResult as any).email_error = emailRes.error;
+            }
+          }
         }
       } else {
         console.warn("SUPABASE_URL ou SERVICE_ROLE_KEY manquant — skip BD storage");
