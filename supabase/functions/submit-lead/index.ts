@@ -421,9 +421,11 @@ serve(async (req) => {
     leadData["Date soumission"] = timestamp;
     leadData["Fiche PDF"] = pdfUrl || "";
 
-    // Sélection webhook
+    // Sélection webhook (avec override par langue)
+    const lang = String(leadData["Langue"] ?? leadData.language ?? "").toLowerCase();
     const webhookUrl =
       (typeof leadData.webhookUrl === "string" && leadData.webhookUrl) ||
+      FORM_WEBHOOKS_BY_LANG[`${formType}:${lang}`] ||
       FORM_WEBHOOKS[formType] ||
       DEFAULT_WEBHOOK_URL;
 
