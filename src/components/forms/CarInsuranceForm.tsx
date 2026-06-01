@@ -219,34 +219,6 @@ const CarInsuranceForm = () => {
       {/* Step 1: Vehicle */}
       <FormStep isActive={currentStep === 1}>
         <div className="space-y-6">
-          {/* License Plate Search - Primary method */}
-          <div className="bg-muted/50 p-4 rounded-lg">
-            <FormFieldWrapper label={t("forms.carInsurance.vehiclePlate")} htmlFor="vehiclePlate">
-              <PlateSearch
-                plate={formData.vehiclePlate}
-                onPlateChange={(plate) => updateFormData({ vehiclePlate: plate })}
-                onVehicleFound={(brand, model, year) => {
-                  updateFormData({ 
-                    vehicleBrand: brand, 
-                    vehicleModel: model, 
-                    vehicleYear: year 
-                  });
-                }}
-              />
-            </FormFieldWrapper>
-          </div>
-
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">
-                {t("forms.carInsurance.orManual")}
-              </span>
-            </div>
-          </div>
-
           {/* Manual Vehicle Selection */}
           <VehicleSelector
             brand={formData.vehicleBrand}
