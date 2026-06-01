@@ -506,8 +506,47 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
       },
     };
 
-    // Apply field renaming
-    const formLabels = { ...fieldLabels._common, ...(fieldLabels[formType] || {}) };
+    // German label overrides (per language)
+    const fieldLabelsDE: Record<string, Record<string, string>> = {
+      _common: {
+        firstName: "Vorname",
+        lastName: "Nachname",
+        email: "E-Mail",
+        phone: "Telefon",
+        canton: "Kanton",
+        postalCode: "Postleitzahl",
+        formType: "Formulartyp",
+        language: "Sprache",
+        source: "Quelle",
+        pageUrl: "Seiten-URL",
+        timestamp: "Datum und Uhrzeit",
+        leadId: "Lead-ID",
+      },
+      "car-insurance": {
+        vehicleBrand: "Fahrzeugmarke",
+        vehicleModel: "Fahrzeugmodell",
+        vehicleYear: "Baujahr",
+        usage: "Nutzung",
+        annualKm: "Jährliche Kilometer",
+        driverBirthDate: "Geburtsdatum des Fahrers",
+        licenseYear: "Jahr des Führerscheins",
+        accidentsLast5Years: "Unfälle (letzte 5 Jahre)",
+        coverageType: "Deckungsart",
+        options_glassBreakage: "Option Glasbruch",
+        options_assistance: "Option Pannenhilfe",
+        options_replacementVehicle: "Option Ersatzfahrzeug",
+      },
+    };
+
+    // Apply field renaming (language-aware)
+    const lang = i18n.language?.toLowerCase().slice(0, 2) || "fr";
+    const overrides = lang === "de" ? fieldLabelsDE : {};
+    const formLabels = {
+      ...fieldLabels._common,
+      ...(fieldLabels[formType] || {}),
+      ...(overrides._common || {}),
+      ...(overrides[formType] || {}),
+    };
     const renamedData: Record<string, unknown> = {};
     for (const [key, value] of Object.entries(normalizedFormData)) {
       const label = formLabels[key] || key;
