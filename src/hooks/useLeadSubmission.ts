@@ -232,6 +232,12 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
       if ("options_replacementVehicle" in normalizedFormData) {
         normalizedFormData.options_replacementVehicle = boolLabel(normalizedFormData.options_replacementVehicle);
       }
+      // Format annual km with thousand separator
+      if (typeof normalizedFormData.annualKm === "number") {
+        normalizedFormData.annualKm = `${normalizedFormData.annualKm.toLocaleString("fr-CH")} km`;
+      }
+      // Remove obsolete plate field (no longer collected)
+      delete normalizedFormData.vehiclePlate;
     }
 
     // Household Insurance: translate property type, ownership
