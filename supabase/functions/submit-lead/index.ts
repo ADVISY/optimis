@@ -28,6 +28,11 @@ const FORM_WEBHOOKS: Record<string, string> = {
   "prenatal-insurance": "https://hooks.zapier.com/hooks/catch/21326682/4oeel8v/",
 };
 
+// Language-specific webhook overrides (key: `${formType}:${lang}`)
+const FORM_WEBHOOKS_BY_LANG: Record<string, string> = {
+  "car-insurance:de": "https://hooks.zapier.com/hooks/catch/21326682/4b9togp/",
+};
+
 const SWISS_MOBILE_PREFIXES = new Set(["76", "77", "78", "79"]);
 
 const digitsOnly = (value: string) => value.replace(/\D/g, "");
@@ -416,9 +421,11 @@ serve(async (req) => {
     leadData["Date soumission"] = timestamp;
     leadData["Fiche PDF"] = pdfUrl || "";
 
-    // Sélection webhook
+    // Sélection webhook (avec override par langue)
+    const lang = String(leadData["Langue"] ?? leadData.language ?? "").toLowerCase();
     const webhookUrl =
       (typeof leadData.webhookUrl === "string" && leadData.webhookUrl) ||
+      FORM_WEBHOOKS_BY_LANG[`${formType}:${lang}`] ||
       FORM_WEBHOOKS[formType] ||
       DEFAULT_WEBHOOK_URL;
 
