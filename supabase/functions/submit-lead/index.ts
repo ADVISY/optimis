@@ -28,6 +28,11 @@ const FORM_WEBHOOKS: Record<string, string> = {
   "prenatal-insurance": "https://hooks.zapier.com/hooks/catch/21326682/4oeel8v/",
 };
 
+// Language-specific webhook overrides (key: `${formType}:${lang}`)
+const FORM_WEBHOOKS_BY_LANG: Record<string, string> = {
+  "car-insurance:de": "https://hooks.zapier.com/hooks/catch/21326682/4b9togp/",
+};
+
 const SWISS_MOBILE_PREFIXES = new Set(["76", "77", "78", "79"]);
 
 const digitsOnly = (value: string) => value.replace(/\D/g, "");
