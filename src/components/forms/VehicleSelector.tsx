@@ -233,14 +233,16 @@ const VehicleSelector = ({
         <label className="block text-sm font-medium mb-1.5">
           {t("forms.carInsurance.vehicleYear")}
         </label>
-        <Combobox
-          value={year}
-          onChange={onYearChange}
-          options={yearStrings.length > 0 ? yearStrings : Array.from({ length: 30 }, (_, i) => (new Date().getFullYear() - i).toString())}
-          placeholder={model ? t("forms.carInsurance.selectYear") : t("forms.carInsurance.selectModelFirst")}
-          disabled={!model && !!brand}
-          emptyMessage={t("forms.carInsurance.yearNotAvailable")}
-        />
+        <Select value={year} onValueChange={onYearChange} disabled={!model && !!brand}>
+          <SelectTrigger className="h-14 text-lg">
+            <SelectValue placeholder={model ? t("forms.carInsurance.selectYear") : t("forms.carInsurance.selectModelFirst")} />
+          </SelectTrigger>
+          <SelectContent className="max-h-60">
+            {(yearStrings.length > 0 ? yearStrings : Array.from({ length: 30 }, (_, i) => (new Date().getFullYear() - i).toString())).map((y) => (
+              <SelectItem key={y} value={y}>{y}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );
