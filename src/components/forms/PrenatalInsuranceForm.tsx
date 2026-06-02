@@ -174,7 +174,12 @@ const PrenatalInsuranceForm = () => {
           formData.postalCode.replace(/\D/g, "").length >= 4
         );
       case 2:
-        return formData.coverageLevel !== "";
+        return (
+          formData.coverageLevel !== "" &&
+          formData.lamalModel !== "" &&
+          formData.childDeductible !== "" &&
+          formData.childDental !== ""
+        );
       case 3:
         return formData.motherHasInsurance !== "";
       case 4:
