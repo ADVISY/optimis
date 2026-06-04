@@ -52,7 +52,7 @@ const PrenatalInsuranceForm = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-  const localizedPath = useLocalizedPath();
+  const { localizedPath } = useLocalizedPath();
   const {
     attemptedNext,
     markAttempted,
