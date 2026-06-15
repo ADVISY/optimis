@@ -193,6 +193,42 @@ const Partenaires = () => {
         </div>
       </section>
 
+      {/* ── VIDÉO PRÉSENTATION ── */}
+      <section className="bg-muted/30 py-12 md:py-16">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="max-w-4xl mx-auto"
+          >
+            <motion.div variants={fadeUp} className="text-center mb-8">
+              <h2 className="text-headline mb-3">
+                {t("partner.video.title", "Découvrez Optimis")} <span className="text-primary">{t("partner.video.titleHighlight", "en vidéo")}</span>
+              </h2>
+              <p className="text-body-lg text-muted-foreground">
+                {t("partner.video.description", "Comment nous générons des leads ultra-qualifiés pour nos partenaires.")}
+              </p>
+            </motion.div>
+            <motion.div
+              variants={fadeUp}
+              className="relative w-full overflow-hidden rounded-2xl shadow-2xl border border-border bg-foreground"
+              style={{ aspectRatio: "16 / 9" }}
+            >
+              <iframe
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1"
+                title="Présentation Optimis"
+                className="absolute inset-0 w-full h-full"
+                frameBorder={0}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── FRAÎCHEUR DES LEADS ── */}
       <section className="bg-primary text-primary-foreground relative overflow-hidden py-12 md:py-16">
         <div className="absolute inset-0 opacity-10" style={{
