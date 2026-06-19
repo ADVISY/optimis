@@ -472,6 +472,15 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
         address: "Adresse",
         city: "Ville",
       },
+      "complementary-insurance": {
+        besoins: "Besoins prioritaires",
+        assuranceComplementaireActuelle: "Assurance complémentaire actuelle",
+        assureurActuel: "Assureur actuel",
+        clientDepuis: "Client depuis (année)",
+        etatDeSante: "État de santé",
+        situationFamiliale: "Situation familiale",
+        dateDeNaissance: "Date de naissance",
+      },
       partner: {
         budget: "Budget mensuel",
         sector: "Secteur d'activité",

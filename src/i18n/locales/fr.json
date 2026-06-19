@@ -29,6 +29,7 @@
     "sending": "Envoi..."
   },
   "megaMenu": {
+    "complementaryInsurance": "Assurance complémentaire",
     "prenatalInsurance": "Assurance prénatale (bébé à naître)",
     "healthModel": "Quel modèle d'assurance maladie choisir ?",
     "dentalInsurance": "Assurance dentaire complémentaire",

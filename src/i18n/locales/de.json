@@ -29,6 +29,7 @@
     "sending": "Senden..."
   },
   "megaMenu": {
+    "complementaryInsurance": "Zusatzversicherung",
     "prenatalInsurance": "Pränatale Versicherung (ungeborenes Baby)",
     "healthModel": "Welches Krankenversicherungsmodell wählen?",
     "dentalInsurance": "Zahnzusatzversicherung",
