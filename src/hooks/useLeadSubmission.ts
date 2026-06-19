@@ -557,6 +557,15 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
         options_assistance: "Option Pannenhilfe",
         options_replacementVehicle: "Option Ersatzfahrzeug",
       },
+      termination: {
+        contractType: "Vertragstyp",
+        currentInsurer: "Aktueller Versicherer",
+        policyNumber: "Policennummer",
+        terminationDate: "Kündigungsdatum",
+        cancellationReasons: "Kündigungsgrund/-gründe",
+        address: "Adresse",
+        city: "Ort",
+      },
     };
 
     // Apply field renaming (language-aware)
