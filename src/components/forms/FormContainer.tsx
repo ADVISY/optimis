@@ -37,6 +37,22 @@ const FormContainer = ({
     setGradientPos({ x: 50, y: 50 });
   }, []);
 
+  // Mobile: when an input gets focus, scroll it into view so the soft keyboard doesn't hide it.
+  const handleFocusIn = useCallback((e: React.FocusEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement;
+    if (!target) return;
+    const tag = target.tagName;
+    if (tag !== "INPUT" && tag !== "SELECT" && tag !== "TEXTAREA") return;
+    // Wait for the on-screen keyboard to open, then center the field.
+    window.setTimeout(() => {
+      try {
+        target.scrollIntoView({ block: "center", behavior: "smooth" });
+      } catch {
+        target.scrollIntoView();
+      }
+    }, 250);
+  }, []);
+
   const isLarge = size === "large";
 
   return (
