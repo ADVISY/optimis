@@ -28,7 +28,6 @@ import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
 interface TerminationFormData {
   contractType: string;
   currentInsurer: string;
-  policyNumber: string;
   terminationDate: Date | null;
   cancellationReasons: string[];
   firstName: string;
@@ -58,7 +57,6 @@ const TerminationForm = () => {
   const initialData: TerminationFormData = {
     contractType: "",
     currentInsurer: "",
-    policyNumber: "",
     terminationDate: null,
     cancellationReasons: [],
     firstName: "",
@@ -177,9 +175,6 @@ const TerminationForm = () => {
                 <p className="mt-4">{formData.currentInsurer}</p>
                 <p className="mt-4">{t("forms.termination.letterSubject")}</p>
                 <p className="mt-2">{t("forms.termination.letterBody")}</p>
-                {formData.policyNumber && (
-                  <p>{t("forms.termination.policyRef")}: {formData.policyNumber}</p>
-                )}
                 {formData.terminationDate && (
                   <p>{t("forms.termination.effectiveDate")}: {format(formData.terminationDate, "PPP", { locale: getDateLocale() })}</p>
                 )}
@@ -244,16 +239,6 @@ const TerminationForm = () => {
               value={formData.currentInsurer}
               onChange={(e) => { updateFormData({ currentInsurer: e.target.value }); notifyDelayed(); }}
               placeholder="CSS, Helsana, La Mobilière..."
-              className="h-14 text-lg"
-            />
-          </FormFieldWrapper>
-
-          <FormFieldWrapper label={t("forms.termination.policyNumber")} htmlFor="policyNumber">
-            <Input
-              id="policyNumber"
-              value={formData.policyNumber}
-              onChange={(e) => updateFormData({ policyNumber: e.target.value })}
-              placeholder="12345678"
               className="h-14 text-lg"
             />
           </FormFieldWrapper>
