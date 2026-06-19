@@ -252,7 +252,7 @@ const ComplementaryInsuranceForm = () => {
         <FormStep isActive={currentStep === 1}>
           <div className="space-y-4">
             <FormFieldWrapper label="Qu'est-ce qui est important pour vous ? (choix multiples)" required>
-              <div className="grid sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                 {NEEDS_OPTIONS.map((opt) => {
                   const Icon = opt.icon;
                   const checked = formData.needs[opt.key];
@@ -260,7 +260,7 @@ const ComplementaryInsuranceForm = () => {
                     <label
                       key={opt.key}
                       className={cn(
-                        "flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-all",
+                        "flex items-center gap-3 p-3 sm:p-4 border rounded-lg cursor-pointer transition-all min-h-[52px]",
                         checked
                           ? "border-primary bg-primary/5 ring-2 ring-primary/20"
                           : "border-border hover:bg-muted/50",
@@ -271,7 +271,7 @@ const ComplementaryInsuranceForm = () => {
                         onCheckedChange={() => toggleNeed(opt.key)}
                       />
                       <Icon className="h-5 w-5 text-primary flex-shrink-0" />
-                      <span className="text-base flex-1">{opt.label}</span>
+                      <span className="text-sm sm:text-base flex-1 leading-snug">{opt.label}</span>
                     </label>
                   );
                 })}
@@ -301,21 +301,21 @@ const ComplementaryInsuranceForm = () => {
                   });
                   if (!yes) notify();
                 }}
-                className="grid grid-cols-2 gap-3"
+                className="grid grid-cols-2 gap-2.5 sm:gap-3"
               >
-                <label className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+                <label className="flex items-center justify-center space-x-2 p-3 sm:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer min-h-[52px]">
                   <RadioGroupItem value="yes" id="ci-yes" />
-                  <span className="text-lg">Oui</span>
+                  <span className="text-base sm:text-lg">Oui</span>
                 </label>
-                <label className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+                <label className="flex items-center justify-center space-x-2 p-3 sm:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer min-h-[52px]">
                   <RadioGroupItem value="no" id="ci-no" />
-                  <span className="text-lg">Non</span>
+                  <span className="text-base sm:text-lg">Non</span>
                 </label>
               </RadioGroup>
             </FormFieldWrapper>
 
             {formData.hasCurrentInsurance === true && (
-              <div className="grid sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <FormFieldWrapper label="Quel est votre assureur actuel ?" htmlFor="currentInsurer" required>
                   <Input
                     id="currentInsurer"
@@ -325,13 +325,14 @@ const ComplementaryInsuranceForm = () => {
                       notifyDelayedLong();
                     }}
                     placeholder="Ex. Helsana, CSS, SWICA..."
-                    className="h-14 text-lg"
+                    className="h-11 sm:h-14 text-base sm:text-lg"
                   />
                 </FormFieldWrapper>
                 <FormFieldWrapper label="Depuis quelle année ?" htmlFor="currentSince">
                   <Input
                     id="currentSince"
                     type="number"
+                    inputMode="numeric"
                     min={1970}
                     max={new Date().getFullYear()}
                     value={formData.currentSince}
@@ -340,7 +341,7 @@ const ComplementaryInsuranceForm = () => {
                       notifyDelayedLong();
                     }}
                     placeholder="Ex. 2018"
-                    className="h-14 text-lg"
+                    className="h-11 sm:h-14 text-base sm:text-lg"
                   />
                 </FormFieldWrapper>
               </div>
@@ -358,7 +359,7 @@ const ComplementaryInsuranceForm = () => {
                   updateFormData({ healthStatus: value });
                   notify();
                 }}
-                className="grid gap-3"
+                className="grid gap-2.5 sm:gap-3"
               >
                 {[
                   { value: "excellent", label: "Oui, excellente forme" },
@@ -368,10 +369,10 @@ const ComplementaryInsuranceForm = () => {
                 ].map((opt) => (
                   <label
                     key={opt.value}
-                    className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer"
+                    className="flex items-center space-x-2 p-3 sm:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer min-h-[52px]"
                   >
                     <RadioGroupItem value={opt.value} id={`hs-${opt.value}`} />
-                    <span className="text-lg flex-1">{opt.label}</span>
+                    <span className="text-base sm:text-lg flex-1">{opt.label}</span>
                   </label>
                 ))}
               </RadioGroup>
@@ -386,7 +387,7 @@ const ComplementaryInsuranceForm = () => {
               <RadioGroup
                 value={formData.familySituation}
                 onValueChange={(value) => updateFormData({ familySituation: value })}
-                className="grid sm:grid-cols-2 gap-3"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3"
               >
                 {[
                   { value: "single", label: "Seul(e)" },
@@ -396,10 +397,10 @@ const ComplementaryInsuranceForm = () => {
                 ].map((opt) => (
                   <label
                     key={opt.value}
-                    className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer"
+                    className="flex items-center space-x-2 p-3 sm:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer min-h-[52px]"
                   >
                     <RadioGroupItem value={opt.value} id={`fam-${opt.value}`} />
-                    <span className="text-lg flex-1">{opt.label}</span>
+                    <span className="text-base sm:text-lg flex-1">{opt.label}</span>
                   </label>
                 ))}
               </RadioGroup>
