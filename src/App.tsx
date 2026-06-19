@@ -51,6 +51,7 @@ import AvoirsLpp from "./pages/AvoirsLpp";
 import EstimationImmobiliere from "./pages/EstimationImmobiliere";
 import ComparateurEstimation from "./pages/comparateurs/ComparateurEstimation";
 import Partenaires from "./pages/Partenaires";
+import ComparateurComplementaire from "./pages/comparateurs/ComparateurComplementaire";
 
 import { localizedRoutes } from "./utils/localizedRoutes";
 import AdminRouter from "./admin/AdminRouter";
