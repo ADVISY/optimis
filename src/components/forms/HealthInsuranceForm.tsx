@@ -592,8 +592,8 @@ const HealthInsuranceForm = () => {
         <div className="space-y-3 md:space-y-6">
           {/* LAMal Model Card */}
           <Card className="bg-emerald-50 border-emerald-200">
-            <CardContent className="p-2.5 md:p-5">
-              <Label className="text-[10px] md:text-sm font-semibold text-emerald-900 mb-2 md:mb-4 block">
+            <CardContent className="p-3 md:p-5">
+              <Label className="text-sm md:text-sm font-semibold text-emerald-900 mb-3 md:mb-4 block">
                 {t("forms.healthInsurance.lamalModel")}
                 <span className="text-red-500 ml-1">*</span>
               </Label>
@@ -601,7 +601,7 @@ const HealthInsuranceForm = () => {
                 value={formData.lamalModel}
                 onValueChange={(value) => updateFormData({ lamalModel: value })}
 
-                className="grid grid-cols-2 gap-1.5 md:gap-3"
+                className="grid grid-cols-2 gap-2 md:gap-3"
               >
                 {[
                   { value: "standard", label: t("forms.healthInsurance.models.standard") },
@@ -609,9 +609,9 @@ const HealthInsuranceForm = () => {
                   { value: "hmo", label: t("forms.healthInsurance.models.hmo") },
                   { value: "telemed", label: t("forms.healthInsurance.models.telemed") },
                 ].map((model) => (
-                  <label key={model.value} htmlFor={model.value} className="flex items-center space-x-1.5 md:space-x-2 p-2 md:p-3 rounded-lg bg-white hover:bg-emerald-100 transition-colors cursor-pointer border border-emerald-200">
-                    <RadioGroupItem value={model.value} id={model.value} className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                    <span className="text-emerald-900 text-xs md:text-base leading-tight">
+                  <label key={model.value} htmlFor={model.value} className="flex items-center space-x-2 p-3 md:p-3 rounded-lg bg-white hover:bg-emerald-100 transition-colors cursor-pointer border border-emerald-200 min-h-11">
+                    <RadioGroupItem value={model.value} id={model.value} className="h-4 w-4 md:h-4 md:w-4 shrink-0" />
+                    <span className="text-emerald-900 text-sm md:text-base leading-tight">
                       {model.label}
                     </span>
                   </label>
@@ -622,13 +622,13 @@ const HealthInsuranceForm = () => {
 
           {/* Franchise Card */}
           <Card className="bg-emerald-50 border-emerald-200">
-            <CardContent className="p-2.5 md:p-5">
-              <Label className="text-[10px] md:text-sm font-semibold text-emerald-900 mb-1 md:mb-2 block">
+            <CardContent className="p-3 md:p-5">
+              <Label className="text-sm md:text-sm font-semibold text-emerald-900 mb-2 md:mb-2 block">
                 {t("forms.healthInsurance.franchise")}
               </Label>
-              <div className="text-center mb-2 md:mb-4">
-                <span className="text-xl md:text-3xl font-bold text-emerald-600">CHF {formData.franchise}</span>
-                <span className="text-emerald-500 text-[10px] md:text-sm ml-1 md:ml-2">/ an</span>
+              <div className="text-center mb-3 md:mb-4">
+                <span className="text-2xl md:text-3xl font-bold text-emerald-600">CHF {formData.franchise}</span>
+                <span className="text-emerald-500 text-xs md:text-sm ml-1 md:ml-2">/ an</span>
               </div>
               <Slider
                 value={[formData.franchise]}
@@ -636,9 +636,9 @@ const HealthInsuranceForm = () => {
                 min={300}
                 max={2500}
                 step={200}
-                className="py-2 md:py-4"
+                className="py-3 md:py-4 [&_[role=slider]]:h-6 [&_[role=slider]]:w-6 md:[&_[role=slider]]:h-5 md:[&_[role=slider]]:w-5"
               />
-              <div className="flex justify-between text-[10px] md:text-xs text-emerald-500 mt-1 md:mt-2">
+              <div className="flex justify-between text-[11px] md:text-xs text-emerald-500 mt-1 md:mt-2">
                 <span>CHF 300</span>
                 <span>CHF 2500</span>
               </div>
@@ -647,20 +647,20 @@ const HealthInsuranceForm = () => {
 
           {/* Accident Coverage Card */}
           <Card className="bg-emerald-50 border-emerald-200">
-            <CardContent className="p-2.5 md:p-5">
-              <div className="flex items-center space-x-2 md:space-x-3">
+            <CardContent className="p-3 md:p-5">
+              <label htmlFor="accidentCoverage" className="flex items-center space-x-3 cursor-pointer min-h-11">
                 <Checkbox
                   id="accidentCoverage"
                   checked={formData.accidentCoverage}
                   onCheckedChange={(checked) =>
                     updateFormData({ accidentCoverage: checked as boolean })
                   }
-                  className="h-4 w-4 md:h-5 md:w-5"
+                  className="h-5 w-5 md:h-5 md:w-5 shrink-0"
                 />
-                <Label htmlFor="accidentCoverage" className="cursor-pointer text-emerald-900 font-medium text-xs md:text-base">
+                <span className="text-emerald-900 font-medium text-sm md:text-base">
                   {t("forms.healthInsurance.includeAccident")}
-                </Label>
-              </div>
+                </span>
+              </label>
             </CardContent>
           </Card>
         </div>
