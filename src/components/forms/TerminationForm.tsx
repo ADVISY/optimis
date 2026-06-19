@@ -333,6 +333,16 @@ const TerminationForm = () => {
             </FormFieldWrapper>
           </div>
 
+          <FormFieldWrapper label={t("forms.healthInsurance.birthDate")} htmlFor="birthDate" required>
+            <DateInput
+              value={formData.birthDate}
+              onChange={(date) => updateFormData({ birthDate: date })}
+              placeholder="JJ/MM/AAAA"
+              maxYear={new Date().getFullYear()}
+              className="h-14 text-lg"
+            />
+          </FormFieldWrapper>
+
           <FormFieldWrapper label={t("forms.termination.address")} htmlFor="address" required>
             <Input
               id="address"
