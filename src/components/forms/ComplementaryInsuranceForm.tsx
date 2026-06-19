@@ -423,7 +423,7 @@ const ComplementaryInsuranceForm = () => {
                 value={formData.canton}
                 onValueChange={(value) => updateFormData({ canton: value })}
               >
-                <SelectTrigger className="h-14 text-lg">
+                <SelectTrigger className="h-11 sm:h-14 text-base sm:text-lg">
                   <SelectValue placeholder={t("forms.healthInsurance.selectCanton", "Sélectionnez votre canton")} />
                 </SelectTrigger>
                 <SelectContent>
@@ -440,6 +440,7 @@ const ComplementaryInsuranceForm = () => {
               <Input
                 id="postalCode"
                 type="text"
+                inputMode="numeric"
                 maxLength={4}
                 value={formData.postalCode}
                 onChange={(e) => {
@@ -447,7 +448,7 @@ const ComplementaryInsuranceForm = () => {
                   notifyDelayed();
                 }}
                 placeholder="1000"
-                className="h-14 text-lg"
+                className="h-11 sm:h-14 text-base sm:text-lg"
               />
             </FormFieldWrapper>
           </div>
@@ -455,38 +456,40 @@ const ComplementaryInsuranceForm = () => {
 
         {/* Step 6: Identité */}
         <FormStep isActive={currentStep === 6}>
-          <div className="space-y-6">
-            <div className="text-center mb-6">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-                <User className="h-8 w-8 text-primary" />
+          <div className="space-y-5 sm:space-y-6">
+            <div className="text-center mb-4 sm:mb-6">
+              <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary/10 mb-3 sm:mb-4">
+                <User className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold">{t("forms.contact.almostDone", "C'est presque terminé !")}</h3>
-              <p className="text-muted-foreground">
+              <h3 className="text-lg sm:text-xl font-semibold">{t("forms.contact.almostDone", "C'est presque terminé !")}</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
                 {t("forms.contact.nameStepDescription", "Comment pouvons-nous vous appeler ?")}
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <FormFieldWrapper label={t("forms.contact.firstName", "Prénom")} htmlFor="firstName" required error={stepErrors.firstName}>
                 <Input
                   id="firstName"
+                  autoComplete="given-name"
                   value={formData.firstName}
                   onChange={(e) => {
                     updateFormData({ firstName: e.target.value });
                     notifyDelayedLong();
                   }}
-                  className="h-14 text-lg"
+                  className="h-11 sm:h-14 text-base sm:text-lg"
                 />
               </FormFieldWrapper>
               <FormFieldWrapper label={t("forms.contact.lastName", "Nom")} htmlFor="lastName" required error={stepErrors.lastName}>
                 <Input
                   id="lastName"
+                  autoComplete="family-name"
                   value={formData.lastName}
                   onChange={(e) => {
                     updateFormData({ lastName: e.target.value });
                     notifyDelayedLong();
                   }}
-                  className="h-14 text-lg"
+                  className="h-11 sm:h-14 text-base sm:text-lg"
                 />
               </FormFieldWrapper>
             </div>
@@ -495,15 +498,15 @@ const ComplementaryInsuranceForm = () => {
 
         {/* Step 7: Contact */}
         <FormStep isActive={currentStep === 7}>
-          <div className="space-y-6">
-            <div className="text-center mb-6">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-                <Phone className="h-8 w-8 text-primary" />
+          <div className="space-y-5 sm:space-y-6">
+            <div className="text-center mb-4 sm:mb-6">
+              <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary/10 mb-3 sm:mb-4">
+                <Phone className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold">
+              <h3 className="text-lg sm:text-xl font-semibold">
                 {t("forms.contact.contactStepTitle", "Recevez votre comparatif personnalisé")}
               </h3>
-              <p className="text-muted-foreground">
+              <p className="text-sm sm:text-base text-muted-foreground">
                 {t("forms.contact.contactStepDescription", "Un expert vous contacte gratuitement et sans engagement.")}
               </p>
             </div>
@@ -519,7 +522,7 @@ const ComplementaryInsuranceForm = () => {
                   updateFormData({ email: e.target.value });
                   notifyDelayed();
                 }}
-                className={cn("h-14 text-lg", stepErrors.email && "border-red-400")}
+                className={cn("h-11 sm:h-14 text-base sm:text-lg", stepErrors.email && "border-red-400")}
               />
             </FormFieldWrapper>
 
@@ -536,9 +539,9 @@ const ComplementaryInsuranceForm = () => {
               />
             </FormFieldWrapper>
 
-            <div className="flex items-center gap-2 p-4 bg-muted/50 rounded-lg">
-              <Lock className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-              <p className="text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 p-3 sm:p-4 bg-muted/50 rounded-lg">
+              <Lock className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground flex-shrink-0" />
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 {t("forms.contact.privacyNote", "Vos données sont protégées et ne seront jamais partagées sans votre accord.")}
               </p>
             </div>
