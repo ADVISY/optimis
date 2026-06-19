@@ -478,7 +478,6 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
       termination: {
         contractType: "Type de contrat",
         currentInsurer: "Assureur actuel",
-        policyNumber: "Numéro de police",
         terminationDate: "Date de résiliation",
         cancellationReasons: "Motif(s) de résiliation",
         address: "Adresse",
@@ -560,7 +559,6 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
       termination: {
         contractType: "Vertragstyp",
         currentInsurer: "Aktueller Versicherer",
-        policyNumber: "Policennummer",
         terminationDate: "Kündigungsdatum",
         cancellationReasons: "Kündigungsgrund/-gründe",
         address: "Adresse",

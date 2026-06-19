@@ -1256,8 +1256,6 @@
       },
       "currentInsurer": "Assicuratore attuale",
       "selectInsurer": "Seleziona il tuo assicuratore",
-      "policyNumber": "Numero di polizza (opzionale)",
-      "policyNumberHelp": "Lo trovi sul tuo contratto o sulle fatture",
       "terminationDate": "Data di disdetta desiderata",
       "selectDate": "Seleziona una data",
       "address": "Indirizzo",
@@ -1282,7 +1280,7 @@
       "letterPreview": "Anteprima della lettera",
       "letterSubject": "Oggetto: Disdetta del contratto",
       "letterBody": "Con la presente, vi chiedo di disdire il mio contratto alla data indicata. Vi prego di confermare la disdetta per iscritto.",
-      "policyRef": "Riferimento polizza",
+      
       "effectiveDate": "Data di efficacia",
       "downloadPDF": "Scarica PDF",
       "compareNew": "Confronta nuove offerte",
