@@ -1312,13 +1312,17 @@
       "selectDate": "Choisir une date",
       "address": "Adresse",
       "city": "Ville",
+      "cancellationReason": "Pourquoi voulez-vous résilier ?",
       "reason": "Motif de résiliation",
       "reasons": {
         "price": "Trouver moins cher",
         "coverage": "Couverture insuffisante",
         "service": "Service client insatisfaisant",
         "moving": "Déménagement",
-        "other": "Autre raison"
+        "other": "Autre raison",
+        "tooExpensive": "Trop cher",
+        "poorService": "Service client médiocre",
+        "poorReimbursement": "Prestations mal remboursées"
       },
       "generateLetter": "Générer ma lettre de résiliation",
       "letterGenerated": "Lettre générée avec succès !",

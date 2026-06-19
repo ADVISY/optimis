@@ -1262,13 +1262,17 @@
       "selectDate": "Seleziona una data",
       "address": "Indirizzo",
       "city": "Città",
+      "cancellationReason": "Perché vuole disdire?",
       "reason": "Motivo della disdetta",
       "reasons": {
         "price": "Trovare un prezzo migliore",
         "coverage": "Copertura insufficiente",
         "service": "Servizio clienti insoddisfacente",
         "moving": "Trasloco",
-        "other": "Altro motivo"
+        "other": "Altro motivo",
+        "tooExpensive": "Troppo caro",
+        "poorService": "Servizio clienti mediocre",
+        "poorReimbursement": "Prestazioni mal rimborsate"
       },
       "generateLetter": "Genera la lettera di disdetta",
       "letterGenerated": "Lettera generata con successo!",
