@@ -61,6 +61,7 @@ const FormContainer = ({
       data-form-container
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onFocus={handleFocusIn}
       className={`w-full mx-auto shadow-2xl border-2 md:border-4 border-emerald-700 rounded-xl md:rounded-3xl overflow-hidden ring-2 ring-emerald-400/30 animate-fade-in text-emerald-900 relative ${
         isLarge ? "max-w-4xl" : "max-w-3xl"
       }`}
