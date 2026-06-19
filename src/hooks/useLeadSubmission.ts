@@ -287,7 +287,7 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
       });
     }
 
-    // Termination: translate contract type
+    // Termination: translate contract type and combine cancellation reasons
     if (formType === "termination") {
       const contractMap: Record<string, string> = {
         health: t("forms.termination.types.health"),
@@ -299,6 +299,17 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
       };
       if (typeof normalizedFormData.contractType === "string") {
         normalizedFormData.contractType = contractMap[normalizedFormData.contractType] ?? normalizedFormData.contractType;
+      }
+
+      const reasonMap: Record<string, string> = {
+        tooExpensive: t("forms.termination.reasons.tooExpensive"),
+        poorService: t("forms.termination.reasons.poorService"),
+        poorReimbursement: t("forms.termination.reasons.poorReimbursement"),
+      };
+      if (Array.isArray(normalizedFormData.cancellationReasons)) {
+        normalizedFormData.cancellationReasons = normalizedFormData.cancellationReasons
+          .map((r) => reasonMap[String(r)] ?? String(r))
+          .join(", ");
       }
     }
 
