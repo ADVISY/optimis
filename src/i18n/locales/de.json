@@ -1262,13 +1262,17 @@
       "selectDate": "Datum auswählen",
       "address": "Adresse",
       "city": "Ort",
+      "cancellationReason": "Warum möchten Sie kündigen?",
       "reason": "Kündigungsgrund",
       "reasons": {
         "price": "Günstigeres Angebot finden",
         "coverage": "Unzureichende Deckung",
         "service": "Unzufriedenheit mit Kundenservice",
         "moving": "Umzug",
-        "other": "Anderer Grund"
+        "other": "Anderer Grund",
+        "tooExpensive": "Zu teuer",
+        "poorService": "Miserabler Kundenservice",
+        "poorReimbursement": "Leistungen schlecht erstattet"
       },
       "generateLetter": "Kündigungsschreiben erstellen",
       "letterGenerated": "Schreiben erfolgreich erstellt!",

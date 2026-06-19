@@ -15,6 +15,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { CalendarIcon, Download, CheckCircle, FileText, Lock, User, Phone } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 import { format } from "date-fns";
 import { fr, de, it } from "date-fns/locale";
 import { cn } from "@/lib/utils";
@@ -29,6 +30,7 @@ interface TerminationFormData {
   currentInsurer: string;
   policyNumber: string;
   terminationDate: Date | null;
+  cancellationReasons: string[];
   firstName: string;
   lastName: string;
   email: string;
@@ -58,6 +60,7 @@ const TerminationForm = () => {
     currentInsurer: "",
     policyNumber: "",
     terminationDate: null,
+    cancellationReasons: [],
     firstName: "",
     lastName: "",
     email: "",
@@ -108,7 +111,7 @@ const TerminationForm = () => {
   const validateStep = (step: number): boolean => {
     switch (step) {
       case 1: return formData.contractType !== "" && formData.currentInsurer.trim() !== "";
-      case 2: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "" && formData.address.trim() !== "" && formData.postalCode.replace(/\D/g, '').length >= 4 && formData.city.trim() !== "";
+      case 2: return formData.cancellationReasons.length > 0 && formData.firstName.trim() !== "" && formData.lastName.trim() !== "" && formData.address.trim() !== "" && formData.postalCode.replace(/\D/g, '').length >= 4 && formData.city.trim() !== "";
       case 3: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
     }
@@ -118,6 +121,15 @@ const TerminationForm = () => {
     if (step === 2) return getIdentityErrors(formData.firstName, formData.lastName);
     if (step === 3) return getContactErrors(formData.email, formData.phone);
     return {};
+  };
+
+  const toggleReason = (reason: string) => {
+    const current = formData.cancellationReasons;
+    if (current.includes(reason)) {
+      updateFormData({ cancellationReasons: current.filter((r) => r !== reason) });
+    } else {
+      updateFormData({ cancellationReasons: [...current, reason] });
+    }
   };
 
   const canProceed = validateStep(currentStep);
@@ -274,9 +286,35 @@ const TerminationForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 2: Identity & Address */}
+      {/* Step 2: Cancellation Reason, Identity & Address */}
       <FormStep isActive={currentStep === 2}>
         <div className="space-y-6">
+          <FormFieldWrapper label={t("forms.termination.cancellationReason")} required>
+            <div className="grid gap-3">
+              {[
+                { value: "tooExpensive", label: t("forms.termination.reasons.tooExpensive") },
+                { value: "poorService", label: t("forms.termination.reasons.poorService") },
+                { value: "poorReimbursement", label: t("forms.termination.reasons.poorReimbursement") },
+              ].map((reason) => (
+                <div
+                  key={reason.value}
+                  className="flex items-center space-x-3 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer"
+                  onClick={() => toggleReason(reason.value)}
+                >
+                  <Checkbox
+                    id={`reason-${reason.value}`}
+                    checked={formData.cancellationReasons.includes(reason.value)}
+                    onCheckedChange={() => toggleReason(reason.value)}
+                    className="h-5 w-5"
+                  />
+                  <Label htmlFor={`reason-${reason.value}`} className="cursor-pointer flex-1 text-base sm:text-lg">
+                    {reason.label}
+                  </Label>
+                </div>
+              ))}
+            </div>
+          </FormFieldWrapper>
+
           <div className="text-center mb-6">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
               <User className="h-8 w-8 text-primary" />
