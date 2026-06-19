@@ -668,9 +668,9 @@ const HealthInsuranceForm = () => {
 
       {/* Step 5: Complementary Insurance - Tier Selection */}
       <FormStep isActive={currentStep === 5}>
-        <div className="space-y-3 md:space-y-6">
-          <div className="text-center mb-2 md:mb-6">
-            <h3 className="text-sm md:text-lg font-semibold mb-1 md:mb-2 text-emerald-900">
+        <div className="space-y-4 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <h3 className="text-base md:text-lg font-semibold mb-1 md:mb-2 text-emerald-900">
               {t("forms.healthInsurance.complementaryTitle", "Assurances complémentaires")}
             </h3>
             <p className="text-xs md:text-sm text-emerald-600">
@@ -694,16 +694,16 @@ const HealthInsuranceForm = () => {
                   : { dental: true, hospitalization: true, glasses: true, alternativeMedicine: true, worldwide: true }
               }); notify(); }}
             >
-              <CardContent className="p-2 md:p-4 text-center">
-                <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-emerald-100 mb-1 md:mb-3">
-                  <span className="text-emerald-700 text-sm md:text-xl font-bold">B</span>
+              <CardContent className="p-3 md:p-4 text-center">
+                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-emerald-100 mb-2 md:mb-3">
+                  <span className="text-emerald-700 text-base md:text-xl font-bold">B</span>
                 </div>
-                <h4 className="font-bold text-xs md:text-lg text-emerald-800">BASIC</h4>
-                <p className="text-[10px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
+                <h4 className="font-bold text-sm md:text-lg text-emerald-800">BASIC</h4>
+                <p className="text-[11px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
                   {t("forms.healthInsurance.tiers.basicDesc", "Couverture essentielle")}
                 </p>
-                <div className="text-sm md:text-2xl font-bold text-emerald-700">
-                  ~39<span className="text-[10px] md:text-sm font-normal text-emerald-500">/m</span>
+                <div className="text-base md:text-2xl font-bold text-emerald-700 mt-1">
+                  ~39<span className="text-[11px] md:text-sm font-normal text-emerald-500">/m</span>
                 </div>
               </CardContent>
             </Card>
@@ -723,20 +723,20 @@ const HealthInsuranceForm = () => {
               }); notify(); }}
             >
               <div className="absolute -top-2 md:-top-3 left-1/2 -translate-x-1/2">
-                <span className="bg-violet-500 text-white text-[8px] md:text-xs font-semibold px-1.5 md:px-3 py-0.5 md:py-1 rounded-full whitespace-nowrap">
+                <span className="bg-violet-500 text-white text-[10px] md:text-xs font-semibold px-2 md:px-3 py-0.5 md:py-1 rounded-full whitespace-nowrap">
                   ★
                 </span>
               </div>
-              <CardContent className="p-2 md:p-4 text-center pt-3 md:pt-4">
-                <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-violet-100 mb-1 md:mb-3">
-                  <span className="text-violet-600 text-sm md:text-xl font-bold">P</span>
+              <CardContent className="p-3 md:p-4 text-center pt-3 md:pt-4">
+                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-violet-100 mb-2 md:mb-3">
+                  <span className="text-violet-600 text-base md:text-xl font-bold">P</span>
                 </div>
-                <h4 className="font-bold text-xs md:text-lg text-violet-600">PREMIUM</h4>
-                <p className="text-[10px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
+                <h4 className="font-bold text-sm md:text-lg text-violet-600">PREMIUM</h4>
+                <p className="text-[11px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
                   {t("forms.healthInsurance.tiers.premiumDesc", "Rapport qualité-prix optimal")}
                 </p>
-                <div className="text-sm md:text-2xl font-bold text-violet-600">
-                  ~91<span className="text-[10px] md:text-sm font-normal text-emerald-500">/m</span>
+                <div className="text-base md:text-2xl font-bold text-violet-600 mt-1">
+                  ~91<span className="text-[11px] md:text-sm font-normal text-emerald-500">/m</span>
                 </div>
               </CardContent>
             </Card>
@@ -755,16 +755,16 @@ const HealthInsuranceForm = () => {
                   : { dental: true, hospitalization: true, glasses: true, alternativeMedicine: true, worldwide: true }
               }); notify(); }}
             >
-              <CardContent className="p-2 md:p-4 text-center">
-                <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-amber-100 mb-1 md:mb-3">
-                  <span className="text-amber-600 text-sm md:text-xl font-bold">D</span>
+              <CardContent className="p-3 md:p-4 text-center">
+                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-amber-100 mb-2 md:mb-3">
+                  <span className="text-amber-600 text-base md:text-xl font-bold">D</span>
                 </div>
-                <h4 className="font-bold text-xs md:text-lg text-amber-600">DIAMOND</h4>
-                <p className="text-[10px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
+                <h4 className="font-bold text-sm md:text-lg text-amber-600">DIAMOND</h4>
+                <p className="text-[11px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
                   {t("forms.healthInsurance.tiers.diamondDesc", "Couverture maximale")}
                 </p>
-                <div className="text-sm md:text-2xl font-bold text-amber-600">
-                  ~175<span className="text-[10px] md:text-sm font-normal text-emerald-500">/m</span>
+                <div className="text-base md:text-2xl font-bold text-amber-600 mt-1">
+                  ~175<span className="text-[11px] md:text-sm font-normal text-emerald-500">/m</span>
                 </div>
               </CardContent>
             </Card>
