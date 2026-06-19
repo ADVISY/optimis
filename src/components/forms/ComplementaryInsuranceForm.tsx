@@ -407,7 +407,6 @@ const ComplementaryInsuranceForm = () => {
 
             <FormFieldWrapper label="Date de naissance" htmlFor="birthDate" required>
               <DateInput
-                id="birthDate"
                 value={formData.birthDate}
                 onChange={(date) => updateFormData({ birthDate: date })}
               />
