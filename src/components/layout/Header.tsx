@@ -49,7 +49,6 @@ const assurancesCategories = [
       { labelKey: "megaMenu.prenatalInsurance", href: "/assurance-prenatale-offres" },
       { labelKey: "megaMenu.healthModel", href: "/blog/quel-modele-dassurance-maladie-choisir" },
       { labelKey: "megaMenu.dentalInsurance", href: "/blog/assurance-dentaire-complementaire-en-suisse-reponses-aux-questions-essentielles" },
-      { labelKey: "megaMenu.healthChange2024", href: "/blog/changement-dassurance-maladie-delais-et-demarches-en-2024" },
       { labelKey: "megaMenu.healthSubsidy", href: "/blog/subside-dassurance-maladie-comment-ca-marche-et-comment-faire-sa-demande" },
     ]
   },
