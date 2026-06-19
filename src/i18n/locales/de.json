@@ -1256,8 +1256,6 @@
       },
       "currentInsurer": "Aktueller Versicherer",
       "selectInsurer": "Wählen Sie Ihren Versicherer",
-      "policyNumber": "Policennummer (optional)",
-      "policyNumberHelp": "Sie finden diese auf Ihrem Vertrag oder Ihren Rechnungen",
       "terminationDate": "Gewünschtes Kündigungsdatum",
       "selectDate": "Datum auswählen",
       "address": "Adresse",
@@ -1282,7 +1280,7 @@
       "letterPreview": "Vorschau des Schreibens",
       "letterSubject": "Betreff: Vertragskündigung",
       "letterBody": "Hiermit bitte ich Sie, meinen Vertrag zum angegebenen Datum zu kündigen. Bitte bestätigen Sie mir die Kündigung schriftlich.",
-      "policyRef": "Policenreferenz",
+      
       "effectiveDate": "Wirksamkeitsdatum",
       "downloadPDF": "Als PDF herunterladen",
       "compareNew": "Neue Angebote vergleichen",
