@@ -110,16 +110,17 @@ const TerminationForm = () => {
 
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 1: return formData.contractType !== "" && formData.currentInsurer.trim() !== "";
-      case 2: return formData.cancellationReasons.length > 0 && formData.firstName.trim() !== "" && formData.lastName.trim() !== "" && formData.address.trim() !== "" && formData.postalCode.replace(/\D/g, '').length >= 4 && formData.city.trim() !== "";
-      case 3: return isValidEmail(formData.email) && isValidPhone(formData.phone);
+      case 1: return formData.contractType !== "";
+      case 2: return formData.currentInsurer.trim() !== "";
+      case 3: return formData.cancellationReasons.length > 0 && formData.firstName.trim() !== "" && formData.lastName.trim() !== "" && formData.address.trim() !== "" && formData.postalCode.replace(/\D/g, '').length >= 4 && formData.city.trim() !== "";
+      case 4: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
     }
   };
 
   const getStepErrors = (step: number): Record<string, string> => {
-    if (step === 2) return getIdentityErrors(formData.firstName, formData.lastName);
-    if (step === 3) return getContactErrors(formData.email, formData.phone);
+    if (step === 3) return getIdentityErrors(formData.firstName, formData.lastName);
+    if (step === 4) return getContactErrors(formData.email, formData.phone);
     return {};
   };
 
