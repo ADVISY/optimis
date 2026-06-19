@@ -26,7 +26,6 @@ const FORM_WEBHOOKS: Record<string, string> = {
   "estimation-immobiliere": "https://hooks.zapier.com/hooks/catch/21326682/un8s2j4/",
   "partner": "https://hooks.zapier.com/hooks/catch/21326682/u79h7km/",
   "prenatal-insurance": "https://hooks.zapier.com/hooks/catch/21326682/4oeel8v/",
-  "complementary-insurance": "https://hooks.zapier.com/hooks/catch/21326682/unuyrh7/",
 };
 
 // Language-specific webhook overrides (key: `${formType}:${lang}`)
