@@ -209,20 +209,17 @@ const TerminationForm = () => {
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
     >
-      {/* Step 1: Contract Info */}
+      {/* Step 1: Contract Type */}
       <FormStep isActive={currentStep === 1}>
         <div className="space-y-4">
           <FormFieldWrapper label={t("forms.termination.contractType")} required>
             <RadioGroup
               value={formData.contractType}
-              onValueChange={(value) => updateFormData({ contractType: value })}
+              onValueChange={(value) => { updateFormData({ contractType: value }); notify(); }}
               className="grid gap-3"
             >
               {[
                 { value: "health", label: t("forms.termination.types.health") },
-                { value: "car", label: t("forms.termination.types.car") },
-                { value: "household", label: t("forms.termination.types.household") },
-                { value: "legal", label: t("forms.termination.types.legal") },
                 { value: "life", label: t("forms.termination.types.life") },
                 { value: "other", label: t("forms.termination.types.other") },
               ].map((type) => (
@@ -235,7 +232,12 @@ const TerminationForm = () => {
               ))}
             </RadioGroup>
           </FormFieldWrapper>
+        </div>
+      </FormStep>
 
+      {/* Step 2: Insurer details */}
+      <FormStep isActive={currentStep === 2}>
+        <div className="space-y-4">
           <FormFieldWrapper label={t("forms.termination.currentInsurer")} htmlFor="currentInsurer" required>
             <Input
               id="currentInsurer"
@@ -287,8 +289,8 @@ const TerminationForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 2: Cancellation Reason, Identity & Address */}
-      <FormStep isActive={currentStep === 2}>
+      {/* Step 3: Cancellation Reason, Identity & Address */}
+      <FormStep isActive={currentStep === 3}>
         <div className="space-y-6">
           <FormFieldWrapper label={t("forms.termination.cancellationReason")} required>
             <div className="grid gap-3">
@@ -379,8 +381,8 @@ const TerminationForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 3: Contact */}
-      <FormStep isActive={currentStep === 3}>
+      {/* Step 4: Contact */}
+      <FormStep isActive={currentStep === 4}>
         <div className="space-y-6">
           <div className="text-center mb-6">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
@@ -418,8 +420,8 @@ const TerminationForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 4: Confirmation */}
-      <FormStep isActive={currentStep === 4}>
+      {/* Step 5: Confirmation */}
+      <FormStep isActive={currentStep === 5}>
         <div className="space-y-4">
           <div className="bg-muted/50 p-4 rounded-lg">
             <p className="text-sm text-muted-foreground">
