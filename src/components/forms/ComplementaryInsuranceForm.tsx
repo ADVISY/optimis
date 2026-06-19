@@ -252,7 +252,7 @@ const ComplementaryInsuranceForm = () => {
         <FormStep isActive={currentStep === 1}>
           <div className="space-y-4">
             <FormFieldWrapper label="Qu'est-ce qui est important pour vous ? (choix multiples)" required>
-              <div className="grid sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                 {NEEDS_OPTIONS.map((opt) => {
                   const Icon = opt.icon;
                   const checked = formData.needs[opt.key];
@@ -260,7 +260,7 @@ const ComplementaryInsuranceForm = () => {
                     <label
                       key={opt.key}
                       className={cn(
-                        "flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition-all",
+                        "flex items-center gap-3 p-3 sm:p-4 border rounded-lg cursor-pointer transition-all min-h-[52px]",
                         checked
                           ? "border-primary bg-primary/5 ring-2 ring-primary/20"
                           : "border-border hover:bg-muted/50",
@@ -271,7 +271,7 @@ const ComplementaryInsuranceForm = () => {
                         onCheckedChange={() => toggleNeed(opt.key)}
                       />
                       <Icon className="h-5 w-5 text-primary flex-shrink-0" />
-                      <span className="text-base flex-1">{opt.label}</span>
+                      <span className="text-sm sm:text-base flex-1 leading-snug">{opt.label}</span>
                     </label>
                   );
                 })}
@@ -301,21 +301,21 @@ const ComplementaryInsuranceForm = () => {
                   });
                   if (!yes) notify();
                 }}
-                className="grid grid-cols-2 gap-3"
+                className="grid grid-cols-2 gap-2.5 sm:gap-3"
               >
-                <label className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+                <label className="flex items-center justify-center space-x-2 p-3 sm:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer min-h-[52px]">
                   <RadioGroupItem value="yes" id="ci-yes" />
-                  <span className="text-lg">Oui</span>
+                  <span className="text-base sm:text-lg">Oui</span>
                 </label>
-                <label className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+                <label className="flex items-center justify-center space-x-2 p-3 sm:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer min-h-[52px]">
                   <RadioGroupItem value="no" id="ci-no" />
-                  <span className="text-lg">Non</span>
+                  <span className="text-base sm:text-lg">Non</span>
                 </label>
               </RadioGroup>
             </FormFieldWrapper>
 
             {formData.hasCurrentInsurance === true && (
-              <div className="grid sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <FormFieldWrapper label="Quel est votre assureur actuel ?" htmlFor="currentInsurer" required>
                   <Input
                     id="currentInsurer"
@@ -325,13 +325,14 @@ const ComplementaryInsuranceForm = () => {
                       notifyDelayedLong();
                     }}
                     placeholder="Ex. Helsana, CSS, SWICA..."
-                    className="h-14 text-lg"
+                    className="h-11 sm:h-14 text-base sm:text-lg"
                   />
                 </FormFieldWrapper>
                 <FormFieldWrapper label="Depuis quelle année ?" htmlFor="currentSince">
                   <Input
                     id="currentSince"
                     type="number"
+                    inputMode="numeric"
                     min={1970}
                     max={new Date().getFullYear()}
                     value={formData.currentSince}
@@ -340,7 +341,7 @@ const ComplementaryInsuranceForm = () => {
                       notifyDelayedLong();
                     }}
                     placeholder="Ex. 2018"
-                    className="h-14 text-lg"
+                    className="h-11 sm:h-14 text-base sm:text-lg"
                   />
                 </FormFieldWrapper>
               </div>
@@ -358,7 +359,7 @@ const ComplementaryInsuranceForm = () => {
                   updateFormData({ healthStatus: value });
                   notify();
                 }}
-                className="grid gap-3"
+                className="grid gap-2.5 sm:gap-3"
               >
                 {[
                   { value: "excellent", label: "Oui, excellente forme" },
@@ -368,10 +369,10 @@ const ComplementaryInsuranceForm = () => {
                 ].map((opt) => (
                   <label
                     key={opt.value}
-                    className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer"
+                    className="flex items-center space-x-2 p-3 sm:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer min-h-[52px]"
                   >
                     <RadioGroupItem value={opt.value} id={`hs-${opt.value}`} />
-                    <span className="text-lg flex-1">{opt.label}</span>
+                    <span className="text-base sm:text-lg flex-1">{opt.label}</span>
                   </label>
                 ))}
               </RadioGroup>
@@ -386,7 +387,7 @@ const ComplementaryInsuranceForm = () => {
               <RadioGroup
                 value={formData.familySituation}
                 onValueChange={(value) => updateFormData({ familySituation: value })}
-                className="grid sm:grid-cols-2 gap-3"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3"
               >
                 {[
                   { value: "single", label: "Seul(e)" },
@@ -396,10 +397,10 @@ const ComplementaryInsuranceForm = () => {
                 ].map((opt) => (
                   <label
                     key={opt.value}
-                    className="flex items-center space-x-2 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer"
+                    className="flex items-center space-x-2 p-3 sm:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer min-h-[52px]"
                   >
                     <RadioGroupItem value={opt.value} id={`fam-${opt.value}`} />
-                    <span className="text-lg flex-1">{opt.label}</span>
+                    <span className="text-base sm:text-lg flex-1">{opt.label}</span>
                   </label>
                 ))}
               </RadioGroup>
@@ -422,7 +423,7 @@ const ComplementaryInsuranceForm = () => {
                 value={formData.canton}
                 onValueChange={(value) => updateFormData({ canton: value })}
               >
-                <SelectTrigger className="h-14 text-lg">
+                <SelectTrigger className="h-11 sm:h-14 text-base sm:text-lg">
                   <SelectValue placeholder={t("forms.healthInsurance.selectCanton", "Sélectionnez votre canton")} />
                 </SelectTrigger>
                 <SelectContent>
@@ -439,6 +440,7 @@ const ComplementaryInsuranceForm = () => {
               <Input
                 id="postalCode"
                 type="text"
+                inputMode="numeric"
                 maxLength={4}
                 value={formData.postalCode}
                 onChange={(e) => {
@@ -446,7 +448,7 @@ const ComplementaryInsuranceForm = () => {
                   notifyDelayed();
                 }}
                 placeholder="1000"
-                className="h-14 text-lg"
+                className="h-11 sm:h-14 text-base sm:text-lg"
               />
             </FormFieldWrapper>
           </div>
@@ -454,38 +456,40 @@ const ComplementaryInsuranceForm = () => {
 
         {/* Step 6: Identité */}
         <FormStep isActive={currentStep === 6}>
-          <div className="space-y-6">
-            <div className="text-center mb-6">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-                <User className="h-8 w-8 text-primary" />
+          <div className="space-y-5 sm:space-y-6">
+            <div className="text-center mb-4 sm:mb-6">
+              <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary/10 mb-3 sm:mb-4">
+                <User className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold">{t("forms.contact.almostDone", "C'est presque terminé !")}</h3>
-              <p className="text-muted-foreground">
+              <h3 className="text-lg sm:text-xl font-semibold">{t("forms.contact.almostDone", "C'est presque terminé !")}</h3>
+              <p className="text-sm sm:text-base text-muted-foreground">
                 {t("forms.contact.nameStepDescription", "Comment pouvons-nous vous appeler ?")}
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <FormFieldWrapper label={t("forms.contact.firstName", "Prénom")} htmlFor="firstName" required error={stepErrors.firstName}>
                 <Input
                   id="firstName"
+                  autoComplete="given-name"
                   value={formData.firstName}
                   onChange={(e) => {
                     updateFormData({ firstName: e.target.value });
                     notifyDelayedLong();
                   }}
-                  className="h-14 text-lg"
+                  className="h-11 sm:h-14 text-base sm:text-lg"
                 />
               </FormFieldWrapper>
               <FormFieldWrapper label={t("forms.contact.lastName", "Nom")} htmlFor="lastName" required error={stepErrors.lastName}>
                 <Input
                   id="lastName"
+                  autoComplete="family-name"
                   value={formData.lastName}
                   onChange={(e) => {
                     updateFormData({ lastName: e.target.value });
                     notifyDelayedLong();
                   }}
-                  className="h-14 text-lg"
+                  className="h-11 sm:h-14 text-base sm:text-lg"
                 />
               </FormFieldWrapper>
             </div>
@@ -494,15 +498,15 @@ const ComplementaryInsuranceForm = () => {
 
         {/* Step 7: Contact */}
         <FormStep isActive={currentStep === 7}>
-          <div className="space-y-6">
-            <div className="text-center mb-6">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-                <Phone className="h-8 w-8 text-primary" />
+          <div className="space-y-5 sm:space-y-6">
+            <div className="text-center mb-4 sm:mb-6">
+              <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary/10 mb-3 sm:mb-4">
+                <Phone className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold">
+              <h3 className="text-lg sm:text-xl font-semibold">
                 {t("forms.contact.contactStepTitle", "Recevez votre comparatif personnalisé")}
               </h3>
-              <p className="text-muted-foreground">
+              <p className="text-sm sm:text-base text-muted-foreground">
                 {t("forms.contact.contactStepDescription", "Un expert vous contacte gratuitement et sans engagement.")}
               </p>
             </div>
@@ -518,7 +522,7 @@ const ComplementaryInsuranceForm = () => {
                   updateFormData({ email: e.target.value });
                   notifyDelayed();
                 }}
-                className={cn("h-14 text-lg", stepErrors.email && "border-red-400")}
+                className={cn("h-11 sm:h-14 text-base sm:text-lg", stepErrors.email && "border-red-400")}
               />
             </FormFieldWrapper>
 
@@ -535,9 +539,9 @@ const ComplementaryInsuranceForm = () => {
               />
             </FormFieldWrapper>
 
-            <div className="flex items-center gap-2 p-4 bg-muted/50 rounded-lg">
-              <Lock className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-              <p className="text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 p-3 sm:p-4 bg-muted/50 rounded-lg">
+              <Lock className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground flex-shrink-0" />
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 {t("forms.contact.privacyNote", "Vos données sont protégées et ne seront jamais partagées sans votre accord.")}
               </p>
             </div>
