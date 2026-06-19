@@ -60,6 +60,7 @@ export const localizedRoutes: LocalizedRoutes = {
   realEstate: { fr: "estimation-immobiliere", de: "immobilienbewertung", it: "valutazione-immobiliare" },
   realEstateLanding: { fr: "estimation-immobiliere-gratuite", de: "kostenlose-immobilienbewertung", it: "valutazione-immobiliare-gratuita" },
   partners: { fr: "partenaires", de: "partner", it: "partner" },
+  complementaryLanding: { fr: "assurance-complementaire-offres", de: "zusatzversicherung-vergleich", it: "confronto-assicurazione-complementare" },
 };
 
 // Helper function to get the localized path for a route

@@ -51,6 +51,7 @@ import AvoirsLpp from "./pages/AvoirsLpp";
 import EstimationImmobiliere from "./pages/EstimationImmobiliere";
 import ComparateurEstimation from "./pages/comparateurs/ComparateurEstimation";
 import Partenaires from "./pages/Partenaires";
+import ComparateurComplementaire from "./pages/comparateurs/ComparateurComplementaire";
 
 import { localizedRoutes } from "./utils/localizedRoutes";
 import AdminRouter from "./admin/AdminRouter";
@@ -139,6 +140,7 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("realEstate", <EstimationImmobiliere />)}
         {createLocalizedRoutes("realEstateLanding", <ComparateurEstimation />)}
         {createLocalizedRoutes("partners", <Partenaires />)}
+        {createLocalizedRoutes("complementaryLanding", <ComparateurComplementaire />)}
         
         {/* Legacy comparateur routes - redirect to new URLs */}
         <Route path="/comparateur/sante" element={<Navigate to="../assurance-maladie-landing" replace />} />
