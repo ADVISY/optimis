@@ -16,6 +16,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Button } from "@/components/ui/button";
 import { CalendarIcon, Download, CheckCircle, FileText, Lock, User, Phone } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
+import DateInput from "@/components/ui/date-input";
 import { format } from "date-fns";
 import { fr, de, it } from "date-fns/locale";
 import { cn } from "@/lib/utils";
@@ -62,6 +63,7 @@ const TerminationForm = () => {
     cancellationReasons: [],
     firstName: "",
     lastName: "",
+    birthDate: null,
     email: "",
     phone: "",
     address: "",
@@ -111,7 +113,7 @@ const TerminationForm = () => {
     switch (step) {
       case 1: return formData.contractType !== "";
       case 2: return formData.currentInsurer.trim() !== "";
-      case 3: return formData.cancellationReasons.length > 0 && formData.firstName.trim() !== "" && formData.lastName.trim() !== "" && formData.address.trim() !== "" && formData.postalCode.replace(/\D/g, '').length >= 4 && formData.city.trim() !== "";
+      case 3: return formData.cancellationReasons.length > 0 && formData.firstName.trim() !== "" && formData.lastName.trim() !== "" && formData.birthDate !== null && formData.address.trim() !== "" && formData.postalCode.replace(/\D/g, '').length >= 4 && formData.city.trim() !== "";
       case 4: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
     }
