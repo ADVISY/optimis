@@ -30,6 +30,7 @@ interface TerminationFormData {
   currentInsurer: string;
   policyNumber: string;
   terminationDate: Date | null;
+  cancellationReasons: string[];
   firstName: string;
   lastName: string;
   email: string;
