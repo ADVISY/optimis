@@ -45,6 +45,7 @@ const assurancesCategories = [
     icon: HeartPulse,
     href: "/assurance-sante",
     subLinks: [
+      { labelKey: "megaMenu.complementaryInsurance", href: "/assurance-complementaire-offres" },
       { labelKey: "megaMenu.prenatalInsurance", href: "/assurance-prenatale-offres" },
       { labelKey: "megaMenu.healthModel", href: "/blog/quel-modele-dassurance-maladie-choisir" },
       { labelKey: "megaMenu.dentalInsurance", href: "/blog/assurance-dentaire-complementaire-en-suisse-reponses-aux-questions-essentielles" },
