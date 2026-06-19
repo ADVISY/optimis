@@ -192,6 +192,15 @@ const AssuranceSante = () => {
                 <p className="text-muted-foreground">
                   {t('healthInsurance.notMandatory')}
                 </p>
+                <div className="mt-6 p-6 rounded-xl bg-primary/5 border border-primary/20 flex flex-col md:flex-row items-start md:items-center gap-4">
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-foreground mb-1">Comparez vos assurances complémentaires</h4>
+                    <p className="text-sm text-muted-foreground">Hospitalisation, dentaire, fitness, médecine alternative… trouvez la meilleure couverture LCA.</p>
+                  </div>
+                  <Button onClick={() => navigate(localizedPath("/assurance-complementaire-offres"))} className="whitespace-nowrap">
+                    Comparer les complémentaires
+                  </Button>
+                </div>
               </section>
 
               <section id="section-6" className="mb-12">
