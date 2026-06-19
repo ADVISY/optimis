@@ -472,28 +472,26 @@ const HealthInsuranceForm = () => {
               label={t("forms.healthInsurance.currentInsurer")}
               htmlFor="currentInsurer"
             >
-              <Select
+              <select
+                id="currentInsurer"
                 value={formData.currentInsurer}
-                onValueChange={(value) => { updateFormData({ currentInsurer: value }); notify(); }}
+                onChange={(e) => { updateFormData({ currentInsurer: e.target.value }); notify(); }}
+                className="flex h-11 md:h-12 w-full items-center justify-between rounded-xl border-2 border-input bg-white text-gray-900 px-4 text-sm md:text-base ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:border-primary/50 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%236b7280%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[length:16px_16px] bg-[right_1rem_center] bg-no-repeat pr-10"
               >
-                <SelectTrigger className="h-11 md:h-12 text-sm md:text-base">
-                  <SelectValue placeholder={t("forms.healthInsurance.selectInsurer")} />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="assura">Assura</SelectItem>
-                  <SelectItem value="css">CSS</SelectItem>
-                  <SelectItem value="groupe-mutuel">Groupe Mutuel</SelectItem>
-                  <SelectItem value="helsana">Helsana</SelectItem>
-                  <SelectItem value="sanitas">Sanitas</SelectItem>
-                  <SelectItem value="swica">Swica</SelectItem>
-                  <SelectItem value="visana">Visana</SelectItem>
-                  <SelectItem value="concordia">Concordia</SelectItem>
-                  <SelectItem value="kpt">KPT</SelectItem>
-                  <SelectItem value="atupri">Atupri</SelectItem>
-                  <SelectItem value="sympany">Sympany</SelectItem>
-                  <SelectItem value="other">{t("forms.healthInsurance.otherInsurer")}</SelectItem>
-                </SelectContent>
-              </Select>
+                <option value="" disabled>{t("forms.healthInsurance.selectInsurer")}</option>
+                <option value="assura">Assura</option>
+                <option value="css">CSS</option>
+                <option value="groupe-mutuel">Groupe Mutuel</option>
+                <option value="helsana">Helsana</option>
+                <option value="sanitas">Sanitas</option>
+                <option value="swica">Swica</option>
+                <option value="visana">Visana</option>
+                <option value="concordia">Concordia</option>
+                <option value="kpt">KPT</option>
+                <option value="atupri">Atupri</option>
+                <option value="sympany">Sympany</option>
+                <option value="other">{t("forms.healthInsurance.otherInsurer")}</option>
+              </select>
             </FormFieldWrapper>
           )}
         </div>
@@ -576,9 +574,12 @@ const HealthInsuranceForm = () => {
             <Input
               id="postalCode"
               type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              autoComplete="postal-code"
               maxLength={4}
               value={formData.postalCode}
-              onChange={(e) => { updateFormData({ postalCode: e.target.value }); notify(); }}
+              onChange={(e) => { updateFormData({ postalCode: e.target.value.replace(/\D/g, '').slice(0, 4) }); notify(); }}
               placeholder="1000"
               className="h-11 md:h-12 text-sm md:text-base"
             />
@@ -591,8 +592,8 @@ const HealthInsuranceForm = () => {
         <div className="space-y-3 md:space-y-6">
           {/* LAMal Model Card */}
           <Card className="bg-emerald-50 border-emerald-200">
-            <CardContent className="p-2.5 md:p-5">
-              <Label className="text-[10px] md:text-sm font-semibold text-emerald-900 mb-2 md:mb-4 block">
+            <CardContent className="p-3 md:p-5">
+              <Label className="text-sm md:text-sm font-semibold text-emerald-900 mb-3 md:mb-4 block">
                 {t("forms.healthInsurance.lamalModel")}
                 <span className="text-red-500 ml-1">*</span>
               </Label>
@@ -600,7 +601,7 @@ const HealthInsuranceForm = () => {
                 value={formData.lamalModel}
                 onValueChange={(value) => updateFormData({ lamalModel: value })}
 
-                className="grid grid-cols-2 gap-1.5 md:gap-3"
+                className="grid grid-cols-2 gap-2 md:gap-3"
               >
                 {[
                   { value: "standard", label: t("forms.healthInsurance.models.standard") },
@@ -608,9 +609,9 @@ const HealthInsuranceForm = () => {
                   { value: "hmo", label: t("forms.healthInsurance.models.hmo") },
                   { value: "telemed", label: t("forms.healthInsurance.models.telemed") },
                 ].map((model) => (
-                  <label key={model.value} htmlFor={model.value} className="flex items-center space-x-1.5 md:space-x-2 p-2 md:p-3 rounded-lg bg-white hover:bg-emerald-100 transition-colors cursor-pointer border border-emerald-200">
-                    <RadioGroupItem value={model.value} id={model.value} className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                    <span className="text-emerald-900 text-xs md:text-base leading-tight">
+                  <label key={model.value} htmlFor={model.value} className="flex items-center space-x-2 p-3 md:p-3 rounded-lg bg-white hover:bg-emerald-100 transition-colors cursor-pointer border border-emerald-200 min-h-11">
+                    <RadioGroupItem value={model.value} id={model.value} className="h-4 w-4 md:h-4 md:w-4 shrink-0" />
+                    <span className="text-emerald-900 text-sm md:text-base leading-tight">
                       {model.label}
                     </span>
                   </label>
@@ -621,13 +622,13 @@ const HealthInsuranceForm = () => {
 
           {/* Franchise Card */}
           <Card className="bg-emerald-50 border-emerald-200">
-            <CardContent className="p-2.5 md:p-5">
-              <Label className="text-[10px] md:text-sm font-semibold text-emerald-900 mb-1 md:mb-2 block">
+            <CardContent className="p-3 md:p-5">
+              <Label className="text-sm md:text-sm font-semibold text-emerald-900 mb-2 md:mb-2 block">
                 {t("forms.healthInsurance.franchise")}
               </Label>
-              <div className="text-center mb-2 md:mb-4">
-                <span className="text-xl md:text-3xl font-bold text-emerald-600">CHF {formData.franchise}</span>
-                <span className="text-emerald-500 text-[10px] md:text-sm ml-1 md:ml-2">/ an</span>
+              <div className="text-center mb-3 md:mb-4">
+                <span className="text-2xl md:text-3xl font-bold text-emerald-600">CHF {formData.franchise}</span>
+                <span className="text-emerald-500 text-xs md:text-sm ml-1 md:ml-2">/ an</span>
               </div>
               <Slider
                 value={[formData.franchise]}
@@ -635,9 +636,9 @@ const HealthInsuranceForm = () => {
                 min={300}
                 max={2500}
                 step={200}
-                className="py-2 md:py-4"
+                className="py-3 md:py-4 [&_[role=slider]]:h-6 [&_[role=slider]]:w-6 md:[&_[role=slider]]:h-5 md:[&_[role=slider]]:w-5"
               />
-              <div className="flex justify-between text-[10px] md:text-xs text-emerald-500 mt-1 md:mt-2">
+              <div className="flex justify-between text-[11px] md:text-xs text-emerald-500 mt-1 md:mt-2">
                 <span>CHF 300</span>
                 <span>CHF 2500</span>
               </div>
@@ -646,20 +647,20 @@ const HealthInsuranceForm = () => {
 
           {/* Accident Coverage Card */}
           <Card className="bg-emerald-50 border-emerald-200">
-            <CardContent className="p-2.5 md:p-5">
-              <div className="flex items-center space-x-2 md:space-x-3">
+            <CardContent className="p-3 md:p-5">
+              <label htmlFor="accidentCoverage" className="flex items-center space-x-3 cursor-pointer min-h-11">
                 <Checkbox
                   id="accidentCoverage"
                   checked={formData.accidentCoverage}
                   onCheckedChange={(checked) =>
                     updateFormData({ accidentCoverage: checked as boolean })
                   }
-                  className="h-4 w-4 md:h-5 md:w-5"
+                  className="h-5 w-5 md:h-5 md:w-5 shrink-0"
                 />
-                <Label htmlFor="accidentCoverage" className="cursor-pointer text-emerald-900 font-medium text-xs md:text-base">
+                <span className="text-emerald-900 font-medium text-sm md:text-base">
                   {t("forms.healthInsurance.includeAccident")}
-                </Label>
-              </div>
+                </span>
+              </label>
             </CardContent>
           </Card>
         </div>
@@ -667,9 +668,9 @@ const HealthInsuranceForm = () => {
 
       {/* Step 5: Complementary Insurance - Tier Selection */}
       <FormStep isActive={currentStep === 5}>
-        <div className="space-y-3 md:space-y-6">
-          <div className="text-center mb-2 md:mb-6">
-            <h3 className="text-sm md:text-lg font-semibold mb-1 md:mb-2 text-emerald-900">
+        <div className="space-y-4 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <h3 className="text-base md:text-lg font-semibold mb-1 md:mb-2 text-emerald-900">
               {t("forms.healthInsurance.complementaryTitle", "Assurances complémentaires")}
             </h3>
             <p className="text-xs md:text-sm text-emerald-600">
@@ -693,16 +694,16 @@ const HealthInsuranceForm = () => {
                   : { dental: true, hospitalization: true, glasses: true, alternativeMedicine: true, worldwide: true }
               }); notify(); }}
             >
-              <CardContent className="p-2 md:p-4 text-center">
-                <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-emerald-100 mb-1 md:mb-3">
-                  <span className="text-emerald-700 text-sm md:text-xl font-bold">B</span>
+              <CardContent className="p-3 md:p-4 text-center">
+                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-emerald-100 mb-2 md:mb-3">
+                  <span className="text-emerald-700 text-base md:text-xl font-bold">B</span>
                 </div>
-                <h4 className="font-bold text-xs md:text-lg text-emerald-800">BASIC</h4>
-                <p className="text-[10px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
+                <h4 className="font-bold text-sm md:text-lg text-emerald-800">BASIC</h4>
+                <p className="text-[11px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
                   {t("forms.healthInsurance.tiers.basicDesc", "Couverture essentielle")}
                 </p>
-                <div className="text-sm md:text-2xl font-bold text-emerald-700">
-                  ~39<span className="text-[10px] md:text-sm font-normal text-emerald-500">/m</span>
+                <div className="text-base md:text-2xl font-bold text-emerald-700 mt-1">
+                  ~39<span className="text-[11px] md:text-sm font-normal text-emerald-500">/m</span>
                 </div>
               </CardContent>
             </Card>
@@ -722,20 +723,20 @@ const HealthInsuranceForm = () => {
               }); notify(); }}
             >
               <div className="absolute -top-2 md:-top-3 left-1/2 -translate-x-1/2">
-                <span className="bg-violet-500 text-white text-[8px] md:text-xs font-semibold px-1.5 md:px-3 py-0.5 md:py-1 rounded-full whitespace-nowrap">
+                <span className="bg-violet-500 text-white text-[10px] md:text-xs font-semibold px-2 md:px-3 py-0.5 md:py-1 rounded-full whitespace-nowrap">
                   ★
                 </span>
               </div>
-              <CardContent className="p-2 md:p-4 text-center pt-3 md:pt-4">
-                <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-violet-100 mb-1 md:mb-3">
-                  <span className="text-violet-600 text-sm md:text-xl font-bold">P</span>
+              <CardContent className="p-3 md:p-4 text-center pt-3 md:pt-4">
+                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-violet-100 mb-2 md:mb-3">
+                  <span className="text-violet-600 text-base md:text-xl font-bold">P</span>
                 </div>
-                <h4 className="font-bold text-xs md:text-lg text-violet-600">PREMIUM</h4>
-                <p className="text-[10px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
+                <h4 className="font-bold text-sm md:text-lg text-violet-600">PREMIUM</h4>
+                <p className="text-[11px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
                   {t("forms.healthInsurance.tiers.premiumDesc", "Rapport qualité-prix optimal")}
                 </p>
-                <div className="text-sm md:text-2xl font-bold text-violet-600">
-                  ~91<span className="text-[10px] md:text-sm font-normal text-emerald-500">/m</span>
+                <div className="text-base md:text-2xl font-bold text-violet-600 mt-1">
+                  ~91<span className="text-[11px] md:text-sm font-normal text-emerald-500">/m</span>
                 </div>
               </CardContent>
             </Card>
@@ -754,16 +755,16 @@ const HealthInsuranceForm = () => {
                   : { dental: true, hospitalization: true, glasses: true, alternativeMedicine: true, worldwide: true }
               }); notify(); }}
             >
-              <CardContent className="p-2 md:p-4 text-center">
-                <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 rounded-full bg-amber-100 mb-1 md:mb-3">
-                  <span className="text-amber-600 text-sm md:text-xl font-bold">D</span>
+              <CardContent className="p-3 md:p-4 text-center">
+                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-amber-100 mb-2 md:mb-3">
+                  <span className="text-amber-600 text-base md:text-xl font-bold">D</span>
                 </div>
-                <h4 className="font-bold text-xs md:text-lg text-amber-600">DIAMOND</h4>
-                <p className="text-[10px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
+                <h4 className="font-bold text-sm md:text-lg text-amber-600">DIAMOND</h4>
+                <p className="text-[11px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
                   {t("forms.healthInsurance.tiers.diamondDesc", "Couverture maximale")}
                 </p>
-                <div className="text-sm md:text-2xl font-bold text-amber-600">
-                  ~175<span className="text-[10px] md:text-sm font-normal text-emerald-500">/m</span>
+                <div className="text-base md:text-2xl font-bold text-amber-600 mt-1">
+                  ~175<span className="text-[11px] md:text-sm font-normal text-emerald-500">/m</span>
                 </div>
               </CardContent>
             </Card>

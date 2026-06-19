@@ -1,100 +1,83 @@
+# Audit UX mobile — Formulaires Maladie & Subside
 
-
-# Plan de Recréation du Site Optimis
-
-## 🎯 Objectif
-Recréer le site **le-comparateur-optimis.ch** en React/Tailwind, visuellement identique avec toutes les fonctionnalités.
+Voici les problèmes constatés et les corrections proposées. Cochez celles à appliquer.
 
 ---
 
-## Phase 1 : Fondations
+## 1. Sélecteurs (Select) instables sur mobile
 
-### Design System
-- Palette de couleurs Optimis (vert émeraude #2D5A3D, vert pastel, blanc)
-- Configuration du favicon avec la mascotte lama
-- Intégration du logo SVG Optimis
+**Problème** : les menus déroulants Radix (`Select`) se ferment parfois immédiatement sur mobile à cause des événements tactiles. Déjà corrigé pour le canton, mais subsiste sur :
+- Maladie étape 1 : *assureur actuel*
+- Subside étape 2 : *assureur actuel* + *franchise actuelle*
 
-### Navigation
-- Header sticky avec logo et menu (Assurances, Finances, Services, Blog)
-- Bouton "Prendre Rendez-vous" → lien Calendly
-- Menu hamburger responsive pour mobile
-- Footer avec contacts, liens légaux et bouton WhatsApp flottant
+**Correction** : remplacer ces `Select` par un `<select>` natif (picker système iOS/Android, 100 % fiable).
 
 ---
 
-## Phase 2 : Page d'Accueil
+## 2. Étape 4 Maladie (LAMal/Franchise) — textes trop petits
 
-### Section Héro
-- Fond vert pastel dégradé
-- Titre : "Comparez les assurances et trouvez les meilleures offres"
-- Mascotte Lama avec monocle (image fournie)
-- Boutons d'action
+**Problème** : les libellés sont en `text-[10px]` / `text-xs`, les radios en `h-3.5 w-3.5`. Sous le seuil de lisibilité et de confort tactile.
 
-### Sélecteur d'Assurances
-- 4 cartes cliquables avec icônes :
-  - 🚗 Assurance Voiture
-  - 🏥 Assurance Santé  
-  - ⚖️ Protection Juridique
-  - 🏠 Assurance Ménage
-
-### Section "Comment ça marche"
-- 4 étapes visuelles : Choisissez → Remplissez → Comparez → Économisez
-
-### Statistiques de Confiance
-- +10,000 utilisateurs
-- 95% de recommandation
-- 20+ partenaires assureurs
-
-### Témoignages Clients
-- Carrousel avec avis (Laurent Weber, Claire Muller, etc.)
-
-### FAQ & Partenaires
+**Correction** :
+- Labels minimum `text-sm` (14 px) sur mobile
+- Radios `h-4 w-4` minimum
+- Padding cartes `p-3` minimum
+- Slider franchise : poignée élargie pour le pouce
 
 ---
 
-## Phase 3 : Pages Assurances
+## 3. Étape 5 Maladie (BASIC/PREMIUM/DIAMOND)
 
-### Formulaires Multi-étapes
-Chaque type d'assurance aura son formulaire interactif :
+**Problème** : grille 3 colonnes très serrée, badges `text-[8px]`, prix `text-sm`. Difficile à lire et à viser.
 
-1. **Assurance Voiture** - Type véhicule, marque, année, conducteur
-2. **Assurance Santé** - Informations personnelles, couverture souhaitée
-3. **Protection Juridique** - Formulaire simplifié
-4. **Assurance Ménage** - Logement, valeur des biens
-
-### Fonctionnalités
-- Progression visuelle par étapes
-- Validation des champs en temps réel
-- Récapitulatif avant envoi
+**Correction** :
+- Augmenter typographie : titres `text-sm`, prix `text-base`, badges `text-[10px]`
+- Padding cartes `p-3` minimum
+- Garder 3 colonnes (besoin métier), mais cartes plus aérées verticalement
 
 ---
 
-## Phase 4 : Blog & Pages Légales
+## 4. Trust badges du conteneur
 
-- Liste des articles avec images et extraits
-- Pages : Politique de confidentialité, Mentions légales, CGU
+**Problème** : `text-[9px]` avec icônes 10 px — quasi illisible.
 
----
-
-## Phase 5 : Backend (Supabase)
-
-### Base de données
-- Table `devis_requests` pour stocker les demandes
-- Table `contacts` pour les messages
-
-### Notifications
-- Email automatique lors d'une nouvelle demande de devis
+**Correction** : passer à `text-[11px]` + icônes `h-3 w-3`.
 
 ---
 
-## 📱 Responsive Design
-- Desktop, tablette et mobile optimisés
-- Menu hamburger sur mobile
-- Formulaires adaptés au tactile
+## 5. Codes postaux et revenus — mauvais clavier mobile
+
+**Problème** :
+- Maladie étape 3 *code postal* : pas de `inputMode="numeric"` → clavier alphanumérique
+- Subside étape 3 *revenu* : `type="number"` (clavier décimal, pas pavé numérique propre sur iOS)
+
+**Correction** : `type="text" inputMode="numeric" pattern="[0-9]*"` sur ces deux champs.
 
 ---
 
-## 🔗 Intégrations
-- **Calendly** : Prise de rendez-vous
-- **WhatsApp** : Bouton de contact flottant
+## 6. Le clavier mobile masque le champ actif
 
+**Problème** : quand le clavier s'ouvre sur les inputs (prénom, email, téléphone, etc.), le champ peut se retrouver caché derrière. L'utilisateur ne voit pas ce qu'il tape.
+
+**Correction** : ajouter `scroll-margin-bottom: 30vh` global sur les inputs des formulaires + `onFocus` qui fait un `scrollIntoView({ block: 'center' })` doux. Geste invisible mais transformatif sur mobile.
+
+---
+
+## 7. Date de naissance — saisie mobile
+
+**Problème** : `DateInput` doit avoir `inputMode="numeric"` pour ouvrir le pavé numérique au lieu du clavier texte.
+
+**Correction** : vérifier et forcer `inputMode="numeric"` sur le composant `DateInput`.
+
+---
+
+## Hors périmètre (pas touché sauf demande)
+
+- Logique métier / calculs primes
+- Structure des étapes
+- Design des résultats
+- Webhook Zapier
+
+---
+
+**Validez les points à appliquer (ex: "tous", "1, 2, 5, 6", etc.) et je code.**
