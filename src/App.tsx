@@ -152,6 +152,7 @@ const LanguageRoutes = () => {
         <Route path="/comparateur/pilier-3a" element={<Navigate to="../3eme-pilier-offres" replace />} />
         <Route path="/comparateur/hypotheque" element={<Navigate to="../hypotheque-offres" replace />} />
         <Route path="/comparateur/professionnel" element={<Navigate to="../assurance-entreprise-offres" replace />} />
+        <Route path="/comparateur/complementaire" element={<Navigate to="/fr/assurance-complementaire-offres" replace />} />
         
         {/* Legacy routes - redirect to new slugs */}
         <Route path="/politique-confidentialite" element={<Navigate to="../politique-de-confidentialite" replace />} />
