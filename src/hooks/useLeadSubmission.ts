@@ -480,6 +480,7 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
         etatDeSante: "État de santé",
         situationFamiliale: "Situation familiale",
         dateDeNaissance: "Date de naissance",
+      },
       partner: {
         budget: "Budget mensuel",
         sector: "Secteur d'activité",
