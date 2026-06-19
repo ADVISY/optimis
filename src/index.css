@@ -228,4 +228,12 @@
   .animate-wa-glow {
     animation: wa-glow 2s ease-in-out infinite;
   }
+
+  /* Mobile: keep active form field visible above the soft keyboard */
+  [data-form-container] input,
+  [data-form-container] select,
+  [data-form-container] textarea {
+    scroll-margin-top: 20vh;
+    scroll-margin-bottom: 40vh;
+  }
 }
