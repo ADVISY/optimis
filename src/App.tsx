@@ -140,6 +140,7 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("realEstate", <EstimationImmobiliere />)}
         {createLocalizedRoutes("realEstateLanding", <ComparateurEstimation />)}
         {createLocalizedRoutes("partners", <Partenaires />)}
+        {createLocalizedRoutes("complementaryLanding", <ComparateurComplementaire />)}
         
         {/* Legacy comparateur routes - redirect to new URLs */}
         <Route path="/comparateur/sante" element={<Navigate to="../assurance-maladie-landing" replace />} />
