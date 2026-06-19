@@ -356,10 +356,11 @@ const SubsidyForm = () => {
           <FormFieldWrapper label={t("forms.subsidy.incomeRange")} htmlFor="incomeRange" required>
             <Input
               id="incomeRange"
-              type="number"
+              type="text"
               inputMode="numeric"
+              pattern="[0-9]*"
               value={formData.incomeRange}
-              onChange={(e) => updateFormData({ incomeRange: e.target.value })}
+              onChange={(e) => updateFormData({ incomeRange: e.target.value.replace(/\D/g, '') })}
               placeholder="65000"
               className="h-11 md:h-14 text-sm md:text-lg"
             />
