@@ -307,47 +307,43 @@ const SubsidyForm = () => {
           {formData.hasCurrentInsurance === "yes" && (
             <>
               <FormFieldWrapper label={t("forms.subsidy.currentInsurer")} htmlFor="currentInsurer">
-                <Select
+                <select
+                  id="currentInsurer"
                   value={formData.currentInsurer}
-                  onValueChange={(value) => updateFormData({ currentInsurer: value })}
+                  onChange={(e) => updateFormData({ currentInsurer: e.target.value })}
+                  className="flex h-11 md:h-14 w-full items-center justify-between rounded-xl border-2 border-input bg-white text-gray-900 px-4 text-sm md:text-lg ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:border-primary/50 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%236b7280%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[length:16px_16px] bg-[right_1rem_center] bg-no-repeat pr-10"
                 >
-                  <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-                    <SelectValue placeholder={t("forms.subsidy.selectInsurer")} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="assura">Assura</SelectItem>
-                    <SelectItem value="css">CSS</SelectItem>
-                    <SelectItem value="groupe-mutuel">Groupe Mutuel</SelectItem>
-                    <SelectItem value="helsana">Helsana</SelectItem>
-                    <SelectItem value="sanitas">Sanitas</SelectItem>
-                    <SelectItem value="swica">Swica</SelectItem>
-                    <SelectItem value="visana">Visana</SelectItem>
-                    <SelectItem value="concordia">Concordia</SelectItem>
-                    <SelectItem value="kpt">KPT</SelectItem>
-                    <SelectItem value="atupri">Atupri</SelectItem>
-                    <SelectItem value="sympany">Sympany</SelectItem>
-                    <SelectItem value="other">{t("forms.subsidy.otherInsurer")}</SelectItem>
-                  </SelectContent>
-                </Select>
+                  <option value="" disabled>{t("forms.subsidy.selectInsurer")}</option>
+                  <option value="assura">Assura</option>
+                  <option value="css">CSS</option>
+                  <option value="groupe-mutuel">Groupe Mutuel</option>
+                  <option value="helsana">Helsana</option>
+                  <option value="sanitas">Sanitas</option>
+                  <option value="swica">Swica</option>
+                  <option value="visana">Visana</option>
+                  <option value="concordia">Concordia</option>
+                  <option value="kpt">KPT</option>
+                  <option value="atupri">Atupri</option>
+                  <option value="sympany">Sympany</option>
+                  <option value="other">{t("forms.subsidy.otherInsurer")}</option>
+                </select>
               </FormFieldWrapper>
 
               <FormFieldWrapper label={t("forms.subsidy.currentDeductible")} htmlFor="currentDeductible">
-                <Select
+                <select
+                  id="currentDeductible"
                   value={formData.currentDeductible}
-                  onValueChange={(value) => updateFormData({ currentDeductible: value })}
+                  onChange={(e) => updateFormData({ currentDeductible: e.target.value })}
+                  className="flex h-11 md:h-14 w-full items-center justify-between rounded-xl border-2 border-input bg-white text-gray-900 px-4 text-sm md:text-lg ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:border-primary/50 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%236b7280%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[length:16px_16px] bg-[right_1rem_center] bg-no-repeat pr-10"
                 >
-                  <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-                    <SelectValue placeholder={t("forms.subsidy.selectDeductible")} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="300">CHF 300</SelectItem>
-                    <SelectItem value="500">CHF 500</SelectItem>
-                    <SelectItem value="1000">CHF 1'000</SelectItem>
-                    <SelectItem value="1500">CHF 1'500</SelectItem>
-                    <SelectItem value="2000">CHF 2'000</SelectItem>
-                    <SelectItem value="2500">CHF 2'500</SelectItem>
-                  </SelectContent>
-                </Select>
+                  <option value="" disabled>{t("forms.subsidy.selectDeductible")}</option>
+                  <option value="300">CHF 300</option>
+                  <option value="500">CHF 500</option>
+                  <option value="1000">CHF 1'000</option>
+                  <option value="1500">CHF 1'500</option>
+                  <option value="2000">CHF 2'000</option>
+                  <option value="2500">CHF 2'500</option>
+                </select>
               </FormFieldWrapper>
             </>
           )}
