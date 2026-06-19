@@ -40,7 +40,7 @@ interface TerminationFormData {
   city: string;
 }
 
-const TOTAL_STEPS = 4;
+const TOTAL_STEPS = 5;
 
 const TerminationForm = () => {
   const { t, i18n } = useTranslation();
