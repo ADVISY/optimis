@@ -103,7 +103,7 @@ const ComplementaryInsuranceForm = () => {
   };
 
   const { submitLead, isSubmitting } = useLeadSubmission({
-    formType: "health-insurance",
+    formType: "complementary-insurance",
   });
 
   const {
