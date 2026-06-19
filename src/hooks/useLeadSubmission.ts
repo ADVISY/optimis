@@ -480,6 +480,7 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
         currentInsurer: "Assureur actuel",
         policyNumber: "Numéro de police",
         terminationDate: "Date de résiliation",
+        cancellationReasons: "Motif(s) de résiliation",
         address: "Adresse",
         city: "Ville",
       },
