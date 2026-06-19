@@ -287,10 +287,10 @@ const TerminationForm = () => {
                 { value: "poorService", label: t("forms.termination.reasons.poorService") },
                 { value: "poorReimbursement", label: t("forms.termination.reasons.poorReimbursement") },
               ].map((reason) => (
-                <div
+                <Label
                   key={reason.value}
+                  htmlFor={`reason-${reason.value}`}
                   className="flex items-center space-x-3 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer"
-                  onClick={() => toggleReason(reason.value)}
                 >
                   <Checkbox
                     id={`reason-${reason.value}`}
@@ -298,10 +298,10 @@ const TerminationForm = () => {
                     onCheckedChange={() => toggleReason(reason.value)}
                     className="h-5 w-5"
                   />
-                  <Label htmlFor={`reason-${reason.value}`} className="cursor-pointer flex-1 text-base sm:text-lg">
+                  <span className="flex-1 text-base sm:text-lg">
                     {reason.label}
-                  </Label>
-                </div>
+                  </span>
+                </Label>
               ))}
             </div>
           </FormFieldWrapper>
