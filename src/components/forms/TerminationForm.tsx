@@ -32,6 +32,7 @@ interface TerminationFormData {
   cancellationReasons: string[];
   firstName: string;
   lastName: string;
+  birthDate: Date | null;
   email: string;
   phone: string;
   address: string;
