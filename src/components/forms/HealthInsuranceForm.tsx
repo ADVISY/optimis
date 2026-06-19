@@ -574,9 +574,12 @@ const HealthInsuranceForm = () => {
             <Input
               id="postalCode"
               type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              autoComplete="postal-code"
               maxLength={4}
               value={formData.postalCode}
-              onChange={(e) => { updateFormData({ postalCode: e.target.value }); notify(); }}
+              onChange={(e) => { updateFormData({ postalCode: e.target.value.replace(/\D/g, '').slice(0, 4) }); notify(); }}
               placeholder="1000"
               className="h-11 md:h-12 text-sm md:text-base"
             />
