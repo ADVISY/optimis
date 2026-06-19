@@ -60,6 +60,7 @@ const TerminationForm = () => {
     currentInsurer: "",
     policyNumber: "",
     terminationDate: null,
+    cancellationReasons: [],
     firstName: "",
     lastName: "",
     email: "",
