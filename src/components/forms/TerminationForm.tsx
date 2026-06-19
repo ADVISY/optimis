@@ -123,6 +123,15 @@ const TerminationForm = () => {
     return {};
   };
 
+  const toggleReason = (reason: string) => {
+    const current = formData.cancellationReasons;
+    if (current.includes(reason)) {
+      updateFormData({ cancellationReasons: current.filter((r) => r !== reason) });
+    } else {
+      updateFormData({ cancellationReasons: [...current, reason] });
+    }
+  };
+
   const canProceed = validateStep(currentStep);
   const { notify, notifyDelayed, notifyDelayedLong } = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep, handleSubmit);
   const stepErrors = attemptedNext ? getStepErrors(currentStep) : {};
