@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { parsePhoneNumberFromString } from "npm:libphonenumber-js@1.13.1";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -192,46 +193,66 @@ function buildProspectEmail(prenom: string, produitLabel: string): string {
   const greeting = prenom ? `Merci ${prenom}` : "Merci";
   return `<!DOCTYPE html>
 <html lang="fr">
-<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head>
-<body style="margin:0; padding:0; background-color:#F5F7FA; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color:#1a1a1a;">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#F5F7FA; padding:48px 16px;">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light only" />
+<meta name="supported-color-schemes" content="light only" />
+<style>
+  :root { color-scheme: light only; supported-color-schemes: light only; }
+  /* Force mode clair sur Gmail dark mode (inversion automatique) */
+  [data-ogsc] body, [data-ogsb] body { background-color: #F5F7FA !important; }
+  [data-ogsc] .light-bg, [data-ogsb] .light-bg { background-color: #ffffff !important; }
+  [data-ogsc] .light-text-dark, [data-ogsb] .light-text-dark { color: #0f172a !important; }
+  [data-ogsc] .light-text-muted, [data-ogsb] .light-text-muted { color: #475569 !important; }
+  [data-ogsc] .light-text-gray, [data-ogsb] .light-text-gray { color: #64748B !important; }
+  [data-ogsc] .light-text-green, [data-ogsb] .light-text-green { color: #34664B !important; }
+  [data-ogsc] .light-bg-card, [data-ogsb] .light-bg-card { background-color: #F8FAFC !important; }
+  [data-ogsc] .light-bg-footer, [data-ogsb] .light-bg-footer { background-color: #F8FAFC !important; }
+  @media (prefers-color-scheme: dark) {
+    body, .light-bg, .light-bg-card, .light-bg-footer { background-color: #ffffff !important; }
+    .light-text-dark { color: #0f172a !important; }
+    .light-text-muted { color: #475569 !important; }
+    .light-text-gray { color: #64748B !important; }
+    .light-text-green { color: #34664B !important; }
+  }
+</style>
+</head>
+<body style="margin:0; padding:0; background-color:#F5F7FA !important; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color:#0f172a !important;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#F5F7FA !important; padding:48px 16px;">
     <tr><td align="center">
-      <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px; background-color:#ffffff; border-radius:20px; overflow:hidden; box-shadow:0 4px 24px rgba(15,23,42,0.06);">
-        <!-- HEADER : fond blanc, logo coloré (au lieu de inversé) -->
-        <tr><td align="center" style="padding:48px 40px 24px; background-color:#ffffff; border-bottom:1px solid #F1F5F9;">
+      <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" class="light-bg" style="max-width:600px; background-color:#ffffff !important; border-radius:20px; overflow:hidden; box-shadow:0 4px 24px rgba(15,23,42,0.06);">
+        <tr><td align="center" class="light-bg" style="padding:48px 40px 24px; background-color:#ffffff !important; border-bottom:1px solid #F1F5F9;">
           <img src="https://iuuefrxcmrcdbbuyzhqf.supabase.co/storage/v1/object/public/brand/logo-optimis.png" alt="Optimis" width="140" style="display:block; height:auto; max-width:140px;" />
         </td></tr>
-        <!-- CORPS -->
-        <tr><td style="padding:40px 48px 40px;">
-          <h1 style="margin:0 0 8px; font-size:32px; line-height:1.2; color:#34664B; font-weight:700; letter-spacing:-0.5px;">${greeting}.</h1>
-          <p style="margin:0 0 24px; font-size:17px; line-height:1.6; color:#475569;">Votre demande de <strong style="color:#0f172a;">${produitLabel}</strong> a bien été reçue.</p>
-          <p style="margin:0 0 36px; font-size:16px; line-height:1.6; color:#475569;">Un conseiller vous contactera sous <strong style="color:#0f172a;">24 heures</strong> pour vous présenter les meilleures offres adaptées à votre situation.</p>
+        <tr><td class="light-bg" style="padding:40px 48px 40px; background-color:#ffffff !important;">
+          <h1 class="light-text-green" style="margin:0 0 8px; font-size:32px; line-height:1.2; color:#34664B !important; font-weight:700; letter-spacing:-0.5px;">${greeting}.</h1>
+          <p class="light-text-muted" style="margin:0 0 24px; font-size:17px; line-height:1.6; color:#475569 !important;">Votre demande de <strong class="light-text-dark" style="color:#0f172a !important;">${produitLabel}</strong> a bien été reçue.</p>
+          <p class="light-text-muted" style="margin:0 0 36px; font-size:16px; line-height:1.6; color:#475569 !important;">Un conseiller vous contactera sous <strong class="light-text-dark" style="color:#0f172a !important;">24 heures</strong> pour vous présenter les meilleures offres adaptées à votre situation.</p>
 
-          <!-- ENCART ÉTAPES : fond gris clair neutre, plus aéré -->
-          <div style="background-color:#F8FAFC; border:1px solid #E2E8F0; border-radius:14px; padding:28px 28px 24px; margin-bottom:32px;">
-            <h3 style="margin:0 0 20px; font-size:12px; font-weight:700; color:#64748B; text-transform:uppercase; letter-spacing:1.2px;">Prochaines étapes</h3>
+          <div class="light-bg-card" style="background-color:#F8FAFC !important; border:1px solid #E2E8F0; border-radius:14px; padding:28px 28px 24px; margin-bottom:32px;">
+            <h3 class="light-text-gray" style="margin:0 0 20px; font-size:12px; font-weight:700; color:#64748B !important; text-transform:uppercase; letter-spacing:1.2px;">Prochaines étapes</h3>
             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
               <tr><td style="padding:0 0 16px;"><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
-                <td valign="top" style="width:36px;"><div style="width:28px; height:28px; border-radius:50%; background-color:#ffffff; border:1.5px solid #34664B; color:#34664B; text-align:center; font-size:13px; line-height:25px; font-weight:700;">1</div></td>
-                <td style="padding-left:14px; font-size:15px; line-height:1.5; color:#334155;">Notre équipe analyse votre demande et compare les meilleures offres.</td>
+                <td valign="top" style="width:36px;"><div style="width:28px; height:28px; border-radius:50%; background-color:#ffffff !important; border:1.5px solid #34664B; color:#34664B !important; text-align:center; font-size:13px; line-height:25px; font-weight:700;">1</div></td>
+                <td style="padding-left:14px; font-size:15px; line-height:1.5; color:#334155 !important;">Notre équipe analyse votre demande et compare les meilleures offres.</td>
               </tr></table></td></tr>
               <tr><td style="padding:0 0 16px;"><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
-                <td valign="top" style="width:36px;"><div style="width:28px; height:28px; border-radius:50%; background-color:#ffffff; border:1.5px solid #34664B; color:#34664B; text-align:center; font-size:13px; line-height:25px; font-weight:700;">2</div></td>
-                <td style="padding-left:14px; font-size:15px; line-height:1.5; color:#334155;">Un conseiller spécialisé vous appelle pour discuter de vos besoins.</td>
+                <td valign="top" style="width:36px;"><div style="width:28px; height:28px; border-radius:50%; background-color:#ffffff !important; border:1.5px solid #34664B; color:#34664B !important; text-align:center; font-size:13px; line-height:25px; font-weight:700;">2</div></td>
+                <td style="padding-left:14px; font-size:15px; line-height:1.5; color:#334155 !important;">Un conseiller spécialisé vous appelle pour discuter de vos besoins.</td>
               </tr></table></td></tr>
               <tr><td><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
-                <td valign="top" style="width:36px;"><div style="width:28px; height:28px; border-radius:50%; background-color:#34664B; color:#ffffff; text-align:center; font-size:13px; line-height:28px; font-weight:700;">3</div></td>
-                <td style="padding-left:14px; font-size:15px; line-height:1.5; color:#334155;">Vous recevez une proposition personnalisée et 100% gratuite.</td>
+                <td valign="top" style="width:36px;"><div style="width:28px; height:28px; border-radius:50%; background-color:#34664B !important; color:#ffffff !important; text-align:center; font-size:13px; line-height:28px; font-weight:700;">3</div></td>
+                <td style="padding-left:14px; font-size:15px; line-height:1.5; color:#334155 !important;">Vous recevez une proposition personnalisée et 100% gratuite.</td>
               </tr></table></td></tr>
             </table>
           </div>
 
-          <p style="margin:0; font-size:14px; line-height:1.5; color:#64748B; text-align:center;">À très bientôt,<br><strong style="color:#34664B; font-weight:600;">L'équipe Optimis</strong></p>
+          <p class="light-text-gray" style="margin:0; font-size:14px; line-height:1.5; color:#64748B !important; text-align:center;">À très bientôt,<br><strong class="light-text-green" style="color:#34664B !important; font-weight:600;">L'équipe Optimis</strong></p>
         </td></tr>
-        <!-- FOOTER : fond gris très clair -->
-        <tr><td style="padding:24px 48px; background-color:#F8FAFC; border-top:1px solid #E2E8F0; text-align:center;">
-          <p style="margin:0 0 6px; font-size:12px; color:#94A3B8;">Optimislink Sàrl · Place de la Fontaine 9 · 1868 Collombey</p>
-          <p style="margin:0; font-size:12px; color:#94A3B8;">Question ? <a href="mailto:lesiteoptimis@gmail.com" style="color:#34664B; text-decoration:none; font-weight:600;">lesiteoptimis@gmail.com</a></p>
+        <tr><td class="light-bg-footer" style="padding:24px 48px; background-color:#F8FAFC !important; border-top:1px solid #E2E8F0; text-align:center;">
+          <p style="margin:0 0 6px; font-size:12px; color:#94A3B8 !important;">Optimislink Sàrl · Place de la Fontaine 9 · 1868 Collombey</p>
+          <p style="margin:0; font-size:12px; color:#94A3B8 !important;">Question ? <a href="mailto:lesiteoptimis@gmail.com" style="color:#34664B !important; text-decoration:none; font-weight:600;">lesiteoptimis@gmail.com</a></p>
         </td></tr>
       </table>
     </td></tr>
@@ -262,6 +283,77 @@ async function sendProspectConfirmation(email: string, prenom: string, formType:
     if (!res.ok) {
       const errText = await res.text().catch(() => "");
       return { ok: false, error: `Resend ${res.status}: ${errText.slice(0, 200)}` };
+    }
+    return { ok: true };
+  } catch (e: any) {
+    return { ok: false, error: e?.message ?? String(e) };
+  }
+}
+
+// ----------------------------------------------------------------------------
+// SMS DE CONFIRMATION AU PROSPECT (via Twilio Messages API)
+// ----------------------------------------------------------------------------
+// NB: Twilio Verify (utilisé pour les OTP) n'envoie QUE des codes. Pour un SMS
+// libre, on passe par l'API Messages, qui nécessite un expéditeur :
+//   - TWILIO_MESSAGING_SERVICE_SID  (recommandé), OU
+//   - TWILIO_SMS_FROM = "Optimis"   (Sender ID alphanumérique, OK en CH/FR), OU
+//                       "+41..."     (numéro Twilio acheté)
+// Si aucun n'est défini, le SMS est simplement sauté (l'email part quand même).
+// ----------------------------------------------------------------------------
+const COMBINING_MARKS = new RegExp("[\\u0300-\\u036f]", "g");
+function stripAccents(s: string): string {
+  return s.normalize("NFD").replace(COMBINING_MARKS, "");
+}
+
+function normalizeToE164(phone: string): string | null {
+  const trimmed = phone.trim();
+  let parsed = parsePhoneNumberFromString(trimmed);
+  if (parsed?.isValid()) return parsed.number;
+  for (const country of ["CH", "FR", "DE", "IT", "ES", "PT", "BE", "AT", "LU"] as const) {
+    parsed = parsePhoneNumberFromString(trimmed, country);
+    if (parsed?.isValid()) return parsed.number;
+  }
+  return null;
+}
+
+function buildProspectSms(prenom: string, produitLabel: string): string {
+  const hi = prenom ? `Merci ${prenom},` : "Merci,";
+  // SMS sans accents (GSM-7) pour rester sur des segments de 160 caracteres.
+  return stripAccents(
+    `Optimis: ${hi} votre demande de ${produitLabel} a bien ete recue. Un conseiller vous contactera sous 24h.`
+  );
+}
+
+async function sendProspectSms(phone: string, prenom: string, formType: string): Promise<{ ok: boolean; error?: string }> {
+  const accountSid = Deno.env.get("TWILIO_ACCOUNT_SID");
+  const authToken = Deno.env.get("TWILIO_AUTH_TOKEN");
+  const messagingServiceSid = Deno.env.get("TWILIO_MESSAGING_SERVICE_SID");
+  const from = Deno.env.get("TWILIO_SMS_FROM");
+
+  if (!accountSid || !authToken) return { ok: false, error: "TWILIO creds manquantes" };
+  if (!messagingServiceSid && !from) return { ok: false, error: "TWILIO_MESSAGING_SERVICE_SID ou TWILIO_SMS_FROM manquant" };
+  if (!phone) return { ok: false, error: "telephone vide" };
+
+  const to = normalizeToE164(phone);
+  if (!to) return { ok: false, error: `telephone invalide: ${phone}` };
+
+  const produitLabel = PRODUIT_LABELS[formType] ?? "demande";
+  const body = buildProspectSms(prenom, produitLabel);
+
+  const params = new URLSearchParams({ To: to, Body: body });
+  if (messagingServiceSid) params.set("MessagingServiceSid", messagingServiceSid);
+  else params.set("From", from!);
+
+  try {
+    const basicAuth = btoa(`${accountSid}:${authToken}`);
+    const res = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${accountSid}/Messages.json`, {
+      method: "POST",
+      headers: { Authorization: `Basic ${basicAuth}`, "Content-Type": "application/x-www-form-urlencoded" },
+      body: params,
+    });
+    if (!res.ok) {
+      const errText = await res.text().catch(() => "");
+      return { ok: false, error: `Twilio ${res.status}: ${errText.slice(0, 200)}` };
     }
     return { ok: true };
   } catch (e: any) {
@@ -399,6 +491,21 @@ serve(async (req) => {
               console.error(`[prospect-email] échec : ${emailRes.error}`);
               (bdResult as any).email_sent = false;
               (bdResult as any).email_error = emailRes.error;
+            }
+          }
+
+          // ========================================================================
+          // SMS CONFIRMATION AU PROSPECT (async, fire-and-forget si échec)
+          // ========================================================================
+          if (fields.telephone) {
+            const smsRes = await sendProspectSms(fields.telephone, fields.prenom ?? "", formType);
+            if (smsRes.ok) {
+              console.log(`[prospect-sms] envoyé à ${fields.telephone}`);
+              (bdResult as any).sms_sent = true;
+            } else {
+              console.error(`[prospect-sms] échec : ${smsRes.error}`);
+              (bdResult as any).sms_sent = false;
+              (bdResult as any).sms_error = smsRes.error;
             }
           }
         }
