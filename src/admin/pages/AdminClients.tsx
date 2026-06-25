@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { AdminLayout } from "@/admin/components/AdminLayout";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Search, Loader2, Trash2, Mail, CheckCircle2 } from "lucide-react";
+import { Plus, Search, Loader2, Trash2, Mail, CheckCircle2, Wand2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatCHF, formatDate, STATUS_LABELS } from "@/admin/lib/format";
 
@@ -31,6 +32,7 @@ const emptyForm: ClientForm = {
 export default function AdminClients() {
   const qc = useQueryClient();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [selected, setSelected] = useState<any | null>(null);
@@ -157,7 +159,12 @@ export default function AdminClients() {
     <AdminLayout
       title="Clients"
       subtitle={`${clients?.length ?? 0} client${(clients?.length ?? 0) > 1 ? "s" : ""}`}
-      actions={<Button onClick={openCreate} size="sm"><Plus className="h-4 w-4" /> Nouveau client</Button>}
+      actions={
+        <div className="flex gap-2">
+          <Button onClick={openCreate} size="sm" variant="outline"><Plus className="h-4 w-4" /> Client rapide</Button>
+          <Button onClick={() => navigate("/admin/nouveau-cabinet")} size="sm"><Wand2 className="h-4 w-4" /> Assistant cabinet</Button>
+        </div>
+      }
     >
       <div className="mb-6 relative max-w-md">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />

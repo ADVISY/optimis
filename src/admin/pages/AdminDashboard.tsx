@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AdminLayout } from "@/admin/components/AdminLayout";
 import { Card, CardContent } from "@/components/ui/card";
-import { Users, ShoppingBag, FileText, Clock, TrendingUp, TrendingDown, Percent } from "lucide-react";
+import { Users, ShoppingBag, FileText, Clock, TrendingUp, TrendingDown, Percent, AlertTriangle, Inbox } from "lucide-react";
 import { RevenueCostChart, RevenueCostPoint } from "@/admin/components/RevenueCostChart";
 import { formatCHF, formatCAD, formatMoney, toCHF, type Currency, formatDate, STATUS_LABELS } from "@/admin/lib/format";
 import { DOMAIN_LABELS_FULL } from "@/admin/lib/productCategories";
@@ -38,6 +38,25 @@ export default function AdminDashboard() {
         .select("id", { count: "exact", head: true })
         .eq("status", "actif");
       return count ?? 0;
+    },
+  });
+
+  // Leads : en attente de distribution (statut 'nouveau'), urgents (>24h), livrés (distribués)
+  const { data: leadsStats } = useQuery({
+    queryKey: ["admin-leads-stats"],
+    refetchInterval: 60_000,
+    queryFn: async () => {
+      const since24h = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+      const [nouveau, urgent, distribue] = await Promise.all([
+        supabase.from("leads").select("id", { count: "exact", head: true }).eq("statut", "nouveau"),
+        supabase.from("leads").select("id", { count: "exact", head: true }).eq("statut", "nouveau").lt("cree_le", since24h),
+        supabase.from("leads").select("id", { count: "exact", head: true }).eq("statut", "distribue"),
+      ]);
+      return {
+        nouveau: nouveau.count ?? 0,
+        urgent: urgent.count ?? 0,
+        distribue: distribue.count ?? 0,
+      };
     },
   });
 
@@ -177,7 +196,7 @@ export default function AdminDashboard() {
 
   const secondaryCards = [
     { label: "Clients actifs", value: activeClientsCount ?? "—", icon: Users, color: "from-emerald-500/10 to-emerald-500/5" },
-    { label: "Leads livrés", value: periodStats.leads, icon: ShoppingBag, color: "from-blue-500/10 to-blue-500/5" },
+    { label: "Leads livrés", value: leadsStats?.distribue ?? "—", icon: ShoppingBag, color: "from-blue-500/10 to-blue-500/5" },
     { label: "Factures émises", value: periodStats.invoices_issued, icon: FileText, color: "from-violet-500/10 to-violet-500/5" },
     { label: "Factures en attente", value: periodStats.invoices_pending, icon: Clock, color: "from-orange-500/10 to-orange-500/5" },
   ];
@@ -192,6 +211,44 @@ export default function AdminDashboard() {
 
   return (
     <AdminLayout title="Dashboard" subtitle={`Vue d'ensemble · ${periodLabel}`}>
+      {/* Alerte leads en attente de distribution */}
+      {leadsStats && leadsStats.nouveau > 0 && (
+        <Link to="/admin/leads" className="block mb-6">
+          <div
+            className={`flex items-center gap-4 rounded-xl border p-4 transition hover:shadow-md ${
+              leadsStats.urgent > 0
+                ? "bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200"
+                : "bg-gradient-to-r from-emerald-50 to-emerald-50/40 border-emerald-200"
+            }`}
+          >
+            <div
+              className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${
+                leadsStats.urgent > 0 ? "bg-amber-100" : "bg-emerald-100"
+              }`}
+            >
+              {leadsStats.urgent > 0 ? (
+                <AlertTriangle className="h-5 w-5 text-amber-600" />
+              ) : (
+                <Inbox className="h-5 w-5 text-[hsl(var(--optimis-green))]" />
+              )}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="font-semibold text-sm text-[hsl(var(--optimis-green-dark))]">
+                {leadsStats.nouveau} lead{leadsStats.nouveau > 1 ? "s" : ""} en attente de distribution
+              </p>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {leadsStats.urgent > 0
+                  ? `Dont ${leadsStats.urgent} en attente depuis plus de 24 h — à traiter en priorité.`
+                  : "À valider puis distribuer aux courtiers."}
+              </p>
+            </div>
+            <span className="text-sm font-semibold text-[hsl(var(--optimis-green))] whitespace-nowrap">
+              Traiter →
+            </span>
+          </div>
+        </Link>
+      )}
+
       {/* Sélecteur de période */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-6">
         <span className="text-sm font-medium text-muted-foreground">Période :</span>
