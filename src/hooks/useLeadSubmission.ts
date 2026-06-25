@@ -232,6 +232,12 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
       if ("options_replacementVehicle" in normalizedFormData) {
         normalizedFormData.options_replacementVehicle = boolLabel(normalizedFormData.options_replacementVehicle);
       }
+      // Format annual km with thousand separator
+      if (typeof normalizedFormData.annualKm === "number") {
+        normalizedFormData.annualKm = `${normalizedFormData.annualKm.toLocaleString("fr-CH")} km`;
+      }
+      // Remove obsolete plate field (no longer collected)
+      delete normalizedFormData.vehiclePlate;
     }
 
     // Household Insurance: translate property type, ownership
@@ -281,7 +287,7 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
       });
     }
 
-    // Termination: translate contract type
+    // Termination: translate contract type and combine cancellation reasons
     if (formType === "termination") {
       const contractMap: Record<string, string> = {
         health: t("forms.termination.types.health"),
@@ -293,6 +299,17 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
       };
       if (typeof normalizedFormData.contractType === "string") {
         normalizedFormData.contractType = contractMap[normalizedFormData.contractType] ?? normalizedFormData.contractType;
+      }
+
+      const reasonMap: Record<string, string> = {
+        tooExpensive: t("forms.termination.reasons.tooExpensive"),
+        poorService: t("forms.termination.reasons.poorService"),
+        poorReimbursement: t("forms.termination.reasons.poorReimbursement"),
+      };
+      if (Array.isArray(normalizedFormData.cancellationReasons)) {
+        normalizedFormData.cancellationReasons = normalizedFormData.cancellationReasons
+          .map((r) => reasonMap[String(r)] ?? String(r))
+          .join(", ");
       }
     }
 
@@ -461,10 +478,22 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
       termination: {
         contractType: "Type de contrat",
         currentInsurer: "Assureur actuel",
-        policyNumber: "Numéro de police",
         terminationDate: "Date de résiliation",
+        cancellationReasons: "Motif(s) de résiliation",
+        firstName: "Prénom",
+        lastName: "Nom",
+        birthDate: "Date de naissance",
         address: "Adresse",
         city: "Ville",
+      },
+      "complementary-insurance": {
+        besoins: "Besoins prioritaires",
+        assuranceComplementaireActuelle: "Assurance complémentaire actuelle",
+        assureurActuel: "Assureur actuel",
+        clientDepuis: "Client depuis (année)",
+        etatDeSante: "État de santé",
+        situationFamiliale: "Situation familiale",
+        dateDeNaissance: "Date de naissance",
       },
       partner: {
         budget: "Budget mensuel",
@@ -500,8 +529,58 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
       },
     };
 
-    // Apply field renaming
-    const formLabels = { ...fieldLabels._common, ...(fieldLabels[formType] || {}) };
+    // German label overrides (per language)
+    const fieldLabelsDE: Record<string, Record<string, string>> = {
+      _common: {
+        firstName: "Vorname",
+        lastName: "Nachname",
+        email: "E-Mail",
+        phone: "Telefon",
+        canton: "Kanton",
+        postalCode: "Postleitzahl",
+        formType: "Formulartyp",
+        language: "Sprache",
+        source: "Quelle",
+        pageUrl: "Seiten-URL",
+        timestamp: "Datum und Uhrzeit",
+        leadId: "Lead-ID",
+      },
+      "car-insurance": {
+        vehicleBrand: "Fahrzeugmarke",
+        vehicleModel: "Fahrzeugmodell",
+        vehicleYear: "Baujahr",
+        usage: "Nutzung",
+        annualKm: "Jährliche Kilometer",
+        driverBirthDate: "Geburtsdatum des Fahrers",
+        licenseYear: "Jahr des Führerscheins",
+        accidentsLast5Years: "Unfälle (letzte 5 Jahre)",
+        coverageType: "Deckungsart",
+        options_glassBreakage: "Option Glasbruch",
+        options_assistance: "Option Pannenhilfe",
+        options_replacementVehicle: "Option Ersatzfahrzeug",
+      },
+      termination: {
+        contractType: "Vertragstyp",
+        currentInsurer: "Aktueller Versicherer",
+        terminationDate: "Kündigungsdatum",
+        cancellationReasons: "Kündigungsgrund/-gründe",
+        firstName: "Vorname",
+        lastName: "Nachname",
+        birthDate: "Geburtsdatum",
+        address: "Adresse",
+        city: "Ort",
+      },
+    };
+
+    // Apply field renaming (language-aware)
+    const lang = i18n.language?.toLowerCase().slice(0, 2) || "fr";
+    const overrides = lang === "de" ? fieldLabelsDE : {};
+    const formLabels = {
+      ...fieldLabels._common,
+      ...(fieldLabels[formType] || {}),
+      ...(overrides._common || {}),
+      ...(overrides[formType] || {}),
+    };
     const renamedData: Record<string, unknown> = {};
     for (const [key, value] of Object.entries(normalizedFormData)) {
       const label = formLabels[key] || key;
@@ -539,6 +618,7 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
       leadId,
       timestamp: new Date().toISOString(),
       webhookUrl: webhookUrl,
+      userAgent: typeof navigator !== "undefined" ? navigator.userAgent : "",
     } as unknown as LeadData;
 
     console.log("Lead data to submit:", leadData);

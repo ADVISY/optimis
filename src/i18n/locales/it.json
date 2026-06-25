@@ -29,6 +29,7 @@
     "sending": "Invio..."
   },
   "megaMenu": {
+    "complementaryInsurance": "Assicurazione complementare",
     "prenatalInsurance": "Assicurazione prenatale (bambino in arrivo)",
     "healthModel": "Quale modello di assicurazione malattia scegliere?",
     "dentalInsurance": "Assicurazione dentale complementare",
@@ -1243,7 +1244,7 @@
         "household": "Assicurazione casa",
         "legal": "Protezione giuridica",
         "life": "Assicurazione vita",
-        "other": "Altro"
+        "other": "Assicurazioni diverse"
       },
       "contractTypes": {
         "health": "Assicurazione malattia",
@@ -1255,19 +1256,21 @@
       },
       "currentInsurer": "Assicuratore attuale",
       "selectInsurer": "Seleziona il tuo assicuratore",
-      "policyNumber": "Numero di polizza (opzionale)",
-      "policyNumberHelp": "Lo trovi sul tuo contratto o sulle fatture",
       "terminationDate": "Data di disdetta desiderata",
       "selectDate": "Seleziona una data",
       "address": "Indirizzo",
       "city": "Città",
+      "cancellationReason": "Perché vuole disdire?",
       "reason": "Motivo della disdetta",
       "reasons": {
         "price": "Trovare un prezzo migliore",
         "coverage": "Copertura insufficiente",
         "service": "Servizio clienti insoddisfacente",
         "moving": "Trasloco",
-        "other": "Altro motivo"
+        "other": "Altro motivo",
+        "tooExpensive": "Troppo caro",
+        "poorService": "Servizio clienti mediocre",
+        "poorReimbursement": "Prestazioni mal rimborsate"
       },
       "generateLetter": "Genera la lettera di disdetta",
       "letterGenerated": "Lettera generata con successo!",
@@ -1277,7 +1280,7 @@
       "letterPreview": "Anteprima della lettera",
       "letterSubject": "Oggetto: Disdetta del contratto",
       "letterBody": "Con la presente, vi chiedo di disdire il mio contratto alla data indicata. Vi prego di confermare la disdetta per iscritto.",
-      "policyRef": "Riferimento polizza",
+      
       "effectiveDate": "Data di efficacia",
       "downloadPDF": "Scarica PDF",
       "compareNew": "Confronta nuove offerte",

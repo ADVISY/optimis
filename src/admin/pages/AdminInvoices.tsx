@@ -21,7 +21,9 @@ import {
   Send,
   Trash2,
   RefreshCw,
+  Pencil,
 } from "lucide-react";
+
 import { useToast } from "@/hooks/use-toast";
 import { formatCHF, formatDate, STATUS_LABELS } from "@/admin/lib/format";
 import { InvoiceFormModal } from "@/admin/components/InvoiceFormModal";
@@ -32,7 +34,10 @@ export default function AdminInvoices() {
   const qc = useQueryClient();
   const { toast } = useToast();
   const [openModal, setOpenModal] = useState(false);
+  const [editingInvoiceId, setEditingInvoiceId] = useState<string | null>(null);
   const [generating, setGenerating] = useState<string | null>(null);
+
+
   const [bulkProgress, setBulkProgress] = useState<{ done: number; total: number } | null>(null);
 
   const { data: invoices, isLoading } = useQuery({
@@ -199,9 +204,10 @@ export default function AdminInvoices() {
               </>
             )}
           </Button>
-          <Button size="sm" onClick={() => setOpenModal(true)}>
+          <Button size="sm" onClick={() => { setEditingInvoiceId(null); setOpenModal(true); }}>
             <Plus className="h-4 w-4" /> Nouvelle facture
           </Button>
+
         </div>
       }
     >
@@ -306,6 +312,15 @@ export default function AdminInvoices() {
                           <Button
                             size="sm"
                             variant="ghost"
+                            onClick={() => { setEditingInvoiceId(inv.id); setOpenModal(true); }}
+                            title="Modifier la facture"
+                          >
+                            <Pencil className="h-3.5 w-3.5" />
+                          </Button>
+
+                          <Button
+                            size="sm"
+                            variant="ghost"
                             onClick={() => {
                               if (confirm(`Supprimer la facture ${inv.invoice_number} ? Cette action est irréversible.`))
                                 deleteInvoice.mutate(inv.id);
@@ -337,6 +352,7 @@ export default function AdminInvoices() {
           )}
         </CardContent>
       </Card>
+      <InvoiceFormModal open={openModal} onOpenChange={(o) => { setOpenModal(o); if (!o) setEditingInvoiceId(null); }} editingInvoiceId={editingInvoiceId} />
 
       <InvoiceFormModal open={openModal} onOpenChange={setOpenModal} />
     </AdminLayout>

@@ -15,6 +15,8 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { CalendarIcon, Download, CheckCircle, FileText, Lock, User, Phone } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import DateInput from "@/components/ui/date-input";
 import { format } from "date-fns";
 import { fr, de, it } from "date-fns/locale";
 import { cn } from "@/lib/utils";
@@ -27,10 +29,11 @@ import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
 interface TerminationFormData {
   contractType: string;
   currentInsurer: string;
-  policyNumber: string;
   terminationDate: Date | null;
+  cancellationReasons: string[];
   firstName: string;
   lastName: string;
+  birthDate: Date | null;
   email: string;
   phone: string;
   address: string;
@@ -38,7 +41,7 @@ interface TerminationFormData {
   city: string;
 }
 
-const TOTAL_STEPS = 4;
+const TOTAL_STEPS = 5;
 
 const TerminationForm = () => {
   const { t, i18n } = useTranslation();
@@ -56,10 +59,11 @@ const TerminationForm = () => {
   const initialData: TerminationFormData = {
     contractType: "",
     currentInsurer: "",
-    policyNumber: "",
     terminationDate: null,
+    cancellationReasons: [],
     firstName: "",
     lastName: "",
+    birthDate: null,
     email: "",
     phone: "",
     address: "",
@@ -107,17 +111,27 @@ const TerminationForm = () => {
 
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 1: return formData.contractType !== "" && formData.currentInsurer.trim() !== "";
-      case 2: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "" && formData.address.trim() !== "" && formData.postalCode.replace(/\D/g, '').length >= 4 && formData.city.trim() !== "";
-      case 3: return isValidEmail(formData.email) && isValidPhone(formData.phone);
+      case 1: return formData.contractType !== "";
+      case 2: return formData.currentInsurer.trim() !== "";
+      case 3: return formData.cancellationReasons.length > 0 && formData.firstName.trim() !== "" && formData.lastName.trim() !== "" && formData.birthDate !== null && formData.address.trim() !== "" && formData.postalCode.replace(/\D/g, '').length >= 4 && formData.city.trim() !== "";
+      case 4: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
     }
   };
 
   const getStepErrors = (step: number): Record<string, string> => {
-    if (step === 2) return getIdentityErrors(formData.firstName, formData.lastName);
-    if (step === 3) return getContactErrors(formData.email, formData.phone);
+    if (step === 3) return getIdentityErrors(formData.firstName, formData.lastName);
+    if (step === 4) return getContactErrors(formData.email, formData.phone);
     return {};
+  };
+
+  const toggleReason = (reason: string) => {
+    const current = formData.cancellationReasons;
+    if (current.includes(reason)) {
+      updateFormData({ cancellationReasons: current.filter((r) => r !== reason) });
+    } else {
+      updateFormData({ cancellationReasons: [...current, reason] });
+    }
   };
 
   const canProceed = validateStep(currentStep);
@@ -164,9 +178,6 @@ const TerminationForm = () => {
                 <p className="mt-4">{formData.currentInsurer}</p>
                 <p className="mt-4">{t("forms.termination.letterSubject")}</p>
                 <p className="mt-2">{t("forms.termination.letterBody")}</p>
-                {formData.policyNumber && (
-                  <p>{t("forms.termination.policyRef")}: {formData.policyNumber}</p>
-                )}
                 {formData.terminationDate && (
                   <p>{t("forms.termination.effectiveDate")}: {format(formData.terminationDate, "PPP", { locale: getDateLocale() })}</p>
                 )}
@@ -196,20 +207,17 @@ const TerminationForm = () => {
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
     >
-      {/* Step 1: Contract Info */}
+      {/* Step 1: Contract Type */}
       <FormStep isActive={currentStep === 1}>
         <div className="space-y-4">
           <FormFieldWrapper label={t("forms.termination.contractType")} required>
             <RadioGroup
               value={formData.contractType}
-              onValueChange={(value) => updateFormData({ contractType: value })}
+              onValueChange={(value) => { updateFormData({ contractType: value }); notify(); }}
               className="grid gap-3"
             >
               {[
                 { value: "health", label: t("forms.termination.types.health") },
-                { value: "car", label: t("forms.termination.types.car") },
-                { value: "household", label: t("forms.termination.types.household") },
-                { value: "legal", label: t("forms.termination.types.legal") },
                 { value: "life", label: t("forms.termination.types.life") },
                 { value: "other", label: t("forms.termination.types.other") },
               ].map((type) => (
@@ -222,23 +230,18 @@ const TerminationForm = () => {
               ))}
             </RadioGroup>
           </FormFieldWrapper>
+        </div>
+      </FormStep>
 
+      {/* Step 2: Insurer details */}
+      <FormStep isActive={currentStep === 2}>
+        <div className="space-y-4">
           <FormFieldWrapper label={t("forms.termination.currentInsurer")} htmlFor="currentInsurer" required>
             <Input
               id="currentInsurer"
               value={formData.currentInsurer}
               onChange={(e) => { updateFormData({ currentInsurer: e.target.value }); notifyDelayed(); }}
               placeholder="CSS, Helsana, La Mobilière..."
-              className="h-14 text-lg"
-            />
-          </FormFieldWrapper>
-
-          <FormFieldWrapper label={t("forms.termination.policyNumber")} htmlFor="policyNumber">
-            <Input
-              id="policyNumber"
-              value={formData.policyNumber}
-              onChange={(e) => updateFormData({ policyNumber: e.target.value })}
-              placeholder="12345678"
               className="h-14 text-lg"
             />
           </FormFieldWrapper>
@@ -274,9 +277,35 @@ const TerminationForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 2: Identity & Address */}
-      <FormStep isActive={currentStep === 2}>
+      {/* Step 3: Cancellation Reason, Identity & Address */}
+      <FormStep isActive={currentStep === 3}>
         <div className="space-y-6">
+          <FormFieldWrapper label={t("forms.termination.cancellationReason")} required>
+            <div className="grid gap-3">
+              {[
+                { value: "tooExpensive", label: t("forms.termination.reasons.tooExpensive") },
+                { value: "poorService", label: t("forms.termination.reasons.poorService") },
+                { value: "poorReimbursement", label: t("forms.termination.reasons.poorReimbursement") },
+              ].map((reason) => (
+                <Label
+                  key={reason.value}
+                  htmlFor={`reason-${reason.value}`}
+                  className="flex items-center space-x-3 p-4 border rounded-lg hover:bg-muted/50 cursor-pointer"
+                >
+                  <Checkbox
+                    id={`reason-${reason.value}`}
+                    checked={formData.cancellationReasons.includes(reason.value)}
+                    onCheckedChange={() => toggleReason(reason.value)}
+                    className="h-5 w-5"
+                  />
+                  <span className="flex-1 text-base sm:text-lg">
+                    {reason.label}
+                  </span>
+                </Label>
+              ))}
+            </div>
+          </FormFieldWrapper>
+
           <div className="text-center mb-6">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
               <User className="h-8 w-8 text-primary" />
@@ -303,6 +332,16 @@ const TerminationForm = () => {
               />
             </FormFieldWrapper>
           </div>
+
+          <FormFieldWrapper label={t("forms.healthInsurance.birthDate")} htmlFor="birthDate" required>
+            <DateInput
+              value={formData.birthDate}
+              onChange={(date) => updateFormData({ birthDate: date })}
+              placeholder="JJ/MM/AAAA"
+              maxYear={new Date().getFullYear()}
+              className="h-14 text-lg"
+            />
+          </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.termination.address")} htmlFor="address" required>
             <Input
@@ -340,8 +379,8 @@ const TerminationForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 3: Contact */}
-      <FormStep isActive={currentStep === 3}>
+      {/* Step 4: Contact */}
+      <FormStep isActive={currentStep === 4}>
         <div className="space-y-6">
           <div className="text-center mb-6">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
@@ -379,8 +418,8 @@ const TerminationForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 4: Confirmation */}
-      <FormStep isActive={currentStep === 4}>
+      {/* Step 5: Confirmation */}
+      <FormStep isActive={currentStep === 5}>
         <div className="space-y-4">
           <div className="bg-muted/50 p-4 rounded-lg">
             <p className="text-sm text-muted-foreground">

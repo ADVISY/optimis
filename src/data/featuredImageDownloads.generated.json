@@ -1,0 +1,1332 @@
+{
+  "generatedAt": "2026-06-19T14:46:12.921Z",
+  "existingCount": 106,
+  "totalInXml": 275,
+  "remainingToImport": 173,
+  "slugs": [
+    "subside-dassurance-maladie-comment-ca-marche-et-comment-faire-sa-demande",
+    "quel-modele-dassurance-maladie-choisir",
+    "le-meilleur-de-la-protection-juridique-en-suisse",
+    "changement-dassurance-maladie-delais-et-demarches-en-2024",
+    "assurance-dentaire-complementaire-en-suisse-reponses-aux-questions-essentielles",
+    "lassurance-menage-en-suisse-les-7-choses-a-savoir",
+    "lassurance-maladie-pour-bebe",
+    "hospitalisation-suisse-comparateur-assurance",
+    "comment-reduire-primes-assurance-maladie-suisse",
+    "assurance-casco-complete",
+    "subside-caisse-maladie-valais",
+    "comment-avoir-une-assurance-maladie-moins-chere-le-top-10",
+    "les-primes-lamal-en-hausse-de-6-pourquoi",
+    "comment-enregistrer-votre-vehicule-en-suisse",
+    "lassurance-automobile-suisse-en-bref",
+    "assurance-rc-menage-quest-ce-que-cest",
+    "pilier-3a-quand-et-comment-commencer-a-epargner",
+    "que-couvre-lamal-pour-lunettes-lentilles",
+    "maternite-prenatale-enfant-naissance-assurance-complementaire",
+    "lassurance-maladie-et-le-fitness-quels-avantages",
+    "comment-faire-ma-demande-de-subside-aupres-du-canton-de-vaud",
+    "subside-assurance-maladie-suisse-aide-financiere",
+    "le-subside-dassurance-maladie-dans-le-valais-comment-ca-fonctionne",
+    "le-subside-dassurance-maladie-a-fribourg-mode-demploi",
+    "assurance-maladie-lamal-permis-b-arrive-en-suisse-resident-suisse-lca-complementaire-prenatale-maternite",
+    "comparer-assurances-suisse-optimis",
+    "assurance-habitation-suisse",
+    "participation-couts-assurance-maladie-suisse",
+    "quelle-complementaire-sante-pour-la-medecine-alternative-choisir",
+    "quelle-assurance-vie-de-capital-souscrire-suisse",
+    "les-differentes-quotes-parts-assurance-maladie-suisse",
+    "cout-intervention-ambulance-suisse",
+    "tout-savoir-sur-la-resiliation-de-votre-assurance-assura",
+    "tout-savoir-sur-la-resiliation-de-votre-assurance-helsana",
+    "tout-savoir-sur-la-resiliation-de-votre-assurance-css",
+    "tout-savoir-sur-la-resiliation-de-votre-assurance-visana",
+    "tout-savoir-sur-la-resiliation-de-votre-assurance-swica",
+    "tout-savoir-sur-la-resiliation-de-votre-assurance-concordia",
+    "tout-savoir-sur-la-resiliation-de-votre-assurance-sanitas",
+    "tout-savoir-sur-la-resiliation-de-votre-assurance-kpt",
+    "tout-savoir-sur-la-resiliation-de-votre-assurance-groupe-mutuel",
+    "la-retraite-en-suisse",
+    "comprendre-gerer-depenses-sante-suisse",
+    "lassurance-maladie-internationale-en-suisse-ce-que-vous-devez-savoir",
+    "subside-assurance-maladie",
+    "lamal",
+    "comparateur-assurance-maladie-suisse",
+    "prime-lamal",
+    "demande-de-subside-2024",
+    "assurance-auto-suisse",
+    "assurance-vie-suisse",
+    "assurance-accident-suisse",
+    "assurance-menage-suisse",
+    "assurance-chien-suisse",
+    "taux-hypothecaire-suisse",
+    "taux-hypothecaire-raiffeisen",
+    "taux-hypothecaire-bcv",
+    "taux-hypothecaire-migros",
+    "taux-hypothecaire-postfinance",
+    "taux-hypothecaire-swiss-life",
+    "taux-hypothecaire-axa",
+    "hypotheque-credit-suisse",
+    "amortissement-direct-indirect",
+    "assurance-voiture-vaudoise",
+    "zurich-assurance-voiture",
+    "axa-assurance-voiture",
+    "baloise-assurance-voiture",
+    "permis-de-conduire-suisse",
+    "helvetia-assurance-voiture",
+    "plaque-immatriculation-suisse",
+    "generali-assurance-voiture",
+    "assurance-voiture-pas-chere-suisse",
+    "assurance-voiture-sans-permis",
+    "allianz-assurance-voiture",
+    "assurance-responsabilite-civile-voiture",
+    "tcs-assurance-voiture",
+    "comparateur-assurance-voiture-jeune-conducteur",
+    "mobiliere-assurance-voiture",
+    "assurance-depannage-voiture",
+    "assurance-voiture-resiliation",
+    "assurance-utilitaire-pas-chere",
+    "assurance-voiture-smile",
+    "assurance-auto-bonus-malus-calcul",
+    "assurance-voiture-parking",
+    "assurance-camping-car",
+    "assurance-voiture-kilometre",
+    "assurance-auto-documents-a-fournir",
+    "la-cesarienne-et-la-couverture-dassurance-maladie-en-suisse",
+    "lassurance-auto-en-suisse-tout-ce-quil-faut-savoir",
+    "assurance-habitation-suisse-guide-complet",
+    "la-retraite-en-suisse-comprendre-les-3-piliers",
+    "contrat-d-assurance-vie",
+    "meilleure-assurance-vie-en-ligne",
+    "assurance-menage-rc",
+    "assurance-inventaire-menage",
+    "augmentation-avs-2025",
+    "cotisation-avs-sans-activite-lucrative",
+    "assurance-sous-location",
+    "vente-vehicule-assurance",
+    "assurance-vehicule-provisoire",
+    "assurance-responsabilite-civile",
+    "degat-eau",
+    "assurance-perte-de-cle-voiture",
+    "contrat-de-sous-location-suisse",
+    "rc-assurance",
+    "assurance-casco-menage"
+  ],
+  "downloads": [
+    {
+      "slug": "subside-dassurance-maladie-comment-ca-marche-et-comment-faire-sa-demande",
+      "thumbnailId": "2889",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/subsides-d-assurance-maladie-comment-ca-marche-et.-comment-faire-sa-demande-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/subside-dassurance-maladie-comment-ca-marche-et-comment-faire-sa-demande.jpg"
+    },
+    {
+      "slug": "quel-modele-dassurance-maladie-choisir",
+      "thumbnailId": "2931",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/quel-modele-d-assurance-choisir-img-2.jpg",
+      "targetPath": "src/assets/blog/featured/quel-modele-dassurance-maladie-choisir.jpg"
+    },
+    {
+      "slug": "le-meilleur-de-la-protection-juridique-en-suisse",
+      "thumbnailId": "2934",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/Le-meilleur-de-la-protection-juridique-en-Suisse.png",
+      "targetPath": "src/assets/blog/featured/le-meilleur-de-la-protection-juridique-en-suisse.png"
+    },
+    {
+      "slug": "changement-dassurance-maladie-delais-et-demarches-en-2024",
+      "thumbnailId": "2960",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/calculator-385506-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/changement-dassurance-maladie-delais-et-demarches-en-2024.jpg"
+    },
+    {
+      "slug": "assurance-dentaire-complementaire-en-suisse-reponses-aux-questions-essentielles",
+      "thumbnailId": "2968",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/assurance-dentaire-en-suisse-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/assurance-dentaire-complementaire-en-suisse-reponses-aux-questions-essentielles.jpg"
+    },
+    {
+      "slug": "lassurance-menage-en-suisse-les-7-choses-a-savoir",
+      "thumbnailId": "3347",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/home-2618511-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/lassurance-menage-en-suisse-les-7-choses-a-savoir.jpg"
+    },
+    {
+      "slug": "lassurance-maladie-pour-bebe",
+      "thumbnailId": "3364",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/feet-718146-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/lassurance-maladie-pour-bebe.jpg"
+    },
+    {
+      "slug": "hospitalisation-suisse-comparateur-assurance",
+      "thumbnailId": "3648",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/thumb_width1000_division-commune-comparaison-assurance-suisse.jpg.webp",
+      "targetPath": "src/assets/blog/featured/hospitalisation-suisse-comparateur-assurance.webp"
+    },
+    {
+      "slug": "comment-reduire-primes-assurance-maladie-suisse",
+      "thumbnailId": "3654",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/comment-reduire-primes-assurance-maladie-suisse-1-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/comment-reduire-primes-assurance-maladie-suisse.jpg"
+    },
+    {
+      "slug": "assurance-casco-complete",
+      "thumbnailId": "4752",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T150609.216.png",
+      "targetPath": "src/assets/blog/featured/assurance-casco-complete.png"
+    },
+    {
+      "slug": "comment-avoir-une-assurance-maladie-moins-chere-le-top-10",
+      "thumbnailId": "3019",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/piggy-bank-850607-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/comment-avoir-une-assurance-maladie-moins-chere-le-top-10.jpg"
+    },
+    {
+      "slug": "les-primes-lamal-en-hausse-de-6-pourquoi",
+      "thumbnailId": "3050",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/Hausse-des-primes-scaled-1-scaled.jpeg",
+      "targetPath": "src/assets/blog/featured/les-primes-lamal-en-hausse-de-6-pourquoi.jpeg"
+    },
+    {
+      "slug": "comment-enregistrer-votre-vehicule-en-suisse",
+      "thumbnailId": "3250",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/Autokennzeichen_list.png",
+      "targetPath": "src/assets/blog/featured/comment-enregistrer-votre-vehicule-en-suisse.png"
+    },
+    {
+      "slug": "lassurance-automobile-suisse-en-bref",
+      "thumbnailId": "3262",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/automobile-3734396-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/lassurance-automobile-suisse-en-bref.jpg"
+    },
+    {
+      "slug": "assurance-rc-menage-quest-ce-que-cest",
+      "thumbnailId": "3341",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/couverture-assurance-rc-menage.jpg.webp",
+      "targetPath": "src/assets/blog/featured/assurance-rc-menage-quest-ce-que-cest.webp"
+    },
+    {
+      "slug": "pilier-3a-quand-et-comment-commencer-a-epargner",
+      "thumbnailId": "3464",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/man-597178-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/pilier-3a-quand-et-comment-commencer-a-epargner.jpg"
+    },
+    {
+      "slug": "que-couvre-lamal-pour-lunettes-lentilles",
+      "thumbnailId": "3484",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/06/Que-couvre-LAMal-pour-lunettes-lentilles--scaled.jpg",
+      "targetPath": "src/assets/blog/featured/que-couvre-lamal-pour-lunettes-lentilles.jpg"
+    },
+    {
+      "slug": "maternite-prenatale-enfant-naissance-assurance-complementaire",
+      "thumbnailId": "3549",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/baby-1531059_1280.jpg",
+      "targetPath": "src/assets/blog/featured/maternite-prenatale-enfant-naissance-assurance-complementaire.jpg"
+    },
+    {
+      "slug": "lassurance-maladie-et-le-fitness-quels-avantages",
+      "thumbnailId": "3608",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/DSC8520-scaled-1-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/lassurance-maladie-et-le-fitness-quels-avantages.jpg"
+    },
+    {
+      "slug": "comment-faire-ma-demande-de-subside-aupres-du-canton-de-vaud",
+      "thumbnailId": "3613",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/bild-fuer-eintrag-834-2x.jpg",
+      "targetPath": "src/assets/blog/featured/comment-faire-ma-demande-de-subside-aupres-du-canton-de-vaud.jpg"
+    },
+    {
+      "slug": "subside-assurance-maladie-suisse-aide-financiere",
+      "thumbnailId": "3615",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/5073a7fe34b0aff1727648f643cd7390-image_20231117phf9080-data.jpg.webp",
+      "targetPath": "src/assets/blog/featured/subside-assurance-maladie-suisse-aide-financiere.webp"
+    },
+    {
+      "slug": "le-subside-dassurance-maladie-dans-le-valais-comment-ca-fonctionne",
+      "thumbnailId": "3620",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/dma_6050-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/le-subside-dassurance-maladie-dans-le-valais-comment-ca-fonctionne.jpg"
+    },
+    {
+      "slug": "le-subside-dassurance-maladie-a-fribourg-mode-demploi",
+      "thumbnailId": "3624",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/9xlejo-26068786.image_.jpeg",
+      "targetPath": "src/assets/blog/featured/le-subside-dassurance-maladie-a-fribourg-mode-demploi.jpeg"
+    },
+    {
+      "slug": "assurance-maladie-lamal-permis-b-arrive-en-suisse-resident-suisse-lca-complementaire-prenatale-maternite",
+      "thumbnailId": "3636",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/europapolitik_fachkraeftemangel.png",
+      "targetPath": "src/assets/blog/featured/assurance-maladie-lamal-permis-b-arrive-en-suisse-resident-suisse-lca-complementaire-prenatale-maternite.png"
+    },
+    {
+      "slug": "comparer-assurances-suisse-optimis",
+      "thumbnailId": "3642",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/comparer-assurances-suisse-optimis.jpg",
+      "targetPath": "src/assets/blog/featured/comparer-assurances-suisse-optimis.jpg"
+    },
+    {
+      "slug": "assurance-habitation-suisse",
+      "thumbnailId": "3658",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/assurance-habitation-suisse.jpg",
+      "targetPath": "src/assets/blog/featured/assurance-habitation-suisse.jpg"
+    },
+    {
+      "slug": "participation-couts-assurance-maladie-suisse",
+      "thumbnailId": "3671",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/assurance.jpg",
+      "targetPath": "src/assets/blog/featured/participation-couts-assurance-maladie-suisse.jpg"
+    },
+    {
+      "slug": "quelle-complementaire-sante-pour-la-medecine-alternative-choisir",
+      "thumbnailId": "3674",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/aha-medecine-complementaire.jpg",
+      "targetPath": "src/assets/blog/featured/quelle-complementaire-sante-pour-la-medecine-alternative-choisir.jpg"
+    },
+    {
+      "slug": "quelle-assurance-vie-de-capital-souscrire-suisse",
+      "thumbnailId": "3710",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/xcsm_Assurance-vie_32a8afa046.jpg.pagespeed.ic_.z_zJadWzjh.jpg",
+      "targetPath": "src/assets/blog/featured/quelle-assurance-vie-de-capital-souscrire-suisse.jpg"
+    },
+    {
+      "slug": "les-differentes-quotes-parts-assurance-maladie-suisse",
+      "thumbnailId": "3718",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/tirelire-et-medicaments-scaled.jpg.webp",
+      "targetPath": "src/assets/blog/featured/les-differentes-quotes-parts-assurance-maladie-suisse.webp"
+    },
+    {
+      "slug": "cout-intervention-ambulance-suisse",
+      "thumbnailId": "3720",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/Service_suisse.jpg",
+      "targetPath": "src/assets/blog/featured/cout-intervention-ambulance-suisse.jpg"
+    },
+    {
+      "slug": "tout-savoir-sur-la-resiliation-de-votre-assurance-assura",
+      "thumbnailId": "4240",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/Tout-savoir-sur-la-resiliation-de-votre-assurance-Assura.jpg",
+      "targetPath": "src/assets/blog/featured/tout-savoir-sur-la-resiliation-de-votre-assurance-assura.jpg"
+    },
+    {
+      "slug": "tout-savoir-sur-la-resiliation-de-votre-assurance-helsana",
+      "thumbnailId": "4248",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/Tout-savoir-sur-la-resiliation-de-votre-assurance-Helsana.jpg",
+      "targetPath": "src/assets/blog/featured/tout-savoir-sur-la-resiliation-de-votre-assurance-helsana.jpg"
+    },
+    {
+      "slug": "tout-savoir-sur-la-resiliation-de-votre-assurance-css",
+      "thumbnailId": "4251",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/Tout-savoir-sur-la-resiliation-de-votre-assurance-CSS-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/tout-savoir-sur-la-resiliation-de-votre-assurance-css.jpg"
+    },
+    {
+      "slug": "tout-savoir-sur-la-resiliation-de-votre-assurance-visana",
+      "thumbnailId": "4254",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/Tout-savoir-sur-la-resiliation-de-votre-assurance-Visana-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/tout-savoir-sur-la-resiliation-de-votre-assurance-visana.jpg"
+    },
+    {
+      "slug": "tout-savoir-sur-la-resiliation-de-votre-assurance-swica",
+      "thumbnailId": "4259",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/Tout-savoir-sur-la-resiliation-de-votre-assurance-swica-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/tout-savoir-sur-la-resiliation-de-votre-assurance-swica.jpg"
+    },
+    {
+      "slug": "tout-savoir-sur-la-resiliation-de-votre-assurance-concordia",
+      "thumbnailId": "4262",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/Tout-savoir-sur-la-resiliation-de-votre-assurance-concordia-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/tout-savoir-sur-la-resiliation-de-votre-assurance-concordia.jpg"
+    },
+    {
+      "slug": "tout-savoir-sur-la-resiliation-de-votre-assurance-sanitas",
+      "thumbnailId": "4265",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/Tout-savoir-sur-la-resiliation-de-votre-assurance-sanitas-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/tout-savoir-sur-la-resiliation-de-votre-assurance-sanitas.jpg"
+    },
+    {
+      "slug": "tout-savoir-sur-la-resiliation-de-votre-assurance-kpt",
+      "thumbnailId": "4268",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/Tout-savoir-sur-la-resiliation-de-votre-assurance-kpt-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/tout-savoir-sur-la-resiliation-de-votre-assurance-kpt.jpg"
+    },
+    {
+      "slug": "tout-savoir-sur-la-resiliation-de-votre-assurance-groupe-mutuel",
+      "thumbnailId": "4274",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/07/Tout-savoir-sur-la-resiliation-de-votre-assurance-groupe-mutuel-scaled.jpg",
+      "targetPath": "src/assets/blog/featured/tout-savoir-sur-la-resiliation-de-votre-assurance-groupe-mutuel.jpg"
+    },
+    {
+      "slug": "la-retraite-en-suisse",
+      "thumbnailId": "4383",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/08/La-retraite-en-Suisse-Un-voyage-en-constante-transformation.jpg",
+      "targetPath": "src/assets/blog/featured/la-retraite-en-suisse.jpg"
+    },
+    {
+      "slug": "comprendre-gerer-depenses-sante-suisse",
+      "thumbnailId": "4394",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/08/les-depenses-de-sante-en-Suisse-1.jpg",
+      "targetPath": "src/assets/blog/featured/comprendre-gerer-depenses-sante-suisse.jpg"
+    },
+    {
+      "slug": "lassurance-maladie-internationale-en-suisse-ce-que-vous-devez-savoir",
+      "thumbnailId": "4420",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/08/frau-balkon-38582-image-2-1.avif",
+      "targetPath": "src/assets/blog/featured/lassurance-maladie-internationale-en-suisse-ce-que-vous-devez-savoir.avif"
+    },
+    {
+      "slug": "subside-assurance-maladie",
+      "thumbnailId": "4483",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/09/fever-3063126_1280.jpg",
+      "targetPath": "src/assets/blog/featured/subside-assurance-maladie.jpg"
+    },
+    {
+      "slug": "lamal",
+      "thumbnailId": "4492",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/09/tablets-5620566_1280.jpg",
+      "targetPath": "src/assets/blog/featured/lamal.jpg"
+    },
+    {
+      "slug": "comparateur-assurance-maladie-suisse",
+      "thumbnailId": "4491",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/09/capsules-1079838_1280.jpg",
+      "targetPath": "src/assets/blog/featured/comparateur-assurance-maladie-suisse.jpg"
+    },
+    {
+      "slug": "prime-lamal",
+      "thumbnailId": "4490",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/09/healthcare-8940018_1280.jpg",
+      "targetPath": "src/assets/blog/featured/prime-lamal.jpg"
+    },
+    {
+      "slug": "demande-de-subside-2024",
+      "thumbnailId": "4489",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/09/surgery-1822458_1280.jpg",
+      "targetPath": "src/assets/blog/featured/demande-de-subside-2024.jpg"
+    },
+    {
+      "slug": "assurance-auto-suisse",
+      "thumbnailId": "4488",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/09/vw-beetle-405876_1280.jpg",
+      "targetPath": "src/assets/blog/featured/assurance-auto-suisse.jpg"
+    },
+    {
+      "slug": "assurance-vie-suisse",
+      "thumbnailId": "4486",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/09/hands-1838658_1280.jpg",
+      "targetPath": "src/assets/blog/featured/assurance-vie-suisse.jpg"
+    },
+    {
+      "slug": "assurance-accident-suisse",
+      "thumbnailId": "4485",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/09/car-crash-6243099_1280.jpg",
+      "targetPath": "src/assets/blog/featured/assurance-accident-suisse.jpg"
+    },
+    {
+      "slug": "assurance-menage-suisse",
+      "thumbnailId": "4484",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/09/lake-7022344_1280.jpg",
+      "targetPath": "src/assets/blog/featured/assurance-menage-suisse.jpg"
+    },
+    {
+      "slug": "assurance-chien-suisse",
+      "thumbnailId": "4493",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/09/shepherd-dog-4357790_1280.jpg",
+      "targetPath": "src/assets/blog/featured/assurance-chien-suisse.jpg"
+    },
+    {
+      "slug": "taux-hypothecaire-suisse",
+      "thumbnailId": "4784",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T154645.605.png",
+      "targetPath": "src/assets/blog/featured/taux-hypothecaire-suisse.png"
+    },
+    {
+      "slug": "taux-hypothecaire-raiffeisen",
+      "thumbnailId": "4783",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T154603.000.png",
+      "targetPath": "src/assets/blog/featured/taux-hypothecaire-raiffeisen.png"
+    },
+    {
+      "slug": "taux-hypothecaire-bcv",
+      "thumbnailId": "4782",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T154501.464.png",
+      "targetPath": "src/assets/blog/featured/taux-hypothecaire-bcv.png"
+    },
+    {
+      "slug": "taux-hypothecaire-migros",
+      "thumbnailId": "4781",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T154417.137.png",
+      "targetPath": "src/assets/blog/featured/taux-hypothecaire-migros.png"
+    },
+    {
+      "slug": "taux-hypothecaire-postfinance",
+      "thumbnailId": "4780",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T154328.804.png",
+      "targetPath": "src/assets/blog/featured/taux-hypothecaire-postfinance.png"
+    },
+    {
+      "slug": "taux-hypothecaire-swiss-life",
+      "thumbnailId": "4779",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T154213.239.png",
+      "targetPath": "src/assets/blog/featured/taux-hypothecaire-swiss-life.png"
+    },
+    {
+      "slug": "taux-hypothecaire-axa",
+      "thumbnailId": "4778",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T154116.205.png",
+      "targetPath": "src/assets/blog/featured/taux-hypothecaire-axa.png"
+    },
+    {
+      "slug": "hypotheque-credit-suisse",
+      "thumbnailId": "4777",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/32049656784-1-1.png",
+      "targetPath": "src/assets/blog/featured/hypotheque-credit-suisse.png"
+    },
+    {
+      "slug": "amortissement-direct-indirect",
+      "thumbnailId": "4776",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T153903.757.png",
+      "targetPath": "src/assets/blog/featured/amortissement-direct-indirect.png"
+    },
+    {
+      "slug": "assurance-voiture-vaudoise",
+      "thumbnailId": "4775",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T153814.894.png",
+      "targetPath": "src/assets/blog/featured/assurance-voiture-vaudoise.png"
+    },
+    {
+      "slug": "zurich-assurance-voiture",
+      "thumbnailId": "4774",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T153717.607.png",
+      "targetPath": "src/assets/blog/featured/zurich-assurance-voiture.png"
+    },
+    {
+      "slug": "axa-assurance-voiture",
+      "thumbnailId": "4773",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T153530.024.png",
+      "targetPath": "src/assets/blog/featured/axa-assurance-voiture.png"
+    },
+    {
+      "slug": "baloise-assurance-voiture",
+      "thumbnailId": "4772",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T153352.637.png",
+      "targetPath": "src/assets/blog/featured/baloise-assurance-voiture.png"
+    },
+    {
+      "slug": "permis-de-conduire-suisse",
+      "thumbnailId": "4766",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T152447.921.png",
+      "targetPath": "src/assets/blog/featured/permis-de-conduire-suisse.png"
+    },
+    {
+      "slug": "helvetia-assurance-voiture",
+      "thumbnailId": "4765",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T152351.193.png",
+      "targetPath": "src/assets/blog/featured/helvetia-assurance-voiture.png"
+    },
+    {
+      "slug": "plaque-immatriculation-suisse",
+      "thumbnailId": "4764",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T152250.539.png",
+      "targetPath": "src/assets/blog/featured/plaque-immatriculation-suisse.png"
+    },
+    {
+      "slug": "generali-assurance-voiture",
+      "thumbnailId": "4763",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T152126.569.png",
+      "targetPath": "src/assets/blog/featured/generali-assurance-voiture.png"
+    },
+    {
+      "slug": "assurance-voiture-pas-chere-suisse",
+      "thumbnailId": "4762",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T152026.150.png",
+      "targetPath": "src/assets/blog/featured/assurance-voiture-pas-chere-suisse.png"
+    },
+    {
+      "slug": "assurance-voiture-sans-permis",
+      "thumbnailId": "4761",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T151906.378.png",
+      "targetPath": "src/assets/blog/featured/assurance-voiture-sans-permis.png"
+    },
+    {
+      "slug": "allianz-assurance-voiture",
+      "thumbnailId": "4760",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T151752.353.png",
+      "targetPath": "src/assets/blog/featured/allianz-assurance-voiture.png"
+    },
+    {
+      "slug": "assurance-responsabilite-civile-voiture",
+      "thumbnailId": "4759",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T151646.811.png",
+      "targetPath": "src/assets/blog/featured/assurance-responsabilite-civile-voiture.png"
+    },
+    {
+      "slug": "tcs-assurance-voiture",
+      "thumbnailId": "4771",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T153244.065.png",
+      "targetPath": "src/assets/blog/featured/tcs-assurance-voiture.png"
+    },
+    {
+      "slug": "comparateur-assurance-voiture-jeune-conducteur",
+      "thumbnailId": "4770",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T153121.749.png",
+      "targetPath": "src/assets/blog/featured/comparateur-assurance-voiture-jeune-conducteur.png"
+    },
+    {
+      "slug": "mobiliere-assurance-voiture",
+      "thumbnailId": "4769",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T152904.120.png",
+      "targetPath": "src/assets/blog/featured/mobiliere-assurance-voiture.png"
+    },
+    {
+      "slug": "assurance-depannage-voiture",
+      "thumbnailId": "4768",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T152754.600.png",
+      "targetPath": "src/assets/blog/featured/assurance-depannage-voiture.png"
+    },
+    {
+      "slug": "assurance-voiture-resiliation",
+      "thumbnailId": "4767",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T152615.622.png",
+      "targetPath": "src/assets/blog/featured/assurance-voiture-resiliation.png"
+    },
+    {
+      "slug": "assurance-utilitaire-pas-chere",
+      "thumbnailId": "4753",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T150703.333.png",
+      "targetPath": "src/assets/blog/featured/assurance-utilitaire-pas-chere.png"
+    },
+    {
+      "slug": "assurance-voiture-smile",
+      "thumbnailId": "4751",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/32049656784-1.png",
+      "targetPath": "src/assets/blog/featured/assurance-voiture-smile.png"
+    },
+    {
+      "slug": "assurance-auto-bonus-malus-calcul",
+      "thumbnailId": "4758",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T151444.921.png",
+      "targetPath": "src/assets/blog/featured/assurance-auto-bonus-malus-calcul.png"
+    },
+    {
+      "slug": "assurance-voiture-parking",
+      "thumbnailId": "4757",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T151333.618.png",
+      "targetPath": "src/assets/blog/featured/assurance-voiture-parking.png"
+    },
+    {
+      "slug": "assurance-camping-car",
+      "thumbnailId": "4756",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T151139.974.png",
+      "targetPath": "src/assets/blog/featured/assurance-camping-car.png"
+    },
+    {
+      "slug": "assurance-voiture-kilometre",
+      "thumbnailId": "4755",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T150946.060.png",
+      "targetPath": "src/assets/blog/featured/assurance-voiture-kilometre.png"
+    },
+    {
+      "slug": "assurance-auto-documents-a-fournir",
+      "thumbnailId": "4754",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/10/image-2024-11-07T150759.258.png",
+      "targetPath": "src/assets/blog/featured/assurance-auto-documents-a-fournir.png"
+    },
+    {
+      "slug": "contrat-d-assurance-vie",
+      "thumbnailId": "5068",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-28T151159.374.png",
+      "targetPath": "src/assets/blog/featured/contrat-d-assurance-vie.png"
+    },
+    {
+      "slug": "meilleure-assurance-vie-en-ligne",
+      "thumbnailId": "5072",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-28T152705.170.png",
+      "targetPath": "src/assets/blog/featured/meilleure-assurance-vie-en-ligne.png"
+    },
+    {
+      "slug": "assurance-menage-rc",
+      "thumbnailId": "5352",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2025/02/image-2025-02-18T142920.499.png",
+      "targetPath": "src/assets/blog/featured/assurance-menage-rc.png"
+    },
+    {
+      "slug": "assurance-inventaire-menage",
+      "thumbnailId": "5355",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2025/02/image-2025-02-18T143733.205.png",
+      "targetPath": "src/assets/blog/featured/assurance-inventaire-menage.png"
+    },
+    {
+      "slug": "augmentation-avs-2025",
+      "thumbnailId": "5501",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2025/03/image-2025-03-14T154756.779-1.png",
+      "targetPath": "src/assets/blog/featured/augmentation-avs-2025.png"
+    },
+    {
+      "slug": "cotisation-avs-sans-activite-lucrative",
+      "thumbnailId": "5504",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2025/03/image-2025-03-14T155612.337.png",
+      "targetPath": "src/assets/blog/featured/cotisation-avs-sans-activite-lucrative.png"
+    },
+    {
+      "slug": "assurance-sous-location",
+      "thumbnailId": "5544",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2025/03/image-2025-03-14T174021.960.png",
+      "targetPath": "src/assets/blog/featured/assurance-sous-location.png"
+    },
+    {
+      "slug": "vente-vehicule-assurance",
+      "thumbnailId": "5604",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2025/03/image-2025-03-29T123419.216.png",
+      "targetPath": "src/assets/blog/featured/vente-vehicule-assurance.png"
+    },
+    {
+      "slug": "assurance-vehicule-provisoire",
+      "thumbnailId": "5607",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2025/03/image-2025-03-29T123959.284.png",
+      "targetPath": "src/assets/blog/featured/assurance-vehicule-provisoire.png"
+    },
+    {
+      "slug": "assurance-responsabilite-civile",
+      "thumbnailId": "5358",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2025/02/image-2025-02-18T144853.656.png",
+      "targetPath": "src/assets/blog/featured/assurance-responsabilite-civile.png"
+    },
+    {
+      "slug": "degat-eau",
+      "thumbnailId": "5556",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2025/03/image-2025-03-14T181252.833.png",
+      "targetPath": "src/assets/blog/featured/degat-eau.png"
+    },
+    {
+      "slug": "assurance-perte-de-cle-voiture",
+      "thumbnailId": "5541",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2025/03/image-2025-03-14T173541.502.png",
+      "targetPath": "src/assets/blog/featured/assurance-perte-de-cle-voiture.png"
+    },
+    {
+      "slug": "contrat-de-sous-location-suisse",
+      "thumbnailId": "5547",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2025/03/image-2025-03-14T174750.539.png",
+      "targetPath": "src/assets/blog/featured/contrat-de-sous-location-suisse.png"
+    },
+    {
+      "slug": "rc-assurance",
+      "thumbnailId": "5367",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2025/02/image-2025-02-18T152112.577.png",
+      "targetPath": "src/assets/blog/featured/rc-assurance.png"
+    },
+    {
+      "slug": "assurance-casco-menage",
+      "thumbnailId": "5523",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2025/03/image-2025-03-14T165516.076.png",
+      "targetPath": "src/assets/blog/featured/assurance-casco-menage.png"
+    }
+  ],
+  "missingSlugs": [
+    "subside-caisse-maladie-valais",
+    "la-cesarienne-et-la-couverture-dassurance-maladie-en-suisse",
+    "lassurance-auto-en-suisse-tout-ce-quil-faut-savoir",
+    "assurance-habitation-suisse-guide-complet",
+    "la-retraite-en-suisse-comprendre-les-3-piliers"
+  ],
+  "missingAttachments": [],
+  "next50ToImport": [
+    {
+      "id": "4524",
+      "slug": "subside-assurance-maladie-vaud",
+      "title": "Subside à l'Assurance Maladie : Guide Complet pour le Canton de Vaud",
+      "thumbnailId": null,
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Le <strong>subside à l'assurance maladie</strong> est une aide financière précieuse pour de nombreux résidents du <strong>Canton de Vaud</strong>. Cette subvention vise à alléger le fardeau des primes d'assurance maladie obligatoire, rendant ainsi les soins de santé plus accessibles. Ce guide complet vous fournira des informations essentielles sur les conditions d'octroi, les procédures de demande, et les documents nécessaires pour bénéficier de ce soutien. Que vous soye",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4526",
+      "slug": "demande-de-subside-2024-2",
+      "title": "Demande de subside 2024 : Tout ce qu'il faut savoir",
+      "thumbnailId": null,
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>La demande de subside 2024 constitue un enjeu majeur pour de nombreux ménages en Suisse, particulièrement pour ceux confrontés à des difficultés économiques. Ce mécanisme de soutien financier vise à alléger le poids des primes d’assurance-maladie, permettant ainsi d’assurer une couverture santé accessible. Dans cet article, nous explorerons en détail les conditions d’éligibilité, les démarches à suivre, ainsi que les obligations liées à la demande de subside.</p>\n<!-- /w",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4528",
+      "slug": "subside-assurance-maladie-geneve",
+      "title": "Subside pour l'Assurance Maladie à Genève : Guide Complet",
+      "thumbnailId": null,
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p><a href=\"https://le-comparateur-optimis.ch/subside-assurance-maladie/\">Les subsides pour l'assurance maladie</a> à Genève représentent une aide précieuse pour les ménages à revenus modestes, leur permettant de bénéficier d'une couverture de santé sans se ruiner. Cet article vous explique en détail le fonctionnement de ces réductions de primes, qui est éligible, comment les obtenir et quelles sont les responsabilités des cantons.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:headin",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4530",
+      "slug": "subside",
+      "title": "Subside : Guide Complet sur les Aides à l'Assurance Maladie",
+      "thumbnailId": null,
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>L'importance des subsides d'assurance maladie est indéniable pour de nombreux ménages en Suisse. Ces aides financières, accessibles selon votre revenu et votre situation familiale, permettent de réduire le poids des primes d'assurance maladie de base obligatoire (LAMal). Dans cet article, nous examinerons en détail ce qu'est un subside, comment vérifier son attribution, suivre une demande et consulter les barèmes pour 2024.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4532",
+      "slug": "subside-assurance-maladie-berne",
+      "title": "Subsides pour l'assurance maladie : Ce que vous devez savoir",
+      "thumbnailId": null,
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Les <strong>subsides d'assurance maladie</strong> représentent une aide essentielle pour de nombreux ménages en Suisse, particulièrement ceux ayant des revenus modestes. Avec l'augmentation des primes de <strong>8,7%</strong> prévue pour 2024, il est crucial de comprendre les conditions d'éligibilité et les démarches à suivre pour bénéficier de ces aides financières. Cet article explore en profondeur les différentes facettes des subsides, ainsi que les procédures spécifi",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4534",
+      "slug": "bareme-subside-assurance-maladie-geneve",
+      "title": "Barème des Subsides d'Assurance Maladie à Genève : Tout ce qu'il Faut Savoir",
+      "thumbnailId": null,
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>En Suisse, l’assurance maladie est obligatoire selon la Loi Fédérale sur l’Assurance Maladie (LAMal). Toutefois, pour les ménages à ressources modestes, il existe une aide précieuse : le subside d’assurance maladie. Cet article vous guide à travers le fonctionnement, les montants et la procédure de demande des subsides disponibles à Genève, afin que vous puissiez bénéficier d’un soutien financier essentiel pour vos frais de santé.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:head",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4536",
+      "slug": "subside-assurance-maladie-fribourg-formulaire",
+      "title": "Subside assurance maladie à Fribourg : Comment naviguer entre les options et formulaires",
+      "thumbnailId": null,
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Chaque année, les assurés ont la possibilité de <strong>changer de caisse-maladie</strong> pour leur assurance de base en Suisse, notamment à Fribourg. Cette démarche peut sembler complexe, mais avec les bonnes informations et un bon accompagnement, elle devient accessible. Cet article vous guidera à travers les étapes essentielles, les conditions nécessaires et les ressources disponibles pour maximiser votre expérience.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4538",
+      "slug": "attestation-subside-assurance-maladie-geneve",
+      "title": "Attestation de subside : Comment l'obtenir facilement à Genève ?",
+      "thumbnailId": null,
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Dans le canton de Genève, l'attestation de subside pour l'assurance maladie est essentielle pour bénéficier d'une réduction sur les primes. Que vous souhaitiez demander votre attestation en ligne via e-démarches ou par courrier postal, il est crucial de comprendre les étapes à suivre et les informations à fournir. Découvrez ici comment faciliter vos démarches pour obtenir ce document important.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4540",
+      "slug": "droit-aux-subsides-vaud",
+      "title": "Droit aux Subsides dans le Canton de Vaud : Quelles Aides Peut-on Obtenir ?",
+      "thumbnailId": null,
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Dans le canton de Vaud, de nombreuses aides financières sont accessibles pour soutenir les résidents dans le besoin. Cet article explore les différentes prestations disponibles, y compris les subventions pour l'assurance maladie, les prestations complémentaires, et bien plus encore. Si vous vous demandez <strong>« <a href=\"https://le-comparateur-optimis.ch/subside-assurance-maladie/\">Ai-je droit aux subsides</a> vaud ? »</strong>, continuez à lire pour découvrir les cond",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4542",
+      "slug": "protection-subsidiaire",
+      "title": "Protection Subsidiaire : Tout Ce Que Vous Devez Savoir",
+      "thumbnailId": null,
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>La protection subsidiaire est un dispositif essentiel pour les étrangers qui ne répondent pas aux critères d'octroi du statut de réfugié. Elle offre un cadre légal permettant de séjourner en France, d'accéder à des droits et de garantir la sécurité. Cet article explore les différents aspects de la protection subsidiaire, y compris les droits liés au titre de séjour, les démarches à suivre pour en faire la demande et les coûts associés.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4544",
+      "slug": "demande-subside-assurance-maladie-fribourg",
+      "title": "Demande de Subside pour l'Assurance Maladie à Fribourg : Guide Complet",
+      "thumbnailId": null,
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Obtenir une réduction des primes d'assurance maladie peut être un processus complexe, mais il est essentiel pour alléger le fardeau financier. Dans cet article, nous allons explorer en détail la <strong><a href=\"https://le-comparateur-optimis.ch/demande-de-subside-2024/\">demande de subside d’assurance maladie à Fribourg</a></strong>, y compris les étapes à suivre, les informations nécessaires, et les délais à respecter pour maximiser vos chances d'approbation.</p>\n<!-- /",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4546",
+      "slug": "subside-assurance-maladie-jura",
+      "title": "Subside Assurance Maladie dans le Jura : Guide Complet",
+      "thumbnailId": null,
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Le subside d'assurance maladie dans le Jura est une aide essentielle pour de nombreuses personnes de condition économique modeste. Ce système, instauré pour alléger le poids des primes d’assurance maladie, permet à ceux qui en ont besoin d'accéder à des soins de santé sans se ruiner. Dans cet article, nous allons explorer en détail les différentes facettes de ces subsides, y compris qui peut en bénéficier, comment le droit est calculé, et les <a href=\"https://le-comparat",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4548",
+      "slug": "subside-neuchatel",
+      "title": "Comprendre le subside d'assurance maladie à Neuchâtel",
+      "thumbnailId": null,
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Le système de santé en Suisse, notamment à Neuchâtel, se distingue par ses subsides d'assurance maladie qui visent à alléger le fardeau financier des primes pour les résidents à revenus modestes. Cet article vous guide à travers les différentes facettes des subsides, leurs spécificités, les démarches à suivre pour en bénéficier et bien plus encore.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Qu'est-ce qu'un subside d'assurance maladie ?</",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4550",
+      "slug": "e-demarche-subside",
+      "title": "Augmentation des Subsides d'Assurance Maladie en 2024 : Ce Que Vous Devez Savoir",
+      "thumbnailId": null,
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>En 2024, le canton de Genève met en place une <strong>augmentation significative des subsides d'assurance maladie</strong>. Ces aides financières, qui visent à alléger le fardeau des primes d'assurance-maladie de base (LAMal), sont essentielles pour de nombreux ménages. Cet article vous guide à travers les principales informations concernant les subsides, les conditions d’éligibilité et les démarches à suivre pour en bénéficier.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:headin",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4554",
+      "slug": "avs-subsides",
+      "title": "Comprendre les prestations complémentaires à l'AVS et à l'AI : Tout ce qu'il faut savoir",
+      "thumbnailId": null,
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Les prestations complémentaires, souvent désignées par l'acronyme PC, jouent un rôle fondamental dans le système social suisse. Elles apportent un soutien financier indispensable aux personnes dont les rentes de l'AVS (Assurance Vieillesse et Survivants) ou de l'AI (Assurance Invalidité) ne suffisent pas à couvrir les besoins vitaux. Cet article explore en détail les conditions d'éligibilité, le mode de calcul, et les démarches nécessaires pour bénéficier de ces aides cr",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4588",
+      "slug": "lamal-suisse",
+      "title": "Comprendre l'Assurance Maladie LAMal en Suisse",
+      "thumbnailId": null,
+      "category": "Assurance santé",
+      "categorySlug": "assurance-sante",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>L'assurance maladie en Suisse, connue sous le nom de LAMal, est un système essentiel pour garantir la couverture des soins en cas de maladie ou d'accident. Avec des exigences légales strictes, chaque résident est tenu de s'assurer. Cet article explore en détail l'obligation d'assurance, les démarches d'affiliation, les règles concernant les membres de la famille, et les changements de situation personnelle.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-bl",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4590",
+      "slug": "lamal-frontalier",
+      "title": "Assurance Maladie Frontalier en Suisse : Quelles Sont les Obligations et Choix ?",
+      "thumbnailId": null,
+      "category": "Assurance santé",
+      "categorySlug": "assurance-sante",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>L’assurance maladie frontalier en Suisse est un sujet essentiel pour les travailleurs transfrontaliers. Depuis 2014, avec l’élimination du régime d’assurance maladie privé, les frontaliers doivent choisir entre deux systèmes : la LAMal et la CMU. Cet article vous guidera à travers les différentes obligations et options disponibles pour optimiser votre couverture santé en tant que frontalier.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Pou",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4592",
+      "slug": "assurance-lamal",
+      "title": "Assurance Lamal : Guide Complet pour les Nouveaux Arrivants en Suisse",
+      "thumbnailId": null,
+      "category": "Assurance santé",
+      "categorySlug": "assurance-sante",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>L’assurance Lamal, ou assurance maladie de base, est une obligation légale pour toute personne résidant en Suisse. En tant que nouvel arrivant, comprendre son fonctionnement et ses options est essentiel pour garantir votre santé et celle de votre famille. Cet article vous fournira toutes les informations nécessaires sur les obligations, les choix d’assurance, et les avantages des couvertures complémentaires disponibles.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4594",
+      "slug": "institution-commune-lamal",
+      "title": "Institution Commune LAMal : Guide Complet pour les Résidents en Suisse",
+      "thumbnailId": null,
+      "category": "Assurance santé",
+      "categorySlug": "assurance-sante",
+      "date": "2024-09-26",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>L’<strong>Institution Commune LAMal</strong> joue un rôle essentiel pour les personnes résidant en Suisse et assurées légalement dans un État membre de l’UE ou de l’AELE. Cet article vous offre une vue d'ensemble détaillée sur l'inscription, les droits aux prestations, ainsi que les mécanismes de contrôle et de remboursement liés à l'assurance-maladie.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Qu'est-ce que l'Institution Commune LAMal e",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4785",
+      "slug": "echelle-bernoise",
+      "title": "Échelle bernoise  et délais de protection maladie : guide complet",
+      "thumbnailId": null,
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-07",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>L’échelle bernoise est une référence essentielle en Suisse, définissant la durée pendant laquelle un employeur doit continuer à verser le salaire d'un employé en incapacité de travail. Basée sur l’ancienneté de l’employé, cette échelle protège les droits des travailleurs et impose des obligations claires aux employeurs. Découvrez dans cet article les éléments-clés de cette réglementation.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Droits",
+      "imageUrl": null,
+      "targetPath": null
+    },
+    {
+      "id": "4787",
+      "slug": "formulaire-s1",
+      "title": "Formulaire S1 (S072) pour les frontaliers : démarches et choix d'assurance-maladie",
+      "thumbnailId": "4789",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-07",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Le formulaire S1 (ou S072), souvent requis pour les travailleurs frontaliers, est un document essentiel pour choisir son régime d'assurance-maladie entre la LAMal en Suisse et la CMU en France. Cet article vous guide dans les démarches nécessaires pour remplir et transmettre ce formulaire, ainsi que dans le processus de validation auprès des administrations suisses et françaises.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Qu'est-ce que l",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-07T175624.968.png",
+      "targetPath": "src/assets/blog/featured/formulaire-s1.png"
+    },
+    {
+      "id": "4790",
+      "slug": "base-de-remboursement",
+      "title": "Les frais de séjour hospitaliers : Comment ça fonctionne ?",
+      "thumbnailId": "4792",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-07",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>L’hospitalisation entraîne des frais importants qui ne sont pas entièrement couverts par la Sécurité Sociale. En fonction des soins reçus et de l’établissement choisi, le reste à charge peut varier. Cet article fait le point sur les frais hospitaliers, leur remboursement par la Sécurité Sociale et les solutions pour réduire ces coûts grâce aux mutuelles.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Que couvrent les frais de séjour hospital",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-07T181417.729.png",
+      "targetPath": "src/assets/blog/featured/base-de-remboursement.png"
+    },
+    {
+      "id": "4793",
+      "slug": "reduction-mammaire-suisse",
+      "title": "Réduction mammaire en Suisse : Tout ce que vous devez savoir",
+      "thumbnailId": "4794",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-07",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>La réduction mammaire est une intervention populaire en Suisse, offrant une solution pour les femmes souffrant d'hypertrophie mammaire. Elle permet de réduire le volume des seins pour améliorer le confort et l'esthétique. Cet article aborde en détail les étapes, les bénéfices, les risques et les options d'assurance pour cette intervention.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Qu'est-ce que l'hypertrophie mammaire ?</h2>\n<!-- /wp:he",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-07T182931.223.png",
+      "targetPath": "src/assets/blog/featured/reduction-mammaire-suisse.png"
+    },
+    {
+      "id": "4796",
+      "slug": "operer-la-myopie",
+      "title": "Opération de la myopie : que prend en charge l’assurance maladie ?",
+      "thumbnailId": "4797",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-07",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>La chirurgie de la myopie, ou chirurgie réfractive, est une solution efficace et de plus en plus répandue pour corriger la vision de loin sans lunettes ni lentilles. Ce guide complet présente les techniques, coûts, et conditions de remboursement disponibles pour cette opération, ainsi que les avantages à long terme. Que vous envisagiez cette intervention ou souhaitiez mieux comprendre ses détails, cet article vous offre une vue d'ensemble détaillée.</p>\n<!-- /wp:paragrap",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-07T183705.263.png",
+      "targetPath": "src/assets/blog/featured/operer-la-myopie.png"
+    },
+    {
+      "id": "4799",
+      "slug": "delai-de-carence",
+      "title": "Qu'est-ce qu'un délai de carence pour vos contrats d’assurance : comprendre et anticiper",
+      "thumbnailId": "4800",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Le délai de carence est un élément central dans la plupart des contrats d’assurance. Comprendre cette période de latence est essentiel pour éviter les mauvaises surprises lors de la souscription. Dans cet article, nous allons détailler le fonctionnement du délai de carence, les types d’assurances concernées, les moyens de l’éviter et son impact pour mieux préparer votre couverture.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Qu’est-ce que",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/63272277939.png",
+      "targetPath": "src/assets/blog/featured/delai-de-carence.png"
+    },
+    {
+      "id": "4803",
+      "slug": "liste-medicaments-rembourses-lamal",
+      "title": "Liste des médicaments remboursés par la LAMal : Ce que vous devez savoir",
+      "thumbnailId": "4804",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>L’assurance maladie de base en Suisse, la LAMal, couvre une partie des frais liés aux médicaments, mais certaines conditions et exclusions s’appliquent. Découvrez dans cet article complet les critères de remboursement, les listes de médicaments couverts, les systèmes de remboursement ainsi que les alternatives disponibles pour les médicaments non pris en charge.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">La couverture des médicaments par",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T133855.042.png",
+      "targetPath": "src/assets/blog/featured/liste-medicaments-rembourses-lamal.png"
+    },
+    {
+      "id": "4806",
+      "slug": "comparatif-assurance-maladie",
+      "title": "Comparatif Assurance Maladie de Base en Suisse",
+      "thumbnailId": "4807",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>L’assurance maladie de base (LAMal) est obligatoire pour tous les résidents suisses et garantit un accès équitable aux soins médicaux essentiels. Comparer les différentes caisses maladie et modèles d’assurance permet de réaliser des économies et de choisir l’offre la mieux adaptée à ses besoins. Découvrez ici tous les aspects importants de l’assurance de base en Suisse.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Comparer les Caisses d’As",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T134906.262.png",
+      "targetPath": "src/assets/blog/featured/comparatif-assurance-maladie.png"
+    },
+    {
+      "id": "4809",
+      "slug": "arcosana",
+      "title": "Arcosana : Assurance-maladie CSS et options de résiliation",
+      "thumbnailId": "4810",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Depuis sa fusion avec CSS le 1er janvier 2023, Arcosana propose aux assurés suisses une continuité de couverture et divers avantages pour les soins de santé. Cet article explore les modèles d’assurance disponibles, la gestion des primes, les options de résiliation, les avis des utilisateurs et les avantages exclusifs offerts par la CSS.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Primes et modèles d'assurance CSS pour anciens assurés Arco",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T140657.764.png",
+      "targetPath": "src/assets/blog/featured/arcosana.png"
+    },
+    {
+      "id": "4814",
+      "slug": "assurance-maladie-moins-chere-a-neuchatel-comparatif-2025",
+      "title": "Assurance maladie moins chère à Neuchâtel : Comparatif 2025",
+      "thumbnailId": "4816",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Dans le canton de Neuchâtel, les primes d'assurance maladie continuent d’augmenter en 2025, poussant de nombreux résidents à rechercher des options plus économiques. Ce comparatif complet vous aidera à identifier les offres d’assurance maladie les plus avantageuses et à comprendre les facteurs influençant les prix, afin de faire un choix éclairé.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Comparatif des primes d'assurance maladie dans le",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T141817.998.png",
+      "targetPath": "src/assets/blog/featured/assurance-maladie-moins-chere-a-neuchatel-comparatif-2025.png"
+    },
+    {
+      "id": "4818",
+      "slug": "subside-assurance-maladie-valais",
+      "title": "Subside assurance maladie Valais : guide complet",
+      "thumbnailId": "4819",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>En Suisse, les primes d’assurance-maladie représentent une charge importante pour de nombreux ménages. Le subside d’assurance-maladie dans le canton du Valais aide les personnes et familles aux revenus modestes à alléger ce fardeau. Ce guide complet vous explique qui est éligible, comment faire la demande, et à quel montant vous pouvez prétendre.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Pourquoi demander un subside d'assurance maladie&",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T143644.466.png",
+      "targetPath": "src/assets/blog/featured/subside-assurance-maladie-valais.png"
+    },
+    {
+      "id": "4821",
+      "slug": "assurance-maladie-moins-cher-vaud",
+      "title": "Assurance maladie moins cher Vaud :  guide",
+      "thumbnailId": "4822",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Dans le canton de Vaud, les primes d'assurance maladie augmentent, suscitant des préoccupations chez de nombreux assurés. Cet article offre un comparatif détaillé des assurances LAMal pour identifier les options les plus abordables, en fonction de l’âge, de la franchise et des modèles de couverture. Explorez les meilleures solutions pour réduire vos coûts tout en restant bien couvert.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Comparatif",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T144910.529.png",
+      "targetPath": "src/assets/blog/featured/assurance-maladie-moins-cher-vaud.png"
+    },
+    {
+      "id": "4824",
+      "slug": "comparateur-assurance-complementaire",
+      "title": "Comparatif des assurances complémentaires en Suisse",
+      "thumbnailId": "4825",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Les assurances complémentaires en Suisse sont une solution pour étendre la couverture offerte par l’assurance de base. Ces polices, bien que non obligatoires, peuvent répondre aux besoins spécifiques des assurés et sont souvent personnalisables. Ce guide complet vous aidera à comprendre les différentes options d’assurances complémentaires et à choisir celle qui convient le mieux à vos besoins.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">L",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T150615.873.png",
+      "targetPath": "src/assets/blog/featured/comparateur-assurance-complementaire.png"
+    },
+    {
+      "id": "4827",
+      "slug": "assurance-en-cas-hospitalisation",
+      "title": "Assurance en cas d’hospitalisation : tout ce que vous devez savoir",
+      "thumbnailId": "4828",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>L'assurance hospitalisation est une couverture essentielle pour quiconque souhaite bénéficier de soins confortables et personnalisés en cas d’hospitalisation. Cet article explore les avantages, les options de couverture et les points à considérer pour bien choisir une assurance complémentaire hospitalière qui réponde à vos besoins.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Pourquoi souscrire une assurance complémentaire hospitalisation ",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T154201.240.png",
+      "targetPath": "src/assets/blog/featured/assurance-en-cas-hospitalisation.png"
+    },
+    {
+      "id": "4830",
+      "slug": "meilleur-assurance-dentaire",
+      "title": "Meilleure assurance complémentaire dentaire en Suisse pour 2025",
+      "thumbnailId": "4831",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Les soins dentaires en Suisse peuvent être coûteux et ne sont que partiellement couverts par l'assurance maladie de base. Souscrire une assurance dentaire complémentaire permet de limiter les frais imprévus liés aux soins dentaires courants ou spécialisés. Dans cet article, découvrez comment choisir la meilleure assurance complémentaire dentaire en Suisse en 2024, en fonction de vos besoins et de votre budget.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T155333.064.png",
+      "targetPath": "src/assets/blog/featured/meilleur-assurance-dentaire.png"
+    },
+    {
+      "id": "4833",
+      "slug": "assurance-dentaire-suisse",
+      "title": "Assurance dentaire en Suisse : couverture, options et conseils",
+      "thumbnailId": "4834",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>En Suisse, les soins dentaires peuvent être coûteux et sont rarement couverts par l'assurance maladie de base (LAMal). Cet article vous aide à comprendre les options d'assurance dentaire complémentaire, leurs avantages et à choisir celle qui convient le mieux à vos besoins et budget.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Pourquoi souscrire une assurance complémentaire pour soins dentaires ?</h2>\n<!-- /wp:heading -->\n\n<!-- wp:heading",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T155756.622.png",
+      "targetPath": "src/assets/blog/featured/assurance-dentaire-suisse.png"
+    },
+    {
+      "id": "4836",
+      "slug": "assurance-perte-de-gain-prix",
+      "title": "Assurance perte de gain prix : meilleures options en Suisse",
+      "thumbnailId": "4837",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>L’assurance perte de gain est essentielle pour se protéger financièrement en cas d’incapacité de travail due à une maladie, un accident ou d'autres événements imprévus. En Suisse, cette couverture est cruciale, notamment pour les travailleurs indépendants et les employés. Cet article explore les différents aspects de l’assurance perte de gain, ses avantages et inconvénients, ainsi que les meilleures options disponibles en 2024.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T161742.560.png",
+      "targetPath": "src/assets/blog/featured/assurance-perte-de-gain-prix.png"
+    },
+    {
+      "id": "4839",
+      "slug": "assurance-maladie-resiliation",
+      "title": "Résilier son assurance maladie : guide complet",
+      "thumbnailId": "4840",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>La résiliation d'une assurance maladie peut sembler complexe, mais comprendre les délais et les conditions est essentiel pour éviter des interruptions indésirables de couverture. Cet article vous guide à travers les étapes clés et les conseils pratiques pour résilier votre assurance maladie en toute sécurité.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Comprendre les délais et conditions de résiliation</h2>\n<!-- /wp:heading -->\n\n<!-- wp:p",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T162843.347.png",
+      "targetPath": "src/assets/blog/featured/assurance-maladie-resiliation.png"
+    },
+    {
+      "id": "4842",
+      "slug": "base-de-remboursement-lentilles",
+      "title": "Remboursement des lentilles de contact : ce que vous devez savoir",
+      "thumbnailId": "4843",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Le remboursement des lentilles de contact est un sujet important pour de nombreux porteurs, notamment en ce qui concerne les coûts liés à leur achat. Cet article explore en profondeur le fonctionnement du remboursement des lentilles de contact par la sécurité sociale et les mutuelles, ainsi que les conditions à respecter pour bénéficier de ces remboursements.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Comprendre le remboursement des lent",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T163610.839.png",
+      "targetPath": "src/assets/blog/featured/base-de-remboursement-lentilles.png"
+    },
+    {
+      "id": "4845",
+      "slug": "concordia-assurance-complementaire-formules-remboursements-et-resiliation",
+      "title": "Concordia assurance complémentaire : formules, remboursements et résiliation",
+      "thumbnailId": "4846",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>L'assurance complémentaire est un élément essentiel du système de santé suisse, permettant de couvrir des frais non pris en charge par l'assurance de base. Concordia, un acteur majeur du secteur, propose plusieurs formules adaptées aux besoins de ses assurés. Cet article explore les différentes offres de Concordia, leurs tarifs, remboursements et modalités de résiliation.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Les formules d’assuranc",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T164802.623.png",
+      "targetPath": "src/assets/blog/featured/concordia-assurance-complementaire-formules-remboursements-et-resiliation.png"
+    },
+    {
+      "id": "4851",
+      "slug": "grossesse-prise-en-charge-assurance-maladie",
+      "title": "Grossesse prise en charge par l'assurance maladie",
+      "thumbnailId": "4852",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>La prise en charge de la grossesse par l’assurance maladie est essentielle pour garantir un suivi médical adéquat et un accès aux soins durant cette période cruciale. Cet article explore en détail les prestations spécifiques offertes, les examens remboursés, et les services des sages-femmes, afin d'informer les futures mamans sur leurs droits et options.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Les prestations de l’assurance maladie en",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T170918.515.png",
+      "targetPath": "src/assets/blog/featured/grossesse-prise-en-charge-assurance-maladie.png"
+    },
+    {
+      "id": "4858",
+      "slug": "css-assurance-maladie",
+      "title": "CSS assurance maladie : Guide complet des modèles d'assurance",
+      "thumbnailId": "4859",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>L’assurance maladie est un sujet essentiel pour garantir la couverture des frais de santé. Ce guide examine les différents modèles d'assurance proposés par la CSS, en mettant en lumière leurs spécificités, avantages, et inconvénients. À travers une analyse approfondie, cet article vous aidera à faire un choix éclairé sur votre couverture santé.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">CSS assurance de base</h2>\n<!-- /wp:heading -->\n\n<!",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T172522.179.png",
+      "targetPath": "src/assets/blog/featured/css-assurance-maladie.png"
+    },
+    {
+      "id": "4861",
+      "slug": "groupe-mutuel-avis",
+      "title": "Avis sur l'assurance maladie Groupe Mutuel en 2025",
+      "thumbnailId": "4862",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>L'assurance maladie est un élément essentiel pour assurer une couverture santé adéquate. Dans cet article, nous examinerons en détail l'offre de Groupe Mutuel, une des principales caisses en Suisse. Nous aborderons ses formules, ses tarifs, ainsi que les avis des assurés pour vous aider à faire un choix éclairé.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Comprendre l'assurance maladie de Groupe Mutuel</h2>\n<!-- /wp:heading -->\n\n<!-- wp:p",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T173332.053.png",
+      "targetPath": "src/assets/blog/featured/groupe-mutuel-avis.png"
+    },
+    {
+      "id": "4864",
+      "slug": "helsana-assurance-maladie",
+      "title": "Assurance maladie Helsana : guide complet",
+      "thumbnailId": "4866",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-08",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>L'assurance maladie Helsana représente une option importante pour les résidents suisses, offrant divers modèles adaptés aux besoins variés des assurés. Avec une réputation solide et plusieurs choix de couverture, il est essentiel d'explorer ce que Helsana propose, notamment en termes de services, de primes, de remboursement et de résiliation. Cet article fournit un aperçu détaillé des différentes options disponibles en 2024 et au-delà.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-08T180230.890.png",
+      "targetPath": "src/assets/blog/featured/helsana-assurance-maladie.png"
+    },
+    {
+      "id": "4867",
+      "slug": "franchise-assurance-maladie",
+      "title": "Franchise en assurance maladie en Suisse : guide complet",
+      "thumbnailId": "4868",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-09",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>En Suisse, la franchise en assurance maladie est un élément clé du système LAMal, influençant le coût des primes et le remboursement des soins. Dans cet article, découvrez comment fonctionne la franchise, quels sont les montants disponibles, et comment choisir celle qui correspond à votre situation. Des astuces pour économiser et des exemples concrets vous aideront à mieux comprendre ce mécanisme.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-headin",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/50338568259.png",
+      "targetPath": "src/assets/blog/featured/franchise-assurance-maladie.png"
+    },
+    {
+      "id": "4870",
+      "slug": "hmo-assurance",
+      "title": "Modèle HMO : fonctionnement, avantages et comparaison des offres en 2024",
+      "thumbnailId": "4871",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-09",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>L'assurance HMO en Suisse permet de réduire les coûts des soins en proposant un réseau restreint de professionnels de santé. Son mode de fonctionnement encadré et ses avantages financiers en font une option de plus en plus populaire pour les assurés. Dans cet article, nous vous détaillons tout ce qu'il faut savoir sur le modèle HMO pour vous aider à choisir l’option qui vous convient le mieux.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Q",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-09T074002.402.png",
+      "targetPath": "src/assets/blog/featured/hmo-assurance.png"
+    },
+    {
+      "id": "4873",
+      "slug": "medecin-de-famille",
+      "title": "Modèle du médecin de famille dans l'assurance maladie en Suisse",
+      "thumbnailId": "4874",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-09",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>L'assurance maladie en Suisse propose plusieurs modèles, dont le modèle du médecin de famille, qui est l'un des plus populaires. Ce modèle, axé sur le rôle de premier interlocuteur du médecin généraliste, permet de réduire les coûts tout en facilitant une prise en charge personnalisée et coordonnée. Découvrez le fonctionnement de ce modèle, ses avantages, ses limites et les options disponibles pour adapter votre couverture santé.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:headi",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-09T074815.587.png",
+      "targetPath": "src/assets/blog/featured/medecin-de-famille.png"
+    },
+    {
+      "id": "4876",
+      "slug": "desensibilisation-pollen",
+      "title": "Désensibilisation aux pollens : prix, efficacité, effets secondaires et méthodes",
+      "thumbnailId": "4877",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-09",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>La désensibilisation aux pollens est un traitement de fond pour les allergies qui vise à améliorer la qualité de vie des patients souffrant de rhinite, conjonctivite et asthme allergiques. Cette méthode, appelée aussi immunothérapie allergénique, aide le système immunitaire à mieux tolérer les pollens en réduisant la sensibilité allergique. Voici un guide complet pour tout comprendre sur ce traitement, ses coûts, ses bénéfices et ses inconvénients.</p>\n<!-- /wp:paragraph",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-09T075353.522.png",
+      "targetPath": "src/assets/blog/featured/desensibilisation-pollen.png"
+    },
+    {
+      "id": "4879",
+      "slug": "soins-dentaires",
+      "title": "Soins dentaires en Suisse : ce qu’il faut savoir pour une prise en charge optimale",
+      "thumbnailId": "4880",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-09",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>En Suisse, les soins dentaires sont un domaine particulier car la plupart des traitements ne sont pas remboursés par l’assurance maladie de base. Cependant, il existe des solutions de prise en charge et des aides financières pour les personnes dans le besoin. Découvrez ici tous les aspects essentiels de la prise en charge des soins dentaires, des options d’assistance disponibles et des conseils pratiques pour maintenir une bonne hygiène bucco-dentaire tout en maîtrisant ",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-09T080428.766.png",
+      "targetPath": "src/assets/blog/featured/soins-dentaires.png"
+    },
+    {
+      "id": "4882",
+      "slug": "base-remboursement-optique",
+      "title": "Base de remboursement optique : quelle prise en charge en Suisse en 2024 ?",
+      "thumbnailId": "4883",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-09",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>En Suisse, le coût des lunettes et des lentilles de contact représente une dépense importante pour de nombreux assurés. Heureusement, diverses assurances permettent de rembourser partiellement ces frais. Dans cet article, nous passons en revue les conditions et modalités de remboursement des frais optiques, qu’il s’agisse des lunettes, lentilles ou encore de certaines opérations oculaires. Découvrez les options de prise en charge offertes par l’assurance de base et les a",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-09T081352.184.png",
+      "targetPath": "src/assets/blog/featured/base-remboursement-optique.png"
+    },
+    {
+      "id": "4885",
+      "slug": "antihistaminique-suisse",
+      "title": "Antihistaminiques en Suisse : choix, utilisation et conseils pratiques",
+      "thumbnailId": "4886",
+      "category": "Aide assurance maladie",
+      "categorySlug": "aide-assurance-maladie",
+      "date": "2024-11-09",
+      "contentPreview": "<!-- wp:paragraph -->\n<p>Les antihistaminiques sont des médicaments couramment utilisés pour traiter les symptômes allergiques, tels que les démangeaisons, l’écoulement nasal ou les éternuements. En Suisse, un large éventail de produits est disponible, avec des caractéristiques spécifiques selon les besoins de chaque patient, que ce soit pour les enfants, les adultes ou les femmes enceintes. Ce guide présente les types d'antihistaminiques, les précautions d'usage et les recommandations pour une ",
+      "imageUrl": "https://le-comparateur-optimis.ch/wp-content/uploads/2024/11/image-2024-11-09T082315.930.png",
+      "targetPath": "src/assets/blog/featured/antihistaminique-suisse.png"
+    }
+  ]
+}

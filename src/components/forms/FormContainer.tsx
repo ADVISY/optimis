@@ -37,6 +37,22 @@ const FormContainer = ({
     setGradientPos({ x: 50, y: 50 });
   }, []);
 
+  // Mobile: when an input gets focus, scroll it into view so the soft keyboard doesn't hide it.
+  const handleFocusIn = useCallback((e: React.FocusEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement;
+    if (!target) return;
+    const tag = target.tagName;
+    if (tag !== "INPUT" && tag !== "SELECT" && tag !== "TEXTAREA") return;
+    // Wait for the on-screen keyboard to open, then center the field.
+    window.setTimeout(() => {
+      try {
+        target.scrollIntoView({ block: "center", behavior: "smooth" });
+      } catch {
+        target.scrollIntoView();
+      }
+    }, 250);
+  }, []);
+
   const isLarge = size === "large";
 
   return (
@@ -45,6 +61,7 @@ const FormContainer = ({
       data-form-container
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onFocus={handleFocusIn}
       className={`w-full mx-auto shadow-2xl border-2 md:border-4 border-emerald-700 rounded-xl md:rounded-3xl overflow-hidden ring-2 ring-emerald-400/30 animate-fade-in text-emerald-900 relative ${
         isLarge ? "max-w-4xl" : "max-w-3xl"
       }`}
@@ -66,17 +83,17 @@ const FormContainer = ({
         isLarge ? "px-4 md:px-10 pt-3 md:pt-10" : "px-3.5 md:px-8 pt-3 md:pt-8"
       }`}>
         {/* Trust badges - single line on mobile */}
-        <div className="flex items-center justify-center gap-1.5 md:gap-4 text-[9px] md:text-base">
-          <div className="flex items-center text-emerald-800 font-semibold rounded-full bg-emerald-50 shadow-sm border border-emerald-200 gap-0.5 md:gap-2 px-2 md:px-4 py-0.5 md:py-2">
-            <Shield className="h-2.5 w-2.5 md:h-4 md:w-4 text-emerald-600" />
+        <div className="flex items-center justify-center gap-1.5 md:gap-4 text-[11px] md:text-base">
+          <div className="flex items-center text-emerald-800 font-semibold rounded-full bg-emerald-50 shadow-sm border border-emerald-200 gap-1 md:gap-2 px-2 md:px-4 py-0.5 md:py-2">
+            <Shield className="h-3 w-3 md:h-4 md:w-4 text-emerald-600" />
             <span>{t("forms.free")}</span>
           </div>
-          <div className="flex items-center text-emerald-800 font-semibold rounded-full bg-emerald-50 shadow-sm border border-emerald-200 gap-0.5 md:gap-2 px-2 md:px-4 py-0.5 md:py-2">
-            <Lock className="h-2.5 w-2.5 md:h-4 md:w-4 text-emerald-600" />
+          <div className="flex items-center text-emerald-800 font-semibold rounded-full bg-emerald-50 shadow-sm border border-emerald-200 gap-1 md:gap-2 px-2 md:px-4 py-0.5 md:py-2">
+            <Lock className="h-3 w-3 md:h-4 md:w-4 text-emerald-600" />
             <span>{t("forms.secure")}</span>
           </div>
-          <div className="flex items-center text-emerald-800 font-semibold rounded-full bg-emerald-50 shadow-sm border border-emerald-200 gap-0.5 md:gap-2 px-2 md:px-4 py-0.5 md:py-2">
-            <CheckCircle className="h-2.5 w-2.5 md:h-4 md:w-4 text-emerald-600" />
+          <div className="flex items-center text-emerald-800 font-semibold rounded-full bg-emerald-50 shadow-sm border border-emerald-200 gap-1 md:gap-2 px-2 md:px-4 py-0.5 md:py-2">
+            <CheckCircle className="h-3 w-3 md:h-4 md:w-4 text-emerald-600" />
             <span>{t("forms.noCommitment")}</span>
           </div>
         </div>

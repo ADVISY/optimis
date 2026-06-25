@@ -29,6 +29,7 @@
     "sending": "Envoi..."
   },
   "megaMenu": {
+    "complementaryInsurance": "Assurance complémentaire",
     "prenatalInsurance": "Assurance prénatale (bébé à naître)",
     "healthModel": "Quel modèle d'assurance maladie choisir ?",
     "dentalInsurance": "Assurance dentaire complémentaire",
@@ -1293,7 +1294,7 @@
         "household": "Assurance ménage",
         "legal": "Protection juridique",
         "life": "Assurance vie",
-        "other": "Autre"
+        "other": "Assurance divers"
       },
       "contractTypes": {
         "health": "Assurance maladie",
@@ -1305,19 +1306,21 @@
       },
       "currentInsurer": "Assureur actuel",
       "selectInsurer": "Sélectionnez votre assureur",
-      "policyNumber": "Numéro de police (optionnel)",
-      "policyNumberHelp": "Vous le trouverez sur votre contrat ou vos factures",
       "terminationDate": "Date de résiliation souhaitée",
       "selectDate": "Choisir une date",
       "address": "Adresse",
       "city": "Ville",
+      "cancellationReason": "Pourquoi voulez-vous résilier ?",
       "reason": "Motif de résiliation",
       "reasons": {
         "price": "Trouver moins cher",
         "coverage": "Couverture insuffisante",
         "service": "Service client insatisfaisant",
         "moving": "Déménagement",
-        "other": "Autre raison"
+        "other": "Autre raison",
+        "tooExpensive": "Trop cher",
+        "poorService": "Service client médiocre",
+        "poorReimbursement": "Prestations mal remboursées"
       },
       "generateLetter": "Générer ma lettre de résiliation",
       "letterGenerated": "Lettre générée avec succès !",
@@ -1327,7 +1330,7 @@
       "letterPreview": "Aperçu de la lettre",
       "letterSubject": "Objet : Résiliation de contrat",
       "letterBody": "Par la présente, je vous prie de résilier mon contrat à la date indiquée. Merci de me confirmer la résiliation par écrit.",
-      "policyRef": "Référence de police",
+      
       "effectiveDate": "Date d'effet",
       "downloadPDF": "Télécharger en PDF",
       "compareNew": "Comparer de nouvelles offres",

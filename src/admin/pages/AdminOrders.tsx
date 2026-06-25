@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Loader2, Trash2, FileText, ChevronDown, ChevronRight, CheckCircle2, Pause, Play, Ban } from "lucide-react";
+import { Plus, Loader2, Trash2, FileText, ChevronDown, ChevronRight, CheckCircle2, Pause, Play, Ban, Pencil } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatMoney, toCHF, formatCHF, formatDate, type Currency } from "@/admin/lib/format";
 import { InvoiceFormModal } from "@/admin/components/InvoiceFormModal";
@@ -83,14 +83,42 @@ export default function AdminOrders() {
   const [selectedOrderIds, setSelectedOrderIds] = useState<Set<string>>(new Set());
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
 
+  const [editingOrderId, setEditingOrderId] = useState<string | null>(null);
   const [clientId, setClientId] = useState("");
   const [orderDate, setOrderDate] = useState(new Date().toISOString().slice(0, 10));
   const [lines, setLines] = useState<OrderLine[]>([newLine()]);
 
   const resetForm = () => {
+    setEditingOrderId(null);
     setClientId("");
     setOrderDate(new Date().toISOString().slice(0, 10));
     setLines([newLine()]);
+  };
+
+  const handleEditOrder = (o: any) => {
+    if (o.invoice_id) {
+      toast({ title: "Commande déjà facturée", description: "Modification autorisée — pensez à mettre à jour la facture si besoin." });
+    }
+    setEditingOrderId(o.id);
+    setClientId(o.client_id);
+    setOrderDate(o.order_date);
+    const ls: OrderLine[] = (o.admin_order_lines ?? [])
+      .slice()
+      .sort((a: any, b: any) => a.position - b.position)
+      .map((l: any) => ({
+        id: crypto.randomUUID(),
+        product_id: l.product_id ?? null,
+        product_name: l.product_name ?? "",
+        category: l.category ?? getCategoryForDomain(l.subcategory ?? l.domain),
+        subcategory: (l.subcategory ?? l.domain ?? "") as OrderDomain | "",
+        quantity: Number(l.quantity) || 1,
+        unit_price: Number(l.unit_price) || 0,
+        currency: (l.currency as Currency) ?? "CHF",
+        fx_rate_to_chf: Number(l.fx_rate_to_chf) || 1,
+        comment: l.comment ?? "",
+      }));
+    setLines(ls.length ? ls : [newLine()]);
+    setOpenModal(true);
   };
 
   const { data: clients } = useQuery({
@@ -233,8 +261,142 @@ export default function AdminOrders() {
     lines.length > 0 &&
     lines.every((l) => l.subcategory && l.product_name.trim() && l.quantity > 0 && l.unit_price >= 0);
 
+  const rebuildInvoiceFromOrders = async (invoiceId: string) => {
+    // Fetch invoice + current vat_rate
+    const { data: inv, error: invErr } = await supabase
+      .from("admin_invoices")
+      .select("id, vat_rate")
+      .eq("id", invoiceId)
+      .single();
+    if (invErr) throw invErr;
+
+    // Fetch all orders linked to this invoice with their lines
+    const { data: linkedOrders, error: loErr } = await supabase
+      .from("admin_orders")
+      .select("id, admin_order_lines(*)")
+      .eq("invoice_id", invoiceId);
+    if (loErr) throw loErr;
+
+    const allLines = (linkedOrders ?? []).flatMap((o: any) =>
+      (o.admin_order_lines ?? [])
+        .slice()
+        .sort((a: any, b: any) => a.position - b.position)
+        .map((l: any) => ({
+          product_id: l.product_id ?? null,
+          product_name: l.product_name ?? null,
+          category: l.category ?? null,
+          subcategory: l.subcategory ?? l.domain ?? null,
+          quantity: Number(l.quantity) || 0,
+          unit_price: Number(l.unit_price) || 0,
+          currency: ((l.currency as Currency) ?? "CHF") as Currency,
+          fx_rate_to_chf: Number(l.fx_rate_to_chf) || 1,
+          comment: l.comment || "",
+        }))
+    );
+
+    const invoiceCurrency: Currency = allLines[0]?.currency ?? "CHF";
+    const fxToChf = allLines[0]?.fx_rate_to_chf ?? 1;
+    const subtotal = allLines.reduce((s, l) => {
+      const lt = l.quantity * l.unit_price;
+      if (l.currency === invoiceCurrency) return s + lt;
+      const chf = toCHF(lt, l.currency, l.fx_rate_to_chf);
+      if (invoiceCurrency === "CHF") return s + chf;
+      const fxBack = allLines.find((x) => x.currency === invoiceCurrency)?.fx_rate_to_chf || 1;
+      return s + chf / fxBack;
+    }, 0);
+    const vatRate = Number(inv.vat_rate) || 0;
+    const vatAmount = +(subtotal * (vatRate / 100)).toFixed(2);
+    const total = +(subtotal + vatAmount).toFixed(2);
+
+    // Replace invoice lines
+    const { error: dErr } = await (supabase.from("admin_invoice_lines" as any) as any)
+      .delete()
+      .eq("invoice_id", invoiceId);
+    if (dErr) throw dErr;
+
+    const invLineRows = allLines.map((l, i) => {
+      const breadcrumb = buildHierarchyLabel({
+        category: l.category ?? undefined,
+        subcategory: (l.subcategory as OrderDomain) ?? undefined,
+        productName: l.product_name ?? undefined,
+      });
+      return {
+        invoice_id: invoiceId,
+        position: i,
+        description: breadcrumb + (l.comment ? ` — ${l.comment}` : ""),
+        quantity: l.quantity,
+        unit_price: l.unit_price,
+        product_id: l.product_id,
+        product_name: l.product_name,
+        category: l.category,
+        subcategory: l.subcategory,
+      };
+    });
+    if (invLineRows.length > 0) {
+      const { error: ilErr } = await (supabase.from("admin_invoice_lines" as any) as any).insert(invLineRows);
+      if (ilErr) throw ilErr;
+    }
+
+    // Update invoice totals
+    const { error: uErr } = await supabase
+      .from("admin_invoices")
+      .update({
+        subtotal,
+        vat_amount: vatAmount,
+        total,
+        currency: invoiceCurrency,
+        fx_rate_to_chf: fxToChf,
+      })
+      .eq("id", invoiceId);
+    if (uErr) throw uErr;
+  };
+
   const createMutation = useMutation({
     mutationFn: async () => {
+      if (editingOrderId) {
+        // Detect linked invoice (if any) before updating
+        const { data: existingOrder } = await supabase
+          .from("admin_orders")
+          .select("invoice_id")
+          .eq("id", editingOrderId)
+          .single();
+        const linkedInvoiceId = existingOrder?.invoice_id ?? null;
+
+        // Update existing order
+        const { error: uErr } = await supabase
+          .from("admin_orders")
+          .update({ client_id: clientId, order_date: orderDate })
+          .eq("id", editingOrderId);
+        if (uErr) throw uErr;
+        // Replace lines: delete then insert
+        const { error: dErr } = await (supabase.from("admin_order_lines" as any) as any)
+          .delete()
+          .eq("order_id", editingOrderId);
+        if (dErr) throw dErr;
+        const lineRows = lines.map((l, i) => ({
+          order_id: editingOrderId,
+          position: i,
+          product_id: l.product_id,
+          product_name: l.product_name,
+          category: l.category,
+          subcategory: l.subcategory,
+          domain: l.subcategory as any,
+          quantity: l.quantity,
+          unit_price: l.unit_price,
+          currency: l.currency,
+          fx_rate_to_chf: l.fx_rate_to_chf,
+          comment: l.comment || null,
+        }));
+        const { error: lErr } = await (supabase.from("admin_order_lines" as any) as any).insert(lineRows);
+        if (lErr) throw lErr;
+
+        // If the order was linked to an invoice, rebuild it from all linked orders
+        if (linkedInvoiceId) {
+          await rebuildInvoiceFromOrders(linkedInvoiceId);
+        }
+
+        return { id: editingOrderId, order_number: "", invoice_id: linkedInvoiceId } as any;
+      }
       const { data: order, error: oErr } = await supabase
         .from("admin_orders")
         .insert({ client_id: clientId, order_date: orderDate })
@@ -261,11 +423,17 @@ export default function AdminOrders() {
     },
     onSuccess: (order) => {
       qc.invalidateQueries({ queryKey: ["admin-orders"] });
+      qc.invalidateQueries({ queryKey: ["admin-invoices"] });
       qc.invalidateQueries({ queryKey: ["admin-stats"] });
       qc.invalidateQueries({ queryKey: ["admin-revenue-by-currency"] });
+
+      const wasEditing = !!editingOrderId;
       setOpenModal(false);
       resetForm();
-      toast({ title: "Commande enregistrée", description: `${(order as any).order_number} · ${lines.length} ligne(s)` });
+      toast({
+        title: wasEditing ? "Commande mise à jour" : "Commande enregistrée",
+        description: wasEditing ? `${lines.length} ligne(s)` : `${(order as any).order_number} · ${lines.length} ligne(s)`,
+      });
     },
     onError: (e: any) => toast({ title: "Erreur", description: e.message, variant: "destructive" }),
   });
@@ -472,6 +640,14 @@ export default function AdminOrders() {
                               <Button
                                 size="sm"
                                 variant="ghost"
+                                onClick={() => handleEditOrder(o)}
+                                title="Modifier la commande"
+                              >
+                                <Pencil className="h-3.5 w-3.5" />
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="ghost"
                                 onClick={() => {
                                   if (confirm(`Supprimer la commande ${o.order_number} ?`)) deleteMutation.mutate(o.id);
                                 }}
@@ -546,7 +722,7 @@ export default function AdminOrders() {
       <Dialog open={openModal} onOpenChange={(o) => { setOpenModal(o); if (!o) resetForm(); }}>
         <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-[hsl(var(--optimis-green))]">Nouvelle commande</DialogTitle>
+            <DialogTitle className="text-[hsl(var(--optimis-green))]">{editingOrderId ? "Modifier la commande" : "Nouvelle commande"}</DialogTitle>
           </DialogHeader>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4 border-b border-border">
@@ -720,7 +896,7 @@ export default function AdminOrders() {
           <DialogFooter className="mt-4">
             <Button variant="outline" onClick={() => { setOpenModal(false); resetForm(); }}>Annuler</Button>
             <Button onClick={() => createMutation.mutate()} disabled={createMutation.isPending || !canSubmit}>
-              {createMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Enregistrer la commande"}
+              {createMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : editingOrderId ? "Mettre à jour la commande" : "Enregistrer la commande"}
             </Button>
           </DialogFooter>
         </DialogContent>

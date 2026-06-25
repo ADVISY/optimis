@@ -1,6 +1,6 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
@@ -50,6 +50,9 @@ const TOTAL_STEPS = 5;
 
 const PrenatalInsuranceForm = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { localizedPath } = useLocalizedPath();
   const {
     attemptedNext,
     markAttempted,
@@ -134,27 +137,35 @@ const PrenatalInsuranceForm = () => {
       motherInsurer: (insurerMap[formData.motherInsurer] ?? formData.motherInsurer) || "-",
     };
     await submitLead(translated as unknown as Record<string, unknown>);
+    navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
+  }, [formData, submitLead, t, navigate, localizedPath, location.pathname]);
 
-    // Fetch newborn LAMal prices (age bracket 0-18, accident coverage by default)
-    setIsLoadingResults(true);
-    setLoadingStep("analyzing");
-    const birthYear = formData.dueDate ? formData.dueDate.getFullYear() : new Date().getFullYear() + 1;
-    setTimeout(() => setLoadingStep("comparing"), 800);
-    setTimeout(() => setLoadingStep("preparing"), 1600);
-    const premiums = await fetchPremiums({
-      canton: formData.canton,
-      postalCode: formData.postalCode,
-      birthYear,
-      franchise: Number(formData.childDeductible) || 0,
-      model: formData.lamalModel,
-      withAccident: true,
-      language: i18n.language,
-    });
-    const offers = premiums.map((p, i) => premiumToInsuranceOffer(p, i));
-    setRealOffers(offers);
-    setIsLoadingResults(false);
-    setShowResults(true);
-  }, [formData, submitLead, t, fetchPremiums, i18n.language]);
+  // On return from /merci: load results
+  useEffect(() => {
+    if (!(location.state as any)?.showResults) return;
+    window.history.replaceState({}, "");
+    (async () => {
+      setIsLoadingResults(true);
+      setLoadingStep("analyzing");
+      const birthYear = formData.dueDate ? formData.dueDate.getFullYear() : new Date().getFullYear() + 1;
+      setTimeout(() => setLoadingStep("comparing"), 800);
+      setTimeout(() => setLoadingStep("preparing"), 1600);
+      const premiums = await fetchPremiums({
+        canton: formData.canton,
+        postalCode: formData.postalCode,
+        birthYear,
+        franchise: Number(formData.childDeductible) || 0,
+        model: formData.lamalModel,
+        withAccident: true,
+        language: i18n.language,
+      });
+      const offers = premiums.map((p, i) => premiumToInsuranceOffer(p, i));
+      setRealOffers(offers);
+      setIsLoadingResults(false);
+      setShowResults(true);
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const { startOtpFlow, otpModalProps } = useOtpFormFlow({
     onOtpVerified: performSubmit,
@@ -174,7 +185,12 @@ const PrenatalInsuranceForm = () => {
           formData.postalCode.replace(/\D/g, "").length >= 4
         );
       case 2:
-        return formData.coverageLevel !== "";
+        return (
+          formData.coverageLevel !== "" &&
+          formData.lamalModel !== "" &&
+          formData.childDeductible !== "" &&
+          formData.childDental !== ""
+        );
       case 3:
         return formData.motherHasInsurance !== "";
       case 4:

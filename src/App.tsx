@@ -51,6 +51,7 @@ import AvoirsLpp from "./pages/AvoirsLpp";
 import EstimationImmobiliere from "./pages/EstimationImmobiliere";
 import ComparateurEstimation from "./pages/comparateurs/ComparateurEstimation";
 import Partenaires from "./pages/Partenaires";
+import ComparateurComplementaire from "./pages/comparateurs/ComparateurComplementaire";
 
 import { localizedRoutes } from "./utils/localizedRoutes";
 import AdminRouter from "./admin/AdminRouter";
@@ -141,7 +142,8 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("realEstate", <EstimationImmobiliere />)}
         {createLocalizedRoutes("realEstateLanding", <ComparateurEstimation />)}
         {createLocalizedRoutes("partners", <Partenaires />)}
-        
+        {createLocalizedRoutes("complementaryLanding", <ComparateurComplementaire />)}
+
         {/* Legacy comparateur routes - redirect to new URLs */}
         <Route path="/comparateur/sante" element={<Navigate to="../assurance-maladie-landing" replace />} />
         <Route path="/comparateur/voiture" element={<Navigate to="../assurance-voiture-landing" replace />} />
@@ -152,6 +154,7 @@ const LanguageRoutes = () => {
         <Route path="/comparateur/pilier-3a" element={<Navigate to="../3eme-pilier-offres" replace />} />
         <Route path="/comparateur/hypotheque" element={<Navigate to="../hypotheque-offres" replace />} />
         <Route path="/comparateur/professionnel" element={<Navigate to="../assurance-entreprise-offres" replace />} />
+        <Route path="/comparateur/complementaire" element={<Navigate to="/fr/assurance-complementaire-offres" replace />} />
         
         {/* Legacy routes - redirect to new slugs */}
         <Route path="/politique-confidentialite" element={<Navigate to="../politique-de-confidentialite" replace />} />
