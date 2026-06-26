@@ -49,7 +49,8 @@ const HealthComparisonResults = ({
   offers,
   formData,
 }: HealthComparisonResultsProps) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
+  const t = i18n.getFixedT("fr");
   const [expandedOfferId, setExpandedOfferId] = useState<string | null>(null);
   const [showComplementary, setShowComplementary] = useState(true);
   const [modalState, setModalState] = useState<{
