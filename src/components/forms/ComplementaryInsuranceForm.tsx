@@ -342,8 +342,8 @@ const ComplementaryInsuranceForm = () => {
   return (
     <>
       <FormContainer
-        title="Comparez et optimisez vos assurances complémentaires"
-        description="Quelques questions pour trouver la meilleure couverture LCA adaptée à vos besoins."
+        title={L.title}
+        description={L.desc}
         currentStep={currentStep}
         totalSteps={TOTAL_STEPS}
       >
@@ -355,9 +355,9 @@ const ComplementaryInsuranceForm = () => {
         {/* Step 1: Besoins (multi-choix) */}
         <FormStep isActive={currentStep === 1}>
           <div className="space-y-4">
-            <FormFieldWrapper label="Qu'est-ce qui est important pour vous ? (choix multiples)" required>
+            <FormFieldWrapper label={L.needsLabel} required>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-                {NEEDS_OPTIONS.map((opt) => {
+                {NEEDS_KEYS.map((opt) => {
                   const Icon = opt.icon;
                   const checked = formData.needs[opt.key];
                   return (
@@ -375,7 +375,7 @@ const ComplementaryInsuranceForm = () => {
                         onCheckedChange={() => toggleNeed(opt.key)}
                       />
                       <Icon className="h-5 w-5 text-primary flex-shrink-0" />
-                      <span className="text-sm sm:text-base flex-1 leading-snug">{opt.label}</span>
+                      <span className="text-sm sm:text-base flex-1 leading-snug">{L.needs[opt.key]}</span>
                     </label>
                   );
                 })}
@@ -383,6 +383,7 @@ const ComplementaryInsuranceForm = () => {
             </FormFieldWrapper>
           </div>
         </FormStep>
+
 
         {/* Step 2: Assurance actuelle */}
         <FormStep isActive={currentStep === 2}>
