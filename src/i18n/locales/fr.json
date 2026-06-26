@@ -1330,7 +1330,6 @@
       "letterPreview": "Aperçu de la lettre",
       "letterSubject": "Objet : Résiliation de contrat",
       "letterBody": "Par la présente, je vous prie de résilier mon contrat à la date indiquée. Merci de me confirmer la résiliation par écrit.",
-      
       "effectiveDate": "Date d'effet",
       "downloadPDF": "Télécharger en PDF",
       "compareNew": "Comparer de nouvelles offres",
@@ -1484,7 +1483,12 @@
     "subsidy": {
       "badge": "Vérification Subside",
       "title": "Vérifiez votre éligibilité aux subsides",
-      "subtitle": "Découvrez si vous avez droit à une aide pour vos primes"
+      "subtitle": "Découvrez si vous avez droit à une aide pour vos primes",
+      "heroTitle": "DEMANDE EN LIGNE SUBSIDE 2026 : VÉRIFIEZ VOTRE DROIT AUX AIDES",
+      "heroSubtitle": "Découvrez en 2 minutes le montant du subside auquel vous avez droit pour réduire votre prime d'assurance maladie.",
+      "heroBullet1": "Simulation gratuite en 2 minutes",
+      "heroBullet2": "Jusqu'à 3'500 CHF d'aides par année",
+      "heroBullet3": "Familles, couples, personnes seules, étudiants"
     },
     "termination": {
       "badge": "Résiliation d'Assurance",
