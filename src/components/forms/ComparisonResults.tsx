@@ -19,7 +19,8 @@ const ComparisonResults = ({
   onSelectOffer,
   onContactRequest,
 }: ComparisonResultsProps) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
+  const t = i18n.getFixedT("fr");
 
   const getBadgeVariant = (badge: string): "default" | "secondary" | "outline" | "destructive" => {
     switch (badge) {
