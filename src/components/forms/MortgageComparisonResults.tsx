@@ -39,7 +39,8 @@ const MortgageComparisonResults = ({
   propertyValue,
   duration,
 }: MortgageComparisonResultsProps) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
+  const t = i18n.getFixedT("fr");
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
   const [contactModalOpen, setContactModalOpen] = useState(false);
   const [selectedOffer, setSelectedOffer] = useState<MortgageSimulationResult | null>(null);
