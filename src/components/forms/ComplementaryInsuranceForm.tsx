@@ -166,6 +166,8 @@ const NEEDS_KEYS: { key: keyof ComplementaryFormData["needs"]; icon: any }[] = [
 
 const ComplementaryInsuranceForm = () => {
   const { t, i18n } = useTranslation();
+  const lang = (["fr", "de", "it", "en"].includes(i18n.language) ? i18n.language : "fr") as Lang;
+  const L = L_DICT[lang];
   const navigate = useNavigate();
   const location = useLocation();
   const { localizedPath } = useLocalizedPath();
