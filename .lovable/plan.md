@@ -1,83 +1,52 @@
-# Audit UX mobile — Formulaires Maladie & Subside
+# Ajout langue anglaise (puis portugaise)
 
-Voici les problèmes constatés et les corrections proposées. Cochez celles à appliquer.
+Cible : expatriés et résidents suisses anglophones / lusophones. Démarrage par **anglais seul**, portugais ensuite une fois validé.
 
----
+## Phase 1 — Anglais (`/en/`)
 
-## 1. Sélecteurs (Select) instables sur mobile
+### 1. Infrastructure i18n
+- Ajouter `en` dans la liste des langues supportées (`src/lib/i18n/config.ts` ou équivalent).
+- Étendre le router (`src/App.tsx`) pour servir `/en/*` avec les mêmes routes que `/fr/`, `/de/`, `/it/`.
+- Ajouter le sélecteur de langue (drapeau 🇬🇧) dans le `Header` desktop + mobile.
+- Mettre à jour le `LanguageDetector` (détection navigateur → `en` si `navigator.language` commence par `en`).
 
-**Problème** : les menus déroulants Radix (`Select`) se ferment parfois immédiatement sur mobile à cause des événements tactiles. Déjà corrigé pour le canton, mais subsiste sur :
-- Maladie étape 1 : *assureur actuel*
-- Subside étape 2 : *assureur actuel* + *franchise actuelle*
+### 2. Slugs URL localisés
+Traduire les ~50 slugs de routes (ex. `assurance-voiture` → `car-insurance`, `assurance-maladie` → `health-insurance`, `hypotheque` → `mortgage`, `troisieme-pilier` → `3rd-pillar`, `merci` → `thank-you`, `blog` → `blog`, etc.).
 
-**Correction** : remplacer ces `Select` par un `<select>` natif (picker système iOS/Android, 100 % fiable).
+### 3. Traductions de contenu (IA)
+- Extraire tous les fichiers de locales FR (`src/locales/fr/*.json` ou équivalent).
+- Traduire automatiquement vers EN via Lovable AI (`google/gemini-3-flash-preview`) avec un script one-shot (`/tmp/translate.py` utilisant le skill `ai-gateway`).
+- Glossaire imposé pour cohérence : *assurance maladie* = "health insurance", *LAMal* = "LAMal (basic health insurance)", *LCA* = "LCA (supplementary)", *3e pilier* = "3rd pillar (private pension)", *résiliation* = "cancellation", *hypothèque* = "mortgage", *prime* = "premium", *franchise* = "deductible", *caisse maladie* = "health insurer".
+- Conserver le ton suisse (mentions CHF, cantons, NPA).
+- Ne PAS traduire le blog (cf. memory existante : blog FR seul, bannière d'alerte pour EN comme pour DE/IT).
 
----
+### 4. Formulaires
+- Tous les labels, placeholders, erreurs, étapes traduits.
+- Validation téléphone : ajouter formats UK (+44) et internationaux courants ; conserver +41 prioritaire (audience = résidents Suisse).
+- OTP SMS : message Twilio en anglais quand `lang=en`.
+- Webhooks Zapier : conserver les **labels en français** côté Google Sheets (le client travaille en FR) — seule l'UI utilisateur est en anglais. À confirmer.
 
-## 2. Étape 4 Maladie (LAMal/Franchise) — textes trop petits
+### 5. SEO
+- `<html lang="en">` dynamique.
+- Title/meta description traduits par page.
+- Balises `hreflang` ajoutées (fr, de, it, en, x-default).
+- Sitemap incluant `/en/*`.
 
-**Problème** : les libellés sont en `text-[10px]` / `text-xs`, les radios en `h-3.5 w-3.5`. Sous le seuil de lisibilité et de confort tactile.
+### 6. Sélecteur de langue
+Mise à jour pour afficher : 🇫🇷 FR · 🇩🇪 DE · 🇮🇹 IT · 🇬🇧 EN
 
-**Correction** :
-- Labels minimum `text-sm` (14 px) sur mobile
-- Radios `h-4 w-4` minimum
-- Padding cartes `p-3` minimum
-- Slider franchise : poignée élargie pour le pouce
+## Phase 2 — Portugais (`/pt/`)
+Une fois l'anglais validé en prod : duplication exacte du processus pour `pt` (cible expats portugais/brésiliens en Suisse). Slugs PT, traduction IA depuis FR, OTP en PT, ajout au sélecteur.
 
----
+## Détails techniques
+- **Translation script** : Python via skill `ai-gateway`, batch JSON par fichier, glossaire injecté dans le system prompt, sortie écrite directement dans `src/locales/en/*.json`.
+- **Pas de retraduction manuelle** des composants : tout passe par les clés i18n existantes.
+- **Audit préalable** : si des chaînes sont hardcodées en FR dans les composants (non passées par i18n), je les extraie avant traduction.
 
-## 3. Étape 5 Maladie (BASIC/PREMIUM/DIAMOND)
+## Hors scope (sauf demande)
+- Traduction du blog (article par article)
+- Refonte du contenu marketing spécifique expat (peut être ajouté Phase 1.5)
+- Numéro WhatsApp/Calendly séparé pour anglophones
 
-**Problème** : grille 3 colonnes très serrée, badges `text-[8px]`, prix `text-sm`. Difficile à lire et à viser.
-
-**Correction** :
-- Augmenter typographie : titres `text-sm`, prix `text-base`, badges `text-[10px]`
-- Padding cartes `p-3` minimum
-- Garder 3 colonnes (besoin métier), mais cartes plus aérées verticalement
-
----
-
-## 4. Trust badges du conteneur
-
-**Problème** : `text-[9px]` avec icônes 10 px — quasi illisible.
-
-**Correction** : passer à `text-[11px]` + icônes `h-3 w-3`.
-
----
-
-## 5. Codes postaux et revenus — mauvais clavier mobile
-
-**Problème** :
-- Maladie étape 3 *code postal* : pas de `inputMode="numeric"` → clavier alphanumérique
-- Subside étape 3 *revenu* : `type="number"` (clavier décimal, pas pavé numérique propre sur iOS)
-
-**Correction** : `type="text" inputMode="numeric" pattern="[0-9]*"` sur ces deux champs.
-
----
-
-## 6. Le clavier mobile masque le champ actif
-
-**Problème** : quand le clavier s'ouvre sur les inputs (prénom, email, téléphone, etc.), le champ peut se retrouver caché derrière. L'utilisateur ne voit pas ce qu'il tape.
-
-**Correction** : ajouter `scroll-margin-bottom: 30vh` global sur les inputs des formulaires + `onFocus` qui fait un `scrollIntoView({ block: 'center' })` doux. Geste invisible mais transformatif sur mobile.
-
----
-
-## 7. Date de naissance — saisie mobile
-
-**Problème** : `DateInput` doit avoir `inputMode="numeric"` pour ouvrir le pavé numérique au lieu du clavier texte.
-
-**Correction** : vérifier et forcer `inputMode="numeric"` sur le composant `DateInput`.
-
----
-
-## Hors périmètre (pas touché sauf demande)
-
-- Logique métier / calculs primes
-- Structure des étapes
-- Design des résultats
-- Webhook Zapier
-
----
-
-**Validez les points à appliquer (ex: "tous", "1, 2, 5, 6", etc.) et je code.**
+## Question avant exécution
+Pour les leads Zapier/Google Sheets : labels FR (comme aujourd'hui) ou labels EN quand le formulaire est rempli en anglais ?
