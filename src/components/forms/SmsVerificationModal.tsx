@@ -40,7 +40,7 @@ const SmsVerificationModal = ({
   onModifyPhone,
   onClose,
 }: SmsVerificationModalProps) => {
-  const { t } = useTranslation();
+  const t = i18n.getFixedT("fr");
   const [digits, setDigits] = useState<string[]>(Array(CODE_LENGTH).fill(""));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [resendCooldown, setResendCooldown] = useState(0);
