@@ -50,7 +50,8 @@ const Pillar3ComparisonResults = ({
   onSelectOffer,
   onContactRequest,
 }: Pillar3ComparisonResultsProps) => {
-  const { t } = useTranslation();
+  const { i18n } = useTranslation();
+  const t = i18n.getFixedT("fr");
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const getBadgeInfo = (badge: string) => {
