@@ -1280,7 +1280,6 @@
       "letterPreview": "Vorschau des Schreibens",
       "letterSubject": "Betreff: Vertragskündigung",
       "letterBody": "Hiermit bitte ich Sie, meinen Vertrag zum angegebenen Datum zu kündigen. Bitte bestätigen Sie mir die Kündigung schriftlich.",
-      
       "effectiveDate": "Wirksamkeitsdatum",
       "downloadPDF": "Als PDF herunterladen",
       "compareNew": "Neue Angebote vergleichen",
@@ -1434,7 +1433,12 @@
     "subsidy": {
       "badge": "Prämienverbilligung",
       "title": "Prüfen Sie Ihre Berechtigung für Prämienverbilligung",
-      "subtitle": "Erfahren Sie, ob Sie Anspruch auf Unterstützung haben"
+      "subtitle": "Erfahren Sie, ob Sie Anspruch auf Unterstützung haben",
+      "heroTitle": "ONLINE-ANTRAG PRÄMIENVERBILLIGUNG 2026: PRÜFEN SIE IHREN ANSPRUCH",
+      "heroSubtitle": "Erfahren Sie in 2 Minuten, auf welche Prämienverbilligung Sie Anspruch haben.",
+      "heroBullet1": "Kostenlose Simulation in 2 Minuten",
+      "heroBullet2": "Bis zu 3'500 CHF Unterstützung pro Jahr",
+      "heroBullet3": "Familien, Paare, Alleinstehende, Studierende"
     },
     "termination": {
       "badge": "Versicherungskündigung",

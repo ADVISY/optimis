@@ -1280,7 +1280,6 @@
       "letterPreview": "Anteprima della lettera",
       "letterSubject": "Oggetto: Disdetta del contratto",
       "letterBody": "Con la presente, vi chiedo di disdire il mio contratto alla data indicata. Vi prego di confermare la disdetta per iscritto.",
-      
       "effectiveDate": "Data di efficacia",
       "downloadPDF": "Scarica PDF",
       "compareNew": "Confronta nuove offerte",
@@ -1434,7 +1433,12 @@
     "subsidy": {
       "badge": "Verifica Sussidio",
       "title": "Verifica la tua idoneità ai sussidi",
-      "subtitle": "Scopri se hai diritto a un aiuto per i tuoi premi"
+      "subtitle": "Scopri se hai diritto a un aiuto per i tuoi premi",
+      "heroTitle": "RICHIESTA ONLINE RIDUZIONE PREMI 2026: VERIFICA IL TUO DIRITTO",
+      "heroSubtitle": "Scopri in 2 minuti l'importo della riduzione a cui hai diritto per ridurre il tuo premio.",
+      "heroBullet1": "Simulazione gratuita in 2 minuti",
+      "heroBullet2": "Fino a 3'500 CHF di aiuti all'anno",
+      "heroBullet3": "Famiglie, coppie, single, studenti"
     },
     "termination": {
       "badge": "Disdetta Assicurazione",

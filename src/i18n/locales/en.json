@@ -1483,7 +1483,12 @@
     "subsidy": {
       "badge": "Subsidy Check",
       "title": "Check your eligibility for subsidies",
-      "subtitle": "Find out if you are entitled to help with your premiums"
+      "subtitle": "Find out if you are entitled to help with your premiums",
+      "heroTitle": "2026 ONLINE SUBSIDY APPLICATION: CHECK YOUR ENTITLEMENT",
+      "heroSubtitle": "Find out in 2 minutes the subsidy amount you're entitled to reduce your health insurance premium.",
+      "heroBullet1": "Free 2-minute simulation",
+      "heroBullet2": "Up to CHF 3,500 in aid per year",
+      "heroBullet3": "Families, couples, singles, students"
     },
     "termination": {
       "badge": "Insurance Cancellation",
