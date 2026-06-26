@@ -230,9 +230,9 @@ const ComplementaryInsuranceForm = () => {
       ? formData.birthDate.toLocaleDateString(i18n.language === "de" ? "de-CH" : i18n.language === "it" ? "it-CH" : "fr-CH")
       : "";
 
-    const selectedNeeds = NEEDS_OPTIONS
+    const selectedNeeds = NEEDS_KEYS
       .filter((opt) => formData.needs[opt.key])
-      .map((opt) => opt.label);
+      .map((opt) => L_DICT.fr.needs[opt.key]);
 
     const healthLabels: Record<string, string> = {
       excellent: "Excellente forme",
