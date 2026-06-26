@@ -388,7 +388,7 @@ const ComplementaryInsuranceForm = () => {
         {/* Step 2: Assurance actuelle */}
         <FormStep isActive={currentStep === 2}>
           <div className="space-y-4">
-            <FormFieldWrapper label="Avez-vous déjà une assurance complémentaire ?" required>
+            <FormFieldWrapper label={L.hasCurrent} required>
               <RadioGroup
                 value={
                   formData.hasCurrentInsurance === null
@@ -410,18 +410,18 @@ const ComplementaryInsuranceForm = () => {
               >
                 <label className="flex items-center justify-center space-x-2 p-3 sm:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer min-h-[52px]">
                   <RadioGroupItem value="yes" id="ci-yes" />
-                  <span className="text-base sm:text-lg">Oui</span>
+                  <span className="text-base sm:text-lg">{L.yes}</span>
                 </label>
                 <label className="flex items-center justify-center space-x-2 p-3 sm:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer min-h-[52px]">
                   <RadioGroupItem value="no" id="ci-no" />
-                  <span className="text-base sm:text-lg">Non</span>
+                  <span className="text-base sm:text-lg">{L.no}</span>
                 </label>
               </RadioGroup>
             </FormFieldWrapper>
 
             {formData.hasCurrentInsurance === true && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                <FormFieldWrapper label="Quel est votre assureur actuel ?" htmlFor="currentInsurer" required>
+                <FormFieldWrapper label={L.currentInsurer} htmlFor="currentInsurer" required>
                   <Input
                     id="currentInsurer"
                     value={formData.currentInsurer}
@@ -429,11 +429,11 @@ const ComplementaryInsuranceForm = () => {
                       updateFormData({ currentInsurer: e.target.value });
                       notifyDelayedLong();
                     }}
-                    placeholder="Ex. Helsana, CSS, SWICA..."
+                    placeholder={L.currentInsurerPh}
                     className="h-11 sm:h-14 text-base sm:text-lg"
                   />
                 </FormFieldWrapper>
-                <FormFieldWrapper label="Depuis quelle année ?" htmlFor="currentSince">
+                <FormFieldWrapper label={L.currentSince} htmlFor="currentSince">
                   <Input
                     id="currentSince"
                     type="number"
@@ -445,7 +445,7 @@ const ComplementaryInsuranceForm = () => {
                       updateFormData({ currentSince: e.target.value });
                       notifyDelayedLong();
                     }}
-                    placeholder="Ex. 2018"
+                    placeholder="2018"
                     className="h-11 sm:h-14 text-base sm:text-lg"
                   />
                 </FormFieldWrapper>
@@ -457,7 +457,7 @@ const ComplementaryInsuranceForm = () => {
         {/* Step 3: État de santé */}
         <FormStep isActive={currentStep === 3}>
           <div className="space-y-4">
-            <FormFieldWrapper label="Êtes-vous en pleine forme ?" required>
+            <FormFieldWrapper label={L.healthQ} required>
               <RadioGroup
                 value={formData.healthStatus}
                 onValueChange={(value) => {
@@ -466,18 +466,13 @@ const ComplementaryInsuranceForm = () => {
                 }}
                 className="grid gap-2.5 sm:gap-3"
               >
-                {[
-                  { value: "excellent", label: "Oui, excellente forme" },
-                  { value: "good", label: "Plutôt en forme" },
-                  { value: "average", label: "Moyenne" },
-                  { value: "issues", label: "Quelques soucis de santé" },
-                ].map((opt) => (
+                {(["excellent", "good", "average", "issues"] as const).map((v) => (
                   <label
-                    key={opt.value}
+                    key={v}
                     className="flex items-center space-x-2 p-3 sm:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer min-h-[52px]"
                   >
-                    <RadioGroupItem value={opt.value} id={`hs-${opt.value}`} />
-                    <span className="text-base sm:text-lg flex-1">{opt.label}</span>
+                    <RadioGroupItem value={v} id={`hs-${v}`} />
+                    <span className="text-base sm:text-lg flex-1">{L.health[v]}</span>
                   </label>
                 ))}
               </RadioGroup>
@@ -488,36 +483,32 @@ const ComplementaryInsuranceForm = () => {
         {/* Step 4: Situation familiale + date de naissance */}
         <FormStep isActive={currentStep === 4}>
           <div className="space-y-4">
-            <FormFieldWrapper label="Situation familiale" required>
+            <FormFieldWrapper label={L.familyQ} required>
               <RadioGroup
                 value={formData.familySituation}
                 onValueChange={(value) => updateFormData({ familySituation: value })}
                 className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3"
               >
-                {[
-                  { value: "single", label: "Seul(e)" },
-                  { value: "couple", label: "Couple" },
-                  { value: "coupleWithChildren", label: "Couple avec enfants" },
-                  { value: "singleWithChildren", label: "Seul(e) avec enfants" },
-                ].map((opt) => (
+                {(["single", "couple", "coupleWithChildren", "singleWithChildren"] as const).map((v) => (
                   <label
-                    key={opt.value}
+                    key={v}
                     className="flex items-center space-x-2 p-3 sm:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer min-h-[52px]"
                   >
-                    <RadioGroupItem value={opt.value} id={`fam-${opt.value}`} />
-                    <span className="text-base sm:text-lg flex-1">{opt.label}</span>
+                    <RadioGroupItem value={v} id={`fam-${v}`} />
+                    <span className="text-base sm:text-lg flex-1">{L.family[v]}</span>
                   </label>
                 ))}
               </RadioGroup>
             </FormFieldWrapper>
 
-            <FormFieldWrapper label="Date de naissance" htmlFor="birthDate" required>
+            <FormFieldWrapper label={L.birthDate} htmlFor="birthDate" required>
               <DateInput
                 value={formData.birthDate}
                 onChange={(date) => updateFormData({ birthDate: date })}
               />
             </FormFieldWrapper>
           </div>
+
         </FormStep>
 
         {/* Step 5: Localisation */}
