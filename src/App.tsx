@@ -75,7 +75,7 @@ const LanguageWrapper = ({ children }: { children: React.ReactNode }) => {
 // Helper to create routes for all language variants of a path
 const createLocalizedRoutes = (routeKey: keyof typeof localizedRoutes, element: React.ReactNode) => {
   const routes = localizedRoutes[routeKey];
-  const uniqueSlugs = [...new Set([routes.fr, routes.de, routes.it])];
+  const uniqueSlugs = [...new Set(Object.values(routes))];
   return uniqueSlugs.map(slug => (
     <Route key={`${routeKey}-${slug}`} path={`/${slug}`} element={element} />
   ));
