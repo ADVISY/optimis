@@ -53,14 +53,116 @@ interface ComplementaryFormData {
 
 const TOTAL_STEPS = 7;
 
-const NEEDS_OPTIONS: { key: keyof ComplementaryFormData["needs"]; label: string; icon: any }[] = [
-  { key: "hospitalization", label: "Hospitalisation (privé / semi-privé)", icon: Bed },
-  { key: "dental", label: "Soins dentaires", icon: Stethoscope },
-  { key: "fitness", label: "Fitness & prévention", icon: Dumbbell },
-  { key: "alternativeMedicine", label: "Médecine alternative", icon: Sparkles },
-  { key: "glasses", label: "Lunettes & lentilles", icon: Eye },
-  { key: "worldwide", label: "Couverture mondiale", icon: Globe2 },
+type Lang = "fr" | "de" | "it" | "en";
+
+const L_DICT = {
+  fr: {
+    title: "Comparez et optimisez vos assurances complémentaires",
+    desc: "Quelques questions pour trouver la meilleure couverture LCA adaptée à vos besoins.",
+    needsLabel: "Qu'est-ce qui est important pour vous ? (choix multiples)",
+    needs: {
+      hospitalization: "Hospitalisation (privé / semi-privé)",
+      dental: "Soins dentaires",
+      fitness: "Fitness & prévention",
+      alternativeMedicine: "Médecine alternative",
+      glasses: "Lunettes & lentilles",
+      worldwide: "Couverture mondiale",
+    },
+    hasCurrent: "Avez-vous déjà une assurance complémentaire ?",
+    yes: "Oui",
+    no: "Non",
+    currentInsurer: "Quel est votre assureur actuel ?",
+    currentInsurerPh: "Ex. Helsana, CSS, SWICA...",
+    currentSince: "Depuis quelle année ?",
+    healthQ: "Êtes-vous en pleine forme ?",
+    health: { excellent: "Oui, excellente forme", good: "Plutôt en forme", average: "Moyenne", issues: "Quelques soucis de santé" },
+    familyQ: "Situation familiale",
+    family: { single: "Seul(e)", couple: "Couple", coupleWithChildren: "Couple avec enfants", singleWithChildren: "Seul(e) avec enfants" },
+    birthDate: "Date de naissance",
+  },
+  de: {
+    title: "Vergleichen und optimieren Sie Ihre Zusatzversicherungen",
+    desc: "Einige Fragen, um die beste VVG-Deckung für Ihre Bedürfnisse zu finden.",
+    needsLabel: "Was ist Ihnen wichtig? (Mehrfachauswahl)",
+    needs: {
+      hospitalization: "Spital (privat / halbprivat)",
+      dental: "Zahnpflege",
+      fitness: "Fitness & Prävention",
+      alternativeMedicine: "Alternativmedizin",
+      glasses: "Brillen & Linsen",
+      worldwide: "Weltweite Deckung",
+    },
+    hasCurrent: "Haben Sie bereits eine Zusatzversicherung?",
+    yes: "Ja",
+    no: "Nein",
+    currentInsurer: "Wer ist Ihr aktueller Versicherer?",
+    currentInsurerPh: "z.B. Helsana, CSS, SWICA...",
+    currentSince: "Seit welchem Jahr?",
+    healthQ: "Sind Sie in Topform?",
+    health: { excellent: "Ja, ausgezeichnete Form", good: "Eher in Form", average: "Mittel", issues: "Einige gesundheitliche Probleme" },
+    familyQ: "Familiensituation",
+    family: { single: "Alleinstehend", couple: "Paar", coupleWithChildren: "Paar mit Kindern", singleWithChildren: "Alleinerziehend mit Kindern" },
+    birthDate: "Geburtsdatum",
+  },
+  it: {
+    title: "Confrontate e ottimizzate le vostre assicurazioni complementari",
+    desc: "Alcune domande per trovare la migliore copertura LCA adatta alle vostre esigenze.",
+    needsLabel: "Cosa è importante per voi? (scelta multipla)",
+    needs: {
+      hospitalization: "Ospedalizzazione (privato / semiprivato)",
+      dental: "Cure dentali",
+      fitness: "Fitness & prevenzione",
+      alternativeMedicine: "Medicina alternativa",
+      glasses: "Occhiali & lenti",
+      worldwide: "Copertura mondiale",
+    },
+    hasCurrent: "Avete già un'assicurazione complementare?",
+    yes: "Sì",
+    no: "No",
+    currentInsurer: "Qual è il vostro assicuratore attuale?",
+    currentInsurerPh: "Es. Helsana, CSS, SWICA...",
+    currentSince: "Da quale anno?",
+    healthQ: "Siete in piena forma?",
+    health: { excellent: "Sì, ottima forma", good: "Piuttosto in forma", average: "Media", issues: "Qualche problema di salute" },
+    familyQ: "Situazione familiare",
+    family: { single: "Solo/a", couple: "Coppia", coupleWithChildren: "Coppia con figli", singleWithChildren: "Solo/a con figli" },
+    birthDate: "Data di nascita",
+  },
+  en: {
+    title: "Compare and optimize your supplementary insurance",
+    desc: "A few questions to find the best LCA coverage for your needs.",
+    needsLabel: "What's important to you? (multiple choice)",
+    needs: {
+      hospitalization: "Hospitalization (private / semi-private)",
+      dental: "Dental care",
+      fitness: "Fitness & prevention",
+      alternativeMedicine: "Alternative medicine",
+      glasses: "Glasses & lenses",
+      worldwide: "Worldwide coverage",
+    },
+    hasCurrent: "Do you already have supplementary insurance?",
+    yes: "Yes",
+    no: "No",
+    currentInsurer: "Who is your current insurer?",
+    currentInsurerPh: "e.g. Helsana, CSS, SWICA...",
+    currentSince: "Since which year?",
+    healthQ: "Are you in great shape?",
+    health: { excellent: "Yes, excellent shape", good: "Fairly fit", average: "Average", issues: "Some health concerns" },
+    familyQ: "Family situation",
+    family: { single: "Single", couple: "Couple", coupleWithChildren: "Couple with children", singleWithChildren: "Single parent" },
+    birthDate: "Date of birth",
+  },
+} as const;
+
+const NEEDS_KEYS: { key: keyof ComplementaryFormData["needs"]; icon: any }[] = [
+  { key: "hospitalization", icon: Bed },
+  { key: "dental", icon: Stethoscope },
+  { key: "fitness", icon: Dumbbell },
+  { key: "alternativeMedicine", icon: Sparkles },
+  { key: "glasses", icon: Eye },
+  { key: "worldwide", icon: Globe2 },
 ];
+
 
 const ComplementaryInsuranceForm = () => {
   const { t, i18n } = useTranslation();
