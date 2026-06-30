@@ -1,31 +1,58 @@
 <!doctype html>
-<html lang="de">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Optimis - Le comparateur malin</title>
-    <meta name="description" content="Comparez les assurances suisses et trouvez les meilleures offres. Assurance auto, assurance maladie, assurance ménage et assurance protection juridique.">
+    <title>Optimis – Comparateur d'assurances en Suisse</title>
+    <meta name="description" content="Comparez gratuitement les assurances suisses : maladie, auto, ménage, 3e pilier, protection juridique. Trouvez la meilleure offre et économisez en quelques minutes.">
     <meta name="author" content="Optimis" />
-    
-    <!-- Canonical & hreflang for multilingual SEO -->
-    <link rel="canonical" href="https://optimis.lovable.app/de" />
-    <link rel="alternate" hreflang="de-CH" href="https://optimis.lovable.app/de" />
-    <link rel="alternate" hreflang="fr-CH" href="https://optimis.lovable.app/fr" />
-    <link rel="alternate" hreflang="it-CH" href="https://optimis.lovable.app/it" />
-    <link rel="alternate" hreflang="x-default" href="https://optimis.lovable.app/de" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
 
-    
-    
+    <!-- Canonical & hreflang par défaut — le <Seo> par page surcharge ces valeurs au runtime.
+         Domaine de PROD : le-comparateur-optimis.ch (jamais lovable.app). -->
+    <link rel="canonical" href="https://le-comparateur-optimis.ch/fr" />
+    <link rel="alternate" hreflang="fr-CH" href="https://le-comparateur-optimis.ch/fr" />
+    <link rel="alternate" hreflang="de-CH" href="https://le-comparateur-optimis.ch/de" />
+    <link rel="alternate" hreflang="it-CH" href="https://le-comparateur-optimis.ch/it" />
+    <link rel="alternate" hreflang="x-default" href="https://le-comparateur-optimis.ch/fr" />
+
+
+
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/djDQzu2Q4CSdSlfxcJJ0GjtU7EE3/social-images/social-1775125138642-favicon.webp">
-    <meta property="og:url" content="https://optimis.lovable.app" />
-    <meta property="og:locale" content="de_CH" />
-    <meta property="og:locale:alternate" content="fr_CH" />
+    <meta property="og:site_name" content="Optimis" />
+    <meta property="og:image" content="https://le-comparateur-optimis.ch/logo-optimis.png">
+    <meta property="og:url" content="https://le-comparateur-optimis.ch/fr" />
+    <meta property="og:locale" content="fr_CH" />
+    <meta property="og:locale:alternate" content="de_CH" />
     <meta property="og:locale:alternate" content="it_CH" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@Optimis" />
-    <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/djDQzu2Q4CSdSlfxcJJ0GjtU7EE3/social-images/social-1775125138642-favicon.webp">
+    <meta name="twitter:image" content="https://le-comparateur-optimis.ch/logo-optimis.png">
+
+    <!-- Données structurées globales (Organization + WebSite) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Optimis",
+      "legalName": "OptimisLink Sàrl",
+      "url": "https://le-comparateur-optimis.ch",
+      "logo": "https://le-comparateur-optimis.ch/logo-optimis.png",
+      "description": "Comparateur d'assurances indépendant en Suisse : maladie, auto, ménage, 3e pilier, protection juridique.",
+      "areaServed": "CH",
+      "email": "contact@le-comparateur-optimis.ch"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Optimis",
+      "url": "https://le-comparateur-optimis.ch",
+      "inLanguage": ["fr-CH", "de-CH", "it-CH"]
+    }
+    </script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

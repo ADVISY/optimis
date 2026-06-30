@@ -54,6 +54,7 @@ import Partenaires from "./pages/Partenaires";
 import ComparateurComplementaire from "./pages/comparateurs/ComparateurComplementaire";
 
 import { localizedRoutes } from "./utils/localizedRoutes";
+import Seo from "@/components/Seo";
 import AdminRouter from "./admin/AdminRouter";
 import PartnerRouter from "./partner/PartnerRouter";
 import PortalLogin from "./pages/PortalLogin";
@@ -79,7 +80,11 @@ const createLocalizedRoutes = (routeKey: keyof typeof localizedRoutes, element: 
   const routes = localizedRoutes[routeKey];
   const uniqueSlugs = [...new Set([routes.fr, routes.de, routes.it])];
   return uniqueSlugs.map(slug => (
-    <Route key={`${routeKey}-${slug}`} path={`/${slug}`} element={element} />
+    <Route
+      key={`${routeKey}-${slug}`}
+      path={`/${slug}`}
+      element={<><Seo routeKey={String(routeKey)} />{element}</>}
+    />
   ));
 };
 
@@ -88,8 +93,8 @@ const LanguageRoutes = () => {
   return (
     <LanguageWrapper>
       <Routes>
-        <Route path="/" element={<Index />} />
-        
+        <Route path="/" element={<><Seo routeKey="home" /><Index /></>} />
+
         {/* Main pages - all language variants */}
         {createLocalizedRoutes("carInsurance", <AssuranceVoiture />)}
         {createLocalizedRoutes("healthInsurance", <AssuranceSante />)}
@@ -106,7 +111,7 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("prenatalInsurance", <ComparateurPrenatal />)}
         
         {/* Blog */}
-        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog" element={<><Seo routeKey="blog" /><Blog /></>} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         
         {/* Institutional pages - all language variants */}

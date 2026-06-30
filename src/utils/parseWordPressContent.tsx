@@ -1,39 +1,282 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { resolveContentImage } from '@/data/contentImageMapping';
 
 /**
- * Parse WordPress Gutenberg content to React components
- * Handles headings, paragraphs, lists, blockquotes, images, links, and tables
+ * Parse WordPress Gutenberg content to React components.
+ * Handles headings, paragraphs, lists, blockquotes, images, links, and tables.
+ *
+ * SEO — maillage interne :
+ *  - Les liens internes existants sont normalisés vers /<lang>/... (préfixe de
+ *    langue garanti, slash final retiré, vieux slugs WordPress morts remappés)
+ *    puis rendus via <Link> React Router (navigation SPA, pas de rechargement).
+ *  - Des liens contextuels sont auto-injectés vers les pages comparateur sur la
+ *    1re occurrence d'un mot-clé, avec garde-fous (jamais dans un titre/lien,
+ *    plafond par article, pas de doublon si la page est déjà liée à la main).
  */
-export function parseWordPressContent(content: string): React.ReactNode[] {
+
+const SUPPORTED_LANGS = ['fr', 'de', 'it'];
+
+// Vieux slugs WordPress sans équivalent SPA → cible valide la plus proche.
+// (chemins sans préfixe de langue ; le préfixe /<lang>/ est ajouté ensuite)
+const REDIRECT_MAP: Record<string, string> = {
+  'assurance-sante-comparatif': 'assurance-maladie-landing',
+  'avs-subsides': 'subside-assurance-maladie',
+  'e-demarche-subside': 'subside-assurance-maladie-demande',
+  'subside-neuchatel': 'subside-assurance-maladie',
+  'assurance-casco-complete': 'blog/assurance-casco-complete',
+};
+
+// Auto-liens : phrases-clés → page cible (slug FR, sans préfixe de langue).
+// Ordre = priorité (les règles les plus spécifiques d'abord). Une seule règle
+// peut viser une cible donnée, et chaque cible n'est liée qu'une fois par article.
+interface AutoLinkRule {
+  to: string;
+  phrases: string[];
+  regex: RegExp;
+}
+
+const buildRule = (to: string, phrases: string[]): AutoLinkRule => ({
+  to,
+  phrases,
+  // (début ou caractère non-lettre) + phrase + (pas suivi d'une lettre).
+  // On capture le préfixe pour le réémettre ; pas de lookbehind (compat Safari).
+  regex: new RegExp(`(^|[^\\p{L}])(${phrases.join('|')})(?![\\p{L}])`, 'iu'),
+});
+
+const AUTO_LINK_RULES: AutoLinkRule[] = [
+  buildRule('protection-juridique-landing', ['protection juridique']),
+  buildRule('assurance-complementaire-offres', [
+    'assurance compl[ée]mentaire',
+    'compl[ée]mentaire sant[ée]',
+  ]),
+  buildRule('assurance-maladie-landing', [
+    'assurance maladie',
+    'caisse maladie',
+    'assurance sant[ée]',
+  ]),
+  buildRule('assurance-voiture-landing', [
+    'assurance voiture',
+    'assurance auto(?:mobile)?',
+  ]),
+  buildRule('assurance-menage-landing', [
+    'assurance m[ée]nage',
+    'responsabilit[ée] civile',
+  ]),
+  buildRule('assurance-vie', ['assurance vie']),
+  buildRule('3eme-pilier-offres', [
+    '3[eè]me pilier',
+    '3e pilier',
+    'troisi[èe]me pilier',
+    'pilier 3a?',
+  ]),
+  buildRule('avoirs-lpp-libre-passage', [
+    'libre passage',
+    'avoirs?\\s+lpp',
+    '2[eè]me pilier',
+    '2e pilier',
+  ]),
+  buildRule('hypotheque-offres', [
+    'pr[êe]t hypoth[ée]caire',
+    'hypoth[èe]que',
+  ]),
+  buildRule('subside-assurance-maladie-demande', ['subsides?']),
+  buildRule('resiliation-assurance', [
+    'r[ée]siliation',
+    'r[ée]silier',
+  ]),
+];
+
+// Plafond d'auto-liens par article (au-delà : sur-optimisation).
+const MAX_AUTO_LINKS = 6;
+
+const INTERNAL_LINK_CLASS = 'text-primary hover:underline font-medium';
+
+// Balises dont le contenu ne doit jamais recevoir d'auto-lien.
+const NO_AUTOLINK_TAGS = new Set([
+  'a', 'h2', 'h3', 'h4', 'blockquote', 'cite', 'figure',
+]);
+
+interface ParseOptions {
+  /** Langue de rendu (préfixe d'URL des liens internes). Défaut : "fr". */
+  lang?: string;
+  /** Active l'auto-injection de liens contextuels. Défaut : true. */
+  autoLink?: boolean;
+  /** Slugs d'articles connus → un slug racine devient /<lang>/blog/<slug>. */
+  blogSlugs?: Set<string>;
+}
+
+interface ParseContext {
+  lang: string;
+  autoLink: boolean;
+  blogSlugs: Set<string>;
+  /** Cibles déjà liées (manuellement ou en auto) → pas de doublon. */
+  linkedTargets: Set<string>;
+  /** Compteur partagé d'auto-liens posés. */
+  count: { n: number };
+  /** Identifiant incrémental pour les clés React. */
+  key: { n: number };
+}
+
+/**
+ * Normalise un href vers une URL interne canonique /<lang>/...
+ * Renvoie null si l'href est cassé (ex. href = texte d'ancre) ou externe.
+ */
+function normalizeInternalHref(
+  rawHref: string,
+  ctx: ParseContext,
+): { href: string; external: false } | { href: string; external: true } | null {
+  const href = rawHref.trim();
+  if (!href) return null;
+
+  // Ancres, mail, tel → laissés tels quels (non internes).
+  if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+    return { href, external: true };
+  }
+
+  let path = href;
+
+  // URL absolue : externe si autre domaine, sinon on garde le pathname.
+  if (/^https?:\/\//i.test(href)) {
+    let url: URL;
+    try {
+      url = new URL(href);
+    } catch {
+      return null; // href malformé
+    }
+    if (!url.hostname.includes('le-comparateur-optimis.ch')) {
+      return { href, external: true };
+    }
+    path = url.pathname;
+  } else if (!href.startsWith('/')) {
+    // Ni URL, ni chemin absolu : href cassé (souvent le texte d'ancre).
+    // On rejette si ça ne ressemble pas à un slug (espaces / majuscules).
+    if (/[\s]/.test(href) || /[A-Z]/.test(href)) return null;
+    path = '/' + href;
+  }
+
+  // Nettoyage : un seul slash initial, pas de slash final.
+  path = path.replace(/\/{2,}/g, '/').replace(/\/+$/, '');
+  if (path === '' || path === '/') return { href: `/${ctx.lang}`, external: false };
+
+  const segs = path.split('/').filter(Boolean);
+
+  // Déjà préfixé par une langue → on garde.
+  if (SUPPORTED_LANGS.includes(segs[0])) {
+    return { href: '/' + segs.join('/'), external: false };
+  }
+
+  // Chemin racine (vieux WordPress) : remap, ou route blog, sinon best-effort.
+  const joined = segs.join('/');
+  let target = REDIRECT_MAP[joined];
+  if (!target) {
+    target = ctx.blogSlugs.has(joined) ? `blog/${joined}` : joined;
+  }
+  return { href: `/${ctx.lang}/${target}`, external: false };
+}
+
+/**
+ * Transforme une chaîne de texte en nœuds React, en posant des auto-liens
+ * sur la 1re occurrence des mots-clés (hors balises interdites, plafonné).
+ */
+function autoLinkText(text: string, ctx: ParseContext): React.ReactNode[] {
+  if (!ctx.autoLink || ctx.count.n >= MAX_AUTO_LINKS || !text.trim()) {
+    return [text];
+  }
+
+  // Collecte des candidats (1re occurrence par règle non encore liée).
+  const candidates: { index: number; length: number; text: string; to: string }[] = [];
+  for (const rule of AUTO_LINK_RULES) {
+    if (ctx.linkedTargets.has(rule.to)) continue;
+    rule.regex.lastIndex = 0;
+    const m = rule.regex.exec(text);
+    if (!m) continue;
+    const prefix = m[1] ?? '';
+    const keyword = m[2] ?? '';
+    candidates.push({
+      index: m.index + prefix.length,
+      length: keyword.length,
+      text: keyword,
+      to: rule.to,
+    });
+  }
+  if (candidates.length === 0) return [text];
+
+  // Plus tôt d'abord ; à index égal, le plus long d'abord.
+  candidates.sort((a, b) => a.index - b.index || b.length - a.length);
+
+  const nodes: React.ReactNode[] = [];
+  let cursor = 0;
+  for (const c of candidates) {
+    if (ctx.count.n >= MAX_AUTO_LINKS) break;
+    if (c.index < cursor) continue; // chevauche une zone déjà consommée
+    if (ctx.linkedTargets.has(c.to)) continue;
+    if (c.index > cursor) nodes.push(text.slice(cursor, c.index));
+    nodes.push(
+      <Link key={`al-${ctx.key.n++}`} to={`/${ctx.lang}/${c.to}`} className={INTERNAL_LINK_CLASS}>
+        {c.text}
+      </Link>,
+    );
+    ctx.linkedTargets.add(c.to);
+    ctx.count.n += 1;
+    cursor = c.index + c.length;
+  }
+  if (cursor < text.length) nodes.push(text.slice(cursor));
+  return nodes;
+}
+
+export function parseWordPressContent(
+  content: string,
+  options: ParseOptions = {},
+): React.ReactNode[] {
+  const ctx: ParseContext = {
+    lang: options.lang && SUPPORTED_LANGS.includes(options.lang) ? options.lang : 'fr',
+    autoLink: options.autoLink !== false,
+    blogSlugs: options.blogSlugs ?? new Set(),
+    linkedTargets: new Set(),
+    count: { n: 0 },
+    key: { n: 0 },
+  };
+
+  // Évite les doublons : si une page comparateur est déjà liée à la main dans le
+  // HTML, on ne la re-linkera pas en auto.
+  for (const rule of AUTO_LINK_RULES) {
+    if (content.includes(rule.to)) ctx.linkedTargets.add(rule.to);
+  }
+
   // Remove WordPress block comments
-  let cleanContent = content
+  const cleanContent = content
     .replace(/<!-- wp:[^>]+-->/g, '')
     .replace(/<!-- \/wp:[^>]+-->/g, '')
     .trim();
 
-  // Split by closing tags to identify elements
   const elements: React.ReactNode[] = [];
-  
-  // Use a simple DOM parser approach - parse as HTML
+
+  // DOMParser : disponible côté navigateur (rendu CSR du blog).
   const parser = new DOMParser();
   const doc = parser.parseFromString(`<div>${cleanContent}</div>`, 'text/html');
   const container = doc.body.firstChild;
-  
+
   if (!container) return elements;
 
-  const parseNode = (node: Node, index: number): React.ReactNode => {
+  const parseNode = (node: Node, index: number, noLink: boolean): React.ReactNode => {
     if (node.nodeType === Node.TEXT_NODE) {
       const text = node.textContent || '';
       if (!text.trim()) return null;
-      return text;
+      if (noLink) return text;
+      const parts = autoLinkText(text, ctx);
+      if (parts.length === 1 && typeof parts[0] === 'string') return parts[0];
+      return <React.Fragment key={index}>{parts}</React.Fragment>;
     }
 
     if (node.nodeType !== Node.ELEMENT_NODE) return null;
 
     const element = node as Element;
     const tagName = element.tagName.toLowerCase();
-    const children = Array.from(element.childNodes).map((child, i) => parseNode(child, i)).filter(Boolean);
+    const childNoLink = noLink || NO_AUTOLINK_TAGS.has(tagName);
+    const children = Array.from(element.childNodes)
+      .map((child, i) => parseNode(child, i, childNoLink))
+      .filter(Boolean);
 
     switch (tagName) {
       case 'h2':
@@ -91,33 +334,38 @@ export function parseWordPressContent(content: string): React.ReactNode[] {
             {children}
           </li>
         );
-      case 'a':
-        const href = element.getAttribute('href') || '#';
-        const isExternal = href.startsWith('http') && !href.includes('le-comparateur-optimis.ch');
-        const isInternal = href.includes('le-comparateur-optimis.ch') || href.startsWith('/');
-        
-        // Convert internal links to relative paths
-        let linkHref = href;
-        if (href.includes('le-comparateur-optimis.ch')) {
-          try {
-            const url = new URL(href);
-            linkHref = url.pathname;
-          } catch {
-            linkHref = href;
-          }
+      case 'a': {
+        const rawHref = element.getAttribute('href') || '';
+        const normalized = normalizeInternalHref(rawHref, ctx);
+
+        // href cassé (ex. href = texte d'ancre) → on rend le texte sans lien.
+        if (!normalized) {
+          return <React.Fragment key={index}>{children}</React.Fragment>;
         }
-        
+
+        // Lien externe (ou ancre/mail/tel) → <a> classique, nouvel onglet si http.
+        if (normalized.external) {
+          const isHttp = /^https?:\/\//i.test(normalized.href);
+          return (
+            <a
+              key={index}
+              href={normalized.href}
+              className={INTERNAL_LINK_CLASS}
+              target={isHttp ? '_blank' : undefined}
+              rel={isHttp ? 'noopener noreferrer' : undefined}
+            >
+              {children}
+            </a>
+          );
+        }
+
+        // Lien interne → <Link> (navigation SPA + href crawlable).
         return (
-          <a
-            key={index}
-            href={linkHref}
-            className="text-primary hover:underline font-medium"
-            target={isExternal ? '_blank' : undefined}
-            rel={isExternal ? 'noopener noreferrer' : undefined}
-          >
+          <Link key={index} to={normalized.href} className={INTERNAL_LINK_CLASS}>
             {children}
-          </a>
+          </Link>
         );
+      }
       case 'strong':
       case 'b':
         return (
@@ -139,17 +387,17 @@ export function parseWordPressContent(content: string): React.ReactNode[] {
             {children}
           </figure>
         );
-      case 'img':
+      case 'img': {
         const src = element.getAttribute('src') || '';
         const alt = element.getAttribute('alt') || '';
         // Try to resolve WordPress images to local assets
         const isWpImage = src.includes('le-comparateur-optimis.ch/wp-content/uploads') || src.includes('${WP_IMAGE_BASE}') || src.includes('WP_IMAGE_BASE');
         const resolvedSrc = isWpImage ? resolveContentImage(src) : src;
-        
+
         if (isWpImage && !resolvedSrc) {
           return null; // No local replacement found, hide it
         }
-        
+
         return (
           <img
             key={index}
@@ -162,6 +410,7 @@ export function parseWordPressContent(content: string): React.ReactNode[] {
             }}
           />
         );
+      }
       case 'table':
         return (
           <div key={index} className="my-6 overflow-x-auto">
@@ -205,7 +454,7 @@ export function parseWordPressContent(content: string): React.ReactNode[] {
   };
 
   Array.from(container.childNodes).forEach((node, index) => {
-    const parsed = parseNode(node, index);
+    const parsed = parseNode(node, index, false);
     if (parsed) {
       elements.push(parsed);
     }

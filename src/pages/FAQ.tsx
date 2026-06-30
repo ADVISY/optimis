@@ -1,5 +1,7 @@
 import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet-async";
 import Layout from "@/components/layout/Layout";
+import { buildFaqSchema } from "@/lib/seo";
 import {
   Accordion,
   AccordionContent,
@@ -21,8 +23,14 @@ const FAQ = () => {
     { question: t('faq.q8'), answer: t('faq.a8') },
   ];
 
+  // Schema FAQPage (le <Seo routeKey="faq"> au niveau route gère le reste du <head>).
+  const faqSchema = buildFaqSchema(faqItems);
+
   return (
     <Layout>
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      </Helmet>
       <div className="container py-12">
         <h1 className="text-3xl font-bold mb-4">{t('faq.title')}</h1>
         <p className="text-muted-foreground mb-8">{t('faq.subtitle')}</p>

@@ -12,6 +12,11 @@ Allow: /
 
 User-agent: *
 Allow: /
+# Espaces privés (back-office, portails) — pas d'intérêt SEO
+Disallow: /admin
+Disallow: /partner
+Disallow: /connexion
+Disallow: /portail
 
 # Sitemap
-Sitemap: https://optimis.lovable.app/sitemap.xml
+Sitemap: https://le-comparateur-optimis.ch/sitemap.xml
