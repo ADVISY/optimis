@@ -8,6 +8,8 @@ import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
 import IllustratedChoice from "@/components/forms/IllustratedChoice";
 import HouseholdIllustration from "@/components/forms/illustrations/HouseholdIllustrations";
+import { InsurerLogoGrid } from "@/components/forms/InsurerLogoGrid";
+import { healthInsurers } from "@/data/healthInsurers";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { Input } from "@/components/ui/input";
@@ -156,7 +158,10 @@ const ComplementaryInsuranceForm = () => {
       postalCode: formData.postalCode,
       besoins: selectedNeeds.length > 0 ? selectedNeeds.join(", ") : "-",
       assuranceComplementaireActuelle: formData.hasCurrentInsurance ? "Oui" : "Non",
-      assureurActuel: formData.currentInsurer || "-",
+      assureurActuel:
+        healthInsurers.find((i) => i.value === formData.currentInsurer)?.label ||
+        formData.currentInsurer ||
+        "-",
       clientDepuis: formData.currentSince || "-",
       etatDeSante: healthLabels[formData.healthStatus] || formData.healthStatus || "-",
       situationFamiliale: familyLabels[formData.familySituation] || formData.familySituation,
@@ -365,30 +370,28 @@ const ComplementaryInsuranceForm = () => {
         {/* Step 3: Assureur actuel (conditionnel — sauté si aucune assurance) */}
         <FormStep isActive={currentStep === 3}>
           <div className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              <FormFieldWrapper label="Quel est votre assureur actuel ?" htmlFor="currentInsurer" required>
-                <Input
-                  id="currentInsurer"
-                  value={formData.currentInsurer}
-                  onChange={(e) => updateFormData({ currentInsurer: e.target.value })}
-                  placeholder="Ex. Helsana, CSS, SWICA..."
-                  className="h-11 sm:h-14 text-base sm:text-lg"
-                />
-              </FormFieldWrapper>
-              <FormFieldWrapper label="Depuis quelle année ?" htmlFor="currentSince">
-                <Input
-                  id="currentSince"
-                  type="number"
-                  inputMode="numeric"
-                  min={1970}
-                  max={new Date().getFullYear()}
-                  value={formData.currentSince}
-                  onChange={(e) => updateFormData({ currentSince: e.target.value })}
-                  placeholder="Ex. 2018"
-                  className="h-11 sm:h-14 text-base sm:text-lg"
-                />
-              </FormFieldWrapper>
-            </div>
+            <FormFieldWrapper label="Quel est votre assureur actuel ?" required>
+              <InsurerLogoGrid
+                value={formData.currentInsurer}
+                onValueChange={(value) => {
+                  updateFormData({ currentInsurer: value });
+                  notify();
+                }}
+              />
+            </FormFieldWrapper>
+            <FormFieldWrapper label="Depuis quelle année ?" htmlFor="currentSince">
+              <Input
+                id="currentSince"
+                type="number"
+                inputMode="numeric"
+                min={1970}
+                max={new Date().getFullYear()}
+                value={formData.currentSince}
+                onChange={(e) => updateFormData({ currentSince: e.target.value })}
+                placeholder="Ex. 2018"
+                className="h-11 sm:h-14 text-base sm:text-lg"
+              />
+            </FormFieldWrapper>
           </div>
         </FormStep>
 

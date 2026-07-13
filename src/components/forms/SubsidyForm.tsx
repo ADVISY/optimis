@@ -6,6 +6,7 @@ import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
 import IllustratedChoice from "@/components/forms/IllustratedChoice";
 import HouseholdIllustration from "@/components/forms/illustrations/HouseholdIllustrations";
+import { InsurerLogoGrid } from "@/components/forms/InsurerLogoGrid";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { fireLeadConversion, getLastLeadId } from "@/lib/leadTracking";
@@ -371,27 +372,14 @@ const SubsidyForm = () => {
       {/* Step 5: Current insurer & deductible (conditional) */}
       <FormStep isActive={currentStep === 5}>
         <div className="space-y-3">
-          <FormFieldWrapper label={t("forms.subsidy.currentInsurer")} htmlFor="currentInsurer" required>
-            <select
-              id="currentInsurer"
+          <FormFieldWrapper label={t("forms.subsidy.currentInsurer")} required>
+            <InsurerLogoGrid
               value={formData.currentInsurer}
-              onChange={(e) => updateFormData({ currentInsurer: e.target.value })}
-              className="flex h-11 md:h-14 w-full items-center justify-between rounded-xl border-2 border-input bg-white text-gray-900 px-4 text-sm md:text-lg ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:border-primary/50 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%236b7280%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[length:16px_16px] bg-[right_1rem_center] bg-no-repeat pr-10"
-            >
-              <option value="" disabled>{t("forms.subsidy.selectInsurer")}</option>
-              <option value="assura">Assura</option>
-              <option value="css">CSS</option>
-              <option value="groupe-mutuel">Groupe Mutuel</option>
-              <option value="helsana">Helsana</option>
-              <option value="sanitas">Sanitas</option>
-              <option value="swica">Swica</option>
-              <option value="visana">Visana</option>
-              <option value="concordia">Concordia</option>
-              <option value="kpt">KPT</option>
-              <option value="atupri">Atupri</option>
-              <option value="sympany">Sympany</option>
-              <option value="other">{t("forms.subsidy.otherInsurer")}</option>
-            </select>
+              onValueChange={(value) => {
+                updateFormData({ currentInsurer: value });
+                notify();
+              }}
+            />
           </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.subsidy.currentDeductible")} htmlFor="currentDeductible">

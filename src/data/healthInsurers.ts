@@ -1,14 +1,14 @@
-import assuraLogo from "@/assets/insurers/assura-logo.svg";
-import cssLogo from "@/assets/insurers/css-logo.svg";
-import groupeMutuelLogo from "@/assets/insurers/groupe-mutuel-logo.svg";
+import assuraLogo from "@/assets/insurers/assura-logo.png";
+import cssLogo from "@/assets/insurers/css-logo.png";
+import groupeMutuelLogo from "@/assets/insurers/groupe-mutuel-logo.png";
 import helsanaLogo from "@/assets/insurers/helsana-logo.svg";
-import sanitasLogo from "@/assets/insurers/sanitas-logo.svg";
-import swicaLogo from "@/assets/insurers/swica-logo.svg";
-import visanaLogo from "@/assets/insurers/visana-logo.svg";
-import concordiaLogo from "@/assets/insurers/concordia-logo.svg";
-import kptLogo from "@/assets/insurers/kpt-logo.svg";
-import atupriLogo from "@/assets/insurers/atupri-logo.svg";
-import sympanyLogo from "@/assets/insurers/sympany-logo.svg";
+import sanitasLogo from "@/assets/insurers/sanitas-logo.png";
+import swicaLogo from "@/assets/insurers/swica-logo.png";
+import visanaLogo from "@/assets/insurers/visana-logo.jpg";
+import concordiaLogo from "@/assets/insurers/concordia-logo.jpg";
+import kptLogo from "@/assets/insurers/kpt-logo.jpg";
+import atupriLogo from "@/assets/insurers/atupri-logo.png";
+import sympanyLogo from "@/assets/insurers/sympany-logo.png";
 
 export interface HealthInsurerOption {
   /** Valeur stockée dans le lead (inchangée vs l'ancien <select>). */
