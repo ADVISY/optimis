@@ -22,7 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { swissCantons, getCantonName } from "@/data/swissCantons";
+import { optimisCantons, getCantonName } from "@/data/swissCantons";
 import { mockLegalProtectionOffers, InsuranceOffer } from "@/data/mockInsuranceData";
 import { Lock, User, Phone } from "lucide-react";
 import { useFormValidation } from "@/hooks/useFormValidation";
@@ -189,6 +189,7 @@ const LegalProtectionForm = () => {
       description={t("forms.legalProtection.description")}
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
+      clientName={formData.firstName}
     >
       {/* Step 1: Coverage Type */}
       <FormStep isActive={currentStep === 1}>
@@ -281,7 +282,7 @@ const LegalProtectionForm = () => {
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
               </SelectTrigger>
               <SelectContent>
-                {swissCantons.map((canton) => (
+                {optimisCantons.map((canton) => (
                   <SelectItem key={canton.code} value={canton.code}>
                     {getCantonName(canton.code, i18n.language)}
                   </SelectItem>

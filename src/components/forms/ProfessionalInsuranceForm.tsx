@@ -198,6 +198,7 @@ const ProfessionalInsuranceForm = () => {
       description={t("forms.professionalInsurance.description")}
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
+      clientName={formData.firstName}
     >
       {/* Step 1: Insurance Types */}
       <FormStep isActive={currentStep === 1}>

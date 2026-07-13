@@ -1,8 +1,6 @@
-import { ReactNode, useState, useRef, useCallback } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, Lock, CheckCircle } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { ReactNode, useRef, useCallback } from "react";
 import FormProgress from "./FormProgress";
+import FormGuide, { type ProductKey } from "./FormGuide";
 
 interface FormContainerProps {
   title: string;
@@ -11,7 +9,29 @@ interface FormContainerProps {
   totalSteps: number;
   children: ReactNode;
   size?: "default" | "large";
+  // --- Accompagnement "app" par la mascotte Optimis (façon Intimy) ---
+  /** Prénom du client : dès qu'il est saisi, l'avatar s'appaire ("Optimis & Camille"). */
+  clientName?: string;
+  /** Messages de la mascotte personnalisés par étape (index 0 = étape 1). Optionnel. */
+  guideMessages?: (string | null | undefined)[];
+  /** Produit comparé : donne une "tenue" métier à la mascotte (emblème + art dédié). */
+  product?: ProductKey;
+  /**
+   * Barre de navigation (Précédent / Continuer). Fournie ici, elle est ÉPINGLÉE
+   * en bas de l'écran (toujours visible), tandis que seules les questions défilent.
+   * Si absente, la nav peut rester en dernier enfant de `children` (repli).
+   */
+  navigation?: ReactNode;
 }
+
+// ----------------------------------------------------------------------------
+// FormContainer — scène "app" épurée façon Intimy.
+//   • PAS de carte / encadré : les questions respirent directement sur le fond.
+//   • Mascotte Optimis en colonne (desktop) ou barre compacte (mobile).
+//   • Progression discrète + titre d'étape, puis les questions.
+// Les badges de réassurance ne sont plus ici : ils vivent dans la ligne de
+// pied de FormAppShell ("Confidentiel · 100% gratuit · Sans engagement").
+// ----------------------------------------------------------------------------
 
 const FormContainer = ({
   title,
@@ -20,30 +40,19 @@ const FormContainer = ({
   totalSteps,
   children,
   size = "default",
+  clientName,
+  guideMessages,
+  product,
+  navigation,
 }: FormContainerProps) => {
-  const { t } = useTranslation();
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [gradientPos, setGradientPos] = useState({ x: 50, y: 50 });
+  const scopeRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    setGradientPos({ x, y });
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    setGradientPos({ x: 50, y: 50 });
-  }, []);
-
-  // Mobile: when an input gets focus, scroll it into view so the soft keyboard doesn't hide it.
+  // Mobile : quand un champ prend le focus, on le centre pour que le clavier ne le masque pas.
   const handleFocusIn = useCallback((e: React.FocusEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement;
     if (!target) return;
     const tag = target.tagName;
     if (tag !== "INPUT" && tag !== "SELECT" && tag !== "TEXTAREA") return;
-    // Wait for the on-screen keyboard to open, then center the field.
     window.setTimeout(() => {
       try {
         target.scrollIntoView({ block: "center", behavior: "smooth" });
@@ -56,68 +65,85 @@ const FormContainer = ({
   const isLarge = size === "large";
 
   return (
-    <Card 
-      ref={cardRef}
-      data-form-container
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onFocus={handleFocusIn}
-      className={`w-full mx-auto shadow-2xl border-2 md:border-4 border-emerald-700 rounded-xl md:rounded-3xl overflow-hidden ring-2 ring-emerald-400/30 animate-fade-in text-emerald-900 relative ${
-        isLarge ? "max-w-4xl" : "max-w-3xl"
-      }`}
-      style={{
-        background: `radial-gradient(circle at ${gradientPos.x}% ${gradientPos.y}%, rgba(255, 255, 255, 1) 0%, rgba(245, 250, 247, 1) 40%, rgba(240, 248, 243, 1) 100%)`,
-        transition: 'background 0.15s ease-out'
-      }}
-    >
-      {/* Subtle animated glow overlay */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-30"
-        style={{
-          background: `radial-gradient(circle at ${gradientPos.x}% ${gradientPos.y}%, rgba(45, 90, 61, 0.15) 0%, transparent 45%)`,
-          transition: 'background 0.15s ease-out'
-        }}
-      />
-      
-      <CardHeader className={`space-y-1 md:space-y-4 pb-1.5 md:pb-6 relative z-10 ${
-        isLarge ? "px-4 md:px-10 pt-3 md:pt-10" : "px-3.5 md:px-8 pt-3 md:pt-8"
-      }`}>
-        {/* Trust badges - single line on mobile */}
-        <div className="flex items-center justify-center gap-1.5 md:gap-4 text-[11px] md:text-base">
-          <div className="flex items-center text-emerald-800 font-semibold rounded-full bg-emerald-50 shadow-sm border border-emerald-200 gap-1 md:gap-2 px-2 md:px-4 py-0.5 md:py-2">
-            <Shield className="h-3 w-3 md:h-4 md:w-4 text-emerald-600" />
-            <span>{t("forms.free")}</span>
-          </div>
-          <div className="flex items-center text-emerald-800 font-semibold rounded-full bg-emerald-50 shadow-sm border border-emerald-200 gap-1 md:gap-2 px-2 md:px-4 py-0.5 md:py-2">
-            <Lock className="h-3 w-3 md:h-4 md:w-4 text-emerald-600" />
-            <span>{t("forms.secure")}</span>
-          </div>
-          <div className="flex items-center text-emerald-800 font-semibold rounded-full bg-emerald-50 shadow-sm border border-emerald-200 gap-1 md:gap-2 px-2 md:px-4 py-0.5 md:py-2">
-            <CheckCircle className="h-3 w-3 md:h-4 md:w-4 text-emerald-600" />
-            <span>{t("forms.noCommitment")}</span>
-          </div>
+    <div className={`relative w-full mx-auto flex min-h-0 flex-1 flex-col ${isLarge ? "max-w-6xl" : "max-w-5xl"}`}>
+      {/* Halo de marque flottant (décoratif) */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -left-10 top-8 h-40 w-40 rounded-full bg-emerald-300/20 blur-3xl" />
+        <div className="absolute right-0 top-1/3 h-32 w-32 rounded-full bg-amber-300/20 blur-3xl" />
+        <div className="absolute bottom-0 left-1/3 h-36 w-36 rounded-full bg-emerald-200/30 blur-3xl" />
+      </div>
+
+      {/* Mascotte compacte au-dessus des questions (mobile) */}
+      <div className="md:hidden shrink-0 mb-2">
+        <FormGuide
+          currentStep={currentStep}
+          totalSteps={totalSteps}
+          clientName={clientName}
+          messages={guideMessages}
+          product={product}
+          variant="bar"
+        />
+      </div>
+
+      <div className="grid min-h-0 flex-1 items-stretch gap-4 md:grid-cols-[220px_minmax(0,1fr)] md:gap-8 lg:gap-10">
+        {/* Colonne mascotte (desktop) — alignée en haut, ne s'étire pas */}
+        <div className="hidden md:block md:self-start">
+          <FormGuide
+            currentStep={currentStep}
+            totalSteps={totalSteps}
+            clientName={clientName}
+            messages={guideMessages}
+            product={product}
+            variant="sidebar"
+          />
         </div>
-        
-        <FormProgress currentStep={currentStep} totalSteps={totalSteps} className="[&_*]:text-[10px] md:[&_*]:text-base [&_.h-2]:h-1.5 md:[&_.h-2]:h-3 [&_.h-3]:h-1.5 md:[&_.h-3]:h-3" />
-        
-        <div className="space-y-0.5 md:space-y-3">
-          <CardTitle className={`font-bold text-emerald-900 leading-tight ${
-            isLarge ? "text-base md:text-2xl lg:text-3xl" : "text-sm md:text-2xl lg:text-3xl"
-          }`}>{title}</CardTitle>
-          {description && (
-            <CardDescription className={`text-emerald-700 leading-snug ${
-              isLarge ? "text-xs md:text-lg line-clamp-2 md:line-clamp-none" : "text-[10px] md:text-lg line-clamp-2 md:line-clamp-none"
-            }`}>{description}</CardDescription>
+
+        {/* Colonne questions — en-tête figé, questions défilantes, nav épinglée en bas */}
+        <div className="flex min-h-0 flex-col">
+          {/* Progression discrète (figée) */}
+          <FormProgress
+            currentStep={currentStep}
+            totalSteps={totalSteps}
+            className="shrink-0 mb-2 md:mb-3 [&_*]:text-[11px] md:[&_*]:text-sm [&_.h-2]:h-1 md:[&_.h-2]:h-1.5 [&_.h-3]:h-1 md:[&_.h-3]:h-1.5"
+          />
+
+          {/* Titre de l'étape (figé) */}
+          <div className="shrink-0 mb-2 md:mb-4 space-y-1">
+            <h2
+              className={`font-heading font-black leading-tight text-emerald-950 ${
+                isLarge
+                  ? "text-lg md:text-2xl lg:text-3xl"
+                  : "text-base md:text-xl lg:text-2xl"
+              }`}
+            >
+              {title}
+            </h2>
+            {description && (
+              <p className="text-xs md:text-base leading-snug text-emerald-700/80">
+                {description}
+              </p>
+            )}
+          </div>
+
+          {/* Zone questions — SEULE partie défilante (sans carte, façon Intimy) */}
+          <div
+            ref={scopeRef}
+            data-form-container
+            onFocus={handleFocusIn}
+            className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden animate-fade-in text-emerald-900"
+          >
+            {children}
+          </div>
+
+          {/* Barre de navigation épinglée (toujours visible) */}
+          {navigation && (
+            <div className="shrink-0 border-t border-emerald-100/70 pt-2 md:pt-3">
+              {navigation}
+            </div>
           )}
         </div>
-      </CardHeader>
-      
-      <CardContent className={`pt-0 text-emerald-900 relative z-10 ${
-        isLarge ? "px-3.5 md:px-10 pb-3 md:pb-10" : "px-3 md:px-8 pb-3 md:pb-8"
-      }`}>
-        {children}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };
 

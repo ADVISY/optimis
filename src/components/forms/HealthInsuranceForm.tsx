@@ -6,6 +6,8 @@ import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
+import IllustratedChoice from "@/components/forms/IllustratedChoice";
+import HouseholdIllustration from "@/components/forms/illustrations/HouseholdIllustrations";
 import HealthComparisonResults from "@/components/forms/HealthComparisonResults";
 import LoadingComparison from "@/components/forms/LoadingComparison";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
@@ -25,7 +27,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { swissCantons, getCantonName } from "@/data/swissCantons";
+import { optimisCantons, getCantonName } from "@/data/swissCantons";
+import { healthInsurers } from "@/data/healthInsurers";
 import { InsuranceOffer } from "@/data/mockInsuranceData";
 import { Button } from "@/components/ui/button";
 import DateInput from "@/components/ui/date-input";
@@ -60,7 +63,7 @@ interface HealthInsuranceFormData {
   availability: string;
 }
 
-const TOTAL_STEPS = 7;
+const TOTAL_STEPS = 11;
 
 const HealthInsuranceForm = () => {
   const { t, i18n } = useTranslation();
@@ -112,6 +115,7 @@ const HealthInsuranceForm = () => {
     updateFormData,
     nextStep,
     previousStep,
+    goToStep,
     errors,
   } = useMultiStepForm({
     initialData,
@@ -257,21 +261,35 @@ const HealthInsuranceForm = () => {
         // Must answer hasCurrentInsurance question
         return formData.hasCurrentInsurance !== null;
       case 2:
-        // Must select family situation AND provide birth date
-        return formData.familySituation !== "" && formData.birthDate !== null;
+        // Current insurer selection (only reached when "yes"). Required so the
+        // step can't be auto-skipped by a lingering advance trigger; "Autre" is
+        // always available as an escape hatch.
+        return formData.currentInsurer !== "";
       case 3:
-        // Must select canton + valid postal code (4 digits)
-        return formData.canton !== "" && formData.postalCode.replace(/\D/g, '').length >= 4;
+        // Must select family situation
+        return formData.familySituation !== "";
       case 4:
-        // LAMal model and franchise have defaults, always valid
-        return formData.lamalModel !== "";
+        // Must provide birth date
+        return formData.birthDate !== null;
       case 5:
+        // Must select canton
+        return formData.canton !== "";
+      case 6:
+        // Must provide valid postal code (4 digits)
+        return formData.postalCode.replace(/\D/g, '').length >= 4;
+      case 7:
+        // LAMal model has a default, always valid
+        return formData.lamalModel !== "";
+      case 8:
+        // Franchise + accident coverage have defaults, always valid
+        return true;
+      case 9:
         // Complementary is optional, always valid
         return true;
-      case 6:
+      case 10:
         // Must provide first and last name
         return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
-      case 7:
+      case 11:
         // Must provide valid email and phone
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const phoneValid = formData.phone.replace(/\s/g, '').length >= 10;
@@ -282,14 +300,34 @@ const HealthInsuranceForm = () => {
   };
 
   const canProceed = validateStep(currentStep);
-  const { notify, notifyDelayed, notifyDelayedLong } = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep, handleSubmit);
+
+  // Step 2 is the "current insurer" grid — only relevant when the user HAS
+  // insurance. When they answer "Non" on step 1, we skip step 2 entirely so the
+  // insurer question never appears (and never causes an internal scroll).
+  const handleAdvance = useCallback(() => {
+    if (currentStep === 1 && formData.hasCurrentInsurance === false) {
+      goToStep(3);
+    } else {
+      nextStep();
+    }
+  }, [currentStep, formData.hasCurrentInsurance, goToStep, nextStep]);
+
+  const handlePrevious = useCallback(() => {
+    if (currentStep === 3 && formData.hasCurrentInsurance === false) {
+      goToStep(1);
+    } else {
+      previousStep();
+    }
+  }, [currentStep, formData.hasCurrentInsurance, goToStep, previousStep]);
+
+  const { notify, notifyDelayed, notifyDelayedLong } = useAutoAdvance(currentStep, handleAdvance, canProceed, isLastStep, handleSubmit);
 
   const [attemptedNext, setAttemptedNext] = useState(false);
 
   // Get validation error messages for current step (only shown after user tries to advance)
   const getStepErrors = (step: number): Record<string, string> => {
     const errs: Record<string, string> = {};
-    if (step === 7) {
+    if (step === 11) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!formData.email.trim() || !emailRegex.test(formData.email.trim())) {
         errs.email = t("forms.validation.invalidEmail", "Adresse email non valide");
@@ -299,7 +337,7 @@ const HealthInsuranceForm = () => {
         errs.phone = t("forms.validation.invalidPhone", "Numéro de téléphone non valide (min. 10 chiffres)");
       }
     }
-    if (step === 6) {
+    if (step === 10) {
       if (formData.firstName.trim() === "") {
         errs.firstName = t("forms.validation.required", "Ce champ est obligatoire");
       }
@@ -310,12 +348,20 @@ const HealthInsuranceForm = () => {
     if (step === 1 && formData.hasCurrentInsurance === null) {
       errs.hasCurrentInsurance = t("forms.validation.required", "Ce champ est obligatoire");
     }
-    if (step === 2) {
-      if (!formData.familySituation) errs.familySituation = t("forms.validation.required", "Ce champ est obligatoire");
-      if (!formData.birthDate) errs.birthDate = t("forms.validation.required", "Ce champ est obligatoire");
+    if (step === 2 && !formData.currentInsurer) {
+      errs.currentInsurer = t("forms.validation.required", "Ce champ est obligatoire");
     }
-    if (step === 3 && !formData.canton) {
+    if (step === 3 && !formData.familySituation) {
+      errs.familySituation = t("forms.validation.required", "Ce champ est obligatoire");
+    }
+    if (step === 4 && !formData.birthDate) {
+      errs.birthDate = t("forms.validation.required", "Ce champ est obligatoire");
+    }
+    if (step === 5 && !formData.canton) {
       errs.canton = t("forms.validation.required", "Ce champ est obligatoire");
+    }
+    if (step === 6 && formData.postalCode.replace(/\D/g, '').length < 4) {
+      errs.postalCode = t("forms.validation.required", "Ce champ est obligatoire");
     }
     return errs;
   };
@@ -367,7 +413,7 @@ const HealthInsuranceForm = () => {
     if (isLastStep) {
       handleSubmit();
     } else {
-      nextStep();
+      handleAdvance();
     }
   };
 
@@ -426,7 +472,33 @@ const HealthInsuranceForm = () => {
       description={t("forms.healthInsurance.description")}
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
+      clientName={formData.firstName}
+      product="sante"
+      guideMessages={[
+        t("forms.healthInsurance.guide.step1", { defaultValue: "On commence : avez-vous déjà une assurance maladie ? Ça m'aide à situer votre dossier." }),
+        t("forms.healthInsurance.guide.insurerStep", { defaultValue: "Parfait — chez quel assureur es-tu aujourd'hui ? Choisis son logo, ça m'aide à comparer au plus juste." }),
+        t("forms.healthInsurance.guide.step2", { defaultValue: "Votre situation familiale influence vos primes. Qui compose votre foyer ?" }),
+        t("forms.healthInsurance.guide.step3", { defaultValue: "Votre âge détermine le montant de vos primes. Quelle est votre date de naissance ?" }),
+        t("forms.healthInsurance.guide.step4", { defaultValue: "Les primes varient selon le canton — dites-moi où vous habitez." }),
+        t("forms.healthInsurance.guide.step5", { defaultValue: "Votre code postal me permet d'affiner le calcul. On y est presque !" }),
+        t("forms.healthInsurance.guide.step6", { defaultValue: "Le modèle d'assurance, c'est là qu'on fait de vraies économies. Je vous guide." }),
+        t("forms.healthInsurance.guide.step7", { defaultValue: "Franchise et accidents : deux réglages qui pèsent sur votre prime. On ajuste ensemble." }),
+        t("forms.healthInsurance.guide.step8", { defaultValue: "Une petite complémentaire santé ? Je vous montre les options vraiment utiles." }),
+        undefined,
+        undefined,
+      ]}
       size="large"
+      navigation={
+        <FormNavigation
+          currentStep={currentStep}
+          totalSteps={TOTAL_STEPS}
+          onPrevious={handlePrevious}
+          onNext={handleNext}
+          isSubmitting={isSubmitting}
+          isLastStep={isLastStep}
+          canProceed={canProceed}
+        />
+      }
     >
       {/* Required fields note */}
       <div className="mb-3 md:mb-6 text-xs md:text-sm text-red-500 flex items-center gap-1.5">
@@ -434,9 +506,9 @@ const HealthInsuranceForm = () => {
         <span>{t("forms.requiredFields", "Champs obligatoires")}</span>
       </div>
 
-      {/* Step 1: Current Insurance */}
+      {/* Step 1: Current Insurance (Yes / No only — 1 question par étape) */}
       <FormStep isActive={currentStep === 1}>
-        <div className="space-y-3 md:space-y-6">
+        <div className="space-y-2 md:space-y-4">
           <FormFieldWrapper
             label={t("forms.healthInsurance.hasCurrentInsurance")}
             required
@@ -444,21 +516,21 @@ const HealthInsuranceForm = () => {
             <RadioGroup
               value={formData.hasCurrentInsurance === null ? "" : formData.hasCurrentInsurance ? "yes" : "no"}
               onValueChange={(value) => {
-                updateFormData({ 
+                updateFormData({
                   hasCurrentInsurance: value === "yes",
                   currentInsurer: value === "no" ? "" : formData.currentInsurer
                 });
-                if (value === "no") notify();
+                notify();
               }}
-              className="grid grid-cols-2 gap-3"
+              className="grid grid-cols-2 gap-2 md:gap-3"
             >
-              <label htmlFor="hasInsurance-yes" className="flex items-center space-x-2 p-3.5 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
+              <label htmlFor="hasInsurance-yes" className="flex items-center space-x-2 p-2.5 md:p-3.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
                 <RadioGroupItem value="yes" id="hasInsurance-yes" className="h-4 w-4" />
                 <span className="text-emerald-900 text-sm md:text-base">
                   {t("common.yes")}
                 </span>
               </label>
-              <label htmlFor="hasInsurance-no" className="flex items-center space-x-2 p-3.5 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
+              <label htmlFor="hasInsurance-no" className="flex items-center space-x-2 p-2.5 md:p-3.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
                 <RadioGroupItem value="no" id="hasInsurance-no" className="h-4 w-4" />
                 <span className="text-emerald-900 text-sm md:text-base">
                   {t("common.no")}
@@ -466,65 +538,94 @@ const HealthInsuranceForm = () => {
               </label>
             </RadioGroup>
           </FormFieldWrapper>
-
-          {formData.hasCurrentInsurance === true && (
-            <FormFieldWrapper
-              label={t("forms.healthInsurance.currentInsurer")}
-              htmlFor="currentInsurer"
-            >
-              <select
-                id="currentInsurer"
-                value={formData.currentInsurer}
-                onChange={(e) => { updateFormData({ currentInsurer: e.target.value }); notify(); }}
-                className="flex h-11 md:h-12 w-full items-center justify-between rounded-xl border-2 border-input bg-white text-gray-900 px-4 text-sm md:text-base ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:border-primary/50 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%236b7280%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[length:16px_16px] bg-[right_1rem_center] bg-no-repeat pr-10"
-              >
-                <option value="" disabled>{t("forms.healthInsurance.selectInsurer")}</option>
-                <option value="assura">Assura</option>
-                <option value="css">CSS</option>
-                <option value="groupe-mutuel">Groupe Mutuel</option>
-                <option value="helsana">Helsana</option>
-                <option value="sanitas">Sanitas</option>
-                <option value="swica">Swica</option>
-                <option value="visana">Visana</option>
-                <option value="concordia">Concordia</option>
-                <option value="kpt">KPT</option>
-                <option value="atupri">Atupri</option>
-                <option value="sympany">Sympany</option>
-                <option value="other">{t("forms.healthInsurance.otherInsurer")}</option>
-              </select>
-            </FormFieldWrapper>
-          )}
         </div>
       </FormStep>
 
-      {/* Step 2: Family Situation & Birth Date */}
+      {/* Step 2: Current Insurer grid (only reached when hasCurrentInsurance === true) */}
       <FormStep isActive={currentStep === 2}>
+        <div className="space-y-2 md:space-y-4">
+          <FormFieldWrapper
+            label={t("forms.healthInsurance.currentInsurer")}
+          >
+            {/* Grille de logos façon Neokare : 4 colonnes × 3 lignes (12 tuiles). */}
+            <div className="grid grid-cols-4 gap-1.5 md:gap-2.5">
+              {healthInsurers.map((insurer) => {
+                const isSelected = formData.currentInsurer === insurer.value;
+                return (
+                  <button
+                    key={insurer.value}
+                    type="button"
+                    aria-pressed={isSelected}
+                    aria-label={insurer.label}
+                    onClick={() => { updateFormData({ currentInsurer: insurer.value }); notify(); }}
+                    className={`group flex h-11 md:h-16 items-center justify-center rounded-xl border-2 bg-white p-1 md:p-2 transition-all duration-200 hover:border-emerald-400 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-1 ${
+                      isSelected
+                        ? "border-primary ring-2 ring-primary/30 shadow-md"
+                        : "border-emerald-100"
+                    }`}
+                  >
+                    {insurer.logo ? (
+                      <img
+                        src={insurer.logo}
+                        alt={insurer.label}
+                        loading="lazy"
+                        className="max-h-6 md:max-h-9 w-auto max-w-full object-contain"
+                      />
+                    ) : (
+                      <span className="text-xs md:text-sm font-semibold text-emerald-800">
+                        {t("forms.healthInsurance.otherShort", { defaultValue: "Autre" })}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </FormFieldWrapper>
+        </div>
+      </FormStep>
+
+      {/* Step 3: Family Situation */}
+      <FormStep isActive={currentStep === 3}>
         <div className="space-y-3 md:space-y-6">
           <FormFieldWrapper
             label={t("forms.healthInsurance.familySituation")}
             required
           >
-            <RadioGroup
+            <IllustratedChoice
+              ariaLabel={t("forms.healthInsurance.familySituation")}
               value={formData.familySituation}
-              onValueChange={(value) => updateFormData({ familySituation: value })}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-3"
-            >
-              {[
-                { value: "single", label: t("forms.healthInsurance.situations.single") },
-                { value: "couple", label: t("forms.healthInsurance.situations.couple") },
-                { value: "coupleWithChildren", label: t("forms.healthInsurance.situations.coupleWithChildren") },
-                { value: "singleWithChildren", label: t("forms.healthInsurance.situations.singleWithChildren") },
-              ].map((situation) => (
-                <label key={situation.value} htmlFor={situation.value} className="flex items-center space-x-2 p-3.5 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
-                  <RadioGroupItem value={situation.value} id={situation.value} className="h-4 w-4" />
-                  <span className="text-emerald-900 text-sm md:text-base">
-                    {situation.label}
-                  </span>
-                </label>
-              ))}
-            </RadioGroup>
+              onValueChange={(value) => { updateFormData({ familySituation: value }); notify(); }}
+              columns={4}
+              options={[
+                {
+                  value: "single",
+                  label: t("forms.healthInsurance.situations.single"),
+                  illustration: <HouseholdIllustration type="single" />,
+                },
+                {
+                  value: "couple",
+                  label: t("forms.healthInsurance.situations.couple"),
+                  illustration: <HouseholdIllustration type="couple" />,
+                },
+                {
+                  value: "coupleWithChildren",
+                  label: t("forms.healthInsurance.situations.coupleWithChildren"),
+                  illustration: <HouseholdIllustration type="coupleWithChildren" />,
+                },
+                {
+                  value: "singleWithChildren",
+                  label: t("forms.healthInsurance.situations.singleWithChildren"),
+                  illustration: <HouseholdIllustration type="singleWithChildren" />,
+                },
+              ]}
+            />
           </FormFieldWrapper>
+        </div>
+      </FormStep>
 
+      {/* Step 4: Birth Date */}
+      <FormStep isActive={currentStep === 4}>
+        <div className="space-y-3 md:space-y-6">
           <FormFieldWrapper
             label={t("forms.healthInsurance.birthDate")}
             htmlFor="birthDate"
@@ -542,8 +643,8 @@ const HealthInsuranceForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 3: Location */}
-      <FormStep isActive={currentStep === 3}>
+      {/* Step 5: Canton */}
+      <FormStep isActive={currentStep === 5}>
         <div className="space-y-3 md:space-y-6">
           <FormFieldWrapper
             label={t("forms.healthInsurance.canton")}
@@ -559,17 +660,23 @@ const HealthInsuranceForm = () => {
               <option value="" disabled>
                 {t("forms.healthInsurance.selectCanton")}
               </option>
-              {swissCantons.map((canton) => (
+              {optimisCantons.map((canton) => (
                 <option key={canton.code} value={canton.code}>
                   {getCantonName(canton.code, i18n.language)}
                 </option>
               ))}
             </select>
           </FormFieldWrapper>
+        </div>
+      </FormStep>
 
+      {/* Step 6: Postal Code */}
+      <FormStep isActive={currentStep === 6}>
+        <div className="space-y-3 md:space-y-6">
           <FormFieldWrapper
             label={t("forms.healthInsurance.postalCode")}
             htmlFor="postalCode"
+            required
           >
             <Input
               id="postalCode"
@@ -587,8 +694,8 @@ const HealthInsuranceForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 4: LAMal Model & Franchise */}
-      <FormStep isActive={currentStep === 4}>
+      {/* Step 7: LAMal Model */}
+      <FormStep isActive={currentStep === 7}>
         <div className="space-y-3 md:space-y-6">
           {/* LAMal Model Card */}
           <Card className="bg-emerald-50 border-emerald-200">
@@ -599,7 +706,7 @@ const HealthInsuranceForm = () => {
               </Label>
               <RadioGroup
                 value={formData.lamalModel}
-                onValueChange={(value) => updateFormData({ lamalModel: value })}
+                onValueChange={(value) => { updateFormData({ lamalModel: value }); notify(); }}
 
                 className="grid grid-cols-2 gap-2 md:gap-3"
               >
@@ -619,7 +726,12 @@ const HealthInsuranceForm = () => {
               </RadioGroup>
             </CardContent>
           </Card>
+        </div>
+      </FormStep>
 
+      {/* Step 8: Franchise & Accident Coverage */}
+      <FormStep isActive={currentStep === 8}>
+        <div className="space-y-3 md:space-y-6">
           {/* Franchise Card */}
           <Card className="bg-emerald-50 border-emerald-200">
             <CardContent className="p-3 md:p-5">
@@ -666,8 +778,8 @@ const HealthInsuranceForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 5: Complementary Insurance - Tier Selection */}
-      <FormStep isActive={currentStep === 5}>
+      {/* Step 9: Complementary Insurance - Tier Selection */}
+      <FormStep isActive={currentStep === 9}>
         <div className="space-y-4 md:space-y-6">
           <div className="text-center mb-3 md:mb-6">
             <h3 className="text-base md:text-lg font-semibold mb-1 md:mb-2 text-emerald-900">
@@ -820,10 +932,11 @@ const HealthInsuranceForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 6: Name */}
-      <FormStep isActive={currentStep === 6}>
+      {/* Step 10: Name */}
+      <FormStep isActive={currentStep === 10}>
         <div className="space-y-3 md:space-y-6">
-          <div className="text-center mb-3 md:mb-6">
+          {/* En-tête décoratif retiré (redondant avec la bulle mascotte). */}
+          <div className="hidden">
             <div className="inline-flex items-center justify-center w-11 h-11 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
               <User className="h-5 w-5 md:h-8 md:w-8 text-primary" />
             </div>
@@ -867,10 +980,12 @@ const HealthInsuranceForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 7: Contact Details */}
-      <FormStep isActive={currentStep === 7}>
-        <div className="space-y-3 md:space-y-6">
-          <div className="text-center mb-3 md:mb-6">
+      {/* Step 11: Contact Details */}
+      <FormStep isActive={currentStep === 11}>
+        <div className="space-y-3 md:space-y-4">
+          {/* En-tête décoratif retiré (redondant avec la bulle mascotte qui porte
+              déjà le message). Évite tout scroll interne mobile ET desktop. */}
+          <div className="hidden">
             <div className="inline-flex items-center justify-center w-11 h-11 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
               <Phone className="h-5 w-5 md:h-8 md:w-8 text-primary" />
             </div>
@@ -896,7 +1011,7 @@ const HealthInsuranceForm = () => {
               value={formData.email}
               onChange={(e) => { updateFormData({ email: e.target.value.toLowerCase() }); notifyDelayed(); }}
               placeholder="votre@email.ch"
-              className={`h-11 md:h-14 text-sm md:text-lg ${stepErrors.email ? 'border-red-400 focus-visible:ring-red-400' : ''}`}
+              className={`h-11 md:h-12 text-sm md:text-lg ${stepErrors.email ? 'border-red-400 focus-visible:ring-red-400' : ''}`}
             />
           </FormFieldWrapper>
 
@@ -914,7 +1029,7 @@ const HealthInsuranceForm = () => {
             />
           </FormFieldWrapper>
 
-          <div className="bg-emerald-50 border border-emerald-200 rounded-lg md:rounded-xl p-3 md:p-4 text-center">
+          <div className="bg-emerald-50 border border-emerald-200 rounded-lg md:rounded-xl p-2.5 text-center">
             <p className="text-xs md:text-sm text-emerald-700">
               🔒 {t("forms.contact.privacyNote", "Vos données sont protégées et ne seront jamais partagées.")}
             </p>
@@ -922,15 +1037,6 @@ const HealthInsuranceForm = () => {
         </div>
       </FormStep>
 
-      <FormNavigation
-        currentStep={currentStep}
-        totalSteps={TOTAL_STEPS}
-        onPrevious={previousStep}
-        onNext={handleNext}
-        isSubmitting={isSubmitting}
-        isLastStep={isLastStep}
-        canProceed={canProceed}
-      />
       <SmsVerificationModal {...otpModalProps} />
     </FormContainer>
   );

@@ -34,13 +34,13 @@ const FormNavigation = ({
   };
 
   return (
-    <div className="flex flex-col-reverse sm:flex-row justify-between gap-2 sm:gap-4 pt-4 md:pt-8">
+    <div className="flex flex-row justify-between gap-2 sm:gap-4">
       <Button
         type="button"
         variant="outline"
         onClick={onPrevious}
         disabled={currentStep === 1 || isSubmitting}
-        className="gap-1.5 sm:gap-2.5 w-full sm:w-auto sm:min-w-[120px] md:min-w-[140px] h-11 md:h-14 text-xs md:text-base font-semibold border-2 border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 hover:border-emerald-400 transition-all duration-200"
+        className="gap-1.5 sm:gap-2.5 w-auto min-w-[92px] sm:min-w-[120px] md:min-w-[140px] h-14 md:h-16 text-xs md:text-base font-semibold border-2 border-emerald-300 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 hover:border-emerald-400 transition-all duration-200"
       >
         <ArrowLeft className="h-4 w-4 md:h-5 md:w-5" />
         {t("forms.previous")}
@@ -51,7 +51,7 @@ const FormNavigation = ({
         onClick={handleNextClick}
         disabled={isSubmitting}
         className={`
-          gap-1.5 sm:gap-2.5 w-full sm:w-auto sm:min-w-[160px] md:min-w-[200px] h-11 md:h-14 text-sm md:text-base font-bold
+          gap-1.5 sm:gap-2.5 w-auto min-w-[150px] sm:min-w-[160px] md:min-w-[200px] h-14 md:h-16 text-sm md:text-base font-bold
           bg-gradient-to-r from-primary via-primary to-emerald-600 
           hover:from-emerald-600 hover:via-primary hover:to-primary
           shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40

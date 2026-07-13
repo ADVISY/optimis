@@ -46,7 +46,7 @@ interface PrenatalFormData {
   phone: string;
 }
 
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 9;
 
 const PrenatalInsuranceForm = () => {
   const { t, i18n } = useTranslation();
@@ -179,23 +179,22 @@ const PrenatalInsuranceForm = () => {
   const validateStep = (step: number): boolean => {
     switch (step) {
       case 1:
-        return (
-          formData.dueDate !== null &&
-          formData.canton !== "" &&
-          formData.postalCode.replace(/\D/g, "").length >= 4
-        );
+        return formData.dueDate !== null;
       case 2:
-        return (
-          formData.coverageLevel !== "" &&
-          formData.lamalModel !== "" &&
-          formData.childDeductible !== "" &&
-          formData.childDental !== ""
-        );
+        return formData.canton !== "" && formData.postalCode.replace(/\D/g, "").length >= 4;
       case 3:
-        return formData.motherHasInsurance !== "";
+        return formData.coverageLevel !== "";
       case 4:
-        return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
+        return formData.lamalModel !== "";
       case 5:
+        return formData.childDeductible !== "";
+      case 6:
+        return formData.childDental !== "";
+      case 7:
+        return formData.motherHasInsurance !== "";
+      case 8:
+        return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
+      case 9:
         return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default:
         return true;
@@ -203,8 +202,8 @@ const PrenatalInsuranceForm = () => {
   };
 
   const getStepErrors = (step: number): Record<string, string> => {
-    if (step === 4) return getIdentityErrors(formData.firstName, formData.lastName);
-    if (step === 5) return getContactErrors(formData.email, formData.phone);
+    if (step === 8) return getIdentityErrors(formData.firstName, formData.lastName);
+    if (step === 9) return getContactErrors(formData.email, formData.phone);
     return {};
   };
 
@@ -292,11 +291,35 @@ const PrenatalInsuranceForm = () => {
         description={t("forms.prenatal.description")}
         currentStep={currentStep}
         totalSteps={TOTAL_STEPS}
+        clientName={formData.firstName}
+        product="prenatale"
+        guideMessages={[
+          t("forms.prenatal.guide.dueDateStep", { defaultValue: "Félicitations ! Quelle est la date prévue de l'accouchement ?" }),
+          t("forms.prenatal.guide.locationStep", { defaultValue: "Où habites-tu ? Canton et code postal, pour calculer les primes bébé au plus juste." }),
+          t("forms.prenatal.guide.coverageStep", { defaultValue: "Quelle protection veux-tu pour bébé ?" }),
+          t("forms.prenatal.guide.modelStep", { defaultValue: "Le modèle LAMal influence la prime. Le standard laisse le libre choix du médecin." }),
+          t("forms.prenatal.guide.deductibleStep", { defaultValue: "Pour bébé, la franchise à 0 CHF est recommandée : tout est remboursé dès le 1er franc." }),
+          t("forms.prenatal.guide.dentalStep", { defaultValue: "Une complémentaire dentaire pour bébé ? Ça peut valoir la peine très tôt." }),
+          t("forms.prenatal.guide.motherStep", { defaultValue: "Un mot sur ton assurance actuelle, pour bien tout coordonner." }),
+          undefined,
+          undefined,
+        ]}
+        navigation={
+          <FormNavigation
+            currentStep={currentStep}
+            totalSteps={TOTAL_STEPS}
+            onNext={handleNext}
+            onPrevious={previousStep}
+            isLastStep={isLastStep}
+            isSubmitting={isSubmitting}
+            canProceed={canProceed}
+          />
+        }
       >
-        {/* Step 1: Due date + canton + postal code */}
+        {/* Step 1: Due date */}
         <FormStep isActive={currentStep === 1}>
           <div className="space-y-3">
-            <div className="text-center mb-3">
+            <div className="hidden text-center mb-3">
               <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2">
                 <Baby className="h-6 w-6 md:h-8 md:w-8 text-primary" />
               </div>
@@ -315,16 +338,23 @@ const PrenatalInsuranceForm = () => {
                   updateFormData({ dueDate: date });
                   if (date) notify();
                 }}
+                minYear={new Date().getFullYear()}
+                maxYear={new Date().getFullYear() + 1}
                 className="h-11 md:h-14 text-sm md:text-lg"
               />
             </FormFieldWrapper>
+          </div>
+        </FormStep>
 
+        {/* Step 2: Canton + Postal code */}
+        <FormStep isActive={currentStep === 2}>
+          <div className="space-y-3">
             <FormFieldWrapper label={t("forms.prenatal.canton")} required>
               <Select
                 value={formData.canton}
                 onValueChange={(value) => {
                   updateFormData({ canton: value });
-                  notifyDelayed();
+                  if (formData.postalCode.replace(/\D/g, "").length >= 4) notify();
                 }}
               >
                 <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
@@ -347,7 +377,7 @@ const PrenatalInsuranceForm = () => {
                 onChange={(e) => {
                   const val = e.target.value.replace(/\D/g, "").slice(0, 4);
                   updateFormData({ postalCode: val });
-                  if (val.length === 4) notifyDelayed();
+                  if (val.length === 4 && formData.canton !== "") notifyDelayed();
                 }}
                 placeholder="1000"
                 className="h-11 md:h-14 text-sm md:text-lg"
@@ -357,13 +387,16 @@ const PrenatalInsuranceForm = () => {
           </div>
         </FormStep>
 
-        {/* Step 2: Coverage choice */}
-        <FormStep isActive={currentStep === 2}>
-          <div className="space-y-3">
+        {/* Step 3: Coverage level */}
+        <FormStep isActive={currentStep === 3}>
+          <div className="space-y-2">
             <FormFieldWrapper label={t("forms.prenatal.coverageLevel")} required>
               <RadioGroup
                 value={formData.coverageLevel}
-                onValueChange={(value) => updateFormData({ coverageLevel: value })}
+                onValueChange={(value) => {
+                  updateFormData({ coverageLevel: value });
+                  notify();
+                }}
                 className="grid gap-3"
               >
                 {[
@@ -375,65 +408,87 @@ const PrenatalInsuranceForm = () => {
                     key={option.value}
                     htmlFor={`coverage-${option.value}`}
                     className={cn(
-                      "flex items-start space-x-3 p-3 md:p-4 border-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-all",
+                      "flex items-start space-x-3 px-3 py-2.5 md:p-4 border-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-all",
                       formData.coverageLevel === option.value && "border-primary bg-primary/5",
                     )}
                   >
-                    <RadioGroupItem value={option.value} id={`coverage-${option.value}`} className="mt-1" />
+                    <RadioGroupItem value={option.value} id={`coverage-${option.value}`} className="mt-0.5" />
                     <div className="flex-1">
-                      <p className="text-sm md:text-lg font-semibold">{option.label}</p>
-                      <p className="text-xs md:text-sm text-muted-foreground">{option.desc}</p>
+                      <p className="text-sm md:text-lg font-semibold leading-tight">{option.label}</p>
+                      <p className="text-xs md:text-sm text-muted-foreground leading-snug">{option.desc}</p>
                     </div>
                   </label>
                 ))}
               </RadioGroup>
             </FormFieldWrapper>
+          </div>
+        </FormStep>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <FormFieldWrapper label={t("forms.prenatal.lamalModel", "Modèle LAMal souhaité")} required>
-                <Select
-                  value={formData.lamalModel}
-                  onValueChange={(value) => updateFormData({ lamalModel: value })}
-                >
-                  <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="family-doctor">{t("forms.healthInsurance.models.familyDoctor")}</SelectItem>
-                    <SelectItem value="hmo">{t("forms.prenatal.models.careNetwork", "Réseau de soins")}</SelectItem>
-                    <SelectItem value="telmed">{t("forms.healthInsurance.models.telemedicine")}</SelectItem>
-                    <SelectItem value="standard">{t("forms.healthInsurance.models.standard")}</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormFieldWrapper>
-
-              <FormFieldWrapper
-                label={t("forms.prenatal.childDeductible", "Franchise enfant (CHF)")}
-                required
+        {/* Step 4: LAMal model */}
+        <FormStep isActive={currentStep === 4}>
+          <div className="space-y-3">
+            <FormFieldWrapper label={t("forms.prenatal.lamalModel", "Modèle LAMal souhaité")} required>
+              <Select
+                value={formData.lamalModel}
+                onValueChange={(value) => {
+                  updateFormData({ lamalModel: value });
+                  notify();
+                }}
               >
-                <Select
-                  value={formData.childDeductible}
-                  onValueChange={(value) => updateFormData({ childDeductible: value })}
-                >
-                  <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {["0", "100", "200", "300", "400", "500", "600"].map((v) => (
-                      <SelectItem key={v} value={v}>
-                        CHF {v}
-                        {v === "0" && ` — ${t("forms.prenatal.childDeductibleDefault", "recommandé pour bébé")}`}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormFieldWrapper>
-            </div>
+                <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="family-doctor">{t("forms.healthInsurance.models.familyDoctor")}</SelectItem>
+                  <SelectItem value="hmo">{t("forms.prenatal.models.careNetwork", "Réseau de soins")}</SelectItem>
+                  <SelectItem value="telmed">{t("forms.healthInsurance.models.telemedicine")}</SelectItem>
+                  <SelectItem value="standard">{t("forms.healthInsurance.models.standard")}</SelectItem>
+                </SelectContent>
+              </Select>
+            </FormFieldWrapper>
+          </div>
+        </FormStep>
 
-            <FormFieldWrapper label={t("forms.prenatal.childDental")}>
+        {/* Step 5: Child deductible */}
+        <FormStep isActive={currentStep === 5}>
+          <div className="space-y-3">
+            <FormFieldWrapper
+              label={t("forms.prenatal.childDeductible", "Franchise enfant (CHF)")}
+              required
+            >
+              <Select
+                value={formData.childDeductible}
+                onValueChange={(value) => {
+                  updateFormData({ childDeductible: value });
+                  notify();
+                }}
+              >
+                <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {["0", "100", "200", "300", "400", "500", "600"].map((v) => (
+                    <SelectItem key={v} value={v}>
+                      CHF {v}
+                      {v === "0" && ` — ${t("forms.prenatal.childDeductibleDefault", "recommandé pour bébé")}`}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </FormFieldWrapper>
+          </div>
+        </FormStep>
+
+        {/* Step 6: Child dental */}
+        <FormStep isActive={currentStep === 6}>
+          <div className="space-y-3">
+            <FormFieldWrapper label={t("forms.prenatal.childDental")} required>
               <RadioGroup
                 value={formData.childDental}
-                onValueChange={(value) => updateFormData({ childDental: value })}
+                onValueChange={(value) => {
+                  updateFormData({ childDental: value });
+                  notify();
+                }}
                 className="grid grid-cols-2 gap-3"
               >
                 {[
@@ -457,8 +512,8 @@ const PrenatalInsuranceForm = () => {
           </div>
         </FormStep>
 
-        {/* Step 3: Mother's current insurance */}
-        <FormStep isActive={currentStep === 3}>
+        {/* Step 7: Mother's current insurance */}
+        <FormStep isActive={currentStep === 7}>
           <div className="space-y-3">
             <FormFieldWrapper label={t("forms.prenatal.motherHasInsurance")} required>
               <RadioGroup
@@ -468,6 +523,7 @@ const PrenatalInsuranceForm = () => {
                     motherHasInsurance: value,
                     motherInsurer: value === "no" ? "" : formData.motherInsurer,
                   });
+                  if (value === "no") notify();
                 }}
                 className="grid grid-cols-2 gap-3"
               >
@@ -519,10 +575,10 @@ const PrenatalInsuranceForm = () => {
           </div>
         </FormStep>
 
-        {/* Step 4: Identity */}
-        <FormStep isActive={currentStep === 4}>
+        {/* Step 8: Identity */}
+        <FormStep isActive={currentStep === 8}>
           <div className="space-y-4 md:space-y-6">
-            <div className="text-center mb-3 md:mb-6">
+            <div className="hidden text-center mb-3 md:mb-6">
               <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
                 <User className="h-6 w-6 md:h-8 md:w-8 text-primary" />
               </div>
@@ -559,10 +615,10 @@ const PrenatalInsuranceForm = () => {
           </div>
         </FormStep>
 
-        {/* Step 5: Contact */}
-        <FormStep isActive={currentStep === 5}>
+        {/* Step 9: Contact */}
+        <FormStep isActive={currentStep === 9}>
           <div className="space-y-4 md:space-y-6">
-            <div className="text-center mb-3 md:mb-6">
+            <div className="hidden text-center mb-3 md:mb-6">
               <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
                 <Phone className="h-6 w-6 md:h-8 md:w-8 text-primary" />
               </div>
@@ -599,16 +655,6 @@ const PrenatalInsuranceForm = () => {
             </FormFieldWrapper>
           </div>
         </FormStep>
-
-        <FormNavigation
-          currentStep={currentStep}
-          totalSteps={TOTAL_STEPS}
-          onNext={handleNext}
-          onPrevious={previousStep}
-          isLastStep={isLastStep}
-          isSubmitting={isSubmitting}
-          canProceed={true}
-        />
       </FormContainer>
 
       <SmsVerificationModal {...otpModalProps} />

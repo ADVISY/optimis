@@ -27,6 +27,15 @@ export const swissCantons = [
   { code: "ZH", name: "Zürich", nameFr: "Zurich", nameIt: "Zurigo" },
 ];
 
+// Cantons ciblés par Optimis : Suisse romande d'abord (GE, VD, VS, FR, NE, JU),
+// puis les 3 cantons conservés hors Romandie (BE bilingue, ZH, TI).
+// Ordre volontaire : la Romandie remonte en tête de liste.
+export const optimisCantonCodes = ["GE", "VD", "VS", "FR", "NE", "JU", "BE", "ZH", "TI"] as const;
+
+export const optimisCantons = optimisCantonCodes
+  .map((code) => swissCantons.find((c) => c.code === code))
+  .filter((c): c is (typeof swissCantons)[number] => Boolean(c));
+
 export const getCantonName = (code: string, language: string): string => {
   const canton = swissCantons.find((c) => c.code === code);
   if (!canton) return code;

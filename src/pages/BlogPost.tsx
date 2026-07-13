@@ -118,6 +118,24 @@ const CATEGORY_CTA: Record<string, BlogCta> = {
   },
 };
 
+// CTA inline compact, injecté EN HAUT de l'article (avant lecture) et AU MILIEU
+// du contenu. Objectif funnel SEO : capter l'intention dès l'arrivée organique
+// et la relancer en cours de lecture, sans attendre le CTA de fin d'article.
+// `not-prose` neutralise les styles typographiques du wrapper `prose`.
+const InlineBlogCta = ({ cta }: { cta: BlogCta }) => (
+  <aside className="not-prose my-8 rounded-xl border border-primary/20 bg-secondary/30 p-5 sm:p-6">
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p className="text-base font-bold text-foreground">{cta.heading}</p>
+        <p className="mt-1 text-sm text-muted-foreground">{cta.subtext}</p>
+      </div>
+      <Button asChild className="shrink-0">
+        <LocalizedLink to={cta.to}>{cta.button}</LocalizedLink>
+      </Button>
+    </div>
+  </aside>
+);
+
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getBlogPostBySlug(slug) : undefined;
@@ -167,6 +185,13 @@ const BlogPost = () => {
     blogSlugs: blogSlugSet,
   });
 
+  // Point d'injection du CTA milieu d'article : milieu du flux de blocs rendus.
+  // On n'injecte que si l'article est assez long (sinon top + milieu se touchent).
+  const midIndex =
+    renderedContent.length >= 6
+      ? Math.floor(renderedContent.length / 2)
+      : -1;
+
   return (
     <Layout>
       <Seo
@@ -213,7 +238,18 @@ const BlogPost = () => {
       <article className="py-8 md:py-12">
         <div className="container">
           <div className="prose prose-lg mx-auto max-w-3xl">
-            {renderedContent}
+            {/* CTA haut d'article — capte l'intention avant la lecture */}
+            <InlineBlogCta cta={cta} />
+            {midIndex > 0 ? (
+              <>
+                {renderedContent.slice(0, midIndex)}
+                {/* CTA milieu d'article — relance en cours de lecture */}
+                <InlineBlogCta cta={cta} />
+                {renderedContent.slice(midIndex)}
+              </>
+            ) : (
+              renderedContent
+            )}
           </div>
         </div>
       </article>

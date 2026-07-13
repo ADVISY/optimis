@@ -25,7 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { swissCantons, getCantonName } from "@/data/swissCantons";
+import { optimisCantons, getCantonName } from "@/data/swissCantons";
 import { mockCarInsuranceOffers, InsuranceOffer } from "@/data/mockInsuranceData";
 import DateInput from "@/components/ui/date-input";
 import { Lock, User, Phone } from "lucide-react";
@@ -215,6 +215,29 @@ const CarInsuranceForm = () => {
       description={t("forms.carInsurance.description")}
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
+      clientName={formData.firstName}
+      guideMessages={[
+        t("forms.carInsurance.guide.vehicle", {
+          defaultValue:
+            "On commence par votre véhicule : marque, modèle et année. Je m'occupe du reste !",
+        }),
+        t("forms.carInsurance.guide.usage", {
+          defaultValue:
+            "Comment utilisez-vous votre voiture ? Ça m'aide à cibler les meilleures offres.",
+        }),
+        t("forms.carInsurance.guide.driver", {
+          defaultValue:
+            "Parlons du conducteur — rassurez-vous, tout reste confidentiel.",
+        }),
+        t("forms.carInsurance.guide.coverage", {
+          defaultValue:
+            "Quelle couverture vous convient le mieux ? Je vous explique si besoin.",
+        }),
+        // Étapes 5 & 6 (identité, contact) : on laisse les messages par défaut,
+        // qui se personnalisent automatiquement avec le prénom.
+        undefined,
+        undefined,
+      ]}
     >
       {/* Step 1: Vehicle */}
       <FormStep isActive={currentStep === 1}>
@@ -435,7 +458,7 @@ const CarInsuranceForm = () => {
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
               </SelectTrigger>
               <SelectContent>
-                {swissCantons.map((canton) => (
+                {optimisCantons.map((canton) => (
                   <SelectItem key={canton.code} value={canton.code}>
                     {getCantonName(canton.code, i18n.language)}
                   </SelectItem>

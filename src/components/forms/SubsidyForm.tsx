@@ -4,6 +4,8 @@ import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
+import IllustratedChoice from "@/components/forms/IllustratedChoice";
+import HouseholdIllustration from "@/components/forms/illustrations/HouseholdIllustrations";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { fireLeadConversion, getLastLeadId } from "@/lib/leadTracking";
@@ -42,7 +44,7 @@ interface SubsidyFormData {
   phone: string;
 }
 
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 9;
 
 const SubsidyForm = () => {
   const { t, i18n } = useTranslation();
@@ -74,6 +76,7 @@ const SubsidyForm = () => {
     formData,
     isLastStep,
     updateFormData,
+    goToStep,
     nextStep,
     previousStep,
   } = useMultiStepForm({
@@ -135,23 +138,44 @@ const SubsidyForm = () => {
 
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 1: return formData.postalCode.replace(/\D/g, '').length >= 4 && formData.birthDate !== null;
-      case 2: return formData.householdSize !== "" && formData.hasCurrentInsurance !== "";
-      case 3: return formData.incomeRange !== "";
-      case 4: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
-      case 5: return isValidEmail(formData.email) && isValidPhone(formData.phone);
+      case 1: return formData.postalCode.replace(/\D/g, '').length >= 4;
+      case 2: return formData.birthDate !== null;
+      case 3: return formData.householdSize !== "";
+      case 4: return formData.hasCurrentInsurance !== "";
+      case 5: return formData.currentInsurer !== "";
+      case 6: return formData.incomeRange !== "";
+      case 7: return true;
+      case 8: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
+      case 9: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
     }
   };
 
   const getStepErrors = (step: number): Record<string, string> => {
-    if (step === 4) return getIdentityErrors(formData.firstName, formData.lastName);
-    if (step === 5) return getContactErrors(formData.email, formData.phone);
+    if (step === 8) return getIdentityErrors(formData.firstName, formData.lastName);
+    if (step === 9) return getContactErrors(formData.email, formData.phone);
     return {};
   };
 
   const canProceed = validateStep(currentStep);
-  const { notify, notifyDelayed, notifyDelayedLong } = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep, handleSubmit);
+
+  const handleAdvance = useCallback(() => {
+    if (currentStep === 4 && formData.hasCurrentInsurance === "no") {
+      goToStep(6);
+    } else {
+      nextStep();
+    }
+  }, [currentStep, formData.hasCurrentInsurance, goToStep, nextStep]);
+
+  const handlePrevious = useCallback(() => {
+    if (currentStep === 6 && formData.hasCurrentInsurance === "no") {
+      goToStep(4);
+    } else {
+      previousStep();
+    }
+  }, [currentStep, formData.hasCurrentInsurance, goToStep, previousStep]);
+
+  const { notify, notifyDelayed, notifyDelayedLong } = useAutoAdvance(currentStep, handleAdvance, canProceed, isLastStep, handleSubmit);
   const stepErrors = attemptedNext ? getStepErrors(currentStep) : {};
 
   const handleNext = () => {
@@ -164,7 +188,7 @@ const SubsidyForm = () => {
     if (isLastStep) {
       handleSubmit();
     } else {
-      nextStep();
+      handleAdvance();
     }
   };
 
@@ -226,175 +250,215 @@ const SubsidyForm = () => {
       description={t("forms.subsidy.description")}
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
+      clientName={formData.firstName}
+      product="subside"
+      guideMessages={[
+        t("forms.subsidy.guide.postalStep", { defaultValue: "Vérifions votre droit au subside : commençons par votre code postal." }),
+        t("forms.subsidy.guide.birthStep", { defaultValue: "Votre date de naissance, pour situer votre tranche d'âge." }),
+        t("forms.subsidy.guide.householdStep", { defaultValue: "Votre foyer détermine le montant de l'aide cantonale possible." }),
+        t("forms.subsidy.guide.hasInsuranceStep", { defaultValue: "Êtes-vous déjà assuré ? Cela m'aide à cibler votre situation." }),
+        t("forms.subsidy.guide.insurerStep", { defaultValue: "Chez quel assureur êtes-vous, et avec quelle franchise ?" }),
+        t("forms.subsidy.guide.incomeStep", { defaultValue: "Vos revenus, en toute discrétion, pour estimer votre subside." }),
+        t("forms.subsidy.guide.situationStep", { defaultValue: "Une situation particulière peut augmenter votre droit au subside." }),
+        undefined,
+        undefined,
+      ]}
+      navigation={
+        <FormNavigation
+          currentStep={currentStep}
+          totalSteps={TOTAL_STEPS}
+          onPrevious={handlePrevious}
+          onNext={handleNext}
+          isSubmitting={isSubmitting}
+          isLastStep={isLastStep}
+          canProceed={canProceed}
+        />
+      }
     >
-      {/* Step 1: Postal code & birth date */}
+      {/* Step 1: Postal code */}
       <FormStep isActive={currentStep === 1}>
-        <div className="space-y-3">
-          <FormFieldWrapper label={t("forms.subsidy.postalCode")} htmlFor="postalCode" required>
-            <Input
-              id="postalCode"
-              type="text"
-              inputMode="numeric"
-              value={formData.postalCode}
-              onChange={(e) => {
-                const val = e.target.value.replace(/\D/g, '').slice(0, 4);
-                updateFormData({ postalCode: val });
-                if (val.length === 4) notifyDelayed();
-              }}
-              placeholder="1000"
-              className="h-11 md:h-14 text-sm md:text-lg"
-              maxLength={4}
-            />
-          </FormFieldWrapper>
-
-          <FormFieldWrapper label={t("forms.subsidy.birthDate")} htmlFor="birthDate" required>
-            <DateInput
-              value={formData.birthDate}
-              onChange={(date) => { updateFormData({ birthDate: date }); if (date) notify(); }}
-              className="h-11 md:h-14 text-sm md:text-lg"
-            />
-          </FormFieldWrapper>
-        </div>
+        <FormFieldWrapper label={t("forms.subsidy.postalCode")} htmlFor="postalCode" required>
+          <Input
+            id="postalCode"
+            type="text"
+            inputMode="numeric"
+            value={formData.postalCode}
+            onChange={(e) => {
+              const val = e.target.value.replace(/\D/g, '').slice(0, 4);
+              updateFormData({ postalCode: val });
+              if (val.length === 4) notifyDelayed();
+            }}
+            placeholder="1000"
+            className="h-11 md:h-14 text-sm md:text-lg"
+            maxLength={4}
+          />
+        </FormFieldWrapper>
       </FormStep>
 
-      {/* Step 2: Household & current insurance */}
+      {/* Step 2: Birth date */}
       <FormStep isActive={currentStep === 2}>
-        <div className="space-y-3">
-          <FormFieldWrapper label={t("forms.subsidy.householdComposition")} required>
-            <RadioGroup
-              value={formData.householdSize}
-              onValueChange={(value) => updateFormData({ householdSize: value })}
-              className="grid grid-cols-2 gap-3"
-            >
-              {[
-                { value: "single", label: t("forms.subsidy.household.single") },
-                { value: "couple", label: t("forms.subsidy.household.couple") },
-                { value: "coupleChildren", label: t("forms.subsidy.household.coupleChildren") },
-                { value: "singleChildren", label: t("forms.subsidy.household.singleChildren") },
-              ].map((option) => (
-                <label key={option.value} htmlFor={`household-${option.value}`} className={cn("flex items-center space-x-2 p-3 md:p-4 border-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-all", formData.householdSize === option.value && "border-primary bg-primary/5")}>
-                  <RadioGroupItem value={option.value} id={`household-${option.value}`} />
-                  <span className="flex-1 text-sm md:text-lg">{option.label}</span>
-                </label>
-              ))}
-            </RadioGroup>
-          </FormFieldWrapper>
-
-          <FormFieldWrapper label={t("forms.subsidy.hasCurrentInsurance")} required>
-            <RadioGroup
-              value={formData.hasCurrentInsurance}
-              onValueChange={(value) => {
-                updateFormData({ 
-                  hasCurrentInsurance: value,
-                  currentInsurer: value === "no" ? "" : formData.currentInsurer,
-                  currentDeductible: value === "no" ? "" : formData.currentDeductible,
-                });
-              }}
-              className="grid grid-cols-2 gap-3"
-            >
-              {[
-                { value: "yes", label: t("common.yes") },
-                { value: "no", label: t("common.no") },
-              ].map((option) => (
-                <label key={option.value} htmlFor={`insurance-${option.value}`} className={cn("flex items-center space-x-2 p-3 md:p-4 border-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-all", formData.hasCurrentInsurance === option.value && "border-primary bg-primary/5")}>
-                  <RadioGroupItem value={option.value} id={`insurance-${option.value}`} />
-                  <span className="flex-1 text-sm md:text-lg">{option.label}</span>
-                </label>
-              ))}
-            </RadioGroup>
-          </FormFieldWrapper>
-
-          {formData.hasCurrentInsurance === "yes" && (
-            <>
-              <FormFieldWrapper label={t("forms.subsidy.currentInsurer")} htmlFor="currentInsurer">
-                <select
-                  id="currentInsurer"
-                  value={formData.currentInsurer}
-                  onChange={(e) => updateFormData({ currentInsurer: e.target.value })}
-                  className="flex h-11 md:h-14 w-full items-center justify-between rounded-xl border-2 border-input bg-white text-gray-900 px-4 text-sm md:text-lg ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:border-primary/50 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%236b7280%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[length:16px_16px] bg-[right_1rem_center] bg-no-repeat pr-10"
-                >
-                  <option value="" disabled>{t("forms.subsidy.selectInsurer")}</option>
-                  <option value="assura">Assura</option>
-                  <option value="css">CSS</option>
-                  <option value="groupe-mutuel">Groupe Mutuel</option>
-                  <option value="helsana">Helsana</option>
-                  <option value="sanitas">Sanitas</option>
-                  <option value="swica">Swica</option>
-                  <option value="visana">Visana</option>
-                  <option value="concordia">Concordia</option>
-                  <option value="kpt">KPT</option>
-                  <option value="atupri">Atupri</option>
-                  <option value="sympany">Sympany</option>
-                  <option value="other">{t("forms.subsidy.otherInsurer")}</option>
-                </select>
-              </FormFieldWrapper>
-
-              <FormFieldWrapper label={t("forms.subsidy.currentDeductible")} htmlFor="currentDeductible">
-                <select
-                  id="currentDeductible"
-                  value={formData.currentDeductible}
-                  onChange={(e) => updateFormData({ currentDeductible: e.target.value })}
-                  className="flex h-11 md:h-14 w-full items-center justify-between rounded-xl border-2 border-input bg-white text-gray-900 px-4 text-sm md:text-lg ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:border-primary/50 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%236b7280%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[length:16px_16px] bg-[right_1rem_center] bg-no-repeat pr-10"
-                >
-                  <option value="" disabled>{t("forms.subsidy.selectDeductible")}</option>
-                  <option value="300">CHF 300</option>
-                  <option value="500">CHF 500</option>
-                  <option value="1000">CHF 1'000</option>
-                  <option value="1500">CHF 1'500</option>
-                  <option value="2000">CHF 2'000</option>
-                  <option value="2500">CHF 2'500</option>
-                </select>
-              </FormFieldWrapper>
-            </>
-          )}
-        </div>
+        <FormFieldWrapper label={t("forms.subsidy.birthDate")} htmlFor="birthDate" required>
+          <DateInput
+            value={formData.birthDate}
+            onChange={(date) => { updateFormData({ birthDate: date }); if (date) notify(); }}
+            className="h-11 md:h-14 text-sm md:text-lg"
+          />
+        </FormFieldWrapper>
       </FormStep>
 
-      {/* Step 3: Income & Situation */}
+      {/* Step 3: Household composition */}
       <FormStep isActive={currentStep === 3}>
+        <FormFieldWrapper label={t("forms.subsidy.householdComposition")} required>
+          <IllustratedChoice
+            ariaLabel={t("forms.subsidy.householdComposition")}
+            value={formData.householdSize}
+            onValueChange={(value) => { updateFormData({ householdSize: value }); notify(); }}
+            columns={4}
+            options={[
+              {
+                value: "single",
+                label: t("forms.subsidy.household.single"),
+                illustration: <HouseholdIllustration type="single" />,
+              },
+              {
+                value: "couple",
+                label: t("forms.subsidy.household.couple"),
+                illustration: <HouseholdIllustration type="couple" />,
+              },
+              {
+                value: "coupleChildren",
+                label: t("forms.subsidy.household.coupleChildren"),
+                illustration: <HouseholdIllustration type="coupleWithChildren" />,
+              },
+              {
+                value: "singleChildren",
+                label: t("forms.subsidy.household.singleChildren"),
+                illustration: <HouseholdIllustration type="singleWithChildren" />,
+              },
+            ]}
+          />
+        </FormFieldWrapper>
+      </FormStep>
+
+      {/* Step 4: Current insurance yes/no */}
+      <FormStep isActive={currentStep === 4}>
+        <FormFieldWrapper label={t("forms.subsidy.hasCurrentInsurance")} required>
+          <RadioGroup
+            value={formData.hasCurrentInsurance}
+            onValueChange={(value) => {
+              updateFormData({
+                hasCurrentInsurance: value,
+                currentInsurer: value === "no" ? "" : formData.currentInsurer,
+                currentDeductible: value === "no" ? "" : formData.currentDeductible,
+              });
+              notify();
+            }}
+            className="grid grid-cols-2 gap-3"
+          >
+            {[
+              { value: "yes", label: t("common.yes") },
+              { value: "no", label: t("common.no") },
+            ].map((option) => (
+              <label key={option.value} htmlFor={`insurance-${option.value}`} className={cn("flex items-center space-x-2 p-3 md:p-4 border-2 rounded-lg hover:bg-muted/50 cursor-pointer transition-all", formData.hasCurrentInsurance === option.value && "border-primary bg-primary/5")}>
+                <RadioGroupItem value={option.value} id={`insurance-${option.value}`} />
+                <span className="flex-1 text-sm md:text-lg">{option.label}</span>
+              </label>
+            ))}
+          </RadioGroup>
+        </FormFieldWrapper>
+      </FormStep>
+
+      {/* Step 5: Current insurer & deductible (conditional) */}
+      <FormStep isActive={currentStep === 5}>
         <div className="space-y-3">
-          <FormFieldWrapper label={t("forms.subsidy.incomeRange")} htmlFor="incomeRange" required>
-            <Input
-              id="incomeRange"
-              type="text"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              value={formData.incomeRange}
-              onChange={(e) => updateFormData({ incomeRange: e.target.value.replace(/\D/g, '') })}
-              placeholder="65000"
-              className="h-11 md:h-14 text-sm md:text-lg"
-            />
+          <FormFieldWrapper label={t("forms.subsidy.currentInsurer")} htmlFor="currentInsurer" required>
+            <select
+              id="currentInsurer"
+              value={formData.currentInsurer}
+              onChange={(e) => updateFormData({ currentInsurer: e.target.value })}
+              className="flex h-11 md:h-14 w-full items-center justify-between rounded-xl border-2 border-input bg-white text-gray-900 px-4 text-sm md:text-lg ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:border-primary/50 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%236b7280%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[length:16px_16px] bg-[right_1rem_center] bg-no-repeat pr-10"
+            >
+              <option value="" disabled>{t("forms.subsidy.selectInsurer")}</option>
+              <option value="assura">Assura</option>
+              <option value="css">CSS</option>
+              <option value="groupe-mutuel">Groupe Mutuel</option>
+              <option value="helsana">Helsana</option>
+              <option value="sanitas">Sanitas</option>
+              <option value="swica">Swica</option>
+              <option value="visana">Visana</option>
+              <option value="concordia">Concordia</option>
+              <option value="kpt">KPT</option>
+              <option value="atupri">Atupri</option>
+              <option value="sympany">Sympany</option>
+              <option value="other">{t("forms.subsidy.otherInsurer")}</option>
+            </select>
           </FormFieldWrapper>
 
-          <FormFieldWrapper label={t("forms.subsidy.specialSituation")}>
-            <RadioGroup
-              value={formData.specialSituation}
-              onValueChange={(value) => updateFormData({ specialSituation: value })}
-              className="grid gap-3"
+          <FormFieldWrapper label={t("forms.subsidy.currentDeductible")} htmlFor="currentDeductible">
+            <select
+              id="currentDeductible"
+              value={formData.currentDeductible}
+              onChange={(e) => updateFormData({ currentDeductible: e.target.value })}
+              className="flex h-11 md:h-14 w-full items-center justify-between rounded-xl border-2 border-input bg-white text-gray-900 px-4 text-sm md:text-lg ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:border-primary/50 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%236b7280%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[length:16px_16px] bg-[right_1rem_center] bg-no-repeat pr-10"
             >
-              {[
-                { value: "none", label: t("forms.subsidy.situations.none") },
-                { value: "avs", label: t("forms.subsidy.situations.avs") },
-                { value: "ai", label: t("forms.subsidy.situations.ai") },
-                { value: "student", label: t("forms.subsidy.situations.student") },
-                { value: "unemployed", label: t("forms.subsidy.situations.unemployed") },
-              ].map((situation) => (
-                <label key={situation.value} htmlFor={situation.value} className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
-                  <RadioGroupItem value={situation.value} id={situation.value} />
-                  <span className="flex-1 text-sm md:text-lg">
-                    {situation.label}
-                  </span>
-                </label>
-              ))}
-            </RadioGroup>
+              <option value="" disabled>{t("forms.subsidy.selectDeductible")}</option>
+              <option value="300">CHF 300</option>
+              <option value="500">CHF 500</option>
+              <option value="1000">CHF 1'000</option>
+              <option value="1500">CHF 1'500</option>
+              <option value="2000">CHF 2'000</option>
+              <option value="2500">CHF 2'500</option>
+            </select>
           </FormFieldWrapper>
         </div>
       </FormStep>
 
-      {/* Step 4: Identity */}
-      <FormStep isActive={currentStep === 4}>
+      {/* Step 6: Income */}
+      <FormStep isActive={currentStep === 6}>
+        <FormFieldWrapper label={t("forms.subsidy.incomeRange")} htmlFor="incomeRange" required>
+          <Input
+            id="incomeRange"
+            type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            value={formData.incomeRange}
+            onChange={(e) => { updateFormData({ incomeRange: e.target.value.replace(/\D/g, '') }); notifyDelayed(); }}
+            placeholder="65000"
+            className="h-11 md:h-14 text-sm md:text-lg"
+          />
+        </FormFieldWrapper>
+      </FormStep>
+
+      {/* Step 7: Special situation */}
+      <FormStep isActive={currentStep === 7}>
+        <FormFieldWrapper label={t("forms.subsidy.specialSituation")}>
+          <RadioGroup
+            value={formData.specialSituation}
+            onValueChange={(value) => { updateFormData({ specialSituation: value }); notify(); }}
+            className="grid gap-3"
+          >
+            {[
+              { value: "none", label: t("forms.subsidy.situations.none") },
+              { value: "avs", label: t("forms.subsidy.situations.avs") },
+              { value: "ai", label: t("forms.subsidy.situations.ai") },
+              { value: "student", label: t("forms.subsidy.situations.student") },
+              { value: "unemployed", label: t("forms.subsidy.situations.unemployed") },
+            ].map((situation) => (
+              <label key={situation.value} htmlFor={situation.value} className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+                <RadioGroupItem value={situation.value} id={situation.value} />
+                <span className="flex-1 text-sm md:text-lg">
+                  {situation.label}
+                </span>
+              </label>
+            ))}
+          </RadioGroup>
+        </FormFieldWrapper>
+      </FormStep>
+
+      {/* Step 8: Identity */}
+      <FormStep isActive={currentStep === 8}>
         <div className="space-y-4 md:space-y-6">
-          <div className="text-center mb-3 md:mb-6">
+          <div className="hidden text-center mb-3 md:mb-6">
             <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
               <User className="h-6 w-6 md:h-8 md:w-8 text-primary" />
             </div>
@@ -423,10 +487,10 @@ const SubsidyForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 5: Contact */}
-      <FormStep isActive={currentStep === 5}>
+      {/* Step 9: Contact */}
+      <FormStep isActive={currentStep === 9}>
         <div className="space-y-4 md:space-y-6">
-          <div className="text-center mb-3 md:mb-6">
+          <div className="hidden text-center mb-3 md:mb-6">
             <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
               <Phone className="h-6 w-6 md:h-8 md:w-8 text-primary" />
             </div>
@@ -461,17 +525,6 @@ const SubsidyForm = () => {
           </div>
         </div>
       </FormStep>
-
-      <FormNavigation
-        currentStep={currentStep}
-        totalSteps={TOTAL_STEPS}
-        onPrevious={previousStep}
-        onNext={handleNext}
-        isSubmitting={isSubmitting}
-        isLastStep={isLastStep}
-        canProceed={canProceed}
-      />
-      
     </FormContainer>
     <SmsVerificationModal {...otpModalProps} />
     </>

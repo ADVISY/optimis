@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { swissCantons, getCantonName } from "@/data/swissCantons";
+import { optimisCantons, getCantonName } from "@/data/swissCantons";
 import { getLocalizedPath } from "@/utils/localizedRoutes";
 import { mortgageProducts } from "@/data/mortgageProducts";
 import { simulateMortgage, MortgageSimulationResult } from "@/utils/mortgageCalculations";
@@ -47,7 +47,7 @@ interface MortgageFormData {
   phone: string;
 }
 
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 10;
 
 const MortgageForm = () => {
   const { t, i18n } = useTranslation();
@@ -137,18 +137,23 @@ const MortgageForm = () => {
 
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 1: return formData.projectType !== "" && formData.propertyType !== "";
-      case 2: return formData.propertyValue !== "" && formData.canton !== "";
-      case 3: return formData.professionalStatus !== "" && formData.incomeRange !== "" && formData.ownFundsRange !== "";
-      case 4: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
-      case 5: return isValidEmail(formData.email) && isValidPhone(formData.phone);
+      case 1: return formData.projectType !== "";
+      case 2: return formData.propertyType !== "";
+      case 3: return formData.propertyValue !== "";
+      case 4: return formData.canton !== "";
+      case 5: return formData.numberOfBorrowers !== "";
+      case 6: return formData.professionalStatus !== "";
+      case 7: return formData.incomeRange !== "";
+      case 8: return formData.ownFundsRange !== "";
+      case 9: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
+      case 10: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
     }
   };
 
   const getStepErrors = (step: number): Record<string, string> => {
-    if (step === 4) return getIdentityErrors(formData.firstName, formData.lastName);
-    if (step === 5) return getContactErrors(formData.email, formData.phone);
+    if (step === 9) return getIdentityErrors(formData.firstName, formData.lastName);
+    if (step === 10) return getContactErrors(formData.email, formData.phone);
     return {};
   };
 
@@ -202,74 +207,103 @@ const MortgageForm = () => {
       description={t("forms.mortgage.description")}
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
+      clientName={formData.firstName}
+      product="hypotheque"
+      guideMessages={[
+        t("forms.mortgage.guide.projectStep", { defaultValue: "Parlons de ton projet : achat, renouvellement ou refinancement ?" }),
+        t("forms.mortgage.guide.propertyTypeStep", { defaultValue: "Quel type de bien vises-tu : appartement, maison, immeuble ?" }),
+        t("forms.mortgage.guide.propertyValueStep", { defaultValue: "Quelle est la valeur du bien ? J'estime ton financement à partir de là." }),
+        t("forms.mortgage.guide.locationStep", { defaultValue: "Où se situe le bien ? Le canton influence les conditions." }),
+        t("forms.mortgage.guide.borrowersStep", { defaultValue: "Seul ou à deux pour cet emprunt ? Ça compte pour la capacité." }),
+        t("forms.mortgage.guide.statusStep", { defaultValue: "Quel est ton statut professionnel ? Il pèse dans le dossier." }),
+        t("forms.mortgage.guide.incomeStep", { defaultValue: "Tes revenus annuels, en toute confidentialité, pour viser le meilleur taux." }),
+        t("forms.mortgage.guide.ownFundsStep", { defaultValue: "Combien de fonds propres peux-tu apporter ?" }),
+        undefined,
+        undefined,
+      ]}
+      navigation={
+        <FormNavigation
+          currentStep={currentStep}
+          totalSteps={TOTAL_STEPS}
+          onPrevious={previousStep}
+          onNext={handleNext}
+          isSubmitting={isSubmitting}
+          isLastStep={isLastStep}
+          canProceed={canProceed}
+        />
+      }
     >
-      {/* Step 1: Project */}
+      {/* Step 1: Project type */}
       <FormStep isActive={currentStep === 1}>
-        <div className="space-y-4 md:space-y-6">
-          <FormFieldWrapper label={t("forms.mortgage.projectType")} required>
-            <RadioGroup
-              value={formData.projectType}
-              onValueChange={(value) => { updateFormData({ projectType: value }); notify(); }}
-              className="grid gap-3"
-            >
-              {[
-                { value: "acquisition", label: t("forms.mortgage.projects.acquisition") },
-                { value: "renewal", label: t("forms.mortgage.projects.renewal") },
-                { value: "refinancing", label: t("forms.mortgage.projects.refinancing") },
-              ].map((proj) => (
-                <label key={proj.value} htmlFor={proj.value} className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
-                  <RadioGroupItem value={proj.value} id={proj.value} />
-                  <span className="flex-1 text-sm md:text-lg">
-                    {proj.label}
-                  </span>
-                </label>
-              ))}
-            </RadioGroup>
-          </FormFieldWrapper>
-
-          <FormFieldWrapper label={t("forms.mortgage.propertyType")} required>
-            <Select
-              value={formData.propertyType}
-              onValueChange={(value) => { updateFormData({ propertyType: value }); notify(); }}
-            >
-              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-                <SelectValue placeholder={t("forms.mortgage.selectPropertyType")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="apartment">{t("forms.mortgage.propertyTypes.apartment")}</SelectItem>
-                <SelectItem value="house">{t("forms.mortgage.propertyTypes.house")}</SelectItem>
-                <SelectItem value="building">{t("forms.mortgage.propertyTypes.building")}</SelectItem>
-                <SelectItem value="other">{t("forms.mortgage.propertyTypes.other")}</SelectItem>
-              </SelectContent>
-            </Select>
-          </FormFieldWrapper>
-        </div>
+        <FormFieldWrapper label={t("forms.mortgage.projectType")} required>
+          <RadioGroup
+            value={formData.projectType}
+            onValueChange={(value) => { updateFormData({ projectType: value }); notify(); }}
+            className="grid gap-3"
+          >
+            {[
+              { value: "acquisition", label: t("forms.mortgage.projects.acquisition") },
+              { value: "renewal", label: t("forms.mortgage.projects.renewal") },
+              { value: "refinancing", label: t("forms.mortgage.projects.refinancing") },
+            ].map((proj) => (
+              <label key={proj.value} htmlFor={proj.value} className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+                <RadioGroupItem value={proj.value} id={proj.value} />
+                <span className="flex-1 text-sm md:text-lg">
+                  {proj.label}
+                </span>
+              </label>
+            ))}
+          </RadioGroup>
+        </FormFieldWrapper>
       </FormStep>
 
-      {/* Step 2: Property Details */}
+      {/* Step 2: Property type */}
       <FormStep isActive={currentStep === 2}>
-        <div className="space-y-3 md:space-y-4">
-          <FormFieldWrapper label={t("forms.mortgage.propertyValue")} htmlFor="propertyValue" required>
-            <Input
-              id="propertyValue"
-              type="text"
-              value={formData.propertyValue}
-              onChange={(e) => { updateFormData({ propertyValue: e.target.value }); }}
-              placeholder="CHF 800'000"
-              className="h-11 md:h-14 text-sm md:text-lg"
-            />
-          </FormFieldWrapper>
+        <FormFieldWrapper label={t("forms.mortgage.propertyType")} required>
+          <Select
+            value={formData.propertyType}
+            onValueChange={(value) => { updateFormData({ propertyType: value }); notify(); }}
+          >
+            <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
+              <SelectValue placeholder={t("forms.mortgage.selectPropertyType")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="apartment">{t("forms.mortgage.propertyTypes.apartment")}</SelectItem>
+              <SelectItem value="house">{t("forms.mortgage.propertyTypes.house")}</SelectItem>
+              <SelectItem value="building">{t("forms.mortgage.propertyTypes.building")}</SelectItem>
+              <SelectItem value="other">{t("forms.mortgage.propertyTypes.other")}</SelectItem>
+            </SelectContent>
+          </Select>
+        </FormFieldWrapper>
+      </FormStep>
 
+      {/* Step 3: Property value */}
+      <FormStep isActive={currentStep === 3}>
+        <FormFieldWrapper label={t("forms.mortgage.propertyValue")} htmlFor="propertyValue" required>
+          <Input
+            id="propertyValue"
+            type="text"
+            value={formData.propertyValue}
+            onChange={(e) => { updateFormData({ propertyValue: e.target.value }); notifyDelayed(); }}
+            placeholder="CHF 800'000"
+            className="h-11 md:h-14 text-sm md:text-lg"
+          />
+        </FormFieldWrapper>
+      </FormStep>
+
+      {/* Step 4: Location (canton + commune) */}
+      <FormStep isActive={currentStep === 4}>
+        <div className="space-y-3 md:space-y-4">
           <FormFieldWrapper label={t("forms.healthInsurance.canton")} required>
             <Select
               value={formData.canton}
-              onValueChange={(value) => { updateFormData({ canton: value }); notify(); }}
+              onValueChange={(value) => { updateFormData({ canton: value }); }}
             >
               <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
                 <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
               </SelectTrigger>
               <SelectContent>
-                {swissCantons.map((canton) => (
+                {optimisCantons.map((canton) => (
                   <SelectItem key={canton.code} value={canton.code}>
                     {getCantonName(canton.code, i18n.language)}
                   </SelectItem>
@@ -287,91 +321,98 @@ const MortgageForm = () => {
               className="h-11 md:h-14 text-sm md:text-lg"
             />
           </FormFieldWrapper>
-
-          <FormFieldWrapper label={t("forms.mortgage.numberOfBorrowers")} required>
-            <RadioGroup
-              value={formData.numberOfBorrowers}
-              onValueChange={(value) => { updateFormData({ numberOfBorrowers: value }); notify(); }}
-              className="flex gap-4"
-            >
-              <label htmlFor="borrowers-1" className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
-                <RadioGroupItem value="1" id="borrowers-1" />
-                <span className="text-sm md:text-lg">1 {t("forms.mortgage.person")}</span>
-              </label>
-              <label htmlFor="borrowers-2" className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
-                <RadioGroupItem value="2" id="borrowers-2" />
-                <span className="text-sm md:text-lg">2 {t("forms.mortgage.persons")}</span>
-              </label>
-            </RadioGroup>
-          </FormFieldWrapper>
         </div>
       </FormStep>
 
-      {/* Step 3: Financial Situation */}
-      <FormStep isActive={currentStep === 3}>
-        <div className="space-y-3 md:space-y-4">
-          <FormFieldWrapper label={t("forms.mortgage.professionalStatus")} required>
-            <Select
-              value={formData.professionalStatus}
-              onValueChange={(value) => { updateFormData({ professionalStatus: value }); notify(); }}
-            >
-              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-                <SelectValue placeholder={t("forms.pillar3.selectStatus")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="employee">{t("forms.pillar3.status.employee")}</SelectItem>
-                <SelectItem value="self-employed">{t("forms.pillar3.status.selfEmployed")}</SelectItem>
-                <SelectItem value="executive">{t("forms.pillar3.status.executive")}</SelectItem>
-                <SelectItem value="retired">{t("forms.mortgage.status.retired")}</SelectItem>
-              </SelectContent>
-            </Select>
-          </FormFieldWrapper>
-
-          <FormFieldWrapper label={t("forms.mortgage.incomeRange")} required>
-            <Select
-              value={formData.incomeRange}
-              onValueChange={(value) => { updateFormData({ incomeRange: value }); notify(); }}
-            >
-              <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
-                <SelectValue placeholder={t("forms.pillar3.selectIncome")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="0-50000">&lt; CHF 50'000</SelectItem>
-                <SelectItem value="50000-80000">CHF 50'000 - 80'000</SelectItem>
-                <SelectItem value="80000-120000">CHF 80'000 - 120'000</SelectItem>
-                <SelectItem value="120000-150000">CHF 120'000 - 150'000</SelectItem>
-                <SelectItem value="150000-200000">CHF 150'000 - 200'000</SelectItem>
-                <SelectItem value="200000-300000">CHF 200'000 - 300'000</SelectItem>
-                <SelectItem value="300000+">&gt; CHF 300'000</SelectItem>
-              </SelectContent>
-            </Select>
-          </FormFieldWrapper>
-
-          <FormFieldWrapper label={t("forms.mortgage.ownFundsRange")} required>
-            <Select
-              value={formData.ownFundsRange}
-              onValueChange={(value) => { updateFormData({ ownFundsRange: value }); notify(); }}
-            >
-              <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
-                <SelectValue placeholder={t("forms.mortgage.selectOwnFunds")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="0-50000">&lt; CHF 50'000</SelectItem>
-                <SelectItem value="50000-100000">CHF 50'000 - 100'000</SelectItem>
-                <SelectItem value="100000-200000">CHF 100'000 - 200'000</SelectItem>
-                <SelectItem value="200000-300000">CHF 200'000 - 300'000</SelectItem>
-                <SelectItem value="300000-500000">CHF 300'000 - 500'000</SelectItem>
-                <SelectItem value="500000+">&gt; CHF 500'000</SelectItem>
-              </SelectContent>
-            </Select>
-          </FormFieldWrapper>
-        </div>
+      {/* Step 5: Number of borrowers */}
+      <FormStep isActive={currentStep === 5}>
+        <FormFieldWrapper label={t("forms.mortgage.numberOfBorrowers")} required>
+          <RadioGroup
+            value={formData.numberOfBorrowers}
+            onValueChange={(value) => { updateFormData({ numberOfBorrowers: value }); notify(); }}
+            className="flex gap-4"
+          >
+            <label htmlFor="borrowers-1" className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+              <RadioGroupItem value="1" id="borrowers-1" />
+              <span className="text-sm md:text-lg">1 {t("forms.mortgage.person")}</span>
+            </label>
+            <label htmlFor="borrowers-2" className="flex items-center space-x-2 p-3 md:p-4 border rounded-lg hover:bg-muted/50 cursor-pointer">
+              <RadioGroupItem value="2" id="borrowers-2" />
+              <span className="text-sm md:text-lg">2 {t("forms.mortgage.persons")}</span>
+            </label>
+          </RadioGroup>
+        </FormFieldWrapper>
       </FormStep>
 
-      {/* Step 4: Identity */}
-      <FormStep isActive={currentStep === 4}>
+      {/* Step 6: Professional status */}
+      <FormStep isActive={currentStep === 6}>
+        <FormFieldWrapper label={t("forms.mortgage.professionalStatus")} required>
+          <Select
+            value={formData.professionalStatus}
+            onValueChange={(value) => { updateFormData({ professionalStatus: value }); notify(); }}
+          >
+            <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
+              <SelectValue placeholder={t("forms.pillar3.selectStatus")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="employee">{t("forms.pillar3.status.employee")}</SelectItem>
+              <SelectItem value="self-employed">{t("forms.pillar3.status.selfEmployed")}</SelectItem>
+              <SelectItem value="executive">{t("forms.pillar3.status.executive")}</SelectItem>
+              <SelectItem value="retired">{t("forms.mortgage.status.retired")}</SelectItem>
+            </SelectContent>
+          </Select>
+        </FormFieldWrapper>
+      </FormStep>
+
+      {/* Step 7: Income */}
+      <FormStep isActive={currentStep === 7}>
+        <FormFieldWrapper label={t("forms.mortgage.incomeRange")} required>
+          <Select
+            value={formData.incomeRange}
+            onValueChange={(value) => { updateFormData({ incomeRange: value }); notify(); }}
+          >
+            <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
+              <SelectValue placeholder={t("forms.pillar3.selectIncome")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="0-50000">&lt; CHF 50'000</SelectItem>
+              <SelectItem value="50000-80000">CHF 50'000 - 80'000</SelectItem>
+              <SelectItem value="80000-120000">CHF 80'000 - 120'000</SelectItem>
+              <SelectItem value="120000-150000">CHF 120'000 - 150'000</SelectItem>
+              <SelectItem value="150000-200000">CHF 150'000 - 200'000</SelectItem>
+              <SelectItem value="200000-300000">CHF 200'000 - 300'000</SelectItem>
+              <SelectItem value="300000+">&gt; CHF 300'000</SelectItem>
+            </SelectContent>
+          </Select>
+        </FormFieldWrapper>
+      </FormStep>
+
+      {/* Step 8: Own funds */}
+      <FormStep isActive={currentStep === 8}>
+        <FormFieldWrapper label={t("forms.mortgage.ownFundsRange")} required>
+          <Select
+            value={formData.ownFundsRange}
+            onValueChange={(value) => { updateFormData({ ownFundsRange: value }); notify(); }}
+          >
+            <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
+              <SelectValue placeholder={t("forms.mortgage.selectOwnFunds")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="0-50000">&lt; CHF 50'000</SelectItem>
+              <SelectItem value="50000-100000">CHF 50'000 - 100'000</SelectItem>
+              <SelectItem value="100000-200000">CHF 100'000 - 200'000</SelectItem>
+              <SelectItem value="200000-300000">CHF 200'000 - 300'000</SelectItem>
+              <SelectItem value="300000-500000">CHF 300'000 - 500'000</SelectItem>
+              <SelectItem value="500000+">&gt; CHF 500'000</SelectItem>
+            </SelectContent>
+          </Select>
+        </FormFieldWrapper>
+      </FormStep>
+
+      {/* Step 9: Identity */}
+      <FormStep isActive={currentStep === 9}>
         <div className="space-y-3 md:space-y-6">
-          <div className="text-center mb-3 md:mb-6">
+          <div className="hidden text-center mb-3 md:mb-6">
             <div className="inline-flex items-center justify-center w-10 h-10 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
               <User className="h-5 w-5 md:h-8 md:w-8 text-primary" />
             </div>
@@ -400,10 +441,10 @@ const MortgageForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 5: Contact */}
-      <FormStep isActive={currentStep === 5}>
+      {/* Step 10: Contact */}
+      <FormStep isActive={currentStep === 10}>
         <div className="space-y-3 md:space-y-6">
-          <div className="text-center mb-3 md:mb-6">
+          <div className="hidden text-center mb-3 md:mb-6">
             <div className="inline-flex items-center justify-center w-10 h-10 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
               <Phone className="h-5 w-5 md:h-8 md:w-8 text-primary" />
             </div>
@@ -439,15 +480,6 @@ const MortgageForm = () => {
         </div>
       </FormStep>
 
-      <FormNavigation
-        currentStep={currentStep}
-        totalSteps={TOTAL_STEPS}
-        onPrevious={previousStep}
-        onNext={handleNext}
-        isSubmitting={isSubmitting}
-        isLastStep={isLastStep}
-        canProceed={canProceed}
-      />
       <SmsVerificationModal {...otpModalProps} />
     </FormContainer>
   );

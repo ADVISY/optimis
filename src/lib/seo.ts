@@ -220,6 +220,11 @@ export const SEO_META: Record<string, Partial<Record<Lang, SeoMeta>>> = {
   },
 
   // --- Complémentaire ---
+  complementaryInsurance: {
+    fr: { title: `Assurance complémentaire (LCA) en Suisse`, description: `Assurance maladie complémentaire LCA en Suisse : hospitalisation, dentaire, médecines douces, lunettes. Comblez les lacunes de la LAMal et économisez jusqu'à 40%.` },
+    de: { title: `Zusatzversicherung (VVG) in der Schweiz`, description: `Krankenzusatzversicherung VVG in der Schweiz: Spital, Zahn, Alternativmedizin, Brillen. Schliessen Sie die Lücken der Grundversicherung und sparen Sie bis zu 40%.` },
+    it: { title: `Assicurazione complementare (LCA) in Svizzera`, description: `Assicurazione malattia complementare LCA in Svizzera: ospedaliera, dentaria, medicine dolci, occhiali. Colma le lacune della LAMal e risparmia fino al 40%.` },
+  },
   complementaryLanding: {
     fr: { title: `Comparateur assurance complémentaire Suisse`, description: `Comparez les assurances maladie complémentaires (LCA) en Suisse : hospitalisation, médecine alternative, dentaire. Trouvez la meilleure couverture.` },
     de: { title: `Zusatzversicherung-Vergleich Schweiz`, description: `Vergleichen Sie Krankenzusatzversicherungen (VVG) in der Schweiz: Spital, Alternativmedizin, Zahn. Finden Sie die beste Deckung.` },
@@ -366,7 +371,7 @@ export const COMPARATOR_ROUTE_KEYS = new Set<string>([
   "mortgage", "mortgageLanding",
   "professionalInsurance", "businessLanding",
   "prenatalInsurance", "prenatalLanding",
-  "complementaryLanding",
+  "complementaryInsurance", "complementaryLanding",
   "pillar3Landing", "lpp", "lppLanding",
   "healthSubsidy", "subsidyLanding",
   "termination", "terminationLanding",

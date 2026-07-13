@@ -12,6 +12,8 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import AssuranceVoiture from "./pages/AssuranceVoiture";
 import AssuranceSante from "./pages/AssuranceSante";
+import AssurancePrenatale from "./pages/AssurancePrenatale";
+import AssuranceComplementaire from "./pages/AssuranceComplementaire";
 import ProtectionJuridique from "./pages/ProtectionJuridique";
 import AssuranceMenage from "./pages/AssuranceMenage";
 import AssuranceVie from "./pages/AssuranceVie";
@@ -108,8 +110,9 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("healthSubsidy", <SubsideAssuranceMaladie />)}
         {createLocalizedRoutes("termination", <Resiliation />)}
         {createLocalizedRoutes("lpp", <AvoirsLpp />)}
-        {createLocalizedRoutes("prenatalInsurance", <ComparateurPrenatal />)}
-        
+        {createLocalizedRoutes("prenatalInsurance", <AssurancePrenatale />)}
+        {createLocalizedRoutes("complementaryInsurance", <AssuranceComplementaire />)}
+
         {/* Blog */}
         <Route path="/blog" element={<><Seo routeKey="blog" /><Blog /></>} />
         <Route path="/blog/:slug" element={<BlogPost />} />

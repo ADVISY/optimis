@@ -281,6 +281,7 @@ const Pillar3Form = () => {
       description={t("forms.pillar3.description")}
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
+      clientName={formData.firstName}
     >
       {/* Step 1: Existing Pillar 3 + Objective */}
       <FormStep isActive={currentStep === 1}>

@@ -143,6 +143,7 @@ const PartnerForm = () => {
       description={t("partner.formDescription", "Remplissez ce formulaire en moins de 30 secondes")}
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
+      clientName={formData.firstName}
     >
       {/* Step 1: Budget */}
       <FormStep isActive={currentStep === 1}>

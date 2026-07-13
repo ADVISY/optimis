@@ -206,6 +206,7 @@ const TerminationForm = () => {
       description={t("forms.termination.description")}
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
+      clientName={formData.firstName}
     >
       {/* Step 1: Contract Type */}
       <FormStep isActive={currentStep === 1}>

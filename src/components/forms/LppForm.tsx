@@ -157,6 +157,7 @@ const LppForm = () => {
       description={t("forms.lpp.description")}
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
+      clientName={formData.firstName}
     >
       {/* Step 1: Objective */}
       <FormStep isActive={currentStep === 1}>

@@ -160,6 +160,7 @@ const RealEstateForm = () => {
       description={t("forms.realEstate.description")}
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
+      clientName={formData.firstName}
     >
       {/* Step 1: Address */}
       <FormStep isActive={currentStep === 1}>

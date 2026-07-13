@@ -807,17 +807,17 @@
     "compare": "Comparer",
     "processing": "Traitement...",
     "successTitle": "Demande envoyée",
-    "successDescription": "Merci ! Un conseiller vous recontactera rapidement.",
+    "successDescription": "Merci ! Un conseiller te recontactera rapidement.",
     "errorTitle": "Erreur",
-    "errorDescription": "Une erreur est survenue. Veuillez réessayer.",
+    "errorDescription": "Une erreur est survenue. Réessaie.",
     "seeMyOffers": "Voir mes offres",
     "stepOf": "Étape {{current}} sur {{total}}",
     "loading": {
       "title": "Recherche des meilleures offres",
-      "analyzing": "Analyse de votre profil...",
+      "analyzing": "Analyse de ton profil...",
       "comparing": "Comparaison des offres...",
       "preparing": "Préparation des résultats...",
-      "message": "Nous analysons votre profil pour vous proposer les offres les plus adaptées."
+      "message": "Nous analysons ton profil pour te proposer les offres les plus adaptées."
     },
     "common": {
       "step": "Étape",
@@ -826,7 +826,7 @@
       "previous": "Précédent",
       "submit": "Comparer maintenant",
       "required": "Champ obligatoire",
-      "selectOption": "Sélectionnez une option"
+      "selectOption": "Sélectionne une option"
     },
     "contact": {
       "firstName": "Prénom",
@@ -835,27 +835,35 @@
       "phone": "Téléphone",
       "birthDate": "Date de naissance",
       "availability": "Disponibilité",
-      "selectAvailability": "Sélectionnez un créneau",
+      "selectAvailability": "Sélectionne un créneau",
       "morning": "Matin",
       "afternoon": "Après-midi",
       "evening": "Soir",
       "anytime": "N'importe quand",
       "almostDone": "Presque terminé !",
-      "nameStepDescription": "Comment pouvons-nous vous appeler ?",
-      "firstNamePlaceholder": "Votre prénom",
-      "lastNamePlaceholder": "Votre nom",
-      "contactStepTitle": "Où pouvons-nous vous joindre ?",
-      "contactStepDescription": "Un conseiller vous contactera pour vous présenter les meilleures offres.",
-      "privacyNote": "Vos données sont protégées et ne seront jamais partagées."
+      "nameStepDescription": "Comment pouvons-nous t'appeler ?",
+      "firstNamePlaceholder": "Ton prénom",
+      "lastNamePlaceholder": "Ton nom",
+      "contactStepTitle": "Où pouvons-nous te joindre ?",
+      "contactStepDescription": "Un conseiller te contactera pour te présenter les meilleures offres.",
+      "privacyNote": "Tes données sont protégées et ne seront jamais partagées."
     },
     "healthInsurance": {
       "title": "Comparateur d'assurance maladie",
-      "description": "Obtenez les meilleures offres en quelques clics",
-      "hasCurrentInsurance": "Avez-vous déjà une assurance maladie ?",
-      "currentInsurer": "Quel est votre assureur actuel ?",
-      "selectInsurer": "Sélectionnez votre assureur",
+      "description": "Obtiens les meilleures offres en quelques clics",
+      "guide": {
+        "step1": "En 2 min je compare tout pour toi — souvent 2'900.- d'économies à la clé ! As-tu déjà une assurance maladie ?",
+        "insurerStep": "Parfait — chez quel assureur es-tu aujourd'hui ? Choisis son logo, ça m'aide à comparer au plus juste.",
+        "step2": "Ta situation familiale et ton âge déterminent tes primes. Un instant !",
+        "step3": "Les primes varient beaucoup d'un canton à l'autre — dis-moi où tu habites.",
+        "step4": "Le modèle, c'est LÀ qu'on économise : Médecin de famille ou Telmed = le moins cher, Libre choix du médecin = le plus cher. Et plus ta franchise est haute, plus ta prime baisse. Je te guide !",
+        "step5": "Une complémentaire (dentaire, médecine douce, hospi) ? Je te montre les options vraiment utiles pour toi."
+      },
+      "hasCurrentInsurance": "As-tu déjà une assurance maladie ?",
+      "currentInsurer": "Quel est ton assureur actuel ?",
+      "selectInsurer": "Sélectionne ton assureur",
       "otherInsurer": "Autre assureur",
-      "familySituation": "Quelle est votre situation familiale ?",
+      "familySituation": "Quelle est ta situation familiale ?",
       "situations": {
         "single": "Seul(e)",
         "couple": "Couple",
@@ -864,12 +872,12 @@
       },
       "birthDate": "Date de naissance",
       "canton": "Canton",
-      "selectCanton": "Sélectionnez votre canton",
+      "selectCanton": "Sélectionne ton canton",
       "postalCode": "Code postal",
-      "selectDate": "Sélectionnez une date",
+      "selectDate": "Sélectionne une date",
       "lamalModel": "Modèle d'assurance",
       "model": "Modèle d'assurance",
-      "selectModel": "Sélectionnez un modèle",
+      "selectModel": "Sélectionne un modèle",
       "models": {
         "standard": "Standard",
         "hmo": "HMO",
@@ -890,7 +898,7 @@
         "alternativeMedicine": "Médecines alternatives",
         "worldwide": "Couverture monde"
       },
-      "complementaryDescription": "Sélectionnez les options complémentaires qui vous intéressent.",
+      "complementaryDescription": "Sélectionne les options complémentaires qui t'intéressent.",
       "complementaryOptions": {
         "dental": "Soins dentaires",
         "hospitalization": "Hospitalisation",
@@ -900,9 +908,9 @@
         "fitness": "Fitness & bien-être"
       },
       "availability": "Disponibilité pour être contacté",
-      "errorLoadingPremiums": "Erreur lors du chargement des primes. Veuillez réessayer.",
+      "errorLoadingPremiums": "Erreur lors du chargement des primes. Réessaie.",
       "complementaryLabel": "Assurances complémentaires",
-      "complementaryTitle": "Choisissez vos complémentaires",
+      "complementaryTitle": "Choisis tes complémentaires",
       "includedInPackage": "Inclus dans le pack",
       "skipComplementary": "Passer cette étape",
       "tiers": {
@@ -915,21 +923,27 @@
     },
     "carInsurance": {
       "title": "Comparateur d'assurance voiture",
-      "description": "Trouvez la meilleure protection pour votre véhicule",
+      "description": "Trouve la meilleure protection pour ton véhicule",
+      "guide": {
+        "vehicle": "On commence par ton véhicule : marque, modèle et année. Je m'occupe du reste !",
+        "usage": "Comment utilises-tu ta voiture ? Ça m'aide à cibler les meilleures offres.",
+        "driver": "Parlons du conducteur — rassure-toi, tout reste confidentiel.",
+        "coverage": "Quelle couverture te convient le mieux ? RC obligatoire, casco partielle ou complète — je t'explique tout."
+      },
       "vehiclePlate": "Plaque d'immatriculation",
-      "orManual": "ou saisissez manuellement",
+      "orManual": "ou saisis manuellement",
       "brand": "Marque",
       "model": "Modèle",
       "year": "Année",
-      "selectYear": "Sélectionnez l'année",
+      "selectYear": "Sélectionne l'année",
       "vehicleInfo": "Informations véhicule",
       "licensePlate": "Plaque d'immatriculation",
       "or": "ou",
       "vehicleBrand": "Marque du véhicule",
       "vehicleModel": "Modèle",
       "vehicleYear": "Année de mise en circulation",
-      "selectBrand": "Sélectionnez une marque",
-      "selectModel": "Sélectionnez un modèle",
+      "selectBrand": "Sélectionne une marque",
+      "selectModel": "Sélectionne un modèle",
       "usage": "Utilisation du véhicule",
       "usagePrivate": "Privée",
       "usageProfessional": "Professionnelle",
@@ -945,7 +959,7 @@
       "driverBirthDate": "Date de naissance du conducteur",
       "driverInfo": "Informations conducteur",
       "licenseYear": "Année d'obtention du permis",
-      "selectLicenseYear": "Sélectionnez l'année",
+      "selectLicenseYear": "Sélectionne l'année",
       "accidents": "Sinistres (5 dernières années)",
       "claimsLast5Years": "Sinistres (5 dernières années)",
       "claimsOptions": {
@@ -975,8 +989,8 @@
       },
       "searchBrand": "Rechercher une marque...",
       "searchModel": "Rechercher un modèle...",
-      "selectBrandFirst": "Sélectionnez d'abord une marque",
-      "selectModelFirst": "Sélectionnez d'abord un modèle",
+      "selectBrandFirst": "Sélectionne d'abord une marque",
+      "selectModelFirst": "Sélectionne d'abord un modèle",
       "brandNotFound": "Marque non trouvée",
       "modelNotFound": "Modèle non trouvé",
       "yearNotAvailable": "Année non disponible",
@@ -985,21 +999,21 @@
       "driverMinAge": "Le conducteur principal doit avoir au moins 18 ans",
       "plateSearch": {
         "search": "Rechercher",
-        "enterPlate": "Veuillez entrer une plaque d'immatriculation",
+        "enterPlate": "Entre une plaque d'immatriculation",
         "invalidFormat": "Format de plaque invalide. Exemple: VD 123456",
-        "notFound": "Aucun véhicule trouvé. Veuillez sélectionner manuellement.",
+        "notFound": "Aucun véhicule trouvé. Sélectionne manuellement.",
         "popularVehicles": "Véhicules populaires pour {{canton}}",
-        "selectOrManual": "Sélectionnez votre véhicule ou choisissez manuellement",
+        "selectOrManual": "Sélectionne ton véhicule ou choisis manuellement",
         "year": "Année",
-        "hint": "Entrez votre plaque d'immatriculation pour identifier automatiquement votre véhicule"
+        "hint": "Entre ta plaque d'immatriculation pour identifier automatiquement ton véhicule"
       }
     },
     "pillar3": {
       "title": "Comparateur 3ème pilier",
-      "description": "Préparez votre retraite et économisez sur vos impôts",
-      "hasExistingPillar3": "Avez-vous déjà un 3ème pilier ?",
+      "description": "Prépare ta retraite et économise sur tes impôts",
+      "hasExistingPillar3": "As-tu déjà un 3ème pilier ?",
       "existingProvider": "Chez quel prestataire ?",
-      "selectProvider": "Sélectionnez votre prestataire",
+      "selectProvider": "Sélectionne ton prestataire",
       "otherProvider": "Autre prestataire",
       "objective": "Objectif principal",
       "objectives": {
@@ -1009,9 +1023,9 @@
         "protection": "Protection famille",
         "mix": "Objectifs mixtes"
       },
-      "age": "Votre âge",
+      "age": "Ton âge",
       "professionalStatus": "Statut professionnel",
-      "selectStatus": "Sélectionnez votre statut",
+      "selectStatus": "Sélectionne ton statut",
       "status": {
         "employee": "Salarié",
         "selfEmployed": "Indépendant",
@@ -1025,7 +1039,7 @@
         "student": "Étudiant"
       },
       "incomeRange": "Tranche de revenu annuel",
-      "selectIncome": "Sélectionnez votre revenu",
+      "selectIncome": "Sélectionne ton revenu",
       "incomeRanges": {
         "less50k": "Moins de 50'000 CHF",
         "50to80k": "50'000 - 80'000 CHF",
@@ -1033,11 +1047,11 @@
         "more120k": "Plus de 120'000 CHF"
       },
       "savingsAmount": "Montant d'épargne souhaité",
-      "selectAmount": "Sélectionnez un montant",
+      "selectAmount": "Sélectionne un montant",
       "perMonth": "mois",
       "maxAmount": "7056 CHF/an",
       "investmentHorizon": "Horizon de placement",
-      "selectHorizon": "Sélectionnez un horizon",
+      "selectHorizon": "Sélectionne un horizon",
       "years": "ans",
       "horizon": "Horizon de placement",
       "horizons": {
@@ -1060,8 +1074,8 @@
     },
     "professionalInsurance": {
       "title": "Assurances pour indépendants",
-      "description": "Protégez votre activité professionnelle",
-      "selectTypes": "Sélectionnez les assurances souhaitées",
+      "description": "Protège ton activité professionnelle",
+      "selectTypes": "Sélectionne les assurances souhaitées",
       "types": {
         "rcProfessional": "RC Professionnelle",
         "lossOfEarnings": "Perte de gain",
@@ -1073,7 +1087,7 @@
       "activityType": "Type d'activité",
       "activityPlaceholder": "Ex: Consultant, Artisan, Médecin...",
       "legalForm": "Forme juridique",
-      "selectLegalForm": "Sélectionnez la forme juridique",
+      "selectLegalForm": "Sélectionne la forme juridique",
       "legalForms": {
         "selfEmployed": "Indépendant (RI)",
         "sarl": "Sàrl",
@@ -1081,18 +1095,28 @@
         "snc": "SNC"
       },
       "employeesCount": "Nombre d'employés",
-      "selectEmployees": "Sélectionnez le nombre",
+      "selectEmployees": "Sélectionne le nombre",
       "soloEntrepreneur": "Entrepreneur solo",
       "message": "Message ou précisions",
-      "messagePlaceholder": "Décrivez vos besoins spécifiques...",
+      "messagePlaceholder": "Décris tes besoins spécifiques...",
       "revenue": "Chiffre d'affaires annuel (CHF)",
       "revenuePlaceholder": "Ex: 150'000",
       "contractStartDate": "Date de début de contrat souhaitée",
-      "selectDate": "Sélectionnez une date"
+      "selectDate": "Sélectionne une date"
     },
     "mortgage": {
       "title": "Comparateur hypothécaire",
-      "description": "Trouvez le meilleur taux pour votre projet immobilier",
+      "description": "Trouve le meilleur taux pour ton projet immobilier",
+      "guide": {
+        "projectStep": "Parlons de ton projet : achat, renouvellement ou refinancement ?",
+        "propertyTypeStep": "Quel type de bien vises-tu : appartement, maison, immeuble ?",
+        "propertyValueStep": "Quelle est la valeur du bien ? J'estime ton financement à partir de là.",
+        "locationStep": "Où se situe le bien ? Le canton influence les conditions.",
+        "borrowersStep": "Seul ou à deux pour cet emprunt ? Ça compte pour la capacité.",
+        "statusStep": "Quel est ton statut professionnel ? Il pèse dans le dossier.",
+        "incomeStep": "Tes revenus annuels, en toute confidentialité, pour viser le meilleur taux.",
+        "ownFundsStep": "Combien de fonds propres peux-tu apporter ?"
+      },
       "projectType": "Type de projet",
       "projects": {
         "acquisition": "Acquisition",
@@ -1105,7 +1129,7 @@
         "refinancing": "Refinancement"
       },
       "propertyType": "Type de bien",
-      "selectPropertyType": "Sélectionnez le type de bien",
+      "selectPropertyType": "Sélectionne le type de bien",
       "propertyTypes": {
         "apartment": "Appartement",
         "house": "Maison",
@@ -1122,7 +1146,7 @@
       "professionalSituation": "Situation professionnelle",
       "incomeRange": "Revenu annuel",
       "ownFundsRange": "Fonds propres",
-      "selectOwnFunds": "Sélectionnez vos fonds propres",
+      "selectOwnFunds": "Sélectionne tes fonds propres",
       "status": {
         "retired": "Retraité"
       },
@@ -1174,26 +1198,26 @@
         "over": "sur",
         "taxSavings": "Économie d'impôts estimée",
         "basedOnRate": "basé sur un taux marginal de 30%",
-        "3aExplanation": "L'amortissement indirect via le 3ème pilier vous permet de maintenir votre dette hypothécaire tout en constituant un capital et en réduisant vos impôts.",
+        "3aExplanation": "L'amortissement indirect via le 3ème pilier te permet de maintenir ta dette hypothécaire tout en constituant un capital et en réduisant tes impôts.",
         "no3aOption": "Cette offre ne propose pas l'amortissement indirect via le 3ème pilier."
       }
     },
     "householdInsurance": {
       "title": "Comparateur assurance ménage",
-      "description": "Protégez votre foyer et vos biens",
+      "description": "Protège ton foyer et tes biens",
       "propertyType": "Type de logement",
       "ownershipStatus": "Statut de propriété",
       "tenant": "Locataire",
       "owner": "Propriétaire",
       "livingSpace": "Surface habitable (m²)",
       "numberOfRooms": "Nombre de pièces",
-      "selectRooms": "Sélectionnez le nombre de pièces",
+      "selectRooms": "Sélectionne le nombre de pièces",
       "propertyValue": "Valeur des biens à assurer",
-      "selectValue": "Sélectionnez une tranche de valeur"
+      "selectValue": "Sélectionne une tranche de valeur"
     },
     "household": {
       "title": "Comparateur assurance ménage",
-      "description": "Protégez votre foyer et vos biens",
+      "description": "Protège ton foyer et tes biens",
       "housingType": "Type de logement",
       "housingTypes": {
         "apartment": "Appartement",
@@ -1208,7 +1232,7 @@
       "livingSpace": "Surface habitable (m²)",
       "numberOfRooms": "Nombre de pièces",
       "insuredValue": "Valeur à assurer (CHF)",
-      "insuredValueHelp": "Estimation de la valeur de vos biens mobiliers",
+      "insuredValueHelp": "Estimation de la valeur de tes biens mobiliers",
       "includeCivilLiability": "Inclure la responsabilité civile privée",
       "additionalCoverage": "Couvertures supplémentaires",
       "coverageOptions": {
@@ -1222,24 +1246,33 @@
     },
     "subsidy": {
       "title": "Demande de subside",
-      "description": "Vérifiez votre éligibilité aux aides cantonales",
+      "description": "Vérifie ton éligibilité aux aides cantonales",
+      "guide": {
+        "postalStep": "Vérifions ton droit au subside : commençons par ton code postal.",
+        "birthStep": "Ta date de naissance, pour situer ta tranche d'âge.",
+        "householdStep": "Ton foyer détermine le montant de l'aide cantonale possible.",
+        "hasInsuranceStep": "Es-tu déjà assuré ? Ça m'aide à cibler ta situation.",
+        "insurerStep": "Chez quel assureur es-tu, et avec quelle franchise ?",
+        "incomeStep": "Tes revenus, en toute discrétion — jusqu'à 3'500.-/an d'aide selon ton canton.",
+        "situationStep": "Une situation particulière peut augmenter ton droit au subside."
+      },
       "postalCode": "Code postal",
       "birthDate": "Date de naissance",
-      "householdComposition": "Combien de personnes dans votre foyer ?",
+      "householdComposition": "Combien de personnes dans ton foyer ?",
       "household": {
         "single": "Seul",
         "couple": "Couple",
         "coupleChildren": "Couple + enfant(s)",
         "singleChildren": "Seul + enfant(s)"
       },
-      "hasCurrentInsurance": "Avez-vous une assurance maladie actuellement ?",
-      "currentInsurer": "Quelle est votre compagnie actuelle ?",
-      "selectInsurer": "Sélectionnez votre assureur",
+      "hasCurrentInsurance": "As-tu une assurance maladie actuellement ?",
+      "currentInsurer": "Quelle est ta compagnie actuelle ?",
+      "selectInsurer": "Sélectionne ton assureur",
       "otherInsurer": "Autre assureur",
-      "currentDeductible": "Quelle est votre franchise actuelle ?",
-      "selectDeductible": "Sélectionnez votre franchise",
+      "currentDeductible": "Quelle est ta franchise actuelle ?",
+      "selectDeductible": "Sélectionne ta franchise",
       "incomeRange": "Revenu annuel du ménage",
-      "selectIncome": "Sélectionnez votre tranche de revenu",
+      "selectIncome": "Sélectionne ta tranche de revenu",
       "specialSituation": "Situation particulière",
       "situations": {
         "none": "Aucune situation particulière",
@@ -1248,27 +1281,45 @@
         "student": "Étudiant",
         "unemployed": "Au chômage"
       },
-      "eligible": "Vous êtes probablement éligible !",
-      "maybeEligible": "Vous pourriez être éligible",
-      "eligibleDescription": "D'après vos informations, vous remplissez les critères pour bénéficier d'un subside.",
-      "maybeEligibleDescription": "Votre situation nécessite une analyse plus approfondie pour déterminer votre éligibilité.",
+      "eligible": "Tu es probablement éligible !",
+      "maybeEligible": "Tu pourrais être éligible",
+      "eligibleDescription": "D'après tes informations, tu remplis les critères pour bénéficier d'un subside.",
+      "maybeEligibleDescription": "Ta situation nécessite une analyse plus approfondie pour déterminer ton éligibilité.",
       "estimatedAmount": "Montant estimé",
       "perMonth": "mois",
-      "estimateNote": "Cette estimation est indicative et peut varier selon votre canton.",
+      "estimateNote": "Cette estimation est indicative et peut varier selon ton canton.",
       "startApplication": "Commencer ma demande",
       "downloadGuide": "Télécharger le guide",
-      "contactNote": "Un conseiller vous contactera pour finaliser votre demande."
+      "contactNote": "Un conseiller te contactera pour finaliser ta demande."
+    },
+    "complementaryGuide": {
+      "needsStep": "Quels besoins veux-tu couvrir ? Dentaire, hospi, médecine douce… Coche tout ce qui compte.",
+      "hasInsuranceStep": "As-tu déjà une complémentaire ? Ça évite les doublons inutiles.",
+      "insurerStep": "Chez qui es-tu assuré aujourd'hui ? Ça m'aide à comparer au plus juste.",
+      "healthStep": "Quelques questions de santé, en toute confidentialité.",
+      "familyStep": "Ta situation familiale m'aide à cibler les bonnes garanties.",
+      "birthStep": "Ta date de naissance, pour un tarif au plus juste.",
+      "locationStep": "Où habites-tu ? Les offres varient d'un canton à l'autre."
     },
     "prenatal": {
       "title": "Assurance prénatale",
-      "description": "Protégez votre futur bébé avant la naissance, sans questions médicales",
+      "description": "Protège ton futur bébé avant la naissance, sans questions médicales",
+      "guide": {
+        "dueDateStep": "Félicitations ! Quelle est la date prévue de l'accouchement ?",
+        "locationStep": "Où habites-tu ? Canton et code postal, pour calculer les primes bébé au plus juste.",
+        "coverageStep": "Quelle protection veux-tu pour bébé ?",
+        "modelStep": "Le modèle LAMal influence la prime. Le standard laisse le libre choix du médecin.",
+        "deductibleStep": "Pour bébé, la franchise à 0 CHF est recommandée : tout est remboursé dès le 1er franc.",
+        "dentalStep": "Une complémentaire dentaire pour bébé ? Ça peut valoir la peine très tôt.",
+        "motherStep": "Un mot sur ton assurance actuelle, pour bien tout coordonner."
+      },
       "babyOnTheWay": "Un bébé arrive bientôt 👶",
-      "babyOnTheWayDesc": "Indiquez la date prévue d'accouchement pour recevoir les meilleures offres",
+      "babyOnTheWayDesc": "Indique la date prévue d'accouchement pour recevoir les meilleures offres",
       "dueDate": "Date prévue d'accouchement",
       "canton": "Canton de résidence",
-      "selectCanton": "Sélectionnez votre canton",
+      "selectCanton": "Sélectionne ton canton",
       "postalCode": "Code postal",
-      "coverageLevel": "Quel niveau de couverture souhaitez-vous pour bébé ?",
+      "coverageLevel": "Quel niveau de couverture souhaites-tu pour bébé ?",
       "coverage": {
         "basic": "Basic",
         "basicDesc": "Soins de base + complémentaire light",
@@ -1286,7 +1337,7 @@
     },
     "termination": {
       "title": "Résiliation d'assurance",
-      "description": "Résiliez votre contrat simplement et rapidement",
+      "description": "Résilie ton contrat simplement et rapidement",
       "contractType": "Type de contrat à résilier",
       "types": {
         "health": "Assurance maladie",
@@ -1305,12 +1356,12 @@
         "other": "Autre"
       },
       "currentInsurer": "Assureur actuel",
-      "selectInsurer": "Sélectionnez votre assureur",
+      "selectInsurer": "Sélectionne ton assureur",
       "terminationDate": "Date de résiliation souhaitée",
       "selectDate": "Choisir une date",
       "address": "Adresse",
       "city": "Ville",
-      "cancellationReason": "Pourquoi voulez-vous résilier ?",
+      "cancellationReason": "Pourquoi veux-tu résilier ?",
       "reason": "Motif de résiliation",
       "reasons": {
         "price": "Trouver moins cher",
@@ -1326,7 +1377,7 @@
       "letterGenerated": "Lettre générée avec succès !",
       "downloadLetter": "Télécharger la lettre (PDF)",
       "success": "Lettre prête !",
-      "successDescription": "Votre lettre de résiliation est générée. Vous pouvez la télécharger et l'envoyer à votre assureur.",
+      "successDescription": "Ta lettre de résiliation est générée. Tu peux la télécharger et l'envoyer à ton assureur.",
       "letterPreview": "Aperçu de la lettre",
       "letterSubject": "Objet : Résiliation de contrat",
       "letterBody": "Par la présente, je vous prie de résilier mon contrat à la date indiquée. Merci de me confirmer la résiliation par écrit.",
@@ -1334,11 +1385,11 @@
       "effectiveDate": "Date d'effet",
       "downloadPDF": "Télécharger en PDF",
       "compareNew": "Comparer de nouvelles offres",
-      "generateNote": "Nous générerons automatiquement votre lettre de résiliation après validation."
+      "generateNote": "Nous générerons automatiquement ta lettre de résiliation après validation."
     },
     "legalProtection": {
       "title": "Comparateur protection juridique",
-      "description": "Protégez vos droits avec la bonne couverture",
+      "description": "Protège tes droits avec la bonne couverture",
       "coverageType": "Type de couverture",
       "types": {
         "complete": "Protection complète",
@@ -1346,9 +1397,9 @@
         "traffic": "Protection circulation",
         "trafficDesc": "Couverture spécifique pour les litiges liés à la route",
         "custom": "Protection personnalisée",
-        "customDesc": "Choisissez les domaines selon vos besoins"
+        "customDesc": "Choisis les domaines selon tes besoins"
       },
-      "selectAreas": "Sélectionnez les domaines de couverture",
+      "selectAreas": "Sélectionne les domaines de couverture",
       "coverageAreas": "Domaines de couverture souhaités",
       "areas": {
         "traffic": "Circulation routière",
@@ -1365,7 +1416,7 @@
       "single": "Personne seule",
       "couple": "Couple",
       "family": "Famille",
-      "hasExistingCoverage": "Avez-vous déjà une protection juridique ?",
+      "hasExistingCoverage": "As-tu déjà une protection juridique ?",
       "existingOptions": {
         "no": "Non, aucune",
         "partial": "Oui, mais incomplète",
@@ -1373,8 +1424,8 @@
       }
     },
     "results": {
-      "title": "Vos offres personnalisées",
-      "subtitle": "Basées sur votre profil",
+      "title": "Tes offres personnalisées",
+      "subtitle": "Basées sur ton profil",
       "bestPrice": "Meilleur prix",
       "recommended": "Recommandé",
       "bestValue": "Meilleur rapport qualité/prix",
@@ -1391,16 +1442,16 @@
       "chooseOffer": "Choisir cette offre"
     },
     "lpp": {
-      "title": "Vérifiez votre avoir LPP en 1 minute",
+      "title": "Vérifie ton avoir LPP en 1 minute",
       "description": "Gratuit • Sans engagement • 100% confidentiel",
-      "objectiveQuestion": "Que souhaitez-vous faire ?",
-      "situationQuestion": "Quelle est votre situation actuelle ?",
-      "yearsQuestion": "Combien d'années avez-vous travaillé en Suisse ?",
-      "birthDateQuestion": "Quelle est votre date de naissance ?",
+      "objectiveQuestion": "Que souhaites-tu faire ?",
+      "situationQuestion": "Quelle est ta situation actuelle ?",
+      "yearsQuestion": "Combien d'années as-tu travaillé en Suisse ?",
+      "birthDateQuestion": "Quelle est ta date de naissance ?",
       "birthDate": "Date de naissance",
       "ctaFinal": "Recevoir mon analyse gratuite",
-      "thankYouTitle": "Merci pour votre demande !",
-      "thankYouDescription": "Un conseiller vous contactera prochainement pour analyser votre situation LPP.",
+      "thankYouTitle": "Merci pour ta demande !",
+      "thankYouDescription": "Un conseiller te contactera prochainement pour analyser ta situation LPP.",
       "objectives": {
         "find": "🔍 Retrouver mes fonds LPP",
         "consolidate": "🔄 Réunir mes fonds LPP"
@@ -1424,17 +1475,17 @@
       "addressQuestion": "Quelle est l'adresse du bien ?",
       "address": "Adresse du bien",
       "addressPlaceholder": "Rue, numéro, NPA, ville",
-      "propertyQuestion": "Quel est votre bien ?",
+      "propertyQuestion": "Quel est ton bien ?",
       "roomsQuestion": "Quel est le nombre de pièces ?",
       "rooms": "pièces",
       "surfaceQuestion": "Quelle est la surface du bien ?",
       "surface": "Surface (m²)",
-      "timelineQuestion": "Quel est votre délai de vente ?",
-      "mandateQuestion": "Avez-vous déjà signé un mandat avec une agence ?",
-      "availabilityQuestion": "Êtes-vous disponible pour une estimation sur place sous 30 jours ?",
+      "timelineQuestion": "Quel est ton délai de vente ?",
+      "mandateQuestion": "As-tu déjà signé un mandat avec une agence ?",
+      "availabilityQuestion": "Es-tu disponible pour une estimation sur place sous 30 jours ?",
       "ctaFinal": "Recevoir mon estimation gratuite",
-      "thankYouTitle": "Merci pour votre demande !",
-      "thankYouDescription": "Un expert immobilier vous contactera prochainement pour estimer votre bien.",
+      "thankYouTitle": "Merci pour ta demande !",
+      "thankYouDescription": "Un expert immobilier te contactera prochainement pour estimer ton bien.",
       "propertyTypes": {
         "apartment": "Appartement",
         "house": "Maison",

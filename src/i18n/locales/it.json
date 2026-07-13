@@ -801,6 +801,14 @@
     "healthInsurance": {
       "title": "Confronto assicurazione malattia",
       "description": "Ottieni le migliori offerte con pochi clic",
+      "guide": {
+        "step1": "In 2 minuti confronto tutto per te — spesso 2'900.- di risparmio! Hai già un'assicurazione malattia?",
+        "insurerStep": "Perfetto — con quale assicuratore sei oggi? Scegli il suo logo, così confronto in modo più preciso.",
+        "step2": "Situazione familiare ed età determinano i premi. Un attimo!",
+        "step3": "I premi variano per cantone — dove abiti?",
+        "step4": "Il modello è dove si risparmia davvero: Medico di famiglia o Telmed = il più economico, Libera scelta del medico = il più caro. E più alta è la franchigia, più basso è il premio. Ti guido io!",
+        "step5": "Una complementare salute? Ti mostro le opzioni davvero utili: dentario, medicina alternativa, ospedale."
+      },
       "hasCurrentInsurance": "Hai già un'assicurazione malattia?",
       "currentInsurer": "Qual è il tuo assicuratore attuale?",
       "selectInsurer": "Seleziona il tuo assicuratore",
@@ -866,6 +874,12 @@
     "carInsurance": {
       "title": "Confronto assicurazione auto",
       "description": "Trova la migliore protezione per il tuo veicolo",
+      "guide": {
+        "vehicle": "Iniziamo dal tuo veicolo: marca, modello e anno. Al resto penso io!",
+        "usage": "Come usi la tua auto? Mi aiuta a trovare le offerte migliori.",
+        "driver": "Parliamo del conducente — tranquillo, resta tutto riservato.",
+        "coverage": "Quale copertura fa per te? RC obbligatoria, casco parziale o totale — ti spiego tutto."
+      },
       "vehiclePlate": "Targa",
       "orManual": "o inserisci manualmente",
       "brand": "Marca",
@@ -1043,6 +1057,16 @@
     "mortgage": {
       "title": "Confronto ipoteche",
       "description": "Trova il miglior tasso per il tuo progetto immobiliare",
+      "guide": {
+        "projectStep": "Parliamo del tuo progetto: acquisto, rinnovo o rifinanziamento?",
+        "propertyTypeStep": "Che tipo di immobile: appartamento, casa, stabile?",
+        "propertyValueStep": "Qual è il valore dell'immobile? Da lì stimo il tuo finanziamento.",
+        "locationStep": "Dove si trova l'immobile? Il cantone influenza le condizioni.",
+        "borrowersStep": "Solo o in due per questo prestito? Conta per la capacità.",
+        "statusStep": "Qual è il tuo statuto professionale? Pesa nella pratica.",
+        "incomeStep": "Il tuo reddito annuo, in tutta riservatezza, per il tasso migliore.",
+        "ownFundsStep": "Quanti fondi propri puoi apportare?"
+      },
       "projectType": "Tipo di progetto",
       "projects": {
         "acquisition": "Acquisto",
@@ -1124,7 +1148,7 @@
         "over": "su",
         "taxSavings": "Risparmio fiscale stimato",
         "basedOnRate": "basato su un'aliquota marginale del 30%",
-        "3aExplanation": "L'ammortamento indiretto tramite il 3° pilastro vi permette di mantenere il vostro debito ipotecario accumulando capitale e riducendo le imposte.",
+        "3aExplanation": "L'ammortamento indiretto tramite il 3° pilastro ti permette di mantenere il tuo debito ipotecario accumulando capitale e riducendo le imposte.",
         "no3aOption": "Questa offerta non propone l'ammortamento indiretto tramite il 3° pilastro."
       }
     },
@@ -1173,9 +1197,18 @@
     "subsidy": {
       "title": "Richiesta sussidio",
       "description": "Verifica la tua idoneità agli aiuti cantonali",
+      "guide": {
+        "postalStep": "Verifichiamo il tuo diritto al sussidio: iniziamo dal tuo codice postale.",
+        "birthStep": "La tua data di nascita, per collocare la tua fascia d'età.",
+        "householdStep": "Il tuo nucleo familiare determina l'importo dell'aiuto cantonale.",
+        "hasInsuranceStep": "Sei già assicurato? Mi aiuta a inquadrare la tua situazione.",
+        "insurerStep": "Con quale assicuratore sei, e con quale franchigia?",
+        "incomeStep": "Il tuo reddito, in tutta discrezione — fino a 3'500.-/anno secondo il cantone.",
+        "situationStep": "Una situazione particolare può aumentare il tuo diritto al sussidio."
+      },
       "postalCode": "Codice postale",
       "birthDate": "Data di nascita",
-      "householdComposition": "Quante persone nel vostro nucleo familiare?",
+      "householdComposition": "Quante persone nel tuo nucleo familiare?",
       "household": {
         "single": "Solo/a",
         "couple": "Coppia",
@@ -1209,9 +1242,27 @@
       "downloadGuide": "Scarica la guida",
       "contactNote": "Un consulente ti contatterà per finalizzare la tua richiesta."
     },
+    "complementaryGuide": {
+      "needsStep": "Quali bisogni vuoi coprire? Dentario, ospedale, medicina alternativa… Seleziona tutto ciò che conta.",
+      "hasInsuranceStep": "Hai già una complementare? Così evitiamo doppioni inutili.",
+      "insurerStep": "Con chi sei assicurato oggi? Mi aiuta a confrontare al meglio.",
+      "healthStep": "Qualche domanda sulla salute, in tutta riservatezza.",
+      "familyStep": "La tua situazione familiare mi aiuta a scegliere le giuste garanzie per te.",
+      "birthStep": "La tua data di nascita, per una tariffa giusta.",
+      "locationStep": "Dove abiti? Le offerte variano da cantone a cantone."
+    },
     "prenatal": {
       "title": "Assicurazione prenatale",
       "description": "Proteggi il tuo futuro bambino prima della nascita, senza domande mediche",
+      "guide": {
+        "dueDateStep": "Congratulazioni! Qual è la data prevista del parto?",
+        "locationStep": "Dove abiti? Cantone e codice postale, per calcolare i premi del bebè con precisione.",
+        "coverageStep": "Quale protezione vuoi per il bebè?",
+        "modelStep": "Il modello LAMal influenza il premio. Lo standard lascia la libera scelta del medico.",
+        "deductibleStep": "Per il bebè, la franchigia a 0 CHF è consigliata: tutto è rimborsato dal 1° franco.",
+        "dentalStep": "Un'assicurazione dentaria complementare per il bebè? Può valere la pena già molto presto.",
+        "motherStep": "Due parole sulla tua assicurazione attuale, per coordinare tutto."
+      },
       "babyOnTheWay": "Sta arrivando un bambino 👶",
       "babyOnTheWayDesc": "Indica la data prevista del parto per ricevere le migliori offerte",
       "dueDate": "Data prevista del parto",
@@ -1379,11 +1430,11 @@
       "rooms": "stanze",
       "surfaceQuestion": "Qual è la superficie dell'immobile?",
       "surface": "Superficie (m²)",
-      "timelineQuestion": "Qual è il vostro termine di vendita?",
+      "timelineQuestion": "Qual è il tuo termine di vendita?",
       "mandateQuestion": "Avete già firmato un mandato con un'agenzia?",
       "availabilityQuestion": "Siete disponibili per una valutazione in loco entro 30 giorni?",
       "ctaFinal": "Ricevere la valutazione gratuita",
-      "thankYouTitle": "Grazie per la vostra richiesta!",
+      "thankYouTitle": "Grazie per la tua richiesta!",
       "thankYouDescription": "Un esperto immobiliare vi contatterà a breve.",
       "propertyTypes": {
         "apartment": "Appartamento",

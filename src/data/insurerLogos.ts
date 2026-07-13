@@ -11,12 +11,12 @@ import tcsLogo from "@/assets/blog/tcs-assurance-voiture.png";
 import vaudoiseLogo from "@/assets/blog/vaudoise-assurance-voiture.png";
 import zurichLogo from "@/assets/blog/zurich-assurance-voiture.png";
 
-// Health insurer logos (SVG)
-import cssLogo from "@/assets/insurers/css-logo.svg";
+// Health insurer logos — real brand logos where available, SVG placeholders otherwise
+import cssLogo from "@/assets/insurers/css-logo.png";
 import helsanaLogo from "@/assets/insurers/helsana-logo.svg";
 import swicaLogo from "@/assets/insurers/swica-logo.svg";
-import sanitasLogo from "@/assets/insurers/sanitas-logo.svg";
-import groupeMutuelLogo from "@/assets/insurers/groupe-mutuel-logo.svg";
+import sanitasLogo from "@/assets/insurers/sanitas-logo.png";
+import groupeMutuelLogo from "@/assets/insurers/groupe-mutuel-logo.png";
 import concordiaLogo from "@/assets/insurers/concordia-logo.svg";
 import visanaLogo from "@/assets/insurers/visana-logo.svg";
 import kptLogo from "@/assets/insurers/kpt-logo.svg";
@@ -25,8 +25,10 @@ import assuraLogo from "@/assets/insurers/assura-logo.svg";
 import oekkLogo from "@/assets/insurers/oekk-logo.svg";
 import sympanyLogo from "@/assets/insurers/sympany-logo.svg";
 
-// Other insurers logos (SVG)
-import swissLifeLogo from "@/assets/insurers/swiss-life-logo.svg";
+// Other insurers logos — real brand logos where available, SVG placeholders otherwise
+import swissLifeLogo from "@/assets/insurers/swiss-life-logo.jpg";
+import paxLogo from "@/assets/insurers/pax-logo.png";
+import liechtensteinLifeLogo from "@/assets/insurers/liechtenstein-life-logo.webp";
 import viacLogo from "@/assets/insurers/viac-logo.svg";
 import postfinanceLogo from "@/assets/insurers/postfinance-logo.svg";
 import ubsLogo from "@/assets/insurers/ubs-logo.svg";
@@ -164,6 +166,16 @@ export const insurerLogos: Record<string, InsurerInfo> = {
     name: "Swiss Life",
     logo: swissLifeLogo,
     color: "#e30613",
+  },
+  "PAX": {
+    name: "PAX",
+    logo: paxLogo,
+    color: "#004c97",
+  },
+  "Liechtenstein Life": {
+    name: "Liechtenstein Life",
+    logo: liechtensteinLifeLogo,
+    color: "#c8a45c",
   },
   "VIAC": {
     name: "VIAC",
