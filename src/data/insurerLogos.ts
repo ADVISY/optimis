@@ -14,16 +14,16 @@ import zurichLogo from "@/assets/blog/zurich-assurance-voiture.png";
 // Health insurer logos — real brand logos where available, SVG placeholders otherwise
 import cssLogo from "@/assets/insurers/css-logo.png";
 import helsanaLogo from "@/assets/insurers/helsana-logo.svg";
-import swicaLogo from "@/assets/insurers/swica-logo.svg";
+import swicaLogo from "@/assets/insurers/swica-logo.png";
 import sanitasLogo from "@/assets/insurers/sanitas-logo.png";
 import groupeMutuelLogo from "@/assets/insurers/groupe-mutuel-logo.png";
 import concordiaLogo from "@/assets/insurers/concordia-logo.svg";
-import visanaLogo from "@/assets/insurers/visana-logo.svg";
-import kptLogo from "@/assets/insurers/kpt-logo.svg";
+import visanaLogo from "@/assets/insurers/visana-logo.jpg";
+import kptLogo from "@/assets/insurers/kpt-logo.jpg";
 import atupriLogo from "@/assets/insurers/atupri-logo.svg";
 import assuraLogo from "@/assets/insurers/assura-logo.svg";
 import oekkLogo from "@/assets/insurers/oekk-logo.svg";
-import sympanyLogo from "@/assets/insurers/sympany-logo.svg";
+import sympanyLogo from "@/assets/insurers/sympany-logo.png";
 
 // Other insurers logos — real brand logos where available, SVG placeholders otherwise
 import swissLifeLogo from "@/assets/insurers/swiss-life-logo.jpg";
