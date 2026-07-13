@@ -17,12 +17,12 @@ import helsanaLogo from "@/assets/insurers/helsana-logo.svg";
 import swicaLogo from "@/assets/insurers/swica-logo.png";
 import sanitasLogo from "@/assets/insurers/sanitas-logo.png";
 import groupeMutuelLogo from "@/assets/insurers/groupe-mutuel-logo.png";
-import concordiaLogo from "@/assets/insurers/concordia-logo.svg";
+import concordiaLogo from "@/assets/insurers/concordia-logo.jpg";
 import visanaLogo from "@/assets/insurers/visana-logo.jpg";
 import kptLogo from "@/assets/insurers/kpt-logo.jpg";
-import atupriLogo from "@/assets/insurers/atupri-logo.svg";
-import assuraLogo from "@/assets/insurers/assura-logo.svg";
-import oekkLogo from "@/assets/insurers/oekk-logo.svg";
+import atupriLogo from "@/assets/insurers/atupri-logo.png";
+import assuraLogo from "@/assets/insurers/assura-logo.png";
+import oekkLogo from "@/assets/insurers/oekk-logo.webp";
 import sympanyLogo from "@/assets/insurers/sympany-logo.png";
 
 // Other insurers logos — real brand logos where available, SVG placeholders otherwise
