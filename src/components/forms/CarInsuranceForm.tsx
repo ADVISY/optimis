@@ -324,21 +324,20 @@ const CarInsuranceForm = () => {
           </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.carInsurance.licenseYear")} htmlFor="licenseYear" required>
-            <Select
+            <Input
+              id="licenseYear"
+              type="text"
+              inputMode="numeric"
+              maxLength={4}
               value={formData.licenseYear}
-              onValueChange={(value) => { updateFormData({ licenseYear: value }); notify(); }}
-            >
-              <SelectTrigger className="h-9 md:h-14 text-sm md:text-lg">
-                <SelectValue placeholder={t("forms.carInsurance.selectLicenseYear")} />
-              </SelectTrigger>
-              <SelectContent>
-                {Array.from({ length: 60 }, (_, i) => new Date().getFullYear() - i).map((year) => (
-                  <SelectItem key={year} value={year.toString()}>
-                    {year}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+              onChange={(e) => {
+                const year = e.target.value.replace(/\D/g, "").slice(0, 4);
+                updateFormData({ licenseYear: year });
+                if (year.length === 4) notify();
+              }}
+              placeholder={String(new Date().getFullYear() - 5)}
+              className="h-9 md:h-14 text-sm md:text-lg"
+            />
           </FormFieldWrapper>
 
           <FormFieldWrapper
