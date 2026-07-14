@@ -6,6 +6,7 @@ import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
+import { OptionButtons } from "@/components/forms/OptionButtons";
 import Pillar3ComparisonResults from "@/components/forms/Pillar3ComparisonResults";
 import LoadingComparison from "@/components/forms/LoadingComparison";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
@@ -312,27 +313,25 @@ const Pillar3Form = () => {
 
           {formData.hasExistingPillar3 === true && (
             <FormFieldWrapper label={t("forms.pillar3.existingProvider")} htmlFor="existingProvider">
-              <Select
+              <OptionButtons
                 value={formData.existingProvider}
                 onValueChange={(value) => { updateFormData({ existingProvider: value }); notify(); }}
-              >
-                <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-                  <SelectValue placeholder={t("forms.pillar3.selectProvider")} />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="viac">VIAC</SelectItem>
-                  <SelectItem value="frankly">Frankly</SelectItem>
-                  <SelectItem value="finpension">Finpension</SelectItem>
-                  <SelectItem value="postfinance">PostFinance</SelectItem>
-                  <SelectItem value="ubs">UBS</SelectItem>
-                  <SelectItem value="credit-suisse">Credit Suisse</SelectItem>
-                  <SelectItem value="raiffeisen">Raiffeisen</SelectItem>
-                  <SelectItem value="zurich">Zurich</SelectItem>
-                  <SelectItem value="axa">AXA</SelectItem>
-                  <SelectItem value="swiss-life">Swiss Life</SelectItem>
-                  <SelectItem value="other">{t("forms.pillar3.otherProvider")}</SelectItem>
-                </SelectContent>
-              </Select>
+                ariaLabel={t("forms.pillar3.existingProvider")}
+                columns={2}
+                options={[
+                  { value: "viac", label: "VIAC" },
+                  { value: "frankly", label: "Frankly" },
+                  { value: "finpension", label: "Finpension" },
+                  { value: "postfinance", label: "PostFinance" },
+                  { value: "ubs", label: "UBS" },
+                  { value: "credit-suisse", label: "Credit Suisse" },
+                  { value: "raiffeisen", label: "Raiffeisen" },
+                  { value: "zurich", label: "Zurich" },
+                  { value: "axa", label: "AXA" },
+                  { value: "swiss-life", label: "Swiss Life" },
+                  { value: "other", label: t("forms.pillar3.otherProvider") },
+                ]}
+              />
             </FormFieldWrapper>
           )}
 
@@ -377,38 +376,34 @@ const Pillar3Form = () => {
           </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.pillar3.professionalStatus")} required>
-            <Select
+            <OptionButtons
               value={formData.professionalStatus}
               onValueChange={(value) => { updateFormData({ professionalStatus: value }); notify(); }}
-            >
-              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-                <SelectValue placeholder={t("forms.pillar3.selectStatus")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="employee">{t("forms.pillar3.status.employee")}</SelectItem>
-                <SelectItem value="self-employed">{t("forms.pillar3.status.selfEmployed")}</SelectItem>
-                <SelectItem value="executive">{t("forms.pillar3.status.executive")}</SelectItem>
-                <SelectItem value="student">{t("forms.pillar3.status.student")}</SelectItem>
-              </SelectContent>
-            </Select>
+              ariaLabel={t("forms.pillar3.professionalStatus")}
+              columns={2}
+              options={[
+                { value: "employee", label: t("forms.pillar3.status.employee") },
+                { value: "self-employed", label: t("forms.pillar3.status.selfEmployed") },
+                { value: "executive", label: t("forms.pillar3.status.executive") },
+                { value: "student", label: t("forms.pillar3.status.student") },
+              ]}
+            />
           </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.pillar3.incomeRange")} required>
-            <Select
+            <OptionButtons
               value={formData.incomeRange}
               onValueChange={(value) => { updateFormData({ incomeRange: value }); notify(); }}
-            >
-              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-                <SelectValue placeholder={t("forms.pillar3.selectIncome")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="0-50000">&lt; CHF 50'000</SelectItem>
-                <SelectItem value="50000-80000">CHF 50'000 - 80'000</SelectItem>
-                <SelectItem value="80000-120000">CHF 80'000 - 120'000</SelectItem>
-                <SelectItem value="120000-200000">CHF 120'000 - 200'000</SelectItem>
-                <SelectItem value="200000+">&gt; CHF 200'000</SelectItem>
-              </SelectContent>
-            </Select>
+              ariaLabel={t("forms.pillar3.incomeRange")}
+              columns={2}
+              options={[
+                { value: "0-50000", label: "< CHF 50'000" },
+                { value: "50000-80000", label: "CHF 50'000 - 80'000" },
+                { value: "80000-120000", label: "CHF 80'000 - 120'000" },
+                { value: "120000-200000", label: "CHF 120'000 - 200'000" },
+                { value: "200000+", label: "> CHF 200'000" },
+              ]}
+            />
           </FormFieldWrapper>
         </div>
       </FormStep>
@@ -417,36 +412,32 @@ const Pillar3Form = () => {
       <FormStep isActive={currentStep === 3}>
         <div className="space-y-4 md:space-y-6">
           <FormFieldWrapper label={t("forms.pillar3.savingsAmount")} required>
-            <Select
+            <OptionButtons
               value={formData.savingsAmount}
               onValueChange={(value) => { updateFormData({ savingsAmount: value }); notify(); }}
-            >
-              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-                <SelectValue placeholder={t("forms.pillar3.selectAmount")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="100-300">CHF 100 - 300 / {t("forms.pillar3.perMonth")}</SelectItem>
-                <SelectItem value="300-500">CHF 300 - 500 / {t("forms.pillar3.perMonth")}</SelectItem>
-                <SelectItem value="500-max">CHF 500 - max ({t("forms.pillar3.maxAmount")})</SelectItem>
-              </SelectContent>
-            </Select>
+              ariaLabel={t("forms.pillar3.savingsAmount")}
+              columns={3}
+              options={[
+                { value: "100-300", label: `CHF 100 - 300 / ${t("forms.pillar3.perMonth")}` },
+                { value: "300-500", label: `CHF 300 - 500 / ${t("forms.pillar3.perMonth")}` },
+                { value: "500-max", label: `CHF 500 - max (${t("forms.pillar3.maxAmount")})` },
+              ]}
+            />
           </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.pillar3.investmentHorizon")} required>
-            <Select
+            <OptionButtons
               value={formData.investmentHorizon}
               onValueChange={(value) => { updateFormData({ investmentHorizon: value }); notify(); }}
-            >
-              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-                <SelectValue placeholder={t("forms.pillar3.selectHorizon")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="5-10">5-10 {t("forms.pillar3.years")}</SelectItem>
-                <SelectItem value="10-20">10-20 {t("forms.pillar3.years")}</SelectItem>
-                <SelectItem value="20-30">20-30 {t("forms.pillar3.years")}</SelectItem>
-                <SelectItem value="30+">30+ {t("forms.pillar3.years")}</SelectItem>
-              </SelectContent>
-            </Select>
+              ariaLabel={t("forms.pillar3.investmentHorizon")}
+              columns={2}
+              options={[
+                { value: "5-10", label: `5-10 ${t("forms.pillar3.years")}` },
+                { value: "10-20", label: `10-20 ${t("forms.pillar3.years")}` },
+                { value: "20-30", label: `20-30 ${t("forms.pillar3.years")}` },
+                { value: "30+", label: `30+ ${t("forms.pillar3.years")}` },
+              ]}
+            />
           </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.pillar3.riskProfile")} required>

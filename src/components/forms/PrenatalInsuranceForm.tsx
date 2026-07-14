@@ -5,6 +5,8 @@ import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
+import { OptionButtons } from "@/components/forms/OptionButtons";
+import { InsurerLogoGrid } from "@/components/forms/InsurerLogoGrid";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { Input } from "@/components/ui/input";
@@ -428,23 +430,21 @@ const PrenatalInsuranceForm = () => {
         <FormStep isActive={currentStep === 4}>
           <div className="space-y-3">
             <FormFieldWrapper label={t("forms.prenatal.lamalModel", "Modèle LAMal souhaité")} required>
-              <Select
+              <OptionButtons
                 value={formData.lamalModel}
                 onValueChange={(value) => {
                   updateFormData({ lamalModel: value });
                   notify();
                 }}
-              >
-                <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="family-doctor">{t("forms.healthInsurance.models.familyDoctor")}</SelectItem>
-                  <SelectItem value="hmo">{t("forms.prenatal.models.careNetwork", "Réseau de soins")}</SelectItem>
-                  <SelectItem value="telmed">{t("forms.healthInsurance.models.telemedicine")}</SelectItem>
-                  <SelectItem value="standard">{t("forms.healthInsurance.models.standard")}</SelectItem>
-                </SelectContent>
-              </Select>
+                ariaLabel={t("forms.prenatal.lamalModel", "Modèle LAMal souhaité")}
+                columns={2}
+                options={[
+                  { value: "family-doctor", label: t("forms.healthInsurance.models.familyDoctor") },
+                  { value: "hmo", label: t("forms.prenatal.models.careNetwork", "Réseau de soins") },
+                  { value: "telmed", label: t("forms.healthInsurance.models.telemedicine") },
+                  { value: "standard", label: t("forms.healthInsurance.models.standard") },
+                ]}
+              />
             </FormFieldWrapper>
           </div>
         </FormStep>
@@ -456,25 +456,22 @@ const PrenatalInsuranceForm = () => {
               label={t("forms.prenatal.childDeductible", "Franchise enfant (CHF)")}
               required
             >
-              <Select
+              <OptionButtons
                 value={formData.childDeductible}
                 onValueChange={(value) => {
                   updateFormData({ childDeductible: value });
                   notify();
                 }}
-              >
-                <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {["0", "100", "200", "300", "400", "500", "600"].map((v) => (
-                    <SelectItem key={v} value={v}>
-                      CHF {v}
-                      {v === "0" && ` — ${t("forms.prenatal.childDeductibleDefault", "recommandé pour bébé")}`}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                ariaLabel={t("forms.prenatal.childDeductible", "Franchise enfant (CHF)")}
+                columns={3}
+                options={["0", "100", "200", "300", "400", "500", "600"].map((v) => ({
+                  value: v,
+                  label: `CHF ${v}`,
+                }))}
+              />
+              <p className="mt-1.5 text-xs text-muted-foreground">
+                {`CHF 0 — ${t("forms.prenatal.childDeductibleDefault", "recommandé pour bébé")}`}
+              </p>
             </FormFieldWrapper>
           </div>
         </FormStep>
@@ -548,28 +545,10 @@ const PrenatalInsuranceForm = () => {
 
             {formData.motherHasInsurance === "yes" && (
               <FormFieldWrapper label={t("forms.prenatal.motherInsurer")} htmlFor="motherInsurer">
-                <Select
+                <InsurerLogoGrid
                   value={formData.motherInsurer}
                   onValueChange={(value) => updateFormData({ motherInsurer: value })}
-                >
-                  <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-                    <SelectValue placeholder={t("forms.subsidy.selectInsurer")} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="assura">Assura</SelectItem>
-                    <SelectItem value="css">CSS</SelectItem>
-                    <SelectItem value="groupe-mutuel">Groupe Mutuel</SelectItem>
-                    <SelectItem value="helsana">Helsana</SelectItem>
-                    <SelectItem value="sanitas">Sanitas</SelectItem>
-                    <SelectItem value="swica">Swica</SelectItem>
-                    <SelectItem value="visana">Visana</SelectItem>
-                    <SelectItem value="concordia">Concordia</SelectItem>
-                    <SelectItem value="kpt">KPT</SelectItem>
-                    <SelectItem value="atupri">Atupri</SelectItem>
-                    <SelectItem value="sympany">Sympany</SelectItem>
-                    <SelectItem value="other">{t("forms.subsidy.otherInsurer")}</SelectItem>
-                  </SelectContent>
-                </Select>
+                />
               </FormFieldWrapper>
             )}
           </div>

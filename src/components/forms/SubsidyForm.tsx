@@ -7,6 +7,7 @@ import FormFieldWrapper from "@/components/forms/FormField";
 import IllustratedChoice from "@/components/forms/IllustratedChoice";
 import HouseholdIllustration from "@/components/forms/illustrations/HouseholdIllustrations";
 import { InsurerLogoGrid } from "@/components/forms/InsurerLogoGrid";
+import { OptionButtons } from "@/components/forms/OptionButtons";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { fireLeadConversion, getLastLeadId } from "@/lib/leadTracking";
@@ -382,21 +383,21 @@ const SubsidyForm = () => {
             />
           </FormFieldWrapper>
 
-          <FormFieldWrapper label={t("forms.subsidy.currentDeductible")} htmlFor="currentDeductible">
-            <select
-              id="currentDeductible"
+          <FormFieldWrapper label={t("forms.subsidy.currentDeductible")}>
+            <OptionButtons
               value={formData.currentDeductible}
-              onChange={(e) => updateFormData({ currentDeductible: e.target.value })}
-              className="flex h-11 md:h-14 w-full items-center justify-between rounded-xl border-2 border-input bg-white text-gray-900 px-4 text-sm md:text-lg ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:border-primary/50 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%236b7280%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[length:16px_16px] bg-[right_1rem_center] bg-no-repeat pr-10"
-            >
-              <option value="" disabled>{t("forms.subsidy.selectDeductible")}</option>
-              <option value="300">CHF 300</option>
-              <option value="500">CHF 500</option>
-              <option value="1000">CHF 1'000</option>
-              <option value="1500">CHF 1'500</option>
-              <option value="2000">CHF 2'000</option>
-              <option value="2500">CHF 2'500</option>
-            </select>
+              onValueChange={(value) => updateFormData({ currentDeductible: value })}
+              ariaLabel={t("forms.subsidy.currentDeductible")}
+              columns={3}
+              options={[
+                { value: "300", label: "CHF 300" },
+                { value: "500", label: "CHF 500" },
+                { value: "1000", label: "CHF 1'000" },
+                { value: "1500", label: "CHF 1'500" },
+                { value: "2000", label: "CHF 2'000" },
+                { value: "2500", label: "CHF 2'500" },
+              ]}
+            />
           </FormFieldWrapper>
         </div>
       </FormStep>

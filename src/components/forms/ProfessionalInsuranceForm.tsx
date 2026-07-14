@@ -6,6 +6,7 @@ import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
+import { OptionButtons } from "@/components/forms/OptionButtons";
 import ComparisonResults from "@/components/forms/ComparisonResults";
 import LoadingComparison from "@/components/forms/LoadingComparison";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
@@ -247,38 +248,34 @@ const ProfessionalInsuranceForm = () => {
           </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.professionalInsurance.legalForm")} required>
-            <Select
+            <OptionButtons
               value={formData.legalForm}
               onValueChange={(value) => { updateFormData({ legalForm: value }); notifyDelayed(); }}
-            >
-              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-                <SelectValue placeholder={t("forms.professionalInsurance.selectLegalForm")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="self-employed">{t("forms.professionalInsurance.legalForms.selfEmployed")}</SelectItem>
-                <SelectItem value="sarl">{t("forms.professionalInsurance.legalForms.sarl")}</SelectItem>
-                <SelectItem value="sa">{t("forms.professionalInsurance.legalForms.sa")}</SelectItem>
-                <SelectItem value="snc">{t("forms.professionalInsurance.legalForms.snc")}</SelectItem>
-              </SelectContent>
-            </Select>
+              ariaLabel={t("forms.professionalInsurance.legalForm")}
+              columns={2}
+              options={[
+                { value: "self-employed", label: t("forms.professionalInsurance.legalForms.selfEmployed") },
+                { value: "sarl", label: t("forms.professionalInsurance.legalForms.sarl") },
+                { value: "sa", label: t("forms.professionalInsurance.legalForms.sa") },
+                { value: "snc", label: t("forms.professionalInsurance.legalForms.snc") },
+              ]}
+            />
           </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.professionalInsurance.employeesCount")} required>
-            <Select
+            <OptionButtons
               value={formData.employeesCount}
               onValueChange={(value) => { updateFormData({ employeesCount: value }); notifyDelayed(); }}
-            >
-              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-                <SelectValue placeholder={t("forms.professionalInsurance.selectEmployees")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="0">0 ({t("forms.professionalInsurance.soloEntrepreneur")})</SelectItem>
-                <SelectItem value="1-5">1-5</SelectItem>
-                <SelectItem value="6-20">6-20</SelectItem>
-                <SelectItem value="21-50">21-50</SelectItem>
-                <SelectItem value="50+">50+</SelectItem>
-              </SelectContent>
-            </Select>
+              ariaLabel={t("forms.professionalInsurance.employeesCount")}
+              columns={3}
+              options={[
+                { value: "0", label: `0 (${t("forms.professionalInsurance.soloEntrepreneur")})` },
+                { value: "1-5", label: "1-5" },
+                { value: "6-20", label: "6-20" },
+                { value: "21-50", label: "21-50" },
+                { value: "50+", label: "50+" },
+              ]}
+            />
           </FormFieldWrapper>
         </div>
       </FormStep>

@@ -5,6 +5,7 @@ import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
+import { OptionButtons } from "@/components/forms/OptionButtons";
 import MortgageComparisonResults from "@/components/forms/MortgageComparisonResults";
 import LoadingComparison from "@/components/forms/LoadingComparison";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
@@ -260,20 +261,18 @@ const MortgageForm = () => {
       {/* Step 2: Property type */}
       <FormStep isActive={currentStep === 2}>
         <FormFieldWrapper label={t("forms.mortgage.propertyType")} required>
-          <Select
+          <OptionButtons
             value={formData.propertyType}
             onValueChange={(value) => { updateFormData({ propertyType: value }); notify(); }}
-          >
-            <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-              <SelectValue placeholder={t("forms.mortgage.selectPropertyType")} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="apartment">{t("forms.mortgage.propertyTypes.apartment")}</SelectItem>
-              <SelectItem value="house">{t("forms.mortgage.propertyTypes.house")}</SelectItem>
-              <SelectItem value="building">{t("forms.mortgage.propertyTypes.building")}</SelectItem>
-              <SelectItem value="other">{t("forms.mortgage.propertyTypes.other")}</SelectItem>
-            </SelectContent>
-          </Select>
+            ariaLabel={t("forms.mortgage.propertyType")}
+            columns={2}
+            options={[
+              { value: "apartment", label: t("forms.mortgage.propertyTypes.apartment") },
+              { value: "house", label: t("forms.mortgage.propertyTypes.house") },
+              { value: "building", label: t("forms.mortgage.propertyTypes.building") },
+              { value: "other", label: t("forms.mortgage.propertyTypes.other") },
+            ]}
+          />
         </FormFieldWrapper>
       </FormStep>
 
@@ -347,65 +346,59 @@ const MortgageForm = () => {
       {/* Step 6: Professional status */}
       <FormStep isActive={currentStep === 6}>
         <FormFieldWrapper label={t("forms.mortgage.professionalStatus")} required>
-          <Select
+          <OptionButtons
             value={formData.professionalStatus}
             onValueChange={(value) => { updateFormData({ professionalStatus: value }); notify(); }}
-          >
-            <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-              <SelectValue placeholder={t("forms.pillar3.selectStatus")} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="employee">{t("forms.pillar3.status.employee")}</SelectItem>
-              <SelectItem value="self-employed">{t("forms.pillar3.status.selfEmployed")}</SelectItem>
-              <SelectItem value="executive">{t("forms.pillar3.status.executive")}</SelectItem>
-              <SelectItem value="retired">{t("forms.mortgage.status.retired")}</SelectItem>
-            </SelectContent>
-          </Select>
+            ariaLabel={t("forms.mortgage.professionalStatus")}
+            columns={2}
+            options={[
+              { value: "employee", label: t("forms.pillar3.status.employee") },
+              { value: "self-employed", label: t("forms.pillar3.status.selfEmployed") },
+              { value: "executive", label: t("forms.pillar3.status.executive") },
+              { value: "retired", label: t("forms.mortgage.status.retired") },
+            ]}
+          />
         </FormFieldWrapper>
       </FormStep>
 
       {/* Step 7: Income */}
       <FormStep isActive={currentStep === 7}>
         <FormFieldWrapper label={t("forms.mortgage.incomeRange")} required>
-          <Select
+          <OptionButtons
             value={formData.incomeRange}
             onValueChange={(value) => { updateFormData({ incomeRange: value }); notify(); }}
-          >
-            <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-              <SelectValue placeholder={t("forms.pillar3.selectIncome")} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="0-50000">&lt; CHF 50'000</SelectItem>
-              <SelectItem value="50000-80000">CHF 50'000 - 80'000</SelectItem>
-              <SelectItem value="80000-120000">CHF 80'000 - 120'000</SelectItem>
-              <SelectItem value="120000-150000">CHF 120'000 - 150'000</SelectItem>
-              <SelectItem value="150000-200000">CHF 150'000 - 200'000</SelectItem>
-              <SelectItem value="200000-300000">CHF 200'000 - 300'000</SelectItem>
-              <SelectItem value="300000+">&gt; CHF 300'000</SelectItem>
-            </SelectContent>
-          </Select>
+            ariaLabel={t("forms.mortgage.incomeRange")}
+            columns={2}
+            options={[
+              { value: "0-50000", label: "< CHF 50'000" },
+              { value: "50000-80000", label: "CHF 50'000 - 80'000" },
+              { value: "80000-120000", label: "CHF 80'000 - 120'000" },
+              { value: "120000-150000", label: "CHF 120'000 - 150'000" },
+              { value: "150000-200000", label: "CHF 150'000 - 200'000" },
+              { value: "200000-300000", label: "CHF 200'000 - 300'000" },
+              { value: "300000+", label: "> CHF 300'000" },
+            ]}
+          />
         </FormFieldWrapper>
       </FormStep>
 
       {/* Step 8: Own funds */}
       <FormStep isActive={currentStep === 8}>
         <FormFieldWrapper label={t("forms.mortgage.ownFundsRange")} required>
-          <Select
+          <OptionButtons
             value={formData.ownFundsRange}
             onValueChange={(value) => { updateFormData({ ownFundsRange: value }); notify(); }}
-          >
-            <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
-              <SelectValue placeholder={t("forms.mortgage.selectOwnFunds")} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="0-50000">&lt; CHF 50'000</SelectItem>
-              <SelectItem value="50000-100000">CHF 50'000 - 100'000</SelectItem>
-              <SelectItem value="100000-200000">CHF 100'000 - 200'000</SelectItem>
-              <SelectItem value="200000-300000">CHF 200'000 - 300'000</SelectItem>
-              <SelectItem value="300000-500000">CHF 300'000 - 500'000</SelectItem>
-              <SelectItem value="500000+">&gt; CHF 500'000</SelectItem>
-            </SelectContent>
-          </Select>
+            ariaLabel={t("forms.mortgage.ownFundsRange")}
+            columns={2}
+            options={[
+              { value: "0-50000", label: "< CHF 50'000" },
+              { value: "50000-100000", label: "CHF 50'000 - 100'000" },
+              { value: "100000-200000", label: "CHF 100'000 - 200'000" },
+              { value: "200000-300000", label: "CHF 200'000 - 300'000" },
+              { value: "300000-500000", label: "CHF 300'000 - 500'000" },
+              { value: "500000+", label: "> CHF 500'000" },
+            ]}
+          />
         </FormFieldWrapper>
       </FormStep>
 

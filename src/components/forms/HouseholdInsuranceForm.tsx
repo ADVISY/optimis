@@ -6,6 +6,7 @@ import FormContainer from "@/components/forms/FormContainer";
 import FormStep from "@/components/forms/FormStep";
 import FormNavigation from "@/components/forms/FormNavigation";
 import FormFieldWrapper from "@/components/forms/FormField";
+import { OptionButtons } from "@/components/forms/OptionButtons";
 import ComparisonResults from "@/components/forms/ComparisonResults";
 import LoadingComparison from "@/components/forms/LoadingComparison";
 import { useMultiStepForm } from "@/hooks/useMultiStepForm";
@@ -241,19 +242,13 @@ const HouseholdInsuranceForm = () => {
             </FormFieldWrapper>
 
             <FormFieldWrapper label={t("forms.householdInsurance.numberOfRooms")} htmlFor="numberOfRooms">
-              <Select
+              <OptionButtons
                 value={formData.numberOfRooms}
                 onValueChange={(value) => updateFormData({ numberOfRooms: value })}
-              >
-                <SelectTrigger className="h-14 text-lg">
-                  <SelectValue placeholder={t("forms.householdInsurance.selectRooms")} />
-                </SelectTrigger>
-                <SelectContent>
-                  {["1", "2", "3", "4", "5", "6+"].map((num) => (
-                    <SelectItem key={num} value={num}>{num}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                ariaLabel={t("forms.householdInsurance.numberOfRooms")}
+                columns={3}
+                options={["1", "2", "3", "4", "5", "6+"].map((num) => ({ value: num, label: num }))}
+              />
             </FormFieldWrapper>
           </div>
         </div>
@@ -293,21 +288,19 @@ const HouseholdInsuranceForm = () => {
           </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.householdInsurance.propertyValue")} htmlFor="propertyValue" required>
-            <Select
+            <OptionButtons
               value={formData.propertyValue}
               onValueChange={(value) => updateFormData({ propertyValue: value })}
-            >
-              <SelectTrigger className="h-14 text-lg">
-                <SelectValue placeholder={t("forms.householdInsurance.selectValue")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="0-30000">&lt; CHF 30'000</SelectItem>
-                <SelectItem value="30000-50000">CHF 30'000 - 50'000</SelectItem>
-                <SelectItem value="50000-80000">CHF 50'000 - 80'000</SelectItem>
-                <SelectItem value="80000-120000">CHF 80'000 - 120'000</SelectItem>
-                <SelectItem value="120000+">&gt; CHF 120'000</SelectItem>
-              </SelectContent>
-            </Select>
+              ariaLabel={t("forms.householdInsurance.propertyValue")}
+              columns={2}
+              options={[
+                { value: "0-30000", label: "< CHF 30'000" },
+                { value: "30000-50000", label: "CHF 30'000 - 50'000" },
+                { value: "50000-80000", label: "CHF 50'000 - 80'000" },
+                { value: "80000-120000", label: "CHF 80'000 - 120'000" },
+                { value: "120000+", label: "> CHF 120'000" },
+              ]}
+            />
           </FormFieldWrapper>
         </div>
       </FormStep>
