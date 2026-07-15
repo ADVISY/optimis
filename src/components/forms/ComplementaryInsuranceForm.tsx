@@ -373,10 +373,7 @@ const ComplementaryInsuranceForm = () => {
             <FormFieldWrapper label="Quel est votre assureur actuel ?" required>
               <InsurerLogoGrid
                 value={formData.currentInsurer}
-                onValueChange={(value) => {
-                  updateFormData({ currentInsurer: value });
-                  notify();
-                }}
+                onValueChange={(value) => updateFormData({ currentInsurer: value })}
               />
             </FormFieldWrapper>
             <FormFieldWrapper label="Depuis quelle année ?" htmlFor="currentSince">
@@ -387,7 +384,10 @@ const ComplementaryInsuranceForm = () => {
                 min={1970}
                 max={new Date().getFullYear()}
                 value={formData.currentSince}
-                onChange={(e) => updateFormData({ currentSince: e.target.value })}
+                onChange={(e) => {
+                  updateFormData({ currentSince: e.target.value });
+                  if (e.target.value.replace(/\D/g, "").length === 4) notify();
+                }}
                 placeholder="Ex. 2018"
                 className="h-11 sm:h-14 text-base sm:text-lg"
               />

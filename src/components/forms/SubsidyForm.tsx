@@ -376,17 +376,14 @@ const SubsidyForm = () => {
           <FormFieldWrapper label={t("forms.subsidy.currentInsurer")} required>
             <InsurerLogoGrid
               value={formData.currentInsurer}
-              onValueChange={(value) => {
-                updateFormData({ currentInsurer: value });
-                notify();
-              }}
+              onValueChange={(value) => updateFormData({ currentInsurer: value })}
             />
           </FormFieldWrapper>
 
           <FormFieldWrapper label={t("forms.subsidy.currentDeductible")}>
             <OptionButtons
               value={formData.currentDeductible}
-              onValueChange={(value) => updateFormData({ currentDeductible: value })}
+              onValueChange={(value) => { updateFormData({ currentDeductible: value }); notify(); }}
               ariaLabel={t("forms.subsidy.currentDeductible")}
               columns={3}
               options={[
