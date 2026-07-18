@@ -230,7 +230,7 @@ const Services = () => {
                 {t('services.helpDescription')}
               </p>
               <Button size="lg" asChild>
-                <a href="https://calendly.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://calendly.com/lesiteoptimis/30min" target="_blank" rel="noopener noreferrer">
                   {t('common.takeAppointment')}
                 </a>
               </Button>
