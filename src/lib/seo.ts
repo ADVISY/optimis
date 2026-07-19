@@ -16,7 +16,7 @@
 
 import { localizedRoutes } from "@/utils/localizedRoutes";
 
-export const LANGS = ["fr", "de", "it"] as const;
+export const LANGS = ["fr", "de", "it", "en"] as const;
 export type Lang = (typeof LANGS)[number];
 
 // Domaine de prod (jamais de hardcode lovable). Surchargé en build via VITE_SITE_URL.
@@ -34,11 +34,14 @@ const HREFLANG: Record<Lang, string> = {
   fr: "fr-CH",
   de: "de-CH",
   it: "it-CH",
+  // EN cible une audience internationale (expats/frontaliers) : hreflang générique.
+  en: "en",
 };
 const OG_LOCALE: Record<Lang, string> = {
   fr: "fr_CH",
   de: "de_CH",
   it: "it_CH",
+  en: "en_GB",
 };
 
 export interface SeoMeta {
@@ -307,13 +310,17 @@ const FALLBACK_META: Record<Lang, SeoMeta> = {
     title: `Optimis – Comparatore assicurazioni Svizzera`,
     description: `Confronta gratuitamente le assicurazioni svizzere e trova le offerte migliori con Optimis.`,
   },
+  en: {
+    title: `Optimis – Swiss insurance comparison`,
+    description: `Compare Swiss insurance for free and find the best offers with Optimis.`,
+  },
 };
 
 // ----------------------------------------------------------------------------
 // Helpers URL
 // ----------------------------------------------------------------------------
 export function isLang(value: string | undefined): value is Lang {
-  return value === "fr" || value === "de" || value === "it";
+  return value === "fr" || value === "de" || value === "it" || value === "en";
 }
 
 /** URL absolue d'une page localisée (slug "" = accueil de langue → /fr). */
@@ -379,7 +386,7 @@ export const COMPARATOR_ROUTE_KEYS = new Set<string>([
   "mobilePackage",
 ]);
 
-const HOME_NAME: Record<Lang, string> = { fr: "Accueil", de: "Startseite", it: "Home" };
+const HOME_NAME: Record<Lang, string> = { fr: "Accueil", de: "Startseite", it: "Home", en: "Home" };
 
 /** Fil d'Ariane (Home > page courante) pour toute page interne. */
 export function buildBreadcrumbSchema(seo: ResolvedSeo): Record<string, unknown> {

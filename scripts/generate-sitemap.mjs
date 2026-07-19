@@ -21,8 +21,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 
 const SITE_URL = (process.env.SITE_URL ?? "https://le-comparateur-optimis.ch").replace(/\/$/, "");
-const LANGS = ["fr", "de", "it"];
-const HREFLANG = { fr: "fr-CH", de: "de-CH", it: "it-CH" };
+const LANGS = ["fr", "de", "it", "en"];
+// EN cible une audience internationale (expats/frontaliers) : hreflang générique.
+const HREFLANG = { fr: "fr-CH", de: "de-CH", it: "it-CH", en: "en" };
 const TODAY = new Date().toISOString().slice(0, 10);
 
 // Pages à NE PAS indexer (tunnel / remerciement) + doublons de contenu.
@@ -43,7 +44,8 @@ let m;
 while ((m = routeRe.exec(routesSrc)) !== null) {
   const [, key, fr, de, it] = m;
   if (EXCLUDE.has(key)) continue;
-  routes.push({ key, slugs: { fr, de, it } });
+  // EN réutilise les slugs FR (pas de slugs dédiés → cf. localizedRoutes.ts).
+  routes.push({ key, slugs: { fr, de, it, en: fr } });
 }
 
 // ----------------------------------------------------------------------------

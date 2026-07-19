@@ -6,6 +6,9 @@ export interface LocalizedRoutes {
     fr: string;
     de: string;
     it: string;
+    // English (EN) reuses the French slugs — EN isn't an SEO priority market,
+    // so no dedicated slugs are defined; consumers fall back to `fr`.
+    en?: string;
   };
 }
 

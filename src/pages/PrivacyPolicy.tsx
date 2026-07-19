@@ -8,6 +8,7 @@ const PrivacyPolicy = () => {
     { title: "introTitle", content: "introContent" },
     { title: "dataCollectionTitle", content: "dataCollectionContent" },
     { title: "dataUsageTitle", content: "dataUsageContent" },
+    { title: "dataSharingTitle", content: "dataSharingContent" },
     { title: "rightsTitle", content: "rightsContent" },
     { title: "contactTitle", content: "contactContent" },
   ];

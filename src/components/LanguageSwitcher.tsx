@@ -23,7 +23,7 @@ const LanguageSwitcher = () => {
   // Find the route key for a given slug in any language
   const findRouteKeyFromSlug = (slug: string): string | null => {
     for (const [key, routes] of Object.entries(localizedRoutes)) {
-      if (routes.fr === slug || routes.de === slug || routes.it === slug) {
+      if (routes.fr === slug || routes.de === slug || routes.it === slug || routes.en === slug) {
         return key;
       }
     }

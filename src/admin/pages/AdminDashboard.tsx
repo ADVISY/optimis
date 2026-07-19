@@ -18,14 +18,6 @@ const MONTH_LABELS = [
 ];
 const MONTH_SHORT = ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Déc"];
 
-// Données mensuelles : tout à zéro tant qu'il n'y a pas d'activité réelle
-const EMPTY_MONTHLY = Array.from({ length: 12 }, () => ({
-  revenue: 0,
-  leads: 0,
-  invoices_issued: 0,
-  invoices_pending: 0,
-}));
-
 export default function AdminDashboard() {
   // "all" = année / 0..11 = mois
   const [period, setPeriod] = useState<"all" | number>("all");
@@ -105,26 +97,29 @@ export default function AdminDashboard() {
     },
   });
 
+  // Factures : émises (non-brouillon) + en attente (envoyée / en_attente), par période.
+  // Clé sous "admin-stats" pour profiter des invalidations existantes (création/màj/suppression facture).
+  const { data: invoiceRows } = useQuery({
+    queryKey: ["admin-stats", "invoices"],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("admin_invoices")
+        .select("status, invoice_date");
+      return data ?? [];
+    },
+  });
 
-  const monthly = useMemo(
-    () => EMPTY_MONTHLY.map((m, i) => ({ ...m, month: MONTH_SHORT[i], monthIndex: i })),
-    []
-  );
-
-  const periodStats = useMemo(() => {
-    if (period === "all") {
-      return monthly.reduce(
-        (acc, m) => ({
-          revenue: acc.revenue + m.revenue,
-          leads: acc.leads + m.leads,
-          invoices_issued: acc.invoices_issued + m.invoices_issued,
-          invoices_pending: acc.invoices_pending + m.invoices_pending,
-        }),
-        { revenue: 0, leads: 0, invoices_issued: 0, invoices_pending: 0 }
-      );
-    }
-    return monthly[period];
-  }, [monthly, period]);
+  const invoiceStats = useMemo(() => {
+    const rows = (invoiceRows ?? []).filter((r: any) => {
+      if (period === "all") return true;
+      const d = r.invoice_date ? new Date(r.invoice_date) : null;
+      return !!d && !isNaN(d.getTime()) && d.getMonth() === period;
+    });
+    return {
+      issued: rows.filter((r: any) => r.status && r.status !== "brouillon").length,
+      pending: rows.filter((r: any) => r.status === "envoyee" || r.status === "en_attente").length,
+    };
+  }, [invoiceRows, period]);
 
   const { data: recentClients } = useQuery({
     queryKey: ["admin-recent-clients"],
@@ -197,8 +192,8 @@ export default function AdminDashboard() {
   const secondaryCards = [
     { label: "Clients actifs", value: activeClientsCount ?? "—", icon: Users, color: "from-emerald-500/10 to-emerald-500/5" },
     { label: "Leads livrés", value: leadsStats?.distribue ?? "—", icon: ShoppingBag, color: "from-blue-500/10 to-blue-500/5" },
-    { label: "Factures émises", value: periodStats.invoices_issued, icon: FileText, color: "from-violet-500/10 to-violet-500/5" },
-    { label: "Factures en attente", value: periodStats.invoices_pending, icon: Clock, color: "from-orange-500/10 to-orange-500/5" },
+    { label: "Factures émises", value: invoiceStats.issued, icon: FileText, color: "from-violet-500/10 to-violet-500/5" },
+    { label: "Factures en attente", value: invoiceStats.pending, icon: Clock, color: "from-orange-500/10 to-orange-500/5" },
   ];
 
   const statusVariant = (status: string) => {

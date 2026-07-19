@@ -382,6 +382,10 @@ export default function AdminOrders() {
           subcategory: l.subcategory,
           domain: l.subcategory as any,
           quantity: l.quantity,
+          // Lignes remplacées (delete + insert) : on réinitialise le solde restant
+          // sur la nouvelle quantité, sinon il retomberait au défaut 0 (commande
+          // affichée « livrée » et inéligible à la distribution).
+          solde_restant: l.quantity,
           unit_price: l.unit_price,
           currency: l.currency,
           fx_rate_to_chf: l.fx_rate_to_chf,
@@ -412,6 +416,9 @@ export default function AdminOrders() {
         subcategory: l.subcategory,
         domain: l.subcategory as any, // compat
         quantity: l.quantity,
+        // Solde initial = quantité commandée (le défaut SQL est 0 → sinon la
+        // commande serait inéligible à la distribution et affichée « livrée »).
+        solde_restant: l.quantity,
         unit_price: l.unit_price,
         currency: l.currency,
         fx_rate_to_chf: l.fx_rate_to_chf,
