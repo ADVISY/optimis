@@ -28,6 +28,22 @@
     "errorFieldsDesc": "Please enter your name and your review.",
     "errorSubmitTitle": "Unable to send"
   },
+  "avisPrompt": {
+    "title": "Your experience matters!",
+    "subtitle": "Did you enjoy the Optimis comparator? Share your review in just a few seconds.",
+    "namePlaceholder": "Your first name (optional)",
+    "cityPlaceholder": "City (optional)",
+    "commentPlaceholder": "What did you think of the site? (optional)",
+    "submit": "Send",
+    "later": "Later",
+    "rating5": "Excellent!",
+    "rating4": "Very good",
+    "rating3": "Thanks for your feedback",
+    "anonymous": "Optimis customer",
+    "defaultComment": "Positive experience with the Optimis comparator.",
+    "thanksTitle": "Thank you so much!",
+    "thanksDesc": "Your review has been recorded. It will appear on our website after verification."
+  },
   "common": {
     "home": "Home",
     "compareOffers": "Compare offers",

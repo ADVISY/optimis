@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import logoOptimis from "@/assets/logo.svg";
 
 export default function PortalLogin() {
   const navigate = useNavigate();
+  const [courtierLogoError, setCourtierLogoError] = useState(false);
 
   return (
     <div
@@ -65,8 +67,17 @@ export default function PortalLogin() {
             className="group w-full bg-white rounded-2xl p-6 flex items-center justify-between text-left shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 transition-all duration-300"
           >
             <div className="flex items-center gap-4">
-              <div className="h-12 w-12 rounded-xl bg-slate-900 flex items-center justify-center">
-                <span className="text-white text-xl font-bold">C</span>
+              <div className="h-12 w-12 rounded-xl bg-slate-900 flex items-center justify-center overflow-hidden">
+                {courtierLogoError ? (
+                  <span className="text-white text-xl font-bold">C</span>
+                ) : (
+                  <img
+                    src="/lyta-courtier.png"
+                    alt="LYTA"
+                    className="h-full w-full object-contain p-1"
+                    onError={() => setCourtierLogoError(true)}
+                  />
+                )}
               </div>
               <div>
                 <div className="text-base font-semibold text-[hsl(var(--optimis-green))]">

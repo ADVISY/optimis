@@ -4,6 +4,7 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Phone, Mail, Clock, Shield, Banknote } from "lucide-react";
 import LocalizedLink from "@/components/LocalizedLink";
+import AvisPromptDialog from "@/components/AvisPromptDialog";
 import { fireLeadConversion, getLastLeadId } from "@/lib/leadTracking";
 
 const ANNUAL_AVG = 3500;
@@ -135,6 +136,7 @@ const MerciLpp = () => {
           </div>
         </div>
       </div>
+      <AvisPromptDialog />
     </Layout>
   );
 };

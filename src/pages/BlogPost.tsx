@@ -118,6 +118,36 @@ const CATEGORY_CTA: Record<string, BlogCta> = {
   },
 };
 
+// Le champ `category` regroupe TOUT le domaine santé sous "Assurance santé"
+// (prénatale, complémentaire/LCA, dentaire, médecine douce…). Ces articles
+// n'ont donc pas à voir avec le comparateur maladie générique. On affine par
+// sujet, détecté dans le slug (sans accents), pour router vers LA bonne landing.
+const PRENATAL_CTA: BlogCta = {
+  to: "/assurance-prenatale-offres",
+  heading: "Protégez votre bébé avant la naissance",
+  subtext:
+    "Souscrivez une complémentaire prénatale sans réserve ni questionnaire de santé. Comparez gratuitement avant l'accouchement.",
+  button: "Comparer l'assurance prénatale",
+};
+
+const COMPLEMENTARY_CTA: BlogCta = {
+  to: "/assurance-complementaire-offres",
+  heading: "Complétez votre assurance de base (LCA)",
+  subtext:
+    "Médecine douce, dentaire, hospitalisation privée, lunettes… Comparez les complémentaires santé au meilleur prix.",
+  button: "Comparer les complémentaires",
+};
+
+// Sujets santé plus fins que la catégorie. Retourne un CTA spécifique ou null.
+const resolveHealthTopicCta = (slug: string): BlogCta | null => {
+  const s = slug.toLowerCase();
+  if (/prenatal|maternit|cesarienne|grossesse|accouchement|nouveau-ne|bebe|naissance/.test(s))
+    return PRENATAL_CTA;
+  if (/complementaire|complement|-lca-|dentaire|orthodont|medecine-alternative|medecines-douces|medecine-douce|hospitalisation|optique|lunettes/.test(s))
+    return COMPLEMENTARY_CTA;
+  return null;
+};
+
 // CTA inline compact, injecté EN HAUT de l'article (avant lecture) et AU MILIEU
 // du contenu. Objectif funnel SEO : capter l'intention dès l'arrivée organique
 // et la relancer en cours de lecture, sans attendre le CTA de fin d'article.
@@ -169,8 +199,12 @@ const BlogPost = () => {
   };
 
   // CTA contextuel : on route vers le formulaire correspondant à la catégorie
-  // de l'article (fallback sur le comparateur générique si catégorie inconnue).
-  const cta = CATEGORY_CTA[post.category] ?? DEFAULT_CTA;
+  // de l'article. Pour la catégorie fourre-tout "Assurance santé", on affine
+  // d'abord par sujet (prénatale, complémentaire…) avant le fallback catégorie.
+  const cta =
+    (post.category === "Assurance santé" ? resolveHealthTopicCta(post.slug) : null) ??
+    CATEGORY_CTA[post.category] ??
+    DEFAULT_CTA;
 
   // Get related posts from same category
   const relatedPosts = blogPosts

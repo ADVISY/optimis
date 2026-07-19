@@ -28,6 +28,22 @@
     "errorFieldsDesc": "Bitte geben Sie Ihren Namen und Ihre Bewertung an.",
     "errorSubmitTitle": "Senden nicht möglich"
   },
+  "avisPrompt": {
+    "title": "Ihre Erfahrung zählt!",
+    "subtitle": "Hat Ihnen der Optimis-Vergleich gefallen? Teilen Sie Ihre Bewertung in wenigen Sekunden.",
+    "namePlaceholder": "Ihr Vorname (optional)",
+    "cityPlaceholder": "Ort (optional)",
+    "commentPlaceholder": "Wie fanden Sie die Website? (optional)",
+    "submit": "Senden",
+    "later": "Später",
+    "rating5": "Ausgezeichnet!",
+    "rating4": "Sehr gut",
+    "rating3": "Danke für Ihr Feedback",
+    "anonymous": "Optimis-Kunde",
+    "defaultComment": "Positive Erfahrung mit dem Optimis-Vergleich.",
+    "thanksTitle": "Vielen Dank!",
+    "thanksDesc": "Ihre Bewertung wurde gespeichert. Sie erscheint nach der Prüfung auf unserer Website."
+  },
   "common": {
     "home": "Startseite",
     "compareOffers": "Angebote vergleichen",

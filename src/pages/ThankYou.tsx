@@ -5,6 +5,7 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight, ShieldCheck } from "lucide-react";
 import LocalizedLink from "@/components/LocalizedLink";
+import AvisPromptDialog from "@/components/AvisPromptDialog";
 import { fireLeadConversion, getLastLeadId, getLastFormType } from "@/lib/leadTracking";
 
 const ThankYou = () => {
@@ -69,6 +70,7 @@ const ThankYou = () => {
           )}
         </div>
       </div>
+      <AvisPromptDialog />
     </Layout>
   );
 };

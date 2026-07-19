@@ -4,6 +4,7 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Phone, Mail, Clock, Shield } from "lucide-react";
 import LocalizedLink from "@/components/LocalizedLink";
+import AvisPromptDialog from "@/components/AvisPromptDialog";
 import { fireLeadConversion, getLastLeadId } from "@/lib/leadTracking";
 
 const MerciHypotheque = () => {
@@ -102,6 +103,7 @@ const MerciHypotheque = () => {
           </div>
         </div>
       </div>
+      <AvisPromptDialog />
     </Layout>
   );
 };

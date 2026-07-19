@@ -4,6 +4,7 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Shield } from "lucide-react";
 import LocalizedLink from "@/components/LocalizedLink";
+import AvisPromptDialog from "@/components/AvisPromptDialog";
 import { fireLeadConversion, getLastLeadId } from "@/lib/leadTracking";
 
 interface Props {
@@ -64,6 +65,7 @@ const MerciGeneric = ({ pageKey, titleKey, titleDefault, messageKey, messageDefa
           </div>
         </div>
       </div>
+      <AvisPromptDialog />
     </Layout>
   );
 };
