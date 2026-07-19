@@ -336,9 +336,9 @@ const Header = () => {
         <div className="hidden lg:flex items-center gap-3 ml-auto">
           <LanguageSwitcher />
           <Link
-            to="/admin/login"
-            aria-label="Espace admin"
-            title="Espace admin"
+            to="/connexion"
+            aria-label={t('nav.login', 'Connexion')}
+            title={t('nav.login', 'Connexion')}
             className="inline-flex items-center justify-center h-9 w-9 rounded-md text-foreground/40 hover:text-primary hover:bg-secondary transition-colors"
           >
             <Lock className="h-4 w-4" />
@@ -454,6 +454,15 @@ const Header = () => {
                     {t('common.takeAppointment')}
                   </a>
                 </Button>
+                <Link
+                  to="/connexion"
+                  onClick={() => setIsOpen(false)}
+                  aria-label={t('nav.login', 'Connexion')}
+                  className="inline-flex items-center justify-center gap-2 py-2 text-sm font-medium text-foreground/40 transition-colors hover:text-primary"
+                >
+                  <Lock className="h-4 w-4" />
+                  {t('nav.login', 'Connexion')}
+                </Link>
               </div>
             </div>
           </SheetContent>

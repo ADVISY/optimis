@@ -54,6 +54,7 @@ import EstimationImmobiliere from "./pages/EstimationImmobiliere";
 import ComparateurEstimation from "./pages/comparateurs/ComparateurEstimation";
 import Partenaires from "./pages/Partenaires";
 import ComparateurComplementaire from "./pages/comparateurs/ComparateurComplementaire";
+import Avis from "./pages/Avis";
 
 import { localizedRoutes } from "./utils/localizedRoutes";
 import Seo from "@/components/Seo";
@@ -116,6 +117,9 @@ const LanguageRoutes = () => {
         {/* Blog */}
         <Route path="/blog" element={<><Seo routeKey="blog" /><Blog /></>} />
         <Route path="/blog/:slug" element={<BlogPost />} />
+
+        {/* Avis clients (soumission publique) */}
+        <Route path="/avis" element={<Avis />} />
         
         {/* Institutional pages - all language variants */}
         {createLocalizedRoutes("privacyPolicy", <PrivacyPolicy />)}

@@ -257,6 +257,11 @@ function buildProspectEmail(prenom: string, produitLabel: string): string {
             </table>
           </div>
 
+          <div style="text-align:center; margin:0 0 28px;">
+            <p class="light-text-gray" style="margin:0 0 12px; font-size:14px; line-height:1.5; color:#64748B !important;">Un instant pour nous aider à progresser ?</p>
+            <a href="https://le-comparateur-optimis.ch/fr/avis" style="display:inline-block; background-color:#ffffff !important; color:#34664B !important; text-decoration:none; font-size:14px; font-weight:600; padding:10px 22px; border:1.5px solid #34664B; border-radius:10px;">Donner mon avis sur le site</a>
+          </div>
+
           <p class="light-text-gray" style="margin:0; font-size:14px; line-height:1.5; color:#64748B !important; text-align:center;">À très bientôt,<br><strong class="light-text-green" style="color:#34664B !important; font-weight:600;">L'équipe Optimis</strong></p>
         </td></tr>
         <tr><td class="light-bg-footer" style="padding:24px 48px; background-color:#F8FAFC !important; border-top:1px solid #E2E8F0; text-align:center;">

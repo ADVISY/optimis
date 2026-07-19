@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Users, ShoppingBag, FileText, LogOut, User, Settings, Package, Inbox, Send, History } from "lucide-react";
+import { LayoutDashboard, Users, ShoppingBag, FileText, LogOut, User, Settings, Package, Inbox, Send, History, Star } from "lucide-react";
 import { useAdminAuth } from "@/admin/hooks/useAdminAuth";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -13,6 +13,7 @@ const navItems = [
   { to: "/admin/commandes", label: "Commandes", icon: ShoppingBag, end: false },
   { to: "/admin/factures", label: "Factures", icon: FileText, end: false },
   { to: "/admin/produits", label: "Produits", icon: Package, end: false },
+  { to: "/admin/avis", label: "Avis", icon: Star, end: false },
   { to: "/admin/canaux", label: "Canaux", icon: Send, end: false },
   { to: "/admin/distributions", label: "Distributions", icon: History, end: false },
   { to: "/admin/parametres", label: "Paramètres", icon: Settings, end: false },
@@ -48,8 +49,22 @@ export function AdminSidebar() {
     refetchInterval: 30000,
   });
 
+  // Badge "Avis en attente" sur l'onglet Avis
+  const { data: avisCount } = useQuery({
+    queryKey: ["sidebar-avis-count"],
+    queryFn: async () => {
+      const { count } = await (supabase as any)
+        .from("avis")
+        .select("*", { count: "exact", head: true })
+        .eq("statut", "en_attente");
+      return count ?? 0;
+    },
+    refetchInterval: 30000,
+  });
+
   const badges: Record<string, number> = {
     "/admin/leads": leadsCount ?? 0,
+    "/admin/avis": avisCount ?? 0,
   };
 
   const handleLogout = async () => {

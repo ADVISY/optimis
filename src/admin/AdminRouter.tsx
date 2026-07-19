@@ -14,6 +14,7 @@ import AdminLeads from "./pages/AdminLeads";
 import AdminCanaux from "./pages/AdminCanaux";
 import AdminDistributions from "./pages/AdminDistributions";
 import AdminNewCabinet from "./pages/AdminNewCabinet";
+import AdminAvis from "./pages/AdminAvis";
 
 export default function AdminRouter() {
   return (
@@ -30,6 +31,7 @@ export default function AdminRouter() {
         <Route path="commandes" element={<ProtectedAdminRoute><AdminOrders /></ProtectedAdminRoute>} />
         <Route path="factures" element={<ProtectedAdminRoute><AdminInvoices /></ProtectedAdminRoute>} />
         <Route path="produits" element={<ProtectedAdminRoute><AdminProducts /></ProtectedAdminRoute>} />
+        <Route path="avis" element={<ProtectedAdminRoute><AdminAvis /></ProtectedAdminRoute>} />
         <Route path="parametres" element={<ProtectedAdminRoute><AdminSettings /></ProtectedAdminRoute>} />
         <Route path="profil" element={<ProtectedAdminRoute><AdminProfile /></ProtectedAdminRoute>} />
       </Routes>
