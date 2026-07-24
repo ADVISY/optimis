@@ -16,6 +16,7 @@ const DevenirProprietaire = () => {
   const navigate = useNavigate();
   const { localizedPath } = useLocalizedPath();
 
+  const goPlan = () => navigate(localizedPath("/plan-premier-achat"));
   const goMortgage = () => navigate(localizedPath("/hypotheque-offres"));
   const goPillar = () => navigate(localizedPath("/3eme-pilier-offres"));
 
@@ -75,7 +76,7 @@ const DevenirProprietaire = () => {
         subtitle={t("becomeOwner.subtitle")}
         buttonLabel={t("becomeOwner.heroButton")}
         buttonIcon={KeyRound}
-        onButtonClick={goMortgage}
+        onButtonClick={goPlan}
       />
 
       {/* Stats Bar */}
@@ -208,9 +209,9 @@ const DevenirProprietaire = () => {
                 {t("becomeOwner.ctaDesc")}
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Button size="sm" className="gap-1.5 md:gap-2 text-xs md:text-base h-9 md:h-11 px-4 md:px-6" onClick={goMortgage}>
-                  <Banknote className="h-3.5 w-3.5 md:h-5 md:w-5" />
-                  {t("becomeOwner.mortgageCardBtn")}
+                <Button size="sm" className="gap-1.5 md:gap-2 text-xs md:text-base h-9 md:h-11 px-4 md:px-6" onClick={goPlan}>
+                  <KeyRound className="h-3.5 w-3.5 md:h-5 md:w-5" />
+                  {t("premierAchat.heroCta")}
                 </Button>
                 <Button size="sm" variant="outline" className="gap-1.5 md:gap-2 text-xs md:text-base h-9 md:h-11 px-4 md:px-6" onClick={goPillar}>
                   <PiggyBank className="h-3.5 w-3.5 md:h-5 md:w-5" />

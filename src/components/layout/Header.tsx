@@ -131,7 +131,7 @@ const financesCategories = [
     id: "proprietaire",
     labelKey: "nav.becomeOwner",
     icon: KeyRound,
-    href: "/devenir-proprietaire",
+    href: "/plan-premier-achat",
     subLinks: [
       { labelKey: "nav.becomeOwnerGuide", href: "/devenir-proprietaire" },
       { labelKey: "nav.becomeOwnerCapacity", href: "/hypotheque-offres" },
