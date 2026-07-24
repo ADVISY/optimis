@@ -14,6 +14,7 @@ import {
   Banknote,
   Briefcase,
   Landmark,
+  KeyRound,
   Lock
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -115,15 +116,26 @@ const financesCategories = [
       { labelKey: "megaMenu.save7056Taxes", href: "/3eme-pilier-offres" },
     ]
   },
-  { 
+  {
     id: "hypotheque",
-    labelKey: "nav.mortgage", 
+    labelKey: "nav.mortgage",
     icon: Banknote,
     href: "/hypotheque",
     subLinks: [
       { labelKey: "megaMenu.compareMortgages", href: "/hypotheque-offres" },
       { labelKey: "megaMenu.mortgageTypes", href: "/hypotheque" },
       { labelKey: "megaMenu.currentRates", href: "/hypotheque" },
+    ]
+  },
+  {
+    id: "proprietaire",
+    labelKey: "nav.becomeOwner",
+    icon: KeyRound,
+    href: "/devenir-proprietaire",
+    subLinks: [
+      { labelKey: "nav.becomeOwnerGuide", href: "/devenir-proprietaire" },
+      { labelKey: "nav.becomeOwnerCapacity", href: "/hypotheque-offres" },
+      { labelKey: "nav.becomeOwnerDownPayment", href: "/3eme-pilier-offres" },
     ]
   },
   { 

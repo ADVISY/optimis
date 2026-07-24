@@ -198,6 +198,21 @@ export const SEO_META: Record<string, Partial<Record<Lang, SeoMeta>>> = {
     it: { title: `Confronto ipoteche Svizzera – migliori tassi`, description: `Confronto ipoteche Svizzera: confronta tassi fissi e SARON di più istituti e ottieni un'offerta di finanziamento gratuita.` },
   },
 
+  // --- Devenir propriétaire (guide achat immobilier) ---
+  becomeOwner: {
+    fr: { title: `Devenir propriétaire en Suisse : le guide ${YEAR}`, description: `Devenir propriétaire en Suisse : capacité d'achat, 20% de fonds propres, 2e et 3e pilier, hypothèque. Le guide complet et gratuit, étape par étape.` },
+    de: { title: `Eigentümer werden in der Schweiz: Ratgeber ${YEAR}`, description: `Eigentümer werden in der Schweiz: Kaufkraft, 20% Eigenmittel, 2. und 3. Säule, Hypothek. Der komplette und kostenlose Ratgeber, Schritt für Schritt.` },
+    it: { title: `Diventare proprietario in Svizzera: guida ${YEAR}`, description: `Diventare proprietario in Svizzera: capacità d'acquisto, 20% di fondi propri, 2° e 3° pilastro, ipoteca. La guida completa e gratuita, passo dopo passo.` },
+  },
+
+  // --- Plan Premier Achat (landing capture "devenir propriétaire") ---
+  // Univers "propriété / projet immobilier" uniquement (jamais prévoyance/pilier/vie).
+  becomeOwnerLanding: {
+    fr: { title: `Devenez propriétaire dès 300 CHF/mois – plan gratuit`, description: `Recevez gratuitement votre plan personnalisé pour devenir propriétaire en Suisse dès 300 CHF/mois. Conseil sans engagement, avec un conseiller certifié.` },
+    de: { title: `Eigentümer werden ab 300 CHF/Monat – Gratis-Plan`, description: `Erhalten Sie gratis Ihren persönlichen Plan, um in der Schweiz ab 300 CHF/Monat Eigentümer zu werden. Unverbindliche Beratung mit einem zertifizierten Berater.` },
+    it: { title: `Diventa proprietario da 300 CHF/mese – piano gratis`, description: `Ricevi gratis il tuo piano personalizzato per diventare proprietario in Svizzera da 300 CHF/mese. Consulenza senza impegno con un consulente certificato.` },
+  },
+
   // --- Pro / entreprise ---
   professionalInsurance: {
     fr: { title: `Assurance professionnelle & entreprise en Suisse`, description: `Comparez les assurances pour entreprises et indépendants en Suisse : RC professionnelle, perte de gain, choses. Protégez votre activité au meilleur prix.` },

@@ -18,6 +18,8 @@ import ProtectionJuridique from "./pages/ProtectionJuridique";
 import AssuranceMenage from "./pages/AssuranceMenage";
 import AssuranceVie from "./pages/AssuranceVie";
 import Hypotheque from "./pages/Hypotheque";
+import DevenirProprietaire from "./pages/DevenirProprietaire";
+import PlanPremierAchat from "./pages/PlanPremierAchat";
 import AssurancePro from "./pages/AssurancePro";
 import Services from "./pages/Services";
 import ForfaitMobile from "./pages/ForfaitMobile";
@@ -105,6 +107,7 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("homeInsurance", <AssuranceMenage />)}
         {createLocalizedRoutes("lifeInsurance", <AssuranceVie />)}
         {createLocalizedRoutes("mortgage", <Hypotheque />)}
+        {createLocalizedRoutes("becomeOwner", <DevenirProprietaire />)}
         {createLocalizedRoutes("professionalInsurance", <AssurancePro />)}
         {createLocalizedRoutes("services", <Services />)}
         {createLocalizedRoutes("mobilePackage", <ForfaitMobile />)}
@@ -149,6 +152,7 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("terminationLanding", <ComparateurResiliation />)}
         {createLocalizedRoutes("pillar3Landing", <ComparateurPilier3 />)}
         {createLocalizedRoutes("mortgageLanding", <ComparateurHypotheque />)}
+        {createLocalizedRoutes("becomeOwnerLanding", <PlanPremierAchat />)}
         {createLocalizedRoutes("businessLanding", <ComparateurProfessionnel />)}
         {createLocalizedRoutes("lppLanding", <ComparateurLpp />)}
         {createLocalizedRoutes("realEstate", <EstimationImmobiliere />)}

@@ -346,6 +346,43 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
       }
     }
 
+    // Premier Achat (landing "devenir propriétaire") : convertit les codes de
+    // qualification en libellés lisibles pour le Sheet / Zapier. Le statut de
+    // distribution et l'âge brut sont calculés côté formulaire et passés tels quels.
+    if (formType === "premier-achat") {
+      const yesNoMap: Record<string, string> = {
+        yes: t("common.yes"),
+        no: t("common.no"),
+      };
+      const incomeMap: Record<string, string> = {
+        "less-6000": t("forms.premierAchat.incomeLess6000", "Moins de 6'000 CHF"),
+        "6000-8000": t("forms.premierAchat.income6000to8000", "6'000 – 8'000 CHF"),
+        "more-8000": t("forms.premierAchat.incomeMore8000", "Plus de 8'000 CHF"),
+      };
+      const horizonMap: Record<string, string> = {
+        soon: t("forms.premierAchat.horizonSoon", "D'ici 1 an"),
+        "1-3-years": t("forms.premierAchat.horizon1to3", "Dans 1 à 3 ans"),
+        exploring: t("forms.premierAchat.horizonExploring", "Je me renseigne"),
+      };
+      const savingsMap: Record<string, string> = {
+        yes: t("forms.premierAchat.savingsYes", "Oui"),
+        no: t("forms.premierAchat.savingsNo", "Non"),
+        unsure: t("forms.premierAchat.savingsUnsure", "Je ne sais pas"),
+      };
+      if (typeof normalizedFormData.isRenter === "string") {
+        normalizedFormData.isRenter = yesNoMap[normalizedFormData.isRenter] ?? normalizedFormData.isRenter;
+      }
+      if (typeof normalizedFormData.incomeRange === "string") {
+        normalizedFormData.incomeRange = incomeMap[normalizedFormData.incomeRange] ?? normalizedFormData.incomeRange;
+      }
+      if (typeof normalizedFormData.purchaseHorizon === "string") {
+        normalizedFormData.purchaseHorizon = horizonMap[normalizedFormData.purchaseHorizon] ?? normalizedFormData.purchaseHorizon;
+      }
+      if (typeof normalizedFormData.hasSavings === "string") {
+        normalizedFormData.hasSavings = savingsMap[normalizedFormData.hasSavings] ?? normalizedFormData.hasSavings;
+      }
+    }
+
     // Rename fields to clean French labels for Google Sheets
     const fieldLabels: Record<string, Record<string, string>> = {
       // Common fields (applied to all forms)
@@ -420,6 +457,17 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
         savingsAmount: "Montant d'épargne",
         investmentHorizon: "Horizon de placement",
         riskProfile: "Profil de risque",
+      },
+      "premier-achat": {
+        // NB: on NE renomme PAS `age` (clé technique lue par l'edge + le trigger
+        // pour peupler la colonne `age` et appliquer la règle âge > 63).
+        isRenter: "Locataire actuellement",
+        incomeRange: "Revenu mensuel brut du ménage",
+        purchaseHorizon: "Horizon d'achat",
+        hasSavings: "Épargne déjà en cours",
+        birthYear: "Année de naissance",
+        statutDistribution: "Statut de distribution",
+        motifNonDistribution: "Motif non-distribution",
       },
       mortgage: {
         projectType: "Type de projet",
