@@ -11,6 +11,8 @@ interface FormNavigationProps {
   isSubmitting?: boolean;
   isLastStep?: boolean;
   canProceed?: boolean;
+  /** Libellé personnalisé du bouton final (défaut : "Voir mes offres"). */
+  lastStepLabel?: string;
 }
 
 const FormNavigation = ({
@@ -21,6 +23,7 @@ const FormNavigation = ({
   isSubmitting = false,
   isLastStep = false,
   canProceed = true,
+  lastStepLabel,
 }: FormNavigationProps) => {
   const { t } = useTranslation();
   const [shaking, setShaking] = useState(false);
@@ -71,8 +74,14 @@ const FormNavigation = ({
         ) : isLastStep ? (
           <>
             <Sparkles className="h-4 w-4 md:h-5 md:w-5 animate-bounce" />
-            <span className="hidden sm:inline">{t("forms.seeMyOffers", { defaultValue: t("forms.compare") })}</span>
-            <span className="sm:hidden">{t("forms.compare")}</span>
+            {lastStepLabel ? (
+              <span>{lastStepLabel}</span>
+            ) : (
+              <>
+                <span className="hidden sm:inline">{t("forms.seeMyOffers", { defaultValue: t("forms.compare") })}</span>
+                <span className="sm:hidden">{t("forms.compare")}</span>
+              </>
+            )}
           </>
         ) : (
           <>
