@@ -21,6 +21,7 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
+import CategoryHero from "@/components/home/CategoryHero";
 import llamaMascot from "@/assets/llama-mascot.png";
 
 const PlanPremierAchat = () => {
@@ -61,60 +62,14 @@ const PlanPremierAchat = () => {
 
   return (
     <Layout>
-      {/* Hero */}
-      <section className="gradient-optimis relative overflow-hidden">
-        <div className="container py-12 md:py-20">
-          <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
-            <div className="space-y-5 text-center lg:text-left animate-fade-in">
-              <div className="flex gap-1 justify-center lg:justify-start">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-accent text-xl md:text-2xl drop-shadow-sm">★</span>
-                ))}
-              </div>
-              <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-[1.05] tracking-tight text-foreground">
-                {t("premierAchat.heroTitle")}
-              </h1>
-              <p className="text-base md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                {t("premierAchat.heroSubtitle")}
-              </p>
-              <div className="flex flex-wrap gap-3 justify-center lg:justify-start pt-1">
-                <Button size="lg" className="gap-2 h-12 text-base px-7" onClick={goToForm}>
-                  <KeyRound className="h-5 w-5" />
-                  {t("premierAchat.heroCta")}
-                </Button>
-              </div>
-              <div className="flex flex-wrap gap-x-5 gap-y-2 justify-center lg:justify-start pt-2 text-sm font-medium text-foreground/80">
-                <span className="flex items-center gap-1.5"><BadgeCheck className="h-4 w-4 text-primary" />{t("premierAchat.heroTrust1")}</span>
-                <span className="flex items-center gap-1.5"><Gift className="h-4 w-4 text-primary" />{t("premierAchat.heroTrust2")}</span>
-                <span className="flex items-center gap-1.5"><Award className="h-4 w-4 text-primary" />{t("premierAchat.heroTrust3")}</span>
-              </div>
-            </div>
-
-            {/* Value / CTA card (hero-side on desktop) — ouvre le tunnel dédié */}
-            <div className="animate-fade-in">
-              <Card className="border-primary/20 shadow-premium overflow-hidden">
-                <CardContent className="p-6 md:p-8 text-center">
-                  <img src={llamaMascot} alt="Mascotte Optimis" className="h-20 md:h-28 mx-auto mb-4" />
-                  <h2 className="text-xl md:text-2xl font-bold text-foreground">{t("premierAchat.formTitle")}</h2>
-                  <p className="text-sm text-muted-foreground mt-1 mb-5">{t("premierAchat.formSubtitle")}</p>
-                  <ul className="space-y-2.5 text-left mb-6 max-w-xs mx-auto">
-                    {reassurance.map((r) => (
-                      <li key={r.labelKey} className="flex items-center gap-2.5">
-                        <r.icon className="h-5 w-5 text-primary shrink-0" />
-                        <span className="text-sm font-medium text-foreground">{t(r.labelKey)}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Button size="lg" className="gap-2 w-full h-12 text-base" onClick={goToForm}>
-                    <KeyRound className="h-5 w-5" />
-                    {t("premierAchat.heroCta")}
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero — aligné sur les autres LP produit (CategoryHero) */}
+      <CategoryHero
+        pageTitle={t("premierAchat.heroTitle")}
+        subtitle={t("premierAchat.heroSubtitle")}
+        buttonLabel={t("premierAchat.heroCta")}
+        buttonIcon={KeyRound}
+        onButtonClick={goToForm}
+      />
 
       {/* Reassurance strip */}
       <section className="border-y bg-muted/30">

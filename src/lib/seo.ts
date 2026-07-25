@@ -210,9 +210,9 @@ export const SEO_META: Record<string, Partial<Record<Lang, SeoMeta>>> = {
   // --- Plan Premier Achat (landing capture "devenir propriétaire") ---
   // Univers "propriété / projet immobilier" uniquement (jamais prévoyance/pilier/vie).
   becomeOwnerLanding: {
-    fr: { title: `Devenez propriétaire dès 300 CHF/mois – plan gratuit`, description: `Recevez gratuitement votre plan personnalisé pour devenir propriétaire en Suisse dès 300 CHF/mois. Conseil sans engagement, avec un conseiller certifié.` },
-    de: { title: `Eigentümer werden ab 300 CHF/Monat – Gratis-Plan`, description: `Erhalten Sie gratis Ihren persönlichen Plan, um in der Schweiz ab 300 CHF/Monat Eigentümer zu werden. Unverbindliche Beratung mit einem zertifizierten Berater.` },
-    it: { title: `Diventa proprietario da 300 CHF/mese – piano gratis`, description: `Ricevi gratis il tuo piano personalizzato per diventare proprietario in Svizzera da 300 CHF/mese. Consulenza senza impegno con un consulente certificato.` },
+    fr: { title: `Plan d'action premier achat immobilier – Suisse`, description: `Recevez gratuitement votre plan d'action personnalisé pour réussir votre premier achat immobilier en Suisse. Conseil sans engagement, avec un conseiller certifié.` },
+    de: { title: `Aktionsplan erster Immobilienkauf – Schweiz`, description: `Erhalten Sie gratis Ihren persönlichen Aktionsplan für Ihren ersten Immobilienkauf in der Schweiz. Unverbindliche Beratung mit einem zertifizierten Berater.` },
+    it: { title: `Piano d'azione primo acquisto immobiliare – Svizzera`, description: `Ricevi gratis il tuo piano d'azione personalizzato per il tuo primo acquisto immobiliare in Svizzera. Consulenza senza impegno con un consulente certificato.` },
   },
 
   // --- Pro / entreprise ---
