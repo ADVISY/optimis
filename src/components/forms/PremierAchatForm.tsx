@@ -17,10 +17,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import FormContainer from "@/components/forms/FormContainer";
 import FormFieldWrapper from "@/components/forms/FormField";
 import FormStep from "@/components/forms/FormStep";
-import FormProgress from "@/components/forms/FormProgress";
-import FormGuide from "@/components/forms/FormGuide";
 import FormNavigation from "@/components/forms/FormNavigation";
 import { PhoneInputCH } from "@/components/forms/PhoneInputCH";
 import LocalizedLink from "@/components/LocalizedLink";
@@ -29,7 +28,8 @@ import { cn } from "@/lib/utils";
 
 // ----------------------------------------------------------------------------
 // PremierAchatForm — "Plan d'action propriétaire" en tunnel guidé multi-étapes.
-//   • 1 question par écran, mascotte Optimis qui accompagne, barre de progression.
+//   • Tunnel plein écran identique aux autres comparateurs : FormContainer
+//     (mascotte latérale desktop / barre mobile + progression + nav épinglée).
 //   • Même backend que la version single-écran : formType "premier-achat",
 //     même règle de distribution (âge > 63 / non-locataire / revenu < 6'000),
 //     `age` numérique brut, tags statutDistribution/motifNonDistribution,
@@ -67,7 +67,7 @@ const initialData: PremierAchatFormData = {
 const TOTAL_STEPS = 8;
 const CURRENT_YEAR = new Date().getFullYear();
 
-/** Boutons de choix empilés (pleine largeur) — lisibles dans une carte étroite. */
+/** Boutons de choix empilés (pleine largeur) — lisibles dans le tunnel. */
 const ChoiceButtons = ({
   value,
   onChange,
@@ -90,10 +90,10 @@ const ChoiceButtons = ({
           aria-checked={selected}
           onClick={() => onChange(opt.value)}
           className={cn(
-            "flex items-center rounded-xl border-2 px-4 py-3.5 text-left text-sm md:text-base font-medium transition-all duration-200",
+            "flex h-12 md:h-14 items-center rounded-xl border-2 bg-white px-4 text-left text-sm md:text-base font-medium transition-all duration-200",
             selected
-              ? "border-primary bg-primary/5 text-primary ring-2 ring-primary/20 shadow-sm"
-              : "border-border bg-white hover:border-primary/50 text-foreground",
+              ? "border-primary ring-2 ring-primary/30 shadow-md text-primary"
+              : "border-emerald-100 hover:border-emerald-400 hover:shadow-sm text-gray-900",
           )}
         >
           <span className="flex-1">{opt.label}</span>
@@ -267,223 +267,215 @@ const PremierAchatForm = () => {
   ];
 
   return (
-    <div className="space-y-4">
-      {/* Mascotte accompagnante */}
-      <FormGuide
-        currentStep={currentStep}
-        totalSteps={TOTAL_STEPS}
-        clientName={formData.firstName}
-        messages={guideMessages}
-        product="immobilier"
-        variant="bar"
-      />
+    <FormContainer
+      title={t("forms.premierAchat.title", "Mon plan d'action propriétaire")}
+      description={t("forms.premierAchat.description", "Quelques questions et je prépare ton plan pour devenir propriétaire.")}
+      currentStep={currentStep}
+      totalSteps={TOTAL_STEPS}
+      clientName={formData.firstName}
+      product="immobilier"
+      guideMessages={guideMessages}
+      navigation={
+        <FormNavigation
+          currentStep={currentStep}
+          totalSteps={TOTAL_STEPS}
+          onPrevious={previousStep}
+          onNext={handleNext}
+          isSubmitting={isSubmitting}
+          isLastStep={isLastStep}
+          canProceed={canProceed}
+          lastStepLabel={t("forms.premierAchat.submit", "Recevoir mon plan gratuit")}
+        />
+      }
+    >
+      {/* Étape 1 : locataire ? */}
+      <FormStep isActive={currentStep === 1}>
+        <FormFieldWrapper label={t("forms.premierAchat.isRenterLabel", "Êtes-vous actuellement locataire ?")} required>
+          <ChoiceButtons
+            value={formData.isRenter}
+            onChange={(v) => { updateFormData({ isRenter: v }); notify(); }}
+            ariaLabel={t("forms.premierAchat.isRenterLabel", "Êtes-vous actuellement locataire ?")}
+            options={[
+              { value: "yes", label: t("common.yes") },
+              { value: "no", label: t("common.no") },
+            ]}
+          />
+        </FormFieldWrapper>
+      </FormStep>
 
-      {/* Progression */}
-      <FormProgress currentStep={currentStep} totalSteps={TOTAL_STEPS} />
+      {/* Étape 2 : horizon d'achat */}
+      <FormStep isActive={currentStep === 2}>
+        <FormFieldWrapper label={t("forms.premierAchat.horizonLabel", "Quand souhaitez-vous acheter ?")} required>
+          <ChoiceButtons
+            value={formData.purchaseHorizon}
+            onChange={(v) => { updateFormData({ purchaseHorizon: v }); notify(); }}
+            ariaLabel={t("forms.premierAchat.horizonLabel", "Quand souhaitez-vous acheter ?")}
+            options={horizonOptions}
+          />
+        </FormFieldWrapper>
+      </FormStep>
 
-      {/* Zone questions (1 par étape) */}
-      <div className="min-h-[190px]">
-        {/* Étape 1 : locataire ? */}
-        <FormStep isActive={currentStep === 1}>
-          <FormFieldWrapper label={t("forms.premierAchat.isRenterLabel", "Êtes-vous actuellement locataire ?")} required>
-            <ChoiceButtons
-              value={formData.isRenter}
-              onChange={(v) => { updateFormData({ isRenter: v }); notify(); }}
-              ariaLabel={t("forms.premierAchat.isRenterLabel", "Êtes-vous actuellement locataire ?")}
-              options={[
-                { value: "yes", label: t("common.yes") },
-                { value: "no", label: t("common.no") },
-              ]}
-            />
+      {/* Étape 3 : revenu du ménage */}
+      <FormStep isActive={currentStep === 3}>
+        <FormFieldWrapper label={t("forms.premierAchat.incomeLabel", "Revenu mensuel brut du ménage")} required>
+          <ChoiceButtons
+            value={formData.incomeRange}
+            onChange={(v) => { updateFormData({ incomeRange: v }); notify(); }}
+            ariaLabel={t("forms.premierAchat.incomeLabel", "Revenu mensuel brut du ménage")}
+            options={incomeOptions}
+          />
+        </FormFieldWrapper>
+      </FormStep>
+
+      {/* Étape 4 : épargne en cours */}
+      <FormStep isActive={currentStep === 4}>
+        <FormFieldWrapper label={t("forms.premierAchat.savingsLabel", "Avez-vous déjà une épargne en cours ?")} required>
+          <ChoiceButtons
+            value={formData.hasSavings}
+            onChange={(v) => { updateFormData({ hasSavings: v }); notify(); }}
+            ariaLabel={t("forms.premierAchat.savingsLabel", "Avez-vous déjà une épargne en cours ?")}
+            options={savingsOptions}
+          />
+        </FormFieldWrapper>
+      </FormStep>
+
+      {/* Étape 5 : canton (+ NPA facultatif) */}
+      <FormStep isActive={currentStep === 5}>
+        <div className="space-y-3 md:space-y-4">
+          <FormFieldWrapper label={t("forms.healthInsurance.canton")} required>
+            <Select value={formData.canton} onValueChange={(v) => { updateFormData({ canton: v }); notify(); }}>
+              <SelectTrigger className="h-12">
+                <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
+              </SelectTrigger>
+              <SelectContent>
+                {cantons.map((c) => (
+                  <SelectItem key={c.code} value={c.code}>
+                    {getCantonName(c.code, i18n.language)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </FormFieldWrapper>
-        </FormStep>
 
-        {/* Étape 2 : horizon d'achat */}
-        <FormStep isActive={currentStep === 2}>
-          <FormFieldWrapper label={t("forms.premierAchat.horizonLabel", "Quand souhaitez-vous acheter ?")} required>
-            <ChoiceButtons
-              value={formData.purchaseHorizon}
-              onChange={(v) => { updateFormData({ purchaseHorizon: v }); notify(); }}
-              ariaLabel={t("forms.premierAchat.horizonLabel", "Quand souhaitez-vous acheter ?")}
-              options={horizonOptions}
-            />
-          </FormFieldWrapper>
-        </FormStep>
-
-        {/* Étape 3 : revenu du ménage */}
-        <FormStep isActive={currentStep === 3}>
-          <FormFieldWrapper label={t("forms.premierAchat.incomeLabel", "Revenu mensuel brut du ménage")} required>
-            <ChoiceButtons
-              value={formData.incomeRange}
-              onChange={(v) => { updateFormData({ incomeRange: v }); notify(); }}
-              ariaLabel={t("forms.premierAchat.incomeLabel", "Revenu mensuel brut du ménage")}
-              options={incomeOptions}
-            />
-          </FormFieldWrapper>
-        </FormStep>
-
-        {/* Étape 4 : épargne en cours */}
-        <FormStep isActive={currentStep === 4}>
-          <FormFieldWrapper label={t("forms.premierAchat.savingsLabel", "Avez-vous déjà une épargne en cours ?")} required>
-            <ChoiceButtons
-              value={formData.hasSavings}
-              onChange={(v) => { updateFormData({ hasSavings: v }); notify(); }}
-              ariaLabel={t("forms.premierAchat.savingsLabel", "Avez-vous déjà une épargne en cours ?")}
-              options={savingsOptions}
-            />
-          </FormFieldWrapper>
-        </FormStep>
-
-        {/* Étape 5 : canton (+ NPA facultatif) */}
-        <FormStep isActive={currentStep === 5}>
-          <div className="space-y-3 md:space-y-4">
-            <FormFieldWrapper label={t("forms.healthInsurance.canton")} required>
-              <Select value={formData.canton} onValueChange={(v) => { updateFormData({ canton: v }); notify(); }}>
-                <SelectTrigger className="h-12">
-                  <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
-                </SelectTrigger>
-                <SelectContent>
-                  {cantons.map((c) => (
-                    <SelectItem key={c.code} value={c.code}>
-                      {getCantonName(c.code, i18n.language)}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </FormFieldWrapper>
-
-            <FormFieldWrapper
-              label={t("forms.healthInsurance.postalCode")}
-              htmlFor="pa-npa"
-              helpText={t("forms.premierAchat.optional", "Facultatif")}
-            >
-              <Input
-                id="pa-npa"
-                inputMode="numeric"
-                autoComplete="postal-code"
-                value={formData.postalCode}
-                onChange={(e) => updateFormData({ postalCode: e.target.value.replace(/\D/g, "").slice(0, 4) })}
-                placeholder="1000"
-                className="h-12"
-              />
-            </FormFieldWrapper>
-          </div>
-        </FormStep>
-
-        {/* Étape 6 : année de naissance */}
-        <FormStep isActive={currentStep === 6}>
           <FormFieldWrapper
-            label={t("forms.premierAchat.birthYearLabel", "Année de naissance")}
-            htmlFor="pa-birthYear"
-            required
-            error={stepErrors.birthYear}
+            label={t("forms.healthInsurance.postalCode")}
+            htmlFor="pa-npa"
+            helpText={t("forms.premierAchat.optional", "Facultatif")}
           >
             <Input
-              id="pa-birthYear"
+              id="pa-npa"
               inputMode="numeric"
-              value={formData.birthYear}
-              onChange={(e) => { updateFormData({ birthYear: e.target.value.replace(/\D/g, "").slice(0, 4) }); notifyDelayed(); }}
-              placeholder="1985"
-              className={cn("h-12", stepErrors.birthYear && "border-red-400")}
+              autoComplete="postal-code"
+              value={formData.postalCode}
+              onChange={(e) => updateFormData({ postalCode: e.target.value.replace(/\D/g, "").slice(0, 4) })}
+              placeholder="1000"
+              className="h-12"
             />
           </FormFieldWrapper>
-        </FormStep>
+        </div>
+      </FormStep>
 
-        {/* Étape 7 : identité */}
-        <FormStep isActive={currentStep === 7}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <FormFieldWrapper label={t("forms.contact.firstName")} htmlFor="pa-firstName" required error={stepErrors.firstName}>
-              <Input
-                id="pa-firstName"
-                autoComplete="given-name"
-                value={formData.firstName}
-                onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayedLong(); }}
-                className={cn("h-12", stepErrors.firstName && "border-red-400")}
-              />
-            </FormFieldWrapper>
-            <FormFieldWrapper label={t("forms.contact.lastName")} htmlFor="pa-lastName" required error={stepErrors.lastName}>
-              <Input
-                id="pa-lastName"
-                autoComplete="family-name"
-                value={formData.lastName}
-                onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayedLong(); }}
-                className={cn("h-12", stepErrors.lastName && "border-red-400")}
-              />
-            </FormFieldWrapper>
-          </div>
-        </FormStep>
+      {/* Étape 6 : année de naissance */}
+      <FormStep isActive={currentStep === 6}>
+        <FormFieldWrapper
+          label={t("forms.premierAchat.birthYearLabel", "Année de naissance")}
+          htmlFor="pa-birthYear"
+          required
+          error={stepErrors.birthYear}
+        >
+          <Input
+            id="pa-birthYear"
+            inputMode="numeric"
+            value={formData.birthYear}
+            onChange={(e) => { updateFormData({ birthYear: e.target.value.replace(/\D/g, "").slice(0, 4) }); notifyDelayed(); }}
+            placeholder="1985"
+            className={cn("h-12", stepErrors.birthYear && "border-red-400")}
+          />
+        </FormFieldWrapper>
+      </FormStep>
 
-        {/* Étape 8 : coordonnées + consentement */}
-        <FormStep isActive={currentStep === 8}>
-          <div className="space-y-4">
-            <FormFieldWrapper
-              label={t("forms.contact.phone")}
-              htmlFor="pa-phone"
-              required
-              error={stepErrors.phone}
-              helpText={t("forms.premierAchat.phoneHelp", "C'est par téléphone que votre conseiller vous rappelle gratuitement.")}
-            >
-              <PhoneInputCH
-                id="pa-phone"
-                value={formData.phone}
-                onChange={(e) => updateFormData({ phone: formatSwissPhone(e.target.value) })}
-                placeholder="79 123 45 67"
-                hasError={!!stepErrors.phone}
-              />
-            </FormFieldWrapper>
+      {/* Étape 7 : identité */}
+      <FormStep isActive={currentStep === 7}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <FormFieldWrapper label={t("forms.contact.firstName")} htmlFor="pa-firstName" required error={stepErrors.firstName}>
+            <Input
+              id="pa-firstName"
+              autoComplete="given-name"
+              value={formData.firstName}
+              onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayedLong(); }}
+              className={cn("h-12", stepErrors.firstName && "border-red-400")}
+            />
+          </FormFieldWrapper>
+          <FormFieldWrapper label={t("forms.contact.lastName")} htmlFor="pa-lastName" required error={stepErrors.lastName}>
+            <Input
+              id="pa-lastName"
+              autoComplete="family-name"
+              value={formData.lastName}
+              onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayedLong(); }}
+              className={cn("h-12", stepErrors.lastName && "border-red-400")}
+            />
+          </FormFieldWrapper>
+        </div>
+      </FormStep>
 
-            <FormFieldWrapper label={t("forms.contact.email")} htmlFor="pa-email" required error={stepErrors.email}>
-              <Input
-                id="pa-email"
-                type="email"
-                inputMode="email"
-                autoComplete="email"
-                value={formData.email}
-                onChange={(e) => updateFormData({ email: e.target.value })}
-                className={cn("h-12", stepErrors.email && "border-red-400")}
-              />
-            </FormFieldWrapper>
+      {/* Étape 8 : coordonnées + consentement */}
+      <FormStep isActive={currentStep === 8}>
+        <div className="space-y-4">
+          <FormFieldWrapper
+            label={t("forms.contact.phone")}
+            htmlFor="pa-phone"
+            required
+            error={stepErrors.phone}
+            helpText={t("forms.premierAchat.phoneHelp", "C'est par téléphone que votre conseiller vous rappelle gratuitement.")}
+          >
+            <PhoneInputCH
+              id="pa-phone"
+              value={formData.phone}
+              onChange={(e) => updateFormData({ phone: formatSwissPhone(e.target.value) })}
+              placeholder="79 123 45 67"
+              hasError={!!stepErrors.phone}
+            />
+          </FormFieldWrapper>
 
-            {/* Consentement nLPD/RGPD (bloquant) */}
-            <div>
-              <div className="flex items-start gap-3 rounded-xl border-2 border-border bg-muted/30 p-4">
-                <Checkbox
-                  id="pa-consent"
-                  checked={consent}
-                  onCheckedChange={(c) => setConsent(c === true)}
-                  className="mt-0.5"
-                />
-                <Label htmlFor="pa-consent" className="text-xs md:text-sm text-muted-foreground font-normal leading-relaxed cursor-pointer">
-                  {t("forms.premierAchat.consentPre", "J'accepte d'être recontacté(e) et que mes données soient traitées conformément à la")}{" "}
-                  <LocalizedLink to="/politique-de-confidentialite" className="text-primary underline underline-offset-2" target="_blank">
-                    {t("forms.premierAchat.consentLinkText", "politique de confidentialité")}
-                  </LocalizedLink>
-                  {t("forms.premierAchat.consentPost", ".")}
-                </Label>
-              </div>
-              {consentError && <p className="mt-1 text-xs md:text-sm text-red-500">{consentError}</p>}
+          <FormFieldWrapper label={t("forms.contact.email")} htmlFor="pa-email" required error={stepErrors.email}>
+            <Input
+              id="pa-email"
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              value={formData.email}
+              onChange={(e) => updateFormData({ email: e.target.value })}
+              className={cn("h-12", stepErrors.email && "border-red-400")}
+            />
+          </FormFieldWrapper>
+
+          {/* Consentement nLPD/RGPD (bloquant) */}
+          <div>
+            <div className="flex items-start gap-3 rounded-xl border-2 border-border bg-muted/30 p-4">
+              <Checkbox
+                id="pa-consent"
+                checked={consent}
+                onCheckedChange={(c) => setConsent(c === true)}
+                className="mt-0.5"
+              />
+              <Label htmlFor="pa-consent" className="text-xs md:text-sm text-muted-foreground font-normal leading-relaxed cursor-pointer">
+                {t("forms.premierAchat.consentPre", "J'accepte d'être recontacté(e) et que mes données soient traitées conformément à la")}{" "}
+                <LocalizedLink to="/politique-de-confidentialite" className="text-primary underline underline-offset-2" target="_blank">
+                  {t("forms.premierAchat.consentLinkText", "politique de confidentialité")}
+                </LocalizedLink>
+                {t("forms.premierAchat.consentPost", ".")}
+              </Label>
             </div>
-
-            <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
-              <Lock className="h-3.5 w-3.5" />
-              <span>{t("forms.premierAchat.privacyNote", "Vos données restent confidentielles et ne servent qu'à préparer votre plan.")}</span>
-            </div>
+            {consentError && <p className="mt-1 text-xs md:text-sm text-red-500">{consentError}</p>}
           </div>
-        </FormStep>
-      </div>
 
-      {/* Navigation épinglée */}
-      <FormNavigation
-        currentStep={currentStep}
-        totalSteps={TOTAL_STEPS}
-        onPrevious={previousStep}
-        onNext={handleNext}
-        isSubmitting={isSubmitting}
-        isLastStep={isLastStep}
-        canProceed={canProceed}
-        lastStepLabel={t("forms.premierAchat.submit", "Recevoir mon plan gratuit")}
-      />
-    </div>
+          <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+            <Lock className="h-3.5 w-3.5" />
+            <span>{t("forms.premierAchat.privacyNote", "Vos données restent confidentielles et ne servent qu'à préparer votre plan.")}</span>
+          </div>
+        </div>
+      </FormStep>
+    </FormContainer>
   );
 };
 
