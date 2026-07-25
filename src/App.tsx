@@ -47,6 +47,7 @@ import ComparateurSubside from "./pages/comparateurs/ComparateurSubside";
 import ComparateurResiliation from "./pages/comparateurs/ComparateurResiliation";
 import ComparateurPilier3 from "./pages/comparateurs/ComparateurPilier3";
 import ComparateurHypotheque from "./pages/comparateurs/ComparateurHypotheque";
+import PlanPremierAchat from "./pages/PlanPremierAchat";
 import ComparateurPremierAchat from "./pages/comparateurs/ComparateurPremierAchat";
 import ComparateurProfessionnel from "./pages/comparateurs/ComparateurProfessionnel";
 import ComparateurLpp from "./pages/comparateurs/ComparateurLpp";
@@ -152,7 +153,8 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("terminationLanding", <ComparateurResiliation />)}
         {createLocalizedRoutes("pillar3Landing", <ComparateurPilier3 />)}
         {createLocalizedRoutes("mortgageLanding", <ComparateurHypotheque />)}
-        {createLocalizedRoutes("becomeOwnerLanding", <ComparateurPremierAchat />)}
+        {createLocalizedRoutes("becomeOwnerLanding", <PlanPremierAchat />)}
+        {createLocalizedRoutes("becomeOwnerFunnel", <ComparateurPremierAchat />)}
         {createLocalizedRoutes("businessLanding", <ComparateurProfessionnel />)}
         {createLocalizedRoutes("lppLanding", <ComparateurLpp />)}
         {createLocalizedRoutes("realEstate", <EstimationImmobiliere />)}

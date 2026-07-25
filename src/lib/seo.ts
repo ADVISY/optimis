@@ -64,6 +64,8 @@ export interface ResolvedSeo {
 
 // Pages de remerciement / conversion / tunnel : à NE PAS indexer.
 export const NOINDEX_ROUTE_KEYS = new Set<string>([
+  // Tunnel de conversion (accessible via CTA depuis la LP indexée /plan-premier-achat)
+  "becomeOwnerFunnel",
   "thankYou",
   "thankYouMortgage",
   "thankYouLpp",

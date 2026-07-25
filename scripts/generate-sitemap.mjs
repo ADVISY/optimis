@@ -31,6 +31,8 @@ const EXCLUDE = new Set([
   "thankYou", "thankYouMortgage", "thankYouLpp", "thankYouRealEstate",
   "thankYouPartner", "thankYouSubsidy", "thankYouTermination", "thankYouPrenatal",
   "aboutAlt",
+  // Tunnel de conversion (noindex) : la LP indexée /plan-premier-achat le référence.
+  "becomeOwnerFunnel",
 ]);
 
 // ----------------------------------------------------------------------------

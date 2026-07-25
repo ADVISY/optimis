@@ -16,18 +16,20 @@ import {
   ArrowRight,
   KeyRound,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import PremierAchatForm from "@/components/forms/PremierAchatForm";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import llamaMascot from "@/assets/llama-mascot.png";
-
-const scrollToForm = () => {
-  document.getElementById("plan-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
-};
 
 const PlanPremierAchat = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { localizedPath } = useLocalizedPath();
+
+  // La LP est purement marketing : chaque CTA ouvre le tunnel plein écran dédié.
+  const goToForm = () => navigate(localizedPath("/plan-premier-achat-offres"));
 
   const benefits = [
     { icon: FileCheck, titleKey: "premierAchat.benefit1Title", descKey: "premierAchat.benefit1Desc" },
@@ -76,7 +78,7 @@ const PlanPremierAchat = () => {
                 {t("premierAchat.heroSubtitle")}
               </p>
               <div className="flex flex-wrap gap-3 justify-center lg:justify-start pt-1">
-                <Button size="lg" className="gap-2 h-12 text-base px-7" onClick={scrollToForm}>
+                <Button size="lg" className="gap-2 h-12 text-base px-7" onClick={goToForm}>
                   <KeyRound className="h-5 w-5" />
                   {t("premierAchat.heroCta")}
                 </Button>
@@ -88,15 +90,25 @@ const PlanPremierAchat = () => {
               </div>
             </div>
 
-            {/* Form card (hero-side on desktop) */}
-            <div id="plan-form" className="scroll-mt-24">
-              <Card className="border-primary/20 shadow-premium">
-                <CardContent className="p-5 md:p-7">
-                  <div className="mb-5 text-center">
-                    <h2 className="text-xl md:text-2xl font-bold text-foreground">{t("premierAchat.formTitle")}</h2>
-                    <p className="text-sm text-muted-foreground mt-1">{t("premierAchat.formSubtitle")}</p>
-                  </div>
-                  <PremierAchatForm />
+            {/* Value / CTA card (hero-side on desktop) — ouvre le tunnel dédié */}
+            <div className="animate-fade-in">
+              <Card className="border-primary/20 shadow-premium overflow-hidden">
+                <CardContent className="p-6 md:p-8 text-center">
+                  <img src={llamaMascot} alt="Mascotte Optimis" className="h-20 md:h-28 mx-auto mb-4" />
+                  <h2 className="text-xl md:text-2xl font-bold text-foreground">{t("premierAchat.formTitle")}</h2>
+                  <p className="text-sm text-muted-foreground mt-1 mb-5">{t("premierAchat.formSubtitle")}</p>
+                  <ul className="space-y-2.5 text-left mb-6 max-w-xs mx-auto">
+                    {reassurance.map((r) => (
+                      <li key={r.labelKey} className="flex items-center gap-2.5">
+                        <r.icon className="h-5 w-5 text-primary shrink-0" />
+                        <span className="text-sm font-medium text-foreground">{t(r.labelKey)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button size="lg" className="gap-2 w-full h-12 text-base" onClick={goToForm}>
+                    <KeyRound className="h-5 w-5" />
+                    {t("premierAchat.heroCta")}
+                  </Button>
                 </CardContent>
               </Card>
             </div>
@@ -142,7 +154,7 @@ const PlanPremierAchat = () => {
               <CardContent className="p-6 text-center">
                 <Home className="h-8 w-8 text-primary mx-auto mb-3" />
                 <p className="font-semibold text-foreground mb-4">{t("premierAchat.benefitsCtaText")}</p>
-                <Button className="gap-2 w-full" onClick={scrollToForm}>
+                <Button className="gap-2 w-full" onClick={goToForm}>
                   <KeyRound className="h-4 w-4" />
                   {t("premierAchat.heroCta")}
                 </Button>
@@ -173,7 +185,7 @@ const PlanPremierAchat = () => {
             ))}
           </div>
           <div className="text-center mt-10">
-            <Button size="lg" className="gap-2" onClick={scrollToForm}>
+            <Button size="lg" className="gap-2" onClick={goToForm}>
               <KeyRound className="h-5 w-5" />
               {t("premierAchat.heroCta")}
             </Button>
@@ -209,7 +221,7 @@ const PlanPremierAchat = () => {
               <img src={llamaMascot} alt="Mascotte Optimis" className="h-16 md:h-24 mx-auto mb-4 md:mb-6" />
               <h2 className="text-xl md:text-3xl font-bold text-foreground mb-2 md:mb-4">{t("premierAchat.ctaTitle")}</h2>
               <p className="text-sm md:text-base text-muted-foreground mb-6 max-w-xl mx-auto">{t("premierAchat.ctaDesc")}</p>
-              <Button size="lg" className="gap-2" onClick={scrollToForm}>
+              <Button size="lg" className="gap-2" onClick={goToForm}>
                 <KeyRound className="h-5 w-5" />
                 {t("premierAchat.heroCta")}
               </Button>

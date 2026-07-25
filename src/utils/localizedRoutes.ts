@@ -23,6 +23,7 @@ export const localizedRoutes: LocalizedRoutes = {
   mortgage: { fr: "hypotheque", de: "hypothek", it: "ipoteca" },
   becomeOwner: { fr: "devenir-proprietaire", de: "eigentuemer-werden", it: "diventare-proprietario" },
   becomeOwnerLanding: { fr: "plan-premier-achat", de: "plan-erstkauf", it: "piano-primo-acquisto" },
+  becomeOwnerFunnel: { fr: "plan-premier-achat-offres", de: "plan-erstkauf-offerten", it: "piano-primo-acquisto-offerte" },
   professionalInsurance: { fr: "assurance-professionnelle", de: "unternehmensversicherung", it: "assicurazione-professionale" },
   services: { fr: "services", de: "dienstleistungen", it: "servizi" },
   mobilePackage: { fr: "forfait-mobile", de: "handy-abo", it: "abbonamento-mobile" },
