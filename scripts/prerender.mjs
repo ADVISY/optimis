@@ -51,9 +51,13 @@ const vite = await createServer({
   logLevel: "error",
   server: { middlewareMode: true },
   appType: "custom",
+  // react-helmet-async est CommonJS → forcer la transformation Vite pour que ses
+  // exports nommés (HelmetProvider dans entry-server, Helmet dans Seo.tsx) soient
+  // résolvables sous ssrLoadModule.
+  ssr: { noExternal: ["react-helmet-async"] },
 });
 
-let seoMod, routesMod, blogPosts;
+let seoMod, routesMod, blogPosts, renderBody;
 try {
   seoMod = await vite.ssrLoadModule("/src/lib/seo.ts");
   routesMod = await vite.ssrLoadModule("/src/utils/localizedRoutes.ts");
@@ -63,6 +67,15 @@ try {
   } catch (e) {
     console.warn("⚠️  Chargement de blogPosts via Vite impossible, fallback regex :", e.message);
     blogPosts = extractBlogPostsFromSource();
+  }
+  // Entrée SSR : rend le body réel de chaque route (contenu indexable).
+  // Si indisponible, on retombe sur l'ancien comportement (head-only body vide).
+  try {
+    const entry = await vite.ssrLoadModule("/src/entry-server.tsx");
+    renderBody = entry.render;
+  } catch (e) {
+    console.warn("⚠️  entry-server indisponible, body non prérendu (head-only) :", e.message);
+    renderBody = null;
   }
 } finally {
   // fermé après extraction
@@ -83,6 +96,16 @@ const { localizedRoutes } = routesMod;
 // 2) Helpers DOM (jsdom) — injection idempotente du <head>
 // ----------------------------------------------------------------------------
 const template = readFileSync(TEMPLATE_PATH, "utf8");
+
+// Polyfills DOM globaux pour le rendu SSR du blog : src/utils/parseWordPressContent.tsx
+// parse le HTML des articles via DOMParser + les constantes Node.* (TEXT_NODE,
+// ELEMENT_NODE), toutes deux indisponibles sous Node.js. jsdom (déjà importé) les
+// fournit — le rendu client (navigateur) reste inchangé.
+{
+  const domGlobals = new JSDOM("").window;
+  if (!globalThis.DOMParser) globalThis.DOMParser = domGlobals.DOMParser;
+  if (!globalThis.Node) globalThis.Node = domGlobals.Node;
+}
 
 /** Supprime tous les <meta> correspondants puis insère un unique frais. */
 function setMeta(doc, attr, key, content) {
@@ -159,6 +182,29 @@ function applySeoToDoc(doc, seo, jsonLd) {
   }
 }
 
+/** Injecte le HTML rendu côté serveur dans <div id="root"> (contenu indexable). */
+function injectBody(doc, bodyHtml) {
+  if (!bodyHtml) return;
+  const root = doc.getElementById("root");
+  if (root) root.innerHTML = bodyHtml;
+}
+
+/**
+ * Rend le body d'une route via l'entrée SSR, avec garde-fou : en cas d'échec
+ * (composant non SSR-safe), on log et on retombe sur un body vide (head-only)
+ * pour cette route SANS casser tout le build.
+ */
+async function safeRenderBody(url, lang) {
+  if (!renderBody) return "";
+  try {
+    return await renderBody(url, lang);
+  } catch (e) {
+    ssrFailures.push(url);
+    console.warn(`   ⚠️  SSR body échoué → ${url} : ${e.message}`);
+    return "";
+  }
+}
+
 /** Écrit dist/<...segments>/index.html (ou dist/index.html si racine vide). */
 function writeRoute(segments, html) {
   const dir = segments.length ? join(DIST, ...segments) : DIST;
@@ -170,6 +216,8 @@ function writeRoute(segments, html) {
 // 3) Générer les pages localisées (37 routes × 3 langues)
 // ----------------------------------------------------------------------------
 let countPages = 0;
+let countBodies = 0;
+const ssrFailures = [];
 const routeKeys = Object.keys(localizedRoutes).filter((k) => !EXCLUDE.has(k));
 
 for (const routeKey of routeKeys) {
@@ -179,8 +227,13 @@ for (const routeKey of routeKeys) {
     const seo = getSeo({ routeKey, lang });
     const jsonLd = buildAutoJsonLd(routeKey, seo);
 
+    const url = slug ? `/${lang}/${slug}` : `/${lang}`;
+    const bodyHtml = await safeRenderBody(url, lang);
+
     const dom = new JSDOM(template);
     applySeoToDoc(dom.window.document, seo, jsonLd);
+    injectBody(dom.window.document, bodyHtml);
+    if (bodyHtml) countBodies += 1;
 
     const segments = slug ? [lang, ...slug.split("/")] : [lang];
     writeRoute(segments, "<!DOCTYPE html>\n" + dom.window.document.documentElement.outerHTML);
@@ -204,8 +257,13 @@ for (const post of blogPosts) {
 
   const jsonLd = [buildBreadcrumbSchema(seo), buildArticleSchema(post, seo)];
 
+  const url = `/fr/blog/${post.slug}`;
+  const bodyHtml = await safeRenderBody(url, "fr");
+
   const dom = new JSDOM(template);
   applySeoToDoc(dom.window.document, seo, jsonLd);
+  injectBody(dom.window.document, bodyHtml);
+  if (bodyHtml) countBodies += 1;
 
   writeRoute(["fr", "blog", post.slug], "<!DOCTYPE html>\n" + dom.window.document.documentElement.outerHTML);
   countBlog += 1;
@@ -218,6 +276,11 @@ console.log(`   Domaine            : ${SITE_URL}`);
 console.log(`   Pages localisées   : ${countPages} fichiers`);
 console.log(`   Articles de blog   : ${countBlog} fichiers`);
 console.log(`   TOTAL              : ${countPages + countBlog} pages HTML statiques`);
+console.log(`   Body prérendu      : ${countBodies}/${countPages + countBlog} (contenu indexable)`);
+if (ssrFailures.length) {
+  console.warn(`   ⚠️  Body non rendu : ${ssrFailures.length} route(s) → fallback head-only`);
+  for (const u of ssrFailures) console.warn(`        - ${u}`);
+}
 
 // ----------------------------------------------------------------------------
 // Helpers

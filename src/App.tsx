@@ -184,12 +184,10 @@ const LanguageRoutes = () => {
   );
 };
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
+// Router-agnostic route tree (shared by the client BrowserRouter and the
+// server StaticRouter used for full-body SSG prerender in scripts/prerender.mjs).
+export const AppRoutes = () => (
+  <>
         <ScrollToTop />
         <Routes>
           {/* Page d'accueil de connexion (choix admin vs courtier) */}
@@ -269,6 +267,16 @@ const App = () => (
           {/* Catch-all */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+  </>
+);
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <AppRoutes />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

@@ -8,10 +8,20 @@ const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
+// En SSG/SSR (build prerender, pas de window), on désactive la persistance de
+// session : sinon GoTrue tente localStorage.getItem côté Node et plante le build.
+// Le comportement navigateur (prod) reste strictement identique.
+const isBrowser = typeof window !== "undefined";
+
 export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
-  auth: {
-    storage: localStorage,
-    persistSession: true,
-    autoRefreshToken: true,
-  }
+  auth: isBrowser
+    ? {
+        storage: localStorage,
+        persistSession: true,
+        autoRefreshToken: true,
+      }
+    : {
+        persistSession: false,
+        autoRefreshToken: false,
+      },
 });
