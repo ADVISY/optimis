@@ -18,9 +18,12 @@ export default function AdminLogin() {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    if (!loading && session && isAdmin) {
-      // ⚠️ TEMP : OTP désactivé → redirect direct dashboard (cf BYPASS_OTP dans useAdminAuth)
+    if (loading || !session || !isAdmin) return;
+    // OTP réactivé : vérifie la session OTP, sinon redirige vers la page de code.
+    if (isOtpVerified) {
       navigate("/admin", { replace: true });
+    } else {
+      navigate("/admin/verify", { replace: true });
     }
   }, [session, isAdmin, isOtpVerified, loading, navigate]);
 
@@ -89,7 +92,7 @@ export default function AdminLogin() {
               </Button>
 
               <p className="text-xs text-muted-foreground text-center pt-2">
-                Accès direct au dashboard
+                Un code de vérification vous sera envoyé par SMS.
               </p>
               <p className="text-xs text-muted-foreground text-center pt-1">
                 <a href="/connexion" className="hover:text-foreground underline">

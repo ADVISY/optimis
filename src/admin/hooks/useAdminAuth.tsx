@@ -17,12 +17,14 @@ const AdminAuthContext = createContext<AdminAuthContextValue | undefined>(undefi
 const INACTIVITY_TIMEOUT_MS = 30 * 60 * 1000; // 30 min
 
 // ============================================================================
-// ⚠️ TEMPORAIRE : OTP désactivé (Twilio pas encore configuré sur nouveau Supabase)
-// Pour réactiver : passer BYPASS_OTP à false ET appliquer une migration qui
-// restaure is_verified_admin() avec la check sur admin_otp_sessions.
-// Cf migration 20260526100000_temp_disable_otp.sql
+// 🔐 OTP admin RÉACTIVÉ (BYPASS_OTP = false)
+// ⚠️ Ce flag doit rester déployé UNIQUEMENT en même temps que :
+//    1. la migration 20260727120000_restore_admin_otp.sql (appliquée)
+//    2. Twilio configuré sur ce projet Supabase (envoi du code SMS)
+// Sinon les admins seront verrouillés hors du dashboard.
+// Pour re-désactiver temporairement : repasser BYPASS_OTP à true.
 // ============================================================================
-const BYPASS_OTP = true;
+const BYPASS_OTP = false;
 
 export function AdminAuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
