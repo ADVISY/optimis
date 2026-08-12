@@ -29,6 +29,7 @@ const FORM_WEBHOOKS: Record<string, string> = {
   "partner": "https://hooks.zapier.com/hooks/catch/21326682/u79h7km/",
   "prenatal-insurance": "https://hooks.zapier.com/hooks/catch/21326682/4oeel8v/",
   "complementary-insurance": "https://hooks.zapier.com/hooks/catch/21326682/43vygp3/",
+  "premier-achat": "https://hooks.zapier.com/hooks/catch/21326682/46bkyby/",
 };
 
 // Overrides de webhook par langue (clé : `${formType}:${lang}`) — repris de la prod

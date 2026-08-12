@@ -40,6 +40,7 @@ import { languages } from "./i18n";
 
 // Comparator/Landing pages
 import ComparateurSante from "./pages/comparateurs/ComparateurSante";
+import LpGoogleSante from "./pages/LpGoogleSante";
 import ComparateurVoiture from "./pages/comparateurs/ComparateurVoiture";
 import ComparateurMenage from "./pages/comparateurs/ComparateurMenage";
 import ComparateurProtectionJuridique from "./pages/comparateurs/ComparateurProtectionJuridique";
@@ -199,6 +200,9 @@ export const AppRoutes = () => (
 
           {/* Espace courtier (hors i18n) */}
           <Route path="/partner/*" element={<PartnerRouter />} />
+
+          {/* LP Google Ads — ancienne expérience assurance maladie (form + design legacy), hors i18n, noindex */}
+          <Route path="/lp-google" element={<LpGoogleSante />} />
 
           {/* Root redirect to French (domain: le-comparateur-optimis.ch) */}
           <Route path="/" element={<Navigate to="/fr" replace />} />

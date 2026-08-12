@@ -322,14 +322,16 @@ export default function AdminLeads() {
 
   // Distribution manuelle batch : distribute_lead_manual à un même courtier pour tous
   const batchManualMutation = useMutation({
-    mutationFn: async ({ leadIds, orderLineId, canalId }: { leadIds: string[]; orderLineId: string; canalId: string }) => {
+    mutationFn: async ({ leadIds, orderLineId }: { leadIds: string[]; orderLineId: string; canalId: string }) => {
       const results = { ok: 0, erreurs: 0, livraisons_ok: 0, livraisons_ko: 0, messages: [] as string[] };
       for (const leadId of leadIds) {
         try {
+          // distribute_lead_manual (2 args) choisit lui-même le canal actif du client.
+          // Ne pas envoyer p_canal_id : sinon la résolution PostgREST échoue faute de
+          // signature à 3 paramètres → c'est ce qui cassait le lot-manuel.
           const { data: distId, error } = await supabase.rpc("distribute_lead_manual", {
             p_lead_id: leadId,
             p_order_line_id: orderLineId,
-            p_canal_id: canalId,
           });
           if (error) {
             results.erreurs++;

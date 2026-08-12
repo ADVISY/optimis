@@ -1,0 +1,939 @@
+import { useState, useCallback, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
+import FormContainer from "@/components/forms/legacy/FormContainerLegacy";
+import FormStep from "@/components/forms/legacy/FormStepLegacy";
+import FormNavigation from "@/components/forms/legacy/FormNavigationLegacy";
+import FormFieldWrapper from "@/components/forms/FormField";
+import HealthComparisonResults from "@/components/forms/HealthComparisonResults";
+import LoadingComparison from "@/components/forms/LoadingComparison";
+import { useMultiStepForm } from "@/hooks/useMultiStepForm";
+import { useLeadSubmission } from "@/hooks/useLeadSubmission";
+import { useToast } from "@/hooks/use-toast";
+import { useHealthPremiums, premiumToInsuranceOffer } from "@/hooks/useHealthPremiums";
+import { Input } from "@/components/ui/input";
+import { PhoneInputCH } from "@/components/forms/PhoneInputCH";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Slider } from "@/components/ui/slider";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { swissCantons, getCantonName } from "@/data/swissCantons";
+import { InsuranceOffer } from "@/data/mockInsuranceData";
+import { Button } from "@/components/ui/button";
+import DateInput from "@/components/ui/date-input";
+import { Card, CardContent } from "@/components/ui/card";
+import { useAutoAdvance } from "@/hooks/useAutoAdvance";
+import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
+import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
+import { User, Phone } from "lucide-react";
+
+interface HealthInsuranceFormData {
+  hasCurrentInsurance: boolean | null;
+  currentInsurer: string;
+  familySituation: string;
+  birthDate: Date | null;
+  canton: string;
+  postalCode: string;
+  lamalModel: string;
+  franchise: number;
+  accidentCoverage: boolean;
+  complementaryTier: "basic" | "premium" | "diamond" | null;
+  complementary: {
+    dental: boolean;
+    hospitalization: boolean;
+    glasses: boolean;
+    alternativeMedicine: boolean;
+    worldwide: boolean;
+  };
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  availability: string;
+}
+
+const TOTAL_STEPS = 7;
+
+const HealthInsuranceForm = () => {
+  const { t, i18n } = useTranslation();
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { localizedPath } = useLocalizedPath();
+  const [showResults, setShowResults] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
+  const [realOffers, setRealOffers] = useState<InsuranceOffer[]>([]);
+  
+  const { fetchPremiums, error: premiumsError } = useHealthPremiums();
+
+
+  const initialData: HealthInsuranceFormData = {
+    hasCurrentInsurance: null,
+    currentInsurer: "",
+    familySituation: "",
+    birthDate: null,
+    canton: "",
+    postalCode: "",
+    lamalModel: "standard",
+    franchise: 2500,
+    accidentCoverage: true,
+    complementaryTier: null,
+    complementary: {
+      dental: false,
+      hospitalization: false,
+      glasses: false,
+      alternativeMedicine: false,
+      worldwide: false,
+    },
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    availability: "",
+  };
+
+  const { submitLead, isSubmitting } = useLeadSubmission({
+    formType: "health-insurance",
+  });
+
+  const {
+    currentStep,
+    formData,
+    isLastStep,
+    updateFormData,
+    nextStep,
+    previousStep,
+    errors,
+  } = useMultiStepForm({
+    initialData,
+    totalSteps: TOTAL_STEPS,
+    onSubmit: async (data) => {
+      await submitLead(data as unknown as Record<string, unknown>);
+    },
+  });
+
+  // Helper function to get translated LAMal model label
+  const getLamalModelLabel = (model: string): string => {
+    const labels: Record<string, Record<string, string>> = {
+      standard: { fr: "Standard", de: "Standard", it: "Standard" },
+      "family-doctor": { fr: "Médecin de famille", de: "Hausarztmodell", it: "Medico di famiglia" },
+      hmo: { fr: "HMO", de: "HMO", it: "HMO" },
+      telemed: { fr: "Télémédecine", de: "Telemedizin", it: "Telemedicina" },
+    };
+    return labels[model]?.[i18n.language] || labels[model]?.fr || model;
+  };
+
+  // Helper function to get translated complementary tier label
+  const getComplementaryTierLabel = (tier: string | null): string => {
+    if (!tier) {
+      const none: Record<string, string> = { fr: "Aucune", de: "Keine", it: "Nessuna" };
+      return none[i18n.language] || none.fr;
+    }
+    const labels: Record<string, Record<string, string>> = {
+      basic: { fr: "Basic", de: "Basic", it: "Basic" },
+      premium: { fr: "Premium", de: "Premium", it: "Premium" },
+      diamond: { fr: "Diamond", de: "Diamond", it: "Diamond" },
+    };
+    return labels[tier]?.[i18n.language] || labels[tier]?.fr || tier;
+  };
+
+  // Helper function to get translated boolean
+  const getBooleanLabel = (value: boolean): string => {
+    const yes: Record<string, string> = { fr: "Oui", de: "Ja", it: "Sì" };
+    const no: Record<string, string> = { fr: "Non", de: "Nein", it: "No" };
+    return value ? (yes[i18n.language] || yes.fr) : (no[i18n.language] || no.fr);
+  };
+
+  // Helper function to get translated family situation label
+  const getFamilySituationLabel = (situation: string): string => {
+    const labels: Record<string, Record<string, string>> = {
+      single: { fr: "Seul(e)", de: "Allein", it: "Single" },
+      couple: { fr: "Couple", de: "Paar", it: "Coppia" },
+      coupleWithChildren: { fr: "Couple avec enfants", de: "Paar mit Kindern", it: "Coppia con figli" },
+      singleWithChildren: { fr: "Seul(e) avec enfants", de: "Alleinerziehend", it: "Single con figli" },
+    };
+    return labels[situation]?.[i18n.language] || labels[situation]?.fr || situation;
+  };
+
+  // Prepare lead data with translated labels
+  const prepareLeadData = () => {
+    const birthDate = formData.birthDate 
+      ? formData.birthDate.toLocaleDateString(i18n.language === 'de' ? 'de-CH' : i18n.language === 'it' ? 'it-CH' : 'fr-CH')
+      : "";
+    
+    // Get complementary options as readable list
+    const complementaryOptions: string[] = [];
+    if (formData.complementary.dental) complementaryOptions.push(t("forms.healthInsurance.complementary.dental"));
+    if (formData.complementary.hospitalization) complementaryOptions.push(t("forms.healthInsurance.complementary.hospitalization"));
+    if (formData.complementary.glasses) complementaryOptions.push(t("forms.healthInsurance.complementary.glasses"));
+    if (formData.complementary.alternativeMedicine) complementaryOptions.push(t("forms.healthInsurance.complementary.alternativeMedicine"));
+    if (formData.complementary.worldwide) complementaryOptions.push(t("forms.healthInsurance.complementary.worldwide"));
+
+    return {
+      // Contact info
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      // Location
+      canton: formData.canton,
+      postalCode: formData.postalCode,
+      // Insurance details with translated labels
+      hasCurrentInsurance: getBooleanLabel(formData.hasCurrentInsurance === true),
+      currentInsurer: formData.currentInsurer || "-",
+      familySituation: getFamilySituationLabel(formData.familySituation),
+      birthDate,
+      lamalModel: getLamalModelLabel(formData.lamalModel),
+      franchise: `CHF ${formData.franchise}`,
+      accidentCoverage: getBooleanLabel(formData.accidentCoverage),
+      complementaryTier: getComplementaryTierLabel(formData.complementaryTier),
+      complementaryOptions: complementaryOptions.length > 0 ? complementaryOptions.join(", ") : getBooleanLabel(false),
+    };
+  };
+
+  // On mount: check if returning from /merci to show results
+  useEffect(() => {
+    if ((location.state as any)?.showResults) {
+      const stored = sessionStorage.getItem("health_form_params");
+      if (stored) {
+        const params = JSON.parse(stored);
+        setIsLoading(true);
+        setLoadingStep("analyzing");
+        
+        // Fetch premiums
+        fetchPremiums(params).then((premiums) => {
+          const offers = premiums.map((premium, index) => premiumToInsuranceOffer(premium, index));
+          setRealOffers(offers);
+          setLoadingStep("comparing");
+          setTimeout(() => setLoadingStep("preparing"), 800);
+          setTimeout(() => { setIsLoading(false); setShowResults(true); }, 1600);
+        });
+        sessionStorage.removeItem("health_form_params");
+      }
+      window.history.replaceState({}, '');
+    }
+  }, []);
+
+  const performSubmit = useCallback(async () => {
+    const leadData = prepareLeadData();
+    await submitLead(leadData);
+
+    const birthYear = formData.birthDate ? formData.birthDate.getFullYear() : 1990;
+    sessionStorage.setItem("health_form_params", JSON.stringify({
+      canton: formData.canton,
+      postalCode: formData.postalCode,
+      birthYear,
+      franchise: formData.franchise,
+      model: formData.lamalModel,
+      withAccident: formData.accidentCoverage,
+      language: i18n.language,
+    }));
+
+    navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
+  }, [formData, submitLead, navigate, localizedPath, location.pathname, i18n.language, prepareLeadData]);
+
+  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
+    onOtpVerified: performSubmit,
+    getPhone: () => formData.phone,
+  });
+
+  const handleSubmit = async () => {
+    await startOtpFlow();
+  };
+
+  // Validation function for each step
+  const validateStep = (step: number): boolean => {
+    switch (step) {
+      case 1:
+        // Must answer hasCurrentInsurance question
+        return formData.hasCurrentInsurance !== null;
+      case 2:
+        // Must select family situation AND provide birth date
+        return formData.familySituation !== "" && formData.birthDate !== null;
+      case 3:
+        // Must select canton + valid postal code (4 digits)
+        return formData.canton !== "" && formData.postalCode.replace(/\D/g, '').length >= 4;
+      case 4:
+        // LAMal model and franchise have defaults, always valid
+        return formData.lamalModel !== "";
+      case 5:
+        // Complementary is optional, always valid
+        return true;
+      case 6:
+        // Must provide first and last name
+        return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
+      case 7:
+        // Must provide valid email and phone
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneValid = formData.phone.replace(/\s/g, '').length >= 10;
+        return emailRegex.test(formData.email.trim()) && phoneValid;
+      default:
+        return true;
+    }
+  };
+
+  const canProceed = validateStep(currentStep);
+  const { notify, notifyDelayed, notifyDelayedLong } = useAutoAdvance(currentStep, nextStep, canProceed, isLastStep, handleSubmit);
+
+  const [attemptedNext, setAttemptedNext] = useState(false);
+
+  // Get validation error messages for current step (only shown after user tries to advance)
+  const getStepErrors = (step: number): Record<string, string> => {
+    const errs: Record<string, string> = {};
+    if (step === 7) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!formData.email.trim() || !emailRegex.test(formData.email.trim())) {
+        errs.email = t("forms.validation.invalidEmail", "Adresse email non valide");
+      }
+      const phoneDigits = formData.phone.replace(/\s/g, '');
+      if (!formData.phone.trim() || phoneDigits.length < 10) {
+        errs.phone = t("forms.validation.invalidPhone", "Numéro de téléphone non valide (min. 10 chiffres)");
+      }
+    }
+    if (step === 6) {
+      if (formData.firstName.trim() === "") {
+        errs.firstName = t("forms.validation.required", "Ce champ est obligatoire");
+      }
+      if (formData.lastName.trim() === "") {
+        errs.lastName = t("forms.validation.required", "Ce champ est obligatoire");
+      }
+    }
+    if (step === 1 && formData.hasCurrentInsurance === null) {
+      errs.hasCurrentInsurance = t("forms.validation.required", "Ce champ est obligatoire");
+    }
+    if (step === 2) {
+      if (!formData.familySituation) errs.familySituation = t("forms.validation.required", "Ce champ est obligatoire");
+      if (!formData.birthDate) errs.birthDate = t("forms.validation.required", "Ce champ est obligatoire");
+    }
+    if (step === 3 && !formData.canton) {
+      errs.canton = t("forms.validation.required", "Ce champ est obligatoire");
+    }
+    return errs;
+  };
+
+  const stepErrors = attemptedNext ? getStepErrors(currentStep) : {};
+
+  // Auto-format Swiss phone number
+  const handlePhoneChange = (value: string) => {
+    // Keep only digits and leading +
+    let cleaned = value.replace(/[^\d+]/g, '');
+    
+    // Auto-add Swiss prefix if user starts typing a number
+    if (cleaned.length > 0 && !cleaned.startsWith('+') && !cleaned.startsWith('0')) {
+      cleaned = '+41' + cleaned;
+    }
+    
+    // Format: +41 XX XXX XX XX
+    if (cleaned.startsWith('+41')) {
+      const digits = cleaned.slice(3);
+      let formatted = '+41';
+      if (digits.length > 0) formatted += ' ' + digits.slice(0, 2);
+      if (digits.length > 2) formatted += ' ' + digits.slice(2, 5);
+      if (digits.length > 5) formatted += ' ' + digits.slice(5, 7);
+      if (digits.length > 7) formatted += ' ' + digits.slice(7, 9);
+      updateFormData({ phone: formatted });
+    } else if (cleaned.startsWith('0')) {
+      const digits = cleaned;
+      let formatted = digits.slice(0, 3);
+      if (digits.length > 3) formatted += ' ' + digits.slice(3, 6);
+      if (digits.length > 6) formatted += ' ' + digits.slice(6, 8);
+      if (digits.length > 8) formatted += ' ' + digits.slice(8, 10);
+      updateFormData({ phone: formatted });
+    } else {
+      updateFormData({ phone: cleaned });
+    }
+  };
+
+  const handleNext = () => {
+    setAttemptedNext(true);
+    if (!canProceed) {
+      toast({
+        title: t("forms.validation.fillRequired", "Veuillez remplir les champs obligatoires"),
+        description: t("forms.validation.checkFields", "Vérifiez les champs marqués en rouge"),
+        variant: "destructive",
+      });
+      return;
+    }
+    setAttemptedNext(false);
+    if (isLastStep) {
+      handleSubmit();
+    } else {
+      nextStep();
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="max-w-2xl mx-auto">
+        <LoadingComparison step={loadingStep} />
+      </div>
+    );
+  }
+
+  if (showResults) {
+    return (
+      <div className="max-w-4xl mx-auto">
+        {premiumsError && (
+          <div className="mb-4 p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm">
+            {t("forms.healthInsurance.errorLoadingPremiums")}
+          </div>
+        )}
+        {realOffers.length === 0 && !premiumsError && (
+          <div className="mb-4 p-4 bg-muted border border-border rounded-lg text-center">
+            <p className="text-muted-foreground mb-2">
+              {t("comparison.noOffersFound", "Aucune offre trouvée pour ces critères.")}
+            </p>
+            <Button 
+              variant="outline" 
+              onClick={() => setShowResults(false)}
+            >
+              {t("common.modifySearch", "Modifier ma recherche")}
+            </Button>
+          </div>
+        )}
+        <HealthComparisonResults
+          offers={realOffers}
+          formData={{
+            canton: formData.canton,
+            postalCode: formData.postalCode,
+            lamalModel: formData.lamalModel,
+            franchise: formData.franchise,
+            accidentCoverage: formData.accidentCoverage,
+            complementaryTier: formData.complementaryTier,
+            complementary: formData.complementary,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+          }}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <FormContainer
+      title={t("forms.healthInsurance.title")}
+      description={t("forms.healthInsurance.description")}
+      currentStep={currentStep}
+      totalSteps={TOTAL_STEPS}
+      size="large"
+    >
+      {/* Required fields note */}
+      <div className="mb-3 md:mb-6 text-xs md:text-sm text-red-500 flex items-center gap-1.5">
+        <span className="text-red-500 font-bold text-sm md:text-base">*</span>
+        <span>{t("forms.requiredFields", "Champs obligatoires")}</span>
+      </div>
+
+      {/* Step 1: Current Insurance */}
+      <FormStep isActive={currentStep === 1}>
+        <div className="space-y-3 md:space-y-6">
+          <FormFieldWrapper
+            label={t("forms.healthInsurance.hasCurrentInsurance")}
+            required
+          >
+            <RadioGroup
+              value={formData.hasCurrentInsurance === null ? "" : formData.hasCurrentInsurance ? "yes" : "no"}
+              onValueChange={(value) => {
+                updateFormData({ 
+                  hasCurrentInsurance: value === "yes",
+                  currentInsurer: value === "no" ? "" : formData.currentInsurer
+                });
+                if (value === "no") notify();
+              }}
+              className="grid grid-cols-2 gap-3"
+            >
+              <label htmlFor="hasInsurance-yes" className="flex items-center space-x-2 p-3.5 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
+                <RadioGroupItem value="yes" id="hasInsurance-yes" className="h-4 w-4" />
+                <span className="text-emerald-900 text-sm md:text-base">
+                  {t("common.yes")}
+                </span>
+              </label>
+              <label htmlFor="hasInsurance-no" className="flex items-center space-x-2 p-3.5 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
+                <RadioGroupItem value="no" id="hasInsurance-no" className="h-4 w-4" />
+                <span className="text-emerald-900 text-sm md:text-base">
+                  {t("common.no")}
+                </span>
+              </label>
+            </RadioGroup>
+          </FormFieldWrapper>
+
+          {formData.hasCurrentInsurance === true && (
+            <FormFieldWrapper
+              label={t("forms.healthInsurance.currentInsurer")}
+              htmlFor="currentInsurer"
+            >
+              <select
+                id="currentInsurer"
+                value={formData.currentInsurer}
+                onChange={(e) => { updateFormData({ currentInsurer: e.target.value }); notify(); }}
+                className="flex h-11 md:h-12 w-full items-center justify-between rounded-xl border-2 border-input bg-white text-gray-900 px-4 text-sm md:text-base ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:border-primary/50 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%236b7280%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[length:16px_16px] bg-[right_1rem_center] bg-no-repeat pr-10"
+              >
+                <option value="" disabled>{t("forms.healthInsurance.selectInsurer")}</option>
+                <option value="assura">Assura</option>
+                <option value="css">CSS</option>
+                <option value="groupe-mutuel">Groupe Mutuel</option>
+                <option value="helsana">Helsana</option>
+                <option value="sanitas">Sanitas</option>
+                <option value="swica">Swica</option>
+                <option value="visana">Visana</option>
+                <option value="concordia">Concordia</option>
+                <option value="kpt">KPT</option>
+                <option value="atupri">Atupri</option>
+                <option value="sympany">Sympany</option>
+                <option value="other">{t("forms.healthInsurance.otherInsurer")}</option>
+              </select>
+            </FormFieldWrapper>
+          )}
+        </div>
+      </FormStep>
+
+      {/* Step 2: Family Situation & Birth Date */}
+      <FormStep isActive={currentStep === 2}>
+        <div className="space-y-3 md:space-y-6">
+          <FormFieldWrapper
+            label={t("forms.healthInsurance.familySituation")}
+            required
+          >
+            <RadioGroup
+              value={formData.familySituation}
+              onValueChange={(value) => updateFormData({ familySituation: value })}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+            >
+              {[
+                { value: "single", label: t("forms.healthInsurance.situations.single") },
+                { value: "couple", label: t("forms.healthInsurance.situations.couple") },
+                { value: "coupleWithChildren", label: t("forms.healthInsurance.situations.coupleWithChildren") },
+                { value: "singleWithChildren", label: t("forms.healthInsurance.situations.singleWithChildren") },
+              ].map((situation) => (
+                <label key={situation.value} htmlFor={situation.value} className="flex items-center space-x-2 p-3.5 md:p-4 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 cursor-pointer">
+                  <RadioGroupItem value={situation.value} id={situation.value} className="h-4 w-4" />
+                  <span className="text-emerald-900 text-sm md:text-base">
+                    {situation.label}
+                  </span>
+                </label>
+              ))}
+            </RadioGroup>
+          </FormFieldWrapper>
+
+          <FormFieldWrapper
+            label={t("forms.healthInsurance.birthDate")}
+            htmlFor="birthDate"
+            required
+          >
+            <DateInput
+              value={formData.birthDate}
+              onChange={(date) => { updateFormData({ birthDate: date }); notify(); }}
+              placeholder="JJ/MM/AAAA"
+              maxYear={new Date().getFullYear()}
+              minYear={1900}
+              className="h-11 md:h-12"
+            />
+          </FormFieldWrapper>
+        </div>
+      </FormStep>
+
+      {/* Step 3: Location */}
+      <FormStep isActive={currentStep === 3}>
+        <div className="space-y-3 md:space-y-6">
+          <FormFieldWrapper
+            label={t("forms.healthInsurance.canton")}
+            htmlFor="canton"
+            required
+          >
+            <select
+              id="canton"
+              value={formData.canton}
+              onChange={(e) => { updateFormData({ canton: e.target.value }); notify(); }}
+              className="flex h-11 md:h-12 w-full items-center justify-between rounded-xl border-2 border-input bg-white text-gray-900 px-4 text-sm md:text-base ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:border-primary/50 appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%236b7280%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[length:16px_16px] bg-[right_1rem_center] bg-no-repeat pr-10"
+            >
+              <option value="" disabled>
+                {t("forms.healthInsurance.selectCanton")}
+              </option>
+              {swissCantons.map((canton) => (
+                <option key={canton.code} value={canton.code}>
+                  {getCantonName(canton.code, i18n.language)}
+                </option>
+              ))}
+            </select>
+          </FormFieldWrapper>
+
+          <FormFieldWrapper
+            label={t("forms.healthInsurance.postalCode")}
+            htmlFor="postalCode"
+          >
+            <Input
+              id="postalCode"
+              type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              autoComplete="postal-code"
+              maxLength={4}
+              value={formData.postalCode}
+              onChange={(e) => { updateFormData({ postalCode: e.target.value.replace(/\D/g, '').slice(0, 4) }); notify(); }}
+              placeholder="1000"
+              className="h-11 md:h-12 text-sm md:text-base"
+            />
+          </FormFieldWrapper>
+        </div>
+      </FormStep>
+
+      {/* Step 4: LAMal Model & Franchise */}
+      <FormStep isActive={currentStep === 4}>
+        <div className="space-y-3 md:space-y-6">
+          {/* LAMal Model Card */}
+          <Card className="bg-emerald-50 border-emerald-200">
+            <CardContent className="p-3 md:p-5">
+              <Label className="text-sm md:text-sm font-semibold text-emerald-900 mb-3 md:mb-4 block">
+                {t("forms.healthInsurance.lamalModel")}
+                <span className="text-red-500 ml-1">*</span>
+              </Label>
+              <RadioGroup
+                value={formData.lamalModel}
+                onValueChange={(value) => updateFormData({ lamalModel: value })}
+
+                className="grid grid-cols-2 gap-2 md:gap-3"
+              >
+                {[
+                  { value: "standard", label: t("forms.healthInsurance.models.standard") },
+                  { value: "family-doctor", label: t("forms.healthInsurance.models.familyDoctor") },
+                  { value: "hmo", label: t("forms.healthInsurance.models.hmo") },
+                  { value: "telemed", label: t("forms.healthInsurance.models.telemed") },
+                ].map((model) => (
+                  <label key={model.value} htmlFor={model.value} className="flex items-center space-x-2 p-3 md:p-3 rounded-lg bg-white hover:bg-emerald-100 transition-colors cursor-pointer border border-emerald-200 min-h-11">
+                    <RadioGroupItem value={model.value} id={model.value} className="h-4 w-4 md:h-4 md:w-4 shrink-0" />
+                    <span className="text-emerald-900 text-sm md:text-base leading-tight">
+                      {model.label}
+                    </span>
+                  </label>
+                ))}
+              </RadioGroup>
+            </CardContent>
+          </Card>
+
+          {/* Franchise Card */}
+          <Card className="bg-emerald-50 border-emerald-200">
+            <CardContent className="p-3 md:p-5">
+              <Label className="text-sm md:text-sm font-semibold text-emerald-900 mb-2 md:mb-2 block">
+                {t("forms.healthInsurance.franchise")}
+              </Label>
+              <div className="text-center mb-3 md:mb-4">
+                <span className="text-2xl md:text-3xl font-bold text-emerald-600">CHF {formData.franchise}</span>
+                <span className="text-emerald-500 text-xs md:text-sm ml-1 md:ml-2">/ an</span>
+              </div>
+              <Slider
+                value={[formData.franchise]}
+                onValueChange={(value) => updateFormData({ franchise: value[0] })}
+                min={300}
+                max={2500}
+                step={200}
+                className="py-3 md:py-4 [&_[role=slider]]:h-6 [&_[role=slider]]:w-6 md:[&_[role=slider]]:h-5 md:[&_[role=slider]]:w-5"
+              />
+              <div className="flex justify-between text-[11px] md:text-xs text-emerald-500 mt-1 md:mt-2">
+                <span>CHF 300</span>
+                <span>CHF 2500</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Accident Coverage Card */}
+          <Card className="bg-emerald-50 border-emerald-200">
+            <CardContent className="p-3 md:p-5">
+              <label htmlFor="accidentCoverage" className="flex items-center space-x-3 cursor-pointer min-h-11">
+                <Checkbox
+                  id="accidentCoverage"
+                  checked={formData.accidentCoverage}
+                  onCheckedChange={(checked) =>
+                    updateFormData({ accidentCoverage: checked as boolean })
+                  }
+                  className="h-5 w-5 md:h-5 md:w-5 shrink-0"
+                />
+                <span className="text-emerald-900 font-medium text-sm md:text-base">
+                  {t("forms.healthInsurance.includeAccident")}
+                </span>
+              </label>
+            </CardContent>
+          </Card>
+        </div>
+      </FormStep>
+
+      {/* Step 5: Complementary Insurance - Tier Selection */}
+      <FormStep isActive={currentStep === 5}>
+        <div className="space-y-4 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <h3 className="text-base md:text-lg font-semibold mb-1 md:mb-2 text-emerald-900">
+              {t("forms.healthInsurance.complementaryTitle", "Assurances complémentaires")}
+            </h3>
+            <p className="text-xs md:text-sm text-emerald-600">
+              {t("forms.healthInsurance.complementaryDescription")}
+            </p>
+          </div>
+
+          {/* Tier Selection Cards - Compact horizontal layout on mobile */}
+          <div className="grid grid-cols-3 gap-2 md:gap-4">
+            {/* BASIC */}
+            <Card 
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-emerald-50 ${
+                formData.complementaryTier === "basic" 
+                  ? "ring-2 ring-emerald-500 border-emerald-400" 
+                  : "border-emerald-200 hover:border-emerald-400"
+              }`}
+              onClick={() => { updateFormData({ 
+                complementaryTier: formData.complementaryTier === "basic" ? null : "basic",
+                complementary: formData.complementaryTier === "basic" 
+                  ? { dental: false, hospitalization: false, glasses: false, alternativeMedicine: false, worldwide: false }
+                  : { dental: true, hospitalization: true, glasses: true, alternativeMedicine: true, worldwide: true }
+              }); notify(); }}
+            >
+              <CardContent className="p-3 md:p-4 text-center">
+                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-emerald-100 mb-2 md:mb-3">
+                  <span className="text-emerald-700 text-base md:text-xl font-bold">B</span>
+                </div>
+                <h4 className="font-bold text-sm md:text-lg text-emerald-800">BASIC</h4>
+                <p className="text-[11px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
+                  {t("forms.healthInsurance.tiers.basicDesc", "Couverture essentielle")}
+                </p>
+                <div className="text-base md:text-2xl font-bold text-emerald-700 mt-1">
+                  ~39<span className="text-[11px] md:text-sm font-normal text-emerald-500">/m</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* PREMIUM */}
+            <Card 
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md relative bg-emerald-50 ${
+                formData.complementaryTier === "premium" 
+                  ? "ring-2 ring-violet-400 border-violet-400" 
+                  : "border-emerald-200 hover:border-violet-400"
+              }`}
+              onClick={() => { updateFormData({ 
+                complementaryTier: formData.complementaryTier === "premium" ? null : "premium",
+                complementary: formData.complementaryTier === "premium" 
+                  ? { dental: false, hospitalization: false, glasses: false, alternativeMedicine: false, worldwide: false }
+                  : { dental: true, hospitalization: true, glasses: true, alternativeMedicine: true, worldwide: true }
+              }); notify(); }}
+            >
+              <div className="absolute -top-2 md:-top-3 left-1/2 -translate-x-1/2">
+                <span className="bg-violet-500 text-white text-[10px] md:text-xs font-semibold px-2 md:px-3 py-0.5 md:py-1 rounded-full whitespace-nowrap">
+                  ★
+                </span>
+              </div>
+              <CardContent className="p-3 md:p-4 text-center pt-3 md:pt-4">
+                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-violet-100 mb-2 md:mb-3">
+                  <span className="text-violet-600 text-base md:text-xl font-bold">P</span>
+                </div>
+                <h4 className="font-bold text-sm md:text-lg text-violet-600">PREMIUM</h4>
+                <p className="text-[11px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
+                  {t("forms.healthInsurance.tiers.premiumDesc", "Rapport qualité-prix optimal")}
+                </p>
+                <div className="text-base md:text-2xl font-bold text-violet-600 mt-1">
+                  ~91<span className="text-[11px] md:text-sm font-normal text-emerald-500">/m</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* DIAMOND */}
+            <Card 
+              className={`cursor-pointer transition-all duration-200 hover:shadow-md bg-emerald-50 ${
+                formData.complementaryTier === "diamond" 
+                  ? "ring-2 ring-amber-400 border-amber-400" 
+                  : "border-emerald-200 hover:border-amber-400"
+              }`}
+              onClick={() => { updateFormData({ 
+                complementaryTier: formData.complementaryTier === "diamond" ? null : "diamond",
+                complementary: formData.complementaryTier === "diamond" 
+                  ? { dental: false, hospitalization: false, glasses: false, alternativeMedicine: false, worldwide: false }
+                  : { dental: true, hospitalization: true, glasses: true, alternativeMedicine: true, worldwide: true }
+              }); notify(); }}
+            >
+              <CardContent className="p-3 md:p-4 text-center">
+                <div className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-amber-100 mb-2 md:mb-3">
+                  <span className="text-amber-600 text-base md:text-xl font-bold">D</span>
+                </div>
+                <h4 className="font-bold text-sm md:text-lg text-amber-600">DIAMOND</h4>
+                <p className="text-[11px] md:text-xs text-emerald-500 mb-1 md:mb-3 hidden md:block">
+                  {t("forms.healthInsurance.tiers.diamondDesc", "Couverture maximale")}
+                </p>
+                <div className="text-base md:text-2xl font-bold text-amber-600 mt-1">
+                  ~175<span className="text-[11px] md:text-sm font-normal text-emerald-500">/m</span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Skip option */}
+          <div className="text-center pt-2 md:pt-4">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => { updateFormData({ 
+                complementaryTier: null,
+                complementary: { dental: false, hospitalization: false, glasses: false, alternativeMedicine: false, worldwide: false }
+              }); notify(); }}
+              className="text-emerald-700 hover:text-emerald-900 hover:bg-emerald-50 text-xs md:text-sm h-8 md:h-auto"
+            >
+              {t("forms.healthInsurance.skipComplementary", "Passer")}
+            </Button>
+          </div>
+
+          {/* Selected tier details - hidden on mobile to save space */}
+          {formData.complementaryTier && (
+            <Card className="bg-emerald-50 border-emerald-200 hidden md:block">
+              <CardContent className="p-4">
+                <h5 className="font-semibold mb-3 text-sm text-emerald-900">
+                  {t("forms.healthInsurance.includedInPackage", "Inclus dans votre package")} {formData.complementaryTier.toUpperCase()}:
+                </h5>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-emerald-800">
+                  <div className="flex items-center gap-2">
+                    <span className="text-emerald-500">✓</span>
+                    {t("forms.healthInsurance.complementary.dental")}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-emerald-500">✓</span>
+                    {t("forms.healthInsurance.complementary.hospitalization")}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-emerald-500">✓</span>
+                    {t("forms.healthInsurance.complementary.glasses")}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-emerald-500">✓</span>
+                    {t("forms.healthInsurance.complementary.alternativeMedicine")}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-emerald-500">✓</span>
+                    {t("forms.healthInsurance.complementary.worldwide")}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+      </FormStep>
+
+      {/* Step 6: Name */}
+      <FormStep isActive={currentStep === 6}>
+        <div className="space-y-3 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <div className="inline-flex items-center justify-center w-11 h-11 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
+              <User className="h-5 w-5 md:h-8 md:w-8 text-primary" />
+            </div>
+            <h3 className="text-sm md:text-lg font-semibold mb-0.5 md:mb-2">
+              {t("forms.contact.almostDone", "Presque terminé !")}
+            </h3>
+            <p className="text-xs md:text-sm text-muted-foreground">
+              {t("forms.contact.nameStepDescription", "Comment pouvons-nous vous appeler ?")}
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-3 md:gap-4">
+            <FormFieldWrapper
+              label={t("forms.contact.firstName")}
+              htmlFor="firstName"
+              required
+            >
+              <Input
+                id="firstName"
+                value={formData.firstName}
+                onChange={(e) => { updateFormData({ firstName: e.target.value }); notifyDelayedLong(); }}
+                placeholder={t("forms.contact.firstNamePlaceholder", "Votre prénom")}
+                className="h-11 md:h-14 text-sm md:text-lg"
+              />
+            </FormFieldWrapper>
+
+            <FormFieldWrapper
+              label={t("forms.contact.lastName")}
+              htmlFor="lastName"
+              required
+            >
+              <Input
+                id="lastName"
+                value={formData.lastName}
+                onChange={(e) => { updateFormData({ lastName: e.target.value }); notifyDelayedLong(); }}
+                placeholder={t("forms.contact.lastNamePlaceholder", "Votre nom")}
+                className="h-11 md:h-14 text-sm md:text-lg"
+              />
+            </FormFieldWrapper>
+          </div>
+        </div>
+      </FormStep>
+
+      {/* Step 7: Contact Details */}
+      <FormStep isActive={currentStep === 7}>
+        <div className="space-y-3 md:space-y-6">
+          <div className="text-center mb-3 md:mb-6">
+            <div className="inline-flex items-center justify-center w-11 h-11 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
+              <Phone className="h-5 w-5 md:h-8 md:w-8 text-primary" />
+            </div>
+            <h3 className="text-sm md:text-lg font-semibold mb-0.5 md:mb-2">
+              {t("forms.contact.contactStepTitle", "Où pouvons-nous vous joindre ?")}
+            </h3>
+            <p className="text-xs md:text-sm text-muted-foreground">
+              {t("forms.contact.contactStepDescription", "Un conseiller vous contactera pour vous présenter les meilleures offres.")}
+            </p>
+          </div>
+          
+          <FormFieldWrapper
+            label={t("forms.contact.email")}
+            htmlFor="email"
+            required
+            error={stepErrors.email}
+          >
+            <Input
+              id="email"
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              value={formData.email}
+              onChange={(e) => { updateFormData({ email: e.target.value.toLowerCase() }); notifyDelayed(); }}
+              placeholder="votre@email.ch"
+              className={`h-11 md:h-14 text-sm md:text-lg ${stepErrors.email ? 'border-red-400 focus-visible:ring-red-400' : ''}`}
+            />
+          </FormFieldWrapper>
+
+          <FormFieldWrapper
+            label={t("forms.contact.phone")}
+            htmlFor="phone"
+            required
+            error={stepErrors.phone}
+          >
+            <PhoneInputCH
+              id="phone"
+              value={formData.phone}
+              onChange={(e) => { handlePhoneChange(e.target.value); notifyDelayed(); }}
+              placeholder="79 123 45 67" hasError={!!stepErrors.phone}
+            />
+          </FormFieldWrapper>
+
+          <div className="bg-emerald-50 border border-emerald-200 rounded-lg md:rounded-xl p-3 md:p-4 text-center">
+            <p className="text-xs md:text-sm text-emerald-700">
+              🔒 {t("forms.contact.privacyNote", "Vos données sont protégées et ne seront jamais partagées.")}
+            </p>
+          </div>
+        </div>
+      </FormStep>
+
+      <FormNavigation
+        currentStep={currentStep}
+        totalSteps={TOTAL_STEPS}
+        onPrevious={previousStep}
+        onNext={handleNext}
+        isSubmitting={isSubmitting}
+        isLastStep={isLastStep}
+        canProceed={canProceed}
+      />
+      <SmsVerificationModal {...otpModalProps} />
+    </FormContainer>
+  );
+};
+
+export default HealthInsuranceForm;
