@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
@@ -12,7 +12,16 @@ const ThankYou = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
-  const returnUrl = (location.state as any)?.returnUrl as string | undefined;
+  // returnUrl : l'état React Router est perdu au rechargement complet de /merci
+  // (on force désormais un vrai page-load pour le tracking) → on le récupère depuis
+  // sessionStorage, écrit par le formulaire juste avant la redirection.
+  const [returnUrl] = useState<string | undefined>(
+    () =>
+      ((location.state as any)?.returnUrl as string | undefined) ??
+      (typeof window !== "undefined"
+        ? sessionStorage.getItem("lead_return_url") ?? undefined
+        : undefined),
+  );
   const phoneVerified = sessionStorage.getItem("phone_verified") === "true";
 
   useEffect(() => {
@@ -22,6 +31,8 @@ const ThankYou = () => {
       formType: getLastFormType(),
       googleAdsSendTo: "AW-16586911321/1MwiCK30gpAcENncoOU9",
     });
+    // Nettoie pour éviter un returnUrl périmé sur une visite directe ultérieure
+    try { sessionStorage.removeItem("lead_return_url"); } catch { /* noop */ }
   }, []);
 
   const handleDiscoverResults = () => {

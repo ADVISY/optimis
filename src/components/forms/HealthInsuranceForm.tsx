@@ -242,7 +242,7 @@ const HealthInsuranceForm = () => {
       language: i18n.language,
     }));
 
-    navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
+    sessionStorage.setItem("lead_return_url", location.pathname); window.location.assign(localizedPath("/merci"));
   }, [formData, submitLead, navigate, localizedPath, location.pathname, i18n.language, prepareLeadData]);
 
   const { startOtpFlow, otpModalProps } = useOtpFormFlow({

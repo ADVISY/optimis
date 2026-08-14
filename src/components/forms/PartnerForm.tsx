@@ -69,7 +69,7 @@ const PartnerForm = () => {
 
   const performSubmit = useCallback(async () => {
     await submitLead(formData as unknown as Record<string, unknown>);
-    navigate(localizedPath("/merci-partenaire"));
+    window.location.assign(localizedPath("/merci-partenaire"));
   }, [formData, submitLead, navigate, localizedPath]);
 
   const handleSubmit = async () => {

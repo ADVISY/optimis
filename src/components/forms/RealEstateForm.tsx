@@ -75,7 +75,7 @@ const RealEstateForm = () => {
 
   const performSubmit = useCallback(async () => {
     await submitLead(formData as unknown as Record<string, unknown>);
-    navigate(localizedPath("/merci-estimation"));
+    window.location.assign(localizedPath("/merci-estimation"));
   }, [formData, submitLead, navigate, localizedPath]);
 
   const { startOtpFlow, otpModalProps } = useOtpFormFlow({

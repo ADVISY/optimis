@@ -167,7 +167,7 @@ const PremierAchatForm = () => {
 
       const result = await submitLead(payload as unknown as Record<string, unknown>);
       if (result) {
-        navigate(localizedPath("/merci"));
+        window.location.assign(localizedPath("/merci"));
       }
     },
     [submitLead, navigate, localizedPath],

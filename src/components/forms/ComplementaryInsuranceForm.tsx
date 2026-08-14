@@ -172,7 +172,7 @@ const ComplementaryInsuranceForm = () => {
   const performSubmit = useCallback(async () => {
     const leadData = prepareLeadData();
     await submitLead(leadData);
-    navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
+    sessionStorage.setItem("lead_return_url", location.pathname); window.location.assign(localizedPath("/merci"));
   }, [formData, submitLead, navigate, localizedPath, location.pathname]);
 
   const { startOtpFlow, otpModalProps } = useOtpFormFlow({

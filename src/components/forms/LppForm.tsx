@@ -80,7 +80,7 @@ const LppForm = () => {
         })
       );
     } catch {}
-    navigate(localizedPath("/merci-lpp"));
+    window.location.assign(localizedPath("/merci-lpp"));
   }, [formData, submitLead, navigate, localizedPath]);
 
   const { startOtpFlow, otpModalProps } = useOtpFormFlow({

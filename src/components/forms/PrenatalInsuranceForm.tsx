@@ -139,7 +139,7 @@ const PrenatalInsuranceForm = () => {
       motherInsurer: (insurerMap[formData.motherInsurer] ?? formData.motherInsurer) || "-",
     };
     await submitLead(translated as unknown as Record<string, unknown>);
-    navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
+    sessionStorage.setItem("lead_return_url", location.pathname); window.location.assign(localizedPath("/merci"));
   }, [formData, submitLead, t, navigate, localizedPath, location.pathname]);
 
   // On return from /merci: load results

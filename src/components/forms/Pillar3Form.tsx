@@ -201,7 +201,7 @@ const Pillar3Form = () => {
     }));
 
     await submitLead(getTranslatedFormData() as unknown as Record<string, unknown>);
-    navigate(localizedPath("/merci"), { state: { returnUrl: location.pathname } });
+    sessionStorage.setItem("lead_return_url", location.pathname); window.location.assign(localizedPath("/merci"));
   }, [formData, submitLead, navigate, localizedPath, location.pathname, getTranslatedFormData]);
 
   const { startOtpFlow, otpModalProps } = useOtpFormFlow({
