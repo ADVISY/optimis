@@ -16,8 +16,14 @@
 
 import { localizedRoutes } from "@/utils/localizedRoutes";
 
-export const LANGS = ["fr", "de", "it", "en"] as const;
+export const LANGS = ["fr", "de", "it", "en", "pt"] as const;
 export type Lang = (typeof LANGS)[number];
+
+// Langues EXPOSÉES au SEO (hreflang + prerender + indexation).
+// Le pt est en SOFT-LAUNCH : fonctionnel et commutable côté site, mais pas encore
+// exposé au SEO tant que la traduction n'est pas complète + validée.
+// Pour « allumer » le SEO portugais plus tard : ajouter "pt" à cette liste.
+export const SEO_LANGS: readonly Lang[] = ["fr", "de", "it", "en"];
 
 // Domaine de prod (jamais de hardcode lovable). Surchargé en build via VITE_SITE_URL.
 export const SITE_URL = (
@@ -36,12 +42,15 @@ const HREFLANG: Record<Lang, string> = {
   it: "it-CH",
   // EN cible une audience internationale (expats/frontaliers) : hreflang générique.
   en: "en",
+  // PT : communauté lusophone de Suisse.
+  pt: "pt-CH",
 };
 const OG_LOCALE: Record<Lang, string> = {
   fr: "fr_CH",
   de: "de_CH",
   it: "it_CH",
   en: "en_GB",
+  pt: "pt_PT",
 };
 
 export interface SeoMeta {
@@ -331,13 +340,17 @@ const FALLBACK_META: Record<Lang, SeoMeta> = {
     title: `Optimis – Swiss insurance comparison`,
     description: `Compare Swiss insurance for free and find the best offers with Optimis.`,
   },
+  pt: {
+    title: `Optimis – Comparador de seguros na Suíça`,
+    description: `Compare gratuitamente os seguros suíços e encontre as melhores ofertas com a Optimis.`,
+  },
 };
 
 // ----------------------------------------------------------------------------
 // Helpers URL
 // ----------------------------------------------------------------------------
 export function isLang(value: string | undefined): value is Lang {
-  return value === "fr" || value === "de" || value === "it" || value === "en";
+  return value === "fr" || value === "de" || value === "it" || value === "en" || value === "pt";
 }
 
 /** URL absolue d'une page localisée (slug "" = accueil de langue → /fr). */
@@ -359,7 +372,11 @@ export function buildAlternates(routeKey: string): {
     const slug = route ? route[lang] ?? route.fr : "";
     const href = buildUrl(lang, slug);
     byLang[lang] = href;
-    alternates.push({ hreflang: HREFLANG[lang], href });
+    // On n'annonce en hreflang que les langues exposées au SEO (le pt, en
+    // soft-launch, ne doit pas être advertised tant qu'il n'est pas complet).
+    if (SEO_LANGS.includes(lang)) {
+      alternates.push({ hreflang: HREFLANG[lang], href });
+    }
   }
   // x-default → français
   alternates.push({ hreflang: "x-default", href: byLang.fr });
@@ -403,7 +420,7 @@ export const COMPARATOR_ROUTE_KEYS = new Set<string>([
   "mobilePackage",
 ]);
 
-const HOME_NAME: Record<Lang, string> = { fr: "Accueil", de: "Startseite", it: "Home", en: "Home" };
+const HOME_NAME: Record<Lang, string> = { fr: "Accueil", de: "Startseite", it: "Home", en: "Home", pt: "Início" };
 
 /** Fil d'Ariane (Home > page courante) pour toute page interne. */
 export function buildBreadcrumbSchema(seo: ResolvedSeo): Record<string, unknown> {
@@ -490,7 +507,11 @@ export function getSeo(opts: GetSeoOptions): ResolvedSeo {
   }
 
   const noindex =
-    opts.noindex ?? (opts.routeKey ? NOINDEX_ROUTE_KEYS.has(opts.routeKey) : false);
+    opts.noindex ??
+    // Langue non exposée au SEO (pt en soft-launch) → noindex, en plus des routes
+    // déjà noindex (tunnels, pages de remerciement).
+    (!SEO_LANGS.includes(lang) ||
+      (opts.routeKey ? NOINDEX_ROUTE_KEYS.has(opts.routeKey) : false));
 
   return {
     title,

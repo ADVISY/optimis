@@ -89,6 +89,7 @@ const {
   SITE_NAME,
   DEFAULT_OG_IMAGE,
   LANGS,
+  SEO_LANGS,
 } = seoMod;
 const { localizedRoutes } = routesMod;
 
@@ -222,7 +223,9 @@ const routeKeys = Object.keys(localizedRoutes).filter((k) => !EXCLUDE.has(k));
 
 for (const routeKey of routeKeys) {
   const route = localizedRoutes[routeKey];
-  for (const lang of LANGS) {
+  // SEO_LANGS (pas LANGS) : le pt est en soft-launch → non prérendu tant qu'il
+  // n'est pas exposé au SEO.
+  for (const lang of SEO_LANGS) {
     const slug = (route[lang] ?? route.fr ?? "").replace(/^\/+|\/+$/g, "");
     const seo = getSeo({ routeKey, lang });
     const jsonLd = buildAutoJsonLd(routeKey, seo);

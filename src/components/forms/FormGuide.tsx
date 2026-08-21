@@ -132,8 +132,8 @@ const CostumeBadge = ({
   const iconDim = size === "md" ? "h-4 w-4" : "h-3.5 w-3.5";
   return (
     <span
-      aria-label={costume.label[lang]}
-      title={costume.label[lang]}
+      aria-label={costume.label[lang] ?? costume.label.fr}
+      title={costume.label[lang] ?? costume.label.fr}
       className={cn(
         "flex items-center justify-center rounded-full border-2 border-white bg-emerald-600 text-white shadow ring-1 ring-emerald-200",
         dim,
@@ -171,6 +171,14 @@ const TEMPLATES: Record<Lang, Record<Phase, string>> = {
     final:
       "Ultimo passaggio{name}: i tuoi recapiti per ricevere il confronto gratuito.",
   },
+  pt: {
+    intro:
+      "Feliz por te acompanhar{name}! Algumas perguntas simples e comparo por ti.",
+    middle: "Estás a ir muito bem{name}, continuamos!",
+    almost: "Quase terminado{name}! Falta só um passo.",
+    final:
+      "Último passo{name}: os teus contactos para receberes o teu comparativo gratuito.",
+  },
 };
 
 // Variantes pour la phase "milieu" : évitent une bulle identique à chaque étape
@@ -191,12 +199,18 @@ const MIDDLE_VARIANTS: Record<Lang, string[]> = {
     "Annotato{name}! Ancora qualche dettaglio.",
     "Perfetto{name}, ci siamo quasi.",
   ],
+  pt: [
+    "Estás a ir muito bem{name}, continuamos!",
+    "Registado{name}! Só mais alguns detalhes.",
+    "Perfeito{name}, estamos quase lá.",
+  ],
 };
 
 const ROLE: Record<Lang, { advisor: string; together: string }> = {
   fr: { advisor: "Ton conseiller", together: "On avance ensemble" },
   de: { advisor: "Dein Berater", together: "Gemeinsam unterwegs" },
   it: { advisor: "Il tuo consulente", together: "Avanziamo insieme" },
+  pt: { advisor: "O teu consultor", together: "Avançamos juntos" },
 };
 
 const SpeechBubble = ({
@@ -263,7 +277,7 @@ const FormGuide = ({
   className,
 }: FormGuideProps) => {
   const { i18n } = useTranslation();
-  const lang: Lang = (["fr", "de", "it"].includes(i18n.language?.slice(0, 2))
+  const lang: Lang = (["fr", "de", "it", "pt"].includes(i18n.language?.slice(0, 2))
     ? (i18n.language.slice(0, 2) as Lang)
     : "fr");
 
