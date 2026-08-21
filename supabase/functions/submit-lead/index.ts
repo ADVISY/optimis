@@ -183,28 +183,141 @@ function extractLeadFields(leadData: Record<string, unknown>): ExtractedLead {
 // ----------------------------------------------------------------------------
 // EMAIL DE CONFIRMATION AU PROSPECT (via Resend)
 // ----------------------------------------------------------------------------
-const PRODUIT_LABELS: Record<string, string> = {
-  "health-insurance": "assurance santé",
-  "subsidy": "subside d'assurance maladie",
-  "pillar-3a": "3e pilier",
-  "premier-achat": "projet immobilier",
-  "lpp-libre-passage": "libre passage LPP",
-  "mortgage": "hypothèque",
-  "car-insurance": "assurance véhicule",
-  "household-insurance": "assurance ménage",
-  "legal-protection": "protection juridique",
-  "professional-insurance": "assurance professionnelle",
-  "estimation-immobiliere": "estimation immobilière",
-  "termination": "résiliation",
-  "prenatal-insurance": "assurance prénatale",
-  "complementary-insurance": "assurance complémentaire",
-  "partner": "partenariat Optimis",
+type ConfirmLang = "fr" | "de" | "it" | "en" | "pt";
+// Langue du lead → langue supportée pour l'email/SMS (fallback fr).
+function pickLang(raw?: string): ConfirmLang {
+  const l = (raw || "").toLowerCase().slice(0, 2);
+  return (["fr", "de", "it", "en", "pt"] as const).includes(l as ConfirmLang) ? (l as ConfirmLang) : "fr";
+}
+
+// Libellé du produit par langue (pour email + SMS + sujet).
+const PRODUIT_LABELS_BY_LANG: Record<ConfirmLang, Record<string, string>> = {
+  fr: {
+    "health-insurance": "assurance santé", "subsidy": "subside d'assurance maladie", "pillar-3a": "3e pilier",
+    "premier-achat": "projet immobilier", "lpp-libre-passage": "libre passage LPP", "mortgage": "hypothèque",
+    "car-insurance": "assurance véhicule", "household-insurance": "assurance ménage", "legal-protection": "protection juridique",
+    "professional-insurance": "assurance professionnelle", "estimation-immobiliere": "estimation immobilière",
+    "termination": "résiliation", "prenatal-insurance": "assurance prénatale", "complementary-insurance": "assurance complémentaire",
+    "partner": "partenariat Optimis",
+  },
+  pt: {
+    "health-insurance": "seguro de saúde", "subsidy": "subsídio do seguro de saúde", "pillar-3a": "3.º pilar",
+    "premier-achat": "projeto imobiliário", "lpp-libre-passage": "livre passagem LPP", "mortgage": "hipoteca",
+    "car-insurance": "seguro automóvel", "household-insurance": "seguro do lar", "legal-protection": "proteção jurídica",
+    "professional-insurance": "seguro profissional", "estimation-immobiliere": "avaliação imobiliária",
+    "termination": "rescisão", "prenatal-insurance": "seguro pré-natal", "complementary-insurance": "seguro complementar",
+    "partner": "parceria Optimis",
+  },
+  de: {
+    "health-insurance": "Krankenversicherung", "subsidy": "Prämienverbilligung", "pillar-3a": "Säule 3a",
+    "premier-achat": "Immobilienprojekt", "lpp-libre-passage": "BVG-Freizügigkeit", "mortgage": "Hypothek",
+    "car-insurance": "Autoversicherung", "household-insurance": "Hausratversicherung", "legal-protection": "Rechtsschutz",
+    "professional-insurance": "Unternehmensversicherung", "estimation-immobiliere": "Immobilienbewertung",
+    "termination": "Kündigung", "prenatal-insurance": "pränatale Versicherung", "complementary-insurance": "Zusatzversicherung",
+    "partner": "Optimis-Partnerschaft",
+  },
+  it: {
+    "health-insurance": "assicurazione malattia", "subsidy": "riduzione dei premi", "pillar-3a": "pilastro 3a",
+    "premier-achat": "progetto immobiliare", "lpp-libre-passage": "libero passaggio LPP", "mortgage": "ipoteca",
+    "car-insurance": "assicurazione auto", "household-insurance": "assicurazione mobilia", "legal-protection": "protezione giuridica",
+    "professional-insurance": "assicurazione aziendale", "estimation-immobiliere": "valutazione immobiliare",
+    "termination": "disdetta", "prenatal-insurance": "assicurazione prenatale", "complementary-insurance": "assicurazione complementare",
+    "partner": "partnership Optimis",
+  },
+  en: {
+    "health-insurance": "health insurance", "subsidy": "premium subsidy", "pillar-3a": "3rd pillar",
+    "premier-achat": "property project", "lpp-libre-passage": "LPP vested benefits", "mortgage": "mortgage",
+    "car-insurance": "car insurance", "household-insurance": "household insurance", "legal-protection": "legal protection",
+    "professional-insurance": "business insurance", "estimation-immobiliere": "property valuation",
+    "termination": "cancellation", "prenatal-insurance": "prenatal insurance", "complementary-insurance": "supplementary insurance",
+    "partner": "Optimis partnership",
+  },
 };
 
-function buildProspectEmail(prenom: string, produitLabel: string): string {
-  const greeting = prenom ? `Merci ${prenom}` : "Merci";
+function productLabel(formType: string, lang: ConfirmLang): string {
+  return PRODUIT_LABELS_BY_LANG[lang]?.[formType] ?? PRODUIT_LABELS_BY_LANG.fr[formType] ?? CONFIRM_TEXT[lang].fallbackLabel;
+}
+
+// Textes localisés de l'email + SMS de confirmation prospect (fallback fr).
+interface ConfirmStrings {
+  htmlLang: string; thanks: string; received: string; advisor: string; stepsTitle: string;
+  step1: string; step2: string; step3: string; reviewPrompt: string; reviewCta: string;
+  signoff: string; team: string; footerQuestion: string; subject: string; sms: string; fallbackLabel: string;
+}
+const CONFIRM_TEXT: Record<ConfirmLang, ConfirmStrings> = {
+  fr: {
+    htmlLang: "fr", thanks: "Merci", received: "Votre demande de {L} a bien été reçue.",
+    advisor: "Un conseiller vous contactera sous 24 heures pour vous présenter les meilleures offres adaptées à votre situation.",
+    stepsTitle: "Prochaines étapes",
+    step1: "Notre équipe analyse votre demande et compare les meilleures offres.",
+    step2: "Un conseiller spécialisé vous appelle pour discuter de vos besoins.",
+    step3: "Vous recevez une proposition personnalisée et 100% gratuite.",
+    reviewPrompt: "Un instant pour nous aider à progresser ?", reviewCta: "Donner mon avis sur le site",
+    signoff: "À très bientôt,", team: "L'équipe Optimis", footerQuestion: "Question ?",
+    subject: "Votre demande de {L} — Optimis",
+    sms: "Optimis: {HI} votre demande de {L} a bien ete recue. Un conseiller vous contactera sous 24h.",
+    fallbackLabel: "demande",
+  },
+  pt: {
+    htmlLang: "pt-PT", thanks: "Obrigado", received: "O seu pedido de {L} foi bem recebido.",
+    advisor: "Um consultor entrará em contacto consigo dentro de 24 horas para lhe apresentar as melhores ofertas adaptadas à sua situação.",
+    stepsTitle: "Próximos passos",
+    step1: "A nossa equipa analisa o seu pedido e compara as melhores ofertas.",
+    step2: "Um consultor especializado liga-lhe para falar sobre as suas necessidades.",
+    step3: "Recebe uma proposta personalizada e 100% gratuita.",
+    reviewPrompt: "Um momento para nos ajudar a melhorar?", reviewCta: "Deixar a minha opinião sobre o site",
+    signoff: "Até breve,", team: "A equipa Optimis", footerQuestion: "Dúvidas?",
+    subject: "O seu pedido de {L} — Optimis",
+    sms: "Optimis: {HI} o seu pedido de {L} foi bem recebido. Um consultor entrara em contacto consigo em 24h.",
+    fallbackLabel: "pedido",
+  },
+  de: {
+    htmlLang: "de-CH", thanks: "Danke", received: "Ihre Anfrage für {L} ist bei uns eingegangen.",
+    advisor: "Ein Berater kontaktiert Sie innerhalb von 24 Stunden, um Ihnen die besten auf Ihre Situation zugeschnittenen Angebote zu präsentieren.",
+    stepsTitle: "Nächste Schritte",
+    step1: "Unser Team prüft Ihre Anfrage und vergleicht die besten Angebote.",
+    step2: "Ein spezialisierter Berater ruft Sie an, um Ihre Bedürfnisse zu besprechen.",
+    step3: "Sie erhalten ein persönliches und 100% kostenloses Angebot.",
+    reviewPrompt: "Einen Moment, um uns zu helfen?", reviewCta: "Meine Meinung zur Website abgeben",
+    signoff: "Bis bald,", team: "Ihr Optimis-Team", footerQuestion: "Fragen?",
+    subject: "Ihre Anfrage für {L} — Optimis",
+    sms: "Optimis: {HI} Ihre Anfrage fuer {L} ist eingegangen. Ein Berater kontaktiert Sie innerhalb von 24h.",
+    fallbackLabel: "Anfrage",
+  },
+  it: {
+    htmlLang: "it-CH", thanks: "Grazie", received: "La Sua richiesta di {L} è stata ricevuta.",
+    advisor: "Un consulente La contatterà entro 24 ore per presentarle le migliori offerte adatte alla Sua situazione.",
+    stepsTitle: "Prossimi passi",
+    step1: "Il nostro team analizza la Sua richiesta e confronta le migliori offerte.",
+    step2: "Un consulente specializzato La chiama per parlare delle Sue esigenze.",
+    step3: "Riceve una proposta personalizzata e 100% gratuita.",
+    reviewPrompt: "Un momento per aiutarci a migliorare?", reviewCta: "Lasciare la mia opinione sul sito",
+    signoff: "A presto,", team: "Il team Optimis", footerQuestion: "Domande?",
+    subject: "La Sua richiesta di {L} — Optimis",
+    sms: "Optimis: {HI} la Sua richiesta di {L} e stata ricevuta. Un consulente La contattera entro 24h.",
+    fallbackLabel: "richiesta",
+  },
+  en: {
+    htmlLang: "en", thanks: "Thank you", received: "Your {L} request has been received.",
+    advisor: "An advisor will contact you within 24 hours to present the best offers suited to your situation.",
+    stepsTitle: "Next steps",
+    step1: "Our team reviews your request and compares the best offers.",
+    step2: "A specialised advisor calls you to discuss your needs.",
+    step3: "You receive a personalised, 100% free proposal.",
+    reviewPrompt: "A moment to help us improve?", reviewCta: "Leave my review of the site",
+    signoff: "See you soon,", team: "The Optimis team", footerQuestion: "Questions?",
+    subject: "Your {L} request — Optimis",
+    sms: "Optimis: {HI} your {L} request has been received. An advisor will contact you within 24h.",
+    fallbackLabel: "request",
+  },
+};
+
+function buildProspectEmail(prenom: string, produitLabel: string, lang: ConfirmLang): string {
+  const M = CONFIRM_TEXT[lang];
+  const greeting = prenom ? `${M.thanks} ${prenom}` : M.thanks;
+  const strongLabel = `<strong class="light-text-dark" style="color:#0f172a !important;">${produitLabel}</strong>`;
   return `<!DOCTYPE html>
-<html lang="fr">
+<html lang="${M.htmlLang}">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -239,37 +352,37 @@ function buildProspectEmail(prenom: string, produitLabel: string): string {
         </td></tr>
         <tr><td class="light-bg" style="padding:40px 48px 40px; background-color:#ffffff !important;">
           <h1 class="light-text-green" style="margin:0 0 8px; font-size:32px; line-height:1.2; color:#34664B !important; font-weight:700; letter-spacing:-0.5px;">${greeting}.</h1>
-          <p class="light-text-muted" style="margin:0 0 24px; font-size:17px; line-height:1.6; color:#475569 !important;">Votre demande de <strong class="light-text-dark" style="color:#0f172a !important;">${produitLabel}</strong> a bien été reçue.</p>
-          <p class="light-text-muted" style="margin:0 0 36px; font-size:16px; line-height:1.6; color:#475569 !important;">Un conseiller vous contactera sous <strong class="light-text-dark" style="color:#0f172a !important;">24 heures</strong> pour vous présenter les meilleures offres adaptées à votre situation.</p>
+          <p class="light-text-muted" style="margin:0 0 24px; font-size:17px; line-height:1.6; color:#475569 !important;">${M.received.replace("{L}", strongLabel)}</p>
+          <p class="light-text-muted" style="margin:0 0 36px; font-size:16px; line-height:1.6; color:#475569 !important;">${M.advisor}</p>
 
           <div class="light-bg-card" style="background-color:#F8FAFC !important; border:1px solid #E2E8F0; border-radius:14px; padding:28px 28px 24px; margin-bottom:32px;">
-            <h3 class="light-text-gray" style="margin:0 0 20px; font-size:12px; font-weight:700; color:#64748B !important; text-transform:uppercase; letter-spacing:1.2px;">Prochaines étapes</h3>
+            <h3 class="light-text-gray" style="margin:0 0 20px; font-size:12px; font-weight:700; color:#64748B !important; text-transform:uppercase; letter-spacing:1.2px;">${M.stepsTitle}</h3>
             <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
               <tr><td style="padding:0 0 16px;"><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
                 <td valign="top" style="width:36px;"><div style="width:28px; height:28px; border-radius:50%; background-color:#ffffff !important; border:1.5px solid #34664B; color:#34664B !important; text-align:center; font-size:13px; line-height:25px; font-weight:700;">1</div></td>
-                <td style="padding-left:14px; font-size:15px; line-height:1.5; color:#334155 !important;">Notre équipe analyse votre demande et compare les meilleures offres.</td>
+                <td style="padding-left:14px; font-size:15px; line-height:1.5; color:#334155 !important;">${M.step1}</td>
               </tr></table></td></tr>
               <tr><td style="padding:0 0 16px;"><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
                 <td valign="top" style="width:36px;"><div style="width:28px; height:28px; border-radius:50%; background-color:#ffffff !important; border:1.5px solid #34664B; color:#34664B !important; text-align:center; font-size:13px; line-height:25px; font-weight:700;">2</div></td>
-                <td style="padding-left:14px; font-size:15px; line-height:1.5; color:#334155 !important;">Un conseiller spécialisé vous appelle pour discuter de vos besoins.</td>
+                <td style="padding-left:14px; font-size:15px; line-height:1.5; color:#334155 !important;">${M.step2}</td>
               </tr></table></td></tr>
               <tr><td><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
                 <td valign="top" style="width:36px;"><div style="width:28px; height:28px; border-radius:50%; background-color:#34664B !important; color:#ffffff !important; text-align:center; font-size:13px; line-height:28px; font-weight:700;">3</div></td>
-                <td style="padding-left:14px; font-size:15px; line-height:1.5; color:#334155 !important;">Vous recevez une proposition personnalisée et 100% gratuite.</td>
+                <td style="padding-left:14px; font-size:15px; line-height:1.5; color:#334155 !important;">${M.step3}</td>
               </tr></table></td></tr>
             </table>
           </div>
 
           <div style="text-align:center; margin:0 0 28px;">
-            <p class="light-text-gray" style="margin:0 0 12px; font-size:14px; line-height:1.5; color:#64748B !important;">Un instant pour nous aider à progresser ?</p>
-            <a href="https://le-comparateur-optimis.ch/fr/avis" style="display:inline-block; background-color:#ffffff !important; color:#34664B !important; text-decoration:none; font-size:14px; font-weight:600; padding:10px 22px; border:1.5px solid #34664B; border-radius:10px;">Donner mon avis sur le site</a>
+            <p class="light-text-gray" style="margin:0 0 12px; font-size:14px; line-height:1.5; color:#64748B !important;">${M.reviewPrompt}</p>
+            <a href="https://le-comparateur-optimis.ch/${lang}/avis" style="display:inline-block; background-color:#ffffff !important; color:#34664B !important; text-decoration:none; font-size:14px; font-weight:600; padding:10px 22px; border:1.5px solid #34664B; border-radius:10px;">${M.reviewCta}</a>
           </div>
 
-          <p class="light-text-gray" style="margin:0; font-size:14px; line-height:1.5; color:#64748B !important; text-align:center;">À très bientôt,<br><strong class="light-text-green" style="color:#34664B !important; font-weight:600;">L'équipe Optimis</strong></p>
+          <p class="light-text-gray" style="margin:0; font-size:14px; line-height:1.5; color:#64748B !important; text-align:center;">${M.signoff}<br><strong class="light-text-green" style="color:#34664B !important; font-weight:600;">${M.team}</strong></p>
         </td></tr>
         <tr><td class="light-bg-footer" style="padding:24px 48px; background-color:#F8FAFC !important; border-top:1px solid #E2E8F0; text-align:center;">
           <p style="margin:0 0 6px; font-size:12px; color:#94A3B8 !important;">Optimislink Sàrl · Place de la Fontaine 9 · 1868 Collombey</p>
-          <p style="margin:0; font-size:12px; color:#94A3B8 !important;">Question ? <a href="mailto:lesiteoptimis@gmail.com" style="color:#34664B !important; text-decoration:none; font-weight:600;">lesiteoptimis@gmail.com</a></p>
+          <p style="margin:0; font-size:12px; color:#94A3B8 !important;">${M.footerQuestion} <a href="mailto:lesiteoptimis@gmail.com" style="color:#34664B !important; text-decoration:none; font-weight:600;">lesiteoptimis@gmail.com</a></p>
         </td></tr>
       </table>
     </td></tr>
@@ -278,13 +391,14 @@ function buildProspectEmail(prenom: string, produitLabel: string): string {
 </html>`;
 }
 
-async function sendProspectConfirmation(email: string, prenom: string, formType: string): Promise<{ ok: boolean; error?: string }> {
+async function sendProspectConfirmation(email: string, prenom: string, formType: string, langue?: string): Promise<{ ok: boolean; error?: string }> {
   const resendKey = Deno.env.get("RESEND_API_KEY");
   if (!resendKey) return { ok: false, error: "RESEND_API_KEY manquante" };
   if (!email) return { ok: false, error: "email vide" };
 
-  const produitLabel = PRODUIT_LABELS[formType] ?? "demande";
-  const html = buildProspectEmail(prenom, produitLabel);
+  const lang = pickLang(langue);
+  const produitLabel = productLabel(formType, lang);
+  const html = buildProspectEmail(prenom, produitLabel, lang);
 
   try {
     const res = await fetch("https://api.resend.com/emails", {
@@ -293,7 +407,7 @@ async function sendProspectConfirmation(email: string, prenom: string, formType:
       body: JSON.stringify({
         from: "Optimis <no-reply@le-comparateur-optimis.ch>",
         to: email,
-        subject: `Votre demande de ${produitLabel} — Optimis`,
+        subject: CONFIRM_TEXT[lang].subject.replace("{L}", produitLabel),
         html,
       }),
     });
@@ -333,15 +447,14 @@ function normalizeToE164(phone: string): string | null {
   return null;
 }
 
-function buildProspectSms(prenom: string, produitLabel: string): string {
-  const hi = prenom ? `Merci ${prenom},` : "Merci,";
+function buildProspectSms(prenom: string, produitLabel: string, lang: ConfirmLang): string {
+  const M = CONFIRM_TEXT[lang];
+  const hi = prenom ? `${M.thanks} ${prenom},` : `${M.thanks},`;
   // SMS sans accents (GSM-7) pour rester sur des segments de 160 caracteres.
-  return stripAccents(
-    `Optimis: ${hi} votre demande de ${produitLabel} a bien ete recue. Un conseiller vous contactera sous 24h.`
-  );
+  return stripAccents(M.sms.replace("{HI}", hi).replace("{L}", produitLabel));
 }
 
-async function sendProspectSms(phone: string, prenom: string, formType: string): Promise<{ ok: boolean; error?: string }> {
+async function sendProspectSms(phone: string, prenom: string, formType: string, langue?: string): Promise<{ ok: boolean; error?: string }> {
   const accountSid = Deno.env.get("TWILIO_ACCOUNT_SID");
   const authToken = Deno.env.get("TWILIO_AUTH_TOKEN");
   const messagingServiceSid = Deno.env.get("TWILIO_MESSAGING_SERVICE_SID");
@@ -354,8 +467,9 @@ async function sendProspectSms(phone: string, prenom: string, formType: string):
   const to = normalizeToE164(phone);
   if (!to) return { ok: false, error: `telephone invalide: ${phone}` };
 
-  const produitLabel = PRODUIT_LABELS[formType] ?? "demande";
-  const body = buildProspectSms(prenom, produitLabel);
+  const lang = pickLang(langue);
+  const produitLabel = productLabel(formType, lang);
+  const body = buildProspectSms(prenom, produitLabel, lang);
 
   const params = new URLSearchParams({ To: to, Body: body });
   if (messagingServiceSid) params.set("MessagingServiceSid", messagingServiceSid);
@@ -793,7 +907,7 @@ serve(async (req) => {
           // EMAIL CONFIRMATION AU PROSPECT (async, fire-and-forget si échec)
           // ========================================================================
           if (fields.email) {
-            const emailRes = await sendProspectConfirmation(fields.email, fields.prenom ?? "", formType);
+            const emailRes = await sendProspectConfirmation(fields.email, fields.prenom ?? "", formType, fields.langue);
             if (emailRes.ok) {
               console.log(`[prospect-email] envoyé à ${fields.email}`);
               (bdResult as any).email_sent = true;
@@ -808,7 +922,7 @@ serve(async (req) => {
           // SMS CONFIRMATION AU PROSPECT (async, fire-and-forget si échec)
           // ========================================================================
           if (fields.telephone) {
-            const smsRes = await sendProspectSms(fields.telephone, fields.prenom ?? "", formType);
+            const smsRes = await sendProspectSms(fields.telephone, fields.prenom ?? "", formType, fields.langue);
             if (smsRes.ok) {
               console.log(`[prospect-sms] envoyé à ${fields.telephone}`);
               (bdResult as any).sms_sent = true;
