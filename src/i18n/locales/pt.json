@@ -411,12 +411,15 @@
       "title": "Comparador de seguro de saúde",
       "description": "Obtém as melhores ofertas em poucos cliques",
       "guide": {
-        "step1": "Em 2 min comparo tudo por ti — muitas vezes 2'900.- de poupança! Já tens um seguro de saúde?",
+        "step1": "Vamos começar: já tens um seguro de saúde? Ajuda-me a situar o teu processo.",
         "insurerStep": "Perfeito — em que seguradora estás atualmente? Escolhe o logótipo dela, ajuda-me a comparar com mais precisão.",
-        "step2": "A tua situação familiar e a tua idade determinam os teus prémios. Um instante!",
-        "step3": "Os prémios variam muito de cantão para cantão — diz-me onde vives.",
-        "step4": "O modelo é ONDE se poupa: Médico de família ou Telemedicina = o mais barato, Livre escolha do médico = o mais caro. E quanto mais alta for a tua franquia, mais baixo é o teu prémio. Eu guio-te!",
-        "step5": "Um complementar (dentário, medicina alternativa, hospitalização)? Mostro-te as opções realmente úteis para ti."
+        "step2": "A tua situação familiar influencia os teus prémios. Quem faz parte do teu agregado?",
+        "step3": "A tua idade determina o valor dos teus prémios. Qual é a tua data de nascimento?",
+        "step4": "Os prémios variam consoante o cantão — diz-me onde vives.",
+        "step5": "O teu código postal permite-me afinar o cálculo. Estamos quase lá!",
+        "step6": "O modelo de seguro é onde se faz mesmo poupança. Eu guio-te.",
+        "step7": "Franquia e acidentes: dois ajustes que pesam no teu prémio. Ajustamos juntos.",
+        "step8": "Um pequeno complementar de saúde? Mostro-te as opções realmente úteis."
       },
       "hasCurrentInsurance": "Já tens um seguro de saúde?",
       "currentInsurer": "Qual é a tua seguradora atual?",
