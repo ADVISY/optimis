@@ -94,6 +94,35 @@
     "freeLabel": "Gratuito",
     "freeSublabel": "e sem compromisso"
   },
+  "otp": {
+    "title": "Verifique o seu número para continuar",
+    "description": "Enviámos-lhe um código de segurança por SMS. Introduza esse código para confirmar o seu número e continuar.",
+    "sentTo": "Código enviado para o número terminado em",
+    "verifying": "A verificar...",
+    "verify": "Validar o código",
+    "resendIn": "Reenviar o código ({{seconds}}s)",
+    "resend": "Reenviar o código",
+    "modifyPhone": "Alterar o meu número",
+    "sending": "A enviar o código SMS...",
+    "phoneVerifiedSuccess": "O seu número foi verificado com sucesso.",
+    "verificationRequired": "A verificação do seu número é necessária para aceder aos resultados."
+  },
+  "avisPrompt": {
+    "title": "A sua experiência conta!",
+    "subtitle": "Gostou do comparador Optimis? Partilhe a sua opinião em poucos segundos.",
+    "namePlaceholder": "O seu nome (facultativo)",
+    "cityPlaceholder": "Cidade (facultativo)",
+    "commentPlaceholder": "O que achou do site? (facultativo)",
+    "submit": "Enviar",
+    "later": "Mais tarde",
+    "rating5": "Excelente!",
+    "rating4": "Muito bom",
+    "rating3": "Obrigado pelo seu feedback",
+    "anonymous": "Cliente Optimis",
+    "defaultComment": "Experiência positiva com o comparador Optimis.",
+    "thanksTitle": "Muito obrigado!",
+    "thanksDesc": "A sua avaliação foi registada. Aparecerá no nosso site após verificação."
+  },
   "healthInsurance": {
     "title": "Seguro de saúde",
     "heroSubtitle": "Proteja-se a si e aos seus com um seguro de saúde. Encontre o plano perfeito para as suas necessidades.",
@@ -241,6 +270,7 @@
     "errorTitle": "Erro",
     "errorDescription": "Ocorreu um erro. Tenta novamente.",
     "seeMyOffers": "Ver as minhas ofertas",
+    "discoverResults": "Ver os meus resultados",
     "stepOf": "Passo {{current}} de {{total}}",
     "loading": {
       "title": "A procurar as melhores ofertas",
