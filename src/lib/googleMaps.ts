@@ -51,6 +51,13 @@ export async function attachAddressAutocomplete(
   await loadGoogleMaps();
   const g = (window as unknown as { google: any }).google;
 
+  // Avec loading=async, la sous-librairie `places` se charge de façon différée :
+  // on l'attend explicitement avant d'instancier l'Autocomplete (sinon
+  // g.maps.places est undefined juste après le onload → l'attache échoue).
+  if (g?.maps?.importLibrary && !g?.maps?.places?.Autocomplete) {
+    await g.maps.importLibrary("places");
+  }
+
   const ac = new g.maps.places.Autocomplete(input, {
     types: ["address"],
     componentRestrictions: { country: "ch" },
