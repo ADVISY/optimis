@@ -31,6 +31,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import ThankYou from "./pages/ThankYou";
+import RendezVous from "./pages/RendezVous";
 import MerciHypotheque from "./pages/MerciHypotheque";
 import MerciLpp from "./pages/MerciLpp";
 import { MerciEstimation, MerciPartenaire, MerciSubside, MerciResiliation, MerciPrenatal } from "./pages/MerciGeneric";
@@ -137,6 +138,7 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("faq", <FAQ />)}
         {createLocalizedRoutes("insurances", <Insurances />)}
         {createLocalizedRoutes("thankYou", <ThankYou />)}
+        {createLocalizedRoutes("rendezVous", <RendezVous />)}
         {createLocalizedRoutes("thankYouMortgage", <MerciHypotheque />)}
         {createLocalizedRoutes("thankYouLpp", <MerciLpp />)}
         {createLocalizedRoutes("thankYouRealEstate", <MerciEstimation />)}

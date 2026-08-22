@@ -28,6 +28,7 @@ const EVENT_TYPE_BY_FORM_TYPE: Record<string, string> = {
   "contact-offer": "Offre choisie",
   "contact-call": "Demande de rappel",
   "contact-email": "Demande par email",
+  "rdv-domicile": "RDV à domicile",
 };
 
 export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLeadSubmissionOptions) {
@@ -469,6 +470,21 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
         statutDistribution: "Statut de distribution",
         motifNonDistribution: "Motif non-distribution",
       },
+      "rdv-domicile": {
+        // RDV physique à domicile pris depuis la page merci (2e soumission
+        // rattachée au lead d'origine via linkToLeadId).
+        address: "Adresse",
+        city: "Ville",
+        rdvDate: "Date de RDV souhaitée",
+        rdvTime: "Heure du RDV",
+        rdvLieu: "Lieu du RDV (domicile)",
+        rdvStart: "Début RDV (agenda)",
+        rdvEnd: "Fin RDV (agenda)",
+        rdvTitre: "Titre RDV",
+        rdvDescription: "Description RDV",
+        produitOrigine: "Produit d'origine",
+        leadOrigine: "Lead d'origine",
+      },
       mortgage: {
         projectType: "Type de projet",
         propertyType: "Type de bien",
@@ -692,6 +708,27 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
       try {
         sessionStorage.setItem("last_lead_id", leadId);
         sessionStorage.setItem("last_lead_form_type", formType);
+        // Snapshot des coordonnées pour pré-remplir le bloc « RDV à domicile »
+        // sur la page merci (rechargement complet → l'état React est perdu).
+        // Le formulaire RDV lui-même (2e soumission) ne réécrit pas le snapshot.
+        if (formType !== "rdv-domicile") {
+          const pick = (k: string) => flatFormData[k] ?? flatFormData[`contact_${k}`];
+          const contactSnapshot = {
+            firstName: pick("firstName"),
+            lastName: pick("lastName"),
+            email: pick("email"),
+            phone: pick("phone"),
+            postalCode: pick("postalCode"),
+            canton: pick("canton"),
+            formType,
+            leadId,
+            language: i18n.language,
+          };
+          sessionStorage.setItem("last_lead_contact", JSON.stringify(contactSnapshot));
+          // Toutes les infos du lead (libellés FR déjà propres) → pour composer
+          // une description RDV complète sur la page merci.
+          sessionStorage.setItem("last_lead_details", JSON.stringify(renamedData));
+        }
       } catch (err) {
         console.warn("Unable to persist lead id for tracking", err);
       }

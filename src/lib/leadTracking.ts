@@ -80,3 +80,56 @@ export function getLastFormType(): string | undefined {
   if (typeof window === "undefined") return undefined;
   return sessionStorage.getItem("last_lead_form_type") ?? undefined;
 }
+
+/**
+ * Coordonnées du dernier prospect, persistées par useLeadSubmission juste après
+ * l'envoi. Permet à la page merci (rechargement complet) de pré-remplir le bloc
+ * « RDV à domicile » sans redemander nom/tél/email/NPA.
+ */
+export type LastLeadContact = {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phone?: string;
+  postalCode?: string;
+  canton?: string;
+  formType?: string;
+  leadId?: string;
+  language?: string;
+};
+
+export function getLastLeadContact(): LastLeadContact | undefined {
+  if (typeof window === "undefined") return undefined;
+  try {
+    const raw = sessionStorage.getItem("last_lead_contact");
+    return raw ? (JSON.parse(raw) as LastLeadContact) : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+export function clearLastLeadContact(): void {
+  if (typeof window === "undefined") return;
+  try {
+    sessionStorage.removeItem("last_lead_contact");
+    sessionStorage.removeItem("last_lead_details");
+  } catch {
+    /* noop */
+  }
+}
+
+/**
+ * Toutes les infos fournies par le prospect dans son formulaire initial
+ * (libellés FR propres : Date de naissance, Situation familiale, Franchise,
+ * Assureur actuel, etc.), persistées par useLeadSubmission. Sert à composer la
+ * description complète du RDV sur la page merci.
+ */
+export function getLastLeadDetails(): Record<string, unknown> | undefined {
+  if (typeof window === "undefined") return undefined;
+  try {
+    const raw = sessionStorage.getItem("last_lead_details");
+    return raw ? (JSON.parse(raw) as Record<string, unknown>) : undefined;
+  } catch {
+    return undefined;
+  }
+}

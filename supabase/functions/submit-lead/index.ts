@@ -30,6 +30,8 @@ const FORM_WEBHOOKS: Record<string, string> = {
   "prenatal-insurance": "https://hooks.zapier.com/hooks/catch/21326682/4oeel8v/",
   "complementary-insurance": "https://hooks.zapier.com/hooks/catch/21326682/43vygp3/",
   "premier-achat": "https://hooks.zapier.com/hooks/catch/21326682/46bkyby/",
+  // RDV physique à domicile (page merci) → Zap dédié : Google Agenda + Sheet
+  "rdv-domicile": "https://hooks.zapier.com/hooks/catch/21326682/4twqspq/",
 };
 
 // Overrides de webhook par langue (clé : `${formType}:${lang}`) — repris de la prod
@@ -56,6 +58,7 @@ const FORM_TO_PRODUIT: Record<string, string> = {
   "partner": "autre",
   "prenatal-insurance": "assurance_maladie",
   "complementary-insurance": "assurance_maladie",
+  "rdv-domicile": "autre",
 };
 
 // ----------------------------------------------------------------------------
@@ -198,7 +201,7 @@ const PRODUIT_LABELS_BY_LANG: Record<ConfirmLang, Record<string, string>> = {
     "car-insurance": "assurance véhicule", "household-insurance": "assurance ménage", "legal-protection": "protection juridique",
     "professional-insurance": "assurance professionnelle", "estimation-immobiliere": "estimation immobilière",
     "termination": "résiliation", "prenatal-insurance": "assurance prénatale", "complementary-insurance": "assurance complémentaire",
-    "partner": "partenariat Optimis",
+    "partner": "partenariat Optimis", "rdv-domicile": "rendez-vous à domicile",
   },
   pt: {
     "health-insurance": "seguro de saúde", "subsidy": "subsídio do seguro de saúde", "pillar-3a": "3.º pilar",
@@ -206,7 +209,7 @@ const PRODUIT_LABELS_BY_LANG: Record<ConfirmLang, Record<string, string>> = {
     "car-insurance": "seguro automóvel", "household-insurance": "seguro do lar", "legal-protection": "proteção jurídica",
     "professional-insurance": "seguro profissional", "estimation-immobiliere": "avaliação imobiliária",
     "termination": "rescisão", "prenatal-insurance": "seguro pré-natal", "complementary-insurance": "seguro complementar",
-    "partner": "parceria Optimis",
+    "partner": "parceria Optimis", "rdv-domicile": "visita ao domicílio",
   },
   de: {
     "health-insurance": "Krankenversicherung", "subsidy": "Prämienverbilligung", "pillar-3a": "Säule 3a",
@@ -214,7 +217,7 @@ const PRODUIT_LABELS_BY_LANG: Record<ConfirmLang, Record<string, string>> = {
     "car-insurance": "Autoversicherung", "household-insurance": "Hausratversicherung", "legal-protection": "Rechtsschutz",
     "professional-insurance": "Unternehmensversicherung", "estimation-immobiliere": "Immobilienbewertung",
     "termination": "Kündigung", "prenatal-insurance": "pränatale Versicherung", "complementary-insurance": "Zusatzversicherung",
-    "partner": "Optimis-Partnerschaft",
+    "partner": "Optimis-Partnerschaft", "rdv-domicile": "Termin bei Ihnen zu Hause",
   },
   it: {
     "health-insurance": "assicurazione malattia", "subsidy": "riduzione dei premi", "pillar-3a": "pilastro 3a",
@@ -222,7 +225,7 @@ const PRODUIT_LABELS_BY_LANG: Record<ConfirmLang, Record<string, string>> = {
     "car-insurance": "assicurazione auto", "household-insurance": "assicurazione mobilia", "legal-protection": "protezione giuridica",
     "professional-insurance": "assicurazione aziendale", "estimation-immobiliere": "valutazione immobiliare",
     "termination": "disdetta", "prenatal-insurance": "assicurazione prenatale", "complementary-insurance": "assicurazione complementare",
-    "partner": "partnership Optimis",
+    "partner": "partnership Optimis", "rdv-domicile": "appuntamento a domicilio",
   },
   en: {
     "health-insurance": "health insurance", "subsidy": "premium subsidy", "pillar-3a": "3rd pillar",
@@ -230,7 +233,7 @@ const PRODUIT_LABELS_BY_LANG: Record<ConfirmLang, Record<string, string>> = {
     "car-insurance": "car insurance", "household-insurance": "household insurance", "legal-protection": "legal protection",
     "professional-insurance": "business insurance", "estimation-immobiliere": "property valuation",
     "termination": "cancellation", "prenatal-insurance": "prenatal insurance", "complementary-insurance": "supplementary insurance",
-    "partner": "Optimis partnership",
+    "partner": "Optimis partnership", "rdv-domicile": "home appointment",
   },
 };
 

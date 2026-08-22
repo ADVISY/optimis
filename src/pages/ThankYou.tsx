@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight, ShieldCheck } from "lucide-react";
 import LocalizedLink from "@/components/LocalizedLink";
 import AvisPromptDialog from "@/components/AvisPromptDialog";
+import RdvCta from "@/components/RdvCta";
 import { fireLeadConversion, getLastLeadId, getLastFormType } from "@/lib/leadTracking";
 
 const ThankYou = () => {
@@ -80,6 +81,9 @@ const ThankYou = () => {
             </LocalizedLink>
           )}
         </div>
+
+        {/* Encart CTA → renvoie vers la page dédiée /rendez-vous */}
+        <RdvCta />
       </div>
       <AvisPromptDialog />
     </Layout>

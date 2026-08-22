@@ -43,6 +43,7 @@ export const localizedRoutes: LocalizedRoutes = {
   faq: { fr: "faqs", de: "faq", it: "faq" },
   insurances: { fr: "assurances", de: "versicherungen", it: "assicurazioni" },
   thankYou: { fr: "merci", de: "danke", it: "grazie" },
+  rendezVous: { fr: "rendez-vous", de: "termin", it: "appuntamento" },
   thankYouMortgage: { fr: "merci-hypotheque", de: "danke-hypothek", it: "grazie-ipoteca" },
   thankYouLpp: { fr: "merci-lpp", de: "danke-bvg", it: "grazie-lpp" },
   thankYouRealEstate: { fr: "merci-estimation", de: "danke-immobilienbewertung", it: "grazie-valutazione" },
