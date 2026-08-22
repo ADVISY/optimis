@@ -2,14 +2,18 @@
 // d'autocomplétion d'adresse restreinte à la Suisse. La clé est une clé front
 // (restreinte par referrer HTTP côté Google Cloud), donc exposable côté client.
 
-const GOOGLE_MAPS_KEY =
-  (import.meta.env.VITE_GOOGLE_MAPS_KEY as string | undefined) ||
-  "AIzaSyB4713HgDDrzGmcRbCmAKKLMXPOKD22AXA";
+// Clé lue UNIQUEMENT depuis l'environnement (jamais en dur dans le code :
+// le repo est public). À définir : `.env` en local + variable Vercel en prod
+// (VITE_GOOGLE_MAPS_KEY). Sans clé → pas d'autocomplétion, saisie manuelle.
+const GOOGLE_MAPS_KEY = (import.meta.env.VITE_GOOGLE_MAPS_KEY as string | undefined) || "";
 
 let loaderPromise: Promise<void> | null = null;
 
 export function loadGoogleMaps(): Promise<void> {
   if (typeof window === "undefined") return Promise.resolve();
+  if (!GOOGLE_MAPS_KEY) {
+    return Promise.reject(new Error("VITE_GOOGLE_MAPS_KEY manquante"));
+  }
   const w = window as unknown as { google?: { maps?: { places?: unknown } } };
   if (w.google?.maps?.places) return Promise.resolve();
   if (loaderPromise) return loaderPromise;
