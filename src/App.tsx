@@ -65,6 +65,7 @@ import Seo from "@/components/Seo";
 import AdminRouter from "./admin/AdminRouter";
 import PartnerRouter from "./partner/PartnerRouter";
 import PortalLogin from "./pages/PortalLogin";
+import { Analytics } from "@vercel/analytics/react";
 
 const queryClient = new QueryClient();
 
@@ -279,6 +280,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <Analytics />
       <BrowserRouter>
         <AppRoutes />
       </BrowserRouter>
