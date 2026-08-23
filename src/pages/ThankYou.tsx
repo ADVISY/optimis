@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight, ShieldCheck } from "lucide-react";
 import LocalizedLink from "@/components/LocalizedLink";
 import AvisPromptDialog from "@/components/AvisPromptDialog";
-import RdvCta from "@/components/RdvCta";
+import RdvPriorityButton from "@/components/RdvPriorityButton";
 import { fireLeadConversion, getLastLeadId, getLastFormType } from "@/lib/leadTracking";
 
 const ThankYou = () => {
@@ -61,29 +61,27 @@ const ThankYou = () => {
           <p className="text-xl text-muted-foreground mb-8">{t('thankYou.message')}</p>
           <p className="text-muted-foreground mb-8">{t('thankYou.nextSteps')}</p>
           
-          {returnUrl && phoneVerified ? (
-            <Button size="lg" onClick={handleDiscoverResults} className="text-lg px-8 py-6">
-              {t('forms.discoverResults', 'Voir mes résultats')}
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          ) : returnUrl && !phoneVerified ? (
-            <div className="space-y-4">
-              <p className="text-sm text-muted-foreground">
-                {t('otp.verificationRequired', 'La vérification de votre numéro est nécessaire pour accéder aux résultats.')}
-              </p>
-              <LocalizedLink to="/">
-                <Button size="lg">{t('thankYou.backHome')}</Button>
-              </LocalizedLink>
-            </div>
-          ) : (
-            <LocalizedLink to="/">
-              <Button size="lg">{t('thankYou.backHome')}</Button>
-            </LocalizedLink>
+          {returnUrl && !phoneVerified && (
+            <p className="text-sm text-muted-foreground mb-6">
+              {t('otp.verificationRequired', 'La vérification de votre numéro est nécessaire pour accéder aux résultats.')}
+            </p>
           )}
-        </div>
 
-        {/* Encart CTA → renvoie vers la page dédiée /rendez-vous */}
-        <RdvCta />
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            {returnUrl && phoneVerified ? (
+              <Button size="lg" onClick={handleDiscoverResults} className="text-lg px-8 py-6">
+                {t('forms.discoverResults', 'Voir mes résultats')}
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            ) : (
+              <LocalizedLink to="/">
+                <Button size="lg" variant="secondary">{t('thankYou.backHome')}</Button>
+              </LocalizedLink>
+            )}
+            {/* Bouton compact → page dédiée /rendez-vous */}
+            <RdvPriorityButton />
+          </div>
+        </div>
       </div>
       <AvisPromptDialog />
     </Layout>

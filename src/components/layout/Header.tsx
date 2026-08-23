@@ -356,14 +356,10 @@ const Header = () => {
             <Lock className="h-4 w-4" />
           </Link>
           <Button asChild size="lg" className="gap-2.5">
-            <a
-              href="https://calendly.com/lesiteoptimis/30min"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <LocalizedLink to="/rendez-vous">
               <Phone className="h-5 w-5" />
               {t('common.takeAppointment')}
-            </a>
+            </LocalizedLink>
           </Button>
         </div>
 
@@ -457,14 +453,10 @@ const Header = () => {
               <div className="flex flex-col gap-4 mt-4">
                 <LanguageSwitcher />
                 <Button asChild size="lg" className="w-full gap-2.5">
-                  <a
-                    href="https://calendly.com/lesiteoptimis/30min"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <LocalizedLink to="/rendez-vous">
                     <Phone className="h-5 w-5" />
                     {t('common.takeAppointment')}
-                  </a>
+                  </LocalizedLink>
                 </Button>
                 <Link
                   to="/connexion"

@@ -1,22 +1,22 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Home, CalendarClock, Clock, Check, CheckCircle2, User, Phone, Mail, MapPin } from "lucide-react";
+import {
+  Home, Clock, MapPin, Check, CheckCircle2, User, Phone, Mail,
+  ChevronLeft, ChevronRight, CalendarDays,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { getLastLeadContact, getLastLeadDetails, clearLastLeadContact } from "@/lib/leadTracking";
 import { attachAddressAutocomplete } from "@/lib/googleMaps";
 
-/**
- * Décalage UTC d'Europe/Zurich pour une date donnée (gère l'heure d'été/hiver).
- * Ex: "+02:00" en été (CEST), "+01:00" en hiver (CET). On l'accole au datetime
- * ISO envoyé à Google Agenda pour que l'heure choisie soit posée à l'identique,
- * quel que soit le réglage de fuseau côté Zapier.
- */
+const pad = (n: number) => String(n).padStart(2, "0");
+const WEEKDAYS = ["L", "M", "M", "J", "V", "S", "D"];
+
 function zurichOffset(dateStr: string, timeStr: string): string {
   try {
     const provisional = new Date(`${dateStr}T${timeStr}:00Z`);
@@ -26,19 +26,13 @@ function zurichOffset(dateStr: string, timeStr: string): string {
     }).formatToParts(provisional);
     const off = parts.find((p) => p.type === "timeZoneName")?.value ?? "";
     const m = off.match(/GMT([+-])(\d{1,2})(?::?(\d{2}))?/);
-    if (m) {
-      const sign = m[1];
-      const hh = m[2].padStart(2, "0");
-      const mm = (m[3] ?? "00").padStart(2, "0");
-      return `${sign}${hh}:${mm}`;
-    }
+    if (m) return `${m[1]}${m[2].padStart(2, "0")}:${(m[3] ?? "00").padStart(2, "0")}`;
     return "+01:00";
   } catch {
     return "+01:00";
   }
 }
 
-/** Libellés produit lisibles (miroir de submit-lead) pour la description RDV. */
 const PRODUIT_LABELS: Record<string, string> = {
   "health-insurance": "Assurance santé",
   subsidy: "Subside assurance maladie",
@@ -56,8 +50,6 @@ const PRODUIT_LABELS: Record<string, string> = {
   "complementary-insurance": "Assurance complémentaire",
 };
 
-// Libellés à NE PAS répéter dans la section « Détails » de la description
-// (identité déjà affichée à part, ou champs techniques/tracking sans intérêt).
 const DETAIL_SKIP = new Set<string>([
   "Prénom", "Nom", "Téléphone", "Email", "Code postal", "Canton",
   "Type de formulaire", "Langue", "Source", "URL de la page", "Date et heure",
@@ -69,19 +61,33 @@ const DETAIL_SKIP = new Set<string>([
   "userAgent", "pageUrl",
 ]);
 
+const TIME_SLOTS: string[] = (() => {
+  const out: string[] = [];
+  for (let h = 8; h <= 19; h++) {
+    out.push(`${pad(h)}:00`);
+    if (h < 19) out.push(`${pad(h)}:30`);
+  }
+  return out;
+})();
+
 /**
- * Bloc « RDV physique à domicile » affiché sur la page merci.
- * Les coordonnées (prénom/nom/tél/email/NPA) sont auto-remplies depuis le lead
- * qui vient d'être soumis (snapshot sessionStorage) ; le prospect ne complète
- * que son adresse + la date + l'heure souhaitées (lieu = son domicile). À la
- * validation, on crée un NOUVEAU lead `rdv-domicile` (tracé au lead d'origine)
- * → submit-lead → Zap Google Agenda + Sheet, puis distribution manuelle.
+ * Tunnel « RDV à domicile » style Calendly : panneau info à gauche, calendrier
+ * mensuel + créneaux à droite, puis mini-formulaire d'adresse à la confirmation.
+ * Coordonnées auto-remplies depuis le lead ; adresse en autocomplétion Google.
  */
 const RdvDomicileBlock = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const contact = useMemo(() => getLastLeadContact(), []);
 
+  const hasLead = !!contact?.leadId;
+  const [firstName, setFirstName] = useState(contact?.firstName ?? "");
+  const [lastName, setLastName] = useState(contact?.lastName ?? "");
+  const [email, setEmail] = useState(contact?.email ?? "");
+  const [phone, setPhone] = useState(contact?.phone ?? "");
+  const [subject, setSubject] = useState(
+    contact?.formType ? (PRODUIT_LABELS[contact.formType] ?? "") : "",
+  );
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [postalCode, setPostalCode] = useState(contact?.postalCode ?? "");
@@ -89,128 +95,101 @@ const RdvDomicileBlock = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [done, setDone] = useState(false);
-  const addressInputRef = useRef<HTMLInputElement>(null);
-
-  // Autocomplétion Google (Suisse) sur le champ adresse → remplit rue + NPA +
-  // ville + canton automatiquement. Si Maps ne charge pas, saisie manuelle.
-  useEffect(() => {
-    const el = addressInputRef.current;
-    if (!el) return;
-    let ac: unknown;
-    attachAddressAutocomplete(el, (a) => {
-      const rue = [a.route, a.streetNumber].filter(Boolean).join(" ").trim();
-      setAddress(rue || a.formatted);
-      if (a.postalCode) setPostalCode(a.postalCode);
-      if (a.city) setCity(a.city);
-      if (a.canton) setCanton(a.canton);
-    })
-      .then((instance) => {
-        ac = instance;
-      })
-      .catch(() => {
-        /* Maps indisponible → l'utilisateur saisit à la main */
-      });
-    return () => {
-      const g = (window as unknown as { google?: any }).google;
-      if (ac && g?.maps?.event) g.maps.event.clearInstanceListeners(ac);
-    };
-  }, []);
-
-  // Pas de linkToLeadId : le RDV est un NOUVEAU lead distribuable (nouvel ID
-  // RDV-DOMICILE-…). La traçabilité vers la demande initiale passe par le champ
-  // « Lead d'origine » (leadOrigine) envoyé dans le payload.
-  const { submitLead, isSubmitting } = useLeadSubmission({
-    formType: "rdv-domicile",
+  const [viewMonth, setViewMonth] = useState(() => {
+    const d = new Date();
+    return new Date(d.getFullYear(), d.getMonth(), 1);
   });
+  const acAttached = useRef(false);
+  const { submitLead, isSubmitting } = useLeadSubmission({ formType: "rdv-domicile" });
 
-  // Sans lead fraîchement soumis, on n'affiche rien (visite directe de /merci).
-  if (!contact?.leadId) return null;
+  // --- Calendrier ---
+  const year = viewMonth.getFullYear();
+  const month = viewMonth.getMonth();
+  const monthLabel = viewMonth.toLocaleDateString("fr-CH", { month: "long", year: "numeric" });
+  const firstWeekday = (new Date(year, month, 1).getDay() + 6) % 7; // Lundi = 0
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const now = new Date();
+  const todayMid = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const canPrev = new Date(year, month, 1) > new Date(todayMid.getFullYear(), todayMid.getMonth(), 1);
 
-  const today = new Date();
-  const minDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(
-    today.getDate(),
-  ).padStart(2, "0")}`;
+  const fullName = [firstName, lastName].filter(Boolean).join(" ");
+  const produitLabel = subject.trim() || "Prise de rendez-vous";
+  const dateFrLong = date
+    ? new Date(`${date}T00:00:00`).toLocaleDateString("fr-CH", {
+        weekday: "long", day: "numeric", month: "long",
+      })
+    : "";
 
-  const fullName = [contact.firstName, contact.lastName].filter(Boolean).join(" ");
+  // Callback ref : attache l'autocomplete Google quand l'input adresse apparaît
+  // (rendu conditionnellement après le choix du créneau).
+  const addressRef = (el: HTMLInputElement | null) => {
+    if (el) {
+      if (!acAttached.current) {
+        acAttached.current = true;
+        attachAddressAutocomplete(el, (a) => {
+          const rue = [a.route, a.streetNumber].filter(Boolean).join(" ").trim();
+          setAddress(rue || a.formatted);
+          if (a.postalCode) setPostalCode(a.postalCode);
+          if (a.city) setCity(a.city);
+          if (a.canton) setCanton(a.canton);
+        }).catch(() => {});
+      }
+    } else {
+      acAttached.current = false;
+    }
+  };
 
   const handleSubmit = async () => {
+    if (!firstName.trim() || !phone.trim() || !email.trim()) {
+      toast({ description: t("rdvDomicile.missingContact", "Merci d'indiquer vos nom, téléphone et email."), variant: "destructive" });
+      return;
+    }
+    if (!subject.trim()) {
+      toast({ description: t("rdvDomicile.missingSubject", "Merci d'indiquer l'objet de votre demande."), variant: "destructive" });
+      return;
+    }
     if (!address.trim() || !city.trim()) {
       toast({ description: t("rdvDomicile.missingAddress"), variant: "destructive" });
       return;
     }
-    if (!date) {
-      toast({ description: t("rdvDomicile.missingDate"), variant: "destructive" });
-      return;
-    }
-    if (!time) {
-      toast({ description: t("rdvDomicile.missingTime"), variant: "destructive" });
-      return;
-    }
-
-    // Heure exacte choisie → datetime ISO 8601 AVEC offset Europe/Zurich (gère
-    // été/hiver) pour que Google Agenda pose l'heure EXACTE. Fin = début + 1h.
     const [h, m] = time.split(":").map(Number);
     const endH = Math.min(h + 1, 23);
-    const endTime = `${String(endH).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+    const endTime = `${pad(endH)}:${pad(m)}`;
     const tz = zurichOffset(date, time);
-    // Adresse complète + « Suisse » → géocodage fiable par Google Maps quand le
-    // conseiller clique sur le lieu de l'événement agenda.
-    const lieu = [address.trim(), `${postalCode} ${city.trim()}`.trim(), "Suisse"]
-      .filter(Boolean)
-      .join(", ");
+    const lieu = [address.trim(), `${postalCode} ${city.trim()}`.trim(), "Suisse"].filter(Boolean).join(", ");
     const dateFr = date.split("-").reverse().join("/");
-    const produitLabel = PRODUIT_LABELS[contact.formType ?? ""] ?? (contact.formType ?? "—");
 
-    // Description complète et propre pour l'événement agenda : en-tête RDV +
-    // coordonnées + TOUTES les infos fournies par le prospect + réf lead.
     const details = getLastLeadDetails() ?? {};
     const detailLines = Object.entries(details)
       .filter(([k, v]) => !DETAIL_SKIP.has(k) && v != null && v !== "" && typeof v !== "object")
       .map(([k, v]) => `${k} : ${v}`);
 
     const descriptionLines = [
-      "RENDEZ-VOUS À DOMICILE",
-      "",
+      "RENDEZ-VOUS À DOMICILE", "",
       `Date : ${dateFr} à ${time}`,
       `Lieu : ${lieu}`,
-      `Produit : ${produitLabel}`,
-      "",
+      `Objet : ${produitLabel}`, "",
       "COORDONNÉES",
-      `Prénom : ${contact.firstName ?? "—"}`,
-      `Nom : ${contact.lastName ?? "—"}`,
-      `Téléphone : ${contact.phone ?? "—"}`,
-      `Email : ${contact.email ?? "—"}`,
-      `Code postal : ${postalCode || "—"}`,
-      `Canton : ${contact.canton ?? "—"}`,
+      `Prénom : ${firstName || "-"}`,
+      `Nom : ${lastName || "-"}`,
+      `Téléphone : ${phone || "-"}`,
+      `Email : ${email || "-"}`,
+      `Code postal : ${postalCode || "-"}`,
+      `Canton : ${canton || "-"}`,
     ];
-    if (detailLines.length) {
-      descriptionLines.push("", "DÉTAILS DE LA DEMANDE", ...detailLines);
-    }
-    descriptionLines.push("", `Réf. lead d'origine : ${contact.leadId ?? "—"}`);
-    const description = descriptionLines.join("\n");
-
-    const titre = `RDV domicile — ${fullName || "Prospect"} · ${produitLabel}`;
+    if (detailLines.length) descriptionLines.push("", "DÉTAILS DE LA DEMANDE", ...detailLines);
+    descriptionLines.push("", `Réf. lead d'origine : ${contact?.leadId ?? "-"}`);
 
     const res = await submitLead({
-      firstName: contact.firstName ?? "",
-      lastName: contact.lastName ?? "",
-      email: contact.email ?? "",
-      phone: contact.phone ?? "",
-      canton,
-      postalCode,
-      address: address.trim(),
-      city: city.trim(),
-      rdvDate: date, // ISO "YYYY-MM-DD"
-      rdvTime: time, // "HH:MM" heure choisie par le prospect
-      rdvLieu: lieu, // adresse complète → Location de l'événement agenda
-      rdvStart: `${date}T${time}:00${tz}`, // ISO+offset → Start événement agenda
-      rdvEnd: `${date}T${endTime}:00${tz}`, // ISO+offset → End événement agenda
-      rdvTitre: titre, // → Summary de l'événement agenda
-      rdvDescription: description, // → Description complète (tout, propre)
-      produitOrigine: produitLabel,
-      leadOrigine: contact.leadId ?? "",
+      firstName: firstName.trim(), lastName: lastName.trim(),
+      email: email.trim(), phone: phone.trim(),
+      canton, postalCode, address: address.trim(), city: city.trim(),
+      rdvDate: date, rdvTime: time, rdvLieu: lieu,
+      rdvStart: `${date}T${time}:00${tz}`, rdvEnd: `${date}T${endTime}:00${tz}`,
+      rdvTitre: `RDV domicile · ${fullName || "Prospect"} · ${produitLabel}`,
+      rdvDescription: descriptionLines.join("\n"),
+      produitOrigine: produitLabel, leadOrigine: contact?.leadId ?? "",
     });
-
     if (res) {
       setDone(true);
       clearLastLeadContact();
@@ -219,149 +198,192 @@ const RdvDomicileBlock = () => {
 
   if (done) {
     return (
-      <div className="max-w-2xl mx-auto mt-12">
-        <Card className="border-green-200 bg-green-50/60">
-          <CardContent className="py-10 text-center">
-            <CheckCircle2 className="h-14 w-14 text-green-600 mx-auto mb-4" />
-            <h3 className="text-xl font-bold mb-2">{t("rdvDomicile.successTitle")}</h3>
-            <p className="text-muted-foreground">{t("rdvDomicile.successMessage")}</p>
-          </CardContent>
+      <div className="max-w-xl mx-auto">
+        <Card className="border-green-200 bg-green-50/60 p-10 text-center">
+          <CheckCircle2 className="h-16 w-16 text-green-600 mx-auto mb-4" />
+          <h2 className="text-2xl font-bold mb-2">{t("rdvDomicile.successTitle")}</h2>
+          <p className="text-muted-foreground">{t("rdvDomicile.successMessage")}</p>
         </Card>
       </div>
     );
   }
 
   return (
-    <div className="max-w-2xl mx-auto mt-12 text-left">
-      <Card className="border-primary/30 shadow-lg overflow-hidden">
-        <CardHeader className="bg-primary/5 border-b">
-          <Badge className="w-fit mb-2" variant="secondary">
-            {t("rdvDomicile.badge")}
-          </Badge>
-          <div className="flex items-start gap-3">
-            <div className="rounded-full bg-primary/10 p-2 shrink-0">
+    <div className="max-w-4xl mx-auto text-left">
+      <Card className="overflow-hidden shadow-xl border-primary/15">
+        <div className="grid md:grid-cols-[0.85fr_1.15fr]">
+          {/* ---- Panneau info (gauche) ---- */}
+          <div className="bg-muted/30 p-6 md:border-r border-b md:border-b-0">
+            <div className="rounded-full bg-primary/15 p-2.5 w-fit mb-3">
               <Home className="h-6 w-6 text-primary" />
             </div>
-            <div>
-              <h3 className="text-2xl font-bold leading-tight">{t("rdvDomicile.title")}</h3>
-              <p className="text-muted-foreground mt-1 text-sm">{t("rdvDomicile.subtitle")}</p>
-              <ul className="mt-3 space-y-1.5">
-                {[1, 2, 3].map((n) => (
-                  <li key={n} className="flex items-center gap-2 text-sm font-medium">
-                    <Check className="h-4 w-4 text-primary shrink-0" />
-                    {t(`rdvDomicile.benefit${n}`)}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </CardHeader>
+            <Badge variant="secondary" className="mb-2">{t("rdvDomicile.badge")}</Badge>
+            <h1 className="text-xl font-bold leading-tight">{t("rdvDomicile.title")}</h1>
 
-        <CardContent className="pt-6 space-y-6">
-          {/* Récap auto-rempli (lecture seule) */}
-          <div className="rounded-lg bg-muted/40 p-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-3">
-              {t("rdvDomicile.recap")}
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4 text-sm">
-              {fullName && (
-                <span className="flex items-center gap-2">
-                  <User className="h-4 w-4 text-primary shrink-0" /> {fullName}
-                </span>
-              )}
-              {contact.phone && (
-                <span className="flex items-center gap-2">
-                  <Phone className="h-4 w-4 text-primary shrink-0" /> {contact.phone}
-                </span>
-              )}
-              {contact.email && (
-                <span className="flex items-center gap-2 truncate">
-                  <Mail className="h-4 w-4 text-primary shrink-0" /> {contact.email}
-                </span>
-              )}
-              {(postalCode || canton) && (
-                <span className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-primary shrink-0" />
-                  {[postalCode, canton].filter(Boolean).join(" · ")}
-                </span>
-              )}
+            <div className="mt-4 space-y-2 text-sm text-muted-foreground">
+              <p className="flex items-center gap-2"><Clock className="h-4 w-4 text-primary" /> {t("rdvDomicile.duration", "Environ 1 heure")}</p>
+              <p className="flex items-center gap-2"><MapPin className="h-4 w-4 text-primary" /> {t("rdvDomicile.atHome", "À votre domicile")}</p>
             </div>
+
+            <ul className="mt-4 space-y-1.5">
+              {[1, 2, 3].map((n) => (
+                <li key={n} className="flex items-start gap-2 text-sm">
+                  <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                  {t(`rdvDomicile.benefit${n}`)}
+                </li>
+              ))}
+            </ul>
+
+            {hasLead && (
+              <div className="mt-5 pt-4 border-t space-y-1.5 text-sm">
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{t("rdvDomicile.recap")}</p>
+                {fullName && <p className="flex items-center gap-2"><User className="h-4 w-4 text-primary" /> {fullName}</p>}
+                {phone && <p className="flex items-center gap-2"><Phone className="h-4 w-4 text-primary" /> {phone}</p>}
+                {email && <p className="flex items-center gap-2 truncate"><Mail className="h-4 w-4 text-primary" /> {email}</p>}
+              </div>
+            )}
           </div>
 
-          {/* Champs à compléter */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="sm:col-span-2 space-y-2">
-              <Label htmlFor="rdv-address">{t("rdvDomicile.addressLabel")}</Label>
-              <Input
-                id="rdv-address"
-                ref={addressInputRef}
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                placeholder={t("rdvDomicile.addressPlaceholder")}
-                autoComplete="off"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="rdv-postal">{t("rdvDomicile.postalCodeLabel")}</Label>
-              <Input
-                id="rdv-postal"
-                value={postalCode}
-                onChange={(e) => setPostalCode(e.target.value)}
-                inputMode="numeric"
-                autoComplete="postal-code"
-              />
-            </div>
-          </div>
+          {/* ---- Planificateur (droite) ---- */}
+          <div className="p-6">
+            <h2 className="font-semibold flex items-center gap-2 mb-4">
+              <CalendarDays className="h-4 w-4 text-primary" />
+              {t("rdvDomicile.pickTitle", "Choisissez une date & une heure")}
+            </h2>
 
-          <div className="space-y-2">
-            <Label htmlFor="rdv-city">{t("rdvDomicile.cityLabel")}</Label>
-            <Input
-              id="rdv-city"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              placeholder={t("rdvDomicile.cityPlaceholder")}
-              autoComplete="address-level2"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="rdv-date" className="flex items-center gap-2">
-                <CalendarClock className="h-4 w-4 text-primary" /> {t("rdvDomicile.dateLabel")}
-              </Label>
-              <Input
-                id="rdv-date"
-                type="date"
-                min={minDate}
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-              />
+            {/* Calendrier */}
+            <div className="flex items-center justify-between mb-3">
+              <button
+                type="button"
+                disabled={!canPrev}
+                onClick={() => setViewMonth(new Date(year, month - 1, 1))}
+                className="p-1.5 rounded-md hover:bg-muted disabled:opacity-30 disabled:cursor-not-allowed"
+                aria-label="Mois précédent"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <span className="font-medium capitalize">{monthLabel}</span>
+              <button
+                type="button"
+                onClick={() => setViewMonth(new Date(year, month + 1, 1))}
+                className="p-1.5 rounded-md hover:bg-muted"
+                aria-label="Mois suivant"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="rdv-time" className="flex items-center gap-2">
-                <Clock className="h-4 w-4 text-primary" /> {t("rdvDomicile.timeLabel")}
-              </Label>
-              <Input
-                id="rdv-time"
-                type="time"
-                step={1800}
-                min="08:00"
-                max="20:00"
-                value={time}
-                onChange={(e) => setTime(e.target.value)}
-              />
-            </div>
-          </div>
 
-          <Button
-            size="lg"
-            className="w-full text-base"
-            onClick={handleSubmit}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? t("rdvDomicile.submitting") : t("rdvDomicile.submit")}
-          </Button>
-        </CardContent>
+            <div className="grid grid-cols-7 gap-1 text-center text-xs text-muted-foreground mb-1">
+              {WEEKDAYS.map((d, i) => <span key={i} className="py-1">{d}</span>)}
+            </div>
+            <div className="grid grid-cols-7 gap-1">
+              {Array.from({ length: firstWeekday }).map((_, i) => <span key={`e${i}`} />)}
+              {Array.from({ length: daysInMonth }).map((_, i) => {
+                const day = i + 1;
+                const cellDate = new Date(year, month, day);
+                const iso = `${year}-${pad(month + 1)}-${pad(day)}`;
+                const past = cellDate < todayMid;
+                const selected = date === iso;
+                return (
+                  <button
+                    key={day}
+                    type="button"
+                    disabled={past}
+                    onClick={() => { setDate(iso); setTime(""); }}
+                    className={[
+                      "h-9 w-full rounded-full text-sm transition-colors",
+                      past ? "text-muted-foreground/30 cursor-not-allowed" : "hover:bg-primary/10 font-medium",
+                      selected ? "bg-primary text-primary-foreground hover:bg-primary" : "",
+                    ].join(" ")}
+                  >
+                    {day}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Créneaux */}
+            {date && (
+              <div className="mt-5">
+                <p className="text-sm font-medium mb-2 capitalize">{dateFrLong}</p>
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 max-h-44 overflow-y-auto pr-1">
+                  {TIME_SLOTS.map((slot) => (
+                    <Button
+                      key={slot}
+                      type="button"
+                      size="sm"
+                      variant={time === slot ? "default" : "outline"}
+                      onClick={() => setTime(slot)}
+                    >
+                      {slot}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Confirmation : adresse + valider */}
+            {date && time && (
+              <div className="mt-6 pt-5 border-t space-y-4">
+                <div className="rounded-lg bg-primary/5 border border-primary/20 px-3 py-2 text-sm flex items-center gap-2">
+                  <CalendarDays className="h-4 w-4 text-primary shrink-0" />
+                  <span className="capitalize">{dateFrLong}</span> · <b>{time}</b>
+                </div>
+
+                {!hasLead && (
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="space-y-1.5">
+                        <Label htmlFor="rdv-fn">{t("rdvDomicile.firstNameLabel", "Prénom")}</Label>
+                        <Input id="rdv-fn" value={firstName} onChange={(e) => setFirstName(e.target.value)} autoComplete="off" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <Label htmlFor="rdv-ln">{t("rdvDomicile.lastNameLabel", "Nom")}</Label>
+                        <Input id="rdv-ln" value={lastName} onChange={(e) => setLastName(e.target.value)} autoComplete="off" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <Label htmlFor="rdv-phone">{t("rdvDomicile.phoneLabel", "Téléphone")}</Label>
+                        <Input id="rdv-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="07x xxx xx xx" autoComplete="off" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <Label htmlFor="rdv-email">{t("rdvDomicile.emailLabel", "Email")}</Label>
+                        <Input id="rdv-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off" />
+                      </div>
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label htmlFor="rdv-subject">{t("rdvDomicile.subjectLabel", "Objet de la demande")}</Label>
+                      <Input id="rdv-subject" value={subject} onChange={(e) => setSubject(e.target.value)} placeholder={t("rdvDomicile.subjectPlaceholder", "Ex. Assurance maladie, hypothèque…")} autoComplete="off" />
+                    </div>
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="sm:col-span-2 space-y-1.5">
+                    <Label htmlFor="rdv-address">{t("rdvDomicile.addressLabel")}</Label>
+                    <Input id="rdv-address" ref={addressRef} value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      placeholder={t("rdvDomicile.addressPlaceholder")} autoComplete="off" />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="rdv-postal">{t("rdvDomicile.postalCodeLabel")}</Label>
+                    <Input id="rdv-postal" value={postalCode}
+                      onChange={(e) => setPostalCode(e.target.value)} inputMode="numeric" autoComplete="off" />
+                  </div>
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="rdv-city">{t("rdvDomicile.cityLabel")}</Label>
+                  <Input id="rdv-city" value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    placeholder={t("rdvDomicile.cityPlaceholder")} autoComplete="off" />
+                </div>
+
+                <Button size="lg" className="w-full h-12 text-base" onClick={handleSubmit} disabled={isSubmitting}>
+                  {isSubmitting ? t("rdvDomicile.submitting") : t("rdvDomicile.submit")}
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
       </Card>
     </div>
   );
