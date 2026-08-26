@@ -66,6 +66,26 @@ export function fireLeadConversion({ leadId, pageKey, googleAdsSendTo, formType 
     }
   }
 
+  // Snap Pixel — conversion lead avec advanced matching (mêmes champs que le
+  // template Snap, mais renseignés avec les VRAIES valeurs du lead, jamais les
+  // placeholders "INSERT_..."). Snap hache email/téléphone côté client.
+  try {
+    if (typeof w.snaptr === "function") {
+      const c = getLastLeadContact();
+      const snapParams: Record<string, unknown> = { geo_country: "CH" };
+      if (c?.email) snapParams.user_email = c.email;
+      if (c?.phone) snapParams.user_phone_number = c.phone;
+      if (c?.firstName) snapParams.firstname = c.firstName;
+      if (c?.lastName) snapParams.lastname = c.lastName;
+      if (c?.postalCode) snapParams.geo_postal_code = c.postalCode;
+      if (formType) snapParams.item_category = formType;
+      if (leadId) snapParams.uuid_c1 = leadId;
+      w.snaptr("track", "SIGN_UP", snapParams);
+    }
+  } catch (err) {
+    console.warn("snaptr SIGN_UP failed", err);
+  }
+
   sessionStorage.setItem(dedupKey, "1");
 }
 
