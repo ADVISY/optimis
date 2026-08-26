@@ -78,8 +78,12 @@ export function fireLeadConversion({ leadId, pageKey, googleAdsSendTo, formType 
       if (c?.firstName) snapParams.firstname = c.firstName;
       if (c?.lastName) snapParams.lastname = c.lastName;
       if (c?.postalCode) snapParams.geo_postal_code = c.postalCode;
-      if (formType) snapParams.item_category = formType;
-      if (leadId) snapParams.uuid_c1 = leadId;
+      if (c?.canton) snapParams.geo_region = c.canton;
+      if (formType) snapParams.sign_up_method = formType;
+      if (leadId) {
+        snapParams.uuid_c1 = leadId;
+        snapParams.client_deduplication_id = leadId;
+      }
       w.snaptr("track", "SIGN_UP", snapParams);
     }
   } catch (err) {
