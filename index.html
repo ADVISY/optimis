@@ -92,6 +92,13 @@
         fbq('track', 'PageView');
         window.__optimisMetaInit.fr = true;
       }
+      // PT pixel - only on /pt/ pages (campagne portugaise). Réutilise le pixel FR
+      // par défaut ; remplacer par un ID PT dédié si la campagne en utilise un autre.
+      if (window.location.pathname.startsWith('/pt') && !window.__optimisMetaInit.pt) {
+        fbq('init', '1569978013669693');
+        fbq('track', 'PageView');
+        window.__optimisMetaInit.pt = true;
+      }
     </script>
     <!-- End Meta Pixel Code -->
     
