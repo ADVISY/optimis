@@ -16,7 +16,7 @@
 
 import { localizedRoutes } from "@/utils/localizedRoutes";
 
-export const LANGS = ["fr", "de", "it", "en", "pt"] as const;
+export const LANGS = ["fr", "de", "it", "en", "pt", "tr"] as const;
 export type Lang = (typeof LANGS)[number];
 
 // Langues EXPOSÉES au SEO (hreflang + prerender + indexation).
@@ -44,6 +44,7 @@ const HREFLANG: Record<Lang, string> = {
   en: "en",
   // PT : communauté lusophone de Suisse.
   pt: "pt-CH",
+  tr: "tr-CH",
 };
 const OG_LOCALE: Record<Lang, string> = {
   fr: "fr_CH",
@@ -51,6 +52,7 @@ const OG_LOCALE: Record<Lang, string> = {
   it: "it_CH",
   en: "en_GB",
   pt: "pt_PT",
+  tr: "tr_TR",
 };
 
 export interface SeoMeta {
@@ -344,13 +346,17 @@ const FALLBACK_META: Record<Lang, SeoMeta> = {
     title: `Optimis – Comparador de seguros na Suíça`,
     description: `Compare gratuitamente os seguros suíços e encontre as melhores ofertas com a Optimis.`,
   },
+  tr: {
+    title: `Optimis – İsviçre sigorta karşılaştırma`,
+    description: `İsviçre sigortalarını ücretsiz karşılaştırın ve Optimis ile en iyi teklifleri bulun.`,
+  },
 };
 
 // ----------------------------------------------------------------------------
 // Helpers URL
 // ----------------------------------------------------------------------------
 export function isLang(value: string | undefined): value is Lang {
-  return value === "fr" || value === "de" || value === "it" || value === "en" || value === "pt";
+  return value === "fr" || value === "de" || value === "it" || value === "en" || value === "pt" || value === "tr";
 }
 
 /** URL absolue d'une page localisée (slug "" = accueil de langue → /fr). */
@@ -420,7 +426,7 @@ export const COMPARATOR_ROUTE_KEYS = new Set<string>([
   "mobilePackage",
 ]);
 
-const HOME_NAME: Record<Lang, string> = { fr: "Accueil", de: "Startseite", it: "Home", en: "Home", pt: "Início" };
+const HOME_NAME: Record<Lang, string> = { fr: "Accueil", de: "Startseite", it: "Home", en: "Home", pt: "Início", tr: "Ana Sayfa" };
 
 /** Fil d'Ariane (Home > page courante) pour toute page interne. */
 export function buildBreadcrumbSchema(seo: ResolvedSeo): Record<string, unknown> {

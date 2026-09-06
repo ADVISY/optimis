@@ -7,6 +7,7 @@ import de from './locales/de.json';
 import it from './locales/it.json';
 import en from './locales/en.json';
 import pt from './locales/pt.json';
+import tr from './locales/tr.json';
 
 export const languages = [
   { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
@@ -14,6 +15,7 @@ export const languages = [
   { code: 'it', name: 'Italiano', flag: '🇮🇹' },
   { code: 'en', name: 'English', flag: '🇬🇧' },
   { code: 'pt', name: 'Português', flag: '🇵🇹' },
+  { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
 ] as const;
 
 export type LanguageCode = typeof languages[number]['code'];
@@ -24,6 +26,7 @@ const resources = {
   it: { translation: it },
   en: { translation: en },
   pt: { translation: pt },
+  tr: { translation: tr },
 };
 
 i18n
@@ -32,7 +35,7 @@ i18n
   .init({
     resources,
     fallbackLng: 'fr',
-    supportedLngs: ['fr', 'de', 'it', 'en', 'pt'],
+    supportedLngs: ['fr', 'de', 'it', 'en', 'pt', 'tr'],
     interpolation: {
       escapeValue: false,
     },
