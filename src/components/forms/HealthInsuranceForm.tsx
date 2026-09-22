@@ -204,45 +204,15 @@ const HealthInsuranceForm = () => {
     };
   };
 
-  // On mount: check if returning from /merci to show results
-  useEffect(() => {
-    if ((location.state as any)?.showResults) {
-      const stored = sessionStorage.getItem("health_form_params");
-      if (stored) {
-        const params = JSON.parse(stored);
-        setIsLoading(true);
-        setLoadingStep("analyzing");
-        
-        // Fetch premiums
-        fetchPremiums(params).then((premiums) => {
-          const offers = premiums.map((premium, index) => premiumToInsuranceOffer(premium, index));
-          setRealOffers(offers);
-          setLoadingStep("comparing");
-          setTimeout(() => setLoadingStep("preparing"), 800);
-          setTimeout(() => { setIsLoading(false); setShowResults(true); }, 1600);
-        });
-        sessionStorage.removeItem("health_form_params");
-      }
-      window.history.replaceState({}, '');
-    }
-  }, []);
+  // Affichage des résultats de primes maladie RETIRÉ (2026-09-22) : le
+  // comparateur capture le lead et un conseiller recontacte, sans afficher de
+  // primes (données non contractuelles → risque de pratiques trompeuses).
 
   const performSubmit = useCallback(async () => {
     const leadData = prepareLeadData();
     await submitLead(leadData);
 
-    const birthYear = formData.birthDate ? formData.birthDate.getFullYear() : 1990;
-    sessionStorage.setItem("health_form_params", JSON.stringify({
-      canton: formData.canton,
-      postalCode: formData.postalCode,
-      birthYear,
-      franchise: formData.franchise,
-      model: formData.lamalModel,
-      withAccident: formData.accidentCoverage,
-      language: i18n.language,
-    }));
-
-    sessionStorage.setItem("lead_return_url", location.pathname); window.location.assign(localizedPath("/merci"));
+    window.location.assign(localizedPath("/merci"));
   }, [formData, submitLead, navigate, localizedPath, location.pathname, i18n.language, prepareLeadData]);
 
   const { startOtpFlow, otpModalProps } = useOtpFormFlow({
@@ -421,47 +391,6 @@ const HealthInsuranceForm = () => {
     return (
       <div className="max-w-2xl mx-auto">
         <LoadingComparison step={loadingStep} />
-      </div>
-    );
-  }
-
-  if (showResults) {
-    return (
-      <div className="max-w-4xl mx-auto">
-        {premiumsError && (
-          <div className="mb-4 p-4 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm">
-            {t("forms.healthInsurance.errorLoadingPremiums")}
-          </div>
-        )}
-        {realOffers.length === 0 && !premiumsError && (
-          <div className="mb-4 p-4 bg-muted border border-border rounded-lg text-center">
-            <p className="text-muted-foreground mb-2">
-              {t("comparison.noOffersFound", "Aucune offre trouvée pour ces critères.")}
-            </p>
-            <Button 
-              variant="outline" 
-              onClick={() => setShowResults(false)}
-            >
-              {t("common.modifySearch", "Modifier ma recherche")}
-            </Button>
-          </div>
-        )}
-        <HealthComparisonResults
-          offers={realOffers}
-          formData={{
-            canton: formData.canton,
-            postalCode: formData.postalCode,
-            lamalModel: formData.lamalModel,
-            franchise: formData.franchise,
-            accidentCoverage: formData.accidentCoverage,
-            complementaryTier: formData.complementaryTier,
-            complementary: formData.complementary,
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            email: formData.email,
-            phone: formData.phone,
-          }}
-        />
       </div>
     );
   }
