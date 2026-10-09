@@ -95,6 +95,7 @@ const Partenaires = () => {
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
+              className="rounded-3xl bg-white/95 backdrop-blur-md shadow-2xl ring-1 ring-emerald-900/5 p-4 sm:p-5 md:p-7"
             >
               <PartnerForm />
             </motion.div>
