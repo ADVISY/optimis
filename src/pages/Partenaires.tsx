@@ -217,14 +217,21 @@ const Partenaires = () => {
               className="relative w-full overflow-hidden rounded-2xl shadow-2xl border border-border bg-foreground"
               style={{ aspectRatio: "16 / 9" }}
             >
-              <iframe
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1"
-                title="Présentation Optimis"
-                className="absolute inset-0 w-full h-full"
-                frameBorder={0}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center">
+                <div className="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/10 border border-white/20">
+                  <svg viewBox="0 0 24 24" className="w-7 h-7 md:w-9 md:h-9 text-white/90" fill="currentColor" aria-hidden>
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-2xl md:text-3xl font-bold text-white">
+                    {t("partner.video.comingSoon", "Bientôt disponible")}
+                  </p>
+                  <p className="text-sm md:text-base text-white/60 mt-1">
+                    {t("partner.video.comingSoonDesc", "Notre vidéo de présentation arrive très prochainement.")}
+                  </p>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         </div>
