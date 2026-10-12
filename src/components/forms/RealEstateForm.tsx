@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import { useTranslation } from "react-i18next";
@@ -16,38 +16,37 @@ import { Input } from "@/components/ui/input";
 import { PhoneInputCH } from "@/components/forms/PhoneInputCH";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { swissCantons, getCantonName } from "@/data/swissCantons";
 import { Lock, User, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface RealEstateFormData {
-  address: string;
+  canton: string;
   propertyType: string;
   rooms: string;
   surface: string;
   saleTimeline: string;
-  hasMandate: string;
   firstName: string;
   lastName: string;
   phone: string;
   email: string;
 }
 
-const TOTAL_STEPS = 8;
+const TOTAL_STEPS = 7;
 
 const RealEstateForm = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { localizedPath } = useLocalizedPath();
   const { attemptedNext, markAttempted, resetAttempted, formatSwissPhone, isValidEmail, isValidPhone, getContactErrors, getIdentityErrors, showValidationToast } = useFormValidation();
 
   const initialData: RealEstateFormData = {
-    address: "",
+    canton: "",
     propertyType: "",
     rooms: "",
     surface: "",
     saleTimeline: "",
-    hasMandate: "",
-    
     firstName: "",
     lastName: "",
     phone: "",
@@ -89,21 +88,20 @@ const RealEstateForm = () => {
 
   const validateStep = (step: number): boolean => {
     switch (step) {
-      case 1: return formData.address.trim() !== "";
+      case 1: return formData.canton !== "";
       case 2: return formData.propertyType !== "";
       case 3: return formData.rooms !== "";
       case 4: return formData.surface.trim() !== "";
       case 5: return formData.saleTimeline !== "";
-      case 6: return formData.hasMandate !== "";
-      case 7: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
-      case 8: return isValidEmail(formData.email) && isValidPhone(formData.phone);
+      case 6: return formData.firstName.trim() !== "" && formData.lastName.trim() !== "";
+      case 7: return isValidEmail(formData.email) && isValidPhone(formData.phone);
       default: return true;
     }
   };
 
   const getStepErrors = (step: number): Record<string, string> => {
-    if (step === 7) return getIdentityErrors(formData.firstName, formData.lastName);
-    if (step === 8) return getContactErrors(formData.email, formData.phone);
+    if (step === 6) return getIdentityErrors(formData.firstName, formData.lastName);
+    if (step === 7) return getContactErrors(formData.email, formData.phone);
     return {};
   };
 
@@ -125,6 +123,10 @@ const RealEstateForm = () => {
     }
   };
 
+  const cantons = useMemo(
+    () => [...swissCantons].sort((a, b) => getCantonName(a.code, i18n.language).localeCompare(getCantonName(b.code, i18n.language))),
+    [i18n.language],
+  );
 
   const propertyOptions = [
     { value: "apartment", label: t("forms.realEstate.propertyTypes.apartment") },
@@ -148,11 +150,6 @@ const RealEstateForm = () => {
     { value: "no-rush", label: t("forms.realEstate.timelines.noRush") },
   ];
 
-  const yesNoOptions = [
-    { value: "yes", label: t("common.yes") },
-    { value: "no", label: t("common.no") },
-  ];
-
   return (
     <>
     <FormContainer
@@ -161,19 +158,35 @@ const RealEstateForm = () => {
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
       clientName={formData.firstName}
+      navigation={
+        <FormNavigation
+          currentStep={currentStep}
+          totalSteps={TOTAL_STEPS}
+          onPrevious={previousStep}
+          onNext={handleNext}
+          isSubmitting={isSubmitting}
+          isLastStep={isLastStep}
+          canProceed={canProceed}
+        />
+      }
     >
-      {/* Step 1: Address */}
+      {/* Step 1: Canton */}
       <FormStep isActive={currentStep === 1}>
         <div className="space-y-3 md:space-y-6">
           <p className="text-xs md:text-base font-medium text-foreground mb-2 md:mb-4">{t("forms.realEstate.addressQuestion")}</p>
-          <FormFieldWrapper label={t("forms.realEstate.address")} htmlFor="address" required>
-            <Input
-              id="address"
-              value={formData.address}
-              onChange={(e) => { updateFormData({ address: e.target.value }); notifyDelayed(); }}
-              placeholder={t("forms.realEstate.addressPlaceholder")}
-              className="h-11 md:h-14 text-sm md:text-lg"
-            />
+          <FormFieldWrapper label={t("forms.realEstate.address")} required>
+            <Select value={formData.canton} onValueChange={(v) => { updateFormData({ canton: v }); notify(); }}>
+              <SelectTrigger className="h-11 md:h-14 text-sm md:text-lg">
+                <SelectValue placeholder={t("forms.healthInsurance.selectCanton")} />
+              </SelectTrigger>
+              <SelectContent>
+                {cantons.map((c) => (
+                  <SelectItem key={c.code} value={c.code}>
+                    {getCantonName(c.code, i18n.language)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </FormFieldWrapper>
         </div>
       </FormStep>
@@ -279,36 +292,8 @@ const RealEstateForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 6: Mandate */}
-      <FormStep isActive={currentStep === 6}>
-        <div className="space-y-2 md:space-y-3">
-          <p className="text-xs md:text-base font-medium text-foreground mb-2 md:mb-4">{t("forms.realEstate.mandateQuestion")}</p>
-          <RadioGroup
-            value={formData.hasMandate}
-            onValueChange={(value) => { updateFormData({ hasMandate: value }); notify(); }}
-            className="space-y-2 md:space-y-3"
-          >
-            {yesNoOptions.map((option) => (
-              <label
-                key={`mandate-${option.value}`}
-                htmlFor={`mandate-${option.value}`}
-                className={cn(
-                  "flex items-center space-x-3 p-3 md:p-4 border-2 rounded-xl cursor-pointer transition-all",
-                  formData.hasMandate === option.value
-                    ? "border-primary bg-primary/5"
-                    : "border-border hover:border-primary/50"
-                )}
-              >
-                <RadioGroupItem value={option.value} id={`mandate-${option.value}`} />
-                <Label htmlFor={`mandate-${option.value}`} className="text-sm md:text-lg cursor-pointer flex-1">{option.label}</Label>
-              </label>
-            ))}
-          </RadioGroup>
-        </div>
-      </FormStep>
-
       {/* Step 6: Identity */}
-      <FormStep isActive={currentStep === 7}>
+      <FormStep isActive={currentStep === 6}>
         <div className="space-y-3 md:space-y-6">
           <div className="text-center mb-3 md:mb-6">
             <div className="inline-flex items-center justify-center w-10 h-10 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
@@ -338,8 +323,8 @@ const RealEstateForm = () => {
         </div>
       </FormStep>
 
-      {/* Step 8: Contact */}
-      <FormStep isActive={currentStep === 8}>
+      {/* Step 7: Contact */}
+      <FormStep isActive={currentStep === 7}>
         <div className="space-y-3 md:space-y-6">
           <div className="text-center mb-3 md:mb-6">
             <div className="inline-flex items-center justify-center w-10 h-10 md:w-16 md:h-16 rounded-full bg-primary/10 mb-2 md:mb-4">
@@ -376,17 +361,6 @@ const RealEstateForm = () => {
           </div>
         </div>
       </FormStep>
-
-      <FormNavigation
-        currentStep={currentStep}
-        totalSteps={TOTAL_STEPS}
-        onPrevious={previousStep}
-        onNext={handleNext}
-        isSubmitting={isSubmitting}
-        isLastStep={isLastStep}
-        canProceed={canProceed}
-      />
-      
     </FormContainer>
     <SmsVerificationModal {...otpModalProps} />
     </>

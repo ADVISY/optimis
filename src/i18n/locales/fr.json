@@ -163,8 +163,8 @@
     "professionalInsurance": "Assurances Pro",
     "lpp": "Avoirs LPP",
     "lppCompare": "Vérifier mon avoir LPP",
-    "realEstate": "Estimation immobilière",
-    "realEstateCompare": "Estimer mon bien gratuitement",
+    "realEstate": "Vendre son bien immobilier",
+    "realEstateCompare": "Vendre mon bien gratuitement",
     "becomeOwner": "Devenir propriétaire",
     "becomeOwnerGuide": "Le guide complet de l'achat",
     "becomeOwnerCapacity": "Calculer ma capacité d'achat",
@@ -1645,10 +1645,10 @@
       }
     },
     "realEstate": {
-      "title": "Estimation immobilière en 2 minutes",
+      "title": "Vendre son bien en Suisse",
       "description": "Gratuit • Sans engagement • 100% confidentiel",
-      "addressQuestion": "Quelle est l'adresse du bien ?",
-      "address": "Adresse du bien",
+      "addressQuestion": "Dans quel canton se situe votre bien ?",
+      "address": "Canton du bien",
       "addressPlaceholder": "Rue, numéro, NPA, ville",
       "propertyQuestion": "Quel est ton bien ?",
       "roomsQuestion": "Quel est le nombre de pièces ?",
@@ -1658,7 +1658,7 @@
       "timelineQuestion": "Quel est ton délai de vente ?",
       "mandateQuestion": "As-tu déjà signé un mandat avec une agence ?",
       "availabilityQuestion": "Es-tu disponible pour une estimation sur place sous 30 jours ?",
-      "ctaFinal": "Recevoir mon estimation gratuite",
+      "ctaFinal": "Être recontacté pour vendre mon bien",
       "thankYouTitle": "Merci pour ta demande !",
       "thankYouDescription": "Un expert immobilier te contactera prochainement pour estimer ton bien.",
       "propertyTypes": {
@@ -1993,9 +1993,9 @@
     "readyToCheckDesc": "Vérifiez gratuitement votre situation en moins d'une minute."
   },
   "realEstatePage": {
-    "title": "Estimation immobilière",
-    "subtitle": "Connaissez la valeur de votre bien en Suisse",
-    "compareButton": "Estimer mon bien",
+    "title": "Vendre son bien en Suisse",
+    "subtitle": "Vendez votre bien au meilleur prix, en toute simplicité",
+    "compareButton": "Je vends mon bien",
     "compareButtonShort": "Estimer",
     "whyEstimate": "Pourquoi faire estimer son bien ?",
     "whyEstimateContent": "Connaître la valeur de votre bien immobilier est essentiel, que vous envisagiez de vendre, de refinancer votre hypothèque ou simplement de faire le point sur votre patrimoine.",

@@ -9,8 +9,8 @@ const ComparateurEstimation = () => {
   return (
     <FormAppShell>
       <FormHero
-        title={t("realEstate.heroTitle", "ESTIMATION IMMOBILIÈRE GRATUITE EN SUISSE")}
-        titleMobile={t("realEstate.heroTitleMobile", { defaultValue: "ESTIMATION IMMO 2026" })}
+        title={t("realEstate.heroTitle", "VENDRE SON BIEN EN SUISSE")}
+        titleMobile={t("realEstate.heroTitleMobile", { defaultValue: "VENDRE SON BIEN" })}
       />
 
       <RealEstateForm />
