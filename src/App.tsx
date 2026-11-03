@@ -154,8 +154,8 @@ const LanguageRoutes = () => {
           element={<>
             <Seo
               noindex
-              title="Assurance maladie & complémentaire — Groupe Mutuel | Demandez votre offre"
-              description="Demandez votre offre d'assurance maladie et complémentaire Groupe Mutuel. Optimis, intermédiaire d'assurance lié à Groupe Mutuel."
+              title="Assurance maladie & complémentaire — Groupe Mutuel"
+              description="Assurance maladie et complémentaire Groupe Mutuel. Optimis, intermédiaire d'assurance lié à Groupe Mutuel."
             />
             <GroupeMutuel />
           </>}

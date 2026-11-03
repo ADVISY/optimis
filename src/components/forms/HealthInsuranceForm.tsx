@@ -397,8 +397,8 @@ const HealthInsuranceForm = ({ tied = false }: { tied?: boolean } = {}) => {
 
   return (
     <FormContainer
-      title={tied ? "Votre meilleure offre d'assurance maladie" : t("forms.healthInsurance.title")}
-      description={tied ? "Obtenez la meilleure offre en quelques clics" : t("forms.healthInsurance.description")}
+      title={tied ? "Votre meilleure assurance maladie" : t("forms.healthInsurance.title")}
+      description={tied ? "Obtenez la meilleure couverture en quelques clics" : t("forms.healthInsurance.description")}
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
       clientName={formData.firstName}
@@ -407,7 +407,9 @@ const HealthInsuranceForm = ({ tied = false }: { tied?: boolean } = {}) => {
         tied
           ? "En 2 min, économisez jusqu'à 1'000.- par année ! Avez-vous déjà une assurance maladie ?"
           : t("forms.healthInsurance.guide.step1", { defaultValue: "On commence : avez-vous déjà une assurance maladie ? Ça m'aide à situer votre dossier." }),
-        t("forms.healthInsurance.guide.insurerStep", { defaultValue: "Parfait — chez quel assureur es-tu aujourd'hui ? Choisis son logo, ça m'aide à comparer au plus juste." }),
+        tied
+          ? "Chez quel assureur êtes-vous aujourd'hui ? Choisissez son logo, ça m'aide à préparer votre dossier."
+          : t("forms.healthInsurance.guide.insurerStep", { defaultValue: "Parfait — chez quel assureur es-tu aujourd'hui ? Choisis son logo, ça m'aide à comparer au plus juste." }),
         t("forms.healthInsurance.guide.step2", { defaultValue: "Votre situation familiale influence vos primes. Qui compose votre foyer ?" }),
         t("forms.healthInsurance.guide.step3", { defaultValue: "Votre âge détermine le montant de vos primes. Quelle est votre date de naissance ?" }),
         t("forms.healthInsurance.guide.step4", { defaultValue: "Les primes varient selon le canton — dites-moi où vous habitez." }),
@@ -428,6 +430,7 @@ const HealthInsuranceForm = ({ tied = false }: { tied?: boolean } = {}) => {
           isSubmitting={isSubmitting}
           isLastStep={isLastStep}
           canProceed={canProceed}
+          lastStepLabel={tied ? "Envoyer ma demande" : undefined}
         />
       }
     >
@@ -924,7 +927,9 @@ const HealthInsuranceForm = ({ tied = false }: { tied?: boolean } = {}) => {
               {t("forms.contact.contactStepTitle", "Où pouvons-nous vous joindre ?")}
             </h3>
             <p className="text-xs md:text-sm text-muted-foreground">
-              {t("forms.contact.contactStepDescription", "Un conseiller vous contactera pour vous présenter les meilleures offres.")}
+              {tied
+                ? "Un conseiller vous rappelle pour vous accompagner dans votre dossier."
+                : t("forms.contact.contactStepDescription", "Un conseiller vous contactera pour vous présenter les meilleures offres.")}
             </p>
           </div>
           

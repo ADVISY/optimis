@@ -24,8 +24,8 @@ const GroupeMutuel = () => {
       }}
     >
       <FormHero
-        title="ASSURANCE MALADIE & COMPLÉMENTAIRE 2026"
-        titleMobile="ASSURANCE MALADIE 2026"
+        title="ASSURANCE MALADIE & COMPLÉMENTAIRE 2027"
+        titleMobile="ASSURANCE MALADIE 2027"
       />
 
       <HealthInsuranceForm tied />
