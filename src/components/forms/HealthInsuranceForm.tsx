@@ -976,16 +976,18 @@ const HealthInsuranceForm = ({ tied = false }: { tied?: boolean } = {}) => {
             />
           </FormFieldWrapper>
 
-          <div className="bg-emerald-50 border border-emerald-200 rounded-lg md:rounded-xl p-2.5 text-center">
-            <p className="text-xs md:text-sm text-emerald-700">
-              🔒 {t("forms.contact.privacyNote", "Vos données sont protégées et ne seront jamais partagées.")}
-            </p>
-          </div>
+          {!tied && (
+            <div className="bg-emerald-50 border border-emerald-200 rounded-lg md:rounded-xl p-2.5 text-center">
+              <p className="text-xs md:text-sm text-emerald-700">
+                🔒 {t("forms.contact.privacyNote", "Vos données sont protégées et ne seront jamais partagées.")}
+              </p>
+            </div>
+          )}
 
           {tied && (
             <label
-              className={`flex items-start gap-2.5 rounded-lg border p-3 cursor-pointer transition-colors ${
-                consentError ? "border-red-400 bg-red-50" : "border-emerald-200 bg-white"
+              className={`flex items-start gap-2 rounded-lg border p-2.5 cursor-pointer transition-colors ${
+                consentError ? "border-red-400 bg-red-50" : "border-emerald-200 bg-emerald-50/60"
               }`}
             >
               <Checkbox
@@ -996,8 +998,9 @@ const HealthInsuranceForm = ({ tied = false }: { tied?: boolean } = {}) => {
                 }}
                 className="mt-0.5 shrink-0"
               />
-              <span className="text-xs md:text-sm leading-snug text-emerald-900">
+              <span className="text-[11px] md:text-xs leading-snug text-emerald-900">
                 Je souhaite être informé(e) par e-mail ou par téléphone par un agent lié.
+                <span className="block text-emerald-700/70">🔒 Vos données restent confidentielles.</span>
               </span>
             </label>
           )}

@@ -1,7 +1,7 @@
 import FormAppShell from "@/components/layout/FormAppShell";
 import FormHero from "@/components/forms/FormHero";
 import HealthInsuranceForm from "@/components/forms/HealthInsuranceForm";
-import gmLogo from "@/assets/insurers/groupe-mutuel-logo.svg";
+import gmLogo from "@/assets/insurers/groupe-mutuel-officiel.svg";
 
 // ----------------------------------------------------------------------------
 // GroupeMutuel — landing de campagne dédiée « intermédiaire lié à Groupe Mutuel ».
