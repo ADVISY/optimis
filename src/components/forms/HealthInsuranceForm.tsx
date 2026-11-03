@@ -74,6 +74,8 @@ const HealthInsuranceForm = ({ tied = false }: { tied?: boolean } = {}) => {
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState<"analyzing" | "comparing" | "preparing">("analyzing");
+  const [tiedConsent, setTiedConsent] = useState(false);
+  const [consentError, setConsentError] = useState(false);
   const [realOffers, setRealOffers] = useState<InsuranceOffer[]>([]);
   
   const { fetchPremiums, error: premiumsError } = useHealthPremiums();
@@ -221,6 +223,15 @@ const HealthInsuranceForm = ({ tied = false }: { tied?: boolean } = {}) => {
   });
 
   const handleSubmit = async () => {
+    if (tied && !tiedConsent) {
+      setConsentError(true);
+      toast({
+        title: "Consentement requis",
+        description: "Merci de cocher la case pour être recontacté(e) par un agent lié.",
+        variant: "destructive",
+      });
+      return;
+    }
     await startOtpFlow();
   };
 
@@ -417,8 +428,8 @@ const HealthInsuranceForm = ({ tied = false }: { tied?: boolean } = {}) => {
         t("forms.healthInsurance.guide.step6", { defaultValue: "Le modèle d'assurance, c'est là qu'on fait de vraies économies. Je vous guide." }),
         t("forms.healthInsurance.guide.step7", { defaultValue: "Franchise et accidents : deux réglages qui pèsent sur votre prime. On ajuste ensemble." }),
         t("forms.healthInsurance.guide.step8", { defaultValue: "Une petite complémentaire santé ? Je vous montre les options vraiment utiles." }),
-        undefined,
-        undefined,
+        tied ? "Presque fini ! Votre prénom et votre nom." : undefined,
+        tied ? "Dernière étape : vos coordonnées, un conseiller vous rappelle." : undefined,
       ]}
       size="large"
       navigation={
@@ -970,6 +981,26 @@ const HealthInsuranceForm = ({ tied = false }: { tied?: boolean } = {}) => {
               🔒 {t("forms.contact.privacyNote", "Vos données sont protégées et ne seront jamais partagées.")}
             </p>
           </div>
+
+          {tied && (
+            <label
+              className={`flex items-start gap-2.5 rounded-lg border p-3 cursor-pointer transition-colors ${
+                consentError ? "border-red-400 bg-red-50" : "border-emerald-200 bg-white"
+              }`}
+            >
+              <Checkbox
+                checked={tiedConsent}
+                onCheckedChange={(v) => {
+                  setTiedConsent(v === true);
+                  if (v === true) setConsentError(false);
+                }}
+                className="mt-0.5 shrink-0"
+              />
+              <span className="text-xs md:text-sm leading-snug text-emerald-900">
+                Je souhaite être informé(e) par e-mail ou par téléphone par un agent lié.
+              </span>
+            </label>
+          )}
         </div>
       </FormStep>
 
