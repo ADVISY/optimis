@@ -24,9 +24,19 @@ interface FormAppShellProps {
   eyebrow?: string;
   /** Accroche courte affichée en tête du tunnel (façon « On avance ensemble »). */
   tagline?: string;
+  /** Mode funnel isolé : logo non cliquable + pas de lien « Retour au site »
+   *  (aucun accès au comparateur depuis la page). Requis pour une campagne liée. */
+  isolated?: boolean;
+  /** Pied « intermédiaire lié » : affiche le statut et le logo de l'assureur partenaire. */
+  tiedPartner?: {
+    label: string;
+    partnerName: string;
+    branch: string;
+    logoSrc: string;
+  };
 }
 
-const FormAppShell = ({ children, eyebrow, tagline }: FormAppShellProps) => {
+const FormAppShell = ({ children, eyebrow, tagline, isolated, tiedPartner }: FormAppShellProps) => {
   const { t } = useTranslation();
 
   return (
@@ -41,23 +51,31 @@ const FormAppShell = ({ children, eyebrow, tagline }: FormAppShellProps) => {
       {/* Barre d'app minimale : logo + langue + sortie */}
       <header className="shrink-0 z-40 w-full border-b border-emerald-100/70 bg-white/70 backdrop-blur-md">
         <div className="mx-auto flex h-12 w-full max-w-6xl items-center justify-between px-3 md:h-14 md:px-6">
-          <LocalizedLink
-            to="/"
-            aria-label="Optimis"
-            className="flex items-center transition-transform hover:scale-105"
-          >
-            <img src={logo} alt="Optimis" className="h-7 md:h-9" />
-          </LocalizedLink>
+          {isolated ? (
+            <span className="flex items-center" aria-label="Optimis">
+              <img src={logo} alt="Optimis" className="h-7 md:h-9" />
+            </span>
+          ) : (
+            <LocalizedLink
+              to="/"
+              aria-label="Optimis"
+              className="flex items-center transition-transform hover:scale-105"
+            >
+              <img src={logo} alt="Optimis" className="h-7 md:h-9" />
+            </LocalizedLink>
+          )}
 
           <div className="flex items-center gap-1.5 md:gap-3">
             <LanguageSwitcher />
-            <LocalizedLink
-              to="/"
-              className="hidden items-center gap-1.5 rounded-full border border-emerald-200 bg-white/80 px-3 py-1.5 text-xs font-semibold text-emerald-700 transition-colors hover:bg-emerald-50 sm:inline-flex md:text-sm"
-            >
-              <ArrowLeft className="h-3.5 w-3.5" />
-              {t("appShell.backToSite", "Retour au site")}
-            </LocalizedLink>
+            {!isolated && (
+              <LocalizedLink
+                to="/"
+                className="hidden items-center gap-1.5 rounded-full border border-emerald-200 bg-white/80 px-3 py-1.5 text-xs font-semibold text-emerald-700 transition-colors hover:bg-emerald-50 sm:inline-flex md:text-sm"
+              >
+                <ArrowLeft className="h-3.5 w-3.5" />
+                {t("appShell.backToSite", "Retour au site")}
+              </LocalizedLink>
+            )}
           </div>
         </div>
       </header>
@@ -86,10 +104,21 @@ const FormAppShell = ({ children, eyebrow, tagline }: FormAppShellProps) => {
 
       {/* Ligne de réassurance minimale (pas de footer de site) */}
       <footer className="w-full shrink-0 px-4 py-1.5 md:py-2">
-        <p className="mx-auto flex max-w-xl items-center justify-center gap-1.5 text-[11px] font-medium text-emerald-700/70 md:text-xs">
-          <ShieldCheck className="h-3.5 w-3.5 shrink-0" />
-          {t("appShell.trustLine", "Confidentiel · 100% gratuit · Sans engagement")}
-        </p>
+        {tiedPartner ? (
+          <p className="mx-auto flex max-w-2xl items-center justify-center gap-2 text-[10px] font-medium text-emerald-700/70 md:text-[11px]">
+            <span>{tiedPartner.label}</span>
+            <img
+              src={tiedPartner.logoSrc}
+              alt={tiedPartner.partnerName}
+              className="h-3.5 w-auto opacity-80"
+            />
+          </p>
+        ) : (
+          <p className="mx-auto flex max-w-xl items-center justify-center gap-1.5 text-[11px] font-medium text-emerald-700/70 md:text-xs">
+            <ShieldCheck className="h-3.5 w-3.5 shrink-0" />
+            {t("appShell.trustLine", "Confidentiel · 100% gratuit · Sans engagement")}
+          </p>
+        )}
       </footer>
 
       {/* Support rapide pendant le tunnel — remonté et réduit pour ne pas

@@ -65,7 +65,7 @@ interface HealthInsuranceFormData {
 
 const TOTAL_STEPS = 11;
 
-const HealthInsuranceForm = () => {
+const HealthInsuranceForm = ({ tied = false }: { tied?: boolean } = {}) => {
   const { t, i18n } = useTranslation();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -397,14 +397,16 @@ const HealthInsuranceForm = () => {
 
   return (
     <FormContainer
-      title={t("forms.healthInsurance.title")}
-      description={t("forms.healthInsurance.description")}
+      title={tied ? "Votre meilleure offre d'assurance maladie" : t("forms.healthInsurance.title")}
+      description={tied ? "Obtenez la meilleure offre en quelques clics" : t("forms.healthInsurance.description")}
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
       clientName={formData.firstName}
       product="sante"
       guideMessages={[
-        t("forms.healthInsurance.guide.step1", { defaultValue: "On commence : avez-vous déjà une assurance maladie ? Ça m'aide à situer votre dossier." }),
+        tied
+          ? "En 2 min, économisez jusqu'à 1'000.- par année ! Avez-vous déjà une assurance maladie ?"
+          : t("forms.healthInsurance.guide.step1", { defaultValue: "On commence : avez-vous déjà une assurance maladie ? Ça m'aide à situer votre dossier." }),
         t("forms.healthInsurance.guide.insurerStep", { defaultValue: "Parfait — chez quel assureur es-tu aujourd'hui ? Choisis son logo, ça m'aide à comparer au plus juste." }),
         t("forms.healthInsurance.guide.step2", { defaultValue: "Votre situation familiale influence vos primes. Qui compose votre foyer ?" }),
         t("forms.healthInsurance.guide.step3", { defaultValue: "Votre âge détermine le montant de vos primes. Quelle est votre date de naissance ?" }),

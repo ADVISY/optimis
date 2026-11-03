@@ -59,6 +59,7 @@ import EstimationImmobiliere from "./pages/EstimationImmobiliere";
 import ComparateurEstimation from "./pages/comparateurs/ComparateurEstimation";
 import Partenaires from "./pages/Partenaires";
 import ComparateurComplementaire from "./pages/comparateurs/ComparateurComplementaire";
+import GroupeMutuel from "./pages/GroupeMutuel";
 import Avis from "./pages/Avis";
 
 import { localizedRoutes } from "./utils/localizedRoutes";
@@ -147,6 +148,19 @@ const LanguageRoutes = () => {
         {createLocalizedRoutes("thankYouTermination", <MerciResiliation />)}
         {createLocalizedRoutes("thankYouPrenatal", <MerciPrenatal />)}
         
+        {/* Campagne liée Groupe Mutuel — funnel isolé, mono-assureur, noindex */}
+        <Route
+          path="/assurance-groupe-mutuel"
+          element={<>
+            <Seo
+              noindex
+              title="Assurance maladie & complémentaire — Groupe Mutuel | Demandez votre offre"
+              description="Demandez votre offre d'assurance maladie et complémentaire Groupe Mutuel. Optimis, intermédiaire d'assurance lié à Groupe Mutuel."
+            />
+            <GroupeMutuel />
+          </>}
+        />
+
         {/* Landing/Comparator pages - all language variants */}
         {createLocalizedRoutes("healthLanding", <ComparateurSante />)}
         {createLocalizedRoutes("carLanding", <ComparateurVoiture />)}
