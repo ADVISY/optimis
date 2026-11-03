@@ -7,6 +7,7 @@ const LegalNotice = () => {
   const sections = [
     { title: "definitionsTitle", content: "definitionsContent" },
     { title: "complianceTitle", content: "complianceContent" },
+    { title: "tiedAgentsTitle", content: "tiedAgentsContent" },
     { title: "serviceTitle", content: "serviceContent" },
     { title: "ownersTitle", content: "ownersContent" },
     { title: "responsibleTitle", content: "responsibleContent" },
