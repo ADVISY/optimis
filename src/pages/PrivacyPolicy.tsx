@@ -9,6 +9,7 @@ const PrivacyPolicy = () => {
     { title: "dataCollectionTitle", content: "dataCollectionContent" },
     { title: "dataUsageTitle", content: "dataUsageContent" },
     { title: "dataSharingTitle", content: "dataSharingContent" },
+    { title: "tiedAgentsTitle", content: "tiedAgentsContent" },
     { title: "rightsTitle", content: "rightsContent" },
     { title: "contactTitle", content: "contactContent" },
   ];

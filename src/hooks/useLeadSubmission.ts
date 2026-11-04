@@ -22,6 +22,12 @@ interface UseLeadSubmissionOptions {
    * lors d'une 2e soumission (choix d'offre, demande de rappel, etc.).
    */
   linkToLeadId?: string;
+  /**
+   * Préfixe personnalisé du leadId (sinon dérivé du formType).
+   * Ex. "GROUPE-MUTUEL" pour marquer les leads de la campagne liée dans le Sheet,
+   * tout en conservant le formType d'origine (et donc le routage/webhook).
+   */
+  leadIdPrefix?: string;
 }
 
 const EVENT_TYPE_BY_FORM_TYPE: Record<string, string> = {
@@ -31,7 +37,7 @@ const EVENT_TYPE_BY_FORM_TYPE: Record<string, string> = {
   "rdv-domicile": "RDV à domicile",
 };
 
-export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLeadSubmissionOptions) {
+export function useLeadSubmission({ webhookUrl, formType, linkToLeadId, leadIdPrefix }: UseLeadSubmissionOptions) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   // Garde anti double-clic indépendante de setState (qui est asynchrone).
@@ -41,7 +47,8 @@ export function useLeadSubmission({ webhookUrl, formType, linkToLeadId }: UseLea
   const { i18n, t } = useTranslation();
 
   const generateLeadId = () => {
-    return `${formType.toUpperCase()}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const prefix = (leadIdPrefix || formType).toUpperCase().replace(/\s+/g, "-");
+    return `${prefix}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
   };
 
   const submitLead = async (formData: Record<string, unknown>) => {

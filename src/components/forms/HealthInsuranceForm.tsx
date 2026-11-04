@@ -108,6 +108,7 @@ const HealthInsuranceForm = ({ tied = false }: { tied?: boolean } = {}) => {
 
   const { submitLead, isSubmitting } = useLeadSubmission({
     formType: "health-insurance",
+    leadIdPrefix: tied ? "GROUPE-MUTUEL" : undefined,
   });
 
   const {
