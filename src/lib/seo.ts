@@ -85,6 +85,8 @@ export const NOINDEX_ROUTE_KEYS = new Set<string>([
   "thankYouSubsidy",
   "thankYouTermination",
   "thankYouPrenatal",
+  // LP payante "nouveaux arrivants" : duplique /assurance-sante -> noindex (pas de duplicate content).
+  "healthArrivant",
 ]);
 
 // ----------------------------------------------------------------------------
@@ -113,6 +115,12 @@ export const SEO_META: Record<string, Partial<Record<Lang, SeoMeta>>> = {
     fr: { title: `Assurance maladie en Suisse : comparez les caisses ${YEAR}`, description: `Comparez les primes d'assurance maladie LAMal ${YEAR} de toutes les caisses suisses. Trouvez la couverture la moins chère adaptée à votre canton et économisez.` },
     de: { title: `Krankenkasse Schweiz: Prämien vergleichen ${YEAR}`, description: `Vergleichen Sie die Krankenkassen-Prämien ${YEAR} aller Schweizer Kassen. Finden Sie die günstigste KVG-Grundversicherung für Ihren Kanton und sparen Sie.` },
     it: { title: `Assicurazione malattia Svizzera: confronto ${YEAR}`, description: `Confronta i premi dell'assicurazione malattia LAMal ${YEAR} di tutte le casse svizzere. Trova la copertura più economica per il tuo cantone e risparmia.` },
+  },
+  healthArrivant: {
+    fr: { title: `Assurance maladie pour nouveaux arrivants en Suisse`, description: `Nouvel arrivant en Suisse ? Comparez toutes les caisses maladie en 2 minutes et souscrivez votre LAMal obligatoire sous 3 mois. Gratuit et sans engagement.` },
+    de: { title: `Krankenversicherung für Neuzuzüger in der Schweiz`, description: `Neu in der Schweiz? Vergleichen Sie alle Krankenkassen in 2 Minuten und schliessen Sie Ihre obligatorische Grundversicherung innert 3 Monaten ab. Kostenlos.` },
+    it: { title: `Assicurazione malattia per nuovi arrivati in Svizzera`, description: `Nuovo in Svizzera? Confronta tutte le casse malati in 2 minuti e stipula l'assicurazione obbligatoria entro 3 mesi. Gratis e senza impegno.` },
+    en: { title: `Health insurance for new arrivals in Switzerland`, description: `New in Switzerland? Compare all Swiss health insurers in 2 minutes and get your mandatory basic insurance within 3 months. Free, no obligation.` },
   },
   healthLanding: {
     fr: { title: `Comparateur assurance maladie ${YEAR} – primes LAMal`, description: `Comparateur d'assurance maladie ${YEAR} : obtenez les primes réelles des caisses suisses selon votre canton, franchise et modèle. Comparaison gratuite et sans engagement.` },
@@ -248,6 +256,7 @@ export const SEO_META: Record<string, Partial<Record<Lang, SeoMeta>>> = {
     fr: { title: `Comparateur assurance prénatale Suisse`, description: `Comparateur d'assurance prénatale suisse : comparez les complémentaires pour votre futur enfant et souscrivez sans réserve avant la naissance.` },
     de: { title: `Pränatale Versicherung Vergleich Schweiz`, description: `Vergleich pränatale Versicherung Schweiz: Zusatzversicherungen für Ihr ungeborenes Kind vergleichen und ohne Vorbehalt vor der Geburt abschliessen.` },
     it: { title: `Confronto assicurazione prenatale Svizzera`, description: `Confronto assicurazione prenatale Svizzera: confronta le complementari per il tuo futuro bambino e stipula senza riserve prima della nascita.` },
+    en: { title: `Prenatal insurance comparison Switzerland`, description: `Compare prenatal supplementary insurance in Switzerland for your unborn child and enrol without medical reservations before the birth.` },
   },
 
   // --- Complémentaire ---

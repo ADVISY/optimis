@@ -245,6 +245,11 @@
     "healthInsuranceDetailDesc": "I costi sanitari sono tra le spese più elevate. Trova la migliore assicurazione malattia per le tue esigenze e il tuo budget.",
     "compareHealthInsurance": "Confronta le assicurazioni malattia"
   },
+  "healthInsuranceArrivant": {
+    "title": "Nuovo in Svizzera? L'assicurazione malattia è obbligatoria entro 3 mesi",
+    "heroSubtitle": "Confronta tutte le casse malati in 2 minuti e trova la più conveniente. Gratis, senza impegno, ti guidiamo.",
+    "compareButton": "Confronta gratis"
+  },
   "healthInsurance": {
     "title": "Assicurazione Malattia",
     "heroSubtitle": "Proteggi te stesso e i tuoi cari con un'assicurazione malattia. Trova il piano perfetto per le tue esigenze.",

@@ -17,6 +17,7 @@ export const localizedRoutes: LocalizedRoutes = {
   home: { fr: "", de: "", it: "" },
   carInsurance: { fr: "assurance-voiture", de: "autoversicherung", it: "assicurazione-auto" },
   healthInsurance: { fr: "assurance-sante", de: "krankenversicherung", it: "assicurazione-malattia" },
+  healthArrivant: { fr: "assurance-sante-arrivant", de: "assurance-sante-arrivant", it: "assurance-sante-arrivant" },
   legalProtection: { fr: "protection-juridique", de: "rechtsschutz", it: "protezione-giuridica" },
   homeInsurance: { fr: "assurance-menage", de: "hausratversicherung", it: "assicurazione-mobilia" },
   lifeInsurance: { fr: "assurance-vie", de: "lebensversicherung", it: "assicurazione-vita" },

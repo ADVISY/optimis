@@ -248,6 +248,11 @@
     "healthInsuranceDetailDesc": "Les coûts des soins de santé comptent parmi les dépenses les plus élevées. Trouvez la meilleure assurance maladie adaptée à vos besoins et à votre budget.",
     "compareHealthInsurance": "Comparez les assurances santé"
   },
+  "healthInsuranceArrivant": {
+    "title": "Nouveau en Suisse ? Votre assurance maladie est obligatoire sous 3 mois",
+    "heroSubtitle": "Comparez toutes les caisses en 2 minutes et trouvez la moins chère. Gratuit, sans engagement, on vous guide.",
+    "compareButton": "Comparer gratuitement"
+  },
   "healthInsurance": {
     "title": "Assurance Santé",
     "heroSubtitle": "Protégez-vous et vos proches grâce à une assurance santé. Trouvez le plan parfait pour vos besoins.",

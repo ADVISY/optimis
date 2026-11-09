@@ -108,6 +108,7 @@ const LanguageRoutes = () => {
         {/* Main pages - all language variants */}
         {createLocalizedRoutes("carInsurance", <AssuranceVoiture />)}
         {createLocalizedRoutes("healthInsurance", <AssuranceSante />)}
+        {createLocalizedRoutes("healthArrivant", <AssuranceSante variant="arrivant" />)}
         {createLocalizedRoutes("legalProtection", <ProtectionJuridique />)}
         {createLocalizedRoutes("homeInsurance", <AssuranceMenage />)}
         {createLocalizedRoutes("lifeInsurance", <AssuranceVie />)}

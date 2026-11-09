@@ -18,8 +18,9 @@ const partners = [
   { name: "Allianz", logo: resolveLegacyImageUrl("allianz-logo.svg") },
 ];
 
-const AssuranceSante = () => {
+const AssuranceSante = ({ variant }: { variant?: "arrivant" } = {}) => {
   const { t } = useTranslation();
+  const heroKey = variant === "arrivant" ? "healthInsuranceArrivant" : "healthInsurance";
   const navigate = useNavigate();
   const { localizedPath } = useLocalizedPath();
 
@@ -41,9 +42,9 @@ const AssuranceSante = () => {
   return (
     <Layout>
       <CategoryHero
-        pageTitle={t("healthInsurance.title")}
-        subtitle={t("healthInsurance.heroSubtitle")}
-        buttonLabel={t("healthInsurance.compareButton")}
+        pageTitle={t(`${heroKey}.title`)}
+        subtitle={t(`${heroKey}.heroSubtitle`)}
+        buttonLabel={t(`${heroKey}.compareButton`)}
         buttonIcon={Heart}
         onButtonClick={handleCompareClick}
       />

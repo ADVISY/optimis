@@ -33,6 +33,8 @@ const EXCLUDE = new Set([
   "aboutAlt",
   // Tunnel de conversion (noindex) : la LP indexée /plan-premier-achat le référence.
   "becomeOwnerFunnel",
+  // LP payante "nouveaux arrivants" (noindex) : duplique /assurance-sante.
+  "healthArrivant",
 ]);
 
 // ----------------------------------------------------------------------------

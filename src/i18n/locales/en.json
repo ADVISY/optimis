@@ -248,6 +248,11 @@
     "healthInsuranceDetailDesc": "Healthcare costs are among the highest expenses. Find the best health insurance tailored to your needs and budget.",
     "compareHealthInsurance": "Compare health insurance"
   },
+  "healthInsuranceArrivant": {
+    "title": "New in Switzerland? Health insurance is mandatory within 3 months",
+    "heroSubtitle": "Compare every Swiss insurer in 2 minutes and find the cheapest. Free, no obligation, we guide you.",
+    "compareButton": "Compare for free"
+  },
   "healthInsurance": {
     "title": "Health insurance",
     "heroSubtitle": "Protect yourself and your loved ones with health insurance. Find the perfect plan for your needs.",
