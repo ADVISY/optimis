@@ -16,6 +16,7 @@ import AdminDistributions from "./pages/AdminDistributions";
 import AdminNewCabinet from "./pages/AdminNewCabinet";
 import AdminAvis from "./pages/AdminAvis";
 import AdminAcquisition from "./pages/AdminAcquisition";
+import AdminJulie from "./pages/AdminJulie";
 
 export default function AdminRouter() {
   return (
@@ -25,6 +26,7 @@ export default function AdminRouter() {
         <Route path="verify" element={<AdminVerifyOtp />} />
         <Route index element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>} />
         <Route path="leads" element={<ProtectedAdminRoute><AdminLeads /></ProtectedAdminRoute>} />
+        <Route path="julie" element={<ProtectedAdminRoute><AdminJulie /></ProtectedAdminRoute>} />
         <Route path="canaux" element={<ProtectedAdminRoute><AdminCanaux /></ProtectedAdminRoute>} />
         <Route path="distributions" element={<ProtectedAdminRoute><AdminDistributions /></ProtectedAdminRoute>} />
         <Route path="acquisition" element={<ProtectedAdminRoute><AdminAcquisition /></ProtectedAdminRoute>} />
