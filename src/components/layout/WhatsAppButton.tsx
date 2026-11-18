@@ -13,7 +13,7 @@ interface WhatsAppButtonProps {
 }
 
 const WhatsAppButton = ({ className, iconClassName }: WhatsAppButtonProps) => {
-  const phoneNumber = "41782122360";
+  const phoneNumber = "41772756199";
   const message = encodeURIComponent(
     "Bonjour, j'aimerais obtenir plus d'informations sur vos services d'assurance."
   );
