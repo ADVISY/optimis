@@ -149,15 +149,32 @@ const PartnerForm = () => {
       currentStep={currentStep}
       totalSteps={TOTAL_STEPS}
       clientName={formData.firstName}
+      size="large"
+      guideMessages={[
+        t("partner.guide.step1", "Nos courtiers font en moyenne x6 en CA. Quel budget mensuel pour vos leads ?"),
+        t("partner.guide.step2", "Dans quel secteur travaillez-vous ? Ça m'aide à cibler les bons prospects."),
+        t("partner.guide.step3", "Le nom de votre entreprise, pour préparer votre dossier."),
+        t("partner.guide.step4", "Combien de commerciaux dans votre équipe ? Ça détermine le volume idéal."),
+        t("partner.guide.step5", "Presque fini : votre prénom et votre nom."),
+        t("partner.guide.step6", "Dernière étape : vos coordonnées, un conseiller Optimis vous rappelle."),
+      ]}
+      navigation={
+        <FormNavigation
+          currentStep={currentStep}
+          totalSteps={TOTAL_STEPS}
+          onPrevious={previousStep}
+          onNext={handleNext}
+          isSubmitting={isSubmitting}
+          isLastStep={isLastStep}
+          canProceed={canProceed}
+        />
+      }
     >
       {/* Step 1: Budget */}
       <FormStep isActive={currentStep === 1}>
         <div className="space-y-2 md:space-y-3">
-          <p className="text-xs md:text-base font-medium text-foreground mb-1 md:mb-2">
+          <p className="text-xs md:text-base font-medium text-foreground mb-2 md:mb-3">
             {t("partner.budgetQuestion", "Quel est votre budget mensuel pour l'achat de leads ?")}
-          </p>
-          <p className="text-[11px] md:text-sm text-muted-foreground mb-2 md:mb-4">
-            {t("partner.budgetProof", "Rendement constaté chez nos courtiers : en moyenne x6 en chiffre d'affaires. Exemple : 3'000 investis, jusqu'à 18'000 de CA.")}
           </p>
           <RadioGroup
             value={formData.budget}
@@ -169,7 +186,7 @@ const PartnerForm = () => {
                 key={option.value}
                 htmlFor={`budget-${option.value}`}
                 className={cn(
-                  "flex items-center space-x-3 p-3 md:p-4 border-2 rounded-xl cursor-pointer transition-all",
+                  "flex items-center space-x-3 p-2.5 md:p-3 border-2 rounded-xl cursor-pointer transition-all",
                   formData.budget === option.value
                     ? "border-primary bg-primary/5"
                     : "border-border hover:border-primary/50"
@@ -202,7 +219,7 @@ const PartnerForm = () => {
                 key={option.value}
                 htmlFor={`sector-${option.value}`}
                 className={cn(
-                  "flex items-center space-x-3 p-3 md:p-4 border-2 rounded-xl cursor-pointer transition-all",
+                  "flex items-center space-x-3 p-2.5 md:p-3 border-2 rounded-xl cursor-pointer transition-all",
                   formData.sector === option.value
                     ? "border-primary bg-primary/5"
                     : "border-border hover:border-primary/50"
@@ -255,7 +272,7 @@ const PartnerForm = () => {
                 key={option.value}
                 htmlFor={`sales-${option.value}`}
                 className={cn(
-                  "flex items-center space-x-3 p-3 md:p-4 border-2 rounded-xl cursor-pointer transition-all",
+                  "flex items-center space-x-3 p-2.5 md:p-3 border-2 rounded-xl cursor-pointer transition-all",
                   formData.salesForce === option.value
                     ? "border-primary bg-primary/5"
                     : "border-border hover:border-primary/50"
@@ -342,16 +359,6 @@ const PartnerForm = () => {
           </div>
         </div>
       </FormStep>
-
-      <FormNavigation
-        currentStep={currentStep}
-        totalSteps={TOTAL_STEPS}
-        onPrevious={previousStep}
-        onNext={handleNext}
-        isSubmitting={isSubmitting}
-        isLastStep={isLastStep}
-        canProceed={canProceed}
-      />
 
       <SmsVerificationModal {...otpModalProps} />
     </FormContainer>
