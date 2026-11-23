@@ -2046,17 +2046,29 @@
     "readyToEstimateDesc": "Obtenez une estimation gratuite et sans engagement en quelques minutes."
   },
   "partner": {
-    "badge": "B2B — Partenariat exclusif",
+    "badge": "B2B · Partenariat exclusif",
     "heroTitle1": "Recevez des leads ultra qualifiés,",
     "heroTitle2": "prêts à être convertis",
-    "heroDescription": "Optimis génère chaque jour des prospects en assurance, finance, immobilier et télécom.",
+    "heroDescription": "Depuis 4 ans, Optimis génère chaque jour des prospects qualifiés pour les courtiers suisses. Une expertise assurance, un moteur digital pensé pour l'assurance.",
     "stats": {
-      "freshLeads": "Leads ultra frais (< 24h)",
-      "dateTime": "Date & heure enregistrées",
+      "freshLeads": "Leads frais (moins de 24h)",
+      "dateTime": "Date et heure enregistrées",
       "verifiedIntent": "Intention réelle vérifiée",
-      "revenue": "Jusqu'à CHF 50'000+ / mois"
+      "revenue": "Exclusifs à votre canton"
     },
-    "limitedPartners": "Partenaires limités par secteur — places limitées",
+    "limitedPartners": "Partenaires limités par secteur · places limitées",
+    "trust": {
+      "title": "Pourquoi les courtiers nous font confiance",
+      "subtitle": "On ne vous vend pas des contacts. On vous livre des opportunités.",
+      "years": "4 ans d'expertise sur le marché suisse de l'assurance",
+      "yearsDesc": "LAMal, LPP, hypothèque, prévoyance : on connaît vos produits, vos clients et vos objections.",
+      "engine": "Un moteur digital spécialisé assurance",
+      "engineDesc": "Ciblage, qualification et scoring pensés pour l'assurance, pas un outil générique.",
+      "exclusive": "Des leads exclusifs, jamais revendus",
+      "exclusiveDesc": "Chaque lead est réservé à votre canton. Vous ne courez pas après le même prospect que trois confrères.",
+      "support": "Un accompagnement terrain, pas juste un fichier",
+      "supportDesc": "Scripts, joignabilité, suivi de performance : on avance avec vous."
+    },
     "forWho": {
       "title": "Cette solution est faite pour",
       "titleHighlight": "vous",
@@ -2127,12 +2139,12 @@
       "warning": "⚠️ Nous ne vendons pas des leads à tout le monde."
     },
     "expertise": {
-      "title": "Expertise terrain + marketing digital",
-      "description": "Optimis comprend vos clients, leurs objections, les cycles de vente et les produits. Notre approche combine expertise commerciale et technologie pour maximiser vos conversions.",
-      "knowledge": "Connaissance clients",
-      "objections": "Gestion des objections",
-      "salesCycles": "Cycles de vente",
-      "products": "Maîtrise produits"
+      "title": "L'expertise qui change vos leads",
+      "description": "Depuis 4 ans sur le marché suisse de l'assurance, nous connaissons vos clients, leurs objections et vos cycles de vente. Notre moteur digital spécialisé assurance transforme cette expertise en leads qui signent.",
+      "knowledge": "4 ans d'expertise assurance CH",
+      "objections": "Moteur digital spécialisé",
+      "salesCycles": "Connaissance des objections",
+      "products": "Accompagnement terrain"
     },
     "cta": {
       "title": "Prêt à recevoir des leads",
@@ -2143,11 +2155,18 @@
     "formTitle": "Devenir partenaire",
     "formDescription": "Remplissez ce formulaire en moins de 30 secondes",
     "budgetQuestion": "Quel est votre budget mensuel pour l'achat de leads ?",
+    "budgetProof": "Rendement constaté chez nos courtiers : en moyenne x6 en chiffre d'affaires. Exemple : 3'000 investis, jusqu'à 18'000 de CA.",
     "budgets": {
       "less3000": "Moins de CHF 3'000",
       "3000to5000": "CHF 3'000 – 5'000",
       "5000to10000": "CHF 5'000 – 10'000",
       "10000plus": "Plus de CHF 10'000"
+    },
+    "budgetExamples": {
+      "less3000": "≈ x6 en CA : jusqu'à 18'000 CHF",
+      "3000to5000": "≈ x6 en CA : 18'000 à 30'000 CHF",
+      "5000to10000": "≈ x6 en CA : 30'000 à 60'000 CHF",
+      "10000plus": "≈ x6 en CA : 60'000+ CHF"
     },
     "sectorQuestion": "Dans quel secteur êtes-vous ?",
     "sectors": {

@@ -103,6 +103,36 @@ const Partenaires = () => {
         </div>
       </section>
 
+      {/* ── POURQUOI NOUS FAIRE CONFIANCE ── */}
+      <section className="bg-background py-12 md:py-16">
+        <div className="container mx-auto px-4">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-4xl mx-auto">
+            <motion.div variants={fadeUp} className="text-center mb-10">
+              <h2 className="text-headline mb-3">{t("partner.trust.title")}</h2>
+              <p className="text-body-lg text-muted-foreground">{t("partner.trust.subtitle")}</p>
+            </motion.div>
+            <motion.div variants={fadeUp} className="grid sm:grid-cols-2 gap-5">
+              {[
+                { icon: Shield, title: t("partner.trust.years"), desc: t("partner.trust.yearsDesc") },
+                { icon: Brain, title: t("partner.trust.engine"), desc: t("partner.trust.engineDesc") },
+                { icon: Lock, title: t("partner.trust.exclusive"), desc: t("partner.trust.exclusiveDesc") },
+                { icon: Handshake, title: t("partner.trust.support"), desc: t("partner.trust.supportDesc") },
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-4 bg-card border border-border rounded-2xl p-6 hover-lift">
+                  <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <item.icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-base md:text-lg mb-1">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── POUR QUI ? ── */}
       <section className="bg-background py-12 md:py-16">
         <div className="container mx-auto px-4">

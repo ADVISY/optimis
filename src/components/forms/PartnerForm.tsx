@@ -10,7 +10,8 @@ import { useMultiStepForm } from "@/hooks/useMultiStepForm";
 import { useLeadSubmission } from "@/hooks/useLeadSubmission";
 import { useFormValidation } from "@/hooks/useFormValidation";
 import { useAutoAdvance } from "@/hooks/useAutoAdvance";
-// OTP disabled for testing — kept on Car and Pillar3 only
+import { useOtpFormFlow } from "@/hooks/useOtpFormFlow";
+import SmsVerificationModal from "@/components/forms/SmsVerificationModal";
 import { Input } from "@/components/ui/input";
 import { PhoneInputCH } from "@/components/forms/PhoneInputCH";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -72,9 +73,13 @@ const PartnerForm = () => {
     window.location.assign(localizedPath("/merci-partenaire"));
   }, [formData, submitLead, navigate, localizedPath]);
 
+  const { startOtpFlow, otpModalProps } = useOtpFormFlow({
+    onOtpVerified: performSubmit,
+    getPhone: () => formData.phone,
+  });
+
   const handleSubmit = async () => {
-    sessionStorage.setItem("phone_verified", "true");
-    await performSubmit();
+    await startOtpFlow();
   };
 
   const validateStep = (step: number): boolean => {
@@ -115,10 +120,10 @@ const PartnerForm = () => {
 
 
   const budgetOptions = [
-    { value: "less-3000", label: t("partner.budgets.less3000", "Moins de CHF 3'000") },
-    { value: "3000-5000", label: t("partner.budgets.3000to5000", "CHF 3'000 – 5'000") },
-    { value: "5000-10000", label: t("partner.budgets.5000to10000", "CHF 5'000 – 10'000") },
-    { value: "10000-plus", label: t("partner.budgets.10000plus", "Plus de CHF 10'000") },
+    { value: "less-3000", label: t("partner.budgets.less3000", "Moins de CHF 3'000"), example: t("partner.budgetExamples.less3000", "≈ x6 en CA : jusqu'à 18'000 CHF") },
+    { value: "3000-5000", label: t("partner.budgets.3000to5000", "CHF 3'000 – 5'000"), example: t("partner.budgetExamples.3000to5000", "≈ x6 en CA : 18'000 à 30'000 CHF") },
+    { value: "5000-10000", label: t("partner.budgets.5000to10000", "CHF 5'000 – 10'000"), example: t("partner.budgetExamples.5000to10000", "≈ x6 en CA : 30'000 à 60'000 CHF") },
+    { value: "10000-plus", label: t("partner.budgets.10000plus", "Plus de CHF 10'000"), example: t("partner.budgetExamples.10000plus", "≈ x6 en CA : 60'000+ CHF") },
   ];
 
   const sectorOptions = [
@@ -148,8 +153,11 @@ const PartnerForm = () => {
       {/* Step 1: Budget */}
       <FormStep isActive={currentStep === 1}>
         <div className="space-y-2 md:space-y-3">
-          <p className="text-xs md:text-base font-medium text-foreground mb-2 md:mb-4">
+          <p className="text-xs md:text-base font-medium text-foreground mb-1 md:mb-2">
             {t("partner.budgetQuestion", "Quel est votre budget mensuel pour l'achat de leads ?")}
+          </p>
+          <p className="text-[11px] md:text-sm text-muted-foreground mb-2 md:mb-4">
+            {t("partner.budgetProof", "Rendement constaté chez nos courtiers : en moyenne x6 en chiffre d'affaires. Exemple : 3'000 investis, jusqu'à 18'000 de CA.")}
           </p>
           <RadioGroup
             value={formData.budget}
@@ -168,7 +176,10 @@ const PartnerForm = () => {
                 )}
               >
                 <RadioGroupItem value={option.value} id={`budget-${option.value}`} />
-                <Label htmlFor={`budget-${option.value}`} className="text-sm md:text-lg cursor-pointer flex-1">{option.label}</Label>
+                <Label htmlFor={`budget-${option.value}`} className="cursor-pointer flex-1">
+                  <span className="block text-sm md:text-lg font-medium">{option.label}</span>
+                  <span className="block text-xs md:text-sm text-primary font-semibold mt-0.5">{option.example}</span>
+                </Label>
               </label>
             ))}
           </RadioGroup>
@@ -340,9 +351,9 @@ const PartnerForm = () => {
         isSubmitting={isSubmitting}
         isLastStep={isLastStep}
         canProceed={canProceed}
-        
       />
-      
+
+      <SmsVerificationModal {...otpModalProps} />
     </FormContainer>
   );
 };
